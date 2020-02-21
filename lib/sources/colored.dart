@@ -1,4 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
+import 'package:colored/sources/style/theme.dart' as theme;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -17,7 +18,7 @@ class Colored extends StatelessWidget {
         ],
         supportedLocales: const [Locale("en"), Locale("es")],
         title: "Colored",
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: theme.dark(context),
         home: home,
       );
 }
