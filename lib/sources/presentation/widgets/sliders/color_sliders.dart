@@ -1,5 +1,5 @@
 import 'package:colored/sources/presentation/widgets/sliders/color_slider.dart';
-import 'package:colored/sources/presentation/widgets/sliders/color_sliders_selection.dart';
+import 'package:colored/sources/domain/data/color_selection.dart';
 import 'package:colored/sources/style/colors.dart' as colors;
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class ColorSliders extends StatefulWidget {
   })  : assert(onChanged != null),
         super(key: key);
 
-  final void Function(ColorSlidersSelection) onChanged;
+  final void Function(ColorSelection) onChanged;
   final double initialFirstValue;
   final double initialSecondValue;
   final double initialThirdValue;
@@ -67,10 +67,10 @@ class _ColorSlidersState extends State<ColorSliders> {
       );
 
   void _notifyChange() => widget.onChanged(
-        ColorSlidersSelection(
-          firstSliderValue: _firstValue,
-          secondSliderValue: _secondValue,
-          thirdSliderValue: _thirdValue,
+        ColorSelection(
+          firstComponent: _firstValue,
+          secondComponent: _secondValue,
+          thirdComponent: _thirdValue,
         ),
       );
 }
