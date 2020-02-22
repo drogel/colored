@@ -1,26 +1,76 @@
 import 'package:colored/sources/presentation/widgets/sliders/color_slider.dart';
+import 'package:colored/sources/presentation/widgets/sliders/color_sliders_selection.dart';
 import 'package:colored/sources/style/colors.dart' as colors;
 import 'package:flutter/material.dart';
 
-class ColorSliders extends StatelessWidget {
+class ColorSliders extends StatefulWidget {
+  const ColorSliders({
+    @required this.initialFirstValue,
+    @required this.initialSecondValue,
+    @required this.initialThirdValue,
+    @required this.onChanged,
+    Key key,
+  })  : assert(onChanged != null),
+        super(key: key);
+
+  final void Function(ColorSlidersSelection) onChanged;
+  final double initialFirstValue;
+  final double initialSecondValue;
+  final double initialThirdValue;
+
+  @override
+  _ColorSlidersState createState() => _ColorSlidersState();
+}
+
+class _ColorSlidersState extends State<ColorSliders> {
+  double _firstValue;
+  double _secondValue;
+  double _thirdValue;
+
+  @override
+  void initState() {
+    _firstValue = widget.initialFirstValue;
+    _secondValue = widget.initialSecondValue;
+    _thirdValue = widget.initialThirdValue;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ColorSlider(
-            initialValue: 0.5,
+            initialValue: _firstValue,
             color: colors.red,
-            onChanged: (_) {},
+            onChanged: (value) {
+              _firstValue = value;
+              _notifyChange();
+            },
           ),
           ColorSlider(
-            initialValue: 0.5,
+            initialValue: _secondValue,
             color: colors.green,
-            onChanged: (_) {},
+            onChanged: (value) {
+              _secondValue = value;
+              _notifyChange();
+            },
           ),
           ColorSlider(
-            initialValue: 0.5,
+            initialValue: _thirdValue,
             color: colors.blue,
-            onChanged: (_) {},
+            onChanged: (value) {
+              _thirdValue = value;
+              _notifyChange();
+            },
           ),
         ],
+      );
+
+  void _notifyChange() => widget.onChanged(
+        ColorSlidersSelection(
+          firstSliderValue: _firstValue,
+          secondSliderValue: _secondValue,
+          thirdSliderValue: _thirdValue,
+        ),
       );
 }

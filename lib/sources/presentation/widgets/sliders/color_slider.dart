@@ -10,7 +10,7 @@ class ColorSlider extends StatefulWidget {
     @required this.initialValue,
     @required this.color,
     @required this.onChanged,
-    this.duration = durations.smallPresenting,
+    this.duration = durations.mediumPresenting,
     this.curve = curves.primary,
     this.inactiveOpacity = colors.fadedOpacity,
     Key key,
