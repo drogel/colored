@@ -30,8 +30,10 @@ class Converter extends StatelessWidget {
                       ),
                       SecondaryRaisedButton(
                         onPressed: () {},
-                        child:
-                            Text("255, 255, 255", style: colorLabelsTextStyle),
+                        child: Text(
+                          converterData.state.rgbComponents,
+                          style: colorLabelsTextStyle,
+                        ),
                       ),
                     ],
                   ),

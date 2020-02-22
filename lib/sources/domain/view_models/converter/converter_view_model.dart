@@ -19,6 +19,7 @@ class ConverterViewModel {
 
   ConverterState getInitialState() => const ConverterState(
         color: Color.fromRGBO(150, 150, 150, 1),
+        rgbComponents: "150, 150, 150",
       );
 
   void convertToColor(ColorSelection selection) {
@@ -26,7 +27,13 @@ class ConverterViewModel {
     final green = (selection.secondComponent * _kDecimal8Bit).round();
     final blue = (selection.thirdComponent * _kDecimal8Bit).round();
     final color = Color.fromRGBO(red, green, blue, 1);
-    _stateController.sink.add(ConverterState(color: color));
+    final rgbString = "$red, $green, $blue";
+    _stateController.sink.add(
+      ConverterState(
+        color: color,
+        rgbComponents: rgbString,
+      ),
+    );
   }
 
   void dispose() => _stateController.close();
