@@ -8,7 +8,7 @@ class Converter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final converterData = ConverterData.of(context);
-    final colorLabelsTextStyle = Theme.of(context).textTheme.headline;
+    final colorLabelsTextStyle = Theme.of(context).textTheme.title;
     return Scaffold(
       appBar: AppBar(title: const Text("Color converter")),
       body: Stack(

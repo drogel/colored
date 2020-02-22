@@ -20,5 +20,6 @@ ThemeData dark(BuildContext context) => ThemeData.from(
       textTheme: TextTheme(
         body1: TextStyle(color: colors.secondary),
         headline: TextStyle(color: colors.secondary),
+        title: TextStyle(color: colors.secondary),
       ),
     );
