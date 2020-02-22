@@ -19,18 +19,22 @@ class Converter extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    SecondaryRaisedButton(
-                      onPressed: () {},
-                      child: Text("#FF01F2", style: colorLabelsTextStyle),
-                    ),
-                    SecondaryRaisedButton(
-                      onPressed: () {},
-                      child: Text("255, 255, 255", style: colorLabelsTextStyle),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      SecondaryRaisedButton(
+                        onPressed: () {},
+                        child: Text("#FF01F2", style: colorLabelsTextStyle),
+                      ),
+                      SecondaryRaisedButton(
+                        onPressed: () {},
+                        child:
+                            Text("255, 255, 255", style: colorLabelsTextStyle),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 8),
                 ColorSliders(
