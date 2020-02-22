@@ -1,4 +1,4 @@
-import 'package:colored/sources/style/colors.dart' as colors;
+import 'package:colored/sources/style/opacities.dart' as opacities;
 import 'package:colored/sources/style/durations.dart' as durations;
 import 'package:colored/sources/style/curves.dart' as curves;
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class ColorSlider extends StatefulWidget {
     @required this.onChanged,
     this.duration = durations.mediumPresenting,
     this.curve = curves.primary,
-    this.inactiveOpacity = colors.fadedOpacity,
+    this.inactiveOpacity = opacities.fadedColor,
     Key key,
   })  : assert(onChanged != null),
         assert(duration != null),
