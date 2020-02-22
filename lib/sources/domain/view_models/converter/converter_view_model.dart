@@ -28,4 +28,8 @@ class ConverterViewModel {
     final color = Color.fromRGBO(red, green, blue, 1);
     _stateController.sink.add(ConverterState(color: color));
   }
+
+  void dispose() {
+    _stateController.close();
+  }
 }

@@ -38,6 +38,12 @@ class _ConverterUpdaterState extends State<ConverterUpdater> {
         child: widget.child,
       );
 
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
+
   void _updateState(ConverterState newState) =>
       setState(() => _state = newState);
 }
