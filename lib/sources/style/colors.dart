@@ -8,3 +8,9 @@ const Color secondaryDark = Color(0xc2c2c2FF);
 const Color secondaryLight = Colors.white;
 
 final Color error = Colors.redAccent[700];
+
+
+const fadedOpacity = 0.38;
+final Color blue = Colors.blueAccent[700];
+final Color red = Colors.redAccent[700];
+final Color green = Colors.lightGreenAccent[700];
