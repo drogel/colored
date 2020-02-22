@@ -1,5 +1,5 @@
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
-import 'package:colored/sources/routers/router.dart';
+import 'package:colored/sources/routing/router.dart';
 import 'package:flutter/material.dart';
 
 class ConverterRouter extends Router {

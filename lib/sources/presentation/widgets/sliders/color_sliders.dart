@@ -1,6 +1,6 @@
 import 'package:colored/sources/presentation/widgets/sliders/color_slider.dart';
 import 'package:colored/sources/domain/data/color_selection.dart';
-import 'package:colored/sources/style/colors.dart' as colors;
+import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:flutter/material.dart';
 
 class ColorSliders extends StatefulWidget {

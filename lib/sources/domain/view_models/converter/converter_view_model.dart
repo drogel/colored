@@ -29,7 +29,5 @@ class ConverterViewModel {
     _stateController.sink.add(ConverterState(color: color));
   }
 
-  void dispose() {
-    _stateController.close();
-  }
+  void dispose() => _stateController.close();
 }

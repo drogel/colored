@@ -1,6 +1,6 @@
-import 'package:colored/sources/style/opacities.dart' as opacities;
-import 'package:colored/sources/style/durations.dart' as durations;
-import 'package:colored/sources/style/curves.dart' as curves;
+import 'package:colored/sources/styling/opacities.dart' as opacities;
+import 'package:colored/sources/styling/durations.dart' as durations;
+import 'package:colored/sources/styling/curves.dart' as curves;
 import 'package:flutter/material.dart';
 
 const _kValueChangeAnimationThreshold = 0.1;

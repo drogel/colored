@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:colored/sources/style/colors.dart' as colors;
-import 'package:colored/sources/style/opacities.dart' as opacities;
+import 'package:colored/sources/styling/colors.dart' as colors;
+import 'package:colored/sources/styling/opacities.dart' as opacities;
 
 class OverlayContainer extends StatelessWidget {
   const OverlayContainer({
