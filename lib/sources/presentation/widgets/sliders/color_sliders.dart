@@ -9,17 +9,17 @@ class ColorSliders extends StatelessWidget {
           ColorSlider(
             initialValue: 0.5,
             color: colors.red,
-            onChanged: (value) => print(value.toStringAsFixed(1)),
+            onChanged: (_) {},
           ),
           ColorSlider(
             initialValue: 0.5,
             color: colors.green,
-            onChanged: (value) => print(value.toStringAsFixed(1)),
+            onChanged: (_) {},
           ),
           ColorSlider(
             initialValue: 0.5,
             color: colors.blue,
-            onChanged: (value) => print(value.toStringAsFixed(1)),
+            onChanged: (_) {},
           ),
         ],
       );
