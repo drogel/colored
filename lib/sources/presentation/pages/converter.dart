@@ -26,12 +26,15 @@ class Converter extends StatelessWidget {
                     children: <Widget>[
                       SecondaryRaisedButton(
                         onPressed: () {},
-                        child: Text("#FF01F2", style: colorLabelsTextStyle),
+                        child: Text(
+                          converterData.state.hexString,
+                          style: colorLabelsTextStyle,
+                        ),
                       ),
                       SecondaryRaisedButton(
                         onPressed: () {},
                         child: Text(
-                          converterData.state.rgbComponents,
+                          converterData.state.rgbString,
                           style: colorLabelsTextStyle,
                         ),
                       ),
@@ -40,9 +43,9 @@ class Converter extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 ColorSliders(
-                  initialFirstValue: 0.5,
-                  initialSecondValue: 0.5,
-                  initialThirdValue: 0.5,
+                  initialFirstValue: 0,
+                  initialSecondValue: 0,
+                  initialThirdValue: 0,
                   onChanged: converterData.onSelectionChanged,
                 ),
               ],

@@ -31,7 +31,8 @@ void main() {
         );
         const expected = ConverterState(
           color: Color.fromRGBO(255, 51, 102, 1),
-          rgbComponents: "255, 51, 102",
+          rgbString: "255, 51, 102",
+          hexString: "#FF3366",
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.convertToColor(selection);
