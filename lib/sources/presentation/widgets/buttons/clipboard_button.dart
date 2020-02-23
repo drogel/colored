@@ -7,18 +7,21 @@ class ClipboardButton extends StatelessWidget {
   const ClipboardButton({
     @required this.title,
     @required this.onClipboardRetrieved,
+    @required this.onClipboardSet,
     Key key,
   }) : super(key: key);
 
   final String title;
   final void Function(String) onClipboardRetrieved;
+  final void Function(String) onClipboardSet;
 
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.title;
 
     return RaisedButton(
-      onPressed: _onPressed,
+      onPressed: _getClipboardData,
+      onLongPress: _setTitleInClipboardData,
       highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
       splashColor: colors.secondary.withOpacity(opacities.fadedColor),
       color: colors.primary,
@@ -28,8 +31,13 @@ class ClipboardButton extends StatelessWidget {
     );
   }
 
-  Future<void> _onPressed() async {
+  Future<void> _getClipboardData() async {
     final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
     onClipboardRetrieved(clipboardData.text);
+  }
+
+  Future<void> _setTitleInClipboardData() async {
+    await Clipboard.setData(ClipboardData(text: title));
+    onClipboardSet(title);
   }
 }

@@ -26,10 +26,12 @@ class Converter extends StatelessWidget {
                     children: <Widget>[
                       ClipboardButton(
                         onClipboardRetrieved: print,
+                        onClipboardSet: print,
                         title: data.state.hexString,
                       ),
                       ClipboardButton(
                         onClipboardRetrieved: print,
+                        onClipboardSet: print,
                         title: data.state.rgbString,
                       ),
                     ],
