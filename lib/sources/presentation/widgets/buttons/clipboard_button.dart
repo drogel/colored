@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ClipboardButton extends StatelessWidget {
-  const ClipboardButton({
+  ClipboardButton({
     @required this.title,
     @required this.onClipboardRetrieved,
     @required this.onClipboardSet,
@@ -14,20 +14,26 @@ class ClipboardButton extends StatelessWidget {
   final String title;
   final void Function(String) onClipboardRetrieved;
   final void Function(String) onClipboardSet;
+  final GlobalKey tooltip = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.title;
 
-    return RaisedButton(
-      onPressed: _getClipboardData,
-      onLongPress: _setTitleInClipboardData,
-      highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
-      splashColor: colors.secondary.withOpacity(opacities.fadedColor),
-      color: colors.primary,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Text(title, style: textStyle),
+    return Tooltip(
+      key: tooltip,
+      message: "Copied!",
+      preferBelow: false,
+      child: RaisedButton(
+        onPressed: _getClipboardData,
+        onLongPress: _setTitleInClipboardData,
+        highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
+        splashColor: colors.secondary.withOpacity(opacities.fadedColor),
+        color: colors.primary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Text(title, style: textStyle),
+      ),
     );
   }
 
@@ -38,6 +44,8 @@ class ClipboardButton extends StatelessWidget {
 
   Future<void> _setTitleInClipboardData() async {
     await Clipboard.setData(ClipboardData(text: title));
+    final dynamic tooltipState = tooltip.currentState;
+    tooltipState.ensureTooltipVisible();
     onClipboardSet(title);
   }
 }
