@@ -33,6 +33,7 @@ void main() {
           color: Color.fromRGBO(255, 51, 102, 1),
           rgbString: "255, 51, 102",
           hexString: "#FF3366",
+          selection: selection,
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.convertToColor(selection);

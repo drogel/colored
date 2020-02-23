@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 class Converter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final converterData = ConverterData.of(context);
+    final data = ConverterData.of(context);
     final colorLabelsTextStyle = Theme.of(context).textTheme.title;
     return Scaffold(
       appBar: AppBar(title: const Text("Color converter")),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          Container(color: converterData.state.color),
+          Container(color: data.state.color),
           OverlayContainer(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -27,14 +27,14 @@ class Converter extends StatelessWidget {
                       SecondaryRaisedButton(
                         onPressed: () {},
                         child: Text(
-                          converterData.state.hexString,
+                          data.state.hexString,
                           style: colorLabelsTextStyle,
                         ),
                       ),
                       SecondaryRaisedButton(
                         onPressed: () {},
                         child: Text(
-                          converterData.state.rgbString,
+                          data.state.rgbString,
                           style: colorLabelsTextStyle,
                         ),
                       ),
@@ -43,10 +43,10 @@ class Converter extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 ColorSliders(
-                  initialFirstValue: 0,
-                  initialSecondValue: 0,
-                  initialThirdValue: 0,
-                  onChanged: converterData.onSelectionChanged,
+                  initialFirstValue: data.state.selection.firstComponent,
+                  initialSecondValue: data.state.selection.secondComponent,
+                  initialThirdValue: data.state.selection.thirdComponent,
+                  onChanged: data.onSelectionChanged,
                 ),
               ],
             ),

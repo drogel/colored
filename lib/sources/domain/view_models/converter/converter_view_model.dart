@@ -22,6 +22,11 @@ class ConverterViewModel {
         color: Color.fromRGBO(0, 0, 0, 1),
         rgbString: "0, 0, 0",
         hexString: "#000000",
+        selection: ColorSelection(
+          firstComponent: 0,
+          secondComponent: 0,
+          thirdComponent: 0,
+        ),
       );
 
   void convertToColor(ColorSelection selection) {
@@ -39,6 +44,7 @@ class ConverterViewModel {
         color: color,
         rgbString: rgbString,
         hexString: hexString,
+        selection: selection,
       ),
     );
   }
