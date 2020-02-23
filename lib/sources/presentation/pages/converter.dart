@@ -1,5 +1,5 @@
 import 'package:colored/sources/domain/inherited/converter/converter_data.dart';
-import 'package:colored/sources/presentation/widgets/buttons/secondary_raised_button.dart';
+import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ class Converter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
-    final colorLabelsTextStyle = Theme.of(context).textTheme.title;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Color converter")),
       body: Stack(
@@ -24,19 +24,13 @@ class Converter extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      SecondaryRaisedButton(
-                        onPressed: () {},
-                        child: Text(
-                          data.state.hexString,
-                          style: colorLabelsTextStyle,
-                        ),
+                      ClipboardButton(
+                        onClipboardRetrieved: print,
+                        title: data.state.hexString,
                       ),
-                      SecondaryRaisedButton(
-                        onPressed: () {},
-                        child: Text(
-                          data.state.rgbString,
-                          style: colorLabelsTextStyle,
-                        ),
+                      ClipboardButton(
+                        onClipboardRetrieved: print,
+                        title: data.state.rgbString,
                       ),
                     ],
                   ),
