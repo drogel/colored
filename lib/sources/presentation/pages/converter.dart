@@ -25,11 +25,13 @@ class Converter extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       ClipboardButton(
+                        clipboardShouldShowError: (_) => true,
                         onClipboardRetrieved: print,
                         onClipboardSet: print,
                         title: data.state.hexString,
                       ),
                       ClipboardButton(
+                        clipboardShouldShowError: (_) => true,
                         onClipboardRetrieved: print,
                         onClipboardSet: print,
                         title: data.state.rgbString,
