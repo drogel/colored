@@ -35,6 +35,9 @@ class _ConverterUpdaterState extends State<ConverterUpdater> {
   Widget build(BuildContext context) => ConverterData(
         state: _state,
         onSelectionChanged: _viewModel.convertToColor,
+        clipboardShouldFail: (_, __) => true,
+        onClipboardRetrieved: print,
+        onClipboardSet: print,
         child: widget.child,
       );
 

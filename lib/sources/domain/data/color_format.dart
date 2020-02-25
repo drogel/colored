@@ -1,0 +1,4 @@
+enum ColorFormat {
+  hex,
+  rgb,
+}

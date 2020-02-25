@@ -1,3 +1,4 @@
+import 'package:colored/sources/domain/data/color_format.dart';
 import 'package:colored/sources/domain/inherited/converter/converter_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
@@ -25,15 +26,17 @@ class Converter extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       ClipboardButton(
-                        clipboardShouldShowError: (_) => true,
-                        onClipboardRetrieved: print,
-                        onClipboardSet: print,
+                        format: ColorFormat.hex,
+                        clipboardShouldFail: data.clipboardShouldFail,
+                        onClipboardRetrieved: data.onClipboardRetrieved,
+                        onClipboardSet: data.onClipboardSet,
                         title: data.state.hexString,
                       ),
                       ClipboardButton(
-                        clipboardShouldShowError: (_) => true,
-                        onClipboardRetrieved: print,
-                        onClipboardSet: print,
+                        format: ColorFormat.rgb,
+                        clipboardShouldFail: data.clipboardShouldFail,
+                        onClipboardRetrieved: data.onClipboardRetrieved,
+                        onClipboardSet: data.onClipboardSet,
                         title: data.state.rgbString,
                       ),
                     ],

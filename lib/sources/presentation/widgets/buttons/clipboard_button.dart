@@ -1,4 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
+import 'package:colored/sources/domain/data/color_format.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:colored/sources/styling/opacities.dart' as opacities;
 import 'package:flutter/material.dart';
@@ -9,16 +10,18 @@ const _kBorderRadius = 8.0;
 class ClipboardButton extends StatefulWidget {
   const ClipboardButton({
     @required this.title,
+    @required this.format,
     @required this.onClipboardRetrieved,
     @required this.onClipboardSet,
-    @required this.clipboardShouldShowError,
+    @required this.clipboardShouldFail,
     Key key,
   }) : super(key: key);
 
   final String title;
   final void Function(String) onClipboardRetrieved;
   final void Function(String) onClipboardSet;
-  final bool Function(String) clipboardShouldShowError;
+  final bool Function(String, ColorFormat) clipboardShouldFail;
+  final ColorFormat format;
 
   @override
   _ClipboardButtonState createState() => _ClipboardButtonState();
@@ -63,11 +66,12 @@ class _ClipboardButtonState extends State<ClipboardButton> {
     );
   }
 
-
-
   Future<void> _getClipboardData() async {
     final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
-    final isError = widget.clipboardShouldShowError(clipboardData.text);
+    final isError = widget.clipboardShouldFail(
+      clipboardData.text,
+      widget.format,
+    );
     if (isError) {
       setState(() {
         _tooltipMessage = Localization.of(context).tooltipError;
