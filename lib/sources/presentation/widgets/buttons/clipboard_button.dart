@@ -1,3 +1,4 @@
+import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:colored/sources/styling/opacities.dart' as opacities;
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class _ClipboardButtonState extends State<ClipboardButton> {
     final isError = widget.clipboardShouldShowError(clipboardData.text);
     if (isError) {
       setState(() {
-        _tooltipMessage = "Error!";
+        _tooltipMessage = Localization.of(context).tooltipError;
         _tooltipColor = colors.error;
       });
       _showTooltip();
@@ -81,7 +82,7 @@ class _ClipboardButtonState extends State<ClipboardButton> {
   Future<void> _setTitleInClipboardData() async {
     await Clipboard.setData(ClipboardData(text: widget.title));
     setState(() {
-      _tooltipMessage = "Copied!";
+      _tooltipMessage = Localization.of(context).tooltipMessage;
       _tooltipColor = colors.primaryDark;
     });
     _showTooltip();
