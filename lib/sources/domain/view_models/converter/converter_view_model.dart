@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:colored/sources/domain/data/color_format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data/color_selection.dart';
 import 'package:flutter/foundation.dart';
@@ -49,8 +50,29 @@ class ConverterViewModel {
     );
   }
 
+  bool clipboardShouldFail(String string, ColorFormat colorFormat) =>
+      !_isStringColorFormat(string, colorFormat);
+
+  bool _isStringColorFormat(String string, ColorFormat colorFormat) {
+    switch (colorFormat) {
+      case ColorFormat.hex:
+        return _isHex(string);
+      case ColorFormat.rgb:
+        return _isRgb(string);
+    }
+    return false;
+  }
+
   void dispose() => _stateController.close();
 
   String _convertDecimalToHexString(int decimal) =>
       decimal.toRadixString(_kDecimalToHexModulo).padLeft(2, "0").toUpperCase();
+
+  bool _isHex(String string) =>
+      RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$').hasMatch(string);
+
+  bool _isRgb(String string) => RegExp(
+          r"^(rgb)?\(?([01]?\d\d?|2[0-4]\d|25[0-5])(\W+)([01]?\d\d?|2[0-4]\d|25"
+          r"[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$")
+      .hasMatch(string);
 }
