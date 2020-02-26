@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 
 class ColorSliders extends StatefulWidget {
   const ColorSliders({
-    @required this.initialFirstValue,
-    @required this.initialSecondValue,
-    @required this.initialThirdValue,
+    @required this.firstValue,
+    @required this.secondValue,
+    @required this.thirdValue,
     @required this.onChanged,
     Key key,
   })  : assert(onChanged != null),
         super(key: key);
 
   final void Function(ColorSelection) onChanged;
-  final double initialFirstValue;
-  final double initialSecondValue;
-  final double initialThirdValue;
+  final double firstValue;
+  final double secondValue;
+  final double thirdValue;
 
   @override
   _ColorSlidersState createState() => _ColorSlidersState();
@@ -29,9 +29,9 @@ class _ColorSlidersState extends State<ColorSliders> {
 
   @override
   void initState() {
-    _firstValue = widget.initialFirstValue;
-    _secondValue = widget.initialSecondValue;
-    _thirdValue = widget.initialThirdValue;
+    _firstValue = widget.firstValue;
+    _secondValue = widget.secondValue;
+    _thirdValue = widget.thirdValue;
     super.initState();
   }
 
@@ -40,7 +40,7 @@ class _ColorSlidersState extends State<ColorSliders> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ColorSlider(
-            initialValue: _firstValue,
+            value: _firstValue,
             color: colors.red,
             onChanged: (value) {
               _firstValue = value;
@@ -48,7 +48,7 @@ class _ColorSlidersState extends State<ColorSliders> {
             },
           ),
           ColorSlider(
-            initialValue: _secondValue,
+            value: _secondValue,
             color: colors.green,
             onChanged: (value) {
               _secondValue = value;
@@ -56,7 +56,7 @@ class _ColorSlidersState extends State<ColorSliders> {
             },
           ),
           ColorSlider(
-            initialValue: _thirdValue,
+            value: _thirdValue,
             color: colors.blue,
             onChanged: (value) {
               _thirdValue = value;

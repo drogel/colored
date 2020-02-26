@@ -44,9 +44,9 @@ class Converter extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 ColorSliders(
-                  initialFirstValue: data.state.selection.firstComponent,
-                  initialSecondValue: data.state.selection.secondComponent,
-                  initialThirdValue: data.state.selection.thirdComponent,
+                  firstValue: data.state.selection.firstComponent,
+                  secondValue: data.state.selection.secondComponent,
+                  thirdValue: data.state.selection.thirdComponent,
                   onChanged: data.onSelectionChanged,
                 ),
               ],
