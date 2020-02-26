@@ -36,6 +36,20 @@ class _ColorSlidersState extends State<ColorSliders> {
   }
 
   @override
+  void didUpdateWidget(ColorSliders oldWidget) {
+    if (oldWidget.firstValue != widget.firstValue) {
+      _firstValue = widget.firstValue;
+    }
+    if (oldWidget.secondValue != widget.secondValue) {
+      _secondValue = widget.secondValue;
+    }
+    if (oldWidget.thirdValue != widget.thirdValue) {
+      _thirdValue = widget.thirdValue;
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

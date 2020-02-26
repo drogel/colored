@@ -9,7 +9,6 @@ class ConverterData extends InheritedWidget {
     @required this.onSelectionChanged,
     @required this.clipboardShouldFail,
     @required this.onClipboardRetrieved,
-    @required this.onClipboardSet,
     Widget child,
     Key key,
   })  : assert(state != null),
@@ -18,8 +17,7 @@ class ConverterData extends InheritedWidget {
   final ConverterState state;
   final void Function(ColorSelection) onSelectionChanged;
   final bool Function(String, ColorFormat) clipboardShouldFail;
-  final void Function(String) onClipboardRetrieved;
-  final void Function(String) onClipboardSet;
+  final void Function(String, ColorFormat) onClipboardRetrieved;
 
   static ConverterData of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<ConverterData>();

@@ -12,14 +12,12 @@ class ClipboardButton extends StatefulWidget {
     @required this.title,
     @required this.format,
     @required this.onClipboardRetrieved,
-    @required this.onClipboardSet,
     @required this.clipboardShouldFail,
     Key key,
   }) : super(key: key);
 
   final String title;
-  final void Function(String) onClipboardRetrieved;
-  final void Function(String) onClipboardSet;
+  final void Function(String, ColorFormat) onClipboardRetrieved;
   final bool Function(String, ColorFormat) clipboardShouldFail;
   final ColorFormat format;
 
@@ -79,7 +77,7 @@ class _ClipboardButtonState extends State<ClipboardButton> {
       });
       _showTooltip();
     } else {
-      widget.onClipboardRetrieved(clipboardData.text);
+      widget.onClipboardRetrieved(clipboardData.text, widget.format);
     }
   }
 
@@ -90,7 +88,6 @@ class _ClipboardButtonState extends State<ClipboardButton> {
       _tooltipColor = colors.primaryDark;
     });
     _showTooltip();
-    widget.onClipboardSet(widget.title);
   }
 
   void _showTooltip() {

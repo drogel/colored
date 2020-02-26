@@ -36,8 +36,7 @@ class _ConverterUpdaterState extends State<ConverterUpdater> {
         state: _state,
         onSelectionChanged: _viewModel.convertToColor,
         clipboardShouldFail: _viewModel.clipboardShouldFail,
-        onClipboardRetrieved: print,
-        onClipboardSet: print,
+        onClipboardRetrieved: _viewModel.convertStringToColor,
         child: widget.child,
       );
 

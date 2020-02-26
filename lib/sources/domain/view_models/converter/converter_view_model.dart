@@ -9,6 +9,12 @@ import 'package:flutter/foundation.dart';
 const _kDecimal8Bit = 255;
 const _kDecimalToHexModulo = 16;
 
+final _hexRegExp = RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
+final _rgbRegExp = RegExp(
+    r"^(rgb)?\(?([01]?\d\d?|2[0-4]\d|25[0-5])(\W+)([01]?\d\d?|2[0-4]\d|25"
+    r"[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$");
+final _doubleRegExp = RegExp(r"-?(?:\d*\.)?\d+(?:[eE][+-]?\d+)?");
+
 class ConverterViewModel {
   const ConverterViewModel({
     @required StreamController<ConverterState> stateController,
@@ -50,21 +56,46 @@ class ConverterViewModel {
     );
   }
 
+  void convertStringToColor(String string, ColorFormat colorFormat) {
+    switch (colorFormat) {
+      case ColorFormat.hex:
+        // TODO(diego): Handle this case.
+        break;
+      case ColorFormat.rgb:
+        final selection = _parseRgb(string);
+        return convertToColor(selection);
+    }
+  }
+
   bool clipboardShouldFail(String string, ColorFormat colorFormat) =>
       !_isStringColorFormat(string, colorFormat);
 
   void dispose() => _stateController.close();
 
+  ColorSelection _parseRgb(String string) {
+    final rgbMatchedString = _rgbRegExp.firstMatch(string).group(0);
+    final rgbStringRemovingSeparators = rgbMatchedString
+        .replaceAll(",", " ")
+        .replaceAll("-", " ")
+        .replaceAll("/", " ");
+    final rgbComponents = _doubleRegExp
+        .allMatches(rgbStringRemovingSeparators)
+        .map((match) => double.parse(match.group(0)))
+        .toList();
+    final selection = ColorSelection(
+      firstComponent: rgbComponents[0] / _kDecimal8Bit,
+      secondComponent: rgbComponents[1] / _kDecimal8Bit,
+      thirdComponent: rgbComponents[2] / _kDecimal8Bit,
+    );
+    return selection;
+  }
+
   String _convertDecimalToHexString(int decimal) =>
       decimal.toRadixString(_kDecimalToHexModulo).padLeft(2, "0").toUpperCase();
 
-  bool _isHex(String string) =>
-      RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$').hasMatch(string);
+  bool _isHex(String string) => _hexRegExp.hasMatch(string);
 
-  bool _isRgb(String string) => RegExp(
-          r"^(rgb)?\(?([01]?\d\d?|2[0-4]\d|25[0-5])(\W+)([01]?\d\d?|2[0-4]\d|25"
-          r"[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$")
-      .hasMatch(string);
+  bool _isRgb(String string) => _rgbRegExp.hasMatch(string);
 
   bool _isStringColorFormat(String string, ColorFormat colorFormat) {
     switch (colorFormat) {
