@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:colored/sources/domain/data/color_format.dart';
 import 'package:colored/sources/domain/data/color_selection.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
@@ -52,6 +53,66 @@ void main() {
       test("then stateController's stream is received", () {
         final actual = viewModel.stateStream;
         expect(actual, stateController.stream);
+      });
+    });
+
+    group("when clipboardShouldFail is called with hex color format", () {
+      test("then false should be returned if string is a valid hex color", () {
+        final shouldHexStringFail = viewModel.clipboardShouldFail(
+          "#FF00FF",
+          ColorFormat.hex,
+        );
+        expect(shouldHexStringFail, false);
+
+        final shouldHexStringWithoutHashFail = viewModel.clipboardShouldFail(
+          "FF00FF",
+          ColorFormat.hex,
+        );
+        expect(shouldHexStringWithoutHashFail, false);
+      });
+
+      test("then false should return if string is not a valid hex color", () {
+        final shouldNonHexStringFail = viewModel.clipboardShouldFail(
+          "This is a sentence",
+          ColorFormat.hex,
+        );
+        expect(shouldNonHexStringFail, true);
+
+        final shouldRGBStringFail = viewModel.clipboardShouldFail(
+          "(255, 255, 255)",
+          ColorFormat.hex,
+        );
+        expect(shouldRGBStringFail, true);
+      });
+    });
+
+    group("when clipboardShouldFail is called with RGB color format", () {
+      test("then false should be returned if string is a valid RGB color", () {
+        final shouldRGBStringFail = viewModel.clipboardShouldFail(
+          "255, 255, 0",
+          ColorFormat.rgb,
+        );
+        expect(shouldRGBStringFail, false);
+
+        final shouldRGBStringParenthesisFail = viewModel.clipboardShouldFail(
+          "(0, 0, 0)",
+          ColorFormat.rgb,
+        );
+        expect(shouldRGBStringParenthesisFail, false);
+      });
+
+      test("then false should return if string is not a valid RGB color", () {
+        final shouldNonRGBStringFail = viewModel.clipboardShouldFail(
+          "This is a sentence",
+          ColorFormat.rgb,
+        );
+        expect(shouldNonRGBStringFail, true);
+
+        final shouldHexStringFail = viewModel.clipboardShouldFail(
+          "#FFFFFF",
+          ColorFormat.rgb,
+        );
+        expect(shouldHexStringFail, true);
       });
     });
   });

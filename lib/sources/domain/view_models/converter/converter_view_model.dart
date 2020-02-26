@@ -53,16 +53,6 @@ class ConverterViewModel {
   bool clipboardShouldFail(String string, ColorFormat colorFormat) =>
       !_isStringColorFormat(string, colorFormat);
 
-  bool _isStringColorFormat(String string, ColorFormat colorFormat) {
-    switch (colorFormat) {
-      case ColorFormat.hex:
-        return _isHex(string);
-      case ColorFormat.rgb:
-        return _isRgb(string);
-    }
-    return false;
-  }
-
   void dispose() => _stateController.close();
 
   String _convertDecimalToHexString(int decimal) =>
@@ -75,4 +65,14 @@ class ConverterViewModel {
           r"^(rgb)?\(?([01]?\d\d?|2[0-4]\d|25[0-5])(\W+)([01]?\d\d?|2[0-4]\d|25"
           r"[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$")
       .hasMatch(string);
+
+  bool _isStringColorFormat(String string, ColorFormat colorFormat) {
+    switch (colorFormat) {
+      case ColorFormat.hex:
+        return _isHex(string);
+      case ColorFormat.rgb:
+        return _isRgb(string);
+    }
+    return false;
+  }
 }
