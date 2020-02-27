@@ -59,8 +59,8 @@ class ConverterViewModel {
   void convertStringToColor(String string, ColorFormat colorFormat) {
     switch (colorFormat) {
       case ColorFormat.hex:
-        // TODO(diego): Handle this case.
-        break;
+        final selection = _parseHex(string);
+        return convertToColor(selection);
       case ColorFormat.rgb:
         final selection = _parseRgb(string);
         return convertToColor(selection);
@@ -82,10 +82,26 @@ class ConverterViewModel {
         .allMatches(rgbStringRemovingSeparators)
         .map((match) => double.parse(match.group(0)))
         .toList();
+
     final selection = ColorSelection(
       firstComponent: rgbComponents[0] / _kDecimal8Bit,
       secondComponent: rgbComponents[1] / _kDecimal8Bit,
       thirdComponent: rgbComponents[2] / _kDecimal8Bit,
+    );
+    return selection;
+  }
+
+  ColorSelection _parseHex(String string) {
+    final buffer = StringBuffer();
+    if (string.length == 6 || string.length == 7) {
+      buffer.write('ff');
+    }
+    buffer.write(string.replaceFirst('#', ''));
+    final color = Color(int.parse(buffer.toString(), radix: 16));
+    final selection = ColorSelection(
+      firstComponent: color.blue / _kDecimal8Bit,
+      secondComponent: color.green / _kDecimal8Bit,
+      thirdComponent: color.red / _kDecimal8Bit,
     );
     return selection;
   }
