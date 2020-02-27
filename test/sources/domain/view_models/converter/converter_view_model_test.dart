@@ -115,5 +115,43 @@ void main() {
         expect(shouldHexStringFail, true);
       });
     });
+
+    group("when convertStringToColor is called with RGB color format", () {
+      test("then a state with parsed RGB color is added to the stream", () {
+        const rgbString = "255, 51, 102";
+        const selection = ColorSelection(
+          firstComponent: 1,
+          secondComponent: 0.2,
+          thirdComponent: 0.4,
+        );
+        const expected = ConverterState(
+          color: Color.fromRGBO(255, 51, 102, 1),
+          rgbString: rgbString,
+          hexString: "#FF3366",
+          selection: selection,
+        );
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.convertStringToColor(rgbString, ColorFormat.rgb);
+      });
+    });
+
+    group("when convertStringToColor is called with hex color format", () {
+      test("then a state with parsed hex color is added to the stream", () {
+        const hexString = "#FF3366";
+        const selection = ColorSelection(
+          firstComponent: 1,
+          secondComponent: 0.2,
+          thirdComponent: 0.4,
+        );
+        const expected = ConverterState(
+          color: Color.fromRGBO(255, 51, 102, 1),
+          rgbString: "255, 51, 102",
+          hexString: hexString,
+          selection: selection,
+        );
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.convertStringToColor(hexString, ColorFormat.hex);
+      });
+    });
   });
 }

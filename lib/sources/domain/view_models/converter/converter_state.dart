@@ -26,4 +26,12 @@ class ConverterState {
 
   @override
   int get hashCode => color.hashCode;
+
+  @override
+  String toString() => """ConverterState(
+      color: ${color.toString()},
+      rgbString: $rgbString,
+      hexString: $hexString,
+      selection: $selection,
+   )""";
 }

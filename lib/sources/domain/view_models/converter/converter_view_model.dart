@@ -99,9 +99,9 @@ class ConverterViewModel {
     buffer.write(string.replaceFirst('#', ''));
     final color = Color(int.parse(buffer.toString(), radix: 16));
     final selection = ColorSelection(
-      firstComponent: color.blue / _kDecimal8Bit,
+      firstComponent: color.red / _kDecimal8Bit,
       secondComponent: color.green / _kDecimal8Bit,
-      thirdComponent: color.red / _kDecimal8Bit,
+      thirdComponent: color.blue / _kDecimal8Bit,
     );
     return selection;
   }
