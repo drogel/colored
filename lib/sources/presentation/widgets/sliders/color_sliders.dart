@@ -1,22 +1,22 @@
 import 'package:colored/sources/presentation/widgets/sliders/color_slider.dart';
-import 'package:colored/sources/presentation/widgets/sliders/color_sliders_selection.dart';
-import 'package:colored/sources/style/colors.dart' as colors;
+import 'package:colored/sources/domain/data/color_selection.dart';
+import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:flutter/material.dart';
 
 class ColorSliders extends StatefulWidget {
   const ColorSliders({
-    @required this.initialFirstValue,
-    @required this.initialSecondValue,
-    @required this.initialThirdValue,
+    @required this.firstValue,
+    @required this.secondValue,
+    @required this.thirdValue,
     @required this.onChanged,
     Key key,
   })  : assert(onChanged != null),
         super(key: key);
 
-  final void Function(ColorSlidersSelection) onChanged;
-  final double initialFirstValue;
-  final double initialSecondValue;
-  final double initialThirdValue;
+  final void Function(ColorSelection) onChanged;
+  final double firstValue;
+  final double secondValue;
+  final double thirdValue;
 
   @override
   _ColorSlidersState createState() => _ColorSlidersState();
@@ -29,10 +29,24 @@ class _ColorSlidersState extends State<ColorSliders> {
 
   @override
   void initState() {
-    _firstValue = widget.initialFirstValue;
-    _secondValue = widget.initialSecondValue;
-    _thirdValue = widget.initialThirdValue;
+    _firstValue = widget.firstValue;
+    _secondValue = widget.secondValue;
+    _thirdValue = widget.thirdValue;
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(ColorSliders oldWidget) {
+    if (oldWidget.firstValue != widget.firstValue) {
+      _firstValue = widget.firstValue;
+    }
+    if (oldWidget.secondValue != widget.secondValue) {
+      _secondValue = widget.secondValue;
+    }
+    if (oldWidget.thirdValue != widget.thirdValue) {
+      _thirdValue = widget.thirdValue;
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -40,7 +54,7 @@ class _ColorSlidersState extends State<ColorSliders> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ColorSlider(
-            initialValue: _firstValue,
+            value: _firstValue,
             color: colors.red,
             onChanged: (value) {
               _firstValue = value;
@@ -48,7 +62,7 @@ class _ColorSlidersState extends State<ColorSliders> {
             },
           ),
           ColorSlider(
-            initialValue: _secondValue,
+            value: _secondValue,
             color: colors.green,
             onChanged: (value) {
               _secondValue = value;
@@ -56,7 +70,7 @@ class _ColorSlidersState extends State<ColorSliders> {
             },
           ),
           ColorSlider(
-            initialValue: _thirdValue,
+            value: _thirdValue,
             color: colors.blue,
             onChanged: (value) {
               _thirdValue = value;
@@ -67,10 +81,10 @@ class _ColorSlidersState extends State<ColorSliders> {
       );
 
   void _notifyChange() => widget.onChanged(
-        ColorSlidersSelection(
-          firstSliderValue: _firstValue,
-          secondSliderValue: _secondValue,
-          thirdSliderValue: _thirdValue,
+        ColorSelection(
+          firstComponent: _firstValue,
+          secondComponent: _secondValue,
+          thirdComponent: _thirdValue,
         ),
       );
 }

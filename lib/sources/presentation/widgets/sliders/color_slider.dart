@@ -1,25 +1,23 @@
-import 'package:colored/sources/style/colors.dart' as colors;
-import 'package:colored/sources/style/durations.dart' as durations;
-import 'package:colored/sources/style/curves.dart' as curves;
+import 'package:colored/sources/styling/opacities.dart' as opacities;
+import 'package:colored/sources/styling/durations.dart' as durations;
+import 'package:colored/sources/styling/curves.dart' as curves;
 import 'package:flutter/material.dart';
-
-const _kValueChangeAnimationThreshold = 0.1;
 
 class ColorSlider extends StatefulWidget {
   const ColorSlider({
-    @required this.initialValue,
+    @required this.value,
     @required this.color,
     @required this.onChanged,
     this.duration = durations.mediumPresenting,
     this.curve = curves.primary,
-    this.inactiveOpacity = colors.fadedOpacity,
+    this.inactiveOpacity = opacities.fadedColor,
     Key key,
   })  : assert(onChanged != null),
         assert(duration != null),
         assert(inactiveOpacity != null),
         super(key: key);
 
-  final double initialValue;
+  final double value;
   final Color color;
   final double inactiveOpacity;
   final void Function(double) onChanged;
@@ -38,7 +36,7 @@ class _ColorSliderState extends State<ColorSlider>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      value: widget.initialValue,
+      value: widget.value,
       duration: widget.duration,
     );
     _animationController.addListener(() => setState(() {}));
@@ -46,9 +44,17 @@ class _ColorSliderState extends State<ColorSlider>
   }
 
   @override
+  void didUpdateWidget(ColorSlider oldWidget) {
+    if (oldWidget.value != widget.value) {
+      _animationController.animateTo(widget.value);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) => Slider.adaptive(
         value: _animationController.value,
-        onChanged: _updateValue,
+        onChanged: widget.onChanged,
         activeColor: widget.color,
         inactiveColor: widget.color.withOpacity(widget.inactiveOpacity),
       );
@@ -57,15 +63,5 @@ class _ColorSliderState extends State<ColorSlider>
   void dispose() {
     _animationController.dispose();
     super.dispose();
-  }
-
-  void _updateValue(double newValue) {
-    var currentValue = _animationController.value;
-    if ((currentValue - newValue).abs() > _kValueChangeAnimationThreshold) {
-      _animationController.animateTo(newValue, curve: widget.curve);
-    } else {
-      _animationController.value = newValue;
-    }
-    widget.onChanged(newValue);
   }
 }
