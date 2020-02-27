@@ -3,8 +3,8 @@ import 'package:colored/sources/styling/durations.dart' as durations;
 import 'package:colored/sources/styling/curves.dart' as curves;
 import 'package:flutter/material.dart';
 
-class ColorSlider extends StatefulWidget {
-  const ColorSlider({
+class SmoothSlider extends StatefulWidget {
+  const SmoothSlider({
     @required this.value,
     @required this.color,
     @required this.onChanged,
@@ -25,10 +25,10 @@ class ColorSlider extends StatefulWidget {
   final Curve curve;
 
   @override
-  _ColorSliderState createState() => _ColorSliderState();
+  _SmoothSliderState createState() => _SmoothSliderState();
 }
 
-class _ColorSliderState extends State<ColorSlider>
+class _SmoothSliderState extends State<SmoothSlider>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
@@ -44,7 +44,7 @@ class _ColorSliderState extends State<ColorSlider>
   }
 
   @override
-  void didUpdateWidget(ColorSlider oldWidget) {
+  void didUpdateWidget(SmoothSlider oldWidget) {
     if (oldWidget.value != widget.value) {
       _animationController.animateTo(widget.value);
     }

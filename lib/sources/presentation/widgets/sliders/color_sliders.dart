@@ -1,4 +1,5 @@
-import 'package:colored/sources/presentation/widgets/sliders/color_slider.dart';
+import 'package:colored/sources/presentation/widgets/sliders/expandable_slider.dart';
+import 'package:colored/sources/presentation/widgets/sliders/smooth_slider.dart';
 import 'package:colored/sources/domain/data/color_selection.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:flutter/material.dart';
@@ -50,34 +51,37 @@ class _ColorSlidersState extends State<ColorSliders> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ColorSlider(
-            value: _firstValue,
-            color: colors.red,
-            onChanged: (value) {
-              _firstValue = value;
-              _notifyChange();
-            },
-          ),
-          ColorSlider(
-            value: _secondValue,
-            color: colors.green,
-            onChanged: (value) {
-              _secondValue = value;
-              _notifyChange();
-            },
-          ),
-          ColorSlider(
-            value: _thirdValue,
-            color: colors.blue,
-            onChanged: (value) {
-              _thirdValue = value;
-              _notifyChange();
-            },
-          ),
-        ],
+  Widget build(BuildContext context) => LayoutBuilder(
+        builder: (_, constraints) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ExpandableSlider(
+              value: _firstValue,
+              color: colors.red,
+              availableWidth: constraints.maxWidth,
+              onChanged: (value) {
+                _firstValue = value;
+                _notifyChange();
+              },
+            ),
+            SmoothSlider(
+              value: _secondValue,
+              color: colors.green,
+              onChanged: (value) {
+                _secondValue = value;
+                _notifyChange();
+              },
+            ),
+            SmoothSlider(
+              value: _thirdValue,
+              color: colors.blue,
+              onChanged: (value) {
+                _thirdValue = value;
+                _notifyChange();
+              },
+            ),
+          ],
+        ),
       );
 
   void _notifyChange() => widget.onChanged(
