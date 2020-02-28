@@ -50,13 +50,7 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   @override
   void initState() {
     _scrollController = ScrollController();
-    _expansionController = AnimationController(
-      vsync: this,
-      duration: widget.expansionDuration,
-      value: widget.availableWidth,
-      lowerBound: widget.availableWidth,
-      upperBound: widget.availableWidth + _kExpandedAddedWidth,
-    );
+    _expansionController = _buildExpansionController();
     _expansionController.addListener(_updateExpansionTransition);
     super.initState();
   }
@@ -86,6 +80,12 @@ class _ExpandableSliderState extends State<ExpandableSlider>
           ),
         ),
       );
+
+  @override
+  void dispose() {
+    _expansionController.dispose();
+    super.dispose();
+  }
 
   void _toggleExpansion(ScaleUpdateDetails details) {
     if (details.horizontalScale > 1) {
@@ -133,4 +133,12 @@ class _ExpandableSliderState extends State<ExpandableSlider>
       _expansionController.reverse();
     }
   }
+
+  AnimationController _buildExpansionController() => AnimationController(
+        vsync: this,
+        duration: widget.expansionDuration,
+        value: widget.availableWidth,
+        lowerBound: widget.availableWidth,
+        upperBound: widget.availableWidth + _kExpandedAddedWidth,
+      );
 }

@@ -64,17 +64,19 @@ class _ColorSlidersState extends State<ColorSliders> {
                 _notifyChange();
               },
             ),
-            SmoothSlider(
+            ExpandableSlider(
               value: _secondValue,
               color: colors.green,
+              availableWidth: constraints.maxWidth,
               onChanged: (value) {
                 _secondValue = value;
                 _notifyChange();
               },
             ),
-            SmoothSlider(
+            ExpandableSlider(
               value: _thirdValue,
               color: colors.blue,
+              availableWidth: constraints.maxWidth,
               onChanged: (value) {
                 _thirdValue = value;
                 _notifyChange();
