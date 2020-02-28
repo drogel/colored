@@ -5,6 +5,8 @@ import 'package:colored/sources/styling/curves.dart' as curves;
 import 'package:flutter/cupertino.dart';
 
 const _kExpandedAddedWidth = 64;
+const _kExpandedValueFactor = 15;
+const _kExpandedDivisions = 255 ~/ _kExpandedValueFactor;
 
 class ExpandableSlider extends StatefulWidget {
   const ExpandableSlider({
@@ -39,6 +41,9 @@ class _ExpandableSliderState extends State<ExpandableSlider>
     with SingleTickerProviderStateMixin {
   ScrollController _scrollController;
   AnimationController _expansionController;
+  double _max = 1;
+  double _min = 0;
+  int _divisions;
 
   @override
   void initState() {
@@ -71,6 +76,9 @@ class _ExpandableSliderState extends State<ExpandableSlider>
                 onChanged: widget.onChanged,
                 duration: widget.duration,
                 curve: widget.curve,
+                max: _max,
+                min: _min,
+                divisions: _divisions,
               ),
             ),
           ),
@@ -78,10 +86,23 @@ class _ExpandableSliderState extends State<ExpandableSlider>
       );
 
   void _updateWidth() {
+    final scrollPosition =
+        (_expansionController.value - widget.availableWidth) * widget.value;
+    _scrollController.jumpTo(scrollPosition);
     setState(() {});
-    _scrollController.jumpTo(
-      (_expansionController.value - widget.availableWidth) * widget.value,
-    );
+    if (_expansionController.status == AnimationStatus.completed) {
+      setState(() {
+        _min = widget.value * (1 - 1 / _kExpandedValueFactor);
+        _max = widget.value + (1 - widget.value) / _kExpandedValueFactor;
+        _divisions = _kExpandedDivisions;
+      });
+    } else if (_expansionController.status == AnimationStatus.dismissed) {
+      setState(() {
+        _min = 0;
+        _max = 1;
+        _divisions = null;
+      });
+    }
   }
 
   void _toggleExpansion() {

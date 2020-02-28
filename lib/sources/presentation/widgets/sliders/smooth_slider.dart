@@ -11,6 +11,9 @@ class SmoothSlider extends StatefulWidget {
     this.duration = durations.mediumPresenting,
     this.curve = curves.primary,
     this.inactiveOpacity = opacities.fadedColor,
+    this.max = 1,
+    this.min = 0,
+    this.divisions,
     Key key,
   })  : assert(onChanged != null),
         assert(duration != null),
@@ -18,6 +21,9 @@ class SmoothSlider extends StatefulWidget {
         super(key: key);
 
   final double value;
+  final double max;
+  final double min;
+  final int divisions;
   final Color color;
   final double inactiveOpacity;
   final void Function(double) onChanged;
@@ -57,6 +63,9 @@ class _SmoothSliderState extends State<SmoothSlider>
         onChanged: widget.onChanged,
         activeColor: widget.color,
         inactiveColor: widget.color.withOpacity(widget.inactiveOpacity),
+        max: widget.max,
+        min: widget.min,
+        divisions: widget.divisions,
       );
 
   @override
