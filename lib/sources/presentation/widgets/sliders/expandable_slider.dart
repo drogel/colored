@@ -50,7 +50,10 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   @override
   void initState() {
     _scrollController = ScrollController();
-    _expansionController = _buildExpansionController();
+    _expansionController = AnimationController(
+      vsync: this,
+      duration: widget.expansionDuration
+    );
     _expansionController.addListener(_updateExpansionTransition);
     super.initState();
   }
@@ -64,7 +67,8 @@ class _ExpandableSliderState extends State<ExpandableSlider>
             scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
             child: SizedBox(
-              width: _expansionController.value,
+              width: widget.availableWidth +
+                  _expansionController.value * _kExpandedAddedWidth,
               child: SmoothSlider(
                 value: widget.value,
                 color: widget.color,
@@ -96,9 +100,10 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   }
 
   void _updateExpansionTransition() {
-    _scrollController.jumpTo(
-      (_expansionController.value - widget.availableWidth) * widget.value,
-    );
+    final fixedWidth = widget.availableWidth;
+    final expansionValue = _expansionController.value;
+    final currentWidth = fixedWidth + expansionValue * _kExpandedAddedWidth;
+    _scrollController.jumpTo((currentWidth - fixedWidth) * widget.value);
     setState(() => _divisions = _kExpandedDivisions);
     if (_expansionController.status == AnimationStatus.completed) {
       _setExpandedRange();
@@ -133,12 +138,4 @@ class _ExpandableSliderState extends State<ExpandableSlider>
       _expansionController.reverse();
     }
   }
-
-  AnimationController _buildExpansionController() => AnimationController(
-        vsync: this,
-        duration: widget.expansionDuration,
-        value: widget.availableWidth,
-        lowerBound: widget.availableWidth,
-        upperBound: widget.availableWidth + _kExpandedAddedWidth,
-      );
 }
