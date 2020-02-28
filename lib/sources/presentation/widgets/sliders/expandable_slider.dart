@@ -63,7 +63,7 @@ class _ExpandableSliderState extends State<ExpandableSlider>
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onDoubleTap: _toggleExpansion,
+        onScaleUpdate: _toggleExpansion,
         child: LayoutBuilder(
           builder: (_, constraints) => SingleChildScrollView(
             controller: _scrollController,
@@ -87,13 +87,19 @@ class _ExpandableSliderState extends State<ExpandableSlider>
         ),
       );
 
+  void _toggleExpansion(ScaleUpdateDetails details) {
+    if (details.horizontalScale > 1) {
+      _shouldExpand();
+    } else if (details.horizontalScale < 1) {
+      _shouldShrink();
+    }
+  }
+
   void _updateWidth() {
-    final scrollPosition =
-        (_expansionController.value - widget.availableWidth) * widget.value;
-    _scrollController.jumpTo(scrollPosition);
-    setState(() {
-      _divisions = _kExpandedDivisions;
-    });
+    _scrollController.jumpTo(
+      (_expansionController.value - widget.availableWidth) * widget.value,
+    );
+    setState(() => _divisions = _kExpandedDivisions);
     if (_expansionController.status == AnimationStatus.completed) {
       _setExpandedRange();
     } else if (_expansionController.status == AnimationStatus.dismissed) {
@@ -116,10 +122,14 @@ class _ExpandableSliderState extends State<ExpandableSlider>
         _divisions = null;
       });
 
-  void _toggleExpansion() {
+  void _shouldExpand() {
     if (_expansionController.status == AnimationStatus.dismissed) {
       _expansionController.forward();
-    } else {
+    }
+  }
+
+  void _shouldShrink() {
+    if (_expansionController.status == AnimationStatus.completed) {
       _expansionController.reverse();
     }
   }
