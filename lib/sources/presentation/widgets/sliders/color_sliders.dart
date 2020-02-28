@@ -1,5 +1,4 @@
 import 'package:colored/sources/presentation/widgets/sliders/expandable_slider.dart';
-import 'package:colored/sources/presentation/widgets/sliders/smooth_slider.dart';
 import 'package:colored/sources/domain/data/color_selection.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:flutter/material.dart';
