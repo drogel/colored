@@ -4,9 +4,11 @@ import 'package:colored/sources/styling/durations.dart' as durations;
 import 'package:colored/sources/styling/curves.dart' as curves;
 import 'package:flutter/cupertino.dart';
 
-const _kExpandedAddedWidth = 64;
-const _kExpandedValueFactor = 15;
+const _kExpandedAddedWidth = 1000;
+const _kExpandedValueFactor = 6;
 const _kExpandedDivisions = 255 ~/ _kExpandedValueFactor;
+const _kDefaultMin = 0.0;
+const _kDefaultMax = 1.0;
 
 class ExpandableSlider extends StatefulWidget {
   const ExpandableSlider({
@@ -41,8 +43,8 @@ class _ExpandableSliderState extends State<ExpandableSlider>
     with SingleTickerProviderStateMixin {
   ScrollController _scrollController;
   AnimationController _expansionController;
-  double _max = 1;
-  double _min = 0;
+  double _max = _kDefaultMax;
+  double _min = _kDefaultMin;
   int _divisions;
 
   @override
@@ -61,7 +63,7 @@ class _ExpandableSliderState extends State<ExpandableSlider>
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onLongPress: _toggleExpansion,
+        onDoubleTap: _toggleExpansion,
         child: LayoutBuilder(
           builder: (_, constraints) => SingleChildScrollView(
             controller: _scrollController,
@@ -89,21 +91,30 @@ class _ExpandableSliderState extends State<ExpandableSlider>
     final scrollPosition =
         (_expansionController.value - widget.availableWidth) * widget.value;
     _scrollController.jumpTo(scrollPosition);
-    setState(() {});
+    setState(() {
+      _divisions = _kExpandedDivisions;
+    });
     if (_expansionController.status == AnimationStatus.completed) {
-      setState(() {
-        _min = widget.value * (1 - 1 / _kExpandedValueFactor);
-        _max = widget.value + (1 - widget.value) / _kExpandedValueFactor;
-        _divisions = _kExpandedDivisions;
-      });
+      _setExpandedRange();
     } else if (_expansionController.status == AnimationStatus.dismissed) {
-      setState(() {
-        _min = 0;
-        _max = 1;
-        _divisions = null;
-      });
+      _setDefaultRange();
     }
   }
+
+  void _setExpandedRange() {
+    final min = widget.value * (1 - 1 / _kExpandedValueFactor);
+    final max = widget.value + (1 - widget.value) / _kExpandedValueFactor;
+    setState(() {
+      _min = min.clamp(_kDefaultMin, _kDefaultMax);
+      _max = max.clamp(_kDefaultMin, _kDefaultMax);
+    });
+  }
+
+  void _setDefaultRange() => setState(() {
+        _min = _kDefaultMin;
+        _max = _kDefaultMax;
+        _divisions = null;
+      });
 
   void _toggleExpansion() {
     if (_expansionController.status == AnimationStatus.dismissed) {
