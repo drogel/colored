@@ -57,7 +57,7 @@ class _ExpandableSliderState extends State<ExpandableSlider>
       lowerBound: widget.availableWidth,
       upperBound: widget.availableWidth + _kExpandedAddedWidth,
     );
-    _expansionController.addListener(_updateWidth);
+    _expansionController.addListener(_updateExpansionTransition);
     super.initState();
   }
 
@@ -95,7 +95,7 @@ class _ExpandableSliderState extends State<ExpandableSlider>
     }
   }
 
-  void _updateWidth() {
+  void _updateExpansionTransition() {
     _scrollController.jumpTo(
       (_expansionController.value - widget.availableWidth) * widget.value,
     );
@@ -111,8 +111,8 @@ class _ExpandableSliderState extends State<ExpandableSlider>
     final min = widget.value * (1 - 1 / _kExpandedValueFactor);
     final max = widget.value + (1 - widget.value) / _kExpandedValueFactor;
     setState(() {
-      _min = min.clamp(_kDefaultMin, _kDefaultMax);
-      _max = max.clamp(_kDefaultMin, _kDefaultMax);
+      _min = min < 0.01 ? 0 : min;
+      _max = max > 0.99 ? 1 : max;
     });
   }
 
