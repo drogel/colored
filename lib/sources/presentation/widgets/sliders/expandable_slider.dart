@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 const _kExpandedAddedWidth = 1000;
 const _kExpandedValueFactor = 6;
 const _kExpandedDivisions = 255 ~/ _kExpandedValueFactor;
+const _kExpandedScrollingFactor = 1.1;
 const _kDefaultMin = 0.0;
 const _kDefaultMax = 1.0;
 
@@ -50,10 +51,8 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   @override
   void initState() {
     _scrollController = ScrollController();
-    _expansionController = AnimationController(
-      vsync: this,
-      duration: widget.expansionDuration
-    );
+    _expansionController =
+        AnimationController(vsync: this, duration: widget.expansionDuration);
     _expansionController.addListener(_updateExpansionTransition);
     super.initState();
   }
@@ -73,7 +72,7 @@ class _ExpandableSliderState extends State<ExpandableSlider>
                 value: widget.value,
                 color: widget.color,
                 inactiveOpacity: widget.inactiveOpacity,
-                onChanged: widget.onChanged,
+                onChanged: _onChanged,
                 duration: widget.duration,
                 curve: widget.curve,
                 max: _max,
@@ -89,6 +88,19 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   void dispose() {
     _expansionController.dispose();
     super.dispose();
+  }
+
+  void _onChanged(double newValue) {
+    //final totalWidth = widget.availableWidth + _kExpandedAddedWidth;
+    // final scrollPosition = _scrollController.position.pixels;
+    //final relativeMin = scrollPosition / totalWidth;
+    //final relativeMax = (scrollPosition + widget.availableWidth) / totalWidth;
+    //final minDistance = (_min - relativeMin).clamp(_kDefaultMin, _kDefaultMax)
+    //final maxDistance = (relativeMax - _max).clamp(_kDefaultMin, _kDefaultMax)
+
+    //print("Min: ${minDistance*_kExpandedScrollingFactor + _min > newValue}");
+    //print("Max: ${_max - maxDistance*_kExpandedScrollingFactor < newValue}");
+    widget.onChanged(newValue);
   }
 
   void _toggleExpansion(ScaleUpdateDetails details) {
