@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 const _kExpandedAddedWidth = 6000;
 const _kExpandedDivisions = 255;
 const _kExpandedScrollingFactor = 1.02;
+const _kScrollTriggerFactor = 0.86;
 const _kDefaultMin = 0.0;
 const _kDefaultMax = 1.0;
 const _kScrollingStep = 40;
@@ -71,6 +72,19 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   }
 
   @override
+  void didUpdateWidget(ExpandableSlider oldWidget) {
+    final change = (oldWidget.value - widget.value).abs() * _totalWidth;
+    if (change > widget.availableWidth * _kScrollTriggerFactor && _isExpanded) {
+      _scrollController.animateTo(
+        widget.value * _totalWidth - widget.availableWidth / 2,
+        duration: durations.mediumPresenting,
+        curve: curves.primary,
+      );
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) => GestureDetector(
         onScaleUpdate: _toggleExpansion,
         child: LayoutBuilder(
@@ -105,6 +119,11 @@ class _ExpandableSliderState extends State<ExpandableSlider>
     _expansionController.dispose();
     super.dispose();
   }
+
+  bool get _isExpanded =>
+      _expansionController.status == AnimationStatus.completed;
+
+  double get _totalWidth => widget.availableWidth + _kExpandedAddedWidth;
 
   void _onChanged(double newValue) {
     _shouldScroll(newValue);
