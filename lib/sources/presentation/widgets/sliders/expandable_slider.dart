@@ -49,7 +49,7 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   ScrollController _scrollController;
   AnimationController _expansion;
   Animation<double> _expansionAnimation;
-  AnimationStatus _previousFrameStatus;
+  double _relativeValue;
   final _max = _kDefaultMax;
   final _min = _kDefaultMin;
 
@@ -69,8 +69,9 @@ class _ExpandableSliderState extends State<ExpandableSlider>
         reverseCurve: curves.incoming,
       ),
     );
-    _previousFrameStatus = _expansion.status;
     _expansionAnimation.addListener(_updateExpansionTransition);
+    _expansionAnimation.addStatusListener(_updateRelativeValue);
+    _updateRelativeValue(_expansionAnimation.status);
     super.initState();
   }
 
@@ -83,6 +84,9 @@ class _ExpandableSliderState extends State<ExpandableSlider>
         duration: durations.mediumPresenting,
         curve: curves.main,
       );
+    }
+    if (oldWidget.value != widget.value && _expansion.isDismissed) {
+      _updateRelativeValue(_expansion.status);
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -133,6 +137,17 @@ class _ExpandableSliderState extends State<ExpandableSlider>
     widget.onChanged(newValue);
   }
 
+  void _updateRelativeValue(AnimationStatus status) {
+    if (_isExpanded) {
+      final scrollPosition = _scrollController.position.pixels;
+      final pixelsValue = widget.value * _totalWidth;
+      final pixelsRelativeValue = pixelsValue - scrollPosition;
+      _relativeValue = pixelsRelativeValue / widget.availableWidth;
+    } else if (status == AnimationStatus.dismissed) {
+      _relativeValue = widget.value;
+    }
+  }
+
   void _shouldScroll(double newValue) {
     if (_expansion.status == AnimationStatus.completed) {
       final scrollPosition = _scrollController.position.pixels;
@@ -167,8 +182,8 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   void _toggleExpansionOnPress() => _isExpanded ? _shrink() : _expand();
 
   void _updateExpansionTransition() {
-    final currentAddedWidth = _expansionAnimation.value * _kExpandedAddedWidth;
-    setState(() => _scrollController.jumpTo(currentAddedWidth * widget.value));
+    final addedWidth = _expansionAnimation.value * _kExpandedAddedWidth;
+    setState(() => _scrollController.jumpTo(addedWidth * _relativeValue));
   }
 
   void _expand() => _expansion.forward();
