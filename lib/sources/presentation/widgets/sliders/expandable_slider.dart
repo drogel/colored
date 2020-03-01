@@ -46,17 +46,17 @@ class ExpandableSlider extends StatefulWidget {
 
 class _ExpandableSliderState extends State<ExpandableSlider>
     with SingleTickerProviderStateMixin {
-  ScrollController _scrollController;
+  final _max = _kDefaultMax;
+  final _min = _kDefaultMin;
+  final ScrollController _scroll = ScrollController();
+
   AnimationController _expansion;
   Animation<double> _expansionAnimation;
   AnimationStatus _previousStatus;
-  double _relativeValue;
-  final _max = _kDefaultMax;
-  final _min = _kDefaultMin;
+  double _expansionFocalValue;
 
   @override
   void initState() {
-    _scrollController = ScrollController();
     _expansion = AnimationController(
       vsync: this,
       duration: widget.expansionDuration,
@@ -71,11 +71,10 @@ class _ExpandableSliderState extends State<ExpandableSlider>
       ),
     );
     _expansionAnimation.addListener(_updateExpansionTransition);
-    _expansionAnimation.addStatusListener(_updateRelativeValue);
+    _expansionAnimation.addStatusListener((_) => _updateExpansionFocalValue());
+    _scroll.addListener(_updateExpansionFocalValue);
     _previousStatus = _expansion.status;
-    _scrollController
-        .addListener(() => _updateRelativeValue(_expansion.status));
-    _updateRelativeValue(_expansionAnimation.status);
+    _updateExpansionFocalValue();
     super.initState();
   }
 
@@ -83,14 +82,14 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   void didUpdateWidget(ExpandableSlider oldWidget) {
     final change = (oldWidget.value - widget.value).abs() * _totalWidth;
     if (change > widget.availableWidth * _kScrollTriggerFactor && _isExpanded) {
-      _scrollController.animateTo(
+      _scroll.animateTo(
         widget.value * _totalWidth - widget.availableWidth / 2,
         duration: durations.largePresenting,
         curve: curves.main,
       );
     }
-    if (oldWidget.value != widget.value && _expansion.isDismissed) {
-      _updateRelativeValue(_expansion.status);
+    if (oldWidget.value != widget.value && _isShrunk) {
+      _updateExpansionFocalValue();
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -103,7 +102,7 @@ class _ExpandableSliderState extends State<ExpandableSlider>
           builder: (_, constraints) => ScrollConfiguration(
             behavior: const NoGlowBehavior(),
             child: SingleChildScrollView(
-              controller: _scrollController,
+              controller: _scroll,
               scrollDirection: Axis.horizontal,
               physics: const NeverScrollableScrollPhysics(),
               child: SizedBox(
@@ -134,6 +133,8 @@ class _ExpandableSliderState extends State<ExpandableSlider>
 
   bool get _isExpanded => _expansion.status == AnimationStatus.completed;
 
+  bool get _isShrunk => _expansion.status == AnimationStatus.dismissed;
+
   double get _totalWidth => widget.availableWidth + _kExpandedAddedWidth;
 
   bool get _isCompleteForwarding =>
@@ -145,30 +146,29 @@ class _ExpandableSliderState extends State<ExpandableSlider>
     widget.onChanged(newValue);
   }
 
-  void _updateRelativeValue(AnimationStatus status) {
+  void _updateExpansionFocalValue() {
     if (_isExpanded) {
-      final scrollPosition = _scrollController.position.pixels;
-      _relativeValue = scrollPosition;
-    } else if (status == AnimationStatus.dismissed) {
-      _relativeValue = widget.value;
+      _expansionFocalValue = _scroll.position.pixels;
+    } else if (_isShrunk) {
+      _expansionFocalValue = widget.value;
     }
   }
 
   void _shouldScroll(double newValue) {
     if (_isExpanded) {
-      final scrollPosition = _scrollController.position.pixels;
+      final scrollPosition = _scroll.position.pixels;
       final screenMin = scrollPosition / _totalWidth;
       final screenMax = (scrollPosition + widget.availableWidth) / _totalWidth;
       final minDiff = (screenMin - _min).clamp(_kDefaultMin, _kDefaultMax);
       final maxDiff = (_max - screenMax).clamp(_kDefaultMin, _kDefaultMax);
       if (minDiff * _kExpandedScrollingFactor + _min > newValue) {
-        _scrollController.animateTo(
+        _scroll.animateTo(
           scrollPosition - _kScrollingStep,
           duration: durations.smallPresenting,
           curve: curves.main,
         );
       } else if (_max - maxDiff * _kExpandedScrollingFactor < newValue) {
-        _scrollController.animateTo(
+        _scroll.animateTo(
           scrollPosition + _kScrollingStep,
           duration: durations.smallPresenting,
           curve: curves.main,
@@ -178,9 +178,9 @@ class _ExpandableSliderState extends State<ExpandableSlider>
   }
 
   void _toggleExpansionOnScale(ScaleUpdateDetails details) {
-    if (details.horizontalScale > 1) {
+    if (details.horizontalScale > 1 && _isShrunk) {
       _expand();
-    } else if (details.horizontalScale < 1) {
+    } else if (details.horizontalScale < 1 && _isExpanded) {
       _shrink();
     }
   }
@@ -189,11 +189,11 @@ class _ExpandableSliderState extends State<ExpandableSlider>
 
   void _updateExpansionTransition() {
     final expansionValue = _expansionAnimation.value;
+    final addedWidth = expansionValue * _kExpandedAddedWidth;
     if (_isCompleteForwarding) {
-      setState(() => _scrollController
-          .jumpTo(_relativeValue * expansionValue * _kExpandedAddedWidth));
+      setState(() => _scroll.jumpTo(_expansionFocalValue * addedWidth));
     } else {
-      setState(() => _scrollController.jumpTo(_relativeValue * expansionValue));
+      setState(() => _scroll.jumpTo(_expansionFocalValue * expansionValue));
     }
     _previousStatus = _expansion.status;
   }
