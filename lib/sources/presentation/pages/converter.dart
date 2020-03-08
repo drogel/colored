@@ -46,6 +46,7 @@ class Converter extends StatelessWidget {
                   secondValue: data.state.selection.secondComponent,
                   thirdValue: data.state.selection.thirdComponent,
                   onChanged: data.onSelectionChanged,
+                  step: data.state.converterStep,
                 ),
               ],
             ),

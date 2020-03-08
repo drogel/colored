@@ -3,14 +3,17 @@ import 'package:colored/sources/styling/durations.dart' as durations;
 import 'package:colored/sources/styling/curves.dart' as curves;
 import 'package:flutter/material.dart';
 
-class ColorSlider extends StatefulWidget {
-  const ColorSlider({
+class SmoothSlider extends StatefulWidget {
+  const SmoothSlider({
     @required this.value,
     @required this.color,
     @required this.onChanged,
-    this.duration = durations.mediumPresenting,
-    this.curve = curves.primary,
+    this.duration = durations.smallPresenting,
+    this.curve = curves.main,
     this.inactiveOpacity = opacities.fadedColor,
+    this.max = 1,
+    this.min = 0,
+    this.divisions,
     Key key,
   })  : assert(onChanged != null),
         assert(duration != null),
@@ -18,6 +21,9 @@ class ColorSlider extends StatefulWidget {
         super(key: key);
 
   final double value;
+  final double max;
+  final double min;
+  final int divisions;
   final Color color;
   final double inactiveOpacity;
   final void Function(double) onChanged;
@@ -25,10 +31,10 @@ class ColorSlider extends StatefulWidget {
   final Curve curve;
 
   @override
-  _ColorSliderState createState() => _ColorSliderState();
+  _SmoothSliderState createState() => _SmoothSliderState();
 }
 
-class _ColorSliderState extends State<ColorSlider>
+class _SmoothSliderState extends State<SmoothSlider>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
@@ -44,7 +50,7 @@ class _ColorSliderState extends State<ColorSlider>
   }
 
   @override
-  void didUpdateWidget(ColorSlider oldWidget) {
+  void didUpdateWidget(SmoothSlider oldWidget) {
     if (oldWidget.value != widget.value) {
       _animationController.animateTo(widget.value);
     }
@@ -57,6 +63,9 @@ class _ColorSliderState extends State<ColorSlider>
         onChanged: widget.onChanged,
         activeColor: widget.color,
         inactiveColor: widget.color.withOpacity(widget.inactiveOpacity),
+        max: widget.max,
+        min: widget.min,
+        divisions: widget.divisions,
       );
 
   @override

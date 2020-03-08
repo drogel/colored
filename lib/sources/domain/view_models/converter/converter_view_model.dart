@@ -27,6 +27,7 @@ class ConverterViewModel {
 
   ConverterState getInitialState() => const ConverterState(
         color: Color.fromRGBO(0, 0, 0, 1),
+        converterStep: 1/_kDecimal8Bit,
         rgbString: "0, 0, 0",
         hexString: "#000000",
         selection: ColorSelection(
@@ -49,6 +50,7 @@ class ConverterViewModel {
     _stateController.sink.add(
       ConverterState(
         color: color,
+        converterStep: 1/_kDecimal8Bit,
         rgbString: rgbString,
         hexString: hexString,
         selection: selection,
