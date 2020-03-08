@@ -32,6 +32,7 @@ void main() {
         );
         const expected = ConverterState(
           color: Color.fromRGBO(255, 51, 102, 1),
+          converterStep: 1/255,
           rgbString: "255, 51, 102",
           hexString: "#FF3366",
           selection: selection,
@@ -126,6 +127,7 @@ void main() {
         );
         const expected = ConverterState(
           color: Color.fromRGBO(255, 51, 102, 1),
+          converterStep: 1 / 255,
           rgbString: rgbString,
           hexString: "#FF3366",
           selection: selection,
@@ -145,6 +147,7 @@ void main() {
         );
         const expected = ConverterState(
           color: Color.fromRGBO(255, 51, 102, 1),
+          converterStep: 1 / 255,
           rgbString: "255, 51, 102",
           hexString: hexString,
           selection: selection,

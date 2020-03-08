@@ -1,6 +1,7 @@
-import 'package:colored/sources/presentation/widgets/sliders/expandable_slider.dart';
 import 'package:colored/sources/domain/data/color_selection.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
+import 'package:colored/sources/styling/opacities.dart' as opacities;
+import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/material.dart';
 
 class ColorSliders extends StatefulWidget {
@@ -9,6 +10,7 @@ class ColorSliders extends StatefulWidget {
     @required this.secondValue,
     @required this.thirdValue,
     @required this.onChanged,
+    @required this.step,
     Key key,
   })  : assert(onChanged != null),
         super(key: key);
@@ -17,6 +19,7 @@ class ColorSliders extends StatefulWidget {
   final double firstValue;
   final double secondValue;
   final double thirdValue;
+  final double step;
 
   @override
   _ColorSlidersState createState() => _ColorSlidersState();
@@ -56,8 +59,9 @@ class _ColorSlidersState extends State<ColorSliders> {
           children: <Widget>[
             ExpandableSlider(
               value: _firstValue,
-              color: colors.red,
-              availableWidth: constraints.maxWidth,
+              activeColor: colors.red,
+              inactiveColor: colors.red.withOpacity(opacities.fadedColor),
+              estimatedValueStep: widget.step,
               onChanged: (value) {
                 _firstValue = value;
                 _notifyChange();
@@ -65,8 +69,9 @@ class _ColorSlidersState extends State<ColorSliders> {
             ),
             ExpandableSlider(
               value: _secondValue,
-              color: colors.green,
-              availableWidth: constraints.maxWidth,
+              activeColor: colors.green,
+              inactiveColor: colors.green.withOpacity(opacities.fadedColor),
+              estimatedValueStep: widget.step,
               onChanged: (value) {
                 _secondValue = value;
                 _notifyChange();
@@ -74,8 +79,9 @@ class _ColorSlidersState extends State<ColorSliders> {
             ),
             ExpandableSlider(
               value: _thirdValue,
-              color: colors.blue,
-              availableWidth: constraints.maxWidth,
+              activeColor: colors.blue,
+              inactiveColor: colors.blue.withOpacity(opacities.fadedColor),
+              estimatedValueStep: widget.step,
               onChanged: (value) {
                 _thirdValue = value;
                 _notifyChange();
