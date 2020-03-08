@@ -6,6 +6,8 @@ import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart'
 import 'package:flutter/material.dart';
 
 class ConverterLayout extends StatelessWidget {
+  const ConverterLayout();
+
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
