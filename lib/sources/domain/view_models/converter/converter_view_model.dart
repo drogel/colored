@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:colored/sources/domain/data/color_format.dart';
+import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
-import 'package:colored/sources/domain/data/color_selection.dart';
+import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter/foundation.dart';
 
 const _kDecimal8Bit = 255;

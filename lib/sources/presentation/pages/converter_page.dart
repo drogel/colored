@@ -1,10 +1,10 @@
-import 'package:colored/sources/domain/inherited/converter/converter_data.dart';
+import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
 import 'package:flutter/cupertino.dart';
 
-class ConverterUpdater extends StatefulWidget {
-  const ConverterUpdater({
+class ConverterPage extends StatefulWidget {
+  const ConverterPage({
     @required ConverterViewModel viewModel,
     @required this.child,
     Key key,
@@ -16,10 +16,10 @@ class ConverterUpdater extends StatefulWidget {
   final Widget child;
 
   @override
-  _ConverterUpdaterState createState() => _ConverterUpdaterState();
+  _ConverterPageState createState() => _ConverterPageState();
 }
 
-class _ConverterUpdaterState extends State<ConverterUpdater> {
+class _ConverterPageState extends State<ConverterPage> {
   ConverterViewModel _viewModel;
   ConverterState _state;
 

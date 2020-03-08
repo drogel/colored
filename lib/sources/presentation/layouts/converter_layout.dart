@@ -1,11 +1,11 @@
-import 'package:colored/sources/domain/data/color_format.dart';
-import 'package:colored/sources/domain/inherited/converter/converter_data.dart';
+import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
 
-class Converter extends StatelessWidget {
+class ConverterLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);

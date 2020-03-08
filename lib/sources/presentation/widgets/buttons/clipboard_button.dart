@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/domain/data/color_format.dart';
+import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:colored/sources/styling/opacities.dart' as opacities;
 import 'package:flutter/material.dart';

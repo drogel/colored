@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:colored/sources/domain/data/color_selection.dart';
+import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter/cupertino.dart';
 
 class ConverterState {
