@@ -1,6 +1,8 @@
+import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
+import 'package:colored/sources/presentation/widgets/buttons/titled_clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +13,11 @@ class ConverterLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
-
+    final localization = Localization.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text("Color converter")),
+      appBar: AppBar(
+        title: Text(localization.colorConverter),
+      ),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
@@ -23,21 +27,24 @@ class ConverterLayout extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 22),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      ClipboardButton(
+                      TitledClipboardButton(
+                        title: localization.hex,
                         format: ColorFormat.hex,
                         clipboardShouldFail: data.clipboardShouldFail,
                         onClipboardRetrieved: data.onClipboardRetrieved,
-                        title: data.state.hexString,
+                        content: data.state.hexString,
                       ),
-                      ClipboardButton(
+                      Icon(Icons.compare_arrows),
+                      TitledClipboardButton(
+                        title: localization.rgb,
                         format: ColorFormat.rgb,
                         clipboardShouldFail: data.clipboardShouldFail,
                         onClipboardRetrieved: data.onClipboardRetrieved,
-                        title: data.state.rgbString,
+                        content: data.state.rgbString,
                       ),
                     ],
                   ),
