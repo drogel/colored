@@ -1,7 +1,6 @@
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
-import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/buttons/titled_clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
