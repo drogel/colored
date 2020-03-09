@@ -5,7 +5,7 @@ import 'package:colored/sources/styling/opacities.dart' as opacities;
 class OverlayContainer extends StatelessWidget {
   const OverlayContainer({
     this.child,
-    this.padding = const EdgeInsets.only(top: 36, bottom: 24),
+    this.padding = const EdgeInsets.only(top: 12, bottom: 12),
     Key key,
   }) : super(key: key);
 

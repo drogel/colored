@@ -1,31 +1,32 @@
-import 'package:colored/sources/domain/inherited/converter/converter_data.dart';
+import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
+import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
 import 'package:flutter/cupertino.dart';
 
-class ConverterUpdater extends StatefulWidget {
-  const ConverterUpdater({
-    @required ConverterViewModel viewModel,
+class ConverterPage extends StatefulWidget {
+  const ConverterPage({
+    @required ConverterInjector injector,
     @required this.child,
     Key key,
-  })  : assert(viewModel != null),
-        _viewModel = viewModel,
+  })  : assert(injector != null),
+        _injector = injector,
         super(key: key);
 
-  final ConverterViewModel _viewModel;
+  final ConverterInjector _injector;
   final Widget child;
 
   @override
-  _ConverterUpdaterState createState() => _ConverterUpdaterState();
+  _ConverterPageState createState() => _ConverterPageState();
 }
 
-class _ConverterUpdaterState extends State<ConverterUpdater> {
+class _ConverterPageState extends State<ConverterPage> {
   ConverterViewModel _viewModel;
   ConverterState _state;
 
   @override
   void initState() {
-    _viewModel = widget._viewModel;
+    _viewModel = widget._injector.injectViewModel();
     _state = _viewModel.getInitialState();
     _viewModel.stateStream.listen(_updateState);
     super.initState();
