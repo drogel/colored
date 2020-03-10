@@ -17,8 +17,10 @@ class DirectionalPanDetector extends StatelessWidget {
   final void Function(DragUpdateDetails) onPanUpdateLeftDirection;
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        onPanUpdate: _notifyPanDirection,
+  Widget build(BuildContext context) =>
+      GestureDetector(
+        onVerticalDragUpdate: _notifyPanDirection,
+        onHorizontalDragUpdate: _notifyPanDirection,
         child: child,
       );
 
@@ -26,24 +28,19 @@ class DirectionalPanDetector extends StatelessWidget {
     final dy = details.delta.dy;
     final dx = details.delta.dx;
 
-    if (dx.abs() < 1.1 || dy.abs() < 1.11) {
-      return;
-    }
-
-    final isMainlyHorizontal = dx.abs() - dy.abs() > 0;
-    if (dy > 0 && !isMainlyHorizontal) {
+    if (dy > 0) {
       if (onPanUpdateDownDirection != null) {
         onPanUpdateDownDirection(details);
       }
-    } else if (dy < 0 && !isMainlyHorizontal) {
+    } else if (dy < 0) {
       if (onPanUpdateUpDirection != null) {
         onPanUpdateUpDirection(details);
       }
-    } else if (dx > 0 && isMainlyHorizontal) {
+    } else if (dx > 0) {
       if (onPanUpdateRightDirection != null) {
         onPanUpdateRightDirection(details);
       }
-    } else if (dx < 0 && isMainlyHorizontal) {
+    } else if (dx < 0) {
       if (onPanUpdateLeftDirection != null) {
         onPanUpdateLeftDirection(details);
       }
