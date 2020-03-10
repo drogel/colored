@@ -3,6 +3,7 @@ import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/titled_clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
+import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class ConverterLayout extends StatelessWidget {
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          Container(color: data.state.color),
+          SwipingColorContainer(color: data.state.color),
           OverlayContainer(
             child: Column(
               mainAxisSize: MainAxisSize.min,

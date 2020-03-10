@@ -18,13 +18,18 @@ class DirectionalPanDetector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onPanUpdate: _handlePanDirection,
+        onPanUpdate: _notifyPanDirection,
         child: child,
       );
 
-  void _handlePanDirection(DragUpdateDetails details) {
+  void _notifyPanDirection(DragUpdateDetails details) {
     final dy = details.delta.dy;
     final dx = details.delta.dx;
+
+    if (dx.abs() < 1.1 || dy.abs() < 1.11) {
+      return;
+    }
+
     final isMainlyHorizontal = dx.abs() - dy.abs() > 0;
     if (dy > 0 && !isMainlyHorizontal) {
       if (onPanUpdateDownDirection != null) {
