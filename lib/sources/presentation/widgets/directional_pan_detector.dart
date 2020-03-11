@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 class DirectionalPanDetector extends StatelessWidget {
   const DirectionalPanDetector({
     @required this.child,
-    this.onPanUpdateDownDirection,
-    this.onPanUpdateRightDirection,
-    this.onPanUpdateLeftDirection,
-    this.onPanUpdateUpDirection,
+    this.onPanUpdateDown,
+    this.onPanUpdateRight,
+    this.onPanUpdateLeft,
+    this.onPanUpdateUp,
     Key key,
   }) : super(key: key);
 
   final Widget child;
-  final void Function(DragUpdateDetails) onPanUpdateDownDirection;
-  final void Function(DragUpdateDetails) onPanUpdateUpDirection;
-  final void Function(DragUpdateDetails) onPanUpdateRightDirection;
-  final void Function(DragUpdateDetails) onPanUpdateLeftDirection;
+  final void Function(DragUpdateDetails) onPanUpdateDown;
+  final void Function(DragUpdateDetails) onPanUpdateUp;
+  final void Function(DragUpdateDetails) onPanUpdateRight;
+  final void Function(DragUpdateDetails) onPanUpdateLeft;
 
   @override
   Widget build(BuildContext context) =>
@@ -29,20 +29,20 @@ class DirectionalPanDetector extends StatelessWidget {
     final dx = details.delta.dx;
 
     if (dy > 0) {
-      if (onPanUpdateDownDirection != null) {
-        onPanUpdateDownDirection(details);
+      if (onPanUpdateDown != null) {
+        onPanUpdateDown(details);
       }
     } else if (dy < 0) {
-      if (onPanUpdateUpDirection != null) {
-        onPanUpdateUpDirection(details);
+      if (onPanUpdateUp != null) {
+        onPanUpdateUp(details);
       }
     } else if (dx > 0) {
-      if (onPanUpdateRightDirection != null) {
-        onPanUpdateRightDirection(details);
+      if (onPanUpdateRight != null) {
+        onPanUpdateRight(details);
       }
     } else if (dx < 0) {
-      if (onPanUpdateLeftDirection != null) {
-        onPanUpdateLeftDirection(details);
+      if (onPanUpdateLeft != null) {
+        onPanUpdateLeft(details);
       }
     }
   }

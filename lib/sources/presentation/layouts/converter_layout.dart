@@ -21,7 +21,13 @@ class ConverterLayout extends StatelessWidget {
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          SwipingColorContainer(color: data.state.color),
+          SwipingColorContainer(
+            color: data.state.color,
+            onColorSwipedDown: data.onColorSwipedDown,
+            onColorSwipedUp: data.onColorSwipedUp,
+            onColorSwipedLeft: data.onColorSwipedLeft,
+            onColorSwipedRight: data.onColorSwipedRight,
+          ),
           OverlayContainer(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -51,9 +57,9 @@ class ConverterLayout extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 ColorSliders(
-                  firstValue: data.state.selection.firstComponent,
-                  secondValue: data.state.selection.secondComponent,
-                  thirdValue: data.state.selection.thirdComponent,
+                  firstValue: data.state.selection.first,
+                  secondValue: data.state.selection.second,
+                  thirdValue: data.state.selection.third,
                   onChanged: data.onSelectionChanged,
                   step: data.state.converterStep,
                 ),

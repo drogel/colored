@@ -2,16 +2,27 @@ import 'package:colored/sources/presentation/widgets/directional_pan_detector.da
 import 'package:flutter/material.dart';
 
 class SwipingColorContainer extends StatelessWidget {
-  const SwipingColorContainer({this.color, Key key}) : super(key: key);
+  const SwipingColorContainer({
+    @required this.onColorSwipedDown,
+    @required this.onColorSwipedUp,
+    @required this.onColorSwipedLeft,
+    @required this.onColorSwipedRight,
+    this.color,
+    Key key,
+  }) : super(key: key);
 
   final Color color;
+  final void Function(double) onColorSwipedDown;
+  final void Function(double) onColorSwipedUp;
+  final void Function(double) onColorSwipedLeft;
+  final void Function(double) onColorSwipedRight;
 
   @override
   Widget build(BuildContext context) => DirectionalPanDetector(
-        onPanUpdateDownDirection: (_) => print("down"),
-        onPanUpdateLeftDirection: (_) => print("left"),
-        onPanUpdateRightDirection: (_) => print("right"),
-        onPanUpdateUpDirection: (_) => print("up"),
+        onPanUpdateDown: (details) => onColorSwipedDown(details.delta.dy),
+        onPanUpdateLeft: (details) => onColorSwipedLeft(details.delta.dx),
+        onPanUpdateRight: (details) => onColorSwipedRight(details.delta.dx),
+        onPanUpdateUp: (details) => onColorSwipedUp(details.delta.dy),
         child: Container(
           color: color,
         ),

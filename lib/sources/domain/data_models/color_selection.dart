@@ -2,27 +2,27 @@ import 'package:flutter/cupertino.dart';
 
 class ColorSelection {
   const ColorSelection({
-    @required this.firstComponent,
-    @required this.secondComponent,
-    @required this.thirdComponent,
-  })  : assert(firstComponent != null),
-        assert(secondComponent != null),
-        assert(thirdComponent != null);
+    @required this.first,
+    @required this.second,
+    @required this.third,
+  })  : assert(first != null),
+        assert(second != null),
+        assert(third != null);
 
-  final double firstComponent;
-  final double secondComponent;
-  final double thirdComponent;
+  final double first;
+  final double second;
+  final double third;
 
   @override
   bool operator ==(Object other) =>
       other is ColorSelection &&
-      other.firstComponent == firstComponent &&
-      other.secondComponent == secondComponent &&
-      other.thirdComponent == thirdComponent;
+      other.first == first &&
+      other.second == second &&
+      other.third == third;
 
   @override
   int get hashCode =>
-      firstComponent.hashCode +
-      secondComponent.hashCode +
-      thirdComponent.hashCode;
+      first.hashCode +
+      second.hashCode +
+      third.hashCode;
 }

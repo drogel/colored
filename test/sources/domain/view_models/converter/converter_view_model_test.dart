@@ -7,6 +7,8 @@ import 'package:colored/sources/domain/view_models/converter/converter_state.dar
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+const _kDecimal8Bit = 255;
+
 void main() {
   ConverterViewModel viewModel;
   StreamController<ConverterState> stateController;
@@ -26,13 +28,13 @@ void main() {
     group("when convertToColor is called with a selection", () {
       test("then a state with corresponding color is added to the stream", () {
         const selection = ColorSelection(
-          firstComponent: 1,
-          secondComponent: 0.2,
-          thirdComponent: 0.4,
+          first: 1,
+          second: 0.2,
+          third: 0.4,
         );
         const expected = ConverterState(
-          color: Color.fromRGBO(255, 51, 102, 1),
-          converterStep: 1/255,
+          color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
+          converterStep: 1 / _kDecimal8Bit,
           rgbString: "255, 51, 102",
           hexString: "#FF3366",
           selection: selection,
@@ -80,7 +82,7 @@ void main() {
         expect(shouldNonHexStringFail, true);
 
         final shouldRGBStringFail = viewModel.clipboardShouldFail(
-          "(255, 255, 255)",
+          "(_kDecimal8Bit, _kDecimal8Bit, _kDecimal8Bit)",
           ColorFormat.hex,
         );
         expect(shouldRGBStringFail, true);
@@ -121,13 +123,13 @@ void main() {
       test("then a state with parsed RGB color is added to the stream", () {
         const rgbString = "255, 51, 102";
         const selection = ColorSelection(
-          firstComponent: 1,
-          secondComponent: 0.2,
-          thirdComponent: 0.4,
+          first: 1,
+          second: 0.2,
+          third: 0.4,
         );
         const expected = ConverterState(
-          color: Color.fromRGBO(255, 51, 102, 1),
-          converterStep: 1 / 255,
+          color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
+          converterStep: 1 / _kDecimal8Bit,
           rgbString: rgbString,
           hexString: "#FF3366",
           selection: selection,
@@ -141,19 +143,107 @@ void main() {
       test("then a state with parsed hex color is added to the stream", () {
         const hexString = "#FF3366";
         const selection = ColorSelection(
-          firstComponent: 1,
-          secondComponent: 0.2,
-          thirdComponent: 0.4,
+          first: 1,
+          second: 0.2,
+          third: 0.4,
         );
         const expected = ConverterState(
-          color: Color.fromRGBO(255, 51, 102, 1),
-          converterStep: 1 / 255,
+          color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
+          converterStep: 1 / _kDecimal8Bit,
           rgbString: "255, 51, 102",
           hexString: hexString,
           selection: selection,
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.convertStringToColor(hexString, ColorFormat.hex);
+      });
+    });
+
+    group("when changeLightness is called with positive change", () {
+      test("then a state with a higher RGB color is retrieved", () {
+        const selection = ColorSelection(
+          first: 0,
+          second: 0.2,
+          third: 0.4,
+        );
+        const expected = ConverterState(
+          color: Color.fromRGBO(10, 61, 112, 1),
+          converterStep: 1 / _kDecimal8Bit,
+          rgbString: "10, 61, 112",
+          hexString: "#0A3D70",
+          selection: ColorSelection(
+            first: 10 / _kDecimal8Bit,
+            second: 61 / _kDecimal8Bit,
+            third: 112 / _kDecimal8Bit,
+          ),
+        );
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.changeLightness(20, selection);
+      });
+
+      test("then a clamped state with a higher RGB color is retrieved", () {
+        const selection = ColorSelection(
+          first: 1,
+          second: 0.2,
+          third: 0.4,
+        );
+        const expected = ConverterState(
+          color: Color.fromRGBO(_kDecimal8Bit, 61, 112, 1),
+          converterStep: 1 / _kDecimal8Bit,
+          rgbString: "255, 61, 112",
+          hexString: "#FF3D70",
+          selection: ColorSelection(
+            first: 1,
+            second: 61 / _kDecimal8Bit,
+            third: 112 / _kDecimal8Bit,
+          ),
+        );
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.changeLightness(20, selection);
+      });
+    });
+
+    group("when changeLightness is called with negative change", () {
+      test("then a state with a lower RGB color is retrieved", () {
+        const selection = ColorSelection(
+          first: 1,
+          second: 0.2,
+          third: 0.4,
+        );
+        const expected = ConverterState(
+          color: Color.fromRGBO(245, 41, 92, 1),
+          converterStep: 1 / _kDecimal8Bit,
+          rgbString: "245, 41, 92",
+          hexString: "#F5295C",
+          selection: ColorSelection(
+            first: 245 / _kDecimal8Bit,
+            second: 41 / _kDecimal8Bit,
+            third: 92 / _kDecimal8Bit,
+          ),
+        );
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.changeLightness(-20, selection);
+      });
+
+      test("then a clamped state with a lower RGB color is retrieved", () {
+        const selection = ColorSelection(
+          first: 0,
+          second: 0.2,
+          third: 0.4,
+        );
+        const expected = ConverterState(
+          color: Color.fromRGBO(0, 41, 92, 1),
+          converterStep: 1 / _kDecimal8Bit,
+          rgbString: "0, 41, 92",
+          hexString: "#00295C",
+          selection: ColorSelection(
+            first: 0,
+            second: 41 / _kDecimal8Bit,
+            third: 92 / _kDecimal8Bit,
+          ),
+        );
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.changeLightness(-20, selection);
       });
     });
   });

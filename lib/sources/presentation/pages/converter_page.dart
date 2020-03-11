@@ -33,13 +33,20 @@ class _ConverterPageState extends State<ConverterPage> {
   }
 
   @override
-  Widget build(BuildContext context) => ConverterData(
-        state: _state,
-        onSelectionChanged: _viewModel.convertToColor,
-        clipboardShouldFail: _viewModel.clipboardShouldFail,
-        onClipboardRetrieved: _viewModel.convertStringToColor,
-        child: widget.child,
-      );
+  Widget build(BuildContext context) {
+    final selection = _state.selection;
+    return ConverterData(
+      state: _state,
+      onSelectionChanged: _viewModel.convertToColor,
+      clipboardShouldFail: _viewModel.clipboardShouldFail,
+      onClipboardRetrieved: _viewModel.convertStringToColor,
+      onColorSwipedUp: (dy) => _viewModel.changeLightness(dy, selection),
+      onColorSwipedDown: (dy) => _viewModel.changeLightness(dy, selection),
+      onColorSwipedRight: (dx) => _viewModel.rotateColorRight(dx, selection),
+      onColorSwipedLeft: (dx) => _viewModel.rotateColorLeft(dx, selection),
+      child: widget.child,
+    );
+  }
 
   @override
   void dispose() {

@@ -93,9 +93,9 @@ class _ColorSlidersState extends State<ColorSliders> {
 
   void _notifyChange() => widget.onChanged(
         ColorSelection(
-          firstComponent: _firstValue,
-          secondComponent: _secondValue,
-          thirdComponent: _thirdValue,
+          first: _firstValue,
+          second: _secondValue,
+          third: _thirdValue,
         ),
       );
 }

@@ -7,7 +7,9 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter/foundation.dart';
 
 const _kDecimal8Bit = 255;
+const _kConverterStep = 1 / _kDecimal8Bit;
 const _kDecimalToHexModulo = 16;
+const _kTunedChangeFactor = 2;
 
 final _hexRegExp = RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
 final _rgbRegExp = RegExp(
@@ -27,20 +29,20 @@ class ConverterViewModel {
 
   ConverterState getInitialState() => const ConverterState(
         color: Color.fromRGBO(0, 0, 0, 1),
-        converterStep: 1/_kDecimal8Bit,
+        converterStep: 1 / _kDecimal8Bit,
         rgbString: "0, 0, 0",
         hexString: "#000000",
         selection: ColorSelection(
-          firstComponent: 0,
-          secondComponent: 0,
-          thirdComponent: 0,
+          first: 0,
+          second: 0,
+          third: 0,
         ),
       );
 
   void convertToColor(ColorSelection selection) {
-    final red = (selection.firstComponent * _kDecimal8Bit).round();
-    final green = (selection.secondComponent * _kDecimal8Bit).round();
-    final blue = (selection.thirdComponent * _kDecimal8Bit).round();
+    final red = (selection.first * _kDecimal8Bit).round();
+    final green = (selection.second * _kDecimal8Bit).round();
+    final blue = (selection.third * _kDecimal8Bit).round();
     final color = Color.fromRGBO(red, green, blue, 1);
     final hexRed = _convertDecimalToHexString(red);
     final hexGreen = _convertDecimalToHexString(green);
@@ -50,7 +52,7 @@ class ConverterViewModel {
     _stateController.sink.add(
       ConverterState(
         color: color,
-        converterStep: 1/_kDecimal8Bit,
+        converterStep: _kConverterStep,
         rgbString: rgbString,
         hexString: hexString,
         selection: selection,
@@ -72,6 +74,29 @@ class ConverterViewModel {
   bool clipboardShouldFail(String string, ColorFormat colorFormat) =>
       !_isStringColorFormat(string, colorFormat);
 
+  void rotateColorRight(double change, ColorSelection currentSelection) {}
+
+  void rotateColorLeft(double change, ColorSelection currentSelection) {}
+
+  void changeLightness(double change, ColorSelection current) {
+    final tunedChange = change / _kTunedChangeFactor;
+    final red = (current.first * _kDecimal8Bit + tunedChange)
+        .round()
+        .clamp(0, _kDecimal8Bit);
+    final green = (current.second * _kDecimal8Bit + tunedChange)
+        .round()
+        .clamp(0, _kDecimal8Bit);
+    final blue = (current.third * _kDecimal8Bit + tunedChange)
+        .round()
+        .clamp(0, _kDecimal8Bit);
+    final selection = ColorSelection(
+      first: red / _kDecimal8Bit,
+      second: green / _kDecimal8Bit,
+      third: blue / _kDecimal8Bit,
+    );
+    convertToColor(selection);
+  }
+
   void dispose() => _stateController.close();
 
   ColorSelection _parseRgb(String string) {
@@ -86,9 +111,9 @@ class ConverterViewModel {
         .toList();
 
     final selection = ColorSelection(
-      firstComponent: rgbComponents[0] / _kDecimal8Bit,
-      secondComponent: rgbComponents[1] / _kDecimal8Bit,
-      thirdComponent: rgbComponents[2] / _kDecimal8Bit,
+      first: rgbComponents[0] / _kDecimal8Bit,
+      second: rgbComponents[1] / _kDecimal8Bit,
+      third: rgbComponents[2] / _kDecimal8Bit,
     );
     return selection;
   }
@@ -101,9 +126,9 @@ class ConverterViewModel {
     buffer.write(string.replaceFirst('#', ''));
     final color = Color(int.parse(buffer.toString(), radix: 16));
     final selection = ColorSelection(
-      firstComponent: color.red / _kDecimal8Bit,
-      secondComponent: color.green / _kDecimal8Bit,
-      thirdComponent: color.blue / _kDecimal8Bit,
+      first: color.red / _kDecimal8Bit,
+      second: color.green / _kDecimal8Bit,
+      third: color.blue / _kDecimal8Bit,
     );
     return selection;
   }
