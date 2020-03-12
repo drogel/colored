@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:math';
 import 'dart:ui';
-
+import 'package:vector_math/vector_math.dart';
 import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 const _kDecimal8Bit = 255;
 const _kConverterStep = 1 / _kDecimal8Bit;
@@ -74,9 +76,35 @@ class ConverterViewModel {
   bool clipboardShouldFail(String string, ColorFormat colorFormat) =>
       !_isStringColorFormat(string, colorFormat);
 
-  void rotateColorRight(double change, ColorSelection currentSelection) {}
+  void rotateColor(double change, ColorSelection currentSelection) {
+    final m = Matrix3.identity();
+    final cosA = cos(radians(change));
+    final sinA = sin(radians(change));
+    final arg0 = cosA + (1.0 - cosA) / 3.0;
+    final arg1 = 1.0 / 3.0 * (1.0 - cosA) - sqrt(1.0 / 3.0) * sinA;
+    final arg2 = 1.0 / 3.0 * (1.0 - cosA) + sqrt(1.0 / 3.0) * sinA;
+    final arg3 = 1.0 / 3.0 * (1.0 - cosA) + sqrt(1.0 / 3.0) * sinA;
+    final arg4 = cosA + 1.0 / 3.0 * (1.0 - cosA);
+    final arg5 = 1.0 / 3.0 * (1.0 - cosA) - sqrt(1.0 / 3.0) * sinA;
+    final arg6 = 1.0 / 3.0 * (1.0 - cosA) - sqrt(1.0 / 3.0) * sinA;
+    final arg7 = 1.0 / 3.0 * (1.0 - cosA) + sqrt(1.0 / 3.0) * sinA;
+    final arg8 = cosA + 1.0 / 3.0 * (1.0 - cosA);
+    m.setValues(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 
-  void rotateColorLeft(double change, ColorSelection currentSelection) {}
+    final r = _kDecimal8Bit * currentSelection.first;
+    final g = _kDecimal8Bit *currentSelection.second;
+    final b = _kDecimal8Bit * currentSelection.third;
+    final rx = r * m.entry(0, 0) + g * m.entry(0, 1) + b * m.entry(0, 2);
+    final gx = r * m.entry(1, 0) + g * m.entry(1, 1) + b * m.entry(1, 2);
+    final bx = r * m.entry(2, 0) + g * m.entry(2, 1) + b * m.entry(2, 2);
+
+    final selection = ColorSelection(
+      first: rx.clamp(0, _kDecimal8Bit) / _kDecimal8Bit,
+      second: gx.clamp(0, _kDecimal8Bit) / _kDecimal8Bit,
+      third: bx.clamp(0, _kDecimal8Bit) / _kDecimal8Bit,
+    );
+    convertToColor(selection);
+  }
 
   void changeLightness(double change, ColorSelection current) {
     final tunedChange = change / _kTunedChangeFactor;

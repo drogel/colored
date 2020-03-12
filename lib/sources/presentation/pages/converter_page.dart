@@ -42,8 +42,8 @@ class _ConverterPageState extends State<ConverterPage> {
       onClipboardRetrieved: _viewModel.convertStringToColor,
       onColorSwipedUp: (dy) => _viewModel.changeLightness(dy, selection),
       onColorSwipedDown: (dy) => _viewModel.changeLightness(dy, selection),
-      onColorSwipedRight: (dx) => _viewModel.rotateColorRight(dx, selection),
-      onColorSwipedLeft: (dx) => _viewModel.rotateColorLeft(dx, selection),
+      onColorSwipedRight: (dx) => _viewModel.rotateColor(dx, selection),
+      onColorSwipedLeft: (dx) => _viewModel.rotateColor(dx, selection),
       child: widget.child,
     );
   }
