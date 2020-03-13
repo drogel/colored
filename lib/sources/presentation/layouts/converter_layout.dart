@@ -3,6 +3,7 @@ import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/titled_clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
+import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,13 @@ class ConverterLayout extends StatelessWidget {
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          Container(color: data.state.color),
+          SwipingColorContainer(
+            color: data.state.color,
+            onColorSwipedDown: data.onColorSwipedDown,
+            onColorSwipedUp: data.onColorSwipedUp,
+            onColorSwipedLeft: data.onColorSwipedLeft,
+            onColorSwipedRight: data.onColorSwipedRight,
+          ),
           OverlayContainer(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -50,9 +57,9 @@ class ConverterLayout extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 ColorSliders(
-                  firstValue: data.state.selection.firstComponent,
-                  secondValue: data.state.selection.secondComponent,
-                  thirdValue: data.state.selection.thirdComponent,
+                  firstValue: data.state.selection.first,
+                  secondValue: data.state.selection.second,
+                  thirdValue: data.state.selection.third,
                   onChanged: data.onSelectionChanged,
                   step: data.state.converterStep,
                 ),

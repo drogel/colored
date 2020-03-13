@@ -9,6 +9,10 @@ class ConverterData extends InheritedWidget {
     @required this.onSelectionChanged,
     @required this.clipboardShouldFail,
     @required this.onClipboardRetrieved,
+    @required this.onColorSwipedDown,
+    @required this.onColorSwipedUp,
+    @required this.onColorSwipedLeft,
+    @required this.onColorSwipedRight,
     Widget child,
     Key key,
   })  : assert(state != null),
@@ -18,6 +22,10 @@ class ConverterData extends InheritedWidget {
   final void Function(ColorSelection) onSelectionChanged;
   final bool Function(String, ColorFormat) clipboardShouldFail;
   final void Function(String, ColorFormat) onClipboardRetrieved;
+  final void Function(double) onColorSwipedDown;
+  final void Function(double) onColorSwipedUp;
+  final void Function(double) onColorSwipedLeft;
+  final void Function(double) onColorSwipedRight;
 
   static ConverterData of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<ConverterData>();
