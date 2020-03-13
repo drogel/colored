@@ -60,6 +60,7 @@ class ConverterLayout extends StatelessWidget {
                 thirdValue: data.state.selection.third,
                 onChanged: data.onSelectionChanged,
                 step: data.state.converterStep,
+                controller: data.slidersController,
               ),
             ),
           ),

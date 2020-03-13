@@ -41,35 +41,19 @@ class ConverterViewModel {
         ),
       );
 
-  void convertToColor(ColorSelection selection) {
-    final red = (selection.first * _kDecimal8Bit).round();
-    final green = (selection.second * _kDecimal8Bit).round();
-    final blue = (selection.third * _kDecimal8Bit).round();
-    final color = Color.fromRGBO(red, green, blue, 1);
-    final hexRed = _convertDecimalToHexString(red);
-    final hexGreen = _convertDecimalToHexString(green);
-    final hexBlue = _convertDecimalToHexString(blue);
-    final rgbString = "$red, $green, $blue";
-    final hexString = "#$hexRed$hexGreen$hexBlue";
-    _stateController.sink.add(
-      ConverterState(
-        color: color,
-        converterStep: _kConverterStep,
-        rgbString: rgbString,
-        hexString: hexString,
-        selection: selection,
-      ),
-    );
+  void notifySelection(ColorSelection selection) {
+    final state = _convertToState(selection);
+    _stateController.sink.add(state);
   }
 
   void convertStringToColor(String string, ColorFormat colorFormat) {
     switch (colorFormat) {
       case ColorFormat.hex:
         final selection = _parseHex(string);
-        return convertToColor(selection);
+        return notifySelection(selection);
       case ColorFormat.rgb:
         final selection = _parseRgb(string);
-        return convertToColor(selection);
+        return notifySelection(selection);
     }
   }
 
@@ -103,7 +87,9 @@ class ConverterViewModel {
       second: gx.clamp(0, _kDecimal8Bit) / _kDecimal8Bit,
       third: bx.clamp(0, _kDecimal8Bit) / _kDecimal8Bit,
     );
-    convertToColor(selection);
+
+    final state = _convertToState(selection);
+    _stateController.sink.add(Shrinking.fromState(state));
   }
 
   void changeLightness(double change, ColorSelection current) {
@@ -122,7 +108,7 @@ class ConverterViewModel {
       second: green / _kDecimal8Bit,
       third: blue / _kDecimal8Bit,
     );
-    convertToColor(selection);
+    notifySelection(selection);
   }
 
   void dispose() => _stateController.close();
@@ -176,5 +162,24 @@ class ConverterViewModel {
         return _isRgb(string);
     }
     return false;
+  }
+
+  ConverterState _convertToState(ColorSelection selection) {
+    final red = (selection.first * _kDecimal8Bit).round();
+    final green = (selection.second * _kDecimal8Bit).round();
+    final blue = (selection.third * _kDecimal8Bit).round();
+    final color = Color.fromRGBO(red, green, blue, 1);
+    final hexRed = _convertDecimalToHexString(red);
+    final hexGreen = _convertDecimalToHexString(green);
+    final hexBlue = _convertDecimalToHexString(blue);
+    final rgbString = "$red, $green, $blue";
+    final hexString = "#$hexRed$hexGreen$hexBlue";
+    return ConverterState(
+      color: color,
+      converterStep: _kConverterStep,
+      rgbString: rgbString,
+      hexString: hexString,
+      selection: selection,
+    );
   }
 }

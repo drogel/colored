@@ -40,7 +40,7 @@ void main() {
           selection: selection,
         );
         stateController.stream.listen((state) => expect(state, expected));
-        viewModel.convertToColor(selection);
+        viewModel.notifySelection(selection);
       });
     });
 

@@ -11,6 +11,7 @@ class ColorSliders extends StatefulWidget {
     @required this.thirdValue,
     @required this.onChanged,
     @required this.step,
+    this.controller,
     Key key,
   })  : assert(onChanged != null),
         super(key: key);
@@ -20,6 +21,7 @@ class ColorSliders extends StatefulWidget {
   final double secondValue;
   final double thirdValue;
   final double step;
+  final ExpandableSliderController controller;
 
   @override
   _ColorSlidersState createState() => _ColorSlidersState();
@@ -66,6 +68,7 @@ class _ColorSlidersState extends State<ColorSliders> {
                 _firstValue = value;
                 _notifyChange();
               },
+              controller: widget.controller,
             ),
             ExpandableSlider(
               value: _secondValue,
@@ -76,6 +79,7 @@ class _ColorSlidersState extends State<ColorSliders> {
                 _secondValue = value;
                 _notifyChange();
               },
+              controller: widget.controller,
             ),
             ExpandableSlider(
               value: _thirdValue,
@@ -86,6 +90,7 @@ class _ColorSlidersState extends State<ColorSliders> {
                 _thirdValue = value;
                 _notifyChange();
               },
+              controller: widget.controller,
             ),
           ],
         ),
