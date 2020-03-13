@@ -7,23 +7,23 @@ class SwipingCrossFade extends StatefulWidget {
   const SwipingCrossFade({
     @required this.header,
     @required this.child,
-    this.initialState = CrossFadeState.showFirst,
-    this.duration = durations.shortPresenting,
-    this.reverseDuration = durations.shortDismissing,
-    this.showCurve = curves.incoming,
-    this.hideCurve = curves.exiting,
+    this.isChildInitiallyShown = true,
+    this.sizeDuration = durations.mediumDismissing,
+    this.reverseFadeDuration = durations.shortDismissing,
+    this.showFadeCurve = curves.incoming,
+    this.hideFadeCurve = curves.exiting,
     this.sizeCurve = curves.incoming,
     Key key,
   }) : super(key: key);
 
   final Widget child;
   final Widget header;
-  final Duration duration;
-  final Duration reverseDuration;
-  final Curve showCurve;
-  final Curve hideCurve;
+  final Duration sizeDuration;
+  final Duration reverseFadeDuration;
+  final Curve showFadeCurve;
+  final Curve hideFadeCurve;
   final Curve sizeCurve;
-  final CrossFadeState initialState;
+  final bool isChildInitiallyShown;
 
   @override
   _SwipingCrossFadeState createState() => _SwipingCrossFadeState();
@@ -34,7 +34,9 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
 
   @override
   void initState() {
-    _state = widget.initialState;
+    _state = widget.isChildInitiallyShown
+        ? CrossFadeState.showFirst
+        : CrossFadeState.showSecond;
     super.initState();
   }
 
@@ -53,10 +55,10 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
               crossFadeState: _state,
               firstChild: widget.child,
               secondChild: Container(),
-              duration: widget.duration,
-              reverseDuration: widget.reverseDuration,
-              firstCurve: widget.showCurve,
-              secondCurve: widget.hideCurve,
+              duration: widget.sizeDuration,
+              reverseDuration: widget.reverseFadeDuration,
+              firstCurve: widget.showFadeCurve,
+              secondCurve: widget.hideFadeCurve,
               sizeCurve: widget.sizeCurve,
             ),
           ],
