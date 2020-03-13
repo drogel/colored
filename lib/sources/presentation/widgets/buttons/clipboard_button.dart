@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/domain/data/color_format.dart';
+import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:colored/sources/styling/opacities.dart' as opacities;
 import 'package:flutter/material.dart';
@@ -9,14 +9,14 @@ const _kBorderRadius = 8.0;
 
 class ClipboardButton extends StatefulWidget {
   const ClipboardButton({
-    @required this.title,
+    @required this.content,
     @required this.format,
     @required this.onClipboardRetrieved,
     @required this.clipboardShouldFail,
     Key key,
   }) : super(key: key);
 
-  final String title;
+  final String content;
   final void Function(String, ColorFormat) onClipboardRetrieved;
   final bool Function(String, ColorFormat) clipboardShouldFail;
   final ColorFormat format;
@@ -59,7 +59,7 @@ class _ClipboardButtonState extends State<ClipboardButton> {
           borderRadius: BorderRadius.circular(_kBorderRadius),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Text(widget.title, style: textStyle),
+        child: Text(widget.content, style: textStyle),
       ),
     );
   }
@@ -82,7 +82,7 @@ class _ClipboardButtonState extends State<ClipboardButton> {
   }
 
   Future<void> _setTitleInClipboardData() async {
-    await Clipboard.setData(ClipboardData(text: widget.title));
+    await Clipboard.setData(ClipboardData(text: widget.content));
     setState(() {
       _tooltipMessage = Localization.of(context).tooltipMessage;
       _tooltipColor = colors.primaryDark;

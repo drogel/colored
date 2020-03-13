@@ -1,7 +1,9 @@
 import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:flutter/material.dart';
 
-ThemeData dark(BuildContext context) => ThemeData.from(
+ThemeData dark(BuildContext context) => ThemeData(
+      primaryColor: colors.primary,
+      primaryColorDark: colors.primaryDark,
       colorScheme: ColorScheme(
         primary: colors.primary,
         primaryVariant: colors.primaryDark,
@@ -19,7 +21,9 @@ ThemeData dark(BuildContext context) => ThemeData.from(
       ),
       textTheme: TextTheme(
         body1: TextStyle(color: colors.secondary),
-        headline: TextStyle(color: colors.secondary),
-        title: TextStyle(color: colors.secondary),
+        headline: TextStyle(color: colors.secondaryLight),
+        subhead: TextStyle(color: colors.secondary),
+        title: TextStyle(color: colors.secondaryLight),
       ),
+      iconTheme: IconThemeData(color: colors.secondary, size: 32),
     );

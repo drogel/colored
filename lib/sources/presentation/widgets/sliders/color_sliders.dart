@@ -1,6 +1,7 @@
-import 'package:colored/sources/presentation/widgets/sliders/color_slider.dart';
-import 'package:colored/sources/domain/data/color_selection.dart';
+import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
+import 'package:colored/sources/styling/opacities.dart' as opacities;
+import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/material.dart';
 
 class ColorSliders extends StatefulWidget {
@@ -9,6 +10,7 @@ class ColorSliders extends StatefulWidget {
     @required this.secondValue,
     @required this.thirdValue,
     @required this.onChanged,
+    @required this.step,
     Key key,
   })  : assert(onChanged != null),
         super(key: key);
@@ -17,6 +19,7 @@ class ColorSliders extends StatefulWidget {
   final double firstValue;
   final double secondValue;
   final double thirdValue;
+  final double step;
 
   @override
   _ColorSlidersState createState() => _ColorSlidersState();
@@ -50,41 +53,49 @@ class _ColorSlidersState extends State<ColorSliders> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ColorSlider(
-            value: _firstValue,
-            color: colors.red,
-            onChanged: (value) {
-              _firstValue = value;
-              _notifyChange();
-            },
-          ),
-          ColorSlider(
-            value: _secondValue,
-            color: colors.green,
-            onChanged: (value) {
-              _secondValue = value;
-              _notifyChange();
-            },
-          ),
-          ColorSlider(
-            value: _thirdValue,
-            color: colors.blue,
-            onChanged: (value) {
-              _thirdValue = value;
-              _notifyChange();
-            },
-          ),
-        ],
+  Widget build(BuildContext context) => LayoutBuilder(
+        builder: (_, constraints) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ExpandableSlider(
+              value: _firstValue,
+              activeColor: colors.red,
+              inactiveColor: colors.red.withOpacity(opacities.fadedColor),
+              estimatedValueStep: widget.step,
+              onChanged: (value) {
+                _firstValue = value;
+                _notifyChange();
+              },
+            ),
+            ExpandableSlider(
+              value: _secondValue,
+              activeColor: colors.green,
+              inactiveColor: colors.green.withOpacity(opacities.fadedColor),
+              estimatedValueStep: widget.step,
+              onChanged: (value) {
+                _secondValue = value;
+                _notifyChange();
+              },
+            ),
+            ExpandableSlider(
+              value: _thirdValue,
+              activeColor: colors.blue,
+              inactiveColor: colors.blue.withOpacity(opacities.fadedColor),
+              estimatedValueStep: widget.step,
+              onChanged: (value) {
+                _thirdValue = value;
+                _notifyChange();
+              },
+            ),
+          ],
+        ),
       );
 
   void _notifyChange() => widget.onChanged(
         ColorSelection(
-          firstComponent: _firstValue,
-          secondComponent: _secondValue,
-          thirdComponent: _thirdValue,
+          first: _firstValue,
+          second: _secondValue,
+          third: _thirdValue,
         ),
       );
 }
