@@ -246,5 +246,61 @@ void main() {
         viewModel.changeLightness(-20, selection);
       });
     });
+
+    group("when rotateColor is called with a positive 180 degrees change", () {
+      test("then a state with an opposite color selection is retrieved", () {
+        const selection = ColorSelection(
+          first: 1,
+          second: 0,
+          third: 0,
+        );
+        stateController.stream.listen(
+          (state) => expect(state.selection.first, 0),
+        );
+        viewModel.rotateColor(180, selection);
+      });
+    });
+
+    group("when rotateColor is called with a negative 90 degrees change", () {
+      test("then a state with rotated color selection is retrieved", () {
+        const selection = ColorSelection(
+          first: 1,
+          second: 0,
+          third: 0,
+        );
+        stateController.stream.listen(
+          (state) => expect(state.selection.first.toStringAsFixed(4), "0.3333"),
+        );
+        viewModel.rotateColor(-90, selection);
+      });
+    });
+
+    group("when rotateColor is called with a positive 360 degrees change", () {
+      test("then a state with the same selection is retrieved", () {
+        const selection = ColorSelection(
+          first: 1,
+          second: 0,
+          third: 0,
+        );
+        stateController.stream.listen(
+          (state) => expect(state.selection.first.toStringAsFixed(4), "1.0000"),
+        );
+        viewModel.rotateColor(360, selection);
+      });
+    });
+
+    group("when rotateColor is called with a positive 540 degrees change", () {
+      test("then a state with an opposite color selection is retrieved", () {
+        const selection = ColorSelection(
+          first: 1,
+          second: 0,
+          third: 0,
+        );
+        stateController.stream.listen(
+              (state) => expect(state.selection.first, 0),
+        );
+        viewModel.rotateColor(180, selection);
+      });
+    });
   });
 }
