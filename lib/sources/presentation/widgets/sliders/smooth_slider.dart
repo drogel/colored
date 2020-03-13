@@ -8,7 +8,7 @@ class SmoothSlider extends StatefulWidget {
     @required this.value,
     @required this.color,
     @required this.onChanged,
-    this.duration = durations.smallPresenting,
+    this.duration = durations.shortPresenting,
     this.curve = curves.main,
     this.inactiveOpacity = opacities.fadedColor,
     this.max = 1,
