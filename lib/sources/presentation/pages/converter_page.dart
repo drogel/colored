@@ -1,7 +1,9 @@
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
+import 'package:colored/sources/extensions/list_swap.dart';
 import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -23,6 +25,7 @@ class ConverterPage extends StatefulWidget {
 
 class _ConverterPageState extends State<ConverterPage> {
   final ExpandableSliderController _controller = ExpandableSliderController();
+  final List<Format> _displayedFormats = List<Format>.from(Format.values);
   ConverterViewModel _viewModel;
   ConverterState _state;
 
@@ -44,7 +47,9 @@ class _ConverterPageState extends State<ConverterPage> {
       onClipboardRetrieved: _viewModel.convertStringToColor,
       onColorSwipedVertical: (dy) => _viewModel.changeLightness(dy, selection),
       onColorSwipedHorizontal: (dx) => _viewModel.rotateColor(dx, selection),
+      onFormatSelection: _updateDisplayedFormats,
       slidersController: _controller,
+      displayedFormats: _displayedFormats,
       child: widget.child,
     );
   }
@@ -60,5 +65,15 @@ class _ConverterPageState extends State<ConverterPage> {
       _controller.shrink();
     }
     setState(() => _state = newState);
+  }
+
+  void _updateDisplayedFormats(Format selected, Format previous) {
+    final previousIndex = _displayedFormats.indexOf(previous);
+    if (_displayedFormats.contains(selected)) {
+      final selectedIndex = _displayedFormats.indexOf(selected);
+      setState(() => _displayedFormats.swap(selectedIndex, previousIndex));
+    } else {
+      setState(() => _displayedFormats[previousIndex] = selected);
+    }
   }
 }

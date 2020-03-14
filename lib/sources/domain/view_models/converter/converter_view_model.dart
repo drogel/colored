@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 import 'package:vector_math/vector_math.dart';
-import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter/foundation.dart';
@@ -38,18 +38,18 @@ class ConverterViewModel {
     _stateController.sink.add(state);
   }
 
-  void convertStringToColor(String string, ColorFormat colorFormat) {
+  void convertStringToColor(String string, Format colorFormat) {
     switch (colorFormat) {
-      case ColorFormat.hex:
+      case Format.hex:
         final selection = _parseHex(string);
         return notifySelection(selection);
-      case ColorFormat.rgb:
+      case Format.rgb:
         final selection = _parseRgb(string);
         return notifySelection(selection);
     }
   }
 
-  bool clipboardShouldFail(String string, ColorFormat colorFormat) =>
+  bool clipboardShouldFail(String string, Format colorFormat) =>
       !_isStringColorFormat(string, colorFormat);
 
   void rotateColor(double change, ColorSelection currentSelection) {
@@ -147,11 +147,11 @@ class ConverterViewModel {
 
   bool _isRgb(String string) => _rgbRegExp.hasMatch(string);
 
-  bool _isStringColorFormat(String string, ColorFormat colorFormat) {
+  bool _isStringColorFormat(String string, Format colorFormat) {
     switch (colorFormat) {
-      case ColorFormat.hex:
+      case Format.hex:
         return _isHex(string);
-      case ColorFormat.rgb:
+      case Format.rgb:
         return _isRgb(string);
     }
     return false;
@@ -172,8 +172,8 @@ class ConverterViewModel {
       converterStep: _kConverterStep,
       selection: selection,
       formatData: {
-        ColorFormat.hex: hexString,
-        ColorFormat.rgb: rgbString,
+        Format.hex: hexString,
+        Format.rgb: rgbString,
       },
     );
   }

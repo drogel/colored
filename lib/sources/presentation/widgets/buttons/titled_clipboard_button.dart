@@ -1,4 +1,4 @@
-import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
 import 'package:flutter/material.dart';
 
@@ -9,29 +9,31 @@ class DropdownFormatButton extends StatelessWidget {
     @required this.format,
     @required this.onClipboardRetrieved,
     @required this.clipboardShouldFail,
+    @required this.onDropdownSelection,
     Key key,
   }) : super(key: key);
 
   final String content;
-  final void Function(String, ColorFormat) onClipboardRetrieved;
-  final bool Function(String, ColorFormat) clipboardShouldFail;
-  final ColorFormat format;
+  final void Function(String, Format) onClipboardRetrieved;
+  final bool Function(String, Format) clipboardShouldFail;
+  final void Function(Format, Format) onDropdownSelection;
+  final Format format;
   final String title;
 
   @override
   Widget build(BuildContext context) => Column(
         children: <Widget>[
           DropdownButton<String>(
-            value: format.value,
-            items: ColorFormat.values
+            value: format.rawValue,
+            items: Format.values
                 .map((format) => DropdownMenuItem<String>(
-                      value: format.value,
-                      child: Text(format.value),
+                      value: format.rawValue,
+                      child: Text(format.rawValue),
                     ))
                 .toList(),
             underline: Container(),
             isDense: true,
-            onChanged: (_) {},
+            onChanged: (str) => onDropdownSelection(formatValue(str), format),
           ),
           const SizedBox(height: 8),
           FormatButton(

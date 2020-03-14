@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:collection/collection.dart';
-import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -16,7 +16,7 @@ class ConverterState {
   final Color color;
   final double converterStep;
   final ColorSelection selection;
-  final Map<ColorFormat, String> formatData;
+  final Map<Format, String> formatData;
 
   @override
   bool operator ==(Object other) =>
@@ -42,7 +42,7 @@ class Shrinking extends ConverterState {
     @required Color color,
     @required double converterStep,
     @required ColorSelection selection,
-    @required Map<ColorFormat, String> formatData,
+    @required Map<Format, String> formatData,
   }) : super(
           color: color,
           converterStep: converterStep,

@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:colored/sources/styling/opacities.dart' as opacities;
 import 'package:flutter/material.dart';
@@ -17,9 +17,9 @@ class FormatButton extends StatefulWidget {
   }) : super(key: key);
 
   final String content;
-  final void Function(String, ColorFormat) onClipboardRetrieved;
-  final bool Function(String, ColorFormat) clipboardShouldFail;
-  final ColorFormat format;
+  final void Function(String, Format) onClipboardRetrieved;
+  final bool Function(String, Format) clipboardShouldFail;
+  final Format format;
 
   @override
   _FormatButtonState createState() => _FormatButtonState();

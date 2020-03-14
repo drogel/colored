@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/titled_clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
@@ -35,18 +35,20 @@ class ConverterLayout extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     DropdownFormatButton(
-                      title: ColorFormat.hex.value,
-                      format: ColorFormat.hex,
+                      title: data.displayedFormats[0].rawValue,
+                      format: data.displayedFormats[0],
                       clipboardShouldFail: data.clipboardShouldFail,
                       onClipboardRetrieved: data.onClipboardRetrieved,
-                      content: data.state.formatData[ColorFormat.hex],
+                      content: data.state.formatData[data.displayedFormats[0]],
+                      onDropdownSelection: data.onFormatSelection,
                     ),
                     DropdownFormatButton(
-                      title: ColorFormat.rgb.value,
-                      format: ColorFormat.rgb,
+                      title: data.displayedFormats[1].rawValue,
+                      format: data.displayedFormats[1],
                       clipboardShouldFail: data.clipboardShouldFail,
                       onClipboardRetrieved: data.onClipboardRetrieved,
-                      content: data.state.formatData[ColorFormat.rgb],
+                      content: data.state.formatData[data.displayedFormats[1]],
+                      onDropdownSelection: data.onFormatSelection,
                     ),
                   ],
                 ),
