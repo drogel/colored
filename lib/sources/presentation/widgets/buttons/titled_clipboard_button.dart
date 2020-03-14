@@ -21,9 +21,19 @@ class DropdownFormatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
         children: <Widget>[
-          Text(
-            title,
-            style: Theme.of(context).textTheme.subhead,
+          DropdownButton<String>(
+            value: format.value,
+            items: ColorFormat.values
+                .map(
+                  (format) => DropdownMenuItem<String>(
+                    value: format.value,
+                    child: Text(format.value),
+                  ),
+                )
+                .toList(),
+            underline: Container(),
+            isDense: true,
+            onChanged: (_) {},
           ),
           const SizedBox(height: 8),
           FormatButton(

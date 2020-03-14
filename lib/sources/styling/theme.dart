@@ -27,5 +27,6 @@ ThemeData dark(BuildContext context) => ThemeData(
         subhead: TextStyle(color: colors.secondary, fontFamily: fonts.header),
         title: TextStyle(color: colors.secondaryLight),
       ),
+      canvasColor: colors.primaryDark,
       iconTheme: IconThemeData(color: colors.secondary, size: 32),
     );

@@ -108,7 +108,8 @@ class ConverterViewModel {
       second: green / _kDecimal8Bit,
       third: blue / _kDecimal8Bit,
     );
-    notifySelection(selection);
+    final state = _convertToState(selection);
+    _stateController.sink.add(Shrinking.fromState(state));
   }
 
   void dispose() => _stateController.close();
