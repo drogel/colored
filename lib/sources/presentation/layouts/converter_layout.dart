@@ -43,7 +43,6 @@ class ConverterLayout extends StatelessWidget {
                       onClipboardRetrieved: data.onClipboardRetrieved,
                       content: data.state.hexString,
                     ),
-                    Icon(Icons.compare_arrows),
                     TitledClipboardButton(
                       title: localization.rgb,
                       format: ColorFormat.rgb,
