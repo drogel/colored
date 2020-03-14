@@ -24,12 +24,10 @@ class DropdownFormatButton extends StatelessWidget {
           DropdownButton<String>(
             value: format.value,
             items: ColorFormat.values
-                .map(
-                  (format) => DropdownMenuItem<String>(
-                    value: format.value,
-                    child: Text(format.value),
-                  ),
-                )
+                .map((format) => DropdownMenuItem<String>(
+                      value: format.value,
+                      child: Text(format.value),
+                    ))
                 .toList(),
             underline: Container(),
             isDense: true,

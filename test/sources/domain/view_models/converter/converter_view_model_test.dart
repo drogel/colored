@@ -38,6 +38,10 @@ void main() {
           rgbString: "255, 51, 102",
           hexString: "#FF3366",
           selection: selection,
+          formatData: {
+            ColorFormat.hex: "#FF3366",
+            ColorFormat.rgb: "255, 51, 102"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.notifySelection(selection);
@@ -133,6 +137,10 @@ void main() {
           rgbString: rgbString,
           hexString: "#FF3366",
           selection: selection,
+          formatData:  {
+            ColorFormat.hex: "#FF3366",
+            ColorFormat.rgb: rgbString
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.convertStringToColor(rgbString, ColorFormat.rgb);
@@ -153,6 +161,10 @@ void main() {
           rgbString: "255, 51, 102",
           hexString: hexString,
           selection: selection,
+          formatData:  {
+            ColorFormat.hex: hexString,
+            ColorFormat.rgb: "255, 51, 102"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.convertStringToColor(hexString, ColorFormat.hex);
@@ -176,6 +188,10 @@ void main() {
             second: 61 / _kDecimal8Bit,
             third: 112 / _kDecimal8Bit,
           ),
+          formatData:  {
+            ColorFormat.hex: "#0A3D70",
+            ColorFormat.rgb: "10, 61, 112"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(20, selection);
@@ -197,6 +213,10 @@ void main() {
             second: 61 / _kDecimal8Bit,
             third: 112 / _kDecimal8Bit,
           ),
+          formatData:  {
+            ColorFormat.hex: "#FF3D70",
+            ColorFormat.rgb: "255, 61, 112"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(20, selection);
@@ -220,6 +240,10 @@ void main() {
             second: 41 / _kDecimal8Bit,
             third: 92 / _kDecimal8Bit,
           ),
+          formatData:  {
+            ColorFormat.hex: "#F5295C",
+            ColorFormat.rgb: "245, 41, 92"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(-20, selection);
@@ -231,7 +255,7 @@ void main() {
           second: 0.2,
           third: 0.4,
         );
-        const expected = ConverterState(
+        const expected = Shrinking(
           color: Color.fromRGBO(0, 41, 92, 1),
           converterStep: 1 / _kDecimal8Bit,
           rgbString: "0, 41, 92",
@@ -241,6 +265,10 @@ void main() {
             second: 41 / _kDecimal8Bit,
             third: 92 / _kDecimal8Bit,
           ),
+          formatData:  {
+            ColorFormat.hex: "#00295C",
+            ColorFormat.rgb: "0, 41, 92"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(-20, selection);

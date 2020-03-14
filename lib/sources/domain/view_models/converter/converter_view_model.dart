@@ -29,16 +29,8 @@ class ConverterViewModel {
 
   Stream<ConverterState> get stateStream => _stateController.stream;
 
-  ConverterState getInitialState() => const ConverterState(
-        color: Color.fromRGBO(0, 0, 0, 1),
-        converterStep: 1 / _kDecimal8Bit,
-        rgbString: "0, 0, 0",
-        hexString: "#000000",
-        selection: ColorSelection(
-          first: 0,
-          second: 0,
-          third: 0,
-        ),
+  ConverterState getInitialState() => _convertToState(
+        const ColorSelection(first: 0, second: 0, third: 0),
       );
 
   void notifySelection(ColorSelection selection) {
@@ -181,6 +173,10 @@ class ConverterViewModel {
       rgbString: rgbString,
       hexString: hexString,
       selection: selection,
+      formatData: {
+        ColorFormat.hex: hexString,
+        ColorFormat.rgb: rgbString,
+      },
     );
   }
 }

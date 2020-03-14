@@ -25,6 +25,7 @@ dependencies:
   expandable_slider: ^1.0.2
   cupertino_icons: ^0.1.2
   vector_math: ^2.0.8
+  collection: ^1.14.11
 
 dev_dependencies:
   flutter_test:

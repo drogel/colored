@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
+import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -10,6 +12,7 @@ class ConverterState {
     @required this.rgbString,
     @required this.hexString,
     @required this.selection,
+    @required this.formatData,
   }) : assert(color != null);
 
   final Color color;
@@ -17,6 +20,7 @@ class ConverterState {
   final String rgbString;
   final String hexString;
   final ColorSelection selection;
+  final Map<ColorFormat, String> formatData;
 
   @override
   bool operator ==(Object other) =>
@@ -25,7 +29,8 @@ class ConverterState {
       other.converterStep == converterStep &&
       other.rgbString == rgbString &&
       other.hexString == hexString &&
-      other.selection == selection;
+      other.selection == selection &&
+      const MapEquality().equals(formatData, other.formatData);
 
   @override
   int get hashCode => color.hashCode;
@@ -36,6 +41,7 @@ class ConverterState {
       rgbString: $rgbString,
       hexString: $hexString,
       selection: $selection,
+      formatData: $formatData,
    )""";
 }
 
@@ -46,12 +52,14 @@ class Shrinking extends ConverterState {
     @required String rgbString,
     @required String hexString,
     @required ColorSelection selection,
+    @required Map<ColorFormat, String> formatData,
   }) : super(
           color: color,
           converterStep: converterStep,
           rgbString: rgbString,
           hexString: hexString,
           selection: selection,
+          formatData: formatData,
         );
 
   factory Shrinking.fromState(ConverterState state) => Shrinking(
@@ -60,5 +68,6 @@ class Shrinking extends ConverterState {
         rgbString: state.rgbString,
         hexString: state.hexString,
         selection: state.selection,
+        formatData: state.formatData,
       );
 }
