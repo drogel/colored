@@ -2,8 +2,8 @@ import 'package:colored/sources/domain/data_models/color_format.dart';
 import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
 import 'package:flutter/material.dart';
 
-class TitledClipboardButton extends StatelessWidget {
-  const TitledClipboardButton({
+class DropdownFormatButton extends StatelessWidget {
+  const DropdownFormatButton({
     @required this.title,
     @required this.content,
     @required this.format,
@@ -26,7 +26,7 @@ class TitledClipboardButton extends StatelessWidget {
             style: Theme.of(context).textTheme.subhead,
           ),
           const SizedBox(height: 8),
-          ClipboardButton(
+          FormatButton(
             format: format,
             clipboardShouldFail: clipboardShouldFail,
             onClipboardRetrieved: onClipboardRetrieved,

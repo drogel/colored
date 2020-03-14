@@ -36,15 +36,15 @@ class ConverterLayout extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    TitledClipboardButton(
-                      title: localization.hex,
+                    DropdownFormatButton(
+                      title: ColorFormat.hex.value,
                       format: ColorFormat.hex,
                       clipboardShouldFail: data.clipboardShouldFail,
                       onClipboardRetrieved: data.onClipboardRetrieved,
                       content: data.state.hexString,
                     ),
-                    TitledClipboardButton(
-                      title: localization.rgb,
+                    DropdownFormatButton(
+                      title: ColorFormat.rgb.value,
                       format: ColorFormat.rgb,
                       clipboardShouldFail: data.clipboardShouldFail,
                       onClipboardRetrieved: data.onClipboardRetrieved,

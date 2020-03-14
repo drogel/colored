@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 
 const _kBorderRadius = 8.0;
 
-class ClipboardButton extends StatefulWidget {
-  const ClipboardButton({
+class FormatButton extends StatefulWidget {
+  const FormatButton({
     @required this.content,
     @required this.format,
     @required this.onClipboardRetrieved,
@@ -22,10 +22,10 @@ class ClipboardButton extends StatefulWidget {
   final ColorFormat format;
 
   @override
-  _ClipboardButtonState createState() => _ClipboardButtonState();
+  _FormatButtonState createState() => _FormatButtonState();
 }
 
-class _ClipboardButtonState extends State<ClipboardButton> {
+class _FormatButtonState extends State<FormatButton> {
   final GlobalKey _tooltip = GlobalKey();
   String _tooltipMessage;
   Color _tooltipColor;
