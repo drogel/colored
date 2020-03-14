@@ -24,10 +24,8 @@ class ConverterLayout extends StatelessWidget {
         children: <Widget>[
           SwipingColorContainer(
             color: data.state.color,
-            onColorSwipedDown: data.onColorSwipedDown,
-            onColorSwipedUp: data.onColorSwipedUp,
-            onColorSwipedLeft: data.onColorSwipedLeft,
-            onColorSwipedRight: data.onColorSwipedRight,
+            onColorSwipedVertical: data.onColorSwipedVertical,
+            onColorSwipedHorizontal: data.onColorSwipedHorizontal,
           ),
           OverlayContainer(
             child: SwipingCrossFade(

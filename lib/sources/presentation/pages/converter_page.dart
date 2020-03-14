@@ -42,10 +42,8 @@ class _ConverterPageState extends State<ConverterPage> {
       onSelectionChanged: _viewModel.notifySelection,
       clipboardShouldFail: _viewModel.clipboardShouldFail,
       onClipboardRetrieved: _viewModel.convertStringToColor,
-      onColorSwipedUp: (dy) => _viewModel.changeLightness(dy, selection),
-      onColorSwipedDown: (dy) => _viewModel.changeLightness(dy, selection),
-      onColorSwipedRight: (dx) => _viewModel.rotateColor(dx, selection),
-      onColorSwipedLeft: (dx) => _viewModel.rotateColor(dx, selection),
+      onColorSwipedVertical: (dy) => _viewModel.changeLightness(dy, selection),
+      onColorSwipedHorizontal: (dx) => _viewModel.rotateColor(dx, selection),
       slidersController: _controller,
       child: widget.child,
     );
