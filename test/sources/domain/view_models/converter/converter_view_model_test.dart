@@ -35,8 +35,6 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "255, 51, 102",
-          hexString: "#FF3366",
           selection: selection,
           formatData: {
             ColorFormat.hex: "#FF3366",
@@ -134,8 +132,6 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: rgbString,
-          hexString: "#FF3366",
           selection: selection,
           formatData:  {
             ColorFormat.hex: "#FF3366",
@@ -158,8 +154,6 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "255, 51, 102",
-          hexString: hexString,
           selection: selection,
           formatData:  {
             ColorFormat.hex: hexString,
@@ -181,8 +175,6 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(10, 61, 112, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "10, 61, 112",
-          hexString: "#0A3D70",
           selection: ColorSelection(
             first: 10 / _kDecimal8Bit,
             second: 61 / _kDecimal8Bit,
@@ -206,8 +198,6 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(_kDecimal8Bit, 61, 112, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "255, 61, 112",
-          hexString: "#FF3D70",
           selection: ColorSelection(
             first: 1,
             second: 61 / _kDecimal8Bit,
@@ -233,8 +223,6 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(245, 41, 92, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "245, 41, 92",
-          hexString: "#F5295C",
           selection: ColorSelection(
             first: 245 / _kDecimal8Bit,
             second: 41 / _kDecimal8Bit,
@@ -258,8 +246,6 @@ void main() {
         const expected = Shrinking(
           color: Color.fromRGBO(0, 41, 92, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "0, 41, 92",
-          hexString: "#00295C",
           selection: ColorSelection(
             first: 0,
             second: 41 / _kDecimal8Bit,

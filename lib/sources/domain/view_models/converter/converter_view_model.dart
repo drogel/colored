@@ -170,8 +170,6 @@ class ConverterViewModel {
     return ConverterState(
       color: color,
       converterStep: _kConverterStep,
-      rgbString: rgbString,
-      hexString: hexString,
       selection: selection,
       formatData: {
         ColorFormat.hex: hexString,
