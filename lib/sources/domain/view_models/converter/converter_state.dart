@@ -38,3 +38,27 @@ class ConverterState {
       selection: $selection,
    )""";
 }
+
+class Shrinking extends ConverterState {
+  const Shrinking({
+    @required Color color,
+    @required double converterStep,
+    @required String rgbString,
+    @required String hexString,
+    @required ColorSelection selection,
+  }) : super(
+          color: color,
+          converterStep: converterStep,
+          rgbString: rgbString,
+          hexString: hexString,
+          selection: selection,
+        );
+
+  factory Shrinking.fromState(ConverterState state) => Shrinking(
+        color: state.color,
+        converterStep: state.converterStep,
+        rgbString: state.rgbString,
+        hexString: state.hexString,
+        selection: state.selection,
+      );
+}

@@ -4,6 +4,7 @@ import 'package:colored/sources/domain/view_models/converter/converter_data.dart
 import 'package:colored/sources/presentation/widgets/buttons/titled_clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
+import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
 
@@ -29,43 +30,39 @@ class ConverterLayout extends StatelessWidget {
             onColorSwipedRight: data.onColorSwipedRight,
           ),
           OverlayContainer(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 22),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      TitledClipboardButton(
-                        title: localization.hex,
-                        format: ColorFormat.hex,
-                        clipboardShouldFail: data.clipboardShouldFail,
-                        onClipboardRetrieved: data.onClipboardRetrieved,
-                        content: data.state.hexString,
-                      ),
-                      Icon(Icons.compare_arrows),
-                      TitledClipboardButton(
-                        title: localization.rgb,
-                        format: ColorFormat.rgb,
-                        clipboardShouldFail: data.clipboardShouldFail,
-                        onClipboardRetrieved: data.onClipboardRetrieved,
-                        content: data.state.rgbString,
-                      ),
-                    ],
-                  ),
+            child: SwipingCrossFade(
+              header: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    TitledClipboardButton(
+                      title: localization.hex,
+                      format: ColorFormat.hex,
+                      clipboardShouldFail: data.clipboardShouldFail,
+                      onClipboardRetrieved: data.onClipboardRetrieved,
+                      content: data.state.hexString,
+                    ),
+                    TitledClipboardButton(
+                      title: localization.rgb,
+                      format: ColorFormat.rgb,
+                      clipboardShouldFail: data.clipboardShouldFail,
+                      onClipboardRetrieved: data.onClipboardRetrieved,
+                      content: data.state.rgbString,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                ColorSliders(
-                  firstValue: data.state.selection.first,
-                  secondValue: data.state.selection.second,
-                  thirdValue: data.state.selection.third,
-                  onChanged: data.onSelectionChanged,
-                  step: data.state.converterStep,
-                ),
-              ],
+              ),
+              child: ColorSliders(
+                firstValue: data.state.selection.first,
+                secondValue: data.state.selection.second,
+                thirdValue: data.state.selection.third,
+                onChanged: data.onSelectionChanged,
+                step: data.state.converterStep,
+                controller: data.slidersController,
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
