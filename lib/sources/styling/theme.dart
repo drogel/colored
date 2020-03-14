@@ -2,6 +2,7 @@ import 'package:colored/sources/styling/colors.dart' as colors;
 import 'package:flutter/material.dart';
 
 ThemeData dark(BuildContext context) => ThemeData(
+      fontFamily: "Montserrat",
       primaryColor: colors.primary,
       primaryColorDark: colors.primaryDark,
       colorScheme: ColorScheme(
@@ -22,7 +23,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       textTheme: TextTheme(
         body1: TextStyle(color: colors.secondary),
         headline: TextStyle(color: colors.secondaryLight),
-        subhead: TextStyle(color: colors.secondary),
+        subhead: TextStyle(color: colors.secondary, fontFamily: "Oswald"),
         title: TextStyle(color: colors.secondaryLight),
       ),
       iconTheme: IconThemeData(color: colors.secondary, size: 32),
