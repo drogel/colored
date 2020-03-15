@@ -1,11 +1,13 @@
 enum Format {
   hex,
   rgb,
+  hsl,
 }
 
 Map<Format, String> _values = {
   Format.hex: "Hex",
   Format.rgb: "RGB",
+  Format.hsl: "HSL",
 };
 
 extension ColorFormatValue on Format {
