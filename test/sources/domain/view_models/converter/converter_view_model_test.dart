@@ -16,7 +16,7 @@ void main() {
 
   setUp(() {
     stateController = StreamController<ConverterState>();
-    viewModel = ConverterInjector().injectViewModel(stateController);
+    viewModel = const ConverterInjector().injectViewModel(stateController);
   });
 
   tearDown(() {
