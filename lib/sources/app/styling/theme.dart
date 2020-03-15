@@ -1,5 +1,5 @@
-import 'package:colored/sources/styling/colors.dart' as colors;
-import 'package:colored/sources/styling/fonts.dart' as fonts;
+import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:colored/sources/app/styling/fonts.dart' as fonts;
 import 'package:flutter/material.dart';
 
 ThemeData dark(BuildContext context) => ThemeData(

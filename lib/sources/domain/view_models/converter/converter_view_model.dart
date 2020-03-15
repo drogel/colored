@@ -243,7 +243,7 @@ class ConverterViewModel {
     saturation = (saturation * 100).round();
     luminance = (luminance * 100).round();
 
-    return "$hueº, $saturation%, $luminance%";
+    return "$hue°, $saturation%, $luminance%";
   }
 
   ConverterState _convertToState(ColorSelection selection) {
