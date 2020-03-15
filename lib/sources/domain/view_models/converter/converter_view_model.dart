@@ -5,7 +5,7 @@ import 'package:vector_math/vector_math.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/extensions/string_replace_non_alphanumeric.dart';
+import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 

@@ -1,0 +1,57 @@
+import 'package:colored/sources/common/factors.dart';
+import 'package:colored/sources/data/color_parser/color_parser.dart';
+import 'package:colored/sources/domain/data_models/color_selection.dart';
+import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
+
+class HslParser extends ColorParser {
+  final _hslRegExp = RegExp(r"^(hsl)?\(?\s*(\d+)\s*(°)?(\W+)"
+      r"\s*(\d*(?:\.\d+)?(%)?)\s*(\W+)\s*(\d*(?:\.\d+)?(%)?)\)?");
+
+  @override
+  bool hasMatch(String input) => _hslRegExp.hasMatch(input);
+
+  @override
+  ColorSelection parse(String string) {
+    final hslMatched = _hslRegExp.firstMatch(string).group(0);
+    final hslWithoutSeparators = hslMatched.replacingAllNonAlphanumericBy(" ");
+    final hslComponents = doubleRegExp
+        .allMatches(hslWithoutSeparators)
+        .map((match) => double.parse(match.group(0)))
+        .toList();
+    var rgb = <double>[0, 0, 0];
+
+    final hue = hslComponents[0] / degreesInTurn % 1;
+    final saturation = hslComponents[1] / percentFactor;
+    final luminance = hslComponents[2] / percentFactor;
+
+    if (hue < 1 / 6) {
+      rgb[0] = 1;
+      rgb[1] = hue * 6;
+    } else if (hue < 2 / 6) {
+      rgb[0] = 2 - hue * 6;
+      rgb[1] = 1;
+    } else if (hue < 3 / 6) {
+      rgb[1] = 1;
+      rgb[2] = hue * 6 - 2;
+    } else if (hue < 4 / 6) {
+      rgb[1] = 4 - hue * 6;
+      rgb[2] = 1;
+    } else if (hue < 5 / 6) {
+      rgb[0] = hue * 6 - 4;
+      rgb[2] = 1;
+    } else {
+      rgb[0] = 1;
+      rgb[2] = 6 - hue * 6;
+    }
+
+    rgb = rgb.map((val) => val + (1 - saturation) * (0.5 - val)).toList();
+
+    if (luminance < 0.5) {
+      rgb = rgb.map((val) => luminance * 2 * val).toList();
+    } else {
+      rgb = rgb.map((val) => luminance * 2 * (1 - val) + 2 * val - 1).toList();
+    }
+
+    return ColorSelection(first: rgb[0], second: rgb[1], third: rgb[2]);
+  }
+}
