@@ -1,9 +1,9 @@
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
-import 'package:colored/sources/data/color_parser/color_parser.dart';
+import 'package:colored/sources/data/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 
-class RgbParser extends ColorParser {
+class RgbParser extends FormatParser {
   final _rgbRegExp = RegExp(
       r"^(rgb)?\(?([01]?\d\d?|2[0-4]\d|25[0-5])(\W+)([01]?\d\d?|2[0-4]\d|25"
       r"[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$");

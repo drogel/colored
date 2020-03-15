@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_parser/color_parser.dart';
+import 'package:colored/sources/data/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 
-class HexParser extends ColorParser {
+class HexParser extends FormatParser {
   final _hexRegExp = RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
 
   @override

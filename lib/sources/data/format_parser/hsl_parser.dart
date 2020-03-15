@@ -1,9 +1,9 @@
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_parser/color_parser.dart';
+import 'package:colored/sources/data/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 
-class HslParser extends ColorParser {
+class HslParser extends FormatParser {
   final _hslRegExp = RegExp(r"^(hsl)?\(?\s*(\d+)\s*(°)?(\W+)"
       r"\s*(\d*(?:\.\d+)?(%)?)\s*(\W+)\s*(\d*(?:\.\d+)?(%)?)\)?");
 
