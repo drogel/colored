@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
+import 'package:colored/sources/data/color_parser/color_parser_type.dart';
 import 'package:vector_math/vector_math.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
@@ -14,20 +14,16 @@ const _kConverterStep = 1 / _kDecimal8Bit;
 const _kDecimalToHexModulo = 16;
 const _kTunedChangeFactor = 2;
 
-final _hexRegExp = RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
-final _rgbRegExp = RegExp(
-    r"^(rgb)?\(?([01]?\d\d?|2[0-4]\d|25[0-5])(\W+)([01]?\d\d?|2[0-4]\d|25"
-    r"[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$");
-final _hslRegExp = RegExp(r"^(hsl)?\(?\s*(\d+)\s*(°)?(\W+)"
-    r"\s*(\d*(?:\.\d+)?(%)?)\s*(\W+)\s*(\d*(?:\.\d+)?(%)?)\)?");
-final _doubleRegExp = RegExp(r"-?(?:\d*\.)?\d+(?:[eE][+-]?\d+)?");
-
 class ConverterViewModel {
   const ConverterViewModel({
     @required StreamController<ConverterState> stateController,
+    @required ColorParserType colorParser,
   })  : assert(stateController != null),
-        _stateController = stateController;
+        assert(colorParser != null),
+        _stateController = stateController,
+        _colorParser = colorParser;
 
+  final ColorParserType _colorParser;
   final StreamController<ConverterState> _stateController;
 
   Stream<ConverterState> get stateStream => _stateController.stream;
@@ -41,22 +37,13 @@ class ConverterViewModel {
     _stateController.sink.add(state);
   }
 
-  void convertStringToColor(String string, Format colorFormat) {
-    switch (colorFormat) {
-      case Format.hex:
-        final selection = _parseHex(string);
-        return notifySelection(selection);
-      case Format.rgb:
-        final selection = _parseRgb(string);
-        return notifySelection(selection);
-      case Format.hsl:
-        final selection = _parseHsl(string);
-        return notifySelection(selection);
-    }
+  void convertStringToColor(String string, Format format) {
+    final selection = _colorParser.parseToFormat(string, format);
+    notifySelection(selection);
   }
 
-  bool clipboardShouldFail(String string, Format colorFormat) =>
-      !_isStringColorFormat(string, colorFormat);
+  bool clipboardShouldFail(String string, Format format) =>
+      !_colorParser.isStringOfFormat(string, format);
 
   void rotateColor(double change, ColorSelection currentSelection) {
     final m = Matrix3.identity();
@@ -112,101 +99,8 @@ class ConverterViewModel {
 
   void dispose() => _stateController.close();
 
-  ColorSelection _parseRgb(String string) {
-    final rgbMatched = _rgbRegExp.firstMatch(string).group(0);
-    final rgbWithoutSeparators = rgbMatched.replacingAllNonAlphanumericBy(" ");
-    final rgbComponents = _doubleRegExp
-        .allMatches(rgbWithoutSeparators)
-        .map((match) => double.parse(match.group(0)))
-        .toList();
-
-    final selection = ColorSelection(
-      first: rgbComponents[0] / _kDecimal8Bit,
-      second: rgbComponents[1] / _kDecimal8Bit,
-      third: rgbComponents[2] / _kDecimal8Bit,
-    );
-    return selection;
-  }
-
-  ColorSelection _parseHex(String string) {
-    final buffer = StringBuffer();
-    if (string.length == 6 || string.length == 7) {
-      buffer.write('ff');
-    }
-    buffer.write(string.replaceFirst('#', ''));
-    final color = Color(int.parse(buffer.toString(), radix: 16));
-    final selection = ColorSelection(
-      first: color.red / _kDecimal8Bit,
-      second: color.green / _kDecimal8Bit,
-      third: color.blue / _kDecimal8Bit,
-    );
-    return selection;
-  }
-
-  ColorSelection _parseHsl(String string) {
-    final hslMatched = _hslRegExp.firstMatch(string).group(0);
-    final hslWithoutSeparators = hslMatched.replacingAllNonAlphanumericBy(" ");
-    final hslComponents = _doubleRegExp
-        .allMatches(hslWithoutSeparators)
-        .map((match) => double.parse(match.group(0)))
-        .toList();
-    var rgb = <double>[0, 0, 0];
-
-    final hue = hslComponents[0] / 360 % 1;
-    final saturation = hslComponents[1] / 100;
-    final luminance = hslComponents[2] / 100;
-
-    if (hue < 1 / 6) {
-      rgb[0] = 1;
-      rgb[1] = hue * 6;
-    } else if (hue < 2 / 6) {
-      rgb[0] = 2 - hue * 6;
-      rgb[1] = 1;
-    } else if (hue < 3 / 6) {
-      rgb[1] = 1;
-      rgb[2] = hue * 6 - 2;
-    } else if (hue < 4 / 6) {
-      rgb[1] = 4 - hue * 6;
-      rgb[2] = 1;
-    } else if (hue < 5 / 6) {
-      rgb[0] = hue * 6 - 4;
-      rgb[2] = 1;
-    } else {
-      rgb[0] = 1;
-      rgb[2] = 6 - hue * 6;
-    }
-
-    rgb = rgb.map((val) => val + (1 - saturation) * (0.5 - val)).toList();
-
-    if (luminance < 0.5) {
-      rgb = rgb.map((val) => luminance * 2 * val).toList();
-    } else {
-      rgb = rgb.map((val) => luminance * 2 * (1 - val) + 2 * val - 1).toList();
-    }
-
-    return ColorSelection(first: rgb[0], second: rgb[1], third: rgb[2]);
-  }
-
   String _convertDecimalToHexString(int decimal) =>
       decimal.toRadixString(_kDecimalToHexModulo).padLeft(2, "0").toUpperCase();
-
-  bool _isHex(String string) => _hexRegExp.hasMatch(string);
-
-  bool _isRgb(String string) => _rgbRegExp.hasMatch(string);
-
-  bool _isHsl(String string) => _hslRegExp.hasMatch(string);
-
-  bool _isStringColorFormat(String string, Format colorFormat) {
-    switch (colorFormat) {
-      case Format.hex:
-        return _isHex(string);
-      case Format.rgb:
-        return _isRgb(string);
-      case Format.hsl:
-        return _isHsl(string);
-    }
-    return false;
-  }
 
   String _convertRgbToHslString(int r, int g, int b) {
     final rf = r / 255;
