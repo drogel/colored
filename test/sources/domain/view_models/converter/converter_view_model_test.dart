@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
+import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +16,7 @@ void main() {
 
   setUp(() {
     stateController = StreamController<ConverterState>();
-    viewModel = ConverterViewModel(stateController: stateController);
+    viewModel = const ConverterInjector().injectViewModel(stateController);
   });
 
   tearDown(() {

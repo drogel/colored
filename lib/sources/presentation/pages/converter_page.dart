@@ -3,7 +3,7 @@ import 'package:colored/sources/domain/view_models/converter/converter_data.dart
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
-import 'package:colored/sources/extensions/list_swap.dart';
+import 'package:colored/sources/common/extensions/list_swap.dart';
 import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/cupertino.dart';
 
