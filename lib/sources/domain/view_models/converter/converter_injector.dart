@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:colored/sources/data/color_converter/rgb_converter.dart';
 import 'package:colored/sources/data/color_parser/color_parser.dart';
+import 'package:colored/sources/data/color_transformer/color_transformer.dart';
 import 'package:colored/sources/data/format_parser/hex_parser.dart';
 import 'package:colored/sources/data/format_parser/hsl_parser.dart';
 import 'package:colored/sources/data/format_parser/rgb_parser.dart';
@@ -20,5 +22,7 @@ class ConverterInjector {
           hexParser: HexParser(),
           hslParser: HslParser(),
         ),
+        colorConverter: const RgbConverter(),
+        colorTransformer: const ColorTransformer(),
       );
 }
