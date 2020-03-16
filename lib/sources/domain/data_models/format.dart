@@ -1,0 +1,20 @@
+enum Format {
+  hex,
+  rgb,
+  hsl,
+}
+
+Map<Format, String> _values = {
+  Format.hex: "Hex",
+  Format.rgb: "RGB",
+  Format.hsl: "HSL",
+};
+
+extension ColorFormatValue on Format {
+  String get rawValue => _values[this];
+}
+
+Format formatValue(String rawValue) => _values.keys.firstWhere(
+      (key) => _values[key] == rawValue,
+      orElse: () => null,
+    );

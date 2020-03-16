@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
+import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +16,7 @@ void main() {
 
   setUp(() {
     stateController = StreamController<ConverterState>();
-    viewModel = ConverterViewModel(stateController: stateController);
+    viewModel = const ConverterInjector().injectViewModel(stateController);
   });
 
   tearDown(() {
@@ -35,9 +36,12 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "255, 51, 102",
-          hexString: "#FF3366",
           selection: selection,
+          formatData: {
+            Format.hex: "#FF3366",
+            Format.rgb: "255, 51, 102",
+            Format.hsl: "345°, 100%, 60%"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.notifySelection(selection);
@@ -63,13 +67,13 @@ void main() {
       test("then false should be returned if string is a valid hex color", () {
         final shouldHexStringFail = viewModel.clipboardShouldFail(
           "#FF00FF",
-          ColorFormat.hex,
+          Format.hex,
         );
         expect(shouldHexStringFail, false);
 
         final shouldHexStringWithoutHashFail = viewModel.clipboardShouldFail(
           "FF00FF",
-          ColorFormat.hex,
+          Format.hex,
         );
         expect(shouldHexStringWithoutHashFail, false);
       });
@@ -77,13 +81,13 @@ void main() {
       test("then false should return if string is not a valid hex color", () {
         final shouldNonHexStringFail = viewModel.clipboardShouldFail(
           "This is a sentence",
-          ColorFormat.hex,
+          Format.hex,
         );
         expect(shouldNonHexStringFail, true);
 
         final shouldRGBStringFail = viewModel.clipboardShouldFail(
           "(_kDecimal8Bit, _kDecimal8Bit, _kDecimal8Bit)",
-          ColorFormat.hex,
+          Format.hex,
         );
         expect(shouldRGBStringFail, true);
       });
@@ -93,13 +97,13 @@ void main() {
       test("then false should be returned if string is a valid RGB color", () {
         final shouldRGBStringFail = viewModel.clipboardShouldFail(
           "255, 255, 0",
-          ColorFormat.rgb,
+          Format.rgb,
         );
         expect(shouldRGBStringFail, false);
 
         final shouldRGBStringParenthesisFail = viewModel.clipboardShouldFail(
           "(0, 0, 0)",
-          ColorFormat.rgb,
+          Format.rgb,
         );
         expect(shouldRGBStringParenthesisFail, false);
       });
@@ -107,13 +111,13 @@ void main() {
       test("then false should return if string is not a valid RGB color", () {
         final shouldNonRGBStringFail = viewModel.clipboardShouldFail(
           "This is a sentence",
-          ColorFormat.rgb,
+          Format.rgb,
         );
         expect(shouldNonRGBStringFail, true);
 
         final shouldHexStringFail = viewModel.clipboardShouldFail(
           "#FFFFFF",
-          ColorFormat.rgb,
+          Format.rgb,
         );
         expect(shouldHexStringFail, true);
       });
@@ -130,12 +134,15 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: rgbString,
-          hexString: "#FF3366",
           selection: selection,
+          formatData:  {
+            Format.hex: "#FF3366",
+            Format.rgb: rgbString,
+            Format.hsl: "345°, 100%, 60%",
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
-        viewModel.convertStringToColor(rgbString, ColorFormat.rgb);
+        viewModel.convertStringToColor(rgbString, Format.rgb);
       });
     });
 
@@ -150,12 +157,15 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "255, 51, 102",
-          hexString: hexString,
           selection: selection,
+          formatData:  {
+            Format.hex: hexString,
+            Format.rgb: "255, 51, 102",
+            Format.hsl: "345°, 100%, 60%"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
-        viewModel.convertStringToColor(hexString, ColorFormat.hex);
+        viewModel.convertStringToColor(hexString, Format.hex);
       });
     });
 
@@ -169,13 +179,16 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(10, 61, 112, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "10, 61, 112",
-          hexString: "#0A3D70",
           selection: ColorSelection(
             first: 10 / _kDecimal8Bit,
             second: 61 / _kDecimal8Bit,
             third: 112 / _kDecimal8Bit,
           ),
+          formatData:  {
+            Format.hex: "#0A3D70",
+            Format.rgb: "10, 61, 112",
+            Format.hsl: "210°, 84%, 24%",
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(20, selection);
@@ -190,13 +203,16 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(_kDecimal8Bit, 61, 112, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "255, 61, 112",
-          hexString: "#FF3D70",
           selection: ColorSelection(
             first: 1,
             second: 61 / _kDecimal8Bit,
             third: 112 / _kDecimal8Bit,
           ),
+          formatData:  {
+            Format.hex: "#FF3D70",
+            Format.rgb: "255, 61, 112",
+            Format.hsl: "344°, 100%, 62%",
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(20, selection);
@@ -213,13 +229,16 @@ void main() {
         const expected = ConverterState(
           color: Color.fromRGBO(245, 41, 92, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "245, 41, 92",
-          hexString: "#F5295C",
           selection: ColorSelection(
             first: 245 / _kDecimal8Bit,
             second: 41 / _kDecimal8Bit,
             third: 92 / _kDecimal8Bit,
           ),
+          formatData:  {
+            Format.hex: "#F5295C",
+            Format.rgb: "245, 41, 92",
+            Format.hsl: "345°, 91%, 56%",
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(-20, selection);
@@ -231,16 +250,19 @@ void main() {
           second: 0.2,
           third: 0.4,
         );
-        const expected = ConverterState(
+        const expected = Shrinking(
           color: Color.fromRGBO(0, 41, 92, 1),
           converterStep: 1 / _kDecimal8Bit,
-          rgbString: "0, 41, 92",
-          hexString: "#00295C",
           selection: ColorSelection(
             first: 0,
             second: 41 / _kDecimal8Bit,
             third: 92 / _kDecimal8Bit,
           ),
+          formatData:  {
+            Format.hex: "#00295C",
+            Format.rgb: "0, 41, 92",
+            Format.hsl: "213°, 100%, 18%"
+          },
         );
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(-20, selection);

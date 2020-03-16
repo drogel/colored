@@ -1,32 +1,42 @@
-import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
 import 'package:flutter/material.dart';
 
-class TitledClipboardButton extends StatelessWidget {
-  const TitledClipboardButton({
+class DropdownFormatButton extends StatelessWidget {
+  const DropdownFormatButton({
     @required this.title,
     @required this.content,
     @required this.format,
     @required this.onClipboardRetrieved,
     @required this.clipboardShouldFail,
+    @required this.onDropdownSelection,
     Key key,
   }) : super(key: key);
 
   final String content;
-  final void Function(String, ColorFormat) onClipboardRetrieved;
-  final bool Function(String, ColorFormat) clipboardShouldFail;
-  final ColorFormat format;
+  final void Function(String, Format) onClipboardRetrieved;
+  final bool Function(String, Format) clipboardShouldFail;
+  final void Function(Format, Format) onDropdownSelection;
+  final Format format;
   final String title;
 
   @override
   Widget build(BuildContext context) => Column(
         children: <Widget>[
-          Text(
-            title,
-            style: Theme.of(context).textTheme.subhead,
+          DropdownButton<String>(
+            value: format.rawValue,
+            items: Format.values
+                .map((format) => DropdownMenuItem<String>(
+                      value: format.rawValue,
+                      child: Text(format.rawValue),
+                    ))
+                .toList(),
+            underline: Container(),
+            isDense: true,
+            onChanged: (str) => onDropdownSelection(formatValue(str), format),
           ),
           const SizedBox(height: 8),
-          ClipboardButton(
+          FormatButton(
             format: format,
             clipboardShouldFail: clipboardShouldFail,
             onClipboardRetrieved: onClipboardRetrieved,

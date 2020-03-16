@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/domain/data_models/color_format.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/titled_clipboard_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
@@ -24,10 +24,8 @@ class ConverterLayout extends StatelessWidget {
         children: <Widget>[
           SwipingColorContainer(
             color: data.state.color,
-            onColorSwipedDown: data.onColorSwipedDown,
-            onColorSwipedUp: data.onColorSwipedUp,
-            onColorSwipedLeft: data.onColorSwipedLeft,
-            onColorSwipedRight: data.onColorSwipedRight,
+            onColorSwipedVertical: data.onColorSwipedVertical,
+            onColorSwipedHorizontal: data.onColorSwipedHorizontal,
           ),
           OverlayContainer(
             child: SwipingCrossFade(
@@ -36,19 +34,21 @@ class ConverterLayout extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    TitledClipboardButton(
-                      title: localization.hex,
-                      format: ColorFormat.hex,
+                    DropdownFormatButton(
+                      title: data.displayedFormats[0].rawValue,
+                      format: data.displayedFormats[0],
                       clipboardShouldFail: data.clipboardShouldFail,
                       onClipboardRetrieved: data.onClipboardRetrieved,
-                      content: data.state.hexString,
+                      content: data.state.formatData[data.displayedFormats[0]],
+                      onDropdownSelection: data.onFormatSelection,
                     ),
-                    TitledClipboardButton(
-                      title: localization.rgb,
-                      format: ColorFormat.rgb,
+                    DropdownFormatButton(
+                      title: data.displayedFormats[1].rawValue,
+                      format: data.displayedFormats[1],
                       clipboardShouldFail: data.clipboardShouldFail,
                       onClipboardRetrieved: data.onClipboardRetrieved,
-                      content: data.state.rgbString,
+                      content: data.state.formatData[data.displayedFormats[1]],
+                      onDropdownSelection: data.onFormatSelection,
                     ),
                   ],
                 ),
