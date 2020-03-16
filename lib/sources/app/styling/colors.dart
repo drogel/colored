@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final Color primary = Colors.grey[900];
-const Color primaryDark = Colors.black;
+const Color primaryDark = Color.fromRGBO(13, 13, 13, 1);
 
 final Color secondary = Colors.grey[200];
 const Color secondaryDark = Color(0xc2c2c2FF);

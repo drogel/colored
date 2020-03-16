@@ -1,14 +1,14 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/domain/data_models/color_format.dart';
-import 'package:colored/sources/styling/colors.dart' as colors;
-import 'package:colored/sources/styling/opacities.dart' as opacities;
+import 'package:colored/sources/domain/data_models/format.dart';
+import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:colored/sources/app/styling/opacities.dart' as opacities;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 const _kBorderRadius = 8.0;
 
-class ClipboardButton extends StatefulWidget {
-  const ClipboardButton({
+class FormatButton extends StatefulWidget {
+  const FormatButton({
     @required this.content,
     @required this.format,
     @required this.onClipboardRetrieved,
@@ -17,15 +17,15 @@ class ClipboardButton extends StatefulWidget {
   }) : super(key: key);
 
   final String content;
-  final void Function(String, ColorFormat) onClipboardRetrieved;
-  final bool Function(String, ColorFormat) clipboardShouldFail;
-  final ColorFormat format;
+  final void Function(String, Format) onClipboardRetrieved;
+  final bool Function(String, Format) clipboardShouldFail;
+  final Format format;
 
   @override
-  _ClipboardButtonState createState() => _ClipboardButtonState();
+  _FormatButtonState createState() => _FormatButtonState();
 }
 
-class _ClipboardButtonState extends State<ClipboardButton> {
+class _FormatButtonState extends State<FormatButton> {
   final GlobalKey _tooltip = GlobalKey();
   String _tooltipMessage;
   Color _tooltipColor;
