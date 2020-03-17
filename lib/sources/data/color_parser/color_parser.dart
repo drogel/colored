@@ -9,16 +9,20 @@ class ColorParser implements ColorParserType {
     @required FormatParser rgbParser,
     @required FormatParser hexParser,
     @required FormatParser hslParser,
+    @required FormatParser hsvParser,
   })  : assert(rgbParser != null),
         assert(hexParser != null),
         assert(hslParser != null),
+        assert(hsvParser != null),
         _rgbParser = rgbParser,
         _hexParser = hexParser,
+        _hsvParser = hsvParser,
         _hslParser = hslParser;
 
   final FormatParser _rgbParser;
   final FormatParser _hexParser;
   final FormatParser _hslParser;
+  final FormatParser _hsvParser;
 
   @override
   bool isStringOfFormat(String string, Format format) {
@@ -29,6 +33,8 @@ class ColorParser implements ColorParserType {
         return _rgbParser.hasMatch(string);
       case Format.hsl:
         return _hslParser.hasMatch(string);
+      case Format.hsv:
+        return _hsvParser.hasMatch(string);
       default:
         return false;
     }
@@ -43,6 +49,8 @@ class ColorParser implements ColorParserType {
         return _rgbParser.parse(string);
       case Format.hsl:
         return _hslParser.parse(string);
+      case Format.hsv:
+        return _hsvParser.parse(string);
       default:
         return null;
     }
