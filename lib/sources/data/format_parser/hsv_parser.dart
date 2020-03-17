@@ -20,7 +20,7 @@ class HsvParser extends FormatParser {
         .toList();
     var rgb = <double>[0, 0, 0];
 
-    final hue = hsvComponents[0] / degreesInTurn % 1;
+    final hue = hsvComponents[0];
     final saturation = hsvComponents[1] / percentFactor;
     final value = hsvComponents[2] / percentFactor;
 
