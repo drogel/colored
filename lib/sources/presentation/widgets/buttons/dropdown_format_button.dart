@@ -1,5 +1,5 @@
 import 'package:colored/sources/domain/data_models/format.dart';
-import 'package:colored/sources/presentation/widgets/buttons/clipboard_button.dart';
+import 'package:colored/sources/presentation/widgets/buttons/format_button.dart';
 import 'package:flutter/material.dart';
 
 class DropdownFormatButton extends StatelessWidget {
@@ -31,6 +31,7 @@ class DropdownFormatButton extends StatelessWidget {
                       child: Text(format.rawValue),
                     ))
                 .toList(),
+            iconEnabledColor: Theme.of(context).colorScheme.secondary,
             underline: Container(),
             isDense: true,
             onChanged: (str) => onDropdownSelection(formatValue(str), format),

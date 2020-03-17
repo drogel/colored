@@ -32,7 +32,7 @@ class _FormatButtonState extends State<FormatButton> {
 
   @override
   void initState() {
-    _tooltipColor = colors.primaryDark;
+    _tooltipColor = colors.primaryVariant;
     _tooltipMessage = "Copied!";
     super.initState();
   }
@@ -52,9 +52,6 @@ class _FormatButtonState extends State<FormatButton> {
       child: RaisedButton(
         onPressed: _getClipboardData,
         onLongPress: _setTitleInClipboardData,
-        highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
-        splashColor: colors.secondary.withOpacity(opacities.fadedColor),
-        color: colors.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_kBorderRadius),
         ),
@@ -73,7 +70,7 @@ class _FormatButtonState extends State<FormatButton> {
     if (isError) {
       setState(() {
         _tooltipMessage = Localization.of(context).tooltipError;
-        _tooltipColor = colors.error;
+        _tooltipColor = colors.errorDark;
       });
       _showTooltip();
     } else {

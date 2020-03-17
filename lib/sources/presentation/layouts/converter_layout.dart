@@ -1,7 +1,7 @@
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
-import 'package:colored/sources/presentation/widgets/buttons/titled_clipboard_button.dart';
+import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
