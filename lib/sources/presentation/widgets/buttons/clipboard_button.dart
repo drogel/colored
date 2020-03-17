@@ -58,7 +58,7 @@ class _FormatButtonState extends State<FormatButton> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_kBorderRadius),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Text(widget.content, style: textStyle),
       ),
     );

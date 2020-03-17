@@ -40,7 +40,8 @@ void main() {
           formatData: {
             Format.hex: "#FF3366",
             Format.rgb: "255, 51, 102",
-            Format.hsl: "345°, 100%, 60%"
+            Format.hsl: "345°, 100%, 60%",
+            Format.hsv: "345°, 80%, 100%",
           },
         );
         stateController.stream.listen((state) => expect(state, expected));
@@ -139,6 +140,7 @@ void main() {
             Format.hex: "#FF3366",
             Format.rgb: rgbString,
             Format.hsl: "345°, 100%, 60%",
+            Format.hsv: "345°, 80%, 100%",
           },
         );
         stateController.stream.listen((state) => expect(state, expected));
@@ -161,7 +163,8 @@ void main() {
           formatData:  {
             Format.hex: hexString,
             Format.rgb: "255, 51, 102",
-            Format.hsl: "345°, 100%, 60%"
+            Format.hsl: "345°, 100%, 60%",
+            Format.hsv: "345°, 80%, 100%"
           },
         );
         stateController.stream.listen((state) => expect(state, expected));
@@ -188,6 +191,7 @@ void main() {
             Format.hex: "#0A3D70",
             Format.rgb: "10, 61, 112",
             Format.hsl: "210°, 84%, 24%",
+            Format.hsv: "210°, 91%, 44%",
           },
         );
         stateController.stream.listen((state) => expect(state, expected));
@@ -212,6 +216,7 @@ void main() {
             Format.hex: "#FF3D70",
             Format.rgb: "255, 61, 112",
             Format.hsl: "344°, 100%, 62%",
+            Format.hsv: "344°, 76%, 100%",
           },
         );
         stateController.stream.listen((state) => expect(state, expected));
@@ -238,6 +243,7 @@ void main() {
             Format.hex: "#F5295C",
             Format.rgb: "245, 41, 92",
             Format.hsl: "345°, 91%, 56%",
+            Format.hsv: "345°, 83%, 96%",
           },
         );
         stateController.stream.listen((state) => expect(state, expected));
@@ -261,7 +267,8 @@ void main() {
           formatData:  {
             Format.hex: "#00295C",
             Format.rgb: "0, 41, 92",
-            Format.hsl: "213°, 100%, 18%"
+            Format.hsl: "213°, 100%, 18%",
+            Format.hsv: "213°, 100%, 36%"
           },
         );
         stateController.stream.listen((state) => expect(state, expected));
