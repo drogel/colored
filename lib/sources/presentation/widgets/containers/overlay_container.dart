@@ -19,7 +19,7 @@ class OverlayContainer extends StatelessWidget {
           color: colors.primary.withOpacity(opacities.overlay),
           boxShadow: [
             BoxShadow(
-              color: colors.primaryDark.withOpacity(opacities.shadow),
+              color: colors.primaryVariant.withOpacity(opacities.shadow),
               offset: const Offset(0, -2),
               blurRadius: 4,
             )
