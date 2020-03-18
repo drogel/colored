@@ -8,6 +8,8 @@ import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fa
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
 
+const _kFormatButtonMinSpace = 162.0;
+
 class ConverterLayout extends StatelessWidget {
   const ConverterLayout();
 
@@ -31,26 +33,11 @@ class ConverterLayout extends StatelessWidget {
             child: SwipingCrossFade(
               header: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 22),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    DropdownFormatButton(
-                      title: data.displayedFormats[0].rawValue,
-                      format: data.displayedFormats[0],
-                      clipboardShouldFail: data.clipboardShouldFail,
-                      onClipboardRetrieved: data.onClipboardRetrieved,
-                      content: data.state.formatData[data.displayedFormats[0]],
-                      onDropdownSelection: data.onFormatSelection,
-                    ),
-                    DropdownFormatButton(
-                      title: data.displayedFormats[1].rawValue,
-                      format: data.displayedFormats[1],
-                      clipboardShouldFail: data.clipboardShouldFail,
-                      onClipboardRetrieved: data.onClipboardRetrieved,
-                      content: data.state.formatData[data.displayedFormats[1]],
-                      onDropdownSelection: data.onFormatSelection,
-                    ),
-                  ],
+                child: LayoutBuilder(
+                  builder: (_, constraints) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: _buildFormatButtons(data, constraints.maxWidth),
+                  ),
                 ),
               ),
               child: ColorSliders(
@@ -67,4 +54,24 @@ class ConverterLayout extends StatelessWidget {
       ),
     );
   }
+
+  List<Widget> _buildFormatButtons(ConverterData data, double availableWidth) {
+    final buttonCountSpace = (availableWidth / _kFormatButtonMinSpace).floor();
+    final buttonCount = buttonCountSpace.clamp(0, Format.values.length);
+    var buttonList = <Widget>[];
+    for (var i = 0; i < buttonCount; i += 1) {
+      buttonList.add(_buildFormatButton(data, i));
+    }
+    return buttonList;
+  }
+
+  Widget _buildFormatButton(ConverterData data, int index) =>
+      DropdownFormatButton(
+        title: data.displayedFormats[index].rawValue,
+        format: data.displayedFormats[index],
+        clipboardShouldFail: data.clipboardShouldFail,
+        onClipboardRetrieved: data.onClipboardRetrieved,
+        content: data.state.formatData[data.displayedFormats[index]],
+        onDropdownSelection: data.onFormatSelection,
+      );
 }

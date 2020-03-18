@@ -1,7 +1,6 @@
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/app/styling/colors.dart' as colors;
-import 'package:colored/sources/app/styling/opacities.dart' as opacities;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
