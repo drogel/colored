@@ -76,6 +76,7 @@ class ConverterViewModel {
     final rgbString = _converter.convertToFormat(r, g, b, Format.rgb);
     final hexString = _converter.convertToFormat(r, g, b, Format.hex);
     final hslString = _converter.convertToFormat(r, g, b, Format.hsl);
+    final hsvString = _converter.convertToFormat(r, g, b, Format.hsv);
     return ConverterState(
       color: color,
       converterStep: _kConverterStep,
@@ -84,6 +85,7 @@ class ConverterViewModel {
         Format.hex: hexString,
         Format.rgb: rgbString,
         Format.hsl: hslString,
+        Format.hsv: hsvString,
       },
     );
   }

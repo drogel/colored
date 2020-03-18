@@ -16,6 +16,8 @@ class RgbConverter implements ColorConverter {
         return _convertToRgb(r, g, b);
       case Format.hsl:
         return _convertToHsl(r, g, b);
+      case Format.hsv:
+        return _convertToHsv(r, g, b);
     }
     return null;
   }
@@ -23,9 +25,9 @@ class RgbConverter implements ColorConverter {
   String _convertToRgb(int r, int g, int b) => "$r, $g, $b";
 
   String _convertToHsl(int r, int g, int b) {
-    final rf = r / 255;
-    final gf = g / 255;
-    final bf = b / 255;
+    final rf = r / decimal8Bit;
+    final gf = g / decimal8Bit;
+    final bf = b / decimal8Bit;
     final cMax = [rf, gf, bf].reduce(max);
     final cMin = [rf, gf, bf].reduce(min);
     final delta = cMax - cMin;
@@ -54,8 +56,8 @@ class RgbConverter implements ColorConverter {
     }
 
     hue = hue.round();
-    saturation = (saturation * 100).round();
-    luminance = (luminance * 100).round();
+    saturation = (saturation * percentFactor).round();
+    luminance = (luminance * percentFactor).round();
 
     return "$hue°, $saturation%, $luminance%";
   }
@@ -65,6 +67,43 @@ class RgbConverter implements ColorConverter {
     final hexGreen = _convertDecimalToHex(g);
     final hexBlue = _convertDecimalToHex(b);
     return "#$hexRed$hexGreen$hexBlue";
+  }
+
+  String _convertToHsv(int r, int g, int b) {
+    final rf = r / decimal8Bit;
+    final gf = g / decimal8Bit;
+    final bf = b / decimal8Bit;
+    final cMax = [rf, gf, bf].reduce(max);
+    final cMin = [rf, gf, bf].reduce(min);
+    final delta = cMax - cMin;
+    num hue;
+    num saturation = 0;
+    num value = 0;
+
+    if (cMax == rf) {
+      hue = 60 * ((gf - bf) / delta % 6);
+    } else if (cMax == gf) {
+      hue = 60 * ((bf - rf) / delta + 2);
+    } else {
+      hue = 60 * ((rf - gf) / delta + 4);
+    }
+
+    if (hue.isNaN || hue.isInfinite) {
+      hue = 0;
+    }
+
+    if (cMax == 0) {
+      saturation = 0;
+    } else {
+      saturation = (delta / cMax) * percentFactor;
+      value = cMax * percentFactor;
+    }
+
+    hue = hue.round();
+    saturation = saturation.round();
+    value = value.round();
+
+    return "$hue°, $saturation%, $value%";
   }
 
   String _convertDecimalToHex(int decimal) =>
