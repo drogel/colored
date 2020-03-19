@@ -32,7 +32,6 @@ class _FormatButtonState extends State<FormatButton> {
   @override
   void initState() {
     _tooltipColor = colors.primaryVariant;
-    _tooltipMessage = "Copied!";
     super.initState();
   }
 
@@ -42,7 +41,7 @@ class _FormatButtonState extends State<FormatButton> {
 
     return Tooltip(
       key: _tooltip,
-      message: _tooltipMessage,
+      message: _tooltipMessage ?? Localization.of(context).tooltipMessage,
       decoration: BoxDecoration(
         color: _tooltipColor,
         borderRadius: BorderRadius.circular(_kBorderRadius / 2),
