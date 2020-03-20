@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_converter/color_converter.dart';
+import 'package:colored/sources/data/color_helpers/color_converter/color_converter.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 
 class RgbConverter implements ColorConverter {

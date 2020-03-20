@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_converter/color_converter.dart';
-import 'package:colored/sources/data/color_parser/color_parser_type.dart';
-import 'package:colored/sources/data/color_transformer/color_transformer_type.dart';
+import 'package:colored/sources/data/color_helpers/color_converter/color_converter.dart';
+import 'package:colored/sources/data/color_helpers/color_parser/color_parser_type.dart';
+import 'package:colored/sources/data/color_helpers/color_transformer/color_transformer_type.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
