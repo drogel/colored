@@ -6,8 +6,8 @@ const Color primaryDark = Color.fromRGBO(26, 26, 26, 1);
 const Color primaryDarkest = Color.fromRGBO(15, 15, 15, 1);
 const Color primaryLight = Colors.white;
 
-const Color secondary = Color.fromRGBO(69, 204, 190, 1);
-const Color secondaryDark = Color.fromRGBO(42, 125, 118, 1);
+const Color secondary = Color.fromRGBO(128, 203, 196, 1);
+const Color secondaryDark = Color.fromRGBO(88, 124, 121, 1);
 
 const Color errorDark = Color.fromRGBO(102, 35, 37, 1);
 const Color error = Color.fromRGBO(252, 86, 89, 1);

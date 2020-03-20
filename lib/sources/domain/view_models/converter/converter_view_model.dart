@@ -36,7 +36,7 @@ class ConverterViewModel {
   Stream<ConverterState> get stateStream => _stateController.stream;
 
   ConverterState getInitialState() => _convertToState(
-        const ColorSelection(first: 0, second: 0, third: 0),
+        ColorSelection(first: 0, second: 0, third: 0),
       );
 
   void notifySelection(ColorSelection selection) {
