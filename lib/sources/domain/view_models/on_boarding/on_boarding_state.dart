@@ -1,0 +1,3 @@
+class OnBoardingState {
+  const OnBoardingState();
+}

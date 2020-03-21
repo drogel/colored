@@ -1,0 +1,3 @@
+class OnBoardingInjector {
+  const OnBoardingInjector();
+}

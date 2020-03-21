@@ -1,6 +1,6 @@
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/app/navigation/flow_navigator.dart';
-import 'package:colored/sources/presentation/layouts/converter_layout.dart';
+import 'package:colored/sources/presentation/layouts/converter/converter_layout.dart';
 import 'package:colored/sources/presentation/pages/converter_page.dart';
 import 'package:flutter/material.dart';
 

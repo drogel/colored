@@ -1,16 +1,32 @@
 import 'package:colored/sources/app/navigation/converter_navigator.dart';
 import 'package:colored/sources/app/navigation/flow_navigator.dart';
+import 'package:colored/sources/data/services/local_storage/local_storage.dart';
+import 'package:colored/sources/data/services/local_storage/local_storage_keys.dart'
+    as keys;
+import 'package:colored/sources/presentation/pages/on_boarding_page.dart';
+import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
+import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_layout.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingNavigator extends StatelessWidget {
-  const OnBoardingNavigator({Key key}) : super(key: key);
+  const OnBoardingNavigator({
+    @required this.initialRoute,
+    Key key,
+  }) : super(key: key);
 
   static const onBoarding = "onBoarding/";
   static const converterFlow = "converterFlow/";
 
+  final String initialRoute;
+
+  static Future<String> getInitialRoute(LocalStorage localStorage) async {
+    final didOnBoard = await localStorage.getBool(key: keys.didOnBoard);
+    return didOnBoard ? converterFlow : onBoarding;
+  }
+
   @override
   Widget build(BuildContext context) => FlowNavigator(
-        initialRoute: onBoarding,
+        initialRoute: initialRoute,
         routes: {
           onBoarding: _buildOnBoarding,
           converterFlow: _buildConverterFlow,
@@ -19,7 +35,10 @@ class OnBoardingNavigator extends StatelessWidget {
 
   Route _buildOnBoarding(BuildContext context, RouteSettings settings) =>
       MaterialPageRoute(
-        builder: (_) => Scaffold(body: Container()),
+        builder: (_) => const OnBoardingPage(
+          injector: OnBoardingInjector(),
+          child: OnBoardingLayout(),
+        ),
         settings: settings,
       );
 

@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart' as preferences;
 
 class SharedPreferences implements LocalStorage {
+  const SharedPreferences();
+
   @override
   Future<bool> storeBool({@required String key, @required bool value}) async {
     final instance = await preferences.SharedPreferences.getInstance();
