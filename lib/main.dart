@@ -4,6 +4,8 @@ import 'package:colored/sources/data/services/local_storage/shared_preferences.d
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   final initialRoute = await OnBoardingNavigator.getInitialRoute(
     const SharedPreferences(),
   );

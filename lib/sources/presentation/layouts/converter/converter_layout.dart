@@ -16,7 +16,7 @@ class ConverterLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
-    final localization = Localization.of(context);
+    final localization = Localization.of(context).converter;
     return Scaffold(
       appBar: AppBar(
         title: Text(localization.colorConverter),

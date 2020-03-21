@@ -41,7 +41,8 @@ class _FormatButtonState extends State<FormatButton> {
 
     return Tooltip(
       key: _tooltip,
-      message: _tooltipMessage ?? Localization.of(context).tooltipMessage,
+      message:
+          _tooltipMessage ?? Localization.of(context).converter.tooltipMessage,
       decoration: BoxDecoration(
         color: _tooltipColor,
         borderRadius: BorderRadius.circular(_kBorderRadius / 2),
@@ -67,7 +68,7 @@ class _FormatButtonState extends State<FormatButton> {
     );
     if (isError) {
       setState(() {
-        _tooltipMessage = Localization.of(context).tooltipError;
+        _tooltipMessage = Localization.of(context).converter.tooltipError;
         _tooltipColor = colors.errorDark;
       });
       _showTooltip();
@@ -79,7 +80,7 @@ class _FormatButtonState extends State<FormatButton> {
   Future<void> _setTitleInClipboardData() async {
     await Clipboard.setData(ClipboardData(text: widget.content));
     setState(() {
-      _tooltipMessage = Localization.of(context).tooltipMessage;
+      _tooltipMessage = Localization.of(context).converter.tooltipMessage;
       _tooltipColor = colors.primaryDark;
     });
     _showTooltip();
