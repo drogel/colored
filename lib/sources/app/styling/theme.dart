@@ -7,6 +7,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       fontFamily: fonts.body,
       primaryColor: colors.primary,
       primaryColorDark: colors.primaryVariant,
+      accentColor: colors.secondary,
       colorScheme: const ColorScheme(
         primary: colors.primary,
         primaryVariant: colors.primaryVariant,

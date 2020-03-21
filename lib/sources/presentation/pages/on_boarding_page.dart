@@ -1,5 +1,7 @@
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
+import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
+import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_model.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -18,8 +20,28 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
+  OnBoardingViewModel _viewModel;
+
   @override
-  Widget build(BuildContext context) => OnBoardingData(
-        child: widget.child,
+  void initState() {
+    _viewModel = widget.injector.injectViewModel();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => StreamBuilder<OnBoardingState>(
+        stream: _viewModel.stateStream,
+        initialData: _viewModel.initialData,
+        builder: (_, snapshot) => OnBoardingData(
+          state: snapshot.data,
+          onPageScroll: _viewModel.computeScrollFraction,
+          child: widget.child,
+        ),
       );
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
 }
