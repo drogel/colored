@@ -24,13 +24,21 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout>
 
   @override
   Widget build(BuildContext context) {
-    final state = OnBoardingData.of(context).state;
-    return PageView(
-      controller: _scroll,
-      children: <Widget>[
-        OnBoardingWelcomeLayout(scrolledFraction: state.pageScrollFraction),
-        OnBoardingButtonsLayout(scrolledFraction: state.pageScrollFraction),
-      ],
+    final colorScheme = Theme.of(context).colorScheme;
+    final scrollFraction = OnBoardingData.of(context).state.pageScrollFraction;
+    return Scaffold(
+      backgroundColor: Color.lerp(
+        colorScheme.onError,
+        colorScheme.secondaryVariant,
+        scrollFraction,
+      ),
+      body: PageView(
+        controller: _scroll,
+        children: <Widget>[
+          const OnBoardingWelcomeLayout(),
+          OnBoardingButtonsLayout(scrolledFraction: scrollFraction),
+        ],
+      ),
     );
   }
 

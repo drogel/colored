@@ -19,7 +19,7 @@ class OnBoardingViewModel {
 
   void computeScrollFraction(double scrollPosition, double maxWidth) {
     final scrollFraction = scrollPosition / maxWidth;
-    final fraction = curves.exiting.transform(scrollFraction);
+    final fraction = curves.easeInExpo.transform(scrollFraction);
     _stateController.sink.add(OnBoardingState(pageScrollFraction: fraction));
   }
 

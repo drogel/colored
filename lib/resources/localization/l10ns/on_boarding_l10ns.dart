@@ -6,11 +6,14 @@ class OnBoardingL10ns extends LocaleCodeAware {
   static final Map<String, Map<String, String>> _values = {
     'en': {
       'welcome': 'Welcome to',
+      'slogan': 'The fastest way to convert colors.',
     },
     "es": {
       'welcome': 'Bienvenido a',
+      'slogan': 'The fastest way to convert colors.',
     }
   };
 
   String get welcome => _values[localeCode]['welcome'];
+  String get slogan => _values[localeCode]['slogan'];
 }
