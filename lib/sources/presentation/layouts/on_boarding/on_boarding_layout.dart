@@ -29,7 +29,7 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout>
       controller: _scroll,
       children: <Widget>[
         OnBoardingWelcomeLayout(colorLerpValue: state.pageScrollFraction),
-        const OnBoardingButtonsLayout(),
+        OnBoardingButtonsLayout(colorLerpValue: state.pageScrollFraction),
       ],
     );
   }
