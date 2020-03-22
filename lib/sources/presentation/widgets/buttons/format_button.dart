@@ -1,10 +1,9 @@
 import 'package:colored/resources/localization/localization.dart';
+import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/app/styling/colors.dart' as colors;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-const _kBorderRadius = 8.0;
 
 class FormatButton extends StatefulWidget {
   const FormatButton({
@@ -45,14 +44,14 @@ class _FormatButtonState extends State<FormatButton> {
           _tooltipMessage ?? Localization.of(context).converter.tooltipMessage,
       decoration: BoxDecoration(
         color: _tooltipColor,
-        borderRadius: BorderRadius.circular(_kBorderRadius / 2),
+        borderRadius: BorderRadius.circular(radii.small),
       ),
       preferBelow: false,
       child: RaisedButton(
         onPressed: _getClipboardData,
         onLongPress: _setTitleInClipboardData,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(_kBorderRadius),
+          borderRadius: BorderRadius.circular(radii.medium),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Text(widget.content, style: textStyle),

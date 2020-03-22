@@ -22,7 +22,7 @@ class OnBoardingNavigator extends StatelessWidget {
   static Future<String> getInitialRoute(LocalStorage localStorage) async {
     final didOnBoard = await localStorage.getBool(key: keys.didOnBoard);
     if (didOnBoard == null) {
-       return onBoarding;
+       return converterFlow;
     }
     return didOnBoard ? converterFlow : onBoarding;
   }
