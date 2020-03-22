@@ -1,3 +1,5 @@
+import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:colored/sources/common/extensions/color_multi_lerp.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_buttons_layout.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_welcome_layout.dart';
@@ -27,15 +29,19 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout>
     final colorScheme = Theme.of(context).colorScheme;
     final scrollFraction = OnBoardingData.of(context).state.pageScrollFraction;
     return Scaffold(
-      backgroundColor: Color.lerp(
-        colorScheme.onError,
-        colorScheme.secondaryVariant,
+      backgroundColor: MultiLerp.multiLerp(
+        [
+          colorScheme.onError,
+          colors.logoBlue,
+          colors.logoRed,
+        ],
         scrollFraction,
       ),
       body: PageView(
         controller: _scroll,
         children: <Widget>[
           const OnBoardingWelcomeLayout(),
+          OnBoardingButtonsLayout(scrolledFraction: scrollFraction),
           OnBoardingButtonsLayout(scrolledFraction: scrollFraction),
         ],
       ),

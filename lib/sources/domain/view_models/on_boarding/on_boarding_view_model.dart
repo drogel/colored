@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:colored/sources/app/styling/curves.dart' as curves;
+import 'package:colored/sources/common/extensions/extended_curve.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
 import 'package:flutter/foundation.dart';
 
@@ -19,7 +20,7 @@ class OnBoardingViewModel {
 
   void computeScrollFraction(double scrollPosition, double maxWidth) {
     final scrollFraction = scrollPosition / maxWidth;
-    final fraction = curves.easeInExpo.transform(scrollFraction);
+    final fraction = curves.easeInExpo.extendedTransform(scrollFraction);
     _stateController.sink.add(OnBoardingState(pageScrollFraction: fraction));
   }
 
