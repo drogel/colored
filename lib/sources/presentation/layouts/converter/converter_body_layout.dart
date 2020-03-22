@@ -9,9 +9,13 @@ import 'package:flutter/material.dart';
 const _kFormatButtonMinSpace = 162.0;
 
 class ConverterBodyLayout extends StatelessWidget {
-  const ConverterBodyLayout({this.background});
+  const ConverterBodyLayout({
+    this.background,
+    this.initiallyShowSliders = true,
+  });
 
   final Widget background;
+  final bool initiallyShowSliders;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +26,7 @@ class ConverterBodyLayout extends StatelessWidget {
         if (background != null) background,
         OverlayContainer(
           child: SwipingCrossFade(
+            isChildInitiallyShown: initiallyShowSliders,
             header: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: LayoutBuilder(

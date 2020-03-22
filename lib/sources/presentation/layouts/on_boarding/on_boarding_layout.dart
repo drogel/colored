@@ -28,8 +28,8 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout>
     return PageView(
       controller: _scroll,
       children: <Widget>[
-        OnBoardingWelcomeLayout(colorLerpValue: state.pageScrollFraction),
-        OnBoardingButtonsLayout(colorLerpValue: state.pageScrollFraction),
+        OnBoardingWelcomeLayout(scrolledFraction: state.pageScrollFraction),
+        OnBoardingButtonsLayout(scrolledFraction: state.pageScrollFraction),
       ],
     );
   }

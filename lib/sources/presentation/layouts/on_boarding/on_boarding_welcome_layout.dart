@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class OnBoardingWelcomeLayout extends StatelessWidget {
   const OnBoardingWelcomeLayout({
-    @required this.colorLerpValue,
+    @required this.scrolledFraction,
     Key key,
   }) : super(key: key);
 
-  final double colorLerpValue;
+  final double scrolledFraction;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class OnBoardingWelcomeLayout extends StatelessWidget {
     final secondary = theme.colorScheme.secondary;
     final localization = Localization.of(context);
     return Scaffold(
-      backgroundColor: Color.lerp(primaryColor, secondary, colorLerpValue),
+      backgroundColor: Color.lerp(primaryColor, secondary, scrolledFraction),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
