@@ -11,11 +11,11 @@ const _kFormatButtonMinSpace = 162.0;
 class ConverterBodyLayout extends StatelessWidget {
   const ConverterBodyLayout({
     this.background,
-    this.initiallyShowSliders = true,
+    this.showSliders = true,
   });
 
   final Widget background;
-  final bool initiallyShowSliders;
+  final bool showSliders;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ConverterBodyLayout extends StatelessWidget {
         if (background != null) background,
         OverlayContainer(
           child: SwipingCrossFade(
-            isChildInitiallyShown: initiallyShowSliders,
+            isChildInitiallyShown: showSliders,
             header: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: LayoutBuilder(

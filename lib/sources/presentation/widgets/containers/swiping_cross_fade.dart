@@ -7,6 +7,7 @@ class SwipingCrossFade extends StatefulWidget {
   const SwipingCrossFade({
     @required this.header,
     @required this.child,
+    this.alwaysShowChild = false,
     this.isChildInitiallyShown = true,
     this.sizeDuration = durations.mediumDismissing,
     this.reverseFadeDuration = durations.shortDismissing,
@@ -24,6 +25,7 @@ class SwipingCrossFade extends StatefulWidget {
   final Curve hideFadeCurve;
   final Curve sizeCurve;
   final bool isChildInitiallyShown;
+  final bool alwaysShowChild;
 
   @override
   _SwipingCrossFadeState createState() => _SwipingCrossFadeState();
@@ -51,16 +53,7 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
               color: Colors.transparent,
               child: widget.header,
             ),
-            AnimatedCrossFade(
-              crossFadeState: _state,
-              firstChild: widget.child,
-              secondChild: Container(),
-              duration: widget.sizeDuration,
-              reverseDuration: widget.reverseFadeDuration,
-              firstCurve: widget.showFadeCurve,
-              secondCurve: widget.hideFadeCurve,
-              sizeCurve: widget.sizeCurve,
-            ),
+            _buildChild(),
           ],
         ),
       );
@@ -70,4 +63,17 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
 
   void _hide(DragUpdateDetails details) =>
       setState(() => _state = CrossFadeState.showSecond);
+
+  Widget _buildChild() => widget.alwaysShowChild
+      ? widget.child
+      : AnimatedCrossFade(
+          crossFadeState: _state,
+          firstChild: widget.child,
+          secondChild: Container(),
+          duration: widget.sizeDuration,
+          reverseDuration: widget.reverseFadeDuration,
+          firstCurve: widget.showFadeCurve,
+          secondCurve: widget.hideFadeCurve,
+          sizeCurve: widget.sizeCurve,
+        );
 }
