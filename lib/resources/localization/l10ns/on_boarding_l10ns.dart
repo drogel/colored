@@ -7,18 +7,18 @@ class OnBoardingL10ns extends LocaleCodeAware {
     'en': {
       'welcome': 'Welcome to',
       'slogan': 'The fastest way to convert colors.',
-      'tap': 'Tap it',
-      'longPress': 'Long-press a button',
+      'tap': 'Tap',
+      'longPress': 'Long-press',
       'tapBody': 'to paste the content of your clipboard.',
-      'longPressBody': 'to copy its text to your clipboard.',
+      'longPressBody': "to copy a button's text to your clipboard.",
     },
     "es": {
       'welcome': 'Bienvenido a',
       'slogan': 'La forma más rápida de convertir colores.',
-      'tap': 'Tócalo',
-      'longPress': 'Mantén presionado un botón',
+      'tap': 'Toca',
+      'longPress': 'Mantén presionado',
       'tapBody': 'para pegar el contenido de tu portapapeles.',
-      'longPressBody': 'para copiar su texto en tu portapapeles.',
+      'longPressBody': 'para copiar el texto de un botón en tu portapapeles.',
     }
   };
 

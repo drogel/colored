@@ -14,7 +14,7 @@ class OnBoardingButtonsLayout extends StatelessWidget {
       children: <Widget>[
         Text(
           localization.longPress,
-          style: textTheme.display1.copyWith(fontWeight: FontWeight.bold),
+          style: textTheme.display3,
           textAlign: TextAlign.center,
         ),
         Text(
@@ -25,7 +25,7 @@ class OnBoardingButtonsLayout extends StatelessWidget {
         const SizedBox(height: 2 * padding.largeText),
         Text(
           localization.tap,
-          style: textTheme.display1.copyWith(fontWeight: FontWeight.bold),
+          style: textTheme.display3,
           textAlign: TextAlign.center,
         ),
         Text(

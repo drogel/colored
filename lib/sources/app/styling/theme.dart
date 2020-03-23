@@ -35,6 +35,7 @@ ThemeData dark(BuildContext context) => ThemeData(
         display3: TextStyle(
           color: colors.primary,
           fontWeight: FontWeight.bold,
+          fontFamily: fonts.header,
         ),
       ),
       highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
