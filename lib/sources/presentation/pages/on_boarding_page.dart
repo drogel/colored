@@ -1,3 +1,5 @@
+import 'package:colored/sources/app/navigation/flow_navigator.dart';
+import 'package:colored/sources/app/navigation/on_boarding_navigator.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
@@ -35,6 +37,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         builder: (_, snapshot) => OnBoardingData(
           state: snapshot.data,
           onPageScroll: _viewModel.computeScrollFraction,
+          onFinished: _onOnBoardingFinished,
           child: widget.child,
         ),
       );
@@ -44,4 +47,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     _viewModel.dispose();
     super.dispose();
   }
+
+  void _onOnBoardingFinished() =>
+      FlowNavigator.of(context).pushNamed(OnBoardingNavigator.converterFlow);
 }

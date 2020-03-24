@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:colored/sources/app/styling/colors.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/color_converter/color_converter.dart';
 import 'package:colored/sources/data/color_helpers/color_parser/color_parser_type.dart';
@@ -36,7 +37,11 @@ class ConverterViewModel {
   Stream<ConverterState> get stateStream => _stateController.stream;
 
   ConverterState getInitialState() => _convertToState(
-        ColorSelection(first: 0, second: 0, third: 0),
+        ColorSelection(
+          first: colors.primaryDark.red.toDouble() / decimal8Bit,
+          second: colors.primaryDark.green.toDouble() / decimal8Bit,
+          third: colors.primaryDark.blue.toDouble() / decimal8Bit,
+        ),
       );
 
   void notifySelection(ColorSelection selection) {

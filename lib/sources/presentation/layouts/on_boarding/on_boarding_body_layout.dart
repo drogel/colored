@@ -12,11 +12,13 @@ class OnBoardingBodyLayout extends StatelessWidget {
   final MainAxisAlignment columnAlignment;
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(padding.largeText),
-        child: Column(
-          mainAxisAlignment: columnAlignment,
-          children: children,
+  Widget build(BuildContext context) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(padding.largeText),
+          child: Column(
+            mainAxisAlignment: columnAlignment,
+            children: children,
+          ),
         ),
       );
 }

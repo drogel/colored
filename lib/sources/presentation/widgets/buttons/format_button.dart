@@ -2,6 +2,7 @@ import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:colored/sources/presentation/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -47,14 +48,10 @@ class _FormatButtonState extends State<FormatButton> {
         borderRadius: BorderRadius.circular(radii.small),
       ),
       preferBelow: false,
-      child: RaisedButton(
+      child: PrimaryButton(
         onPressed: _getClipboardData,
         onLongPress: _setTitleInClipboardData,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radii.medium),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        child: Text(widget.content, style: textStyle),
+        title: widget.content,
       ),
     );
   }

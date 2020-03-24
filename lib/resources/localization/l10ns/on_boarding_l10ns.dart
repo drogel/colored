@@ -15,6 +15,7 @@ class OnBoardingL10ns extends LocaleCodeAware {
       'useSlidersBody': "to select any color you want.",
       'useSlidersFooter':
           "Long-press them to select values with more precision.",
+      'done': "Got it!",
     },
     "es": {
       'welcome': 'Bienvenido a',
@@ -27,6 +28,7 @@ class OnBoardingL10ns extends LocaleCodeAware {
       'useSlidersBody': "para escoger el color que quieras.",
       'useSlidersFooter':
           "Mantén presionado un selector para elegir con más precisión.",
+      'done': "¡Entendido!",
     }
   };
 
@@ -39,4 +41,5 @@ class OnBoardingL10ns extends LocaleCodeAware {
   String get useSliders => _values[localeCode]['useSliders'];
   String get useSlidersBody => _values[localeCode]['useSlidersBody'];
   String get useSlidersFooter => _values[localeCode]['useSlidersFooter'];
+  String get done => _values[localeCode]['done'];
 }
