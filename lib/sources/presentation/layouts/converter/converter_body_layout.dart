@@ -26,7 +26,7 @@ class ConverterBodyLayout extends StatelessWidget {
         if (background != null) background,
         OverlayContainer(
           child: SwipingCrossFade(
-            isChildInitiallyShown: showSliders,
+            showChild: showSliders,
             header: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: LayoutBuilder(

@@ -8,7 +8,7 @@ class SwipingCrossFade extends StatefulWidget {
     @required this.header,
     @required this.child,
     this.alwaysShowChild = false,
-    this.isChildInitiallyShown = true,
+    this.showChild = true,
     this.sizeDuration = durations.mediumDismissing,
     this.reverseFadeDuration = durations.shortDismissing,
     this.showFadeCurve = curves.incoming,
@@ -24,7 +24,7 @@ class SwipingCrossFade extends StatefulWidget {
   final Curve showFadeCurve;
   final Curve hideFadeCurve;
   final Curve sizeCurve;
-  final bool isChildInitiallyShown;
+  final bool showChild;
   final bool alwaysShowChild;
 
   @override
@@ -36,10 +36,16 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
 
   @override
   void initState() {
-    _state = widget.isChildInitiallyShown
-        ? CrossFadeState.showFirst
-        : CrossFadeState.showSecond;
+    _updateState();
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(SwipingCrossFade oldWidget) {
+    if (oldWidget.showChild != widget.showChild) {
+      _updateState();
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -76,4 +82,7 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
           secondCurve: widget.hideFadeCurve,
           sizeCurve: widget.sizeCurve,
         );
+
+  void _updateState() => _state =
+      widget.showChild ? CrossFadeState.showFirst : CrossFadeState.showSecond;
 }
