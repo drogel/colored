@@ -6,8 +6,15 @@ import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_but
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_sliders_layout.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_welcome_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:colored/sources/app/styling/padding.dart' as padding;
 
 const _kSlidersScrollFractionTrigger = 1.66;
+const _kBackgroundColors = [
+  colors.primaryLight,
+  colors.logoBlue,
+  colors.logoRed,
+];
 
 class OnBoardingLayout extends StatefulWidget {
   const OnBoardingLayout();
@@ -36,33 +43,42 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout>
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: MultiLerp.multiLerp(
-        [
-          colorScheme.onError,
-          colors.logoBlue,
-          colors.logoRed,
-        ],
-        _scrollFraction,
-      ),
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: <Widget>[
-          PageView(
-            controller: _scroll,
-            children: const <Widget>[
-              OnBoardingWelcomeLayout(),
-              OnBoardingButtonsLayout(),
-              OnBoardingSlidersLayout(),
-            ],
-          ),
-          FractionalTranslation(
-            translation: Offset(0, 1.0 - _scrollFraction.clamp(0, 1)),
-            child: ConverterBodyLayout(
-              showSliders: _showSliders,
-              enableGestures: false,
+      backgroundColor: MultiLerp.multiLerp(_kBackgroundColors, _scrollFraction),
+      body: SafeArea(
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(padding.largeText),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: SmoothPageIndicator(
+                  effect: WormEffect(
+                    activeDotColor: colorScheme.primary,
+                    dotColor: colors.logoGray,
+                  ),
+                  controller: _scroll,
+                  count: _kBackgroundColors.length,
+                ),
+              ),
             ),
-          ),
-        ],
+            PageView(
+              controller: _scroll,
+              children: const <Widget>[
+                OnBoardingWelcomeLayout(),
+                OnBoardingButtonsLayout(),
+                OnBoardingSlidersLayout(),
+              ],
+            ),
+            FractionalTranslation(
+              translation: Offset(0, 1.0 - _scrollFraction.clamp(0, 1)),
+              child: ConverterBodyLayout(
+                showSliders: _showSliders,
+                enableGestures: false,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

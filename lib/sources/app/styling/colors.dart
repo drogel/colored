@@ -18,3 +18,4 @@ final Color green = Colors.lightGreenAccent[700];
 
 const Color logoBlue = Color.fromRGBO(192, 229, 225, 1);
 const Color logoRed = Color.fromRGBO(250, 171, 173, 1);
+const Color logoGray = Color.fromRGBO(149, 149, 149, 1);
