@@ -7,8 +7,8 @@ class SwipingCrossFade extends StatefulWidget {
   const SwipingCrossFade({
     @required this.header,
     @required this.child,
-    this.alwaysShowChild = false,
     this.showChild = true,
+    this.enableGestures = true,
     this.sizeDuration = durations.mediumDismissing,
     this.reverseFadeDuration = durations.shortDismissing,
     this.showFadeCurve = curves.incoming,
@@ -25,7 +25,7 @@ class SwipingCrossFade extends StatefulWidget {
   final Curve hideFadeCurve;
   final Curve sizeCurve;
   final bool showChild;
-  final bool alwaysShowChild;
+  final bool enableGestures;
 
   @override
   _SwipingCrossFadeState createState() => _SwipingCrossFadeState();
@@ -50,8 +50,8 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
 
   @override
   Widget build(BuildContext context) => DirectionalPanDetector(
-        onPanUpdateUp: _show,
-        onPanUpdateDown: _hide,
+        onPanUpdateUp: widget.enableGestures ? _show : null,
+        onPanUpdateDown: widget.enableGestures ? _hide : null,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -59,7 +59,16 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
               color: Colors.transparent,
               child: widget.header,
             ),
-            _buildChild(),
+            AnimatedCrossFade(
+              crossFadeState: _state,
+              firstChild: widget.child,
+              secondChild: Container(),
+              duration: widget.sizeDuration,
+              reverseDuration: widget.reverseFadeDuration,
+              firstCurve: widget.showFadeCurve,
+              secondCurve: widget.hideFadeCurve,
+              sizeCurve: widget.sizeCurve,
+            ),
           ],
         ),
       );
@@ -69,19 +78,6 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
 
   void _hide(DragUpdateDetails details) =>
       setState(() => _state = CrossFadeState.showSecond);
-
-  Widget _buildChild() => widget.alwaysShowChild
-      ? widget.child
-      : AnimatedCrossFade(
-          crossFadeState: _state,
-          firstChild: widget.child,
-          secondChild: Container(),
-          duration: widget.sizeDuration,
-          reverseDuration: widget.reverseFadeDuration,
-          firstCurve: widget.showFadeCurve,
-          secondCurve: widget.hideFadeCurve,
-          sizeCurve: widget.sizeCurve,
-        );
 
   void _updateState() => _state =
       widget.showChild ? CrossFadeState.showFirst : CrossFadeState.showSecond;

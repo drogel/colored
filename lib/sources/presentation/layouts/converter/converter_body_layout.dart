@@ -12,10 +12,12 @@ class ConverterBodyLayout extends StatelessWidget {
   const ConverterBodyLayout({
     this.background,
     this.showSliders = true,
+    this.enableGestures = true,
   });
 
   final Widget background;
   final bool showSliders;
+  final bool enableGestures;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class ConverterBodyLayout extends StatelessWidget {
         OverlayContainer(
           child: SwipingCrossFade(
             showChild: showSliders,
+            enableGestures: enableGestures,
             header: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: LayoutBuilder(

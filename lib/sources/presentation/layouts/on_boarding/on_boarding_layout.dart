@@ -57,7 +57,10 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout>
           ),
           FractionalTranslation(
             translation: Offset(0, 1.0 - _scrollFraction.clamp(0, 1)),
-            child: ConverterBodyLayout(showSliders: _showSliders),
+            child: ConverterBodyLayout(
+              showSliders: _showSliders,
+              enableGestures: false,
+            ),
           ),
         ],
       ),
