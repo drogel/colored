@@ -12,26 +12,41 @@ class OnBoardingButtonsLayout extends StatelessWidget {
     final localization = Localization.of(context).onBoarding;
     return OnBoardingBodyLayout(
       children: <Widget>[
-        Text(
-          localization.longPress,
-          style: textTheme.display3,
-          textAlign: TextAlign.center,
+        const SizedBox(height: padding.largeText),
+        Flexible(
+          child: Column(
+            children: <Widget>[
+              Text(
+                localization.longPress,
+                style: textTheme.display3,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                localization.longPressBody,
+                style: textTheme.headline,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
-        Text(
-          localization.longPressBody,
-          style: textTheme.headline,
-          textAlign: TextAlign.center,
+        Flexible(
+          child: Column(
+            children: <Widget>[
+              Text(
+                localization.tap,
+                style: textTheme.display3,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                localization.tapBody,
+                style: textTheme.headline,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 2 * padding.largeText),
-        Text(
-          localization.tap,
-          style: textTheme.display3,
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          localization.tapBody,
-          style: textTheme.headline,
-          textAlign: TextAlign.center,
+        Flexible(
+          child: Container(),
         ),
       ],
     );

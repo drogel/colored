@@ -6,7 +6,7 @@ import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fa
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
 
-const _kFormatButtonMinSpace = 162.0;
+const _kFormatButtonMinSpace = 140.0;
 
 class ConverterBodyLayout extends StatelessWidget {
   const ConverterBodyLayout({

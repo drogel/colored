@@ -17,11 +17,13 @@ class OnBoardingSlidersLayout extends StatelessWidget {
     return OnBoardingBodyLayout(
       columnAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 3 * padding.largeText),
-        Text(
-          localization.useSliders,
-          style: textTheme.display3,
-          textAlign: TextAlign.center,
+        FittedBox(
+          fit: BoxFit.contain,
+          child: Text(
+            localization.useSliders,
+            style: textTheme.display3,
+            textAlign: TextAlign.center,
+          ),
         ),
         Text(
           localization.useSlidersBody,

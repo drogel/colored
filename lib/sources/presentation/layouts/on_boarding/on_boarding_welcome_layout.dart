@@ -19,10 +19,12 @@ class OnBoardingWelcomeLayout extends StatelessWidget {
           image: Image.asset(paths.largeLogo).image,
           size: 0.618 * MediaQuery.of(context).size.width,
         ),
-        const SizedBox(height: padding.largeText),
-        Text(localization.onBoarding.welcome, style: textTheme.display1),
-        Text(localization.appTitle, style: textTheme.display3),
-        const SizedBox(height: 2 * padding.largeText),
+        Column(
+          children: <Widget>[
+            Text(localization.onBoarding.welcome, style: textTheme.display1),
+            Text(localization.appTitle, style: textTheme.display3),
+          ],
+        ),
         Text(
           localization.onBoarding.slogan,
           style: textTheme.headline,

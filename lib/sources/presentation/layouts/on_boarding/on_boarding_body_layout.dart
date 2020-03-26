@@ -4,7 +4,7 @@ import 'package:colored/sources/app/styling/padding.dart' as padding;
 class OnBoardingBodyLayout extends StatelessWidget {
   const OnBoardingBodyLayout({
     @required this.children,
-    this.columnAlignment = MainAxisAlignment.center,
+    this.columnAlignment = MainAxisAlignment.spaceEvenly,
     Key key,
   }) : super(key: key);
 
@@ -14,7 +14,11 @@ class OnBoardingBodyLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(padding.largeText),
+          padding: const EdgeInsets.only(
+            left: padding.largeText,
+            right: padding.largeText,
+            top: 2* padding.largeText,
+          ),
           child: Column(
             mainAxisAlignment: columnAlignment,
             children: children,
