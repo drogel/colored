@@ -14,6 +14,7 @@ class OnBoardingWelcomeLayout extends StatelessWidget {
     final textTheme = theme.textTheme;
     final localization = Localization.of(context);
     return OnBoardingBodyLayout(
+      columnAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         FadedInImage(
           image: Image.asset(paths.largeLogo).image,
