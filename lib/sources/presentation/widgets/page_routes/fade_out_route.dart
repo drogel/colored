@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 
 class FadeOutRoute<T> extends PageRoute<T> {
   FadeOutRoute({
-    @required this.enterWidget,
+    @required this.builder,
+    RouteSettings settings,
     this.maintainState = true,
-  });
+    bool fullscreenDialog = false,
+  })  : assert(builder != null),
+        super(settings: settings, fullscreenDialog: fullscreenDialog);
 
-  final Widget enterWidget;
+  final Widget Function(BuildContext) builder;
 
   @override
   Color get barrierColor => null;
@@ -22,7 +25,7 @@ class FadeOutRoute<T> extends PageRoute<T> {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
   ) =>
-      enterWidget;
+      builder(context);
 
   @override
   Widget buildTransitions(

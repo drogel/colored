@@ -1,5 +1,4 @@
-import 'package:colored/sources/app/navigation/flow_navigator.dart';
-import 'package:colored/sources/app/navigation/on_boarding_navigator.dart';
+import 'package:colored/sources/app/navigation/converter_router.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
@@ -49,5 +48,5 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
 
   void _onOnBoardingFinished() =>
-      FlowNavigator.of(context).pushNamed(OnBoardingNavigator.converterFlow);
+      Navigator.of(context).pushNamed(ConverterRouter.name);
 }
