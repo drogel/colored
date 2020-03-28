@@ -8,8 +8,11 @@ import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_
 class OnBoardingInjector {
   const OnBoardingInjector();
 
-  OnBoardingViewModel injectViewModel() => OnBoardingViewModel(
-        stateController: StreamController<OnBoardingState>(),
+  OnBoardingViewModel injectViewModel([
+    StreamController<OnBoardingState> stateController,
+  ]) =>
+      OnBoardingViewModel(
+        stateController: stateController ?? StreamController<OnBoardingState>(),
         deviceOrientationService: const SystemChromeService(),
         localStorage: const SharedPreferences(),
       );

@@ -6,4 +6,12 @@ class OnBoardingState {
   }) : assert(pageScrollFraction != null);
 
   final double pageScrollFraction;
+
+  @override
+  bool operator ==(Object other) =>
+      other is OnBoardingState &&
+      other.pageScrollFraction == pageScrollFraction;
+
+  @override
+  int get hashCode => 17 * 32 + pageScrollFraction.hashCode;
 }
