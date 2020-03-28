@@ -47,6 +47,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     super.dispose();
   }
 
-  void _onOnBoardingFinished() =>
-      Navigator.of(context).pushReplacementNamed(ConverterRouter.name);
+  Future<void> _onOnBoardingFinished() async {
+    await _viewModel.onOnBoardingFinish();
+    await Navigator.of(context).pushReplacementNamed(ConverterRouter.name);
+  }
 }
