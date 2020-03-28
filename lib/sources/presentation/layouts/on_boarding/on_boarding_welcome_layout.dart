@@ -1,6 +1,5 @@
 import 'package:colored/resources/asset_paths.dart' as paths;
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/app/styling/padding.dart' as padding;
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_body_layout.dart';
 import 'package:colored/sources/presentation/widgets/faded_in_image.dart';
 import 'package:flutter/material.dart';

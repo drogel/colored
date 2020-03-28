@@ -5,6 +5,7 @@ import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/color_converter/color_converter.dart';
 import 'package:colored/sources/data/color_helpers/color_parser/color_parser_type.dart';
 import 'package:colored/sources/data/color_helpers/color_transformer/color_transformer_type.dart';
+import 'package:colored/sources/data/services/device_orientation/device_orientation_service.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
@@ -20,10 +21,13 @@ class ConverterViewModel {
     @required ColorParserType colorParser,
     @required ColorConverter colorConverter,
     @required ColorTransformerType colorTransformer,
+    @required DeviceOrientationService deviceOrientationService,
   })  : assert(stateController != null),
         assert(colorParser != null),
         assert(colorTransformer != null),
         assert(colorConverter != null),
+        assert(deviceOrientationService != null),
+        _deviceOrientationService = deviceOrientationService,
         _stateController = stateController,
         _converter = colorConverter,
         _transformer = colorTransformer,
@@ -33,16 +37,19 @@ class ConverterViewModel {
   final ColorConverter _converter;
   final ColorTransformerType _transformer;
   final StreamController<ConverterState> _stateController;
+  final DeviceOrientationService _deviceOrientationService;
 
   Stream<ConverterState> get stateStream => _stateController.stream;
 
-  ConverterState getInitialState() => _convertToState(
+  ConverterState get initialData => _convertToState(
         ColorSelection(
           first: colors.primaryDark.red.toDouble() / decimal8Bit,
           second: colors.primaryDark.green.toDouble() / decimal8Bit,
           third: colors.primaryDark.blue.toDouble() / decimal8Bit,
         ),
       );
+
+  void init() => _deviceOrientationService.setAllOrientations();
 
   void notifySelection(ColorSelection selection) {
     final state = _convertToState(selection);

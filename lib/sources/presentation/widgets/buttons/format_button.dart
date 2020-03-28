@@ -37,12 +37,10 @@ class _FormatButtonState extends State<FormatButton> {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.title;
-
+    final localization = Localization.of(context).converter;
     return Tooltip(
       key: _tooltip,
-      message:
-          _tooltipMessage ?? Localization.of(context).converter.tooltipMessage,
+      message: _tooltipMessage ?? localization.tooltipMessage,
       decoration: BoxDecoration(
         color: _tooltipColor,
         borderRadius: BorderRadius.circular(radii.small),

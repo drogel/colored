@@ -6,7 +6,6 @@ import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_but
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_sliders_layout.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_welcome_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:colored/sources/app/styling/padding.dart' as padding;
 
@@ -42,7 +41,6 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout>
 
   @override
   Widget build(BuildContext context) {
-    _setPreferredOrientations();
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: MultiLerp.multiLerp(_kBackgroundColors, _scrollFraction),
@@ -96,9 +94,4 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout>
     final screenWidth = MediaQuery.of(context).size.width;
     data.onPageScroll(_scroll.position.pixels, screenWidth);
   }
-
-  void _setPreferredOrientations() => SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
 }

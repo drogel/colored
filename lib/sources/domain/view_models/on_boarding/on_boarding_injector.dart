@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/sources/data/services/device_orientation/system_chrome_service.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_model.dart';
 
@@ -8,5 +9,6 @@ class OnBoardingInjector {
 
   OnBoardingViewModel injectViewModel() => OnBoardingViewModel(
         stateController: StreamController<OnBoardingState>(),
+        deviceOrientationService: const SystemChromeService(),
       );
 }
