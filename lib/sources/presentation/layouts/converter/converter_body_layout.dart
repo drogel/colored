@@ -6,7 +6,7 @@ import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fa
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
 import 'package:flutter/material.dart';
 
-const _kFormatButtonMinSpace = 140.0;
+const _kFormatButtonMinSpace = 160.0;
 
 class ConverterBodyLayout extends StatelessWidget {
   const ConverterBodyLayout({
@@ -34,7 +34,10 @@ class ConverterBodyLayout extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: LayoutBuilder(
                 builder: (_, constraints) => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment:
+                      _computeButtonCount(constraints.maxWidth) == 1
+                          ? MainAxisAlignment.spaceAround
+                          : MainAxisAlignment.spaceBetween,
                   children: _buildFormatButtons(data, constraints.maxWidth),
                 ),
               ),
@@ -54,8 +57,7 @@ class ConverterBodyLayout extends StatelessWidget {
   }
 
   List<Widget> _buildFormatButtons(ConverterData data, double availableWidth) {
-    final buttonCountSpace = (availableWidth / _kFormatButtonMinSpace).floor();
-    final buttonCount = buttonCountSpace.clamp(0, Format.values.length);
+    final buttonCount = _computeButtonCount(availableWidth);
     var buttonList = <Widget>[];
     for (var i = 0; i < buttonCount; i += 1) {
       buttonList.add(_buildFormatButton(data, i));
@@ -72,4 +74,10 @@ class ConverterBodyLayout extends StatelessWidget {
         content: data.state.formatData[data.displayedFormats[index]],
         onDropdownSelection: data.onFormatSelection,
       );
+
+  int _computeButtonCount(double availableWidth) {
+    final buttonCountSpace = (availableWidth / _kFormatButtonMinSpace).floor();
+    final buttonCount = buttonCountSpace.clamp(0, Format.values.length);
+    return buttonCount;
+  }
 }
