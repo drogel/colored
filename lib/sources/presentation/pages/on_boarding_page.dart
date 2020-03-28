@@ -48,5 +48,5 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
 
   void _onOnBoardingFinished() =>
-      Navigator.of(context).pushNamed(ConverterRouter.name);
+      Navigator.of(context).pushReplacementNamed(ConverterRouter.name);
 }

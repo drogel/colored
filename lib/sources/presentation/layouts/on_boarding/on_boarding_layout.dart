@@ -23,17 +23,19 @@ class OnBoardingLayout extends StatefulWidget {
   _OnBoardingLayoutState createState() => _OnBoardingLayoutState();
 }
 
-class _OnBoardingLayoutState extends State<OnBoardingLayout>
-    with ChangeNotifier {
+class _OnBoardingLayoutState extends State<OnBoardingLayout> {
   final _scroll = PageController();
   double _scrollFraction = 0;
   bool _showSliders = false;
 
   @override
+  void initState() {
+    _scroll.addListener(_handleScroll);
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() {
-    if (!_scroll.hasListeners) {
-      _scroll.addListener(_handleScroll);
-    }
     _scrollFraction = OnBoardingData.of(context).state.pageScrollFraction;
     _showSliders = _scrollFraction > _kSlidersScrollFractionTrigger;
     super.didChangeDependencies();
