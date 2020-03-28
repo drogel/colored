@@ -18,6 +18,7 @@ dependencies:
   shared_preferences: ^0.5.6+3
   transparent_image: ^1.0.0
   smooth_page_indicator: ^0.1.5
+  mockito: ^4.1.1
 
 dev_dependencies:
   flutter_test:

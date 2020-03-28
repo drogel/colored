@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/sources/app/styling/curves.dart' as curves;
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_model.dart';
@@ -53,7 +54,19 @@ void main() {
         test("then a new state with the pageScrollFraction is retrieved", () {
           runScrollFractionTest(
             expectedState: const OnBoardingState(pageScrollFraction: 3),
-            scrollPosition: 3*_kTestMaxWidth,
+            scrollPosition: 3 * _kTestMaxWidth,
+          );
+        });
+      });
+
+      group("with in-between scroll values", () {
+        test("then a new state with right pageScrollFraction is retrieved", () {
+          final scrollFractionInCurve = curves.exiting.transform(0.5);
+          runScrollFractionTest(
+            expectedState: OnBoardingState(
+              pageScrollFraction: scrollFractionInCurve,
+            ),
+            scrollPosition: _kTestMaxWidth / 2,
           );
         });
       });
