@@ -11,11 +11,9 @@ class OnBoardingButtonsLayout extends StatelessWidget {
     final localization = Localization.of(context).onBoarding;
     return OnBoardingBodyLayout(
       children: <Widget>[
+        Flexible(child: Container()),
         Flexible(
-          child: Container(),
-        ),
-        Flexible(
-          flex: 4,
+          flex: 6,
           child: Column(
             children: <Widget>[
               Text(
@@ -31,8 +29,9 @@ class OnBoardingButtonsLayout extends StatelessWidget {
             ],
           ),
         ),
+        Flexible(child: Container()),
         Flexible(
-          flex: 4,
+          flex: 6,
           child: Column(
             children: <Widget>[
               Text(
@@ -49,7 +48,7 @@ class OnBoardingButtonsLayout extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 3,
+          flex: 4,
           child: Container(),
         ),
       ],
