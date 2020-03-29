@@ -35,3 +35,5 @@ lib/generated_plugin_registrant.dart
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data_models/dart_dependencies_test/**/.packages
+android/key.properties
+android/app/key.jks
