@@ -1,3 +1,4 @@
+import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:flutter/cupertino.dart';
 import 'package:colored/sources/app/styling/colors.dart' as colors;
 import 'package:colored/sources/app/styling/opacities.dart' as opacities;
@@ -5,7 +6,7 @@ import 'package:colored/sources/app/styling/opacities.dart' as opacities;
 class OverlayContainer extends StatelessWidget {
   const OverlayContainer({
     this.child,
-    this.padding = const EdgeInsets.only(top: 12, bottom: 12),
+    this.padding = const EdgeInsets.only(top: radii.large, bottom: 12),
     Key key,
   }) : super(key: key);
 
@@ -17,6 +18,10 @@ class OverlayContainer extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           color: colors.primary.withOpacity(opacities.overlay),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(radii.large),
+            topRight: Radius.circular(radii.large),
+          ),
           boxShadow: [
             BoxShadow(
               color: colors.primaryVariant.withOpacity(opacities.shadow),

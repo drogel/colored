@@ -7,6 +7,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       fontFamily: fonts.body,
       primaryColor: colors.primary,
       primaryColorDark: colors.primaryVariant,
+      accentColor: colors.secondary,
       colorScheme: const ColorScheme(
         primary: colors.primary,
         primaryVariant: colors.primaryVariant,
@@ -24,12 +25,18 @@ ThemeData dark(BuildContext context) => ThemeData(
       ),
       textTheme: const TextTheme(
         body1: TextStyle(color: colors.secondary),
-        headline: TextStyle(color: colors.primaryLight),
+        headline: TextStyle(color: colors.primary),
         subhead: TextStyle(
           color: colors.primaryLight,
           fontFamily: fonts.header,
         ),
         title: TextStyle(color: colors.primaryLight),
+        display1: TextStyle(color: colors.primary),
+        display3: TextStyle(
+          color: colors.primary,
+          fontWeight: FontWeight.bold,
+          fontFamily: fonts.header,
+        ),
       ),
       highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
       canvasColor: colors.primaryDarkest,

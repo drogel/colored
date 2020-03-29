@@ -7,7 +7,8 @@ class SwipingCrossFade extends StatefulWidget {
   const SwipingCrossFade({
     @required this.header,
     @required this.child,
-    this.isChildInitiallyShown = true,
+    this.showChild = true,
+    this.enableGestures = true,
     this.sizeDuration = durations.mediumDismissing,
     this.reverseFadeDuration = durations.shortDismissing,
     this.showFadeCurve = curves.incoming,
@@ -23,7 +24,8 @@ class SwipingCrossFade extends StatefulWidget {
   final Curve showFadeCurve;
   final Curve hideFadeCurve;
   final Curve sizeCurve;
-  final bool isChildInitiallyShown;
+  final bool showChild;
+  final bool enableGestures;
 
   @override
   _SwipingCrossFadeState createState() => _SwipingCrossFadeState();
@@ -34,16 +36,22 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
 
   @override
   void initState() {
-    _state = widget.isChildInitiallyShown
-        ? CrossFadeState.showFirst
-        : CrossFadeState.showSecond;
+    _updateState();
     super.initState();
   }
 
   @override
+  void didUpdateWidget(SwipingCrossFade oldWidget) {
+    if (oldWidget.showChild != widget.showChild) {
+      _updateState();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) => DirectionalPanDetector(
-        onPanUpdateUp: _show,
-        onPanUpdateDown: _hide,
+        onPanUpdateUp: widget.enableGestures ? _show : null,
+        onPanUpdateDown: widget.enableGestures ? _hide : null,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -70,4 +78,7 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
 
   void _hide(DragUpdateDetails details) =>
       setState(() => _state = CrossFadeState.showSecond);
+
+  void _updateState() => _state =
+      widget.showChild ? CrossFadeState.showFirst : CrossFadeState.showSecond;
 }

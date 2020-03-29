@@ -1,10 +1,10 @@
 import 'package:colored/resources/localization/localization.dart';
+import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:colored/sources/presentation/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-const _kBorderRadius = 8.0;
 
 class FormatButton extends StatefulWidget {
   const FormatButton({
@@ -32,30 +32,24 @@ class _FormatButtonState extends State<FormatButton> {
   @override
   void initState() {
     _tooltipColor = colors.primaryVariant;
-    _tooltipMessage = "Copied!";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.title;
-
+    final localization = Localization.of(context).converter;
     return Tooltip(
       key: _tooltip,
-      message: _tooltipMessage,
+      message: _tooltipMessage ?? localization.tooltipMessage,
       decoration: BoxDecoration(
         color: _tooltipColor,
-        borderRadius: BorderRadius.circular(_kBorderRadius / 2),
+        borderRadius: BorderRadius.circular(radii.small),
       ),
       preferBelow: false,
-      child: RaisedButton(
+      child: PrimaryButton(
         onPressed: _getClipboardData,
         onLongPress: _setTitleInClipboardData,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(_kBorderRadius),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        child: Text(widget.content, style: textStyle),
+        title: widget.content,
       ),
     );
   }
@@ -68,7 +62,7 @@ class _FormatButtonState extends State<FormatButton> {
     );
     if (isError) {
       setState(() {
-        _tooltipMessage = Localization.of(context).tooltipError;
+        _tooltipMessage = Localization.of(context).converter.tooltipError;
         _tooltipColor = colors.errorDark;
       });
       _showTooltip();
@@ -80,7 +74,7 @@ class _FormatButtonState extends State<FormatButton> {
   Future<void> _setTitleInClipboardData() async {
     await Clipboard.setData(ClipboardData(text: widget.content));
     setState(() {
-      _tooltipMessage = Localization.of(context).tooltipMessage;
+      _tooltipMessage = Localization.of(context).converter.tooltipMessage;
       _tooltipColor = colors.primaryDark;
     });
     _showTooltip();

@@ -31,8 +31,8 @@ class _ConverterPageState extends State<ConverterPage> {
 
   @override
   void initState() {
-    _viewModel = widget._injector.injectViewModel();
-    _state = _viewModel.getInitialState();
+    _viewModel = widget._injector.injectViewModel()..init();
+    _state = _viewModel.initialData;
     _viewModel.stateStream.listen(_updateState);
     super.initState();
   }
@@ -61,7 +61,7 @@ class _ConverterPageState extends State<ConverterPage> {
   }
 
   void _updateState(ConverterState newState) {
-    if (newState is Shrinking) {
+    if (newState is Shrinking && _controller.isExpanded) {
       _controller.shrink();
     }
     setState(() => _state = newState);
