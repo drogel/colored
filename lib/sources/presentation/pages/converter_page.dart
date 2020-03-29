@@ -61,7 +61,7 @@ class _ConverterPageState extends State<ConverterPage> {
   }
 
   void _updateState(ConverterState newState) {
-    if (newState is Shrinking) {
+    if (newState is Shrinking && _controller.isExpanded) {
       _controller.shrink();
     }
     setState(() => _state = newState);
