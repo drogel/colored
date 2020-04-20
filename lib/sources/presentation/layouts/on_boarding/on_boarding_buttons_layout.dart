@@ -1,6 +1,7 @@
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_body_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:colored/sources/app/styling/padding.dart' as padding;
 
 class OnBoardingButtonsLayout extends StatelessWidget {
   const OnBoardingButtonsLayout({Key key}) : super(key: key);
@@ -11,33 +12,32 @@ class OnBoardingButtonsLayout extends StatelessWidget {
     final localization = Localization.of(context).onBoarding;
     return OnBoardingBodyLayout(
       children: <Widget>[
-        Flexible(child: Container()),
+        const SizedBox(height: padding.largeText),
         Flexible(
-          flex: 6,
+          flex: 4,
           child: Column(
             children: <Widget>[
-              Text(
-                localization.longPress,
-                style: textTheme.display3,
-                textAlign: TextAlign.center,
+              FittedBox(
+                fit: BoxFit.contain,
+                child: Text(
+                  localization.longPress,
+                  style: textTheme.display3,
+                  textAlign: TextAlign.center,
+                ),
               ),
               Text(
                 localization.longPressBody,
                 style: textTheme.headline,
                 textAlign: TextAlign.center,
               ),
-            ],
-          ),
-        ),
-        Flexible(child: Container()),
-        Flexible(
-          flex: 6,
-          child: Column(
-            children: <Widget>[
-              Text(
-                localization.tap,
-                style: textTheme.display3,
-                textAlign: TextAlign.center,
+              const SizedBox(height: padding.largeText),
+              FittedBox(
+                fit: BoxFit.contain,
+                child: Text(
+                  localization.tap,
+                  style: textTheme.display3,
+                  textAlign: TextAlign.center,
+                ),
               ),
               Text(
                 localization.tapBody,
@@ -47,10 +47,7 @@ class OnBoardingButtonsLayout extends StatelessWidget {
             ],
           ),
         ),
-        Flexible(
-          flex: 4,
-          child: Container(),
-        ),
+        Flexible(flex: 1,child: Container()),
       ],
     );
   }

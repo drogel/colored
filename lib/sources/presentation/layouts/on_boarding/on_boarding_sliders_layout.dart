@@ -17,10 +17,9 @@ class OnBoardingSlidersLayout extends StatelessWidget {
     final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return OnBoardingBodyLayout(
       children: <Widget>[
-        if (devicePixelRatio > 2.5)
-          const SizedBox(height: 2 * padding.largeText),
+        if (devicePixelRatio > 2.5) const SizedBox(height: padding.largeText),
         Flexible(
-          flex: 2,
+          flex: 1,
           child: Column(
             children: <Widget>[
               FittedBox(
@@ -39,13 +38,13 @@ class OnBoardingSlidersLayout extends StatelessWidget {
               if (devicePixelRatio > 2.5)
                 Column(
                   children: <Widget>[
-                    const SizedBox(height: 2 * padding.largeText),
+                    const SizedBox(height: padding.largeText),
                     Text(
                       localization.useSlidersFooter,
                       style: textTheme.headline,
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 2 * padding.largeText),
+                    const SizedBox(height: padding.largeText),
                   ],
                 ),
               const SizedBox(height: padding.largeText / 2),
