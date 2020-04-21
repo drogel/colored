@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
@@ -19,19 +20,17 @@ class OnBoardingSlidersLayout extends StatelessWidget {
       children: <Widget>[
         if (devicePixelRatio > 2.5) const SizedBox(height: padding.largeText),
         Flexible(
-          flex: 1,
           child: Column(
             children: <Widget>[
-              FittedBox(
-                fit: BoxFit.contain,
-                child: Text(
-                  localization.useSliders,
-                  style: textTheme.display3,
-                  textAlign: TextAlign.center,
-                ),
+              AutoSizeText(
+                localization.useSliders,
+                maxLines: 1,
+                style: textTheme.display3,
+                textAlign: TextAlign.center,
               ),
-              Text(
+              AutoSizeText(
                 localization.useSlidersBody,
+                maxLines: 2,
                 style: textTheme.headline,
                 textAlign: TextAlign.center,
               ),
@@ -39,8 +38,9 @@ class OnBoardingSlidersLayout extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     const SizedBox(height: padding.largeText),
-                    Text(
+                    AutoSizeText(
                       localization.useSlidersFooter,
+                      maxLines: 2,
                       style: textTheme.headline,
                       textAlign: TextAlign.center,
                     ),

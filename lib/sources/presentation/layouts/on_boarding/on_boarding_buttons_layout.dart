@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_body_layout.dart';
 import 'package:flutter/material.dart';
@@ -17,37 +18,35 @@ class OnBoardingButtonsLayout extends StatelessWidget {
           flex: 4,
           child: Column(
             children: <Widget>[
-              FittedBox(
-                fit: BoxFit.contain,
-                child: Text(
-                  localization.longPress,
-                  style: textTheme.display3,
-                  textAlign: TextAlign.center,
-                ),
+              AutoSizeText(
+                localization.longPress,
+                maxLines: 1,
+                style: textTheme.display3,
+                textAlign: TextAlign.center,
               ),
-              Text(
+              AutoSizeText(
                 localization.longPressBody,
+                maxLines: 2,
                 style: textTheme.headline,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: padding.largeText),
-              FittedBox(
-                fit: BoxFit.contain,
-                child: Text(
-                  localization.tap,
-                  style: textTheme.display3,
-                  textAlign: TextAlign.center,
-                ),
+              AutoSizeText(
+                localization.tap,
+                maxLines: 1,
+                style: textTheme.display3,
+                textAlign: TextAlign.center,
               ),
-              Text(
+              AutoSizeText(
                 localization.tapBody,
+                maxLines: 2,
                 style: textTheme.headline,
                 textAlign: TextAlign.center,
               ),
             ],
           ),
         ),
-        Flexible(flex: 1,child: Container()),
+        Flexible(flex: 1, child: Container()),
       ],
     );
   }
