@@ -19,6 +19,7 @@ dependencies:
   transparent_image: ^1.0.0
   smooth_page_indicator: ^0.1.5
   mockito: ^4.1.1
+  auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:

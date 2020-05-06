@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
@@ -17,35 +18,33 @@ class OnBoardingSlidersLayout extends StatelessWidget {
     final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return OnBoardingBodyLayout(
       children: <Widget>[
-        if (devicePixelRatio > 2.5)
-          const SizedBox(height: 2 * padding.largeText),
+        if (devicePixelRatio > 2.5) const SizedBox(height: padding.largeText),
         Flexible(
-          flex: 2,
           child: Column(
             children: <Widget>[
-              FittedBox(
-                fit: BoxFit.contain,
-                child: Text(
-                  localization.useSliders,
-                  style: textTheme.display3,
-                  textAlign: TextAlign.center,
-                ),
+              AutoSizeText(
+                localization.useSliders,
+                maxLines: 1,
+                style: textTheme.headline2,
+                textAlign: TextAlign.center,
               ),
-              Text(
+              AutoSizeText(
                 localization.useSlidersBody,
-                style: textTheme.headline,
+                maxLines: 2,
+                style: textTheme.headline5,
                 textAlign: TextAlign.center,
               ),
               if (devicePixelRatio > 2.5)
                 Column(
                   children: <Widget>[
-                    const SizedBox(height: 2 * padding.largeText),
-                    Text(
+                    const SizedBox(height: padding.largeText),
+                    AutoSizeText(
                       localization.useSlidersFooter,
-                      style: textTheme.headline,
+                      maxLines: 2,
+                      style: textTheme.headline5,
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 2 * padding.largeText),
+                    const SizedBox(height: padding.largeText),
                   ],
                 ),
               const SizedBox(height: padding.largeText / 2),
