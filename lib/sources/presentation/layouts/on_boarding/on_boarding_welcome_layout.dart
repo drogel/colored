@@ -23,8 +23,8 @@ class OnBoardingWelcomeLayout extends StatelessWidget {
           fit: BoxFit.fitHeight,
           child: Column(
             children: <Widget>[
-              Text(localization.onBoarding.welcome, style: textTheme.display1),
-              Text(localization.appTitle, style: textTheme.display3),
+              Text(localization.onBoarding.welcome, style: textTheme.headline4),
+              Text(localization.appTitle, style: textTheme.headline2),
             ],
           ),
         ),
@@ -32,7 +32,7 @@ class OnBoardingWelcomeLayout extends StatelessWidget {
           fit: BoxFit.fitHeight,
           child: Text(
             localization.onBoarding.slogan,
-            style: textTheme.headline,
+            style: textTheme.headline5,
             textAlign: TextAlign.center,
           ),
         ),

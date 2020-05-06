@@ -25,13 +25,13 @@ class OnBoardingSlidersLayout extends StatelessWidget {
               AutoSizeText(
                 localization.useSliders,
                 maxLines: 1,
-                style: textTheme.display3,
+                style: textTheme.headline2,
                 textAlign: TextAlign.center,
               ),
               AutoSizeText(
                 localization.useSlidersBody,
                 maxLines: 2,
-                style: textTheme.headline,
+                style: textTheme.headline5,
                 textAlign: TextAlign.center,
               ),
               if (devicePixelRatio > 2.5)
@@ -41,7 +41,7 @@ class OnBoardingSlidersLayout extends StatelessWidget {
                     AutoSizeText(
                       localization.useSlidersFooter,
                       maxLines: 2,
-                      style: textTheme.headline,
+                      style: textTheme.headline5,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: padding.largeText),
