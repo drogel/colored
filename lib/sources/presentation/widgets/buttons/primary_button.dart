@@ -20,7 +20,7 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.title;
+    final textStyle = Theme.of(context).textTheme.headline6;
     return RaisedButton(
       onPressed: onPressed,
       onLongPress: onLongPress,
@@ -29,7 +29,7 @@ class PrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(radii.medium),
       ),
       padding: padding,
-      child: Text(title, style: textStyle),
+      child: Text(title, style: textStyle, textScaleFactor: 1),
     );
   }
 }

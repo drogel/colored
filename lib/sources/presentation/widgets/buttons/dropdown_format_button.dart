@@ -33,10 +33,8 @@ class DropdownFormatButton extends StatelessWidget {
                 .toList(),
             iconEnabledColor: Theme.of(context).colorScheme.secondary,
             underline: Container(),
-            isDense: true,
             onChanged: (str) => onDropdownSelection(formatValue(str), format),
           ),
-          const SizedBox(height: 8),
           FormatButton(
             format: format,
             clipboardShouldFail: clipboardShouldFail,

@@ -23,16 +23,16 @@ ThemeData dark(BuildContext context) => ThemeData(
         onError: colors.primaryLight,
         brightness: Brightness.light,
       ),
-      textTheme: const TextTheme(
-        body1: TextStyle(color: colors.secondary),
-        headline: TextStyle(color: colors.primary),
-        subhead: TextStyle(
+      textTheme: TextTheme(
+        bodyText2: const TextStyle(color: colors.secondary),
+        headline5: const TextStyle(color: colors.primary),
+        subtitle1: TextStyle(
           color: colors.primaryLight,
           fontFamily: fonts.header,
         ),
-        title: TextStyle(color: colors.primaryLight),
-        display1: TextStyle(color: colors.primary),
-        display3: TextStyle(
+        headline6: const TextStyle(color: colors.primaryLight),
+        headline4: const TextStyle(color: colors.primary),
+        headline2: TextStyle(
           color: colors.primary,
           fontWeight: FontWeight.bold,
           fontFamily: fonts.header,
