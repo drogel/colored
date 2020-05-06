@@ -84,21 +84,16 @@ class ConverterViewModel {
     final g = (selection.second * decimal8Bit).round();
     final b = (selection.third * decimal8Bit).round();
 
-    final color = Color.fromRGBO(r, g, b, 1);
-    final rgbString = _converter.convertToFormat(r, g, b, Format.rgb);
-    final hexString = _converter.convertToFormat(r, g, b, Format.hex);
-    final hslString = _converter.convertToFormat(r, g, b, Format.hsl);
-    final hsvString = _converter.convertToFormat(r, g, b, Format.hsv);
+    final formatData = {
+      for (var format in Format.values)
+        format: _converter.convertToFormat(r, g, b, format)
+    };
+
     return ConverterState(
-      color: color,
+      color: Color.fromRGBO(r, g, b, 1),
       converterStep: _kConverterStep,
       selection: selection,
-      formatData: {
-        Format.hex: hexString,
-        Format.rgb: rgbString,
-        Format.hsl: hslString,
-        Format.hsv: hsvString,
-      },
+      formatData: formatData,
     );
   }
 }
