@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:colored/sources/app/styling/colors.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_helpers/color_converter/color_converter.dart';
+import 'package:colored/sources/data/color_helpers/color_converter/color_converter_type.dart';
 import 'package:colored/sources/data/color_helpers/color_parser/color_parser_type.dart';
 import 'package:colored/sources/data/color_helpers/color_transformer/color_transformer_type.dart';
 import 'package:colored/sources/data/services/device_orientation/device_orientation_service.dart';
@@ -19,7 +19,7 @@ class ConverterViewModel {
   const ConverterViewModel({
     @required StreamController<ConverterState> stateController,
     @required ColorParserType colorParser,
-    @required ColorConverter colorConverter,
+    @required ColorConverterType colorConverter,
     @required ColorTransformerType colorTransformer,
     @required DeviceOrientationService deviceOrientationService,
   })  : assert(stateController != null),
@@ -34,7 +34,7 @@ class ConverterViewModel {
         _parser = colorParser;
 
   final ColorParserType _parser;
-  final ColorConverter _converter;
+  final ColorConverterType _converter;
   final ColorTransformerType _transformer;
   final StreamController<ConverterState> _stateController;
   final DeviceOrientationService _deviceOrientationService;

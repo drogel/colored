@@ -1,8 +1,12 @@
 import 'dart:async';
 
-import 'package:colored/sources/data/color_helpers/color_converter/rgb_converter.dart';
+import 'package:colored/sources/data/color_helpers/color_converter/color_converter.dart';
 import 'package:colored/sources/data/color_helpers/color_parser/color_parser.dart';
 import 'package:colored/sources/data/color_helpers/color_transformer/color_transformer.dart';
+import 'package:colored/sources/data/color_helpers/format_converter/hex_converter.dart';
+import 'package:colored/sources/data/color_helpers/format_converter/hsl_converter.dart';
+import 'package:colored/sources/data/color_helpers/format_converter/hsv_converter.dart';
+import 'package:colored/sources/data/color_helpers/format_converter/rgb_converter.dart';
 import 'package:colored/sources/data/color_helpers/format_parser/hex_parser.dart';
 import 'package:colored/sources/data/color_helpers/format_parser/hsl_parser.dart';
 import 'package:colored/sources/data/color_helpers/format_parser/hsv_parser.dart';
@@ -28,7 +32,14 @@ class ConverterInjector {
             Format.hsv: HsvParser(),
           },
         ),
-        colorConverter: const RgbConverter(),
+        colorConverter: const ColorConverter(
+          formatConverters: {
+            Format.rgb: RgbConverter(),
+            Format.hex: HexConverter(),
+            Format.hsl: HslConverter(),
+            Format.hsv: HsvConverter(),
+          },
+        ),
         colorTransformer: const ColorTransformer(),
         deviceOrientationService: const SystemChromeService(),
       );
