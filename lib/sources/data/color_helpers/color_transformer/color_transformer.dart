@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_helpers/color_transformer/color_transformer_type.dart';
+import 'package:colored/sources/data/color_helpers/color_transformer/transformer.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:vector_math/vector_math.dart';
 
-class ColorTransformer implements ColorTransformerType {
+class ColorTransformer implements Transformer {
   const ColorTransformer();
 
   @override

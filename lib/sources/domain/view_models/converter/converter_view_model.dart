@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:colored/sources/app/styling/colors.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_helpers/color_converter/color_converter_type.dart';
-import 'package:colored/sources/data/color_helpers/color_parser/color_parser_type.dart';
-import 'package:colored/sources/data/color_helpers/color_transformer/color_transformer_type.dart';
+import 'package:colored/sources/data/color_helpers/color_converter/converter.dart';
+import 'package:colored/sources/data/color_helpers/color_parser/parser.dart';
+import 'package:colored/sources/data/color_helpers/color_transformer/transformer.dart';
 import 'package:colored/sources/data/services/device_orientation/device_orientation_service.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
@@ -18,9 +18,9 @@ const _kTunedChangeFactor = 2;
 class ConverterViewModel {
   const ConverterViewModel({
     @required StreamController<ConverterState> stateController,
-    @required ColorParserType colorParser,
-    @required ColorConverterType colorConverter,
-    @required ColorTransformerType colorTransformer,
+    @required Parser colorParser,
+    @required Converter colorConverter,
+    @required Transformer colorTransformer,
     @required DeviceOrientationService deviceOrientationService,
   })  : assert(stateController != null),
         assert(colorParser != null),
@@ -33,9 +33,9 @@ class ConverterViewModel {
         _transformer = colorTransformer,
         _parser = colorParser;
 
-  final ColorParserType _parser;
-  final ColorConverterType _converter;
-  final ColorTransformerType _transformer;
+  final Parser _parser;
+  final Converter _converter;
+  final Transformer _transformer;
   final StreamController<ConverterState> _stateController;
   final DeviceOrientationService _deviceOrientationService;
 
