@@ -1,0 +1,1 @@
+const api = "https://api.color.pizza/v1/";

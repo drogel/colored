@@ -1,0 +1,4 @@
+enum ApiResponse {
+  ok,
+  failed,
+}
