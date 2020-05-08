@@ -18,8 +18,8 @@ class NamingResult {
         r: map[_rgb]["r"],
         g: map[_rgb]["g"],
         b: map[_rgb]["b"],
-        distance: map["distance"],
-        luminance: map["luminance"],
+        distance: map["distance"].toDouble(),
+        luminance: map["luminance"].toDouble(),
         requestedHex: map["requestedHex"],
       );
 
@@ -30,7 +30,7 @@ class NamingResult {
   final int r;
   final int g;
   final int b;
-  final int distance;
+  final double distance;
   final double luminance;
   final String requestedHex;
 

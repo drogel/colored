@@ -3,7 +3,7 @@ import 'package:colored/sources/domain/data_models/naming_result.dart';
 import 'package:flutter/foundation.dart';
 
 class NamingResponse {
-  const NamingResponse({@required this.result, @required this.response});
+  const NamingResponse({@required this.response, this.result});
 
   final ApiResponse response;
   final NamingResult result;
