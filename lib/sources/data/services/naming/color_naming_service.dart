@@ -22,7 +22,7 @@ class ColorNamingService implements NamingService {
   final NetworkClient _client;
 
   @override
-  Future<NamingResponse> fetchNaming({String hexColor}) async {
+  Future<NamingResponse> getNaming({String hexColor}) async {
     final url = _urlComposer.compose(endpoints.baseUrl, path: hexColor);
     final response = await _client.get(url);
     if (response.statusCode == 200) {

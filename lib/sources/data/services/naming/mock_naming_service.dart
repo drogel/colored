@@ -11,7 +11,7 @@ class MockNamingService implements NamingService {
   const MockNamingService();
 
   @override
-  Future<NamingResponse> fetchNaming({String hexColor}) async {
+  Future<NamingResponse> getNaming({String hexColor}) async {
     final sampleColorStr = await rootBundle.loadString(mock_paths.sampleColor);
     final map = jsonDecode(sampleColorStr);
     final namingMap = map["colors"].first;

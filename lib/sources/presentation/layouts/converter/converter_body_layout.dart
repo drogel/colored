@@ -1,5 +1,6 @@
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
+import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
@@ -22,6 +23,7 @@ class ConverterBodyLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
+    final namingData = NamingData.of(context);
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
@@ -47,6 +49,8 @@ class ConverterBodyLayout extends StatelessWidget {
               secondValue: data.state.selection.second,
               thirdValue: data.state.selection.third,
               onChanged: data.onSelectionChanged,
+              onChangeStart: namingData?.onSelectionStart,
+              onChangeEnd: namingData?.onSelectionEnd,
               step: data.state.converterStep,
               controller: data.slidersController,
             ),

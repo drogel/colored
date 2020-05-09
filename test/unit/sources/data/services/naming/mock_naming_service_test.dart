@@ -19,7 +19,7 @@ void main() {
   group("Given a MockNamingService", () {
     group("when fetchNaming is called for any hexColor", () {
       test("then expected sample color is retrieved", () async {
-        final namingResponse = await namingService.fetchNaming(hexColor: "");
+        final namingResponse = await namingService.getNaming(hexColor: "");
         final result = namingResponse.result;
         expect(namingResponse.response, ApiResponse.ok);
         expect(result.hex, "#212121");
