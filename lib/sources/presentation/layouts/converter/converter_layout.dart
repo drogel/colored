@@ -13,8 +13,7 @@ class ConverterLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
-    final color = data.state.color;
-    final selection = ColorSelection.fromColor(color);
+    final selection = data.state.selection;
     final namingData = NamingData.of(context);
     final localization = Localization.of(context).converter;
     return Scaffold(
@@ -23,7 +22,7 @@ class ConverterLayout extends StatelessWidget {
       ),
       body: ConverterBodyLayout(
         background: SwipingColorContainer(
-          color: color,
+          color: data.state.color,
           onColorSwipedVertical: data.onColorSwipedVertical,
           onColorSwipedHorizontal: data.onColorSwipedHorizontal,
           onColorSwipeEnd: () => namingData.onSelectionEnd(selection),

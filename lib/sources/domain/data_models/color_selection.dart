@@ -18,13 +18,6 @@ class ColorSelection {
     );
   }
 
-  factory ColorSelection.fromColor(Color color) {
-    final first = color.red / decimal8Bit;
-    final second = color.green / decimal8Bit;
-    final third = color.blue / decimal8Bit;
-    return ColorSelection(first: first, second: second, third: third);
-  }
-
   const ColorSelection._({
     @required this.first,
     @required this.second,
