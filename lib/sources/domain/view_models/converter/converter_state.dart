@@ -38,22 +38,31 @@ class ConverterState {
 }
 
 class Shrinking extends ConverterState {
-  const Shrinking({
-    @required Color color,
-    @required double converterStep,
-    @required ColorSelection selection,
-    @required Map<Format, String> formatData,
-  }) : super(
-          color: color,
-          converterStep: converterStep,
-          selection: selection,
-          formatData: formatData,
+  Shrinking(ConverterState state)
+      : super(
+          color: state.color,
+          converterStep: state.converterStep,
+          selection: state.selection,
+          formatData: state.formatData,
         );
+}
 
-  factory Shrinking.fromState(ConverterState state) => Shrinking(
-        color: state.color,
-        converterStep: state.converterStep,
-        selection: state.selection,
-        formatData: state.formatData,
-      );
+class SelectionEnded extends ConverterState {
+  SelectionEnded(ConverterState state)
+      : super(
+          color: state.color,
+          converterStep: state.converterStep,
+          selection: state.selection,
+          formatData: state.formatData,
+        );
+}
+
+class SelectionStarted extends ConverterState {
+  SelectionStarted(ConverterState state)
+      : super(
+          color: state.color,
+          converterStep: state.converterStep,
+          selection: state.selection,
+          formatData: state.formatData,
+        );
 }

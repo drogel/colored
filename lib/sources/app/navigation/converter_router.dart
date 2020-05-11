@@ -22,10 +22,10 @@ class ConverterRouter implements FlowRouter {
   }
 
   Route _buildConverter(RouteSettings settings) => FadeOutRoute(
-        builder: (_) => const NamingPage(
-          injector: NamingInjector(),
-          child: ConverterPage(
-            injector: ConverterInjector(),
+        builder: (_) => const ConverterPage(
+          injector: ConverterInjector(),
+          child: NamingPage(
+            injector: NamingInjector(),
             child: ConverterLayout(),
           ),
         ),

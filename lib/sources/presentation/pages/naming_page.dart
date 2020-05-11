@@ -1,3 +1,5 @@
+import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
+import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
@@ -30,13 +32,18 @@ class _NamingPageState extends State<NamingPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    final state = ConverterData.of(context).state;
+    _handleConverterStateChange(state);
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) => StreamBuilder<NamingState>(
         initialData: _viewModel.initialData,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => NamingData(
           state: snapshot.data,
-          onSelectionStart: _viewModel.notifyNamingChange,
-          onSelectionEnd: _viewModel.fetchNaming,
           child: widget.child,
         ),
       );
@@ -45,5 +52,17 @@ class _NamingPageState extends State<NamingPage> {
   void dispose() {
     _viewModel.dispose();
     super.dispose();
+  }
+
+  void _handleConverterStateChange(ConverterState state) {
+    print(state.runtimeType);
+    switch (state.runtimeType) {
+      case SelectionStarted:
+        _viewModel.notifyNamingChange(state.selection);
+        break;
+      case SelectionEnded:
+        _viewModel.fetchNaming(state.selection);
+        break;
+    }
   }
 }

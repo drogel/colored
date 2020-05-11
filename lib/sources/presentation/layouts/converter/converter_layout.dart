@@ -1,7 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
-import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_body_layout.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
 import 'package:colored/sources/presentation/widgets/texts/naming_cross_fade_text.dart';
@@ -14,7 +12,6 @@ class ConverterLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
     final selection = data.state.selection;
-    final namingData = NamingData.of(context);
     final localization = Localization.of(context).converter;
     return Scaffold(
       appBar: AppBar(
@@ -25,8 +22,8 @@ class ConverterLayout extends StatelessWidget {
           color: data.state.color,
           onColorSwipedVertical: data.onColorSwipedVertical,
           onColorSwipedHorizontal: data.onColorSwipedHorizontal,
-          onColorSwipeEnd: () => namingData.onSelectionEnd(selection),
-          onColorSwipeStart: () => namingData.onSelectionStart(selection),
+          onColorSwipeEnd: () => data.onSelectionEnd(selection),
+          onColorSwipeStart: () => data.onSelectionStart(selection),
         ),
       ),
     );

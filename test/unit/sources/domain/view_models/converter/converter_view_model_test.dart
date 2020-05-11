@@ -45,7 +45,7 @@ void main() {
           },
         );
         stateController.stream.listen((state) => expect(state, expected));
-        viewModel.notifySelection(selection);
+        viewModel.notifySelectionChanged(selection);
       });
     });
 
@@ -256,7 +256,7 @@ void main() {
           second: 0.2,
           third: 0.4,
         );
-        final expected = Shrinking(
+        final expectedState = ConverterState(
           color: const Color.fromRGBO(0, 41, 92, 1),
           converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
@@ -271,6 +271,7 @@ void main() {
             Format.hsv: "213°, 100%, 36%"
           },
         );
+        final expected = Shrinking(expectedState);
         stateController.stream.listen((state) => expect(state, expected));
         viewModel.changeLightness(-20, selection);
       });
