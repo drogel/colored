@@ -23,7 +23,6 @@ class ConverterLayout extends StatelessWidget {
           onColorSwipedVertical: data.onColorSwipedVertical,
           onColorSwipedHorizontal: data.onColorSwipedHorizontal,
           onColorSwipeEnd: () => data.onSelectionEnd(selection),
-          onColorSwipeStart: () => data.onSelectionStart(selection),
         ),
       ),
     );

@@ -26,11 +26,12 @@ class NamingCrossFadeText extends StatelessWidget {
   Widget _buildText(NamingState state) {
     switch (state.runtimeType) {
       case Changing:
-        return Text("", key: UniqueKey());
+        return const Text("");
       case Named:
-        return Text((state as Named).name, key: UniqueKey());
+        final name = (state as Named).name;
+        return Text(name, key: Key(name));
       default:
-        return Text(defaultText, key: UniqueKey());
+        return Text(defaultText);
     }
   }
 }

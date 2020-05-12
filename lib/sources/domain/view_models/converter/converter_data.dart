@@ -15,19 +15,16 @@ class ConverterData extends InheritedWidget {
     @required this.onColorSwipedHorizontal,
     @required this.onFormatSelection,
     @required this.displayedFormats,
-    @required this.onSelectionStart,
     @required this.onSelectionEnd,
     this.slidersController,
     Widget child,
     Key key,
   })  : assert(state != null),
         assert(onSelectionEnd != null),
-        assert(onSelectionStart != null),
         super(key: key, child: child);
 
   final ConverterState state;
   final void Function(ColorSelection) onSelectionChanged;
-  final void Function(ColorSelection) onSelectionStart;
   final void Function(ColorSelection) onSelectionEnd;
   final bool Function(String, Format) clipboardShouldFail;
   final void Function(String, Format) onClipboardRetrieved;

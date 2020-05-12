@@ -55,11 +55,7 @@ class _NamingPageState extends State<NamingPage> {
   }
 
   void _handleConverterStateChange(ConverterState state) {
-    print(state.runtimeType);
     switch (state.runtimeType) {
-      case SelectionStarted:
-        _viewModel.notifyNamingChange(state.selection);
-        break;
       case SelectionEnded:
         _viewModel.fetchNaming(state.selection);
         break;

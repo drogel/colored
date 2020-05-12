@@ -10,7 +10,6 @@ class ColorSliders extends StatefulWidget {
     @required this.secondValue,
     @required this.thirdValue,
     @required this.onChanged,
-    @required this.onChangeStart,
     @required this.onChangeEnd,
     @required this.step,
     this.controller,
@@ -19,7 +18,6 @@ class ColorSliders extends StatefulWidget {
         super(key: key);
 
   final void Function(ColorSelection) onChanged;
-  final void Function(ColorSelection) onChangeStart;
   final void Function(ColorSelection) onChangeEnd;
   final double firstValue;
   final double secondValue;
@@ -68,7 +66,6 @@ class _ColorSlidersState extends State<ColorSliders> {
               activeColor: colors.red,
               inactiveColor: colors.red.withOpacity(opacities.fadedColor),
               estimatedValueStep: widget.step,
-              onChangeStart: _onChangeStart,
               onChangeEnd: _onChangeEnd,
               onChanged: (value) {
                 _firstValue = value;
@@ -81,7 +78,6 @@ class _ColorSlidersState extends State<ColorSliders> {
               activeColor: colors.green,
               inactiveColor: colors.green.withOpacity(opacities.fadedColor),
               estimatedValueStep: widget.step,
-              onChangeStart: _onChangeStart,
               onChangeEnd: _onChangeEnd,
               onChanged: (value) {
                 _secondValue = value;
@@ -94,7 +90,6 @@ class _ColorSlidersState extends State<ColorSliders> {
               activeColor: colors.blue,
               inactiveColor: colors.blue.withOpacity(opacities.fadedColor),
               estimatedValueStep: widget.step,
-              onChangeStart: _onChangeStart,
               onChangeEnd: _onChangeEnd,
               onChanged: (value) {
                 _thirdValue = value;
@@ -111,12 +106,6 @@ class _ColorSlidersState extends State<ColorSliders> {
         second: _secondValue,
         third: _thirdValue,
       );
-
-  void _onChangeStart(double value) {
-    if (widget.onChangeStart != null) {
-      widget.onChangeStart(_getSelection());
-    }
-  }
 
   void _onChangeEnd(double value){
     if (widget.onChangeEnd != null) {

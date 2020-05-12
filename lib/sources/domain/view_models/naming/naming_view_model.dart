@@ -29,6 +29,7 @@ class NamingViewModel {
   NamingState get initialData => const Unknown();
 
   Future<void> fetchNaming(ColorSelection selection) async {
+    _stateController.sink.add(const Changing());
     final r = (selection.first * decimal8Bit).round();
     final g = (selection.second * decimal8Bit).round();
     final b = (selection.third * decimal8Bit).round();
@@ -42,9 +43,6 @@ class NamingViewModel {
       _stateController.sink.add(const Unknown());
     }
   }
-
-  void notifyNamingChange(ColorSelection selection) =>
-      _stateController.sink.add(const Changing());
 
   void dispose() => _stateController.close();
 }

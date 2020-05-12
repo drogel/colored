@@ -47,7 +47,6 @@ class ConverterBodyLayout extends StatelessWidget {
               secondValue: data.state.selection.second,
               thirdValue: data.state.selection.third,
               onChanged: data.onSelectionChanged,
-              onChangeStart: data.onSelectionStart,
               onChangeEnd: data.onSelectionEnd,
               step: data.state.converterStep,
               controller: data.slidersController,

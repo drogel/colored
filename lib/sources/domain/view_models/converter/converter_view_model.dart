@@ -56,11 +56,6 @@ class ConverterViewModel {
     _stateController.sink.add(state);
   }
 
-  void notifySelectionStarted(ColorSelection selection) {
-    final state = _convertToState(selection);
-    _stateController.sink.add(SelectionStarted(state));
-  }
-
   void notifySelectionEnded(ColorSelection selection) {
     final state = _convertToState(selection);
     _stateController.sink.add(SelectionEnded(state));
