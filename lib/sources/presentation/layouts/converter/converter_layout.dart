@@ -2,7 +2,7 @@ import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_body_layout.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
-import 'package:colored/sources/presentation/widgets/texts/naming_cross_fade_text.dart';
+import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/presentation/layouts/naming/naming_cross_fade_text.dart';
 import 'package:flutter/material.dart';
 
 class ConverterLayout extends StatelessWidget {
