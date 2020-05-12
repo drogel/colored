@@ -56,13 +56,3 @@ class SelectionEnded extends ConverterState {
           formatData: state.formatData,
         );
 }
-
-class SelectionStarted extends ConverterState {
-  SelectionStarted(ConverterState state)
-      : super(
-          color: state.color,
-          converterStep: state.converterStep,
-          selection: state.selection,
-          formatData: state.formatData,
-        );
-}
