@@ -1,0 +1,3 @@
+class NamesListState {
+  const NamesListState();
+}
