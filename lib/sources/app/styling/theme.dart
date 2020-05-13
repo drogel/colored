@@ -26,7 +26,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       textTheme: TextTheme(
         bodyText2: const TextStyle(color: colors.secondary),
         headline5: const TextStyle(color: colors.primary),
-        subtitle1: TextStyle(
+        subtitle1: const TextStyle(
           color: colors.primaryLight,
           fontFamily: fonts.header,
         ),

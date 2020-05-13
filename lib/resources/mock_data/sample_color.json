@@ -1,0 +1,16 @@
+{
+  "colors": [
+    {
+      "name": "Sample Color",
+      "hex": "#212121",
+      "rgb": {
+        "r": 33,
+        "g": 33,
+        "b": 33
+      },
+      "distance": 0,
+      "luminance": 22.062320231562225,
+      "requestedHex": "#212121"
+    }
+  ]
+}

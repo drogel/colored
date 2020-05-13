@@ -1,5 +1,6 @@
 import 'package:colored/sources/common/factors.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:vector_math/hash.dart';
 
 class ColorSelection {
   factory ColorSelection({
@@ -37,5 +38,5 @@ class ColorSelection {
       other.third == third;
 
   @override
-  int get hashCode => first.hashCode + second.hashCode + third.hashCode;
+  int get hashCode => hashObjects([first, second, third]);
 }

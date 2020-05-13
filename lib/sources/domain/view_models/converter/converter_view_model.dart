@@ -51,14 +51,19 @@ class ConverterViewModel {
 
   void init() => _deviceOrientationService.setAllOrientations();
 
-  void notifySelection(ColorSelection selection) {
+  void notifySelectionChanged(ColorSelection selection) {
     final state = _convertToState(selection);
     _stateController.sink.add(state);
   }
 
+  void notifySelectionEnded(ColorSelection selection) {
+    final state = _convertToState(selection);
+    _stateController.sink.add(SelectionEnded(state));
+  }
+
   void convertStringToColor(String string, Format format) {
     final selection = _parser.parseToFormat(string, format);
-    notifySelection(selection);
+    notifySelectionEnded(selection);
   }
 
   bool clipboardShouldFail(String string, Format format) =>
@@ -67,14 +72,14 @@ class ConverterViewModel {
   void rotateColor(double change, ColorSelection current) {
     final selection = _transformer.rotate(current, change);
     final state = _convertToState(selection);
-    _stateController.sink.add(Shrinking.fromState(state));
+    _stateController.sink.add(Shrinking(state));
   }
 
   void changeLightness(double change, ColorSelection current) {
     final tunedChange = change / _kTunedChangeFactor;
     final selection = _transformer.changeLightness(current, tunedChange);
     final state = _convertToState(selection);
-    _stateController.sink.add(Shrinking.fromState(state));
+    _stateController.sink.add(Shrinking(state));
   }
 
   void dispose() => _stateController.close();
