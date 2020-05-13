@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:colored/sources/app/styling/colors.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_helpers/color_converter/color_converter.dart';
-import 'package:colored/sources/data/color_helpers/color_parser/color_parser_type.dart';
-import 'package:colored/sources/data/color_helpers/color_transformer/color_transformer_type.dart';
+import 'package:colored/sources/data/color_helpers/color_converter/converter.dart';
+import 'package:colored/sources/data/color_helpers/color_parser/parser.dart';
+import 'package:colored/sources/data/color_helpers/color_transformer/transformer.dart';
 import 'package:colored/sources/data/services/device_orientation/device_orientation_service.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
@@ -18,9 +18,9 @@ const _kTunedChangeFactor = 2;
 class ConverterViewModel {
   const ConverterViewModel({
     @required StreamController<ConverterState> stateController,
-    @required ColorParserType colorParser,
-    @required ColorConverter colorConverter,
-    @required ColorTransformerType colorTransformer,
+    @required Parser colorParser,
+    @required Converter colorConverter,
+    @required Transformer colorTransformer,
     @required DeviceOrientationService deviceOrientationService,
   })  : assert(stateController != null),
         assert(colorParser != null),
@@ -33,9 +33,9 @@ class ConverterViewModel {
         _transformer = colorTransformer,
         _parser = colorParser;
 
-  final ColorParserType _parser;
-  final ColorConverter _converter;
-  final ColorTransformerType _transformer;
+  final Parser _parser;
+  final Converter _converter;
+  final Transformer _transformer;
   final StreamController<ConverterState> _stateController;
   final DeviceOrientationService _deviceOrientationService;
 
@@ -51,14 +51,19 @@ class ConverterViewModel {
 
   void init() => _deviceOrientationService.setAllOrientations();
 
-  void notifySelection(ColorSelection selection) {
+  void notifySelectionChanged(ColorSelection selection) {
     final state = _convertToState(selection);
     _stateController.sink.add(state);
   }
 
+  void notifySelectionEnded(ColorSelection selection) {
+    final state = _convertToState(selection);
+    _stateController.sink.add(SelectionEnded(state));
+  }
+
   void convertStringToColor(String string, Format format) {
     final selection = _parser.parseToFormat(string, format);
-    notifySelection(selection);
+    notifySelectionEnded(selection);
   }
 
   bool clipboardShouldFail(String string, Format format) =>
@@ -67,14 +72,14 @@ class ConverterViewModel {
   void rotateColor(double change, ColorSelection current) {
     final selection = _transformer.rotate(current, change);
     final state = _convertToState(selection);
-    _stateController.sink.add(Shrinking.fromState(state));
+    _stateController.sink.add(Shrinking(state));
   }
 
   void changeLightness(double change, ColorSelection current) {
     final tunedChange = change / _kTunedChangeFactor;
     final selection = _transformer.changeLightness(current, tunedChange);
     final state = _convertToState(selection);
-    _stateController.sink.add(Shrinking.fromState(state));
+    _stateController.sink.add(Shrinking(state));
   }
 
   void dispose() => _stateController.close();
@@ -84,21 +89,16 @@ class ConverterViewModel {
     final g = (selection.second * decimal8Bit).round();
     final b = (selection.third * decimal8Bit).round();
 
-    final color = Color.fromRGBO(r, g, b, 1);
-    final rgbString = _converter.convertToFormat(r, g, b, Format.rgb);
-    final hexString = _converter.convertToFormat(r, g, b, Format.hex);
-    final hslString = _converter.convertToFormat(r, g, b, Format.hsl);
-    final hsvString = _converter.convertToFormat(r, g, b, Format.hsv);
+    final formatData = {
+      for (var format in Format.values)
+        format: _converter.convertToFormat(r, g, b, format)
+    };
+
     return ConverterState(
-      color: color,
+      color: Color.fromRGBO(r, g, b, 1),
       converterStep: _kConverterStep,
       selection: selection,
-      formatData: {
-        Format.hex: hexString,
-        Format.rgb: rgbString,
-        Format.hsl: hslString,
-        Format.hsv: hsvString,
-      },
+      formatData: formatData,
     );
   }
 }
