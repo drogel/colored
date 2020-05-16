@@ -5,7 +5,7 @@ class NamesListLayout extends StatelessWidget {
   const NamesListLayout({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => GridView.builder(
+  Widget build(BuildContext context) => ListView.builder(
         itemCount: Colors.primaries.length,
         itemBuilder: (_, i) => ColorCard(
           backgroundColor: Colors.primaries[i],
