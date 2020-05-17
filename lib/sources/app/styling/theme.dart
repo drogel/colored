@@ -8,6 +8,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       primaryColor: colors.primary,
       primaryColorDark: colors.primaryVariant,
       accentColor: colors.secondary,
+      scaffoldBackgroundColor: colors.primaryLight,
       colorScheme: const ColorScheme(
         primary: colors.primary,
         primaryVariant: colors.primaryVariant,
@@ -20,23 +21,28 @@ ThemeData dark(BuildContext context) => ThemeData(
         onSecondary: colors.primary,
         onSurface: colors.secondary,
         onBackground: colors.secondary,
-        onError: colors.primaryLight,
+        onError: colors.text,
         brightness: Brightness.light,
       ),
-      textTheme: TextTheme(
-        bodyText2: const TextStyle(color: colors.secondary),
-        headline5: const TextStyle(color: colors.primary),
-        subtitle1: const TextStyle(
-          color: colors.primaryLight,
+      appBarTheme: const AppBarTheme(
+        elevation: 2,
+        color: colors.primary,
+      ),
+      textTheme: const TextTheme(
+        bodyText2: TextStyle(color: colors.secondary),
+        headline5: TextStyle(color: colors.primary),
+        subtitle1: TextStyle(
+          color: colors.text,
           fontFamily: fonts.header,
         ),
-        headline6: const TextStyle(color: colors.primaryLight),
-        headline4: const TextStyle(color: colors.primary),
+        headline6: TextStyle(color: colors.text),
+        headline4: TextStyle(color: colors.primary),
         headline2: TextStyle(
           color: colors.primary,
           fontWeight: FontWeight.bold,
           fontFamily: fonts.header,
         ),
+        caption: TextStyle(color: colors.text),
       ),
       highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
       canvasColor: colors.primaryDarkest,

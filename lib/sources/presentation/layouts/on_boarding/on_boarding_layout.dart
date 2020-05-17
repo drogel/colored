@@ -11,7 +11,7 @@ import 'package:colored/sources/app/styling/padding.dart' as padding;
 
 const _kSlidersScrollFractionTrigger = 1.66;
 const _kBackgroundColors = [
-  colors.primaryLight,
+  colors.text,
   colors.logoBlue,
   colors.logoRed,
 ];
