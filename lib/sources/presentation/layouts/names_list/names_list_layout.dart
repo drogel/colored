@@ -11,7 +11,7 @@ class NamesListLayout extends StatelessWidget {
         child: GridView.builder(
           padding: padding.lists,
           itemCount: Colors.primaries.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1,
           ),
