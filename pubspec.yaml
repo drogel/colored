@@ -53,3 +53,4 @@ flutter:
   assets:
     - lib/resources/graphics/
     - lib/resources/mock_data/
+    - lib/resources/data/
