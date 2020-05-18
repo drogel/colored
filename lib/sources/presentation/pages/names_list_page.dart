@@ -25,7 +25,7 @@ class _NamesListPageState extends State<NamesListPage> {
 
   @override
   void initState() {
-    _viewModel = widget.injector.injectViewModel();
+    _viewModel = widget.injector.injectViewModel()..init();
     super.initState();
   }
 
