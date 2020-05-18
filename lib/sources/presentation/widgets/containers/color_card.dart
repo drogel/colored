@@ -15,25 +15,27 @@ class ColorCard extends StatelessWidget {
   final String subtitle;
 
   @override
-  Widget build(BuildContext context) => Card(
-        elevation: 1,
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radii.medium),
-        ),
-        color: backgroundColor,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: <Widget>[
-            Container(
-              color:
-                  Theme.of(context).primaryColor.withOpacity(opacities.overlay),
-              child: ListTile(
-                title: Text(title),
-                subtitle: Text(subtitle),
-              ),
+  Widget build(BuildContext context) {
+    final primaryColorDark = Theme.of(context).primaryColorDark;
+    return Card(
+      elevation: 1,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(radii.medium),
+      ),
+      color: backgroundColor,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: <Widget>[
+          Container(
+            color: primaryColorDark.withOpacity(opacities.overlay),
+            child: ListTile(
+              title: Text(title),
+              subtitle: Text(subtitle),
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -8,7 +8,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       primaryColor: colors.primary,
       primaryColorDark: colors.primaryVariant,
       accentColor: colors.secondary,
-      scaffoldBackgroundColor: colors.primaryLight,
+      scaffoldBackgroundColor: colors.primary,
       colorScheme: const ColorScheme(
         primary: colors.primary,
         primaryVariant: colors.primaryVariant,
@@ -26,7 +26,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       ),
       appBarTheme: const AppBarTheme(
         elevation: 2,
-        color: colors.primary,
+        color: colors.primaryVariant,
       ),
       textTheme: const TextTheme(
         bodyText2: TextStyle(color: colors.secondary),
