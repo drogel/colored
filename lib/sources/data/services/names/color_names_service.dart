@@ -14,7 +14,7 @@ class ColorNamesService implements NamesService {
     }
 
     final filtered = _colorNames;
-    filtered.removeWhere((key, value) => !value.contains(searchString));
+    filtered.removeWhere((_, name) => !_containsSearch(name, searchString));
     return filtered;
   }
 
@@ -23,4 +23,10 @@ class ColorNamesService implements NamesService {
     final colorNamesStr = await rootBundle.loadString(paths.colorNames);
     _colorNames = Map<String, String>.from(jsonDecode(colorNamesStr));
   }
+
+  @override
+  void dispose() => _colorNames = null;
+
+  bool _containsSearch(String hexColor, String searchString) =>
+      hexColor.toLowerCase().contains(searchString.toLowerCase());
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
-import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:flutter/foundation.dart';
 
 class NamesListViewModel {
@@ -25,5 +24,13 @@ class NamesListViewModel {
     await _namesService.loadNames();
   }
 
-  void dispose() => _stateController.close();
+  void searchColorName(String searchString) {
+    final colorNamesResult = _namesService.fetchNamesContaining(searchString);
+    _stateController.sink.add(Found(colorNamesResult));
+  }
+
+  void dispose() {
+    _stateController.close();
+    _namesService.dispose();
+  }
 }
