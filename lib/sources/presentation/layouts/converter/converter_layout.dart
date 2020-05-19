@@ -27,17 +27,13 @@ class _ConverterLayoutState extends State<ConverterLayout> {
         title: NamingCrossFadeText(defaultText: localization.colorConverter),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () => setState(() => isSearching = !isSearching))
+            icon: Icon(Icons.search),
+            onPressed: () => setState(() => isSearching = !isSearching),
+          )
         ],
       ),
       body: PageTransitionSwitcher(
-        transitionBuilder: (child, animation, secondaryAnimation) =>
-            FadeThroughTransition(
-          animation: animation,
-          secondaryAnimation: secondaryAnimation,
-          child: child,
-        ),
+        transitionBuilder: _buildTransition,
         child: isSearching
             ? const NamesListLayout()
             : ConverterBodyLayout(
@@ -51,4 +47,12 @@ class _ConverterLayoutState extends State<ConverterLayout> {
       ),
     );
   }
+
+  Widget _buildTransition(Widget child, Animation<double> primaryAnimation,
+          Animation<double> secondaryAnimation) =>
+      FadeThroughTransition(
+        animation: primaryAnimation,
+        secondaryAnimation: secondaryAnimation,
+        child: child,
+      );
 }
