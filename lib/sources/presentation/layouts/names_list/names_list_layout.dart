@@ -1,25 +1,21 @@
-import 'package:colored/sources/app/styling/padding.dart' as padding;
-import 'package:colored/sources/presentation/widgets/containers/color_card.dart';
+import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
+import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
+import 'package:colored/sources/presentation/layouts/names_list/names_list_grid.dart';
+import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
 import 'package:flutter/material.dart';
 
 class NamesListLayout extends StatelessWidget {
   const NamesListLayout({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: GridView.builder(
-          padding: padding.lists,
-          itemCount: Colors.primaries.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1,
-          ),
-          itemBuilder: (_, i) => ColorCard(
-            backgroundColor: Colors.primaries[i],
-            title: "Test color",
-            subtitle: "#34B4F5",
-          ),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final state = NamesListData.of(context).state;
+    switch (state.runtimeType) {
+      case Found:
+        final foundState = state as Found;
+        return NamesListGrid(namedColors: foundState.namedColors);
+      default:
+        return const BackgroundContainer();
+    }
+  }
 }

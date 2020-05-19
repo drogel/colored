@@ -24,8 +24,8 @@ class NamesListViewModel {
   Future<void> init() => _namesService.loadNames();
 
   void searchColorName(String searchString) {
-    final colorNamesMap = _namesService.fetchNamesContaining(searchString);
-    final namedColors = colorNamesMap.entries.map(_convertToNamedColor);
+    final namesMap = _namesService.fetchNamesContaining(searchString);
+    final namedColors = namesMap.entries.map(_convertToNamedColor).toList();
     _stateController.sink.add(Found(namedColors));
   }
 
@@ -35,5 +35,5 @@ class NamesListViewModel {
   }
 
   NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
-      NamedColor(name: entry.value, hex: entry.key);
+      NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
 }
