@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:colored/sources/data/services/names/names_service.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
 import 'package:flutter/foundation.dart';
 
@@ -20,17 +21,19 @@ class NamesListViewModel {
 
   NamesListState get initialData => const Busy();
 
-  Future<void> init() async {
-    await _namesService.loadNames();
-  }
+  Future<void> init() => _namesService.loadNames();
 
   void searchColorName(String searchString) {
-    final colorNamesResult = _namesService.fetchNamesContaining(searchString);
-    _stateController.sink.add(Found(colorNamesResult));
+    final colorNamesMap = _namesService.fetchNamesContaining(searchString);
+    final namedColors = colorNamesMap.entries.map(_convertToNamedColor);
+    _stateController.sink.add(Found(namedColors));
   }
 
   void dispose() {
     _stateController.close();
     _namesService.dispose();
   }
+
+  NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
+      NamedColor(name: entry.value, hex: entry.key);
 }

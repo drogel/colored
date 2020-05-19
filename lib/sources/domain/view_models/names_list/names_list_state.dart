@@ -1,3 +1,5 @@
+import 'package:colored/sources/domain/data_models/named_color.dart';
+
 class NamesListState {
   const NamesListState();
 }
@@ -7,7 +9,7 @@ class Busy extends NamesListState {
 }
 
 class Found extends NamesListState {
-  const Found(this.colorsMap);
+  const Found(this.namedColors);
 
-  final Map<String, String> colorsMap;
+  final List<NamedColor> namedColors;
 }

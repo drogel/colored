@@ -16,7 +16,7 @@ class NamingServiceSuccessStub implements NamingService {
   @override
   Future<NamingResponse> getNaming({String hexColor}) async =>
       const NamingResponse(
-        result: NamingResult(name: name),
+        result: NamingResult(name: name, hex: "testHex"),
         response: ApiResponse.ok,
       );
 }
