@@ -25,7 +25,7 @@ ThemeData dark(BuildContext context) => ThemeData(
         brightness: Brightness.light,
       ),
       appBarTheme: const AppBarTheme(
-        elevation: 2,
+        elevation: 6,
         color: colors.primaryVariant,
       ),
       textTheme: const TextTheme(

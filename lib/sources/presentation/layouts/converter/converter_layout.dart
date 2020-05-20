@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_body_layout.dart';
+import 'package:colored/sources/presentation/layouts/names_list/color_names_search_field.dart';
 import 'package:colored/sources/presentation/layouts/names_list/names_list_layout.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
 import 'package:colored/sources/presentation/layouts/naming/naming_cross_fade_text.dart';
@@ -24,7 +25,9 @@ class _ConverterLayoutState extends State<ConverterLayout> {
     final localization = Localization.of(context).converter;
     return Scaffold(
       appBar: AppBar(
-        title: NamingCrossFadeText(defaultText: localization.colorConverter),
+        title: isSearching
+            ? const ColorNamesSearchField()
+            : NamingCrossFadeText(defaultText: localization.colorConverter),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),

@@ -13,8 +13,8 @@ class ColorNamesService implements NamesService {
       return {};
     }
 
-    final filtered = _colorNames;
-    filtered.removeWhere((_, name) => !_containsSearch(name, searchString));
+    final filtered = Map<String, String>.from(_colorNames)
+      ..removeWhere((_, name) => !_containsSearch(name, searchString));
     return filtered;
   }
 
@@ -27,6 +27,6 @@ class ColorNamesService implements NamesService {
   @override
   void dispose() => _colorNames = null;
 
-  bool _containsSearch(String hexColor, String searchString) =>
-      hexColor.toLowerCase().contains(searchString.toLowerCase());
+  bool _containsSearch(String name, String searchString) =>
+      name.toLowerCase().contains(searchString.toLowerCase());
 }

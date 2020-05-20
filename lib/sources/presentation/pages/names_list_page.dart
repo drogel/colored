@@ -35,6 +35,7 @@ class _NamesListPageState extends State<NamesListPage> {
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => NamesListData(
           state: snapshot.data,
+          onSearchChanged: _viewModel.searchColorName,
           child: widget.child,
         ),
       );

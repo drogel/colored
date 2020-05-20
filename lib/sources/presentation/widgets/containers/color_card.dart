@@ -18,7 +18,7 @@ class ColorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final primaryColorDark = Theme.of(context).primaryColorDark;
     return Card(
-      elevation: 1,
+      elevation: 4,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radii.medium),

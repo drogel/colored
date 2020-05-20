@@ -24,6 +24,10 @@ class NamesListViewModel {
   Future<void> init() => _namesService.loadNames();
 
   void searchColorName(String searchString) {
+    if (searchString.length < 3) {
+      return _stateController.sink.add(const Busy());
+    }
+
     final namesMap = _namesService.fetchNamesContaining(searchString);
     final namedColors = namesMap.entries.map(_convertToNamedColor).toList();
     _stateController.sink.add(Found(namedColors));
