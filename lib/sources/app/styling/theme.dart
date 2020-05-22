@@ -27,6 +27,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       appBarTheme: const AppBarTheme(
         elevation: 6,
         color: colors.primaryVariant,
+        actionsIconTheme: IconThemeData(color: colors.text),
       ),
       textTheme: const TextTheme(
         bodyText2: TextStyle(color: colors.secondary),

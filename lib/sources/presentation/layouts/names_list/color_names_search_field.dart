@@ -1,14 +1,39 @@
+import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
 import 'package:flutter/material.dart';
 
 class ColorNamesSearchField extends StatelessWidget {
-  const ColorNamesSearchField({Key key}) : super(key: key);
+  const ColorNamesSearchField({this.prefixIcon, Key key}) : super(key: key);
+
+  final Widget prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     final data = NamesListData.of(context);
-    return TextField(
-      onChanged: data.onSearchChanged,
+    final theme = Theme.of(context);
+    final borderRadius = BorderRadius.circular(radii.medium);
+    return Material(
+      borderRadius: borderRadius,
+      elevation: theme.appBarTheme.elevation,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: <Widget>[
+          TextField(
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              filled: true,
+              fillColor: theme.appBarTheme.color,
+              prefixIcon: prefixIcon,
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(style: BorderStyle.none, width: 0),
+                borderRadius: borderRadius,
+              ),
+            ),
+            onChanged: data.onSearchChanged,
+          ),
+          prefixIcon,
+        ],
+      ),
     );
   }
 }
