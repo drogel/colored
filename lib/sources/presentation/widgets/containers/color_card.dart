@@ -1,6 +1,7 @@
 import 'package:colored/sources/app/styling/padding.dart' as paddings;
 import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:colored/sources/app/styling/opacities.dart' as opacities;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -9,12 +10,14 @@ class ColorCard extends StatelessWidget {
     @required this.backgroundColor,
     @required this.title,
     @required this.subtitle,
+    this.onPressed,
     Key key,
   }) : super(key: key);
 
   final Color backgroundColor;
   final String title;
   final String subtitle;
+  final void Function(Color) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class ColorCard extends StatelessWidget {
     return Padding(
       padding: paddings.card,
       child: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => onPressed(backgroundColor),
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radii.medium),

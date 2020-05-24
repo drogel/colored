@@ -5,7 +5,9 @@ import 'package:colored/sources/presentation/widgets/containers/background_conta
 import 'package:flutter/material.dart';
 
 class NamesListLayout extends StatelessWidget {
-  const NamesListLayout({Key key}) : super(key: key);
+  const NamesListLayout({this.onColorCardPressed, Key key}) : super(key: key);
+
+  final void Function(Color) onColorCardPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,10 @@ class NamesListLayout extends StatelessWidget {
     switch (state.runtimeType) {
       case Found:
         final foundState = state as Found;
-        return NamesListGrid(namedColors: foundState.namedColors);
+        return NamesListGrid(
+          namedColors: foundState.namedColors,
+          onCardPressed: onColorCardPressed,
+        );
       default:
         return const BackgroundContainer();
     }

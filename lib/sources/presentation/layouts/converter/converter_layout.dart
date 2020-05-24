@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:colored/sources/app/styling/durations.dart' as durations;
+import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_app_bar.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_body_layout.dart';
@@ -30,7 +31,7 @@ class _ConverterLayoutState extends State<ConverterLayout> {
         duration: durations.longPresenting,
         transitionBuilder: _buildPageTransition,
         child: isSearching
-            ? const NamesListLayout()
+            ? NamesListLayout(onColorCardPressed: _onColorCardPressed)
             : ConverterBodyLayout(
                 background: SwipingColorContainer(
                   color: data.state.color,
@@ -58,4 +59,11 @@ class _ConverterLayoutState extends State<ConverterLayout> {
       );
 
   void _updateSearchingState() => setState(() => isSearching = !isSearching);
+
+  void _onColorCardPressed(Color color) {
+    final selection = ColorSelection.fromColor(color);
+    FocusScope.of(context).unfocus();
+    ConverterData.of(context).onSelectionEnd(selection);
+    _updateSearchingState();
+  }
 }

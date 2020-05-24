@@ -6,9 +6,14 @@ import 'package:colored/sources/presentation/widgets/containers/color_card.dart'
 import 'package:flutter/material.dart';
 
 class NamesListGrid extends StatelessWidget {
-  const NamesListGrid({@required this.namedColors, Key key}) : super(key: key);
+  const NamesListGrid({
+    @required this.namedColors,
+    this.onCardPressed,
+    Key key,
+  }) : super(key: key);
 
   final List<NamedColor> namedColors;
+  final void Function(Color) onCardPressed;
 
   @override
   Widget build(BuildContext context) => BackgroundContainer(
@@ -21,6 +26,7 @@ class NamesListGrid extends StatelessWidget {
           ),
           itemBuilder: (_, i) => ColorCard(
             backgroundColor: HexColor.fromHex(namedColors[i].hex),
+            onPressed: onCardPressed,
             title: namedColors[i].name,
             subtitle: namedColors[i].hex,
           ),
