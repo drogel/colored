@@ -13,7 +13,7 @@ class NamesListGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BackgroundContainer(
         child: GridView.builder(
-          padding: padding.lists,
+          padding: padding.list,
           itemCount: namedColors.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
