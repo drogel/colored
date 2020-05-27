@@ -19,13 +19,17 @@ class ColorNamesSearchField extends StatelessWidget {
         alignment: Alignment.centerLeft,
         children: <Widget>[
           TextField(
+            style: theme.textTheme.headline6,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.zero,
               filled: true,
               fillColor: theme.appBarTheme.color,
               prefixIcon: prefixIcon,
               border: OutlineInputBorder(
-                borderSide: const BorderSide(style: BorderStyle.none, width: 0),
+                borderSide: const BorderSide(
+                  style: BorderStyle.none,
+                  width: 0,
+                ),
                 borderRadius: borderRadius,
               ),
             ),

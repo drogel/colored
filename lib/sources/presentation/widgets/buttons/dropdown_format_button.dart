@@ -21,7 +21,11 @@ class DropdownFormatButton extends StatelessWidget {
   final String title;
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Theme(
+      data: theme.copyWith(canvasColor: theme.buttonColor),
+      child: Column(
         children: <Widget>[
           DropdownButton<String>(
             value: format.rawValue,
@@ -42,5 +46,7 @@ class DropdownFormatButton extends StatelessWidget {
             content: content,
           ),
         ],
-      );
+      ),
+    );
+  }
 }

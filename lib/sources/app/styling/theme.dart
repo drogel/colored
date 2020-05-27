@@ -1,6 +1,7 @@
 import 'package:colored/sources/app/styling/colors.dart' as colors;
 import 'package:colored/sources/app/styling/fonts.dart' as fonts;
 import 'package:colored/sources/app/styling/opacities.dart' as opacities;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ThemeData dark(BuildContext context) => ThemeData(
@@ -9,6 +10,10 @@ ThemeData dark(BuildContext context) => ThemeData(
       primaryColorDark: colors.primaryVariant,
       accentColor: colors.secondary,
       scaffoldBackgroundColor: colors.primary,
+      cursorColor: colors.secondary,
+      indicatorColor: colors.secondary,
+      primarySwatch: colors.swatch,
+      textSelectionHandleColor: colors.secondary,
       colorScheme: const ColorScheme(
         primary: colors.primary,
         primaryVariant: colors.primaryVariant,
@@ -32,10 +37,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       textTheme: const TextTheme(
         bodyText2: TextStyle(color: colors.secondary),
         headline5: TextStyle(color: colors.primary),
-        subtitle1: TextStyle(
-          color: colors.text,
-          fontFamily: fonts.header,
-        ),
+        subtitle1: TextStyle(color: colors.text, fontFamily: fonts.header),
         headline6: TextStyle(color: colors.text),
         headline4: TextStyle(color: colors.primary),
         headline2: TextStyle(
@@ -43,11 +45,17 @@ ThemeData dark(BuildContext context) => ThemeData(
           fontWeight: FontWeight.bold,
           fontFamily: fonts.header,
         ),
-        caption: TextStyle(color: colors.text),
+        caption: TextStyle(color: colors.textVariant),
       ),
       highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
-      canvasColor: colors.primaryDarkest,
+      canvasColor: colors.textVariant,
       splashColor: colors.secondary.withOpacity(opacities.fadedColor),
       buttonColor: colors.primaryDark,
       iconTheme: const IconThemeData(color: colors.secondary, size: 32),
+      cupertinoOverrideTheme: const CupertinoThemeData(
+        primaryColor: colors.secondary,
+        primaryContrastingColor: colors.primary,
+        scaffoldBackgroundColor: colors.primary,
+        barBackgroundColor: colors.primaryVariant,
+      ),
     );

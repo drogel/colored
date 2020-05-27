@@ -17,8 +17,9 @@ class Colored extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
           const ColoredLocalizationDelegate(),
+          GlobalWidgetsLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: const [Locale("en"), Locale("es")],
         title: "Colored",

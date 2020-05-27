@@ -23,6 +23,7 @@ class _ConverterLayoutState extends State<ConverterLayout> {
     final data = ConverterData.of(context);
     final selection = data.state.selection;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: ConverterAppBar(
         isSearching: isSearching,
         onSearchStateChange: _updateSearchingState,
