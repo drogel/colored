@@ -22,7 +22,7 @@ const Color secondary = Color.fromRGBO(128, 203, 196, 1);
 const Color secondaryDark = Color.fromRGBO(88, 124, 121, 1);
 
 const Color text = Color.fromRGBO(250, 253, 252, 1);
-const Color textVariant = Color.fromRGBO(178, 181, 180, 1);
+const Color textVariant = Color.fromRGBO(212, 215, 214, 1);
 
 const Color errorDark = Color.fromRGBO(102, 35, 37, 1);
 const Color error = Color.fromRGBO(252, 86, 89, 1);

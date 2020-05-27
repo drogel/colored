@@ -22,6 +22,7 @@ class ColorNamesSearchField extends StatelessWidget {
         children: <Widget>[
           TextField(
             style: theme.textTheme.headline6,
+            textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
               hintText: localization.search,
               contentPadding: EdgeInsets.zero,
