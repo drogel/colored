@@ -1,4 +1,5 @@
 import 'package:colored/resources/localization/l10ns/converter_l10ns.dart';
+import 'package:colored/resources/localization/l10ns/names_list_l10ns.dart';
 import 'package:colored/resources/localization/l10ns/on_boarding_l10ns.dart';
 
 abstract class LocaleCodeAware {
@@ -20,4 +21,5 @@ mixin LocalizationProvider on LocaleCodeAware {
   String get appTitle => _values[localeCode]['appTitle'];
   OnBoardingL10ns get onBoarding => OnBoardingL10ns(localeCode);
   ConverterL10ns get converter => ConverterL10ns(localeCode);
+  NamesListL10ns get namesList => NamesListL10ns(localeCode);
 }

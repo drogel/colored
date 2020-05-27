@@ -18,7 +18,7 @@ class ConverterAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) => AnimatedSwitcher(
         duration: durations.mediumPresenting,
-        switchInCurve: curves.exiting,
+        switchInCurve: curves.incoming,
         child: isSearching
             ? ColorNamesAppBar(onBackPressed: onSearchStateChange)
             : NamingAppBar(onSearchPressed: onSearchStateChange),

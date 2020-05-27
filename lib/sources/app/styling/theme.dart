@@ -14,6 +14,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       indicatorColor: colors.secondary,
       primarySwatch: colors.swatch,
       textSelectionHandleColor: colors.secondary,
+      hintColor: colors.textVariant,
       colorScheme: const ColorScheme(
         primary: colors.primary,
         primaryVariant: colors.primaryVariant,
@@ -31,7 +32,7 @@ ThemeData dark(BuildContext context) => ThemeData(
       ),
       appBarTheme: const AppBarTheme(
         elevation: 6,
-        color: colors.primaryVariant,
+        color: colors.primary,
         actionsIconTheme: IconThemeData(color: colors.text),
       ),
       textTheme: const TextTheme(
@@ -56,6 +57,6 @@ ThemeData dark(BuildContext context) => ThemeData(
         primaryColor: colors.secondary,
         primaryContrastingColor: colors.primary,
         scaffoldBackgroundColor: colors.primary,
-        barBackgroundColor: colors.primaryVariant,
+        barBackgroundColor: colors.primary,
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class ColorNamesSearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = NamesListData.of(context);
+    final localization = Localization.of(context).namesList;
     final theme = Theme.of(context);
     final borderRadius = BorderRadius.circular(radii.medium);
     return Material(
@@ -21,9 +23,10 @@ class ColorNamesSearchField extends StatelessWidget {
           TextField(
             style: theme.textTheme.headline6,
             decoration: InputDecoration(
+              hintText: localization.search,
               contentPadding: EdgeInsets.zero,
               filled: true,
-              fillColor: theme.appBarTheme.color,
+              fillColor: theme.colorScheme.primaryVariant,
               prefixIcon: prefixIcon,
               border: OutlineInputBorder(
                 borderSide: const BorderSide(
