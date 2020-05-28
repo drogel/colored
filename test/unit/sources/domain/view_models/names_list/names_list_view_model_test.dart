@@ -16,7 +16,8 @@ class NamesServiceStub implements NamesService {
   void dispose() {}
 
   @override
-  Map<String, String> fetchNamesContaining(String searchString) => namesMap;
+  Future<Map<String, String>> fetchNamesContaining(String searchString) async =>
+      namesMap;
 
   @override
   Future<void> loadNames() async {}

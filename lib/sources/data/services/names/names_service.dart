@@ -1,5 +1,5 @@
 abstract class NamesService {
-  Map<String, String> fetchNamesContaining(String searchString);
+  Future<Map<String, String>> fetchNamesContaining(String searchString);
 
   Future<void> loadNames();
 
