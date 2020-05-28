@@ -3,10 +3,24 @@ import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
 import 'package:flutter/material.dart';
 
-class ColorNamesSearchField extends StatelessWidget {
+class ColorNamesSearchField extends StatefulWidget {
   const ColorNamesSearchField({this.prefixIcon, Key key}) : super(key: key);
 
   final Widget prefixIcon;
+
+  @override
+  _ColorNamesSearchFieldState createState() => _ColorNamesSearchFieldState();
+}
+
+class _ColorNamesSearchFieldState extends State<ColorNamesSearchField> {
+  FocusNode _focusNode;
+
+  @override
+  void initState() {
+    _focusNode = FocusNode();
+    _focusNode.requestFocus();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +36,14 @@ class ColorNamesSearchField extends StatelessWidget {
         children: <Widget>[
           TextField(
             style: theme.textTheme.headline6,
+            focusNode: _focusNode,
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
               hintText: localization.search,
               contentPadding: EdgeInsets.zero,
               filled: true,
               fillColor: theme.colorScheme.primaryVariant,
-              prefixIcon: prefixIcon,
+              prefixIcon: widget.prefixIcon,
               border: OutlineInputBorder(
                 borderSide: const BorderSide(
                   style: BorderStyle.none,
@@ -39,7 +54,7 @@ class ColorNamesSearchField extends StatelessWidget {
             ),
             onChanged: data.onSearchChanged,
           ),
-          prefixIcon,
+          widget.prefixIcon,
         ],
       ),
     );

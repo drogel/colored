@@ -34,6 +34,7 @@ class NamesListLayout extends StatelessWidget {
     final localization = Localization.of(context).namesList;
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
+      constraints: const BoxConstraints.expand(),
       padding: const EdgeInsets.symmetric(
         horizontal: paddings.largeText,
         vertical: paddings.largeText / 2,
