@@ -2,22 +2,18 @@ import 'dart:convert';
 
 import 'package:colored/resources/asset_paths.dart' as paths;
 import 'package:colored/sources/data/services/names/names_service.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class ColorNamesService implements NamesService {
   Map<String, String> _colorNames;
 
   @override
-  Future<Map<String, String>> fetchNamesContaining(String search) async {
+  Map<String, String> fetchNamesContaining(String searchString) {
     if (_colorNames == null) {
       return {};
     }
 
-    final filtered = await compute<_ColorNamesSearchData, Map<String, String>>(
-      _filterSearchedNames,
-      _ColorNamesSearchData(search, _colorNames),
-    );
+    final filtered = _filterSearchedNames(searchString);
     return filtered;
   }
 
@@ -29,18 +25,11 @@ class ColorNamesService implements NamesService {
 
   @override
   void dispose() => _colorNames = null;
+
+  bool _containsSearch(String name, String searchString) =>
+      name.toLowerCase().contains(searchString.toLowerCase());
+
+  Map<String, String> _filterSearchedNames(String searchString) =>
+      Map<String, String>.from(_colorNames)
+        ..removeWhere((_, name) => !_containsSearch(name, searchString));
 }
-
-class _ColorNamesSearchData {
-  const _ColorNamesSearchData(this.search, this.colorNames);
-
-  final String search;
-  final Map<String, String> colorNames;
-}
-
-Map<String, String> _filterSearchedNames(_ColorNamesSearchData searchData) =>
-    Map<String, String>.from(searchData.colorNames)
-      ..removeWhere((_, name) => !_containsSearch(name, searchData.search));
-
-bool _containsSearch(String name, String searchString) =>
-    name.toLowerCase().contains(searchString.toLowerCase());

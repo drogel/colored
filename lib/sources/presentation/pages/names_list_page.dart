@@ -36,6 +36,7 @@ class _NamesListPageState extends State<NamesListPage> {
         builder: (_, snapshot) => NamesListData(
           state: snapshot.data,
           onSearchChanged: _viewModel.searchColorName,
+          onBackPressed: _viewModel.clearSearch,
           child: widget.child,
         ),
       );

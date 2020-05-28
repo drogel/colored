@@ -36,7 +36,7 @@ ThemeData dark(BuildContext context) => ThemeData(
         actionsIconTheme: IconThemeData(color: colors.text),
       ),
       textTheme: const TextTheme(
-        bodyText2: TextStyle(color: colors.secondary),
+        bodyText2: TextStyle(color: colors.text),
         headline5: TextStyle(color: colors.primary),
         subtitle1: TextStyle(color: colors.text, fontFamily: fonts.header),
         headline6: TextStyle(color: colors.text),

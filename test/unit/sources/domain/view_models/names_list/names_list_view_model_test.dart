@@ -16,8 +16,7 @@ class NamesServiceStub implements NamesService {
   void dispose() {}
 
   @override
-  Future<Map<String, String>> fetchNamesContaining(String searchString) async =>
-      namesMap;
+  Map<String, String> fetchNamesContaining(String searchString) => namesMap;
 
   @override
   Future<void> loadNames() async {}
@@ -45,9 +44,9 @@ void main() {
   });
 
   group("When initialData is called", () {
-    test("then a Busy state is received", () {
+    test("then a Pending state is received", () {
       final initialState = viewModel.initialData;
-      expect(initialState.runtimeType, Busy);
+      expect(initialState.runtimeType, Pending);
     });
   });
 
@@ -58,10 +57,19 @@ void main() {
     });
   });
 
-  group("when disponse is called", () {
+  group("when dispose is called", () {
     test("then namesService is asked to dispose", () {
       viewModel.dispose();
       verify(namesService.dispose());
+    });
+  });
+
+  group("When clearSearch is called", () {
+    test("then a Pending state is received", () {
+      stateController.stream.listen(
+            (event) => expect(event.runtimeType, Pending),
+      );
+      viewModel.clearSearch();
     });
   });
 
@@ -82,9 +90,9 @@ void main() {
     });
 
     group("when searchColorName is called", () {
-      test("with a searchString of lenght < 3, then Busy state is added", () {
+      test("with a searchString of lenght < 3, then Pending is added", () {
         stateController.stream.listen(
-          (event) => expect(event.runtimeType, Busy),
+          (event) => expect(event.runtimeType, Pending),
         );
         viewModel.searchColorName("se");
       });

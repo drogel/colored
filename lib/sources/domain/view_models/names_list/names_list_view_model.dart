@@ -19,19 +19,26 @@ class NamesListViewModel {
 
   Stream<NamesListState> get stateStream => _stateController.stream;
 
-  NamesListState get initialData => const Busy();
+  NamesListState get initialData => const Pending();
 
   Future<void> init() => _namesService.loadNames();
 
-  Future<void> searchColorName(String searchString) async {
+  void searchColorName(String searchString) {
     if (searchString.length < 3) {
-      return _stateController.sink.add(const Busy());
+      return _stateController.sink.add(const Pending());
     }
 
-    final namesMap = await _namesService.fetchNamesContaining(searchString);
+    final namesMap = _namesService.fetchNamesContaining(searchString);
     final namedColors = namesMap.entries.map(_convertToNamedColor).toList();
-    _stateController.sink.add(Found(namedColors));
+
+    if (namedColors.isEmpty) {
+      _stateController.sink.add(const NoneFound());
+    } else {
+      _stateController.sink.add(Found(namedColors));
+    }
   }
+
+  void clearSearch() => _stateController.sink.add(const Pending());
 
   void dispose() {
     _stateController.close();

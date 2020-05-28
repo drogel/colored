@@ -5,6 +5,7 @@ class NamesListData extends InheritedWidget {
   const NamesListData({
     @required this.state,
     @required this.onSearchChanged,
+    @required this.onBackPressed,
     @required Widget child,
     Key key,
   })  : assert(child != null),
@@ -13,6 +14,7 @@ class NamesListData extends InheritedWidget {
 
   final NamesListState state;
   final void Function(String) onSearchChanged;
+  final void Function() onBackPressed;
 
   static NamesListData of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: NamesListData);
