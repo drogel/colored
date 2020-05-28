@@ -1,5 +1,5 @@
-import 'package:colored/sources/app/navigation/converter_router.dart';
-import 'package:colored/sources/app/navigation/flow_router.dart';
+import 'package:colored/sources/app/navigation/routers/converter_router.dart';
+import 'package:colored/sources/app/navigation/routers/flow_router.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_layout.dart';

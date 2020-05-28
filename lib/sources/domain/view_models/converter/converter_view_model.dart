@@ -41,13 +41,16 @@ class ConverterViewModel {
 
   Stream<ConverterState> get stateStream => _stateController.stream;
 
-  ConverterState get initialData => _convertToState(
-        ColorSelection(
-          first: colors.primaryDark.red.toDouble() / decimal8Bit,
-          second: colors.primaryDark.green.toDouble() / decimal8Bit,
-          third: colors.primaryDark.blue.toDouble() / decimal8Bit,
-        ),
-      );
+  ConverterState get initialData {
+    const initialColor = colors.primaryDark;
+    return _convertToState(
+      ColorSelection(
+        first: initialColor.red.toDouble() / decimal8Bit,
+        second: initialColor.green.toDouble() / decimal8Bit,
+        third: initialColor.blue.toDouble() / decimal8Bit,
+      ),
+    );
+  }
 
   void init() => _deviceOrientationService.setAllOrientations();
 

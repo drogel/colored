@@ -1,6 +1,6 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/app/navigation/flow_router.dart';
-import 'package:colored/sources/app/navigation/on_boarding_router.dart';
+import 'package:colored/sources/app/navigation/routers/flow_router.dart';
+import 'package:colored/sources/app/navigation/routers/on_boarding_router.dart';
 import 'package:colored/sources/app/styling/theme.dart' as theme;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -17,8 +17,9 @@ class Colored extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
           const ColoredLocalizationDelegate(),
+          GlobalWidgetsLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: const [Locale("en"), Locale("es")],
         title: "Colored",

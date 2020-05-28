@@ -1,6 +1,5 @@
 import 'package:colored/sources/app/styling/radii.dart' as radii;
-import 'package:flutter/cupertino.dart';
-import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:flutter/material.dart';
 import 'package:colored/sources/app/styling/opacities.dart' as opacities;
 
 class OverlayContainer extends StatelessWidget {
@@ -14,22 +13,25 @@ class OverlayContainer extends StatelessWidget {
   final EdgeInsets padding;
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: padding,
-        decoration: BoxDecoration(
-          color: colors.primary.withOpacity(opacities.overlay),
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(radii.large),
-            topRight: Radius.circular(radii.large),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: colors.primaryVariant.withOpacity(opacities.shadow),
-              offset: const Offset(0, -2),
-              blurRadius: 4,
-            )
-          ],
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: colorScheme.primary.withOpacity(opacities.overlay),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(radii.large),
+          topRight: Radius.circular(radii.large),
         ),
-        child: child,
-      );
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.primary.withOpacity(opacities.shadow),
+            offset: const Offset(0, -2),
+            blurRadius: 4,
+          )
+        ],
+      ),
+      child: child,
+    );
+  }
 }

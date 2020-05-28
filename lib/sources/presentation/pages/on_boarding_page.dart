@@ -1,4 +1,4 @@
-import 'package:colored/sources/app/navigation/converter_router.dart';
+import 'package:colored/sources/app/navigation/routers/converter_router.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
