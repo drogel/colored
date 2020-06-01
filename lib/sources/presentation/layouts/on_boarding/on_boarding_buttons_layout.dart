@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_body_layout.dart';
 import 'package:flutter/material.dart';
-import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/styling/padding/padding_constants.dart' as padding;
+import 'package:colored/sources/app/styling/padding/padding_constants.dart' as padding;
 
 class OnBoardingButtonsLayout extends StatelessWidget {
   const OnBoardingButtonsLayout({Key key}) : super(key: key);
@@ -13,7 +13,7 @@ class OnBoardingButtonsLayout extends StatelessWidget {
     final localization = Localization.of(context).onBoarding;
     return OnBoardingBodyLayout(
       children: <Widget>[
-        const SizedBox(height: padding.large),
+        const SizedBox(height: padding.base),
         Flexible(
           flex: 4,
           child: Column(
@@ -30,7 +30,7 @@ class OnBoardingButtonsLayout extends StatelessWidget {
                 style: textTheme.headline5,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: padding.large),
+              const SizedBox(height: padding.base),
               AutoSizeText(
                 localization.tap,
                 maxLines: 1,

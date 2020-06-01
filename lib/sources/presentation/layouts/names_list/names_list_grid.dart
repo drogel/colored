@@ -1,6 +1,6 @@
 import 'package:colored/sources/common/extensions/hex_color.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/styling/padding/padding_constants.dart' as padding;
+import 'package:colored/sources/app/styling/padding/padding_constants.dart' as padding;
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/color_card.dart';
 import 'package:flutter/material.dart';

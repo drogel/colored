@@ -1,4 +1,4 @@
-import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/styling/padding/padding_constants.dart' as paddings;
+import 'package:colored/sources/app/styling/padding/padding_constants.dart' as paddings;
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
@@ -36,8 +36,8 @@ class NamesListLayout extends StatelessWidget {
       color: Theme.of(context).scaffoldBackgroundColor,
       constraints: const BoxConstraints.expand(),
       padding: const EdgeInsets.symmetric(
-        horizontal: paddings.large,
-        vertical: paddings.large / 2,
+        horizontal: paddings.base,
+        vertical: paddings.base / 2,
       ),
       child: Text(localization.noColorsFound),
     );

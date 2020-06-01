@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:colored/sources/app/styling/radii.dart' as radii;
-import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/styling/padding/padding_constants.dart' as paddings;
+import 'package:colored/sources/app/styling/padding/padding_constants.dart' as paddings;
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
