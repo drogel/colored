@@ -1,13 +1,18 @@
 import 'package:colored/sources/app/styling/colors/colored_color_scheme.dart';
 import 'package:colored/sources/app/styling/fonts.dart' as fonts;
-import 'package:colored/sources/app/styling/opacities.dart' as opacities;
+import 'package:colored/sources/app/styling/opacity/opacity_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ColoredThemeWrapper {
-  const ColoredThemeWrapper({@required this.colors}) : assert(colors != null);
+  const ColoredThemeWrapper({
+    @required this.colors,
+    @required this.opacity,
+  })  : assert(colors != null),
+        assert(opacity != null);
 
   final ColoredColorScheme colors;
+  final OpacityScheme opacity;
 
   ThemeData getThemeData() => ThemeData(
         fontFamily: fonts.body,
@@ -53,9 +58,9 @@ class ColoredThemeWrapper {
           ),
           caption: TextStyle(color: colors.textVariant),
         ),
-        highlightColor: colors.secondaryDark.withOpacity(opacities.shadow),
+        highlightColor: colors.secondaryDark.withOpacity(opacity.shadow),
         canvasColor: colors.textVariant,
-        splashColor: colors.secondary.withOpacity(opacities.fadedColor),
+        splashColor: colors.secondary.withOpacity(opacity.fadedColor),
         buttonColor: colors.primaryDark,
         iconTheme: IconThemeData(color: colors.secondary, size: 32),
         cupertinoOverrideTheme: CupertinoThemeData(

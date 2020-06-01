@@ -1,6 +1,6 @@
+import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:flutter/material.dart';
-import 'package:colored/sources/app/styling/opacities.dart' as opacities;
 
 class OverlayContainer extends StatelessWidget {
   const OverlayContainer({
@@ -15,17 +15,18 @@ class OverlayContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final opacity = OpacityData.of(context).opacityScheme;
     return Container(
       padding: padding,
       decoration: BoxDecoration(
-        color: colorScheme.primary.withOpacity(opacities.overlay),
+        color: colorScheme.primary.withOpacity(opacity.overlay),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(radii.large),
           topRight: Radius.circular(radii.large),
         ),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withOpacity(opacities.shadow),
+            color: colorScheme.primary.withOpacity(opacity.shadow),
             offset: const Offset(0, -2),
             blurRadius: 4,
           )
