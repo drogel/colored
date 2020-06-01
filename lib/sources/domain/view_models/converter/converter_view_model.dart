@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/color_converter/converter.dart';
 import 'package:colored/sources/data/color_helpers/color_parser/parser.dart';

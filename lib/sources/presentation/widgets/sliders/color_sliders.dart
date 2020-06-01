@@ -1,5 +1,5 @@
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
 import 'package:colored/sources/app/styling/opacities.dart' as opacities;
 import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/material.dart';
