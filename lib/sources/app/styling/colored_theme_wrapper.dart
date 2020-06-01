@@ -1,5 +1,5 @@
 import 'package:colored/sources/app/styling/colors/colored_color_scheme.dart';
-import 'package:colored/sources/app/styling/fonts.dart' as fonts;
+import 'package:colored/sources/app/styling/fonts/font_scheme.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +8,17 @@ class ColoredThemeWrapper {
   const ColoredThemeWrapper({
     @required this.colors,
     @required this.opacity,
+    @required this.fonts,
   })  : assert(colors != null),
+        assert(fonts != null),
         assert(opacity != null);
 
   final ColoredColorScheme colors;
   final OpacityScheme opacity;
+  final FontScheme fonts;
 
   ThemeData getThemeData() => ThemeData(
-        fontFamily: fonts.body,
+        fontFamily: fonts.primary,
         primaryColor: colors.primary,
         primaryColorDark: colors.primaryVariant,
         accentColor: colors.secondary,
@@ -48,13 +51,13 @@ class ColoredThemeWrapper {
         textTheme: TextTheme(
           bodyText2: TextStyle(color: colors.text),
           headline5: TextStyle(color: colors.primary),
-          subtitle1: TextStyle(color: colors.text, fontFamily: fonts.header),
+          subtitle1: TextStyle(color: colors.text, fontFamily: fonts.secondary),
           headline6: TextStyle(color: colors.text),
           headline4: TextStyle(color: colors.primary),
           headline2: TextStyle(
             color: colors.primary,
             fontWeight: FontWeight.bold,
-            fontFamily: fonts.header,
+            fontFamily: fonts.secondary,
           ),
           caption: TextStyle(color: colors.textVariant),
         ),
