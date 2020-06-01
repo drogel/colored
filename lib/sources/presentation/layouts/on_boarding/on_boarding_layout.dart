@@ -1,4 +1,6 @@
-import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
+import 'package:colored/sources/app/styling/colors/color_constants.dart'
+    as colors;
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/common/extensions/color_multi_lerp.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_body_layout.dart';
@@ -7,7 +9,6 @@ import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_sli
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_welcome_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:colored/sources/app/styling/padding/padding_constants.dart' as padding;
 
 const _kSlidersScrollFractionTrigger = 1.66;
 const _kBackgroundColors = [
@@ -43,6 +44,7 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final padding = PaddingData.of(context).paddingScheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: MultiLerp.multiLerp(_kBackgroundColors, _scrollFraction),
@@ -51,7 +53,7 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
           alignment: Alignment.bottomCenter,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(padding.base),
+              padding: EdgeInsets.all(padding.base),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: SmoothPageIndicator(

@@ -1,5 +1,5 @@
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
-import 'package:colored/sources/app/styling/padding/padding_constants.dart' as paddings;
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii.dart' as radii;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +23,9 @@ class ColorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final primaryColorDark = Theme.of(context).primaryColorDark;
     final opacity = OpacityData.of(context).opacityScheme;
+    final padding = PaddingData.of(context).paddingScheme;
     return Padding(
-      padding: paddings.small,
+      padding: padding.small,
       child: FloatingActionButton(
         onPressed: () => onPressed(backgroundColor),
         clipBehavior: Clip.antiAlias,
