@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:colored/sources/app/styling/radii.dart' as radii;
-import 'package:colored/sources/app/styling/padding.dart' as paddings;
+import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/styling/padding/padding_constants.dart' as paddings;
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
@@ -8,7 +8,7 @@ class PrimaryButton extends StatelessWidget {
     @required this.onPressed,
     this.onLongPress,
     this.backgroundColor,
-    this.padding = paddings.button,
+    this.padding = paddings.medium,
     Key key,
   }) : super(key: key);
 

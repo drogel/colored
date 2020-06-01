@@ -1,6 +1,6 @@
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
 import 'package:colored/sources/presentation/layouts/names_list/color_names_search_field.dart';
-import 'package:colored/sources/app/styling/padding.dart' as paddings;
+import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/styling/padding/padding_constants.dart' as paddings;
 import 'package:flutter/material.dart';
 
 class ColorNamesAppBar extends StatelessWidget {
@@ -14,7 +14,7 @@ class ColorNamesAppBar extends StatelessWidget {
     final data = NamesListData.of(context);
     return SafeArea(
       child: Padding(
-        padding: paddings.button,
+        padding: paddings.medium,
         child: ColorNamesSearchField(
           prefixIcon: IconButton(
             highlightColor: Colors.transparent,

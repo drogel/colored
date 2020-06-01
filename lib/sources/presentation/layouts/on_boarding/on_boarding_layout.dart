@@ -7,7 +7,7 @@ import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_sli
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_welcome_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:colored/sources/app/styling/padding.dart' as padding;
+import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/styling/padding/padding_constants.dart' as padding;
 
 const _kSlidersScrollFractionTrigger = 1.66;
 const _kBackgroundColors = [
@@ -51,7 +51,7 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
           alignment: Alignment.bottomCenter,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(padding.largeText),
+              padding: const EdgeInsets.all(padding.large),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: SmoothPageIndicator(

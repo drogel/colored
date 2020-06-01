@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:colored/sources/app/styling/padding.dart' as padding;
+import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/styling/padding/padding_constants.dart' as padding;
 
 class OnBoardingBodyLayout extends StatelessWidget {
   const OnBoardingBodyLayout({
@@ -15,10 +15,10 @@ class OnBoardingBodyLayout extends StatelessWidget {
   Widget build(BuildContext context) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
-            left: padding.largeText,
-            right: padding.largeText,
-            top: 2 * padding.largeText,
-            bottom: padding.largeText,
+            left: padding.large,
+            right: padding.large,
+            top: 2 * padding.large,
+            bottom: padding.large,
           ),
           child: Column(
             mainAxisAlignment: columnAlignment,
