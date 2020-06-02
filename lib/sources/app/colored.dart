@@ -5,6 +5,8 @@ import 'package:colored/sources/app/styling/colors/dark_color_scheme.dart';
 import 'package:colored/sources/app/styling/colored_theme_wrapper.dart';
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/curves/default_curve_scheme.dart';
+import 'package:colored/sources/app/styling/duration/default_duration_scheme.dart';
+import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/fonts/default_font_scheme.dart';
 import 'package:colored/sources/app/styling/opacity/default_opacity_scheme.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
@@ -25,38 +27,41 @@ class Colored extends StatelessWidget {
   final FlowRouter router;
 
   @override
-  Widget build(BuildContext context) => RadiusData(
-    radiiScheme: const DefaultRadiiScheme(),
-    child: CurveData(
-          curveScheme: const DefaultCurveScheme(),
-          child: PaddingData(
-            paddingScheme: const DefaultPaddingScheme(),
-            child: OpacityData(
-              opacityScheme: const DefaultOpacityScheme(),
-              child: Builder(
-                builder: (context) {
-                  final opacityScheme = OpacityData.of(context).opacityScheme;
-                  final darkThemeWrapper = ColoredThemeWrapper(
-                    colors: const DarkColorScheme(),
-                    opacity: opacityScheme,
-                    fonts: const DefaultFontScheme(),
-                  );
-                  return MaterialApp(
-                    localizationsDelegates: [
-                      const ColoredLocalizationDelegate(),
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                    ],
-                    supportedLocales: const [Locale("en"), Locale("es")],
-                    title: "Colored",
-                    theme: darkThemeWrapper.getThemeData(),
-                    darkTheme: darkThemeWrapper.getThemeData(),
-                    onGenerateRoute: router.generateRoute,
-                  );
-                },
+  Widget build(BuildContext context) => DurationData(
+        durationScheme: const DefaultDurationScheme(),
+        child: RadiusData(
+          radiiScheme: const DefaultRadiiScheme(),
+          child: CurveData(
+            curveScheme: const DefaultCurveScheme(),
+            child: PaddingData(
+              paddingScheme: const DefaultPaddingScheme(),
+              child: OpacityData(
+                opacityScheme: const DefaultOpacityScheme(),
+                child: Builder(
+                  builder: (context) {
+                    final opacityScheme = OpacityData.of(context).opacityScheme;
+                    final darkThemeWrapper = ColoredThemeWrapper(
+                      colors: const DarkColorScheme(),
+                      opacity: opacityScheme,
+                      fonts: const DefaultFontScheme(),
+                    );
+                    return MaterialApp(
+                      localizationsDelegates: [
+                        const ColoredLocalizationDelegate(),
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                      ],
+                      supportedLocales: const [Locale("en"), Locale("es")],
+                      title: "Colored",
+                      theme: darkThemeWrapper.getThemeData(),
+                      darkTheme: darkThemeWrapper.getThemeData(),
+                      onGenerateRoute: router.generateRoute,
+                    );
+                  },
+                ),
               ),
             ),
           ),
         ),
-  );
+      );
 }

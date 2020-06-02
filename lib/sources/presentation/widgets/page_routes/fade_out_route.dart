@@ -1,5 +1,6 @@
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
-import 'package:colored/sources/app/styling/durations.dart' as durations;
+import 'package:colored/sources/app/styling/duration/duration_constants.dart'
+    as duration;
 import 'package:flutter/material.dart';
 
 class FadeOutRoute<T> extends PageRoute<T> {
@@ -50,5 +51,5 @@ class FadeOutRoute<T> extends PageRoute<T> {
   final bool maintainState;
 
   @override
-  Duration get transitionDuration => durations.longPresenting;
+  Duration get transitionDuration => duration.longPresenting;
 }

@@ -1,5 +1,5 @@
 import 'package:animations/animations.dart';
-import 'package:colored/sources/app/styling/durations.dart' as durations;
+import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_app_bar.dart';
@@ -21,6 +21,7 @@ class _ConverterLayoutState extends State<ConverterLayout> {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
+    final durations = DurationData.of(context).durationScheme;
     final selection = data.state.selection;
     return Scaffold(
       resizeToAvoidBottomInset: false,

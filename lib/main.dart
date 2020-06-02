@@ -7,7 +7,6 @@ import 'package:colored/sources/app/navigation/routers/on_boarding_router.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage_keys.dart'
     as keys;
-import 'package:colored/sources/data/services/local_storage/mock_local_storage.dart';
 import 'package:colored/sources/data/services/local_storage/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(flavor: Flavor.production);
 
-  final initialRouter = await _getInitialRoute(const MockLocalStorage());
+  final initialRouter = await _getInitialRoute(const SharedPreferences());
 
   runApp(Colored(router: initialRouter));
 }
