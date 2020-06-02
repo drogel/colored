@@ -5,7 +5,7 @@ import 'package:colored/sources/presentation/widgets/containers/background_conta
 import 'package:colored/sources/presentation/widgets/containers/color_card.dart';
 import 'package:flutter/material.dart';
 
-const _kEstimatedItemSize = 150;
+const _kEstimatedItemSize = 200;
 const _kCrossAxisMinCount = 2;
 const _kCrossAxisMaxCount = 9;
 
@@ -22,20 +22,23 @@ class NamesListGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = PaddingData.of(context).paddingScheme;
-    return LayoutBuilder(
-      builder: (_, constraints) => BackgroundContainer(
-        child: GridView.builder(
-          padding: padding.vertical,
-          itemCount: namedColors.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: _computeCrossAxisCount(constraints),
-            childAspectRatio: 1,
-          ),
-          itemBuilder: (_, i) => ColorCard(
-            backgroundColor: HexColor.fromHex(namedColors[i].hex),
-            onPressed: onCardPressed,
-            title: namedColors[i].name,
-            subtitle: namedColors[i].hex,
+    return BackgroundContainer(
+      child: SafeArea(
+        bottom: false,
+        child: LayoutBuilder(
+          builder: (_, constraints) => GridView.builder(
+            padding: padding.vertical,
+            itemCount: namedColors.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: _computeCrossAxisCount(constraints),
+              childAspectRatio: 1,
+            ),
+            itemBuilder: (_, i) => ColorCard(
+              backgroundColor: HexColor.fromHex(namedColors[i].hex),
+              onPressed: onCardPressed,
+              title: namedColors[i].name,
+              subtitle: namedColors[i].hex,
+            ),
           ),
         ),
       ),

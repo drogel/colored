@@ -49,6 +49,7 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
     return Scaffold(
       backgroundColor: MultiLerp.multiLerp(_kBackgroundColors, _scrollFraction),
       body: SafeArea(
+        bottom: false,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[

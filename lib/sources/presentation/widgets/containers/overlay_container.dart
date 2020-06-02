@@ -20,23 +20,27 @@ class OverlayContainer extends StatelessWidget {
     final padding = PaddingData.of(context).paddingScheme;
     final defaultPadding = EdgeInsets.symmetric(vertical: padding.medium.top);
     final opacity = OpacityData.of(context).opacityScheme;
-    return Container(
-      padding: this.padding ?? defaultPadding,
-      decoration: BoxDecoration(
-        color: colorScheme.primary.withOpacity(opacity.overlay),
-        borderRadius: BorderRadius.only(
-          topLeft: radii.large,
-          topRight: radii.large,
+    return SafeArea(
+      bottom: false,
+      top: false,
+      child: Container(
+        padding: this.padding ?? defaultPadding,
+        decoration: BoxDecoration(
+          color: colorScheme.primary.withOpacity(opacity.overlay),
+          borderRadius: BorderRadius.only(
+            topLeft: radii.large,
+            topRight: radii.large,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.primary.withOpacity(opacity.shadow),
+              offset: const Offset(0, -2),
+              blurRadius: 4,
+            )
+          ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.primary.withOpacity(opacity.shadow),
-            offset: const Offset(0, -2),
-            blurRadius: 4,
-          )
-        ],
+        child: SafeArea(child: child),
       ),
-      child: child,
     );
   }
 }

@@ -7,6 +7,8 @@ import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_bod
 import 'package:colored/sources/presentation/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 
+const _kInfoPixelRatio = 2.0;
+
 class OnBoardingSlidersLayout extends StatelessWidget {
   const OnBoardingSlidersLayout({Key key}) : super(key: key);
 
@@ -15,12 +17,13 @@ class OnBoardingSlidersLayout extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final localization = Localization.of(context).onBoarding;
     final stateColor = ConverterData.of(context).state.color;
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final pixelRatio = MediaQuery.of(context).devicePixelRatio;
     final padding = PaddingData.of(context).paddingScheme;
     return OnBoardingBodyLayout(
       children: <Widget>[
-        if (devicePixelRatio > 2.5) SizedBox(height: padding.base),
+        if (pixelRatio >= _kInfoPixelRatio) SizedBox(height: padding.base),
         Flexible(
+          flex: 4,
           child: Column(
             children: <Widget>[
               AutoSizeText(
@@ -35,7 +38,7 @@ class OnBoardingSlidersLayout extends StatelessWidget {
                 style: textTheme.headline5,
                 textAlign: TextAlign.center,
               ),
-              if (devicePixelRatio > 2.5)
+              if (pixelRatio >= _kInfoPixelRatio)
                 Column(
                   children: <Widget>[
                     SizedBox(height: padding.base),
@@ -48,7 +51,6 @@ class OnBoardingSlidersLayout extends StatelessWidget {
                     SizedBox(height: padding.base),
                   ],
                 ),
-              SizedBox(height: padding.base / 2),
               PrimaryButton(
                 title: localization.done,
                 onPressed: OnBoardingData.of(context).onFinished,
@@ -62,6 +64,7 @@ class OnBoardingSlidersLayout extends StatelessWidget {
           ),
         ),
         Flexible(
+          flex: 3,
           child: Container(),
         ),
       ],
