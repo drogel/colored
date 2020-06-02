@@ -1,11 +1,12 @@
 import 'package:colored/sources/app/styling/colors/colored_color_scheme.dart';
 import 'package:colored/sources/app/styling/fonts/font_scheme.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_scheme.dart';
+import 'package:colored/sources/app/styling/theme/theme_composer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ColoredThemeWrapper {
-  const ColoredThemeWrapper({
+class ColoredThemeComposer implements ThemeComposer {
+  const ColoredThemeComposer({
     @required this.colors,
     @required this.opacity,
     @required this.fonts,
@@ -17,6 +18,7 @@ class ColoredThemeWrapper {
   final OpacityScheme opacity;
   final FontScheme fonts;
 
+  @override
   ThemeData getThemeData() => ThemeData(
         fontFamily: fonts.primary,
         primaryColor: colors.primary,
