@@ -1,6 +1,6 @@
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
+import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:flutter/material.dart';
-import 'package:colored/sources/app/styling/radii.dart' as radii;
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
@@ -20,6 +20,7 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final radii = RadiusData.of(context).radiiScheme;
     final textStyle = Theme.of(context).textTheme.headline6;
     final paddingScheme = PaddingData.of(context).paddingScheme;
     return RaisedButton(
@@ -27,7 +28,7 @@ class PrimaryButton extends StatelessWidget {
       onLongPress: onLongPress,
       color: backgroundColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radii.medium),
+        borderRadius: BorderRadius.all(radii.medium),
       ),
       padding: padding ?? paddingScheme.medium,
       child: Text(title, style: textStyle, textScaleFactor: 1),
