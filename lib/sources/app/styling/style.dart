@@ -1,5 +1,3 @@
-import 'package:colored/sources/app/styling/colors/colored_color_scheme.dart';
-import 'package:colored/sources/app/styling/colors/dark_color_scheme.dart';
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/curves/curve_scheme.dart';
 import 'package:colored/sources/app/styling/curves/default_curve_scheme.dart';
