@@ -3,8 +3,8 @@ import 'package:colored/sources/app/navigation/routers/flow_router.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_layout.dart';
-import 'package:colored/sources/presentation/pages/converter_page.dart';
-import 'package:colored/sources/presentation/pages/on_boarding_page.dart';
+import 'package:colored/sources/presentation/notifiers/converter_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/on_boarding_notifier.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingRouter implements FlowRouter {
@@ -23,9 +23,9 @@ class OnBoardingRouter implements FlowRouter {
   }
 
   Route _buildOnBoarding(RouteSettings settings) => MaterialPageRoute(
-        builder: (_) => const ConverterPage(
+        builder: (_) => const ConverterNotifier(
           injector: ConverterInjector(),
-          child: OnBoardingPage(
+          child: OnBoardingNotifier(
             injector: OnBoardingInjector(),
             child: OnBoardingLayout(),
           ),

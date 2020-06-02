@@ -6,8 +6,8 @@ import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_view_model.dart';
 import 'package:flutter/material.dart';
 
-class NamingPage extends StatefulWidget {
-  const NamingPage({
+class NamingNotifier extends StatefulWidget {
+  const NamingNotifier({
     @required NamingInjector injector,
     @required this.child,
     Key key,
@@ -19,10 +19,10 @@ class NamingPage extends StatefulWidget {
   final Widget child;
 
   @override
-  _NamingPageState createState() => _NamingPageState();
+  _NamingNotifierState createState() => _NamingNotifierState();
 }
 
-class _NamingPageState extends State<NamingPage> {
+class _NamingNotifierState extends State<NamingNotifier> {
   NamingViewModel _viewModel;
 
   @override

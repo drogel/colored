@@ -4,8 +4,8 @@ import 'package:colored/sources/domain/view_models/names_list/names_list_state.d
 import 'package:colored/sources/domain/view_models/names_list/names_list_view_model.dart';
 import 'package:flutter/material.dart';
 
-class NamesListPage extends StatefulWidget {
-  const NamesListPage({
+class NamesListNotifier extends StatefulWidget {
+  const NamesListNotifier({
     @required this.injector,
     @required this.child,
     Key key,
@@ -17,10 +17,10 @@ class NamesListPage extends StatefulWidget {
   final NamesListInjector injector;
 
   @override
-  _NamesListPageState createState() => _NamesListPageState();
+  _NamesListNotifierState createState() => _NamesListNotifierState();
 }
 
-class _NamesListPageState extends State<NamesListPage> {
+class _NamesListNotifierState extends State<NamesListNotifier> {
   NamesListViewModel _viewModel;
 
   @override

@@ -5,8 +5,8 @@ import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_model.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingPage extends StatefulWidget {
-  const OnBoardingPage({
+class OnBoardingNotifier extends StatefulWidget {
+  const OnBoardingNotifier({
     @required this.injector,
     @required this.child,
     Key key,
@@ -17,10 +17,10 @@ class OnBoardingPage extends StatefulWidget {
   final OnBoardingInjector injector;
 
   @override
-  _OnBoardingPageState createState() => _OnBoardingPageState();
+  _OnBoardingNotifierState createState() => _OnBoardingNotifierState();
 }
 
-class _OnBoardingPageState extends State<OnBoardingPage> {
+class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
   OnBoardingViewModel _viewModel;
 
   @override
