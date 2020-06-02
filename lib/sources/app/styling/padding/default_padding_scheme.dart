@@ -3,8 +3,8 @@ import 'package:colored/sources/app/styling/padding/padding_constants.dart'
     as padding;
 import 'package:flutter/material.dart';
 
-class DefaultPadding implements PaddingScheme {
-  const DefaultPadding();
+class DefaultPaddingScheme implements PaddingScheme {
+  const DefaultPaddingScheme();
 
   @override
   double get base => padding.base;

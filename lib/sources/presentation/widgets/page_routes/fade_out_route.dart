@@ -1,4 +1,4 @@
-import 'package:colored/sources/app/styling/curves.dart' as curves;
+import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/durations.dart' as durations;
 import 'package:flutter/material.dart';
 
@@ -33,16 +33,18 @@ class FadeOutRoute<T> extends PageRoute<T> {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
     Widget child,
-  ) =>
-      FadeTransition(
-        opacity: Tween<double>(begin: 0, end: 1).animate(
-          CurvedAnimation(
-            parent: animation,
-            curve: curves.incoming,
-          ),
+  ) {
+    final curves = CurveData.of(context).curveScheme;
+    return FadeTransition(
+      opacity: Tween<double>(begin: 0, end: 1).animate(
+        CurvedAnimation(
+          parent: animation,
+          curve: curves.incoming,
         ),
-        child: child,
-      );
+      ),
+      child: child,
+    );
+  }
 
   @override
   final bool maintainState;

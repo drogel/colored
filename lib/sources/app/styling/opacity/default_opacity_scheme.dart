@@ -1,8 +1,8 @@
 import 'package:colored/sources/app/styling/opacity/opacity_scheme.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_constants.dart' as opacity;
 
-class DefaultOpacity implements OpacityScheme {
-  const DefaultOpacity();
+class DefaultOpacityScheme implements OpacityScheme {
+  const DefaultOpacityScheme();
 
   @override
   double get fadedColor => opacity.fadedColor;

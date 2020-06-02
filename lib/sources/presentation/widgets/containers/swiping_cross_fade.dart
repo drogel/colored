@@ -1,5 +1,5 @@
+import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/presentation/widgets/directional_pan_detector.dart';
-import 'package:colored/sources/app/styling/curves.dart' as curves;
 import 'package:colored/sources/app/styling/durations.dart' as durations;
 import 'package:flutter/material.dart';
 
@@ -11,9 +11,9 @@ class SwipingCrossFade extends StatefulWidget {
     this.enableGestures = true,
     this.sizeDuration = durations.mediumDismissing,
     this.reverseFadeDuration = durations.shortDismissing,
-    this.showFadeCurve = curves.incoming,
-    this.hideFadeCurve = curves.exiting,
-    this.sizeCurve = curves.incoming,
+    this.showFadeCurve,
+    this.hideFadeCurve,
+    this.sizeCurve,
     Key key,
   }) : super(key: key);
 
@@ -49,29 +49,32 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
   }
 
   @override
-  Widget build(BuildContext context) => DirectionalPanDetector(
-        onPanUpdateUp: widget.enableGestures ? _show : null,
-        onPanUpdateDown: widget.enableGestures ? _hide : null,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              color: Colors.transparent,
-              child: widget.header,
-            ),
-            AnimatedCrossFade(
-              crossFadeState: _state,
-              firstChild: widget.child,
-              secondChild: Container(),
-              duration: widget.sizeDuration,
-              reverseDuration: widget.reverseFadeDuration,
-              firstCurve: widget.showFadeCurve,
-              secondCurve: widget.hideFadeCurve,
-              sizeCurve: widget.sizeCurve,
-            ),
-          ],
-        ),
-      );
+  Widget build(BuildContext context) {
+    final curves = CurveData.of(context).curveScheme;
+    return DirectionalPanDetector(
+      onPanUpdateUp: widget.enableGestures ? _show : null,
+      onPanUpdateDown: widget.enableGestures ? _hide : null,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            color: Colors.transparent,
+            child: widget.header,
+          ),
+          AnimatedCrossFade(
+            crossFadeState: _state,
+            firstChild: widget.child,
+            secondChild: Container(),
+            duration: widget.sizeDuration,
+            reverseDuration: widget.reverseFadeDuration,
+            firstCurve: widget.showFadeCurve ?? curves.incoming,
+            secondCurve: widget.hideFadeCurve ?? curves.exiting,
+            sizeCurve: widget.sizeCurve ?? curves.incoming,
+          ),
+        ],
+      ),
+    );
+  }
 
   void _show(DragUpdateDetails details) =>
       setState(() => _state = CrossFadeState.showFirst);
