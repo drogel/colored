@@ -3,6 +3,8 @@ import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:flutter/material.dart';
 
+import '../../../app/styling/padding/padding_scheme.dart';
+
 class OverlayContainer extends StatelessWidget {
   const OverlayContainer({
     this.child,
@@ -18,29 +20,39 @@ class OverlayContainer extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final radii = RadiusData.of(context).radiiScheme;
     final padding = PaddingData.of(context).paddingScheme;
-    final defaultPadding = EdgeInsets.symmetric(vertical: padding.medium.top);
+    final defaultPaddingValue = padding.large.bottom + padding.small.bottom;
+    final defaultPadding = EdgeInsets.only(bottom: defaultPaddingValue);
+    final deviceSafeArea = MediaQuery.of(context).padding;
     final opacity = OpacityData.of(context).opacityScheme;
     return SafeArea(
-      bottom: false,
-      top: false,
-      child: Container(
-        padding: this.padding ?? defaultPadding,
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withOpacity(opacity.overlay),
-          borderRadius: BorderRadius.only(
-            topLeft: radii.large,
-            topRight: radii.large,
+      child: OrientationBuilder(
+        builder: (_, orientation) => Padding(
+          padding: _getPadding(orientation, deviceSafeArea, padding),
+          child: Material(
+            elevation: 2,
+            color: colorScheme.primary.withOpacity(opacity.overlay),
+            borderRadius: BorderRadius.all(radii.large),
+            child: Padding(
+              padding: this.padding ?? defaultPadding,
+              child: child,
+            ),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.primary.withOpacity(opacity.shadow),
-              offset: const Offset(0, -2),
-              blurRadius: 4,
-            )
-          ],
         ),
-        child: SafeArea(child: child),
       ),
     );
+  }
+
+  EdgeInsets _getPadding(
+    Orientation orientation,
+    EdgeInsets deviceSafeArea,
+    PaddingScheme paddingScheme,
+  ) {
+    if (orientation == Orientation.portrait) {
+      return deviceSafeArea.bottom == 0
+          ? paddingScheme.small
+          : EdgeInsets.symmetric(horizontal: deviceSafeArea.bottom / 2);
+    } else {
+      return paddingScheme.small;
+    }
   }
 }

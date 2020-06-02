@@ -30,8 +30,8 @@ class PrimaryButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(radii.medium),
       ),
-      padding: padding ?? paddingScheme.medium,
-      child: Text(title, style: textStyle, textScaleFactor: 1),
+      padding: padding ?? paddingScheme.large,
+      child: Text(title, style: textStyle, textScaleFactor: 0.82),
     );
   }
 }
