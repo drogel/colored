@@ -1,5 +1,5 @@
-import 'package:colored/sources/app/styling/padding.dart' as paddings;
 import 'package:colored/resources/localization/localization.dart';
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
 import 'package:colored/sources/presentation/layouts/names_list/names_list_grid.dart';
@@ -32,12 +32,13 @@ class NamesListLayout extends StatelessWidget {
 
   Widget _buildNoneFoundStateLayout(BuildContext context) {
     final localization = Localization.of(context).namesList;
+    final padding = PaddingData.of(context).paddingScheme;
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
       constraints: const BoxConstraints.expand(),
-      padding: const EdgeInsets.symmetric(
-        horizontal: paddings.largeText,
-        vertical: paddings.largeText / 2,
+      padding: EdgeInsets.symmetric(
+        horizontal: padding.base,
+        vertical: padding.base / 2,
       ),
       child: Text(localization.noColorsFound),
     );

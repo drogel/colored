@@ -7,8 +7,8 @@ import 'package:colored/sources/common/extensions/list_swap.dart';
 import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/cupertino.dart';
 
-class ConverterPage extends StatefulWidget {
-  const ConverterPage({
+class ConverterNotifier extends StatefulWidget {
+  const ConverterNotifier({
     @required ConverterInjector injector,
     @required this.child,
     Key key,
@@ -20,10 +20,10 @@ class ConverterPage extends StatefulWidget {
   final Widget child;
 
   @override
-  _ConverterPageState createState() => _ConverterPageState();
+  _ConverterNotifierState createState() => _ConverterNotifierState();
 }
 
-class _ConverterPageState extends State<ConverterPage> {
+class _ConverterNotifierState extends State<ConverterNotifier> {
   final ExpandableSliderController _controller = ExpandableSliderController();
   final List<Format> _displayedFormats = List<Format>.from(Format.values);
   ConverterViewModel _viewModel;

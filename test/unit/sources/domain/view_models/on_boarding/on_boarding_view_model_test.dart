@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:colored/sources/app/styling/curves.dart' as curves;
+import 'package:colored/sources/app/styling/curves/curve_constants.dart' as curves;
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_model.dart';

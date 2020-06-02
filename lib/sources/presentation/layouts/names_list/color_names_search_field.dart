@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/app/styling/radii.dart' as radii;
+import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +27,8 @@ class _ColorNamesSearchFieldState extends State<ColorNamesSearchField> {
     final data = NamesListData.of(context);
     final localization = Localization.of(context).namesList;
     final theme = Theme.of(context);
-    final borderRadius = BorderRadius.circular(radii.medium);
+    final radii = RadiusData.of(context).radiiScheme;
+    final borderRadius = BorderRadius.all(radii.medium);
     return Material(
       borderRadius: borderRadius,
       elevation: theme.appBarTheme.elevation,

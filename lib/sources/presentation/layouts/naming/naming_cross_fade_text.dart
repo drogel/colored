@@ -1,5 +1,5 @@
-import 'package:colored/sources/app/styling/durations.dart' as durations;
-import 'package:colored/sources/app/styling/curves.dart' as curves;
+import 'package:colored/sources/app/styling/curves/curve_data.dart';
+import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,8 @@ class NamingCrossFadeText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = NamingData.of(context).state;
+    final durations = DurationData.of(context).durationScheme;
+    final curves = CurveData.of(context).curveScheme;
     return AnimatedSwitcher(
       switchInCurve: curves.incoming,
       switchOutCurve: curves.exiting,
