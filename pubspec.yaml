@@ -21,6 +21,7 @@ dependencies:
   mockito: ^4.1.1
   auto_size_text: ^2.1.0
   http: ^0.12.1
+  animations: ^1.0.0+5
 
 dev_dependencies:
   flutter_test:
@@ -52,3 +53,4 @@ flutter:
   assets:
     - lib/resources/graphics/
     - lib/resources/mock_data/
+    - lib/resources/data/

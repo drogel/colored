@@ -1,5 +1,7 @@
+import 'dart:ui';
+
 import 'package:colored/sources/common/factors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:vector_math/hash.dart';
 
 class ColorSelection {
@@ -17,6 +19,12 @@ class ColorSelection {
       third: clampedThird,
     );
   }
+
+  factory ColorSelection.fromColor(Color color) => ColorSelection(
+        first: color.red / decimal8Bit,
+        second: color.green / decimal8Bit,
+        third: color.blue / decimal8Bit,
+      );
 
   const ColorSelection._({
     @required this.first,

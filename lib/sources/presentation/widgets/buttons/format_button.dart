@@ -1,7 +1,6 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/app/styling/radii.dart' as radii;
+import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
-import 'package:colored/sources/app/styling/colors.dart' as colors;
 import 'package:colored/sources/presentation/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,20 +29,21 @@ class _FormatButtonState extends State<FormatButton> {
   Color _tooltipColor;
 
   @override
-  void initState() {
-    _tooltipColor = colors.primaryVariant;
-    super.initState();
+  void didChangeDependencies() {
+    _tooltipColor = Theme.of(context).colorScheme.primaryVariant;
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    final radii = RadiusData.of(context).radiiScheme;
     final localization = Localization.of(context).converter;
     return Tooltip(
       key: _tooltip,
       message: _tooltipMessage ?? localization.tooltipMessage,
       decoration: BoxDecoration(
         color: _tooltipColor,
-        borderRadius: BorderRadius.circular(radii.small),
+        borderRadius: BorderRadius.all(radii.small),
       ),
       preferBelow: false,
       child: PrimaryButton(
@@ -63,7 +63,7 @@ class _FormatButtonState extends State<FormatButton> {
     if (isError) {
       setState(() {
         _tooltipMessage = Localization.of(context).converter.tooltipError;
-        _tooltipColor = colors.errorDark;
+        _tooltipColor = Theme.of(context).colorScheme.error;
       });
       _showTooltip();
     } else {
@@ -75,7 +75,7 @@ class _FormatButtonState extends State<FormatButton> {
     await Clipboard.setData(ClipboardData(text: widget.content));
     setState(() {
       _tooltipMessage = Localization.of(context).converter.tooltipMessage;
-      _tooltipColor = colors.primaryDark;
+      _tooltipColor = Theme.of(context).buttonColor;
     });
     _showTooltip();
   }

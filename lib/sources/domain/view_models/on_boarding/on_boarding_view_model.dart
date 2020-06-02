@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:colored/sources/app/styling/curves.dart' as curves;
+import 'package:colored/sources/app/styling/curves/curve_constants.dart' as curves;
 import 'package:colored/sources/common/extensions/extended_curve.dart';
 import 'package:colored/sources/data/services/device_orientation/device_orientation_service.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage.dart';

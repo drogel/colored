@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:colored/sources/app/styling/colors.dart' as colors;
+import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/color_converter/converter.dart';
 import 'package:colored/sources/data/color_helpers/color_parser/parser.dart';
@@ -41,13 +41,16 @@ class ConverterViewModel {
 
   Stream<ConverterState> get stateStream => _stateController.stream;
 
-  ConverterState get initialData => _convertToState(
-        ColorSelection(
-          first: colors.primaryDark.red.toDouble() / decimal8Bit,
-          second: colors.primaryDark.green.toDouble() / decimal8Bit,
-          third: colors.primaryDark.blue.toDouble() / decimal8Bit,
-        ),
-      );
+  ConverterState get initialData {
+    const initialColor = colors.primaryDark;
+    return _convertToState(
+      ColorSelection(
+        first: initialColor.red.toDouble() / decimal8Bit,
+        second: initialColor.green.toDouble() / decimal8Bit,
+        third: initialColor.blue.toDouble() / decimal8Bit,
+      ),
+    );
+  }
 
   void init() => _deviceOrientationService.setAllOrientations();
 
