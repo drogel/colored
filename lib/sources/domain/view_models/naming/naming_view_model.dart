@@ -37,12 +37,12 @@ class NamingViewModel {
   NamingState get initialData => const Unknown();
 
   Future<void> fetchNaming(ColorSelection selection) async {
-    _stateController.sink.add(const Changing());
-
     final connectivityResult = await _connectivityService.checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       return _stateController.sink.add(const Unknown());
     }
+
+    _stateController.sink.add(const Changing());
 
     final r = (selection.first * decimal8Bit).round();
     final g = (selection.second * decimal8Bit).round();

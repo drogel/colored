@@ -183,15 +183,9 @@ void main() {
     });
 
     group("when fetchNaming is called", () {
-      test("then a Changing state is added to the stream first", () async {
-        final selection = ColorSelection(first: 0, second: 0, third: 0);
-        await viewModel.fetchNaming(selection);
-        final state = await stateController.stream.first;
-        expect(state.runtimeType, Changing);
-      });
 
-      test("then an Unknown state is added to stream after Changing", () async {
-        stateController.stream.skip(1).listen((event) {
+      test("then an Unknown state is added to stream", () async {
+        stateController.stream.listen((event) {
           expectLater(event.runtimeType, Unknown);
         });
         final selection = ColorSelection(first: 0, second: 0, third: 0);
