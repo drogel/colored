@@ -37,7 +37,11 @@ class ColorCard extends StatelessWidget {
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            color: primaryColorDark.withOpacity(opacity.overlay),
+            margin: padding.small,
+            decoration: BoxDecoration(
+              color: primaryColorDark.withOpacity(opacity.overlay),
+              borderRadius: BorderRadius.all(radii.medium),
+            ),
             child: ListTile(
               title: Text(title),
               subtitle: Text(subtitle),

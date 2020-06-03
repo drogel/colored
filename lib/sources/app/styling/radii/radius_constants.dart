@@ -1,3 +1,3 @@
-const small = 4.0;
-const medium = 8.0;
-const large = 12.0;
+const small = 6.0;
+const medium = small * 2;
+const large = small * 4;
