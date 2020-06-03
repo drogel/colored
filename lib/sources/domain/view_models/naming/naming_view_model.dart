@@ -40,7 +40,7 @@ class NamingViewModel {
 
   void init() {
     final connectivityStream = _connectivityService.connectivityStream;
-    _connectivity = connectivityStream.skip(1).listen(_onConnectivityChanged);
+    _connectivity = connectivityStream.listen(_onConnectivityChanged);
   }
 
   Future<void> fetchNaming(ColorSelection selection) async {
@@ -73,6 +73,8 @@ class NamingViewModel {
   void _onConnectivityChanged(ConnectivityResult connectivityResult) {
     if (connectivityResult == ConnectivityResult.none) {
       return _stateController.sink.add(const NoConnectivity());
+    } else {
+      return _stateController.sink.add(const ConnectivityRestored());
     }
   }
 }

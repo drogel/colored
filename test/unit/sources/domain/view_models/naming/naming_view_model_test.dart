@@ -201,11 +201,23 @@ void main() {
     });
 
     group("when init is called", () {
-      test("then Unknown added to stream on ConnectivityResult.none", () async {
+      test("then NoConnectivity added to stream on ConnectivityResult.none",
+          () async {
         stateController.stream.listen((event) {
           expectLater(event.runtimeType, NoConnectivity);
         });
         connectivityController.sink.add(ConnectivityResult.none);
+        viewModel.init();
+      });
+
+      test(
+          "then ConnectivityRestored added to stream on any "
+          "ConnectivityResult different from ConnectivityResult.none",
+          () async {
+        stateController.stream.listen((event) {
+          expectLater(event.runtimeType, ConnectivityRestored);
+        });
+        connectivityController.sink.add(ConnectivityResult.wifi);
         viewModel.init();
       });
     });

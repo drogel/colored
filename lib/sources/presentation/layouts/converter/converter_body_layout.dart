@@ -1,10 +1,12 @@
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
-import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
+import 'package:colored/sources/presentation/layouts/naming/naming_error_bar.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
+import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
+import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
@@ -23,6 +25,7 @@ class ConverterBodyLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
+    final namingData = NamingData.of(context);
     final padding = PaddingData.of(context).paddingScheme;
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -55,6 +58,8 @@ class ConverterBodyLayout extends StatelessWidget {
             ),
           ),
         ),
+        if (namingData != null)
+          const Align(alignment: Alignment.topCenter, child: NamingErrorBar()),
       ],
     );
   }
