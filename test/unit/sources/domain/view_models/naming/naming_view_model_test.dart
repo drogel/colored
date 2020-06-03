@@ -41,6 +41,12 @@ class ConnectivityServiceSuccessStub implements ConnectivityService {
       ConnectivityResult.mobile;
 }
 
+class ConnectivityServiceFailureStub implements ConnectivityService {
+  @override
+  Future<ConnectivityResult> checkConnectivity() async =>
+      ConnectivityResult.none;
+}
+
 void main() {
   NamingViewModel viewModel;
   StreamController<NamingState> stateController;
@@ -133,6 +139,47 @@ void main() {
         final initialState = viewModel.initialData;
         expect(initialState.runtimeType, Unknown);
       });
+    });
+
+    group("when fetchNaming is called", () {
+      test("then a Changing state is added to the stream first", () async {
+        final selection = ColorSelection(first: 0, second: 0, third: 0);
+        await viewModel.fetchNaming(selection);
+        final state = await stateController.stream.first;
+        expect(state.runtimeType, Changing);
+      });
+
+      test("then an Unknown state is added to stream after Changing", () async {
+        stateController.stream.skip(1).listen((event) {
+          expectLater(event.runtimeType, Unknown);
+        });
+        final selection = ColorSelection(first: 0, second: 0, third: 0);
+        await viewModel.fetchNaming(selection);
+      });
+    });
+  });
+
+  group("Given a NamingViewModel with no network connectivity", () {
+    setUp(() {
+      stateController = StreamController<NamingState>();
+      namingService = NamingServiceFailureStub();
+      formatConverter = FormatConverterStub();
+      connectivityService = ConnectivityServiceFailureStub();
+      viewModel = NamingViewModel(
+        stateController: stateController,
+        namingService: namingService,
+        connectivityService: connectivityService,
+        converter: formatConverter,
+      );
+    });
+
+    tearDown(() {
+      stateController.close();
+      stateController = null;
+      namingService = null;
+      formatConverter = null;
+      connectivityService = null;
+      viewModel = null;
     });
 
     group("when fetchNaming is called", () {
