@@ -27,7 +27,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
 
   @override
   void initState() {
-    _viewModel = widget._injector.injectViewModel();
+    _viewModel = widget._injector.injectViewModel()..init();
     super.initState();
   }
 

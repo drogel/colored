@@ -13,7 +13,7 @@ import 'package:flutter/foundation.dart';
 import 'naming_state.dart';
 
 class NamingViewModel {
-  const NamingViewModel({
+  NamingViewModel({
     @required StreamController<NamingState> stateController,
     @required NamingService namingService,
     @required ConnectivityService connectivityService,
@@ -32,14 +32,21 @@ class NamingViewModel {
   final ConnectivityService _connectivityService;
   final FormatConverter _converter;
 
+  StreamSubscription<ConnectivityResult> _connectivity;
+
   Stream<NamingState> get stateStream => _stateController.stream;
 
   NamingState get initialData => const Unknown();
 
+  void init() {
+    final connectivityStream = _connectivityService.connectivityStream;
+    _connectivity = connectivityStream.skip(1).listen(_onConnectivityChanged);
+  }
+
   Future<void> fetchNaming(ColorSelection selection) async {
     final connectivityResult = await _connectivityService.checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
-      return _stateController.sink.add(const Unknown());
+      return;
     }
 
     _stateController.sink.add(const Changing());
@@ -58,5 +65,14 @@ class NamingViewModel {
     }
   }
 
-  void dispose() => _stateController.close();
+  void dispose() {
+    _connectivity?.cancel();
+    _stateController.close();
+  }
+
+  void _onConnectivityChanged(ConnectivityResult connectivityResult) {
+    if (connectivityResult == ConnectivityResult.none) {
+      return _stateController.sink.add(const NoConnectivity());
+    }
+  }
 }

@@ -7,6 +7,10 @@ class DeviceConnectivityService implements ConnectivityService {
   final Connectivity _connectivity;
 
   @override
+  Stream<ConnectivityResult> get connectivityStream =>
+      _connectivity.onConnectivityChanged;
+
+  @override
   Future<ConnectivityResult> checkConnectivity() =>
       _connectivity.checkConnectivity();
 }

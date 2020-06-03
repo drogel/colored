@@ -39,12 +39,24 @@ class ConnectivityServiceSuccessStub implements ConnectivityService {
   @override
   Future<ConnectivityResult> checkConnectivity() async =>
       ConnectivityResult.mobile;
+
+  @override
+  Stream<ConnectivityResult> get connectivityStream =>
+      StreamController<ConnectivityResult>().stream;
 }
 
 class ConnectivityServiceFailureStub implements ConnectivityService {
+  const ConnectivityServiceFailureStub(this.connectivityController);
+
+  final StreamController<ConnectivityResult> connectivityController;
+
   @override
   Future<ConnectivityResult> checkConnectivity() async =>
       ConnectivityResult.none;
+
+  @override
+  Stream<ConnectivityResult> get connectivityStream =>
+      connectivityController.stream;
 }
 
 void main() {
@@ -160,11 +172,16 @@ void main() {
   });
 
   group("Given a NamingViewModel with no network connectivity", () {
+    StreamController<ConnectivityResult> connectivityController;
+
     setUp(() {
+      connectivityController = StreamController<ConnectivityResult>();
       stateController = StreamController<NamingState>();
       namingService = NamingServiceFailureStub();
       formatConverter = FormatConverterStub();
-      connectivityService = ConnectivityServiceFailureStub();
+      connectivityService = ConnectivityServiceFailureStub(
+        connectivityController,
+      );
       viewModel = NamingViewModel(
         stateController: stateController,
         namingService: namingService,
@@ -175,6 +192,7 @@ void main() {
 
     tearDown(() {
       stateController.close();
+      connectivityController.close();
       stateController = null;
       namingService = null;
       formatConverter = null;
@@ -182,14 +200,13 @@ void main() {
       viewModel = null;
     });
 
-    group("when fetchNaming is called", () {
-
-      test("then an Unknown state is added to stream", () async {
+    group("when init is called", () {
+      test("then Unknown added to stream on ConnectivityResult.none", () async {
         stateController.stream.listen((event) {
-          expectLater(event.runtimeType, Unknown);
+          expectLater(event.runtimeType, NoConnectivity);
         });
-        final selection = ColorSelection(first: 0, second: 0, third: 0);
-        await viewModel.fetchNaming(selection);
+        connectivityController.sink.add(ConnectivityResult.none);
+        viewModel.init();
       });
     });
   });
