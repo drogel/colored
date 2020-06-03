@@ -3,25 +3,33 @@ import 'dart:async';
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/format_converter/format_converter.dart';
 import 'package:colored/sources/data/services/api_response.dart';
+import 'package:colored/sources/data/services/connectivity/connectivity_service.dart';
 import 'package:colored/sources/data/services/naming/naming_service.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
+
+import 'naming_state.dart';
 
 class NamingViewModel {
   const NamingViewModel({
     @required StreamController<NamingState> stateController,
     @required NamingService namingService,
+    @required ConnectivityService connectivityService,
     @required FormatConverter converter,
   })  : assert(stateController != null),
         assert(namingService != null),
+        assert(connectivityService != null),
         assert(converter != null),
         _namingService = namingService,
         _converter = converter,
+        _connectivityService = connectivityService,
         _stateController = stateController;
 
   final StreamController<NamingState> _stateController;
   final NamingService _namingService;
+  final ConnectivityService _connectivityService;
   final FormatConverter _converter;
 
   Stream<NamingState> get stateStream => _stateController.stream;
@@ -30,6 +38,11 @@ class NamingViewModel {
 
   Future<void> fetchNaming(ColorSelection selection) async {
     _stateController.sink.add(const Changing());
+
+    final connectivityResult = await _connectivityService.checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      return _stateController.sink.add(const Unknown());
+    }
 
     final r = (selection.first * decimal8Bit).round();
     final g = (selection.second * decimal8Bit).round();

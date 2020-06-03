@@ -2,12 +2,15 @@ import 'dart:async';
 
 import 'package:colored/sources/data/color_helpers/format_converter/format_converter.dart';
 import 'package:colored/sources/data/services/api_response.dart';
+import 'package:colored/sources/data/services/connectivity/connectivity_service.dart';
 import 'package:colored/sources/data/services/naming/naming_response.dart';
 import 'package:colored/sources/data/services/naming/naming_service.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/data_models/naming_result.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_view_model.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_platform_interface/src/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class NamingServiceSuccessStub implements NamingService {
@@ -32,20 +35,29 @@ class FormatConverterStub implements FormatConverter {
   String convert(int r, int g, int b) => "mockedConversion";
 }
 
+class ConnectivityServiceSuccessStub implements ConnectivityService {
+  @override
+  Future<ConnectivityResult> checkConnectivity() async =>
+      ConnectivityResult.mobile;
+}
+
 void main() {
   NamingViewModel viewModel;
   StreamController<NamingState> stateController;
   NamingService namingService;
+  ConnectivityService connectivityService;
   FormatConverter formatConverter;
 
   group("Given a NamingViewModel with successful NamingService requests", () {
     setUp(() {
       stateController = StreamController<NamingState>();
       namingService = NamingServiceSuccessStub();
+      connectivityService = ConnectivityServiceSuccessStub();
       formatConverter = FormatConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,
         namingService: namingService,
+        connectivityService: connectivityService,
         converter: formatConverter,
       );
     });
@@ -55,6 +67,7 @@ void main() {
       stateController = null;
       namingService = null;
       formatConverter = null;
+      connectivityService = null;
       viewModel = null;
     });
 
@@ -97,9 +110,11 @@ void main() {
       stateController = StreamController<NamingState>();
       namingService = NamingServiceFailureStub();
       formatConverter = FormatConverterStub();
+      connectivityService = ConnectivityServiceSuccessStub();
       viewModel = NamingViewModel(
         stateController: stateController,
         namingService: namingService,
+        connectivityService: connectivityService,
         converter: formatConverter,
       );
     });
@@ -109,6 +124,7 @@ void main() {
       stateController = null;
       namingService = null;
       formatConverter = null;
+      connectivityService = null;
       viewModel = null;
     });
 
