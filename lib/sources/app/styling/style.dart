@@ -1,11 +1,12 @@
-import 'package:colored/sources/app/styling/colors/colored_color_scheme.dart';
-import 'package:colored/sources/app/styling/colors/dark_color_scheme.dart';
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/curves/curve_scheme.dart';
 import 'package:colored/sources/app/styling/curves/default_curve_scheme.dart';
 import 'package:colored/sources/app/styling/duration/default_duration_scheme.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/duration/duration_scheme.dart';
+import 'package:colored/sources/app/styling/elevation/default_elevation_scheme.dart';
+import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
+import 'package:colored/sources/app/styling/elevation/elevation_scheme.dart';
 import 'package:colored/sources/app/styling/opacity/default_opacity_scheme.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_scheme.dart';
@@ -26,6 +27,7 @@ class Style extends StatelessWidget {
     this.opacityScheme = const DefaultOpacityScheme(),
     this.paddingScheme = const DefaultPaddingScheme(),
     this.radiiScheme = const DefaultRadiiScheme(),
+    this.elevationScheme = const DefaultElevationScheme(),
   })  : assert(curveScheme != null),
         assert(durationScheme != null),
         assert(opacityScheme != null),
@@ -38,20 +40,24 @@ class Style extends StatelessWidget {
   final OpacityScheme opacityScheme;
   final PaddingScheme paddingScheme;
   final RadiiScheme radiiScheme;
+  final ElevationScheme elevationScheme;
   final Widget child;
 
   @override
-  Widget build(BuildContext context) => RadiusData(
-        radiiScheme: radiiScheme,
-        child: PaddingData(
-          paddingScheme: paddingScheme,
-          child: OpacityData(
-            opacityScheme: opacityScheme,
-            child: DurationData(
-              durationScheme: durationScheme,
-              child: CurveData(
-                curveScheme: curveScheme,
-                child: child,
+  Widget build(BuildContext context) => ElevationData(
+        elevationScheme: elevationScheme,
+        child: RadiusData(
+          radiiScheme: radiiScheme,
+          child: PaddingData(
+            paddingScheme: paddingScheme,
+            child: OpacityData(
+              opacityScheme: opacityScheme,
+              child: DurationData(
+                durationScheme: durationScheme,
+                child: CurveData(
+                  curveScheme: curveScheme,
+                  child: child,
+                ),
               ),
             ),
           ),

@@ -1,12 +1,13 @@
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
-import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
 import 'package:colored/sources/presentation/widgets/sliders/color_sliders.dart';
+import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
 import 'package:flutter/material.dart';
 
-const _kFormatButtonMinSpace = 160.0;
+const _kFormatButtonMinSpace = 140.0;
 
 class ConverterBodyLayout extends StatelessWidget {
   const ConverterBodyLayout({
@@ -22,6 +23,7 @@ class ConverterBodyLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
+    final padding = PaddingData.of(context).paddingScheme;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
@@ -31,7 +33,7 @@ class ConverterBodyLayout extends StatelessWidget {
             showChild: showSliders,
             enableGestures: enableGestures,
             header: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+              padding: EdgeInsets.symmetric(horizontal: padding.base),
               child: LayoutBuilder(
                 builder: (_, constraints) => Row(
                   mainAxisAlignment:

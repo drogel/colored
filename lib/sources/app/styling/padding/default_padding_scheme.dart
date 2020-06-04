@@ -10,6 +10,9 @@ class DefaultPaddingScheme implements PaddingScheme {
   double get base => padding.base;
 
   @override
+  EdgeInsets get large => padding.large;
+
+  @override
   EdgeInsets get medium => padding.medium;
 
   @override

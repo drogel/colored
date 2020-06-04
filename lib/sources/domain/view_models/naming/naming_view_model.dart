@@ -8,8 +8,10 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:flutter/foundation.dart';
 
+import 'naming_state.dart';
+
 class NamingViewModel {
-  const NamingViewModel({
+  NamingViewModel({
     @required StreamController<NamingState> stateController,
     @required NamingService namingService,
     @required FormatConverter converter,

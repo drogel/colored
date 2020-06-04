@@ -1,3 +1,4 @@
+import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
 import 'package:colored/sources/app/styling/theme/colored_theme_composer.dart';
 import 'package:colored/sources/app/styling/colors/colored_color_scheme.dart';
 import 'package:colored/sources/app/styling/colors/dark_color_scheme.dart';
@@ -28,15 +29,18 @@ class ThemeBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final opacityScheme = OpacityData.of(context).opacityScheme;
+    final elevationScheme = ElevationData.of(context).elevationScheme;
     final darkThemeComposer = ColoredThemeComposer(
       colors: darkColorScheme,
       opacity: opacityScheme,
       fonts: fontScheme,
+      elevation: elevationScheme,
     );
     final lightThemeComposer = ColoredThemeComposer(
       colors: lightColorScheme,
       opacity: opacityScheme,
       fonts: fontScheme,
+      elevation: elevationScheme
     );
     return builder(
       lightThemeComposer.getThemeData(),

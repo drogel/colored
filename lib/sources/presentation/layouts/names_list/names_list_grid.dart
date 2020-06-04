@@ -22,12 +22,15 @@ class NamesListGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = PaddingData.of(context).paddingScheme;
+    final mediaQuery = MediaQuery.of(context);
+    final viewInsets = mediaQuery.viewInsets;
+    final safeAreaPadding = mediaQuery.padding;
     return BackgroundContainer(
       child: SafeArea(
         bottom: false,
         child: LayoutBuilder(
           builder: (_, constraints) => GridView.builder(
-            padding: padding.vertical,
+            padding: padding.vertical.add(viewInsets).add(safeAreaPadding),
             itemCount: namedColors.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: _computeCrossAxisCount(constraints),
