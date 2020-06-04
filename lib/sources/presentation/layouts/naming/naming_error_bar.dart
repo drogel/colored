@@ -1,4 +1,5 @@
 import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
+import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
@@ -22,12 +23,13 @@ class NamingErrorBar extends StatelessWidget {
     final radii = RadiusData.of(context).radiiScheme;
     final durations = DurationData.of(context).durationScheme;
     final paddingScheme = PaddingData.of(context).paddingScheme;
+    final opacity = OpacityData.of(context).opacityScheme;
     final crossFadeState = _getCrossFadeState(namingState);
     return Padding(
       padding: paddingScheme.small,
       child: Material(
         elevation: elevation.low,
-        color: colors.error,
+        color: colors.primary.withOpacity(opacity.overlay),
         borderRadius: BorderRadius.all(radii.medium),
         child: AnimatedCrossFade(
           crossFadeState: crossFadeState,
@@ -48,7 +50,7 @@ class NamingErrorBar extends StatelessWidget {
                 Icon(
                   Icons.offline_bolt,
                   size: bodyTextStyle.fontSize + 3,
-                  color: colors.onError,
+                  color: colors.error,
                 ),
                 SizedBox(width: paddingScheme.large.top),
                 Text(localization.noConnection),
