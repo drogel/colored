@@ -24,34 +24,39 @@ class ConverterBodyLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
     final padding = PaddingData.of(context).paddingScheme;
+    final maxButtonCount = Format.values.length;
+    final maxContainerWidth = (maxButtonCount + 1.5) * _kFormatButtonMinSpace;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         if (background != null) background,
-        OverlayContainer(
-          child: SwipingCrossFade(
-            showChild: showSliders,
-            enableGestures: enableGestures,
-            header: Padding(
-              padding: EdgeInsets.symmetric(horizontal: padding.base),
-              child: LayoutBuilder(
-                builder: (_, constraints) => Row(
-                  mainAxisAlignment:
-                      _computeButtonCount(constraints.maxWidth) == 1
-                          ? MainAxisAlignment.spaceAround
-                          : MainAxisAlignment.spaceBetween,
-                  children: _buildFormatButtons(data, constraints.maxWidth),
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxContainerWidth),
+          child: OverlayContainer(
+            child: SwipingCrossFade(
+              showChild: showSliders,
+              enableGestures: enableGestures,
+              header: Padding(
+                padding: EdgeInsets.symmetric(horizontal: padding.base),
+                child: LayoutBuilder(
+                  builder: (_, constraints) => Row(
+                    mainAxisAlignment:
+                        _computeButtonCount(constraints.maxWidth) == 1
+                            ? MainAxisAlignment.spaceAround
+                            : MainAxisAlignment.spaceBetween,
+                    children: _buildFormatButtons(data, constraints.maxWidth),
+                  ),
                 ),
               ),
-            ),
-            child: ColorSliders(
-              firstValue: data.state.selection.first,
-              secondValue: data.state.selection.second,
-              thirdValue: data.state.selection.third,
-              onChanged: data.onSelectionChanged,
-              onChangeEnd: data.onSelectionEnd,
-              step: data.state.converterStep,
-              controller: data.slidersController,
+              child: ColorSliders(
+                firstValue: data.state.selection.first,
+                secondValue: data.state.selection.second,
+                thirdValue: data.state.selection.third,
+                onChanged: data.onSelectionChanged,
+                onChangeEnd: data.onSelectionEnd,
+                step: data.state.converterStep,
+                controller: data.slidersController,
+              ),
             ),
           ),
         ),

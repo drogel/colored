@@ -3,6 +3,7 @@ import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 const double _kIndicatorHeight = 5;
@@ -26,14 +27,12 @@ class OverlayContainer extends StatelessWidget {
     final elevation = ElevationData.of(context).elevationScheme;
     final radii = RadiusData.of(context).radiiScheme;
     final padding = PaddingData.of(context).paddingScheme;
-    final defaultPaddingValue = padding.large.bottom + padding.small.bottom;
-    final defaultPadding = EdgeInsets.only(bottom: defaultPaddingValue);
     final deviceSafeArea = MediaQuery.of(context).padding;
     final opacity = OpacityData.of(context).opacityScheme;
     return SafeArea(
       child: OrientationBuilder(
         builder: (_, orientation) => Padding(
-          padding: _getPadding(orientation, deviceSafeArea, padding),
+          padding: _getOuterPadding(orientation, deviceSafeArea, padding),
           child: Stack(
             alignment: Alignment.topCenter,
             children: <Widget>[
@@ -42,7 +41,7 @@ class OverlayContainer extends StatelessWidget {
                 color: colors.primary.withOpacity(opacity.overlay),
                 borderRadius: BorderRadius.all(radii.large),
                 child: Padding(
-                  padding: this.padding ?? defaultPadding,
+                  padding: this.padding ?? _getInnerPadding(padding),
                   child: child,
                 ),
               ),
@@ -63,17 +62,26 @@ class OverlayContainer extends StatelessWidget {
     );
   }
 
-  EdgeInsets _getPadding(
+  EdgeInsets _getOuterPadding(
     Orientation orientation,
     EdgeInsets deviceSafeArea,
     PaddingScheme paddingScheme,
   ) {
-    if (orientation == Orientation.portrait) {
-      return deviceSafeArea.bottom == 0
-          ? paddingScheme.small
-          : EdgeInsets.symmetric(horizontal: deviceSafeArea.bottom / 2);
+    if (kIsWeb) {
+      return paddingScheme.large;
     } else {
-      return paddingScheme.small;
+      if (orientation == Orientation.portrait) {
+        return deviceSafeArea.bottom == 0
+            ? paddingScheme.small
+            : EdgeInsets.symmetric(horizontal: deviceSafeArea.bottom / 2);
+      } else {
+        return paddingScheme.small;
+      }
     }
+  }
+
+  EdgeInsets _getInnerPadding(PaddingScheme padding) {
+    final defaultPaddingValue = padding.large.bottom + padding.small.top;
+    return EdgeInsets.only(bottom: defaultPaddingValue, top: padding.small.top);
   }
 }
