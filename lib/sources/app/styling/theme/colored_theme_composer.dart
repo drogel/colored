@@ -1,4 +1,5 @@
 import 'package:colored/sources/app/styling/colors/colored_color_scheme.dart';
+import 'package:colored/sources/app/styling/elevation/elevation_scheme.dart';
 import 'package:colored/sources/app/styling/fonts/font_scheme.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_scheme.dart';
 import 'package:colored/sources/app/styling/theme/theme_composer.dart';
@@ -10,6 +11,7 @@ class ColoredThemeComposer implements ThemeComposer {
     @required this.colors,
     @required this.opacity,
     @required this.fonts,
+    @required this.elevation,
   })  : assert(colors != null),
         assert(fonts != null),
         assert(opacity != null);
@@ -17,6 +19,7 @@ class ColoredThemeComposer implements ThemeComposer {
   final ColoredColorScheme colors;
   final OpacityScheme opacity;
   final FontScheme fonts;
+  final ElevationScheme elevation;
 
   @override
   ThemeData getThemeData() => ThemeData(
@@ -46,7 +49,7 @@ class ColoredThemeComposer implements ThemeComposer {
           brightness: Brightness.light,
         ),
         appBarTheme: AppBarTheme(
-          elevation: 6,
+          elevation: elevation.medium,
           color: colors.primary,
           actionsIconTheme: IconThemeData(color: colors.text),
         ),

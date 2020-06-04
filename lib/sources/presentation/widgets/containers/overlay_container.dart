@@ -1,9 +1,9 @@
+import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
+import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:flutter/material.dart';
-
-import '../../../app/styling/padding/padding_scheme.dart';
 
 class OverlayContainer extends StatelessWidget {
   const OverlayContainer({
@@ -18,6 +18,7 @@ class OverlayContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final elevation = ElevationData.of(context).elevationScheme;
     final radii = RadiusData.of(context).radiiScheme;
     final padding = PaddingData.of(context).paddingScheme;
     final defaultPaddingValue = padding.large.bottom + padding.small.bottom;
@@ -29,7 +30,7 @@ class OverlayContainer extends StatelessWidget {
         builder: (_, orientation) => Padding(
           padding: _getPadding(orientation, deviceSafeArea, padding),
           child: Material(
-            elevation: 2,
+            elevation: elevation.low,
             color: colorScheme.primary.withOpacity(opacity.overlay),
             borderRadius: BorderRadius.all(radii.large),
             child: Padding(

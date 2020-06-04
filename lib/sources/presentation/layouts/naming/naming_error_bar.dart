@@ -1,3 +1,4 @@
+import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
@@ -13,6 +14,7 @@ class NamingErrorBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localization = Localization.of(context).naming;
+    final elevation = ElevationData.of(context).elevationScheme;
     final bodyTextStyle = Theme.of(context).textTheme.bodyText1;
     final colors = Theme.of(context).colorScheme;
     final namingState = NamingData.of(context).state;
@@ -24,7 +26,7 @@ class NamingErrorBar extends StatelessWidget {
     return Padding(
       padding: paddingScheme.small,
       child: Material(
-        elevation: 2,
+        elevation: elevation.low,
         color: colors.error,
         borderRadius: BorderRadius.all(radii.medium),
         child: AnimatedCrossFade(
