@@ -33,6 +33,7 @@ class ColoredThemeComposer implements ThemeComposer {
         primarySwatch: colors.swatch,
         textSelectionHandleColor: colors.secondary,
         hintColor: colors.textVariant,
+        hoverColor: colors.secondaryDark.withOpacity(opacity.hover),
         colorScheme: ColorScheme(
           primary: colors.primary,
           primaryVariant: colors.primaryVariant,

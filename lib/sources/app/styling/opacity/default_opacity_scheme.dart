@@ -12,4 +12,7 @@ class DefaultOpacityScheme implements OpacityScheme {
 
   @override
   double get shadow => opacity.shadow;
+
+  @override
+  double get hover => opacity.hover;
 }

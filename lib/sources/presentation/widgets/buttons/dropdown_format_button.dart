@@ -1,3 +1,4 @@
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/presentation/widgets/buttons/format_button.dart';
 import 'package:flutter/material.dart';
@@ -23,29 +24,33 @@ class DropdownFormatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final padding = PaddingData.of(context).paddingScheme;
     return Theme(
       data: theme.copyWith(canvasColor: theme.buttonColor),
-      child: Column(
-        children: <Widget>[
-          DropdownButton<String>(
-            value: format.rawValue,
-            items: Format.values
-                .map((format) => DropdownMenuItem<String>(
-                      value: format.rawValue,
-                      child: Text(format.rawValue),
-                    ))
-                .toList(),
-            iconEnabledColor: Theme.of(context).colorScheme.secondary,
-            underline: Container(),
-            onChanged: (str) => onDropdownSelection(formatValue(str), format),
-          ),
-          FormatButton(
-            format: format,
-            clipboardShouldFail: clipboardShouldFail,
-            onClipboardRetrieved: onClipboardRetrieved,
-            content: content,
-          ),
-        ],
+      child: Padding(
+        padding: padding.small,
+        child: Column(
+          children: <Widget>[
+            DropdownButton<String>(
+              value: format.rawValue,
+              items: Format.values
+                  .map((format) => DropdownMenuItem<String>(
+                        value: format.rawValue,
+                        child: Text(format.rawValue),
+                      ))
+                  .toList(),
+              iconEnabledColor: Theme.of(context).colorScheme.secondary,
+              underline: Container(),
+              onChanged: (str) => onDropdownSelection(formatValue(str), format),
+            ),
+            FormatButton(
+              format: format,
+              clipboardShouldFail: clipboardShouldFail,
+              onClipboardRetrieved: onClipboardRetrieved,
+              content: content,
+            ),
+          ],
+        ),
       ),
     );
   }

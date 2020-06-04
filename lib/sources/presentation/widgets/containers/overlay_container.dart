@@ -6,19 +6,15 @@ import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const double _kIndicatorHeight = 5;
-
 class OverlayContainer extends StatelessWidget {
   const OverlayContainer({
     this.child,
     this.padding,
-    this.hasIndicator = true,
     Key key,
   }) : super(key: key);
 
   final Widget child;
   final EdgeInsets padding;
-  final bool hasIndicator;
 
   @override
   Widget build(BuildContext context) {
@@ -33,29 +29,14 @@ class OverlayContainer extends StatelessWidget {
       child: OrientationBuilder(
         builder: (_, orientation) => Padding(
           padding: _getOuterPadding(orientation, deviceSafeArea, padding),
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: <Widget>[
-              Material(
-                elevation: elevation.low,
-                color: colors.primary.withOpacity(opacity.overlay),
-                borderRadius: BorderRadius.all(radii.large),
-                child: Padding(
-                  padding: this.padding ?? _getInnerPadding(padding),
-                  child: child,
-                ),
-              ),
-              if (hasIndicator)
-                Container(
-                  width: 36,
-                  height: _kIndicatorHeight,
-                  margin: const EdgeInsets.all(_kIndicatorHeight),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(radii.small),
-                    color: theme.buttonColor,
-                  ),
-                ),
-            ],
+          child: Material(
+            elevation: elevation.low,
+            color: colors.primary.withOpacity(opacity.overlay),
+            borderRadius: BorderRadius.all(radii.large),
+            child: Padding(
+              padding: this.padding ?? _getInnerPadding(padding),
+              child: child,
+            ),
           ),
         ),
       ),

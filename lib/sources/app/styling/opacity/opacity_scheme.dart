@@ -4,4 +4,6 @@ abstract class OpacityScheme {
   double get shadow;
 
   double get fadedColor;
+
+  double get hover;
 }
