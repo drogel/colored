@@ -37,10 +37,7 @@ class NamingErrorBar extends StatelessWidget {
           firstCurve: curves.exiting,
           secondCurve: curves.exiting,
           sizeCurve: curves.incoming,
-          firstChild: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: const <Widget>[SizedBox()],
-          ),
+          firstChild: SizedBox(width: double.maxFinite),
           secondChild: Padding(
             padding: paddingScheme.medium,
             child: Row(
