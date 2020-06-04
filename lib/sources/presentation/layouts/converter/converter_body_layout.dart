@@ -8,7 +8,7 @@ import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_but
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
-const _kOverlayContainerMaxHeight = 260.0;
+const _kOverlayContainerMaxHeight = 300.0;
 
 class ConverterBodyLayout extends StatelessWidget {
   const ConverterBodyLayout({
