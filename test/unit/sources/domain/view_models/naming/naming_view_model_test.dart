@@ -45,37 +45,20 @@ class ConnectivityServiceSuccessStub implements ConnectivityService {
       StreamController<ConnectivityResult>().stream;
 }
 
-class ConnectivityServiceFailureStub implements ConnectivityService {
-  const ConnectivityServiceFailureStub(this.connectivityController);
-
-  final StreamController<ConnectivityResult> connectivityController;
-
-  @override
-  Future<ConnectivityResult> checkConnectivity() async =>
-      ConnectivityResult.none;
-
-  @override
-  Stream<ConnectivityResult> get connectivityStream =>
-      connectivityController.stream;
-}
-
 void main() {
   NamingViewModel viewModel;
   StreamController<NamingState> stateController;
   NamingService namingService;
-  ConnectivityService connectivityService;
   FormatConverter formatConverter;
 
   group("Given a NamingViewModel with successful NamingService requests", () {
     setUp(() {
       stateController = StreamController<NamingState>();
       namingService = NamingServiceSuccessStub();
-      connectivityService = ConnectivityServiceSuccessStub();
       formatConverter = FormatConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,
         namingService: namingService,
-        connectivityService: connectivityService,
         converter: formatConverter,
       );
     });
@@ -85,7 +68,6 @@ void main() {
       stateController = null;
       namingService = null;
       formatConverter = null;
-      connectivityService = null;
       viewModel = null;
     });
 
@@ -128,11 +110,9 @@ void main() {
       stateController = StreamController<NamingState>();
       namingService = NamingServiceFailureStub();
       formatConverter = FormatConverterStub();
-      connectivityService = ConnectivityServiceSuccessStub();
       viewModel = NamingViewModel(
         stateController: stateController,
         namingService: namingService,
-        connectivityService: connectivityService,
         converter: formatConverter,
       );
     });
@@ -142,7 +122,6 @@ void main() {
       stateController = null;
       namingService = null;
       formatConverter = null;
-      connectivityService = null;
       viewModel = null;
     });
 
@@ -167,58 +146,6 @@ void main() {
         });
         final selection = ColorSelection(first: 0, second: 0, third: 0);
         await viewModel.fetchNaming(selection);
-      });
-    });
-  });
-
-  group("Given a NamingViewModel with no network connectivity", () {
-    StreamController<ConnectivityResult> connectivityController;
-
-    setUp(() {
-      connectivityController = StreamController<ConnectivityResult>();
-      stateController = StreamController<NamingState>();
-      namingService = NamingServiceFailureStub();
-      formatConverter = FormatConverterStub();
-      connectivityService = ConnectivityServiceFailureStub(
-        connectivityController,
-      );
-      viewModel = NamingViewModel(
-        stateController: stateController,
-        namingService: namingService,
-        connectivityService: connectivityService,
-        converter: formatConverter,
-      );
-    });
-
-    tearDown(() {
-      stateController.close();
-      connectivityController.close();
-      stateController = null;
-      namingService = null;
-      formatConverter = null;
-      connectivityService = null;
-      viewModel = null;
-    });
-
-    group("when init is called", () {
-      test("then NoConnectivity added to stream on ConnectivityResult.none",
-          () async {
-        stateController.stream.listen((event) {
-          expectLater(event.runtimeType, NoConnectivity);
-        });
-        connectivityController.sink.add(ConnectivityResult.none);
-        viewModel.init();
-      });
-
-      test(
-          "then ConnectivityRestored added to stream on any "
-          "ConnectivityResult different from ConnectivityResult.none",
-          () async {
-        stateController.stream.listen((event) {
-          expectLater(event.runtimeType, ConnectivityRestored);
-        });
-        connectivityController.sink.add(ConnectivityResult.wifi);
-        viewModel.init();
       });
     });
   });
