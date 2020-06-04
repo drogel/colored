@@ -1,23 +1,29 @@
+import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
+import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/styling/padding/padding_scheme.dart';
+const double _kIndicatorHeight = 5;
 
 class OverlayContainer extends StatelessWidget {
   const OverlayContainer({
     this.child,
     this.padding,
+    this.hasIndicator = true,
     Key key,
   }) : super(key: key);
 
   final Widget child;
   final EdgeInsets padding;
+  final bool hasIndicator;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final elevation = ElevationData.of(context).elevationScheme;
     final radii = RadiusData.of(context).radiiScheme;
     final padding = PaddingData.of(context).paddingScheme;
     final defaultPaddingValue = padding.large.bottom + padding.small.bottom;
@@ -28,14 +34,29 @@ class OverlayContainer extends StatelessWidget {
       child: OrientationBuilder(
         builder: (_, orientation) => Padding(
           padding: _getPadding(orientation, deviceSafeArea, padding),
-          child: Material(
-            elevation: 2,
-            color: colorScheme.primary.withOpacity(opacity.overlay),
-            borderRadius: BorderRadius.all(radii.large),
-            child: Padding(
-              padding: this.padding ?? defaultPadding,
-              child: child,
-            ),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: <Widget>[
+              Material(
+                elevation: elevation.low,
+                color: colors.primary.withOpacity(opacity.overlay),
+                borderRadius: BorderRadius.all(radii.large),
+                child: Padding(
+                  padding: this.padding ?? defaultPadding,
+                  child: child,
+                ),
+              ),
+              if (hasIndicator)
+                Container(
+                  width: 36,
+                  height: _kIndicatorHeight,
+                  margin: const EdgeInsets.all(_kIndicatorHeight),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(radii.small),
+                    color: theme.buttonColor,
+                  ),
+                ),
+            ],
           ),
         ),
       ),

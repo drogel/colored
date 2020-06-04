@@ -1,8 +1,10 @@
 import 'package:colored/sources/app/navigation/routers/flow_router.dart';
+import 'package:colored/sources/domain/view_models/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_layout.dart';
+import 'package:colored/sources/presentation/notifiers/connectivity_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/converter_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/names_list_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/naming_notifier.dart';
@@ -28,9 +30,12 @@ class ConverterRouter implements FlowRouter {
           injector: NamesListInjector(),
           child: ConverterNotifier(
             injector: ConverterInjector(),
-            child: NamingNotifier(
-              injector: NamingInjector(),
-              child: ConverterLayout(),
+            child: ConnectivityNotifier(
+              injector: ConnectivityInjector(),
+              child: NamingNotifier(
+                injector: NamingInjector(),
+                child: ConverterLayout(),
+              ),
             ),
           ),
         ),
