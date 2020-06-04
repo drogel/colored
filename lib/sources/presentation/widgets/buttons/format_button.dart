@@ -1,7 +1,7 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/presentation/widgets/buttons/primary_button.dart';
+import 'package:colored/sources/presentation/widgets/containers/colored_tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -36,16 +36,11 @@ class _FormatButtonState extends State<FormatButton> {
 
   @override
   Widget build(BuildContext context) {
-    final radii = RadiusData.of(context).radiiScheme;
     final localization = Localization.of(context).converter;
-    return Tooltip(
-      key: _tooltip,
+    return ColoredTooltip(
+      tooltipKey: _tooltip,
       message: _tooltipMessage ?? localization.tooltipMessage,
-      decoration: BoxDecoration(
-        color: _tooltipColor,
-        borderRadius: BorderRadius.all(radii.small),
-      ),
-      preferBelow: false,
+      color: _tooltipColor,
       child: PrimaryButton(
         onPressed: _getClipboardData,
         onLongPress: _setTitleInClipboardData,
