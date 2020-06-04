@@ -19,8 +19,8 @@ class Colored extends StatelessWidget {
   Widget build(BuildContext context) => Style(
         child: ThemeBuilder(
           builder: (lightTheme, darkTheme) => MaterialApp(
-            localizationsDelegates: [
-              const ColoredLocalizationDelegate(),
+            localizationsDelegates: const [
+              ColoredLocalizationDelegate(),
               GlobalWidgetsLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
             ],

@@ -14,7 +14,7 @@ class NamingAppBar extends StatelessWidget {
       title: NamingCrossFadeText(defaultText: localization.colorConverter),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.search),
+          icon: const Icon(Icons.search),
           onPressed: onSearchPressed,
         ),
       ],
