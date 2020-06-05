@@ -76,6 +76,7 @@ class _FormatButtonState extends State<FormatButton> {
   }
 
   void _showTooltip() {
+    HapticFeedback.mediumImpact();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final dynamic tooltipState = _tooltip.currentState;
       tooltipState.ensureTooltipVisible();
