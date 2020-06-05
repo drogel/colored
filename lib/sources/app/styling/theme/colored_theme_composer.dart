@@ -71,6 +71,7 @@ class ColoredThemeComposer implements ThemeComposer {
         canvasColor: colors.textVariant,
         splashColor: colors.secondary.withOpacity(opacity.fadedColor),
         buttonColor: colors.primaryDark,
+        disabledColor: colors.primary,
         iconTheme: IconThemeData(color: colors.secondary, size: 32),
         cupertinoOverrideTheme: CupertinoThemeData(
           primaryColor: colors.secondary,
