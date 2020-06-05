@@ -1,10 +1,13 @@
-import 'dart:convert';
-
-import 'package:colored/resources/asset_paths.dart' as paths;
+import 'package:colored/sources/data/services/names/names_data_source/names_data_source.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 
 class ColorNamesService implements NamesService {
+  ColorNamesService({@required NamesDataSource dataSource})
+      : assert(dataSource != null),
+        _dataSource = dataSource;
+
+  final NamesDataSource _dataSource;
   Map<String, String> _colorNames;
 
   @override
@@ -18,10 +21,7 @@ class ColorNamesService implements NamesService {
   }
 
   @override
-  Future<void> loadNames() async {
-    final colorNamesStr = await rootBundle.loadString(paths.colorNames);
-    _colorNames = Map<String, String>.from(jsonDecode(colorNamesStr));
-  }
+  Future<void> loadNames() async => _colorNames = await _dataSource.loadNames();
 
   @override
   void dispose() => _colorNames = null;
