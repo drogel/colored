@@ -60,4 +60,10 @@ class _ColorNamesSearchFieldState extends State<ColorNamesSearchField> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 }
