@@ -26,10 +26,15 @@ class ColorNamesService implements NamesService {
   @override
   void dispose() => _colorNames = null;
 
+  Map<String, String> _filterSearchedNames(String search) {
+    final tmpCopy = Map<String, String>.from(_colorNames);
+    tmpCopy.removeWhere((hex, name) => _noKeyOrValueFound(hex, name, search));
+    return tmpCopy;
+  }
+
   bool _containsSearch(String name, String searchString) =>
       name.toLowerCase().contains(searchString.toLowerCase());
 
-  Map<String, String> _filterSearchedNames(String searchString) =>
-      Map<String, String>.from(_colorNames)
-        ..removeWhere((_, name) => !_containsSearch(name, searchString));
+  bool _noKeyOrValueFound(String key, String value, String search) =>
+      !_containsSearch(key, search) && !_containsSearch(value, search);
 }
