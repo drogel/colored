@@ -15,7 +15,7 @@ import 'package:flutter/widgets.dart';
 class ConverterRouter implements FlowRouter {
   const ConverterRouter();
 
-  static const name = "converterFlow/";
+  static const name = "converter/";
 
   @override
   Route generateRoute(RouteSettings settings) {

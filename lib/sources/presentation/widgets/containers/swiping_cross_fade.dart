@@ -1,5 +1,6 @@
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
+import 'package:colored/sources/presentation/widgets/containers/draggable_indicator.dart';
 import 'package:colored/sources/presentation/widgets/directional_pan_detector.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class SwipingCrossFade extends StatefulWidget {
     this.showFadeCurve,
     this.hideFadeCurve,
     this.sizeCurve,
+    this.hasIndicator = true,
     Key key,
   }) : super(key: key);
 
@@ -26,6 +28,7 @@ class SwipingCrossFade extends StatefulWidget {
   final Curve sizeCurve;
   final bool showChild;
   final bool enableGestures;
+  final bool hasIndicator;
 
   @override
   _SwipingCrossFadeState createState() => _SwipingCrossFadeState();
@@ -53,37 +56,40 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
     final durations = DurationData.of(context).durationScheme;
     final curves = CurveData.of(context).curveScheme;
     return DirectionalPanDetector(
-      onPanUpdateUp: widget.enableGestures ? _show : null,
-      onPanUpdateDown: widget.enableGestures ? _hide : null,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            color: Colors.transparent,
-            child: widget.header,
+      onPanUpdateUp: widget.enableGestures ? (_) => _show() : null,
+      onPanUpdateDown: widget.enableGestures ? (_) => _hide() : null,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              widget.header,
+              AnimatedCrossFade(
+                crossFadeState: _state,
+                firstChild: widget.child,
+                secondChild: Container(),
+                duration: widget.sizeDuration ?? durations.mediumPresenting,
+                reverseDuration:
+                    widget.reverseFadeDuration ?? durations.mediumDismissing,
+                firstCurve: widget.showFadeCurve ?? curves.incoming,
+                secondCurve: widget.hideFadeCurve ?? curves.exiting,
+                sizeCurve: widget.sizeCurve ?? curves.incoming,
+              ),
+            ],
           ),
-          AnimatedCrossFade(
-            crossFadeState: _state,
-            firstChild: widget.child,
-            secondChild: Container(),
-            duration: widget.sizeDuration ?? durations.mediumPresenting,
-            reverseDuration:
-                widget.reverseFadeDuration ?? durations.mediumDismissing,
-            firstCurve: widget.showFadeCurve ?? curves.incoming,
-            secondCurve: widget.hideFadeCurve ?? curves.exiting,
-            sizeCurve: widget.sizeCurve ?? curves.incoming,
-          ),
+          if (widget.hasIndicator) DraggableIndicator(onTap: _toggle),
         ],
       ),
     );
   }
 
-  void _show(DragUpdateDetails details) =>
-      setState(() => _state = CrossFadeState.showFirst);
+  void _show() => setState(() => _state = CrossFadeState.showFirst);
 
-  void _hide(DragUpdateDetails details) =>
-      setState(() => _state = CrossFadeState.showSecond);
+  void _hide() => setState(() => _state = CrossFadeState.showSecond);
 
   void _updateState() => _state =
       widget.showChild ? CrossFadeState.showFirst : CrossFadeState.showSecond;
+
+  void _toggle() => _state == CrossFadeState.showFirst ? _hide() : _show();
 }

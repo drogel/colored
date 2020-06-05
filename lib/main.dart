@@ -8,6 +8,7 @@ import 'package:colored/sources/data/services/local_storage/local_storage.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage_keys.dart'
     as keys;
 import 'package:colored/sources/data/services/local_storage/shared_preferences.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -20,6 +21,14 @@ Future<void> main() async {
 }
 
 Future<FlowRouter> _getInitialRoute(LocalStorage localStorage) async {
+  if (kIsWeb) {
+    return const ConverterRouter();
+  } else {
+    return _getMobileInitialRoute(localStorage);
+  }
+}
+
+Future<FlowRouter> _getMobileInitialRoute(LocalStorage localStorage) async {
   final didOnBoard = await localStorage.getBool(key: keys.didOnBoard);
   if (didOnBoard == null) {
     return const OnBoardingRouter();

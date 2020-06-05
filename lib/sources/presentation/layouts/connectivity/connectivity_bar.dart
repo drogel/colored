@@ -41,7 +41,7 @@ class ConnectivityBar extends StatelessWidget {
           firstCurve: curves.exiting,
           secondCurve: curves.exiting,
           sizeCurve: curves.incoming,
-          firstChild: SizedBox(width: double.maxFinite),
+          firstChild: const SizedBox(width: double.maxFinite),
           secondChild: Padding(
             padding: paddingScheme.medium,
             child: child,
