@@ -11,7 +11,6 @@ class ColorNamesAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final actionsTheme = Theme.of(context).appBarTheme.actionsIconTheme;
     final data = NamesListData.of(context);
     final padding = PaddingData.of(context).paddingScheme;
     return SafeArea(
