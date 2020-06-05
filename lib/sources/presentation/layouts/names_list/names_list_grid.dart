@@ -21,6 +21,7 @@ class NamesListGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const pageStorageKey = PageStorageKey<int>(1);
     final padding = PaddingData.of(context).paddingScheme;
     final mediaQuery = MediaQuery.of(context);
     final viewInsets = mediaQuery.viewInsets;
@@ -30,6 +31,7 @@ class NamesListGrid extends StatelessWidget {
         bottom: false,
         child: LayoutBuilder(
           builder: (_, constraints) => GridView.builder(
+            key: pageStorageKey,
             padding: padding.vertical.add(viewInsets).add(safeAreaPadding),
             itemCount: namedColors.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
