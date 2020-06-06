@@ -1,25 +1,49 @@
+import 'package:colored/sources/data/services/names/color_names_service.dart';
 import 'package:colored/sources/data/services/names/names_data_source/names_data_source.dart';
+import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class MockNamesDataSource implements NamesDataSource {
+  static const mockColorNames = {"212121": "Sample Color"};
+
   @override
-  Future<Map<String, String>> loadNames() async {
-    throw UnimplementedError();
-  }
+  Future<Map<String, String>> loadNames() async => mockColorNames;
 }
 
 void main() {
+  NamesDataSource namesDataSource;
+  NamesService namesService;
+
   setUp(() {
-    // TODO(diego): implement setUp method in color_names_service_test
+    namesDataSource = MockNamesDataSource();
+    namesService = ColorNamesService(dataSource: namesDataSource);
   });
 
   tearDown(() {
-    // TODO(diego): implement tearDown method in color_names_service_test
+    namesDataSource = null;
+    namesService.dispose();
+    namesService = null;
   });
 
-  group("", () {
-    test("", () {
-      // TODO(diego): define unit tests in color_names_service_test
+  group("Given a ColorNamesService with a mocked data source", () {
+    group("when fetchColorNames is called", () {
+      test("then the color can be found by its hex code", () async {
+        await namesService.loadNames();
+        final actual = namesService.fetchNamesContaining("2121");
+        expect(actual, MockNamesDataSource.mockColorNames);
+      });
+
+      test("then the color can be found by its name", () async {
+        await namesService.loadNames();
+        final actual = namesService.fetchNamesContaining("Sample");
+        expect(actual, MockNamesDataSource.mockColorNames);
+      });
+
+      test("then an empty map is returned if search missed", () async {
+        await namesService.loadNames();
+        final actual = namesService.fetchNamesContaining("Black");
+        expect(actual, {});
+      });
     });
   });
 }
