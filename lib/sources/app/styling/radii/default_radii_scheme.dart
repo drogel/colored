@@ -6,11 +6,11 @@ class DefaultRadiiScheme implements RadiiScheme {
   const DefaultRadiiScheme();
 
   @override
-  Radius get large => Radius.circular(radii.large);
+  Radius get large => const Radius.circular(radii.large);
 
   @override
-  Radius get medium => Radius.circular(radii.medium);
+  Radius get medium => const Radius.circular(radii.medium);
 
   @override
-  Radius get small => Radius.circular(radii.small);
+  Radius get small => const Radius.circular(radii.small);
 }

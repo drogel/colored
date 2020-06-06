@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-final ColorSwatch swatch = MaterialColor(secondary.value, {
-  50: secondary.withOpacity(0.2),
-  100: secondary.withOpacity(0.4),
-  200: secondary.withOpacity(0.6),
-  300: secondary.withOpacity(0.8),
-  400: secondary.withOpacity(1),
-  500: secondaryDark.withOpacity(0.2),
-  600: secondaryDark.withOpacity(0.4),
-  700: secondaryDark.withOpacity(0.6),
-  800: secondaryDark.withOpacity(0.8),
-  900: secondaryDark.withOpacity(1),
+final ColorSwatch swatch = MaterialColor(secondary.value, const {
+  50: Color.fromRGBO(242, 249, 249, 1),
+  100: Color.fromRGBO(217, 238, 236, 1),
+  200: Color.fromRGBO(191, 227, 223, 1),
+  300: Color.fromRGBO(165, 215, 210, 1),
+  400: secondary,
+  500: Color.fromRGBO(114, 178, 171, 1),
+  600: Color.fromRGBO(89, 139, 133, 1),
+  700: secondaryDark,
+  800: Color.fromRGBO(64, 99, 95, 1),
+  900: Color.fromRGBO(38, 59, 57, 1),
 });
 
 const Color primary = Color.fromRGBO(48, 48, 48, 1);

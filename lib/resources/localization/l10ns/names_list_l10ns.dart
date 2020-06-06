@@ -5,11 +5,11 @@ class NamesListL10ns extends LocaleCodeAware {
 
   static final Map<String, Map<String, String>> _values = {
     'en': {
-      'search': 'Search colors',
+      'search': "Try 'Blue' or '#7FC6BE'",
       'noColorsFound': "Thousands of colors and I can't find that one!",
     },
     "es": {
-      'search': 'Buscar colores',
+      'search': 'Prueba "Blue" o "#7FC6BE"',
       'noColorsFound': '¡Tengo miles de colores, pero no encuentro ese!',
     }
   };

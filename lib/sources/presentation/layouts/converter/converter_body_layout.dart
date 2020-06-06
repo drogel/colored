@@ -8,51 +8,61 @@ import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_but
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
+const _kOverlayContainerMaxHeight = 300.0;
 
 class ConverterBodyLayout extends StatelessWidget {
   const ConverterBodyLayout({
     this.background,
-    this.showSliders = true,
-    this.enableGestures = true,
+    this.slidersShownIfSpaceAvailable = true,
+    this.gesturesEnabledIfSpaceAvailable = true,
   });
 
   final Widget background;
-  final bool showSliders;
-  final bool enableGestures;
+  final bool slidersShownIfSpaceAvailable;
+  final bool gesturesEnabledIfSpaceAvailable;
 
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
     final padding = PaddingData.of(context).paddingScheme;
+    final maxButtonCount = Format.values.length;
+    final maxContainerWidth = (maxButtonCount + 1.5) * _kFormatButtonMinSpace;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         if (background != null) background,
-        OverlayContainer(
-          child: SwipingCrossFade(
-            showChild: showSliders,
-            enableGestures: enableGestures,
-            header: Padding(
-              padding: EdgeInsets.symmetric(horizontal: padding.base),
-              child: LayoutBuilder(
-                builder: (_, constraints) => Row(
-                  mainAxisAlignment:
-                      _computeButtonCount(constraints.maxWidth) == 1
-                          ? MainAxisAlignment.spaceAround
-                          : MainAxisAlignment.spaceBetween,
-                  children: _buildFormatButtons(data, constraints.maxWidth),
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxContainerWidth),
+          child: OverlayContainer(
+            child: LayoutBuilder(builder: (_, outerBox) {
+              final showSliders = _shouldShowSliders(outerBox.maxHeight);
+              final enableGestures = _shouldEnableGestures(outerBox.maxHeight);
+              return SwipingCrossFade(
+                showChild: showSliders,
+                enableGestures: enableGestures,
+                header: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: padding.base),
+                  child: LayoutBuilder(
+                    builder: (_, constraints) => Row(
+                      mainAxisAlignment:
+                          _computeButtonCount(constraints.maxWidth) == 1
+                              ? MainAxisAlignment.spaceAround
+                              : MainAxisAlignment.spaceBetween,
+                      children: _buildFormatButtons(data, constraints.maxWidth),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            child: ColorSliders(
-              firstValue: data.state.selection.first,
-              secondValue: data.state.selection.second,
-              thirdValue: data.state.selection.third,
-              onChanged: data.onSelectionChanged,
-              onChangeEnd: data.onSelectionEnd,
-              step: data.state.converterStep,
-              controller: data.slidersController,
-            ),
+                child: ColorSliders(
+                  firstValue: data.state.selection.first,
+                  secondValue: data.state.selection.second,
+                  thirdValue: data.state.selection.third,
+                  onChanged: data.onSelectionChanged,
+                  onChangeEnd: data.onSelectionEnd,
+                  step: data.state.converterStep,
+                  controller: data.slidersController,
+                ),
+              );
+            }),
           ),
         ),
       ],
@@ -82,5 +92,23 @@ class ConverterBodyLayout extends StatelessWidget {
     final buttonCountSpace = (availableWidth / _kFormatButtonMinSpace).floor();
     final buttonCount = buttonCountSpace.clamp(0, Format.values.length);
     return buttonCount;
+  }
+
+  bool _shouldShowSliders(double availableHeight) {
+    if (slidersShownIfSpaceAvailable) {
+      final hasAvailableRoom = availableHeight >= _kOverlayContainerMaxHeight;
+      return hasAvailableRoom;
+    } else {
+      return slidersShownIfSpaceAvailable;
+    }
+  }
+
+  bool _shouldEnableGestures(double availableHeight) {
+    if (gesturesEnabledIfSpaceAvailable) {
+      final hasAvailableRoom = availableHeight >= _kOverlayContainerMaxHeight;
+      return hasAvailableRoom;
+    } else {
+      return gesturesEnabledIfSpaceAvailable;
+    }
   }
 }
