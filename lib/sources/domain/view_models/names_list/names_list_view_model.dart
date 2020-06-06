@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
@@ -24,11 +25,13 @@ class NamesListViewModel {
   Future<void> init() => _namesService.loadNames();
 
   void searchColorName(String searchString) {
-    if (searchString.length < 3) {
+    final cleanSearch = _cleanSearch(searchString);
+
+    if (cleanSearch.length < 3) {
       return _stateController.sink.add(const Pending());
     }
 
-    final namesMap = _namesService.fetchNamesContaining(searchString);
+    final namesMap = _namesService.fetchNamesContaining(cleanSearch);
     final namedColors = namesMap.entries.map(_convertToNamedColor).toList();
 
     if (namedColors.isEmpty) {
@@ -47,4 +50,7 @@ class NamesListViewModel {
 
   NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
       NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
+
+  String _cleanSearch(String searchString) =>
+      searchString.trim().replacingAllNonAlphanumericBy("").replaceAll("#", "");
 }
