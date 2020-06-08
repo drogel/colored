@@ -32,34 +32,37 @@ class _ColorNamesSearchFieldState extends State<ColorNamesSearchField> {
     final theme = Theme.of(context);
     final radii = RadiusData.of(context).radiiScheme;
     final borderRadius = BorderRadius.all(radii.medium);
-    return Material(
-      borderRadius: borderRadius,
-      elevation: theme.appBarTheme.elevation,
-      child: TextField(
-        controller: _controller,
-        style: theme.textTheme.headline6,
-        focusNode: _focusNode,
-        textCapitalization: TextCapitalization.sentences,
-        decoration: InputDecoration(
-          hintText: localization.search,
-          contentPadding: EdgeInsets.zero,
-          filled: true,
-          fillColor: theme.colorScheme.primaryVariant,
-          prefixIcon: widget.prefixIcon,
-          suffixIcon: PlainIconButton(
-            icon: const Icon(Icons.clear),
-            onPressed:
-                _controller.text.isEmpty ? null : () => _onClearPressed(data),
-          ),
-          border: OutlineInputBorder(
-            borderSide: const BorderSide(
-              style: BorderStyle.none,
-              width: 0,
+    return Theme(
+      data: theme.copyWith(canvasColor: theme.colorScheme.primaryVariant),
+      child: Material(
+        borderRadius: borderRadius,
+        elevation: theme.appBarTheme.elevation,
+        child: TextField(
+          controller: _controller,
+          style: theme.textTheme.headline6,
+          focusNode: _focusNode,
+          textCapitalization: TextCapitalization.sentences,
+          decoration: InputDecoration(
+            hintText: localization.search,
+            contentPadding: EdgeInsets.zero,
+            filled: true,
+            fillColor: theme.colorScheme.primaryVariant,
+            prefixIcon: widget.prefixIcon,
+            suffixIcon: PlainIconButton(
+              icon: const Icon(Icons.clear),
+              onPressed:
+                  _controller.text.isEmpty ? null : () => _onClearPressed(data),
             ),
-            borderRadius: borderRadius,
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(
+                style: BorderStyle.none,
+                width: 0,
+              ),
+              borderRadius: borderRadius,
+            ),
           ),
+          onChanged: (_) => _onTextChanged(data),
         ),
-        onChanged: (_) => _onTextChanged(data),
       ),
     );
   }
