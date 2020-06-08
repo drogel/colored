@@ -25,6 +25,7 @@ class Colored extends StatelessWidget {
               GlobalMaterialLocalizations.delegate,
             ],
             supportedLocales: const [Locale("en"), Locale("es")],
+            debugShowCheckedModeBanner: false,
             title: "Colored",
             theme: lightTheme,
             darkTheme: darkTheme,
