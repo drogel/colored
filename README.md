@@ -29,7 +29,7 @@
 
 The purpose of this project is to develop a useful tool to convert, explore, and manipulate colors for developers and designers, that works on desktop, web and mobile devices. Try it out [on Flutter web!](https://drogel.github.io/colored/#/).
 
-Colored aims to be light-weight, fast and easy to use. It uses a massive color dictionary curated by [David Aerne](https://github.com/meodai), which can be found [here](https://github.com/meodai/color-names).
+Colored aims to be light-weight, fast and easy to use. It is based on the BLoC pattern, using a Domain-Driven Design. It leverages a massive color dictionary curated by [David Aerne](https://github.com/meodai), which can be found [here](https://github.com/meodai/color-names).
 
 This project has been built using the [Flutter](https://flutter.io/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
