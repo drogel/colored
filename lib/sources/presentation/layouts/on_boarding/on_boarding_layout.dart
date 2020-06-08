@@ -37,7 +37,9 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
 
   @override
   void didChangeDependencies() {
-    _scrollFraction = OnBoardingData.of(context).state.pageScrollFraction;
+    final scrollFraction = OnBoardingData.of(context).state.pageScrollFraction;
+    final maxScrollFraction = _kBackgroundColors.length - 1;
+    _scrollFraction = scrollFraction.clamp(0, maxScrollFraction).toDouble();
     _showSliders = _scrollFraction > _kSlidersScrollFractionTrigger;
     super.didChangeDependencies();
   }
