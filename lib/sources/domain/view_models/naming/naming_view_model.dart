@@ -33,9 +33,9 @@ class NamingViewModel {
   Future<void> fetchNaming(ColorSelection selection) async {
     _stateController.sink.add(const Changing());
 
-    final r = (selection.first * decimal8Bit).round();
-    final g = (selection.second * decimal8Bit).round();
-    final b = (selection.third * decimal8Bit).round();
+    final r = (selection.r * decimal8Bit).round();
+    final g = (selection.g * decimal8Bit).round();
+    final b = (selection.b * decimal8Bit).round();
 
     final hexColor = _converter.convert(r, g, b);
     final namingResult = await _namingService.getNaming(hexColor: hexColor);

@@ -53,9 +53,9 @@ class ConverterBodyLayout extends StatelessWidget {
                   ),
                 ),
                 child: ColorSliders(
-                  firstValue: data.state.selection.first,
-                  secondValue: data.state.selection.second,
-                  thirdValue: data.state.selection.third,
+                  firstValue: data.state.selection.r,
+                  secondValue: data.state.selection.g,
+                  thirdValue: data.state.selection.b,
                   onChanged: data.onSelectionChanged,
                   onChangeEnd: data.onSelectionEnd,
                   step: data.state.converterStep,

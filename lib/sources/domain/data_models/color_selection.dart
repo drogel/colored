@@ -6,45 +6,42 @@ import 'package:vector_math/hash.dart';
 
 class ColorSelection {
   factory ColorSelection({
-    @required double first,
-    @required double second,
-    @required double third,
+    @required double r,
+    @required double g,
+    @required double b,
   }) {
-    final clampedFirst = first.clamp(selectionMin, selectionMax).toDouble();
-    final clampedSecond = second.clamp(selectionMin, selectionMax).toDouble();
-    final clampedThird = third.clamp(selectionMin, selectionMax).toDouble();
+    final clampedFirst = r.clamp(selectionMin, selectionMax).toDouble();
+    final clampedSecond = g.clamp(selectionMin, selectionMax).toDouble();
+    final clampedThird = b.clamp(selectionMin, selectionMax).toDouble();
     return ColorSelection._(
-      first: clampedFirst,
-      second: clampedSecond,
-      third: clampedThird,
+      r: clampedFirst,
+      g: clampedSecond,
+      b: clampedThird,
     );
   }
 
   factory ColorSelection.fromColor(Color color) => ColorSelection(
-        first: color.red / decimal8Bit,
-        second: color.green / decimal8Bit,
-        third: color.blue / decimal8Bit,
+        r: color.red / decimal8Bit,
+        g: color.green / decimal8Bit,
+        b: color.blue / decimal8Bit,
       );
 
   const ColorSelection._({
-    @required this.first,
-    @required this.second,
-    @required this.third,
-  })  : assert(first != null),
-        assert(second != null),
-        assert(third != null);
+    @required this.r,
+    @required this.g,
+    @required this.b,
+  })  : assert(r != null),
+        assert(g != null),
+        assert(b != null);
 
-  final double first;
-  final double second;
-  final double third;
+  final double r;
+  final double g;
+  final double b;
 
   @override
   bool operator ==(Object other) =>
-      other is ColorSelection &&
-      other.first == first &&
-      other.second == second &&
-      other.third == third;
+      other is ColorSelection && other.r == r && other.g == g && other.b == b;
 
   @override
-  int get hashCode => hashObjects([first, second, third]);
+  int get hashCode => hashObjects([r, g, b]);
 }

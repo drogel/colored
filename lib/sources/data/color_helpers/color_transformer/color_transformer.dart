@@ -10,19 +10,19 @@ class ColorTransformer implements Transformer {
 
   @override
   ColorSelection changeLightness(ColorSelection selection, double change) {
-    final red = (selection.first * decimal8Bit + change)
+    final red = (selection.r * decimal8Bit + change)
         .round()
         .clamp(0, decimal8Bit);
-    final green = (selection.second * decimal8Bit + change)
+    final green = (selection.g * decimal8Bit + change)
         .round()
         .clamp(0, decimal8Bit);
-    final blue = (selection.third * decimal8Bit + change)
+    final blue = (selection.b * decimal8Bit + change)
         .round()
         .clamp(0, decimal8Bit);
     final changedSelection = ColorSelection(
-      first: red / decimal8Bit,
-      second: green / decimal8Bit,
-      third: blue / decimal8Bit,
+      r: red / decimal8Bit,
+      g: green / decimal8Bit,
+      b: blue / decimal8Bit,
     );
     return changedSelection;
   }
@@ -43,17 +43,17 @@ class ColorTransformer implements Transformer {
     final arg8 = cosA + 1 / 3 * (1 - cosA);
     m.setValues(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 
-    final r = decimal8Bit * selection.first;
-    final g = decimal8Bit * selection.second;
-    final b = decimal8Bit * selection.third;
+    final r = decimal8Bit * selection.r;
+    final g = decimal8Bit * selection.g;
+    final b = decimal8Bit * selection.b;
     final rx = r * m.entry(0, 0) + g * m.entry(0, 1) + b * m.entry(0, 2);
     final gx = r * m.entry(1, 0) + g * m.entry(1, 1) + b * m.entry(1, 2);
     final bx = r * m.entry(2, 0) + g * m.entry(2, 1) + b * m.entry(2, 2);
 
     final rotatedSelection = ColorSelection(
-      first: rx.clamp(0, decimal8Bit) / decimal8Bit,
-      second: gx.clamp(0, decimal8Bit) / decimal8Bit,
-      third: bx.clamp(0, decimal8Bit) / decimal8Bit,
+      r: rx.clamp(0, decimal8Bit) / decimal8Bit,
+      g: gx.clamp(0, decimal8Bit) / decimal8Bit,
+      b: bx.clamp(0, decimal8Bit) / decimal8Bit,
     );
     return rotatedSelection;
   }

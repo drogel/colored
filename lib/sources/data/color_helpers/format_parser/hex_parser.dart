@@ -19,9 +19,9 @@ class HexParser extends FormatParser {
     buffer.write(string.replaceFirst('#', ''));
     final color = Color(int.parse(buffer.toString(), radix: 16));
     final selection = ColorSelection(
-      first: color.red / decimal8Bit,
-      second: color.green / decimal8Bit,
-      third: color.blue / decimal8Bit,
+      r: color.red / decimal8Bit,
+      g: color.green / decimal8Bit,
+      b: color.blue / decimal8Bit,
     );
     return selection;
   }

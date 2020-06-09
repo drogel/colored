@@ -106,9 +106,9 @@ class _ColorSlidersState extends State<ColorSliders> {
   }
 
   ColorSelection _getSelection() => ColorSelection(
-        first: _firstValue,
-        second: _secondValue,
-        third: _thirdValue,
+        r: _firstValue,
+        g: _secondValue,
+        b: _thirdValue,
       );
 
   void _onChangeEnd(double value) {

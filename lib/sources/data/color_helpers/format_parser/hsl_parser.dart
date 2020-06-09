@@ -52,6 +52,6 @@ class HslParser extends FormatParser {
       rgb = rgb.map((val) => luminance * 2 * (1 - val) + 2 * val - 1).toList();
     }
 
-    return ColorSelection(first: rgb[0], second: rgb[1], third: rgb[2]);
+    return ColorSelection(r: rgb[0], g: rgb[1], b: rgb[2]);
   }
 }
