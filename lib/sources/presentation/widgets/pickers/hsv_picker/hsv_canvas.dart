@@ -41,10 +41,7 @@ class _HSVColorPainter extends CustomPainter {
       colors: [Colors.white, Colors.black],
     );
     final horizontalGradient = LinearGradient(
-      colors: [
-        Colors.white,
-        purifier.purify(color),
-      ],
+      colors: [Colors.white, purifier.purify(color)],
     );
     final verticalPaint = Paint()..shader = verticalGradient.createShader(rect);
     final horizontalPaint = Paint()
