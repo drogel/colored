@@ -30,9 +30,9 @@ class _ColorThumbState extends State<ColorThumb> {
     final textColor = Theme.of(context).appBarTheme.actionsIconTheme.color;
     final curves = CurveData.of(context).curveScheme;
     return GestureDetector(
-      onPanDown: (_) => setState(() => _isPressed = true),
-      onPanEnd: (_) => setState(() => _isPressed = false),
-      onTapUp: (_) => setState(() => _isPressed = false),
+      onPanDown: (_) => _showOuterRing(),
+      onPanEnd: (_) => _hideOuterRing(),
+      onTapUp: (_) => _hideOuterRing(),
       child: LayoutBuilder(
         builder: (_, constraints) => Stack(
           alignment: Alignment.center,
@@ -78,18 +78,20 @@ class _ColorThumbState extends State<ColorThumb> {
 
   Color _getOuterColor({@required Color dark, @required Color light}) {
     final opacity = OpacityData.of(context).opacityScheme.fadedColor;
-    final contrastingColor = _getContrastingColor(dark: dark, light: light);
+    final contrastingColor = _getContrastingColor(dark, light);
     final fadedContrastingColor = contrastingColor.withOpacity(opacity);
     return _isPressed ? widget.color : fadedContrastingColor;
   }
 
-  Color _getContrastingColor({@required Color dark, @required Color light}) {
+  Color _getContrastingColor(Color dark, Color light) {
     final contrastingColor = widget.color.isDark() ? light : dark;
     return contrastingColor;
   }
 
   Color _getThumbColor({@required Color dark, @required Color light}) =>
-      _isPressed
-          ? _getContrastingColor(dark: dark, light: light)
-          : widget.color;
+      _isPressed ? _getContrastingColor(dark, light) : widget.color;
+
+  void _showOuterRing() => setState(() => _isPressed = true);
+
+  void _hideOuterRing() => setState(() => _isPressed = false);
 }

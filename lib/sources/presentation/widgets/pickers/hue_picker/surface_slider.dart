@@ -1,3 +1,5 @@
+import 'package:colored/sources/app/styling/curves/curve_data.dart';
+import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +34,8 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
   @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (_, constraints) {
+          final duration = DurationData.of(context).durationScheme;
+          final curves = CurveData.of(context).curveScheme;
           final width = constraints.maxWidth;
           final height = constraints.maxHeight;
           const sliderThumbShape = RoundSliderThumbShape();
@@ -41,7 +45,9 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
             child: Stack(
               children: [
                 SizedBox.expand(child: widget.child),
-                Positioned(
+                AnimatedPositioned(
+                  duration: duration.shortPresenting,
+                  curve: curves.incoming,
                   left: widget.value.dx * width - thumbSize / 2,
                   top: widget.value.dy * height - thumbSize / 2,
                   width: thumbSize,
@@ -104,5 +110,5 @@ class _MultiChildRecognizer extends PanGestureRecognizer {
   void rejectGesture(int pointer) => acceptGesture(pointer);
 
   @override
-  String get debugDescription => 'AcceptingRecognizer';
+  String get debugDescription => '_MultiChildRecognizer';
 }
