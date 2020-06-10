@@ -9,17 +9,20 @@ class SurfaceSlider extends StatefulWidget {
   const SurfaceSlider({
     @required this.thumb,
     @required this.child,
+    @required this.value,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
     Key key,
   })  : assert(thumb != null),
         assert(child != null),
+        assert(value != null),
         super(key: key);
 
   final ValueChanged onChanged;
   final ValueChanged onChangeStart;
   final ValueChanged onChangeEnd;
+  final Offset value;
   final Widget thumb;
   final Widget child;
 
@@ -28,14 +31,6 @@ class SurfaceSlider extends StatefulWidget {
 }
 
 class _SurfaceSliderState extends State<SurfaceSlider> {
-  Offset _thumbPosition;
-
-  @override
-  void initState() {
-    _thumbPosition = Offset.zero;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (_, constraints) {
@@ -47,8 +42,8 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
               children: [
                 SizedBox.expand(child: widget.child),
                 Positioned(
-                  left: _thumbPosition.dx * width - _kThumbSize / 2,
-                  top: _thumbPosition.dy * height - _kThumbSize / 2,
+                  left: widget.value.dx * width - _kThumbSize / 2,
+                  top: widget.value.dy * height - _kThumbSize / 2,
                   width: _kThumbSize,
                   height: _kThumbSize,
                   child: widget.thumb,
@@ -70,6 +65,7 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
   void _buildRecognizer(PanGestureRecognizer recognizer, double w, double h) =>
       recognizer
         ..onStart = ((d) => _onStart(d.globalPosition, context, h, w))
+        ..onDown = ((d) => _onUpdate(d.globalPosition, context, h, w))
         ..onEnd = ((d) => _onEnd(context, h, w))
         ..onUpdate = ((d) => _onUpdate(d.globalPosition, context, h, w));
 
@@ -83,21 +79,20 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
 
   void _onStart(Offset offset, BuildContext context, double h, double w) {
     final normalized = _normalize(offset, context, h, w);
-    _updateThumbAndNotify(normalized.dx, normalized.dy, widget.onChangeStart);
+    _shouldNotify(normalized.dx, normalized.dy, widget.onChangeStart);
   }
 
   void _onUpdate(Offset offset, BuildContext context, double h, double w) {
     final normalized = _normalize(offset, context, h, w);
-    _updateThumbAndNotify(normalized.dx, normalized.dy, widget.onChanged);
+    _shouldNotify(normalized.dx, normalized.dy, widget.onChanged);
   }
 
   void _onEnd(BuildContext context, double h, double w) {
-    final position = _thumbPosition;
-    _updateThumbAndNotify(position.dx, position.dy, widget.onChangeEnd);
+    final position = widget.value;
+    _shouldNotify(position.dx, position.dy, widget.onChangeEnd);
   }
 
-  void _updateThumbAndNotify(double dx, double dy, ValueChanged notifier) {
-    setState(() => _thumbPosition = Offset(dx, dy));
+  void _shouldNotify(double dx, double dy, ValueChanged notifier) {
     if (notifier != null) {
       notifier(dx, dy);
     }

@@ -13,7 +13,8 @@ class HsvPicker extends StatelessWidget {
     this.onChangeEnd,
     this.purifier = const DefaultColorPurifier(),
     Key key,
-  }) : super(key: key);
+  })  : assert(color != null),
+        super(key: key);
 
   final Color color;
   final ColorPurifier purifier;
@@ -25,6 +26,7 @@ class HsvPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final hue = purifier.getHue(color);
     return HuePicker(
+      value: _pickerValue(),
       color: color,
       hueCanvas: HsvCanvas(hue: hue),
       onChanged: (x, y) => _notify(_selection(hue, x, y), onChanged),
@@ -34,7 +36,14 @@ class HsvPicker extends StatelessWidget {
   }
 
   ColorSelection _selection(double hue, double dx, double dy) =>
-      ColorSelection.fromHSV(h: hue, s: dx, v: 1 - dy);
+      ColorSelection.fromHSV(h: hue, s: dx, v: _reverseValue(dy));
+
+  double _reverseValue(double dy) => 1 - dy;
+
+  Offset _pickerValue() {
+    final hsvColor = HSVColor.fromColor(color);
+    return Offset(hsvColor.saturation, _reverseValue(hsvColor.value));
+  }
 
   void _notify(
     ColorSelection selection,
