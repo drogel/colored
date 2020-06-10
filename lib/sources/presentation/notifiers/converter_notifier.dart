@@ -44,6 +44,7 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
       state: _state,
       onSelectionChanged: _viewModel.notifySelectionChanged,
       onSelectionEnd: _viewModel.notifySelectionEnded,
+      onSelectionStarted: _viewModel.notifySelectionStarted,
       clipboardShouldFail: _viewModel.clipboardShouldFail,
       onClipboardRetrieved: _viewModel.convertStringToColor,
       onColorSwipedVertical: (dy) => _viewModel.changeLightness(dy, selection),

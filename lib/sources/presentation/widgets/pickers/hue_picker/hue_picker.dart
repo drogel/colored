@@ -30,7 +30,7 @@ class HuePicker extends StatelessWidget {
         onChanged: onChanged,
         onChangeEnd: onChangeEnd,
         onChangeStart: onChangeStart,
-        thumb: ColorThumb(color: color),
+        thumbBuilder: (pressed) => ColorThumb(color: color, isPressed: pressed),
         child: hueCanvas,
       );
 }

@@ -7,14 +7,14 @@ typedef ValueChanged = void Function(double, double);
 
 class SurfaceSlider extends StatefulWidget {
   const SurfaceSlider({
-    @required this.thumb,
+    @required this.thumbBuilder,
     @required this.child,
     @required this.value,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
     Key key,
-  })  : assert(thumb != null),
+  })  : assert(thumbBuilder != null),
         assert(child != null),
         assert(value != null),
         super(key: key);
@@ -23,7 +23,7 @@ class SurfaceSlider extends StatefulWidget {
   final ValueChanged onChangeStart;
   final ValueChanged onChangeEnd;
   final Offset value;
-  final Widget thumb;
+  final Widget Function(bool) thumbBuilder;
   final Widget child;
 
   @override
@@ -31,6 +31,8 @@ class SurfaceSlider extends StatefulWidget {
 }
 
 class _SurfaceSliderState extends State<SurfaceSlider> {
+  bool _isPressed = false;
+
   @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (_, constraints) {
@@ -40,21 +42,26 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
           final height = constraints.maxHeight;
           const sliderThumbShape = RoundSliderThumbShape();
           final thumbSize = 6 * sliderThumbShape.enabledThumbRadius;
-          return RawGestureDetector(
-            gestures: _buildGestures(width, height),
-            child: Stack(
-              children: [
-                SizedBox.expand(child: widget.child),
-                AnimatedPositioned(
-                  duration: duration.shortPresenting,
-                  curve: curves.incoming,
-                  left: widget.value.dx * width - thumbSize / 2,
-                  top: widget.value.dy * height - thumbSize / 2,
-                  width: thumbSize,
-                  height: thumbSize,
-                  child: widget.thumb,
-                ),
-              ],
+          return MouseRegion(
+            onEnter: (_) => _setPressed(),
+            onExit: (_) => _setUnpressed(),
+            child: RawGestureDetector(
+              gestures: _buildGestures(width, height),
+              child: Stack(
+                overflow: Overflow.visible,
+                children: [
+                  SizedBox.expand(child: widget.child),
+                  AnimatedPositioned(
+                    duration: duration.shortPresenting,
+                    curve: curves.incoming,
+                    left: widget.value.dx * width - thumbSize / 2,
+                    top: widget.value.dy * height - thumbSize / 2,
+                    width: thumbSize,
+                    height: thumbSize,
+                    child: widget.thumbBuilder(_isPressed),
+                  ),
+                ],
+              ),
             ),
           );
         },
@@ -85,6 +92,7 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
 
   void _onStart(Offset offset, BuildContext context, double h, double w) {
     final normalized = _normalize(offset, context, h, w);
+    _setPressed();
     _shouldNotify(normalized.dx, normalized.dy, widget.onChangeStart);
   }
 
@@ -95,6 +103,7 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
 
   void _onEnd(BuildContext context, double h, double w) {
     final position = widget.value;
+    _setUnpressed();
     _shouldNotify(position.dx, position.dy, widget.onChangeEnd);
   }
 
@@ -103,6 +112,10 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
       notifier(dx, dy);
     }
   }
+
+  void _setPressed() => setState(() => _isPressed = true);
+
+  void _setUnpressed() => setState(() => _isPressed = false);
 }
 
 class _MultiChildRecognizer extends PanGestureRecognizer {
