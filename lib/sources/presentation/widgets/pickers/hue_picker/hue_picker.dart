@@ -1,11 +1,6 @@
 import 'package:colored/sources/presentation/widgets/pickers/color_thumb.dart';
-import 'package:colored/sources/common/extensions/is_dark_color.dart';
-import 'package:colored/sources/presentation/widgets/pickers/hue_picker/hsv_canvas.dart';
 import 'package:colored/sources/presentation/widgets/pickers/hue_picker/surface_slider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-const _kIndicatorSize = 48.0;
 
 class HuePicker extends StatefulWidget {
   const HuePicker({
