@@ -15,12 +15,10 @@ class HsvCanvas extends StatelessWidget {
   final Color color;
 
   @override
-  Widget build(BuildContext context) => SizedBox.expand(
-        child: CustomPaint(
-          painter: _HSVColorPainter(
-            purifier: purifier,
-            color: color,
-          ),
+  Widget build(BuildContext context) => CustomPaint(
+        painter: _HSVColorPainter(
+          purifier: purifier,
+          color: color,
         ),
       );
 }
