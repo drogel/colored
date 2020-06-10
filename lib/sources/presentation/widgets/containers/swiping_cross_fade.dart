@@ -78,7 +78,8 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
               ),
             ],
           ),
-          if (widget.hasIndicator) DraggableIndicator(onTap: _toggle),
+          if (widget.hasIndicator && widget.showChild)
+            DraggableIndicator(onTap: _toggle),
         ],
       ),
     );

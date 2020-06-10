@@ -81,7 +81,6 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
               translation: Offset(0, 1.0 - _scrollFraction.clamp(0, 1)),
               child: ConverterBodyLayout(
                 slidersShownIfSpaceAvailable: _showSliders,
-                gesturesEnabledIfSpaceAvailable: false,
               ),
             ),
           ],

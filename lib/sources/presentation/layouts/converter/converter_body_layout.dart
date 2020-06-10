@@ -14,12 +14,10 @@ class ConverterBodyLayout extends StatelessWidget {
   const ConverterBodyLayout({
     this.background,
     this.slidersShownIfSpaceAvailable = true,
-    this.gesturesEnabledIfSpaceAvailable = true,
   });
 
   final Widget background;
   final bool slidersShownIfSpaceAvailable;
-  final bool gesturesEnabledIfSpaceAvailable;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +33,10 @@ class ConverterBodyLayout extends StatelessWidget {
           constraints: BoxConstraints(maxWidth: maxContainerWidth),
           child: OverlayContainer(
             child: LayoutBuilder(builder: (_, outerBox) {
-              final showSliders = _shouldShowSliders(outerBox.maxHeight);
-              final enableGestures = _shouldEnableGestures(outerBox.maxHeight);
+              final showChild = _shouldShowOverlayChild(outerBox.maxHeight);
               return SwipingCrossFade(
-                showChild: showSliders,
-                enableGestures: enableGestures,
+                showChild: showChild,
+                enableGestures: false,
                 header: Padding(
                   padding: EdgeInsets.symmetric(horizontal: padding.base),
                   child: LayoutBuilder(
@@ -94,21 +91,12 @@ class ConverterBodyLayout extends StatelessWidget {
     return buttonCount;
   }
 
-  bool _shouldShowSliders(double availableHeight) {
+  bool _shouldShowOverlayChild(double availableHeight) {
     if (slidersShownIfSpaceAvailable) {
       final hasAvailableRoom = availableHeight >= _kOverlayContainerMaxHeight;
       return hasAvailableRoom;
     } else {
       return slidersShownIfSpaceAvailable;
-    }
-  }
-
-  bool _shouldEnableGestures(double availableHeight) {
-    if (gesturesEnabledIfSpaceAvailable) {
-      final hasAvailableRoom = availableHeight >= _kOverlayContainerMaxHeight;
-      return hasAvailableRoom;
-    } else {
-      return gesturesEnabledIfSpaceAvailable;
     }
   }
 }
