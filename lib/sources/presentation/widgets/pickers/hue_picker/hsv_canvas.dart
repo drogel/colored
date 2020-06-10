@@ -1,35 +1,25 @@
-import 'package:colored/sources/data/color_helpers/color_purifier/color_purifier.dart';
-import 'package:colored/sources/data/color_helpers/color_purifier/default_color_purifier.dart';
+import 'package:colored/sources/presentation/widgets/pickers/hue_picker/hue_canvas.dart';
 import 'package:flutter/material.dart';
 
-class HsvCanvas extends StatelessWidget {
+class HsvCanvas extends HueCanvas {
   const HsvCanvas({
-    @required this.color,
-    this.purifier = const DefaultColorPurifier(),
+    @required double hue,
     Key key,
-  })  : assert(color != null),
-        assert(purifier != null),
-        super(key: key);
-
-  final ColorPurifier purifier;
-  final Color color;
+  }) : super(hue: hue, key: key);
 
   @override
   Widget build(BuildContext context) => CustomPaint(
         painter: _HSVColorPainter(
-          purifier: purifier,
-          color: color,
+          color: HSVColor.fromAHSV(1, hue, 1, 1).toColor(),
         ),
       );
 }
 
 class _HSVColorPainter extends CustomPainter {
   const _HSVColorPainter({
-    @required this.purifier,
     @required this.color,
   });
 
-  final ColorPurifier purifier;
   final Color color;
 
   @override
@@ -41,7 +31,7 @@ class _HSVColorPainter extends CustomPainter {
       colors: [Colors.white, Colors.black],
     );
     final horizontalGradient = LinearGradient(
-      colors: [Colors.white, purifier.purify(color)],
+      colors: [Colors.white, color],
     );
     final verticalPaint = Paint()..shader = verticalGradient.createShader(rect);
     final horizontalPaint = Paint()
