@@ -34,8 +34,8 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
         builder: (_, constraints) {
           final width = constraints.maxWidth;
           final height = constraints.maxHeight;
-          const sliderThumbShape =  RoundSliderThumbShape();
-          final thumbSize = 4*sliderThumbShape.enabledThumbRadius;
+          const sliderThumbShape = RoundSliderThumbShape();
+          final thumbSize = 6 * sliderThumbShape.enabledThumbRadius;
           return RawGestureDetector(
             gestures: _buildGestures(width, height),
             child: Stack(
@@ -55,9 +55,9 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
       );
 
   Map<Type, GestureRecognizerFactory> _buildGestures(double w, double h) => {
-        _AcceptingRecognizer:
-            GestureRecognizerFactoryWithHandlers<_AcceptingRecognizer>(
-          () => _AcceptingRecognizer(),
+        _MultiChildRecognizer:
+            GestureRecognizerFactoryWithHandlers<_MultiChildRecognizer>(
+          () => _MultiChildRecognizer(),
           (recognizer) => _buildRecognizer(recognizer, w, h),
         ),
       };
@@ -99,12 +99,9 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
   }
 }
 
-class _AcceptingRecognizer extends PanGestureRecognizer {
+class _MultiChildRecognizer extends PanGestureRecognizer {
   @override
-  void addAllowedPointer(PointerEvent event) {
-    super.addAllowedPointer(event);
-    resolve(GestureDisposition.accepted);
-  }
+  void rejectGesture(int pointer) => acceptGesture(pointer);
 
   @override
   String get debugDescription => 'AcceptingRecognizer';
