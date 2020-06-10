@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:colored/sources/common/factors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:vector_math/hash.dart';
 
@@ -25,6 +26,15 @@ class ColorSelection {
         g: color.green / decimal8Bit,
         b: color.blue / decimal8Bit,
       );
+
+  factory ColorSelection.fromHSV({
+    @required double h,
+    @required double s,
+    @required double v,
+  }) {
+    final hsvColor = HSVColor.fromAHSV(1, h, s, v);
+    return ColorSelection.fromColor(hsvColor.toColor());
+  }
 
   const ColorSelection._({
     @required this.r,

@@ -7,7 +7,14 @@ class DefaultColorPurifier implements ColorPurifier {
   @override
   Color purify(Color color) {
     final hsvColor = HSVColor.fromColor(color);
-    final pureColor = HSVColor.fromAHSV(1, hsvColor.hue, 1, 1).toColor();
+    final pureColor = getPureColorFromHue(hsvColor.hue);
     return pureColor;
   }
+
+  @override
+  double getHue(Color color) => HSVColor.fromColor(color).hue;
+
+  @override
+  Color getPureColorFromHue(double hue) =>
+      HSVColor.fromAHSV(1, hue, 1, 1).toColor();
 }

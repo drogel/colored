@@ -9,6 +9,7 @@ import 'package:colored/sources/presentation/layouts/converter/converter_body_la
 import 'package:colored/sources/presentation/layouts/names_list/names_list_layout.dart';
 import 'package:colored/sources/presentation/layouts/naming/naming_error_row.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
+import 'package:colored/sources/presentation/widgets/pickers/hue_picker/hsv_picker.dart';
 import 'package:flutter/material.dart';
 
 class ConverterLayout extends StatefulWidget {

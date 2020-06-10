@@ -7,14 +7,13 @@ typedef ValueChanged = void Function(double, double);
 
 class SurfaceSlider extends StatefulWidget {
   const SurfaceSlider({
-    @required this.onChanged,
     @required this.thumb,
     @required this.child,
+    this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
     Key key,
-  })  : assert(onChanged != null),
-        assert(thumb != null),
+  })  : assert(thumb != null),
         assert(child != null),
         super(key: key);
 
