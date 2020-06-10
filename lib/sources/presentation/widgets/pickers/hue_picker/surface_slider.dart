@@ -1,8 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-const _kThumbSize = 20.0;
-
 typedef ValueChanged = void Function(double, double);
 
 class SurfaceSlider extends StatefulWidget {
@@ -36,16 +34,18 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
         builder: (_, constraints) {
           final width = constraints.maxWidth;
           final height = constraints.maxHeight;
+          const sliderThumbShape =  RoundSliderThumbShape();
+          final thumbSize = 4*sliderThumbShape.enabledThumbRadius;
           return RawGestureDetector(
             gestures: _buildGestures(width, height),
             child: Stack(
               children: [
                 SizedBox.expand(child: widget.child),
                 Positioned(
-                  left: widget.value.dx * width - _kThumbSize / 2,
-                  top: widget.value.dy * height - _kThumbSize / 2,
-                  width: _kThumbSize,
-                  height: _kThumbSize,
+                  left: widget.value.dx * width - thumbSize / 2,
+                  top: widget.value.dy * height - thumbSize / 2,
+                  width: thumbSize,
+                  height: thumbSize,
                   child: widget.thumb,
                 ),
               ],
