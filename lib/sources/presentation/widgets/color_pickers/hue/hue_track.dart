@@ -1,5 +1,5 @@
 import 'package:colored/sources/common/factors.dart' as factors;
-import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hue_based_track.dart';
+import 'package:colored/sources/presentation/widgets/color_pickers/base/hue_base/hue_based_track.dart';
 import 'package:flutter/material.dart';
 
 const _kDegreesPerHueDivision = 60.0;

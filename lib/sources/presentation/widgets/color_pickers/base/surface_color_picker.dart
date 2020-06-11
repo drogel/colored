@@ -1,5 +1,5 @@
-import 'package:colored/sources/presentation/widgets/pickers/color_thumb.dart';
-import 'package:colored/sources/presentation/widgets/pickers/color_pickers/surface_slider.dart';
+import 'package:colored/sources/presentation/widgets/color_pickers/base/color_thumb.dart';
+import 'package:colored/sources/presentation/widgets/color_pickers/base/surface_slider.dart';
 import 'package:flutter/material.dart';
 
 class SurfaceColorPicker extends StatelessWidget {

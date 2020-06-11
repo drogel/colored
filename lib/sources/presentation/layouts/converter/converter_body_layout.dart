@@ -5,8 +5,8 @@ import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
 import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
-import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hsv_picker.dart';
-import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hue_picker.dart';
+import 'package:colored/sources/presentation/widgets/color_pickers/hsv/hsv_picker.dart';
+import 'package:colored/sources/presentation/widgets/color_pickers/hue/hue_picker.dart';
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
