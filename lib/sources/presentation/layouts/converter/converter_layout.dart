@@ -39,28 +39,13 @@ class _ConverterLayoutState extends State<ConverterLayout> {
         child: isSearching
             ? NamesListLayout(onColorCardPressed: _onColorCardPressed)
             : ConnectivityLayout(
-                body: Stack(
-                  alignment: Alignment.topCenter,
-                  children: [
-                    ConverterBodyLayout(
-                      background: SwipingColorContainer(
-                        color: data.state.color,
-                        onColorSwipedVertical: data.onColorSwipedVertical,
-                        onColorSwipedHorizontal: data.onColorSwipedHorizontal,
-                        onColorSwipeEnd: () => data.onSelectionEnd(selection),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 300,
-                      height: 300,
-                      child: HsvPicker(
-                        color: data.state.color,
-                        onChangeEnd: data.onSelectionEnd,
-                        onChanged: data.onSelectionChanged,
-                        onChangeStart: data.onSelectionStarted,
-                      ),
-                    ),
-                  ],
+                body: ConverterBodyLayout(
+                  background: SwipingColorContainer(
+                    color: data.state.color,
+                    onColorSwipedVertical: data.onColorSwipedVertical,
+                    onColorSwipedHorizontal: data.onColorSwipedHorizontal,
+                    onColorSwipeEnd: () => data.onSelectionEnd(selection),
+                  ),
                 ),
                 child: const ConnectivityBar(child: NamingErrorRow()),
               ),

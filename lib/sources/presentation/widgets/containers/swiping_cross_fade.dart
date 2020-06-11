@@ -1,5 +1,6 @@
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/draggable_indicator.dart';
 import 'package:colored/sources/presentation/widgets/directional_pan_detector.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,7 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
   Widget build(BuildContext context) {
     final durations = DurationData.of(context).durationScheme;
     final curves = CurveData.of(context).curveScheme;
+    final padding = PaddingData.of(context).paddingScheme;
     return DirectionalPanDetector(
       onPanUpdateUp: widget.enableGestures ? (_) => _show() : null,
       onPanUpdateDown: widget.enableGestures ? (_) => _hide() : null,
@@ -68,18 +70,23 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
               AnimatedCrossFade(
                 crossFadeState: _state,
                 firstChild: widget.child,
-                secondChild: Container(),
-                duration: widget.sizeDuration ?? durations.mediumPresenting,
+                secondChild: Container(
+                  height: padding.large.bottom + padding.small.bottom,
+                ),
+                duration: widget.sizeDuration ?? durations.mediumDismissing,
                 reverseDuration:
-                    widget.reverseFadeDuration ?? durations.mediumDismissing,
+                    widget.reverseFadeDuration ?? durations.shortDismissing,
                 firstCurve: widget.showFadeCurve ?? curves.incoming,
-                secondCurve: widget.hideFadeCurve ?? curves.exiting,
+                secondCurve: widget.hideFadeCurve ?? curves.incoming,
                 sizeCurve: widget.sizeCurve ?? curves.incoming,
               ),
             ],
           ),
           if (widget.hasIndicator && widget.showChild)
-            DraggableIndicator(onTap: _toggle),
+            Padding(
+              padding: padding.small,
+              child: DraggableIndicator(onTap: _toggle),
+            ),
         ],
       ),
     );

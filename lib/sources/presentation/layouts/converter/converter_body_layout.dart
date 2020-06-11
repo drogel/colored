@@ -1,3 +1,4 @@
+import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
@@ -5,6 +6,7 @@ import 'package:colored/sources/presentation/widgets/containers/overlay_containe
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
 import 'package:colored/sources/presentation/widgets/pickers/color_sliders.dart';
 import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
+import 'package:colored/sources/presentation/widgets/pickers/hue_picker/hsv_picker.dart';
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
@@ -32,34 +34,37 @@ class ConverterBodyLayout extends StatelessWidget {
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: maxContainerWidth),
           child: OverlayContainer(
-            child: LayoutBuilder(builder: (_, outerBox) {
-              final showChild = _shouldShowOverlayChild(outerBox.maxHeight);
-              return SwipingCrossFade(
-                showChild: showChild,
-                enableGestures: false,
-                header: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: padding.base),
-                  child: LayoutBuilder(
-                    builder: (_, constraints) => Row(
-                      mainAxisAlignment:
-                          _computeButtonCount(constraints.maxWidth) == 1
-                              ? MainAxisAlignment.spaceAround
-                              : MainAxisAlignment.spaceBetween,
-                      children: _buildFormatButtons(data, constraints.maxWidth),
+            child: LayoutBuilder(
+              builder: (_, outerBox) {
+                final showChild = _shouldShowOverlayChild(outerBox.maxHeight);
+                return SwipingCrossFade(
+                  showChild: showChild,
+                  enableGestures: false,
+                  header: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: padding.base),
+                    child: LayoutBuilder(
+                      builder: (_, constraints) => Row(
+                        mainAxisAlignment:
+                            _computeButtonCount(constraints.maxWidth) == 1
+                                ? MainAxisAlignment.spaceAround
+                                : MainAxisAlignment.spaceBetween,
+                        children:
+                            _buildFormatButtons(data, constraints.maxWidth),
+                      ),
                     ),
                   ),
-                ),
-                child: ColorSliders(
-                  firstValue: data.state.selection.r,
-                  secondValue: data.state.selection.g,
-                  thirdValue: data.state.selection.b,
-                  onChanged: data.onSelectionChanged,
-                  onChangeEnd: data.onSelectionEnd,
-                  step: data.state.converterStep,
-                  controller: data.slidersController,
-                ),
-              );
-            }),
+                  child: Padding(
+                    padding: _getInnerPadding(padding),
+                    child: HsvPicker(
+                      color: data.state.color,
+                      onChangeEnd: data.onSelectionEnd,
+                      onChanged: data.onSelectionChanged,
+                      onChangeStart: data.onSelectionStarted,
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ],
@@ -98,5 +103,10 @@ class ConverterBodyLayout extends StatelessWidget {
     } else {
       return slidersShownIfSpaceAvailable;
     }
+  }
+
+  EdgeInsets _getInnerPadding(PaddingScheme padding) {
+    final defaultPaddingValue = padding.large.bottom + padding.small.top;
+    return EdgeInsets.only(bottom: defaultPaddingValue, top: padding.small.top);
   }
 }
