@@ -1,28 +1,20 @@
-import 'package:colored/sources/app/styling/radii/radius_data.dart';
-import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hue_canvas.dart';
+import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hue_based_track.dart';
 import 'package:flutter/material.dart';
 
-class HsvCanvas extends HueCanvas {
-  const HsvCanvas({
-    @required double hue,
-    this.borderRadius,
+class HsvTrack extends StatelessWidget {
+  const HsvTrack({
+    @required this.hue,
     Key key,
-  }) : super(hue: hue, key: key);
+  }) : super(key: key);
 
-  final BorderRadius borderRadius;
+  final double hue;
 
   @override
-  Widget build(BuildContext context) {
-    final radii = RadiusData.of(context).radiiScheme;
-    return ClipRRect(
-      borderRadius: BorderRadius.all(radii.medium),
-      child: CustomPaint(
+  Widget build(BuildContext context) => HueBasedTrack(
         painter: _HSVColorPainter(
           color: HSVColor.fromAHSV(1, hue, 1, 1).toColor(),
         ),
-      ),
-    );
-  }
+      );
 }
 
 class _HSVColorPainter extends CustomPainter {

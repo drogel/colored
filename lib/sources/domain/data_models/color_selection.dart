@@ -32,7 +32,10 @@ class ColorSelection {
     @required double s,
     @required double v,
   }) {
-    final hsvColor = HSVColor.fromAHSV(1, h, s, v);
+    final clampedH = h.clamp(0, degreesInTurn).toDouble();
+    final clampedS = s.clamp(selectionMin, selectionMax).toDouble();
+    final clampedV = v.clamp(selectionMin, selectionMax).toDouble();
+    final hsvColor = HSVColor.fromAHSV(1, clampedH, clampedS, clampedV);
     return ColorSelection.fromColor(hsvColor.toColor());
   }
 

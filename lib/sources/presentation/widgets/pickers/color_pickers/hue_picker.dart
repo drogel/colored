@@ -1,19 +1,20 @@
+import 'package:colored/sources/common/factors.dart' as factors;
 import 'package:colored/sources/data/color_helpers/color_purifier/color_purifier.dart';
 import 'package:colored/sources/data/color_helpers/color_purifier/default_color_purifier.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/presentation/widgets/pickers/color_pickers/color_picker_layout.dart';
-import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hsv_track.dart';
+import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hue_track.dart';
 import 'package:colored/sources/presentation/widgets/pickers/color_pickers/surface_color_picker.dart';
 import 'package:flutter/material.dart';
 
-class HsvPicker extends StatelessWidget {
-  const HsvPicker({
+class HuePicker extends StatelessWidget {
+  const HuePicker({
     @required this.color,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
+    this.height = 8,
     this.purifier = const DefaultColorPurifier(),
-    this.height = 80,
     Key key,
   })  : assert(color != null),
         super(key: key);
@@ -27,28 +28,27 @@ class HsvPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hue = purifier.getHue(color);
+    final pureColor = purifier.purify(color);
     return ColorPickerLayout(
       height: height,
       child: SurfaceColorPicker(
-        value: _pickerValue(),
-        color: color,
-        track: HsvTrack(hue: hue),
-        onChanged: (x, y) => _notify(_select(hue, x, y), onChanged),
-        onChangeStart: (x, y) => _notify(_select(hue, x, y), onChangeStart),
-        onChangeEnd: (x, y) => _notify(_select(hue, x, y), onChangeEnd),
+        value: _pickerValue(pureColor),
+        color: pureColor,
+        track: const HueTrack(),
+        onChanged: (x, y) => _notify(_select(x), onChanged),
+        onChangeStart: (x, y) => _notify(_select(x), onChangeStart),
+        onChangeEnd: (x, y) => _notify(_select(x), onChangeEnd),
       ),
     );
   }
 
-  ColorSelection _select(double hue, double dx, double dy) =>
-      ColorSelection.fromHSV(h: hue, s: dx, v: _reverseValue(dy));
+  ColorSelection _select(double dx) =>
+      ColorSelection.fromHSV(h: dx * factors.degreesInTurn, s: 1, v: 1);
 
-  double _reverseValue(double dy) => 1 - dy;
-
-  Offset _pickerValue() {
+  Offset _pickerValue(Color color) {
     final hsvColor = HSVColor.fromColor(color);
-    return Offset(hsvColor.saturation, _reverseValue(hsvColor.value));
+    final x = hsvColor.hue.roundToDouble() / factors.degreesInTurn;
+    return Offset(x, 0.5);
   }
 
   void _notify(
