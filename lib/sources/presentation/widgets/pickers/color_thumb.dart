@@ -46,8 +46,8 @@ class _ColorThumbState extends State<ColorThumb> {
             ),
           ),
           SizedBox(
-            height: constraints.maxHeight / 3,
-            width: constraints.maxWidth / 3,
+            height: 2 * constraints.maxHeight / 5,
+            width: 2 * constraints.maxWidth / 5,
             child: Material(
               animationDuration: duration.shortPresenting,
               elevation: widget.isPressed ? elevation.high : elevation.low,

@@ -41,7 +41,7 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
           final width = constraints.maxWidth;
           final height = constraints.maxHeight;
           const sliderThumbShape = RoundSliderThumbShape();
-          final thumbSize = 6 * sliderThumbShape.enabledThumbRadius;
+          final thumbSize = 5 * sliderThumbShape.enabledThumbRadius;
           return MouseRegion(
             onEnter: (_) => _setPressed(),
             onExit: (_) => _setUnpressed(),
