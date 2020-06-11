@@ -2,8 +2,8 @@ import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/data/color_helpers/color_purifier/color_purifier.dart';
 import 'package:colored/sources/data/color_helpers/color_purifier/default_color_purifier.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/presentation/widgets/pickers/hue_picker/hsv_canvas.dart';
-import 'package:colored/sources/presentation/widgets/pickers/hue_picker/hue_picker.dart';
+import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hsv_canvas.dart';
+import 'package:colored/sources/presentation/widgets/pickers/color_pickers/surface_color_picker.dart';
 import 'package:flutter/material.dart';
 
 class HsvPicker extends StatelessWidget {
@@ -38,7 +38,7 @@ class HsvPicker extends StatelessWidget {
       ),
       child: SizedBox(
         height: height,
-        child: HuePicker(
+        child: SurfaceColorPicker(
           value: _pickerValue(),
           color: color,
           hueCanvas: HsvCanvas(hue: hue),

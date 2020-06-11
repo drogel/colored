@@ -80,7 +80,7 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
         ..onStart = ((d) => _onStart(d.globalPosition, context, h, w))
         ..onDown = ((d) => _onStart(d.globalPosition, context, h, w))
         ..onEnd = ((d) => _onEnd(context, h, w))
-        ..onCancel = _setUnpressed
+        ..onCancel = (() => _onEnd(context, h, w))
         ..onUpdate = ((d) => _onUpdate(d.globalPosition, context, h, w));
 
   Offset _normalize(Offset offset, BuildContext context, double h, double w) {

@@ -1,5 +1,5 @@
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
-import 'package:colored/sources/presentation/widgets/pickers/hue_picker/hue_canvas.dart';
+import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hue_canvas.dart';
 import 'package:flutter/material.dart';
 
 class HsvCanvas extends HueCanvas {

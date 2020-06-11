@@ -1,10 +1,10 @@
 import 'package:colored/sources/presentation/widgets/pickers/color_thumb.dart';
-import 'package:colored/sources/presentation/widgets/pickers/hue_picker/hue_canvas.dart';
-import 'package:colored/sources/presentation/widgets/pickers/hue_picker/surface_slider.dart';
+import 'package:colored/sources/presentation/widgets/pickers/color_pickers/hue_canvas.dart';
+import 'package:colored/sources/presentation/widgets/pickers/color_pickers/surface_slider.dart';
 import 'package:flutter/material.dart';
 
-class HuePicker extends StatelessWidget {
-  const HuePicker({
+class SurfaceColorPicker extends StatelessWidget {
+  const SurfaceColorPicker({
     @required this.color,
     @required this.value,
     @required this.hueCanvas,
