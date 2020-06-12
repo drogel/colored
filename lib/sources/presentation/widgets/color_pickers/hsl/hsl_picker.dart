@@ -1,13 +1,13 @@
 import 'package:colored/sources/data/color_helpers/color_purifier/color_purifier.dart';
 import 'package:colored/sources/data/color_helpers/color_purifier/default_color_purifier.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/presentation/widgets/color_pickers/hsv/hsv_track.dart';
+import 'package:colored/sources/presentation/widgets/color_pickers/hsl/hsl_track.dart';
 import 'package:colored/sources/presentation/widgets/color_pickers/base/hue_base/hue_based_picker.dart';
 import 'package:colored/sources/presentation/widgets/color_pickers/base/hue_base/hue_based_selector.dart';
 import 'package:flutter/material.dart';
 
-class HsvPicker extends StatelessWidget {
-  const HsvPicker({
+class HslPicker extends StatelessWidget {
+  const HslPicker({
     @required this.color,
     this.onChanged,
     this.onChangeStart,
@@ -30,32 +30,32 @@ class HsvPicker extends StatelessWidget {
     final currentHue = purifier.getHue(color);
     return HueBasedPicker(
       color: color,
-      selector: _HsvPickerSelector(color: color, purifier: purifier),
+      selector: _HslPickerSelector(color: color, purifier: purifier),
       constraints: constraints,
       onChangeStart: onChangeStart,
       onChangeEnd: onChangeEnd,
       onChanged: onChanged,
-      track: HsvTrack(hue: currentHue),
+      track: HslTrack(hue: currentHue),
     );
   }
 }
 
-class _HsvPickerSelector implements HueBasedSelector {
-  const _HsvPickerSelector({@required this.color, @required this.purifier});
+class _HslPickerSelector implements HueBasedSelector {
+  const _HslPickerSelector({@required this.color, @required this.purifier});
 
   final Color color;
   final ColorPurifier purifier;
 
   @override
   Offset pickValue() {
-    final hsvColor = HSVColor.fromColor(color);
-    return Offset(hsvColor.saturation, _reverseValue(hsvColor.value));
+    final hslColor = HSLColor.fromColor(color);
+    return Offset(hslColor.saturation, _reverseValue(hslColor.lightness));
   }
 
   @override
   ColorSelection select(double dx, double dy) {
     final currentHue = purifier.getHue(color);
-    return ColorSelection.fromHSV(h: currentHue, s: dx, v: _reverseValue(dy));
+    return ColorSelection.fromHSL(h: currentHue, s: dx, l: _reverseValue(dy));
   }
 
   double _reverseValue(double dy) => 1 - dy;

@@ -56,7 +56,7 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
                 child: Stack(
                   overflow: Overflow.visible,
                   children: [
-                    SizedBox.expand(child: widget.child),
+                    widget.child,
                     AnimatedPositioned(
                       duration: duration.shortPresenting,
                       curve: curves.incoming,

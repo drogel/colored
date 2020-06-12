@@ -7,7 +7,7 @@ class HueBasedPicker extends StatelessWidget {
   const HueBasedPicker({
     @required this.color,
     @required this.selector,
-    @required this.height,
+    @required this.constraints,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
@@ -15,10 +15,10 @@ class HueBasedPicker extends StatelessWidget {
     Key key,
   })  : assert(color != null),
         assert(selector != null),
-        assert(height != null),
+        assert(constraints != null),
         super(key: key);
 
-  final double height;
+  final BoxConstraints constraints;
   final Color color;
   final Widget track;
   final HueBasedSelector selector;
@@ -27,8 +27,8 @@ class HueBasedPicker extends StatelessWidget {
   final void Function(ColorSelection) onChangeEnd;
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        height: height,
+  Widget build(BuildContext context) => ConstrainedBox(
+        constraints: constraints,
         child: SurfaceColorPicker(
           value: selector.pickValue(),
           color: color,

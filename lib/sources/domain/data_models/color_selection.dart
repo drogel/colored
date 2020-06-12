@@ -39,6 +39,18 @@ class ColorSelection {
     return ColorSelection.fromColor(hsvColor.toColor());
   }
 
+  factory ColorSelection.fromHSL({
+    @required double h,
+    @required double s,
+    @required double l,
+  }) {
+    final clampedH = h.clamp(0, degreesInTurn).toDouble();
+    final clampedS = s.clamp(selectionMin, selectionMax).toDouble();
+    final clampedL = l.clamp(selectionMin, selectionMax).toDouble();
+    final hsvColor = HSLColor.fromAHSL(1, clampedH, clampedS, clampedL);
+    return ColorSelection.fromColor(hsvColor.toColor());
+  }
+
   const ColorSelection._({
     @required this.r,
     @required this.g,

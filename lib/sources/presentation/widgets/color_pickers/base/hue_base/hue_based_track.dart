@@ -13,9 +13,11 @@ class HueBasedTrack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final radii = RadiusData.of(context).radiiScheme;
-    return ClipRRect(
-      borderRadius: BorderRadius.all(radii.medium),
-      child: CustomPaint(painter: painter),
+    return SizedBox.expand(
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(radii.medium),
+        child: CustomPaint(painter: painter),
+      ),
     );
   }
 }
