@@ -1,8 +1,8 @@
 import 'package:colored/sources/presentation/widgets/color_pickers/base/hue_base/hue_based_track.dart';
 import 'package:flutter/material.dart';
 
-class HslTrack extends StatelessWidget {
-  const HslTrack({
+class SaturationValueTrack extends StatelessWidget {
+  const SaturationValueTrack({
     @required this.hue,
     Key key,
   }) : super(key: key);
@@ -11,14 +11,14 @@ class HslTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => HueBasedTrack(
-        painter: _HSLColorPainter(
-          color: HSLColor.fromAHSL(1, hue, 1, 0.5).toColor(),
+        painter: _SaturationValuePainter(
+          color: HSVColor.fromAHSV(1, hue, 1, 1).toColor(),
         ),
       );
 }
 
-class _HSLColorPainter extends CustomPainter {
-  const _HSLColorPainter({
+class _SaturationValuePainter extends CustomPainter {
+  const _SaturationValuePainter({
     @required this.color,
   });
 
@@ -30,22 +30,18 @@ class _HSLColorPainter extends CustomPainter {
     const verticalGradient = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      stops: [0.0, 0.5, 0.5, 1],
-      colors: [
-        Colors.white,
-        Colors.transparent,
-        Colors.transparent,
-        Colors.black,
-      ],
+      colors: [Colors.white, Colors.black],
     );
     final horizontalGradient = LinearGradient(
-      colors: [const Color(0xff808080), color],
+      colors: [Colors.white, color],
     );
-    final vPaint = Paint()..shader = verticalGradient.createShader(rect);
-    final hPaint = Paint()..shader = horizontalGradient.createShader(rect);
+    final verticalPaint = Paint()..shader = verticalGradient.createShader(rect);
+    final horizontalPaint = Paint()
+      ..blendMode = BlendMode.multiply
+      ..shader = horizontalGradient.createShader(rect);
 
-    canvas.drawRect(rect, hPaint);
-    canvas.drawRect(rect, vPaint);
+    canvas.drawRect(rect, verticalPaint);
+    canvas.drawRect(rect, horizontalPaint);
   }
 
   @override

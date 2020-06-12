@@ -37,7 +37,7 @@ class SurfaceColorPicker extends StatelessWidget {
         top: padding.base,
         left: padding.base + padding.small.left,
         right: padding.base + padding.small.right,
-        bottom: padding.medium.bottom,
+        bottom: padding.medium.bottom + padding.small.bottom,
       ),
       child: track,
     );

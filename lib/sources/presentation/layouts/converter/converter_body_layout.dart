@@ -6,8 +6,6 @@ import 'package:colored/sources/presentation/widgets/color_pickers/hsl/hsl_picke
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
 import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
-import 'package:colored/sources/presentation/widgets/color_pickers/hsv/hsv_picker.dart';
-import 'package:colored/sources/presentation/widgets/color_pickers/hue/hue_picker.dart';
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
@@ -56,21 +54,11 @@ class ConverterBodyLayout extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: _getInnerPadding(padding),
-                    child: Column(
-                      children: [
-                        HuePicker(
-                          color: data.state.color,
-                          onChangeEnd: data.onSelectionEnd,
-                          onChanged: data.onSelectionChanged,
-                          onChangeStart: data.onSelectionStarted,
-                        ),
-                        HslPicker(
-                          color: data.state.color,
-                          onChangeEnd: data.onSelectionEnd,
-                          onChanged: data.onSelectionChanged,
-                          onChangeStart: data.onSelectionStarted,
-                        )
-                      ],
+                    child: HslPicker(
+                      color: data.state.color,
+                      onChangeEnd: data.onSelectionEnd,
+                      onChanged: data.onSelectionChanged,
+                      onChangeStart: data.onSelectionStarted,
                     ),
                   ),
                 );
