@@ -13,7 +13,7 @@ class HuePicker extends StatelessWidget {
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
-    this.height = 44,
+    this.height = 40,
     this.purifier = const DefaultColorPurifier(),
     Key key,
   })  : assert(color != null),
