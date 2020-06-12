@@ -12,7 +12,7 @@ Map<Format, String> _values = {
   Format.hsv: "HSV",
 };
 
-extension ColorFormatValue on Format {
+extension FormatValue on Format {
   String get rawValue => _values[this];
 }
 

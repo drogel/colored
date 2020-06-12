@@ -1,5 +1,5 @@
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class HueBasedTrack extends StatelessWidget {
   const HueBasedTrack({

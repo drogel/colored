@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:colored/sources/common/factors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:vector_math/hash.dart';
 
