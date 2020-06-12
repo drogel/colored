@@ -47,7 +47,7 @@ class _HuePickerSelector implements HueBasedSelector {
   @override
   Offset pickValue() {
     final hue = purifier.getHue(color);
-    final x = hue.roundToDouble() / (factors.degreesInTurn);
+    final x = hue / (factors.degreesInTurn);
     return Offset(x, 0.5);
   }
 
@@ -55,8 +55,9 @@ class _HuePickerSelector implements HueBasedSelector {
   ColorSelection select(double dx, double dy) {
     final currentHsvColor = HSVColor.fromColor(color);
     final newHue = dx * factors.degreesInTurn;
+    final clampedHue = newHue.clamp(0, factors.degreesInTurn - 1).toDouble();
     final currentSat = currentHsvColor.saturation;
-    final currentValue = currentHsvColor.value;
-    return ColorSelection.fromHSV(h: newHue, s: currentSat, v: currentValue);
+    final currentVal = currentHsvColor.value;
+    return ColorSelection.fromHSV(h: clampedHue, s: currentSat, v: currentVal);
   }
 }
