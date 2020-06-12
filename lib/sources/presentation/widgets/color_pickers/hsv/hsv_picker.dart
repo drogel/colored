@@ -13,7 +13,7 @@ class HsvPicker extends StatelessWidget {
     this.onChangeStart,
     this.onChangeEnd,
     this.purifier = const DefaultColorPurifier(),
-    this.height = 80,
+    this.height = 110,
     Key key,
   })  : assert(color != null),
         super(key: key);

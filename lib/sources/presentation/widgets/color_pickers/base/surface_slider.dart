@@ -13,6 +13,7 @@ class SurfaceSlider extends StatefulWidget {
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
+    this.hitTestMargin = EdgeInsets.zero,
     Key key,
   })  : assert(thumbBuilder != null),
         assert(child != null),
@@ -22,6 +23,7 @@ class SurfaceSlider extends StatefulWidget {
   final ValueChanged onChanged;
   final ValueChanged onChangeStart;
   final ValueChanged onChangeEnd;
+  final EdgeInsets hitTestMargin;
   final Offset value;
   final Widget Function(bool) thumbBuilder;
   final Widget child;
@@ -36,31 +38,36 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
   @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (_, constraints) {
+          final margin = widget.hitTestMargin;
           final duration = DurationData.of(context).durationScheme;
           final curves = CurveData.of(context).curveScheme;
-          final width = constraints.maxWidth;
-          final height = constraints.maxHeight;
+          final width = constraints.maxWidth - margin.left - margin.right;
+          final height = constraints.maxHeight - margin.top - margin.bottom;
           const sliderThumbShape = RoundSliderThumbShape();
           final thumbSize = 5 * sliderThumbShape.enabledThumbRadius;
           return MouseRegion(
             onEnter: (_) => _setPressed(),
             onExit: (_) => _setUnpressed(),
             child: RawGestureDetector(
+              behavior: HitTestBehavior.translucent,
               gestures: _buildGestures(width, height),
-              child: Stack(
-                overflow: Overflow.visible,
-                children: [
-                  SizedBox.expand(child: widget.child),
-                  AnimatedPositioned(
-                    duration: duration.shortPresenting,
-                    curve: curves.incoming,
-                    left: widget.value.dx * width - thumbSize / 2,
-                    top: widget.value.dy * height - thumbSize / 2,
-                    width: thumbSize,
-                    height: thumbSize,
-                    child: widget.thumbBuilder(_isPressed),
-                  ),
-                ],
+              child: Padding(
+                padding: margin,
+                child: Stack(
+                  overflow: Overflow.visible,
+                  children: [
+                    SizedBox.expand(child: widget.child),
+                    AnimatedPositioned(
+                      duration: duration.shortPresenting,
+                      curve: curves.incoming,
+                      left: widget.value.dx * width - thumbSize / 2,
+                      top: widget.value.dy * height - thumbSize / 2,
+                      width: thumbSize,
+                      height: thumbSize,
+                      child: widget.thumbBuilder(_isPressed),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -85,9 +92,13 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
 
   Offset _normalize(Offset offset, BuildContext context, double h, double w) {
     RenderBox getBox = context.findRenderObject();
+    final margin = widget.hitTestMargin;
     final localOffset = getBox.globalToLocal(offset);
-    final dx = localOffset.dx.clamp(0, w) / w;
-    final dy = localOffset.dy.clamp(0, h) / h;
+    final shiftedLocalX = localOffset.dx - margin.left;
+    final shiftedLocalY = localOffset.dy - margin.top;
+    final marginShiftedOffset = Offset(shiftedLocalX, shiftedLocalY);
+    final dx = marginShiftedOffset.dx.clamp(0, w) / w;
+    final dy = marginShiftedOffset.dy.clamp(0, h) / h;
     return Offset(dx, dy);
   }
 

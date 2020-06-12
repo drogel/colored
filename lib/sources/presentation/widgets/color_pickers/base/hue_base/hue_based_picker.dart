@@ -1,5 +1,4 @@
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/presentation/widgets/color_pickers/base/color_picker_layout.dart';
 import 'package:colored/sources/presentation/widgets/color_pickers/base/hue_base/hue_based_selector.dart';
 import 'package:colored/sources/presentation/widgets/color_pickers/base/surface_color_picker.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ class HueBasedPicker extends StatelessWidget {
   final void Function(ColorSelection) onChangeEnd;
 
   @override
-  Widget build(BuildContext context) => ColorPickerLayout(
+  Widget build(BuildContext context) => SizedBox(
         height: height,
         child: SurfaceColorPicker(
           value: selector.pickValue(),
