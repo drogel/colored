@@ -9,6 +9,7 @@ class HslPicker extends StatelessWidget {
     @required this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
+    this.saturationLightnessPickerConstraints,
     Key key,
   }) : super(key: key);
 
@@ -16,6 +17,7 @@ class HslPicker extends StatelessWidget {
   final void Function(ColorSelection) onChanged;
   final void Function(ColorSelection) onChangeStart;
   final void Function(ColorSelection) onChangeEnd;
+  final BoxConstraints saturationLightnessPickerConstraints;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -32,6 +34,7 @@ class HslPicker extends StatelessWidget {
             onChangeEnd: onChangeEnd,
             onChanged: onChanged,
             onChangeStart: onChangeStart,
+            constraints: saturationLightnessPickerConstraints,
           )
         ],
       );

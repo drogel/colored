@@ -13,7 +13,7 @@ class SaturationLightnessPicker extends StatelessWidget {
     this.onChangeStart,
     this.onChangeEnd,
     this.purifier = const DefaultColorPurifier(),
-    this.constraints = const BoxConstraints(maxHeight: 100),
+    this.constraints,
     Key key,
   })  : assert(color != null),
         super(key: key);
@@ -31,7 +31,7 @@ class SaturationLightnessPicker extends StatelessWidget {
     return HueBasedPicker(
       color: color,
       selector: _HslPickerSelector(color: color, purifier: purifier),
-      constraints: constraints,
+      constraints: constraints ?? const BoxConstraints(maxHeight: 100),
       onChangeStart: onChangeStart,
       onChangeEnd: onChangeEnd,
       onChanged: onChanged,

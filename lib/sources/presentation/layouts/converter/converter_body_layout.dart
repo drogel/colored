@@ -2,7 +2,6 @@ import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
-import 'package:colored/sources/presentation/widgets/color_pickers/hsl/hsl_picker.dart';
 import 'package:colored/sources/presentation/widgets/color_pickers/hsv/hsv_picker.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
