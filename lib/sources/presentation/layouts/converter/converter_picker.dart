@@ -26,28 +26,38 @@ class ConverterPicker extends StatelessWidget {
   }
 
   Widget _buildPicker(PickerData data, ConverterData converterData) {
+    if (data == null) {
+      return _buildDefaultPicker(converterData);
+    }
+
     switch (data.state.pickerStyle) {
       case PickerStyle.hsl:
-        return HslPicker(
-          color: converterData.state.color,
-          onChangeEnd: converterData.onSelectionEnd,
-          onChanged: converterData.onSelectionChanged,
-          onChangeStart: converterData.onSelectionStarted,
-        );
+        return _buildHslPicker(converterData);
       case PickerStyle.hsv:
-        return HsvPicker(
-          color: converterData.state.color,
-          onChangeEnd: converterData.onSelectionEnd,
-          onChanged: converterData.onSelectionChanged,
-          onChangeStart: converterData.onSelectionStarted,
-        );
+        return _buildHsvPicker(converterData);
       default:
-        return RgbPicker(
-          selection: converterData.state.selection,
-          onChanged: converterData.onSelectionChanged,
-          onChangeEnd: converterData.onSelectionEnd,
-          step: converterData.state.converterStep,
-        );
+        return _buildDefaultPicker(converterData);
     }
   }
+
+  Widget _buildDefaultPicker(ConverterData converterData) => RgbPicker(
+        selection: converterData.state.selection,
+        onChanged: converterData.onSelectionChanged,
+        onChangeEnd: converterData.onSelectionEnd,
+        step: converterData.state.converterStep,
+      );
+
+  Widget _buildHslPicker(ConverterData converterData) => HslPicker(
+        color: converterData.state.color,
+        onChangeEnd: converterData.onSelectionEnd,
+        onChanged: converterData.onSelectionChanged,
+        onChangeStart: converterData.onSelectionStarted,
+      );
+
+  Widget _buildHsvPicker(ConverterData converterData) => HsvPicker(
+        color: converterData.state.color,
+        onChangeEnd: converterData.onSelectionEnd,
+        onChanged: converterData.onSelectionChanged,
+        onChangeStart: converterData.onSelectionStarted,
+      );
 }
