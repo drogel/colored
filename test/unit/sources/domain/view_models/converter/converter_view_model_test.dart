@@ -29,9 +29,9 @@ void main() {
     group("when convertToColor is called with a selection", () {
       test("then a state with corresponding color is added to the stream", () {
         final selection = ColorSelection(
-          first: 1,
-          second: 0.2,
-          third: 0.4,
+          r: 1,
+          g: 0.2,
+          b: 0.4,
         );
         final expected = ConverterState(
           color: const Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
@@ -128,9 +128,9 @@ void main() {
       test("then a state with parsed RGB color is added to the stream", () {
         const rgbString = "255, 51, 102";
         final selection = ColorSelection(
-          first: 1,
-          second: 0.2,
-          third: 0.4,
+          r: 1,
+          g: 0.2,
+          b: 0.4,
         );
         final expected = ConverterState(
           color: const Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
@@ -152,9 +152,9 @@ void main() {
       test("then a state with parsed hex color is added to the stream", () {
         const hexString = "#FF3366";
         final selection = ColorSelection(
-          first: 1,
-          second: 0.2,
-          third: 0.4,
+          r: 1,
+          g: 0.2,
+          b: 0.4,
         );
         final expected = ConverterState(
           color: const Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
@@ -175,17 +175,17 @@ void main() {
     group("when changeLightness is called with positive change", () {
       test("then a state with a higher RGB color is retrieved", () {
         final selection = ColorSelection(
-          first: 0,
-          second: 0.2,
-          third: 0.4,
+          r: 0,
+          g: 0.2,
+          b: 0.4,
         );
         final expected = ConverterState(
           color: const Color.fromRGBO(10, 61, 112, 1),
           converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
-            first: 10 / _kDecimal8Bit,
-            second: 61 / _kDecimal8Bit,
-            third: 112 / _kDecimal8Bit,
+            r: 10 / _kDecimal8Bit,
+            g: 61 / _kDecimal8Bit,
+            b: 112 / _kDecimal8Bit,
           ),
           formatData: {
             Format.hex: "#0A3D70",
@@ -200,17 +200,17 @@ void main() {
 
       test("then a clamped state with a higher RGB color is retrieved", () {
         final selection = ColorSelection(
-          first: 1,
-          second: 0.2,
-          third: 0.4,
+          r: 1,
+          g: 0.2,
+          b: 0.4,
         );
         final expected = ConverterState(
           color: const Color.fromRGBO(_kDecimal8Bit, 61, 112, 1),
           converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
-            first: 1,
-            second: 61 / _kDecimal8Bit,
-            third: 112 / _kDecimal8Bit,
+            r: 1,
+            g: 61 / _kDecimal8Bit,
+            b: 112 / _kDecimal8Bit,
           ),
           formatData: {
             Format.hex: "#FF3D70",
@@ -227,17 +227,17 @@ void main() {
     group("when changeLightness is called with negative change", () {
       test("then a state with a lower RGB color is retrieved", () {
         final selection = ColorSelection(
-          first: 1,
-          second: 0.2,
-          third: 0.4,
+          r: 1,
+          g: 0.2,
+          b: 0.4,
         );
         final expected = ConverterState(
           color: const Color.fromRGBO(245, 41, 92, 1),
           converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
-            first: 245 / _kDecimal8Bit,
-            second: 41 / _kDecimal8Bit,
-            third: 92 / _kDecimal8Bit,
+            r: 245 / _kDecimal8Bit,
+            g: 41 / _kDecimal8Bit,
+            b: 92 / _kDecimal8Bit,
           ),
           formatData: {
             Format.hex: "#F5295C",
@@ -252,17 +252,17 @@ void main() {
 
       test("then a clamped state with a lower RGB color is retrieved", () {
         final selection = ColorSelection(
-          first: 0,
-          second: 0.2,
-          third: 0.4,
+          r: 0,
+          g: 0.2,
+          b: 0.4,
         );
         final expectedState = ConverterState(
           color: const Color.fromRGBO(0, 41, 92, 1),
           converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
-            first: 0,
-            second: 41 / _kDecimal8Bit,
-            third: 92 / _kDecimal8Bit,
+            r: 0,
+            g: 41 / _kDecimal8Bit,
+            b: 92 / _kDecimal8Bit,
           ),
           formatData: {
             Format.hex: "#00295C",
@@ -280,12 +280,12 @@ void main() {
     group("when rotateColor is called with a positive 180 degrees change", () {
       test("then a state with an opposite color selection is retrieved", () {
         final selection = ColorSelection(
-          first: 1,
-          second: 0,
-          third: 0,
+          r: 1,
+          g: 0,
+          b: 0,
         );
         stateController.stream.listen(
-          (state) => expect(state.selection.first, 0),
+          (state) => expect(state.selection.r, 0),
         );
         viewModel.rotateColor(180, selection);
       });
@@ -294,12 +294,12 @@ void main() {
     group("when rotateColor is called with a negative 90 degrees change", () {
       test("then a state with rotated color selection is retrieved", () {
         final selection = ColorSelection(
-          first: 1,
-          second: 0,
-          third: 0,
+          r: 1,
+          g: 0,
+          b: 0,
         );
         stateController.stream.listen(
-          (state) => expect(state.selection.first.toStringAsFixed(4), "0.3333"),
+          (state) => expect(state.selection.r.toStringAsFixed(4), "0.3333"),
         );
         viewModel.rotateColor(-90, selection);
       });
@@ -308,12 +308,12 @@ void main() {
     group("when rotateColor is called with a positive 360 degrees change", () {
       test("then a state with the same selection is retrieved", () {
         final selection = ColorSelection(
-          first: 1,
-          second: 0,
-          third: 0,
+          r: 1,
+          g: 0,
+          b: 0,
         );
         stateController.stream.listen(
-          (state) => expect(state.selection.first.toStringAsFixed(4), "1.0000"),
+          (state) => expect(state.selection.r.toStringAsFixed(4), "1.0000"),
         );
         viewModel.rotateColor(360, selection);
       });
@@ -322,12 +322,12 @@ void main() {
     group("when rotateColor is called with a positive 540 degrees change", () {
       test("then a state with an opposite color selection is retrieved", () {
         final selection = ColorSelection(
-          first: 1,
-          second: 0,
-          third: 0,
+          r: 1,
+          g: 0,
+          b: 0,
         );
         stateController.stream.listen(
-          (state) => expect(state.selection.first, 0),
+          (state) => expect(state.selection.r, 0),
         );
         viewModel.rotateColor(180, selection);
       });

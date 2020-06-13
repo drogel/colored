@@ -80,7 +80,7 @@ void main() {
 
     group("when fetchNaming is called", () {
       test("then a Changing state is added to the stream first", () async {
-        final selection = ColorSelection(first: 0, second: 0, third: 0);
+        final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
         final state = await stateController.stream.first;
         expect(state.runtimeType, Changing);
@@ -90,7 +90,7 @@ void main() {
         stateController.stream.skip(1).listen((event) {
           expectLater(event.runtimeType, Named);
         });
-        final selection = ColorSelection(first: 0, second: 0, third: 0);
+        final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
       });
 
@@ -99,7 +99,7 @@ void main() {
           final name = (event as Named).name;
           expectLater(name, NamingServiceSuccessStub.name);
         });
-        final selection = ColorSelection(first: 0, second: 0, third: 0);
+        final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
       });
     });
@@ -134,7 +134,7 @@ void main() {
 
     group("when fetchNaming is called", () {
       test("then a Changing state is added to the stream first", () async {
-        final selection = ColorSelection(first: 0, second: 0, third: 0);
+        final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
         final state = await stateController.stream.first;
         expect(state.runtimeType, Changing);
@@ -144,7 +144,7 @@ void main() {
         stateController.stream.skip(1).listen((event) {
           expectLater(event.runtimeType, Unknown);
         });
-        final selection = ColorSelection(first: 0, second: 0, third: 0);
+        final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
       });
     });

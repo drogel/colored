@@ -21,9 +21,9 @@ class RgbParser extends FormatParser {
         .toList();
 
     final selection = ColorSelection(
-      first: rgbComponents[0] / decimal8Bit,
-      second: rgbComponents[1] / decimal8Bit,
-      third: rgbComponents[2] / decimal8Bit,
+      r: rgbComponents[0] / decimal8Bit,
+      g: rgbComponents[1] / decimal8Bit,
+      b: rgbComponents[2] / decimal8Bit,
     );
     return selection;
   }

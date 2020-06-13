@@ -45,9 +45,9 @@ class ConverterViewModel {
     const initialColor = colors.primaryDark;
     return _convertToState(
       ColorSelection(
-        first: initialColor.red.toDouble() / decimal8Bit,
-        second: initialColor.green.toDouble() / decimal8Bit,
-        third: initialColor.blue.toDouble() / decimal8Bit,
+        r: initialColor.red.toDouble() / decimal8Bit,
+        g: initialColor.green.toDouble() / decimal8Bit,
+        b: initialColor.blue.toDouble() / decimal8Bit,
       ),
     );
   }
@@ -57,6 +57,11 @@ class ConverterViewModel {
   void notifySelectionChanged(ColorSelection selection) {
     final state = _convertToState(selection);
     _stateController.sink.add(state);
+  }
+
+  void notifySelectionStarted(ColorSelection selection) {
+    final state = _convertToState(selection);
+    _stateController.sink.add(Shrinking(state));
   }
 
   void notifySelectionEnded(ColorSelection selection) {
@@ -88,9 +93,9 @@ class ConverterViewModel {
   void dispose() => _stateController.close();
 
   ConverterState _convertToState(ColorSelection selection) {
-    final r = (selection.first * decimal8Bit).round();
-    final g = (selection.second * decimal8Bit).round();
-    final b = (selection.third * decimal8Bit).round();
+    final r = (selection.r * decimal8Bit).round();
+    final g = (selection.g * decimal8Bit).round();
+    final b = (selection.b * decimal8Bit).round();
 
     final formatData = {
       for (var format in Format.values)

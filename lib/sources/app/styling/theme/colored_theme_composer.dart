@@ -69,7 +69,7 @@ class ColoredThemeComposer implements ThemeComposer {
           caption: TextStyle(color: colors.textVariant),
         ),
         highlightColor: colors.secondaryDark.withOpacity(opacity.shadow),
-        canvasColor: colors.textVariant,
+        canvasColor: colors.primaryVariant,
         splashColor: colors.secondary.withOpacity(opacity.fadedColor),
         buttonColor: colors.primaryDark,
         disabledColor: colors.primary,

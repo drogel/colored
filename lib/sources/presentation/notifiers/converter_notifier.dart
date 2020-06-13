@@ -5,7 +5,7 @@ import 'package:colored/sources/domain/view_models/converter/converter_state.dar
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
 import 'package:colored/sources/common/extensions/list_swap.dart';
 import 'package:expandable_slider/expandable_slider.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ConverterNotifier extends StatefulWidget {
   const ConverterNotifier({
@@ -44,6 +44,7 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
       state: _state,
       onSelectionChanged: _viewModel.notifySelectionChanged,
       onSelectionEnd: _viewModel.notifySelectionEnded,
+      onSelectionStarted: _viewModel.notifySelectionStarted,
       clipboardShouldFail: _viewModel.clipboardShouldFail,
       onClipboardRetrieved: _viewModel.convertStringToColor,
       onColorSwipedVertical: (dy) => _viewModel.changeLightness(dy, selection),

@@ -9,6 +9,7 @@ class ConverterData extends InheritedWidget {
   const ConverterData({
     @required this.state,
     @required this.onSelectionChanged,
+    @required this.onSelectionStarted,
     @required this.clipboardShouldFail,
     @required this.onClipboardRetrieved,
     @required this.onColorSwipedVertical,
@@ -26,12 +27,12 @@ class ConverterData extends InheritedWidget {
   final ConverterState state;
   final void Function(ColorSelection) onSelectionChanged;
   final void Function(ColorSelection) onSelectionEnd;
+  final void Function(ColorSelection) onSelectionStarted;
   final bool Function(String, Format) clipboardShouldFail;
   final void Function(String, Format) onClipboardRetrieved;
   final void Function(double) onColorSwipedVertical;
   final void Function(double) onColorSwipedHorizontal;
   final void Function(Format, Format) onFormatSelection;
-
   final List<Format> displayedFormats;
   final ExpandableSliderController slidersController;
 

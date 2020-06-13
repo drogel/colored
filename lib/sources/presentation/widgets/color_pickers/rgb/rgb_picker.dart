@@ -5,11 +5,9 @@ import 'package:colored/sources/app/styling/colors/color_constants.dart'
 import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/material.dart';
 
-class ColorSliders extends StatefulWidget {
-  const ColorSliders({
-    @required this.firstValue,
-    @required this.secondValue,
-    @required this.thirdValue,
+class RgbPicker extends StatefulWidget {
+  const RgbPicker({
+    @required this.selection,
     @required this.onChanged,
     @required this.onChangeEnd,
     @required this.step,
@@ -20,39 +18,37 @@ class ColorSliders extends StatefulWidget {
 
   final void Function(ColorSelection) onChanged;
   final void Function(ColorSelection) onChangeEnd;
-  final double firstValue;
-  final double secondValue;
-  final double thirdValue;
+  final ColorSelection selection;
   final double step;
   final ExpandableSliderController controller;
 
   @override
-  _ColorSlidersState createState() => _ColorSlidersState();
+  _RgbPickerState createState() => _RgbPickerState();
 }
 
-class _ColorSlidersState extends State<ColorSliders> {
+class _RgbPickerState extends State<RgbPicker> {
   double _firstValue;
   double _secondValue;
   double _thirdValue;
 
   @override
   void initState() {
-    _firstValue = widget.firstValue;
-    _secondValue = widget.secondValue;
-    _thirdValue = widget.thirdValue;
+    _firstValue = widget.selection.r;
+    _secondValue = widget.selection.g;
+    _thirdValue = widget.selection.b;
     super.initState();
   }
 
   @override
-  void didUpdateWidget(ColorSliders oldWidget) {
-    if (oldWidget.firstValue != widget.firstValue) {
-      _firstValue = widget.firstValue;
+  void didUpdateWidget(RgbPicker oldWidget) {
+    if (oldWidget.selection.r != widget.selection.r) {
+      _firstValue = widget.selection.r;
     }
-    if (oldWidget.secondValue != widget.secondValue) {
-      _secondValue = widget.secondValue;
+    if (oldWidget.selection.g != widget.selection.g) {
+      _secondValue = widget.selection.g;
     }
-    if (oldWidget.thirdValue != widget.thirdValue) {
-      _thirdValue = widget.thirdValue;
+    if (oldWidget.selection.b != widget.selection.b) {
+      _thirdValue = widget.selection.b;
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -106,9 +102,9 @@ class _ColorSlidersState extends State<ColorSliders> {
   }
 
   ColorSelection _getSelection() => ColorSelection(
-        first: _firstValue,
-        second: _secondValue,
-        third: _thirdValue,
+        r: _firstValue,
+        g: _secondValue,
+        b: _thirdValue,
       );
 
   void _onChangeEnd(double value) {
