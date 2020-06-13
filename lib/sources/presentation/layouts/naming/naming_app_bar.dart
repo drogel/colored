@@ -1,6 +1,6 @@
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/data_models/picker_style.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
+import 'package:colored/sources/domain/view_models/picker/picker_data.dart';
 import 'package:colored/sources/presentation/layouts/naming/naming_cross_fade_text.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class NamingAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localization = Localization.of(context).converter;
-    final converterData = ConverterData.of(context);
+    final pickerData = PickerData.of(context);
     return DefaultTabController(
       length: PickerStyle.values.length,
       child: AppBar(
@@ -27,7 +27,7 @@ class NamingAppBar extends StatelessWidget {
           tabs: PickerStyle.values
               .map((style) => Tab(text: style.rawValue))
               .toList(),
-          onTap: converterData.onUpdatePickerStyle,
+          onTap: pickerData.onPickerSelected,
         ),
       ),
     );

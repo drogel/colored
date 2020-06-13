@@ -1,5 +1,4 @@
 import 'package:colored/sources/domain/data_models/format.dart';
-import 'package:colored/sources/domain/data_models/picker_style.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
@@ -27,7 +26,6 @@ class ConverterNotifier extends StatefulWidget {
 class _ConverterNotifierState extends State<ConverterNotifier> {
   final ExpandableSliderController _controller = ExpandableSliderController();
   final List<Format> _displayedFormats = List<Format>.from(Format.values);
-  PickerStyle _pickerStyle = PickerStyle.rgb;
   ConverterViewModel _viewModel;
   ConverterState _state;
 
@@ -44,8 +42,6 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
     final selection = _state.selection;
     return ConverterData(
       state: _state,
-      pickerStyle: _pickerStyle,
-      onUpdatePickerStyle: _updatePickerStyle,
       onSelectionChanged: _viewModel.notifySelectionChanged,
       onSelectionEnd: _viewModel.notifySelectionEnded,
       onSelectionStarted: _viewModel.notifySelectionStarted,
@@ -82,7 +78,4 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
       setState(() => _displayedFormats[previousIndex] = selected);
     }
   }
-
-  void _updatePickerStyle(int pickerStyleIndex) =>
-      setState(() => _pickerStyle = PickerStyle.values[pickerStyleIndex]);
 }

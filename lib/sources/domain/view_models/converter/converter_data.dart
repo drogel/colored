@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
-import 'package:colored/sources/domain/data_models/picker_style.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:expandable_slider/expandable_slider.dart';
@@ -18,8 +17,6 @@ class ConverterData extends InheritedWidget {
     @required this.onFormatSelection,
     @required this.displayedFormats,
     @required this.onSelectionEnd,
-    @required this.pickerStyle,
-    this.onUpdatePickerStyle,
     this.slidersController,
     Widget child,
     Key key,
@@ -28,8 +25,6 @@ class ConverterData extends InheritedWidget {
         super(key: key, child: child);
 
   final ConverterState state;
-  final PickerStyle pickerStyle;
-  final void Function(int) onUpdatePickerStyle;
   final void Function(ColorSelection) onSelectionChanged;
   final void Function(ColorSelection) onSelectionEnd;
   final void Function(ColorSelection) onSelectionStarted;
@@ -38,7 +33,6 @@ class ConverterData extends InheritedWidget {
   final void Function(double) onColorSwipedVertical;
   final void Function(double) onColorSwipedHorizontal;
   final void Function(Format, Format) onFormatSelection;
-
   final List<Format> displayedFormats;
   final ExpandableSliderController slidersController;
 
