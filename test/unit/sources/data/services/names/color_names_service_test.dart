@@ -1,22 +1,22 @@
 import 'package:colored/sources/data/services/names/color_names_service.dart';
-import 'package:colored/sources/data/services/names/names_data_source/names_data_source.dart';
+import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockNamesDataSource implements NamesDataSource {
+class MockNamesDataSource implements DataLoader {
   static const mockColorNames = {"212121": "Sample Color"};
 
   @override
-  Future<Map<String, String>> loadNames() async => mockColorNames;
+  Future<Map<String, String>> load() async => mockColorNames;
 }
 
 void main() {
-  NamesDataSource namesDataSource;
+  DataLoader namesDataSource;
   NamesService namesService;
 
   setUp(() {
     namesDataSource = MockNamesDataSource();
-    namesService = ColorNamesService(dataSource: namesDataSource);
+    namesService = ColorNamesService(dataLoader: namesDataSource);
   });
 
   tearDown(() {
