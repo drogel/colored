@@ -1,13 +1,19 @@
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
+import 'package:colored/sources/data/services/random_generator/random_generator.dart';
 import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
 import 'package:flutter/foundation.dart';
 
 class ColorSuggestionsService implements SuggestionsService {
-  ColorSuggestionsService({@required DataLoader dataLoader})
-      : assert(dataLoader != null),
-        _dataLoader = dataLoader;
+  ColorSuggestionsService({
+    @required DataLoader dataLoader,
+    @required RandomGenerator randomGenerator,
+  })  : assert(dataLoader != null),
+        assert(randomGenerator != null),
+        _dataLoader = dataLoader,
+        _randomGenerator = randomGenerator;
 
   final DataLoader _dataLoader;
+  final RandomGenerator _randomGenerator;
   Map<String, String> _suggestions;
 
   @override
@@ -28,7 +34,7 @@ class ColorSuggestionsService implements SuggestionsService {
 
   Iterable<String> _getRandomSuggestionKeys(int desiredLength) sync* {
     final suggestionsKeys = _suggestions.keys.toList();
-    final selectedIndexes = _getRandomIntList(
+    final selectedIndexes = _randomGenerator.getList(
       max: suggestionsKeys.length,
       length: desiredLength,
     );
@@ -36,10 +42,5 @@ class ColorSuggestionsService implements SuggestionsService {
     for (final index in selectedIndexes) {
       yield suggestionsKeys[index];
     }
-  }
-
-  List<int> _getRandomIntList({@required int max, @required int length}) {
-    final randomInts = List.generate(max, (i) => i + 1)..shuffle();
-    return randomInts.take(length);
   }
 }
