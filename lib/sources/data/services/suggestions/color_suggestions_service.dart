@@ -14,9 +14,32 @@ class ColorSuggestionsService implements SuggestionsService {
   void dispose() => _suggestions = null;
 
   @override
-  Map<String, String> fetchSuggestions() => _suggestions;
+  Map<String, String> fetchRandomSuggestions(int desiredSuggestionsLength) {
+    final randomKeys = _getRandomSuggestionKeys(desiredSuggestionsLength);
+    final randomSuggestions = {
+      for (final key in randomKeys) key: _suggestions[key]
+    };
+    return randomSuggestions;
+  }
 
   @override
   Future<void> loadSuggestions() async =>
       _suggestions = await _dataLoader.load();
+
+  Iterable<String> _getRandomSuggestionKeys(int desiredLength) sync* {
+    final suggestionsKeys = _suggestions.keys.toList();
+    final selectedIndexes = _getRandomIntList(
+      max: suggestionsKeys.length,
+      length: desiredLength,
+    );
+
+    for (final index in selectedIndexes) {
+      yield suggestionsKeys[index];
+    }
+  }
+
+  List<int> _getRandomIntList({@required int max, @required int length}) {
+    final randomInts = List.generate(max, (i) => i + 1)..shuffle();
+    return randomInts.take(length);
+  }
 }

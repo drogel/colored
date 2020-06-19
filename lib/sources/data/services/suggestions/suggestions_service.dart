@@ -1,5 +1,5 @@
 abstract class SuggestionsService {
-  Map<String, dynamic> fetchSuggestions();
+  Map<String, dynamic> fetchRandomSuggestions(int desiredSuggestionsLength);
 
   Future<void> loadSuggestions();
 
