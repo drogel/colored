@@ -9,7 +9,7 @@ class RandomIntGenerator implements RandomGenerator {
   List<int> getList({int max, int length}) {
     final random = Random();
     final intSet = <int>{};
-    for (var i = 0; i == length - 1; i++) {
+    for (var i = 0; i <= length; i++) {
       intSet.add(random.nextInt(max));
     }
     return intSet.toList();

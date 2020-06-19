@@ -32,15 +32,13 @@ class ColorSuggestionsService implements SuggestionsService {
   Future<void> loadSuggestions() async =>
       _suggestions = await _dataLoader.load();
 
-  Iterable<String> _getRandomSuggestionKeys(int desiredLength) sync* {
-    final suggestionsKeys = _suggestions.keys.toList();
+  List<String> _getRandomSuggestionKeys(int desiredLength) {
+    final keys = _suggestions.keys.toList();
     final selectedIndexes = _randomGenerator.getList(
-      max: suggestionsKeys.length,
+      max: keys.length,
       length: desiredLength,
     );
-
-    for (final index in selectedIndexes) {
-      yield suggestionsKeys[index];
-    }
+    final selectedKeys = selectedIndexes.map((index) => keys[index]).toList();
+    return selectedKeys;
   }
 }
