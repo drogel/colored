@@ -16,13 +16,14 @@ class ColorSuggestionsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = PaddingData.of(context).paddingScheme;
+    final safeArea = MediaQuery.of(context).padding;
     final horizontalPadding = padding.small.horizontal;
     return SizedBox(
       height: kTextTabBarHeight,
       child: ListView.builder(
         padding: EdgeInsets.only(
-          left: horizontalPadding,
-          right: 2 * horizontalPadding,
+          left: safeArea.left + horizontalPadding,
+          right: safeArea.right + 2 * horizontalPadding,
         ),
         itemCount: suggestions.length,
         scrollDirection: Axis.horizontal,
