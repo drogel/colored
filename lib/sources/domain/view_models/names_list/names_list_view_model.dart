@@ -20,7 +20,7 @@ class NamesListViewModel {
 
   Stream<NamesListState> get stateStream => _stateController.stream;
 
-  NamesListState get initialData => const Pending();
+  NamesListState get initialData => Pending.emptySearch();
 
   Future<void> init() => _namesService.loadNames();
 
@@ -28,20 +28,20 @@ class NamesListViewModel {
     final cleanSearch = _cleanSearch(searchString);
 
     if (cleanSearch.length < 3) {
-      return _stateController.sink.add(const Pending());
+      return _stateController.sink.add(Pending(search: searchString));
     }
 
     final namesMap = _namesService.fetchNamesContaining(cleanSearch);
     final namedColors = namesMap.entries.map(_convertToNamedColor).toList();
 
     if (namedColors.isEmpty) {
-      _stateController.sink.add(const NoneFound());
+      _stateController.sink.add(NoneFound(search: searchString));
     } else {
-      _stateController.sink.add(Found(namedColors));
+      _stateController.sink.add(Found(namedColors, search: searchString));
     }
   }
 
-  void clearSearch() => _stateController.sink.add(const Pending());
+  void clearSearch() => _stateController.sink.add(Pending.emptySearch());
 
   void dispose() {
     _stateController.close();
@@ -51,6 +51,8 @@ class NamesListViewModel {
   NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
       NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
 
-  String _cleanSearch(String searchString) =>
-      searchString.trim().replacingAllNonAlphanumericBy("").replaceAll("#", "");
+  String _cleanSearch(String searchString) => searchString
+      .trimLeft()
+      .replacingAllNonAlphanumericBy("")
+      .replaceAll("#", "");
 }

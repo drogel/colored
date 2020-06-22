@@ -22,6 +22,17 @@ class NamesServiceStub implements NamesService {
   Future<void> loadNames() async {}
 }
 
+class NamesServiceEmptyStub implements NamesService {
+  @override
+  void dispose() {}
+
+  @override
+  Map<String, String> fetchNamesContaining(String searchString) => {};
+
+  @override
+  Future<void> loadNames() async {}
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -104,6 +115,22 @@ void main() {
         viewModel.searchColorName("red");
       });
 
+      test("with a searchString of lenght < 3, then search is retrieved", () {
+        const expected = "se";
+        stateController.stream.listen(
+              (event) => expect(event.search, expected),
+        );
+        viewModel.searchColorName(expected);
+      });
+
+      test("with a searchString of lenght >= 3, then search is retrieved", () {
+        const expected = "search";
+        stateController.stream.listen(
+              (event) => expect(event.search, expected),
+        );
+        viewModel.searchColorName(expected);
+      });
+
       test("with searchString.lenght >= 3, then namedColors are retrieved", () {
         stateController.stream.listen((event) {
           final found = event as Found;
@@ -114,6 +141,39 @@ void main() {
           final actual = found.namedColors.first;
           expect(actual, expected);
         });
+        viewModel.searchColorName("red");
+      });
+    });
+  });
+
+  group("Given a NamesListViewModel with an empty NamesService", () {
+    setUp(() {
+      stateController = StreamController<NamesListState>();
+      namesService = NamesServiceEmptyStub();
+      viewModel = NamesListViewModel(
+        stateController: stateController,
+        namesService: namesService,
+      );
+    });
+
+    tearDown(() {
+      stateController.close();
+      stateController = null;
+      namesService = null;
+    });
+
+    group("when searchColorName is called", () {
+      test("with a searchString of lenght < 3, then Pending is added", () {
+        stateController.stream.listen(
+              (event) => expect(event.runtimeType, Pending),
+        );
+        viewModel.searchColorName("se");
+      });
+
+      test("with searchString.lenght >= 3, then NoneFound is retrieved", () {
+        stateController.stream.listen(
+              (event) => expect(event.runtimeType, NoneFound),
+        );
         viewModel.searchColorName("red");
       });
     });
