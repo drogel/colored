@@ -20,7 +20,9 @@ class ColorNamesAppBar extends StatelessWidget {
         ),
       ),
       centerTitle: true,
-      bottom: const ColorSuggestionsLayout(),
+      bottom: ColorSuggestionsLayout(
+        onSuggestionSelected: data.onSearchChanged,
+      ),
     );
   }
 

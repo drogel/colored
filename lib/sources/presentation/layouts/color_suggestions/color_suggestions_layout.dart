@@ -5,14 +5,19 @@ import 'package:flutter/material.dart';
 
 class ColorSuggestionsLayout extends StatelessWidget
     implements PreferredSizeWidget {
-  const ColorSuggestionsLayout({Key key}) : super(key: key);
+  const ColorSuggestionsLayout({
+    this.onSuggestionSelected,
+    Key key,
+  }) : super(key: key);
+
+  final void Function(String) onSuggestionSelected;
 
   @override
   Widget build(BuildContext context) {
     final data = ColorSuggestionsData.of(context);
     switch (data.state.runtimeType) {
       case SuggestionsFound:
-        return _buildSuggestionsWidget(data);
+        return _buildSuggestionsWidget(data.state as SuggestionsFound);
       default:
         return _buildDefaultWidget();
     }
@@ -21,10 +26,11 @@ class ColorSuggestionsLayout extends StatelessWidget
   @override
   Size get preferredSize => const Size.fromHeight(kTextTabBarHeight);
 
-  Widget _buildSuggestionsWidget(ColorSuggestionsData data) {
-    final suggestionsState = data.state as SuggestionsFound;
-    return ColorSuggestionsList(suggestions: suggestionsState.colorSuggestions);
-  }
+  Widget _buildSuggestionsWidget(SuggestionsFound suggestions) =>
+      ColorSuggestionsList(
+        suggestions: suggestions.colorSuggestions,
+        onSuggestionSelected: onSuggestionSelected,
+      );
 
   Widget _buildDefaultWidget() => Container();
 }

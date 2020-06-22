@@ -4,10 +4,14 @@ import 'package:colored/sources/presentation/widgets/containers/color_chip.dart'
 import 'package:flutter/material.dart';
 
 class ColorSuggestionsList extends StatelessWidget {
-  const ColorSuggestionsList({@required this.suggestions, Key key})
-      : super(key: key);
+  const ColorSuggestionsList({
+    @required this.suggestions,
+    this.onSuggestionSelected,
+    Key key,
+  }) : super(key: key);
 
   final List<NamedColor> suggestions;
+  final void Function(String) onSuggestionSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,7 @@ class ColorSuggestionsList extends StatelessWidget {
           return ColorChip(
             text: suggestion.name,
             colorHex: suggestion.hex,
+            onPressed: onSuggestionSelected,
           );
         },
       ),
