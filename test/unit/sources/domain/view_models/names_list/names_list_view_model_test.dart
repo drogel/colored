@@ -13,24 +13,14 @@ class NamesServiceStub implements NamesService {
   static const Map<String, String> namesMap = {"testHex": "testName"};
 
   @override
-  void dispose() {}
-
-  @override
-  Map<String, String> fetchNamesContaining(String searchString) => namesMap;
-
-  @override
-  Future<void> loadNames() async {}
+  Future<Map<String, String>> fetchNamesContaining(String searchString) async =>
+      namesMap;
 }
 
 class NamesServiceEmptyStub implements NamesService {
   @override
-  void dispose() {}
-
-  @override
-  Map<String, String> fetchNamesContaining(String searchString) => {};
-
-  @override
-  Future<void> loadNames() async {}
+  Future<Map<String, String>> fetchNamesContaining(String searchString) async =>
+      {};
 }
 
 void main() {
@@ -61,24 +51,10 @@ void main() {
     });
   });
 
-  group("when init is called", () {
-    test("then namesService is asked to load the names data", () {
-      viewModel.init();
-      verify(namesService.loadNames());
-    });
-  });
-
-  group("when dispose is called", () {
-    test("then namesService is asked to dispose", () {
-      viewModel.dispose();
-      verify(namesService.dispose());
-    });
-  });
-
   group("When clearSearch is called", () {
     test("then a Pending state is received", () {
       stateController.stream.listen(
-            (event) => expect(event.runtimeType, Pending),
+        (event) => expect(event.runtimeType, Pending),
       );
       viewModel.clearSearch();
     });
@@ -118,7 +94,7 @@ void main() {
       test("with a searchString of lenght < 3, then search is retrieved", () {
         const expected = "se";
         stateController.stream.listen(
-              (event) => expect(event.search, expected),
+          (event) => expect(event.search, expected),
         );
         viewModel.searchColorName(expected);
       });
@@ -126,7 +102,7 @@ void main() {
       test("with a searchString of lenght >= 3, then search is retrieved", () {
         const expected = "search";
         stateController.stream.listen(
-              (event) => expect(event.search, expected),
+          (event) => expect(event.search, expected),
         );
         viewModel.searchColorName(expected);
       });
@@ -165,14 +141,14 @@ void main() {
     group("when searchColorName is called", () {
       test("with a searchString of lenght < 3, then Pending is added", () {
         stateController.stream.listen(
-              (event) => expect(event.runtimeType, Pending),
+          (event) => expect(event.runtimeType, Pending),
         );
         viewModel.searchColorName("se");
       });
 
       test("with searchString.lenght >= 3, then NoneFound is retrieved", () {
         stateController.stream.listen(
-              (event) => expect(event.runtimeType, NoneFound),
+          (event) => expect(event.runtimeType, NoneFound),
         );
         viewModel.searchColorName("red");
       });

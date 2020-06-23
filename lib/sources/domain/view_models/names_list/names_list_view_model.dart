@@ -22,16 +22,14 @@ class NamesListViewModel {
 
   NamesListState get initialData => Pending.emptySearch();
 
-  Future<void> init() => _namesService.loadNames();
-
-  void searchColorName(String searchString) {
+  Future<void> searchColorName(String searchString) async {
     final cleanSearch = _cleanSearch(searchString);
 
     if (cleanSearch.length < 3) {
       return _stateController.sink.add(Pending(search: searchString));
     }
 
-    final namesMap = _namesService.fetchNamesContaining(cleanSearch);
+    final namesMap = await _namesService.fetchNamesContaining(cleanSearch);
     final namedColors = namesMap.entries.map(_convertToNamedColor).toList();
 
     if (namedColors.isEmpty) {
@@ -43,10 +41,7 @@ class NamesListViewModel {
 
   void clearSearch() => _stateController.sink.add(Pending.emptySearch());
 
-  void dispose() {
-    _stateController.close();
-    _namesService.dispose();
-  }
+  void dispose() => _stateController.close();
 
   NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
       NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");

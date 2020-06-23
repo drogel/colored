@@ -34,9 +34,7 @@ class ColorSuggestionsViewModel {
     }
   }
 
-  void dispose() {
-    _stateController.close();
-  }
+  void dispose() => _stateController.close();
 
   NamedColor _convertToNamedColor(MapEntry<String, dynamic> entry) =>
       NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
