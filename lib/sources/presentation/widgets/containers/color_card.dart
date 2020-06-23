@@ -25,7 +25,7 @@ class ColorCard extends StatelessWidget {
     final padding = PaddingData.of(context).paddingScheme;
     final radii = RadiusData.of(context).radiiScheme;
     return Padding(
-      padding: padding.small,
+      padding: padding.medium,
       child: FloatingActionButton(
         onPressed: () => onPressed(backgroundColor),
         clipBehavior: Clip.antiAlias,
