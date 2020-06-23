@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:colored/sources/data/color_helpers/format_converter/format_converter.dart';
-import 'package:colored/sources/data/services/api_response.dart';
+import 'package:colored/sources/data/network_client/response_status.dart';
 import 'package:colored/sources/data/services/connectivity/connectivity_service.dart';
 import 'package:colored/sources/data/services/naming/naming_response.dart';
 import 'package:colored/sources/data/services/naming/naming_service.dart';
@@ -20,14 +20,14 @@ class NamingServiceSuccessStub implements NamingService {
   Future<NamingResponse> getNaming({String hexColor}) async =>
       const NamingResponse(
         result: NamingResult(name: name, hex: "testHex"),
-        response: ApiResponse.ok,
+        response: ResponseStatus.ok,
       );
 }
 
 class NamingServiceFailureStub implements NamingService {
   @override
   Future<NamingResponse> getNaming({String hexColor}) async =>
-      const NamingResponse(response: ApiResponse.failed);
+      const NamingResponse(response: ResponseStatus.failed);
 }
 
 class FormatConverterStub implements FormatConverter {

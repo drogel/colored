@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/format_converter/format_converter.dart';
-import 'package:colored/sources/data/services/api_response.dart';
+import 'package:colored/sources/data/network_client/response_status.dart';
 import 'package:colored/sources/data/services/naming/naming_service.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
@@ -40,7 +40,7 @@ class NamingViewModel {
     final hexColor = _converter.convert(r, g, b);
     final namingResult = await _namingService.getNaming(hexColor: hexColor);
 
-    if (namingResult.response == ApiResponse.ok) {
+    if (namingResult.response == ResponseStatus.ok) {
       _stateController.sink.add(Named(namingResult.result.name));
     } else {
       _stateController.sink.add(const Unknown());
