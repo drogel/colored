@@ -40,15 +40,13 @@ void main() {
 
   tearDown(() {
     suggestionsDataLoader = null;
-    suggestionsService.dispose();
     suggestionsService = null;
   });
 
   group("Given a ColorSuggestionsService with a mocked data loader", () {
     group("when fetchRandomSuggestions is called", () {
       test("then the expected map is retrieved", () async {
-        await suggestionsService.loadSuggestions();
-        final actual = suggestionsService.fetchRandomSuggestions(0);
+        final actual = await suggestionsService.fetchSuggestions(2);
         final expected = {"222222": "Second", "444444": "Fourth"};
         expect(actual, expected);
       });

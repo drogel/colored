@@ -24,9 +24,7 @@ class ColorSuggestionsViewModel {
   ColorSuggestionsState get initialData => const Loading();
 
   Future<void> init() async {
-    await _suggestionsService.loadSuggestions();
-
-    final map = _suggestionsService.fetchRandomSuggestions(_kSuggestionsLength);
+    final map = await _suggestionsService.fetchSuggestions(_kSuggestionsLength);
     final namedColors = map.entries.map(_convertToNamedColor).toList();
 
     if (namedColors.isEmpty) {
@@ -37,7 +35,6 @@ class ColorSuggestionsViewModel {
   }
 
   void dispose() {
-    _suggestionsService.dispose();
     _stateController.close();
   }
 

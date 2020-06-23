@@ -14,22 +14,15 @@ class ColorSuggestionsService implements SuggestionsService {
 
   final DataLoader _dataLoader;
   final ListPicker<String> _listPicker;
-  Map<String, String> _suggestions;
 
   @override
-  void dispose() => _suggestions = null;
-
-  @override
-  Map<String, String> fetchRandomSuggestions(int estimatedCount) {
-    final keys = _suggestions.keys.toList();
+  Future<Map<String, dynamic>> fetchSuggestions(int estimatedCount) async {
+    final suggestions = await _dataLoader.load();
+    final keys = suggestions.keys.toList();
     final chosenKeys = _listPicker.pick(from: keys, count: estimatedCount);
-    final randomSuggestions = {
-      for (final key in chosenKeys) key: _suggestions[key]
+    final chosenSuggestions = {
+      for (final key in chosenKeys) key: suggestions[key]
     };
-    return randomSuggestions;
+    return chosenSuggestions;
   }
-
-  @override
-  Future<void> loadSuggestions() async =>
-      _suggestions = await _dataLoader.load();
 }
