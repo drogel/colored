@@ -1,5 +1,6 @@
+import 'package:colored/sources/data/list_picker/string_list_picker.dart';
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
-import 'package:colored/sources/data/services/random_generator/random_generator.dart';
+import 'package:colored/sources/data/services/randomizer/int_generator.dart';
 import 'package:colored/sources/data/services/suggestions/color_suggestions_service.dart';
 import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,11 +17,11 @@ class MockSuggestionsDataLoader implements DataLoader {
   Future<Map<String, String>> load() async => mockSuggestions;
 }
 
-class RandomGeneratorStub implements RandomGenerator {
+class RandomGeneratorStub implements IntGenerator {
   static const stubbedIntList = [1, 3];
 
   @override
-  List<int> getList({int max, int length}) => stubbedIntList;
+  List<int> generate({int max, int length}) => stubbedIntList;
 }
 
 void main() {
@@ -31,7 +32,9 @@ void main() {
     suggestionsDataLoader = MockSuggestionsDataLoader();
     suggestionsService = ColorSuggestionsService(
       dataLoader: suggestionsDataLoader,
-      randomGenerator: RandomGeneratorStub(),
+      listPicker: StringListPicker(
+        intGenerator: RandomGeneratorStub(),
+      ),
     );
   });
 
