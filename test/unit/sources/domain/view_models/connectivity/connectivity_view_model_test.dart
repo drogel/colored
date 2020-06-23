@@ -12,11 +12,7 @@ class ConnectivityServiceStub implements ConnectivityService {
   final StreamController<ConnectivityResult> connectivityController;
 
   @override
-  Future<ConnectivityResult> checkConnectivity() async =>
-      ConnectivityResult.none;
-
-  @override
-  Stream<ConnectivityResult> get connectivityStream =>
+  Stream<ConnectivityResult> get onConnectivityChanged =>
       connectivityController.stream;
 }
 

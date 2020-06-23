@@ -37,11 +37,7 @@ class FormatConverterStub implements FormatConverter {
 
 class ConnectivityServiceSuccessStub implements ConnectivityService {
   @override
-  Future<ConnectivityResult> checkConnectivity() async =>
-      ConnectivityResult.mobile;
-
-  @override
-  Stream<ConnectivityResult> get connectivityStream =>
+  Stream<ConnectivityResult> get onConnectivityChanged =>
       StreamController<ConnectivityResult>().stream;
 }
 
