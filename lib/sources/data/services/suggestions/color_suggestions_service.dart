@@ -1,4 +1,4 @@
-import 'package:colored/sources/data/list_picker/list_picker.dart';
+import 'package:colored/sources/data/services/list_picker/list_picker.dart';
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
 import 'package:flutter/foundation.dart';

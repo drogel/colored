@@ -1,5 +1,5 @@
-import 'package:colored/sources/data/list_picker/list_picker.dart';
-import 'package:colored/sources/data/services/randomizer/int_generator.dart';
+import 'package:colored/sources/data/services/list_picker/list_picker.dart';
+import 'package:colored/sources/data/services/int_generator/int_generator.dart';
 import 'package:flutter/foundation.dart';
 
 class StringListPicker implements ListPicker<String> {

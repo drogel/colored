@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:colored/sources/data/services/randomizer/int_generator.dart';
+import 'package:colored/sources/data/services/int_generator/int_generator.dart';
 
 class RandomUniqueIntGenerator implements IntGenerator {
   const RandomUniqueIntGenerator();
