@@ -29,8 +29,10 @@ class ConnectivityViewModel {
   }
 
   void dispose() {
-    _subscription.cancel();
-    _subscription = null;
+    if (_subscription != null) {
+      _subscription.cancel();
+      _subscription = null;
+    }
     _stateController.close();
   }
 

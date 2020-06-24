@@ -44,7 +44,7 @@ class NamesListViewModel {
   void dispose() => _stateController.close();
 
   NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
-      NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
+      NamedColor.fromMapEntry(entry);
 
   String _cleanSearch(String searchString) => searchString
       .trimLeft()

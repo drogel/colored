@@ -30,12 +30,12 @@ class ColorSuggestionsViewModel {
     if (namedColors.isEmpty) {
       _stateController.sink.add(const Failed());
     } else {
-      _stateController.sink.add(SuggestionsFound(namedColors));
+      _stateController.sink.add(ColorSuggestionsFound(namedColors));
     }
   }
 
   void dispose() => _stateController.close();
 
   NamedColor _convertToNamedColor(MapEntry<String, dynamic> entry) =>
-      NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
+      NamedColor.fromMapEntry(entry);
 }

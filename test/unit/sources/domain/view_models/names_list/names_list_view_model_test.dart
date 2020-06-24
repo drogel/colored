@@ -60,6 +60,14 @@ void main() {
     });
   });
 
+  group("when dispose is called", () {
+    test("then stateController is closed", () {
+      expect(stateController.isClosed, false);
+      viewModel.dispose();
+      expect(stateController.isClosed, true);
+    });
+  });
+
   group("Given a NamesListViewModel with an stubbed NamesService", () {
     setUp(() {
       stateController = StreamController<NamesListState>();

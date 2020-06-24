@@ -8,8 +8,8 @@ class Loading extends ColorSuggestionsState {
   const Loading();
 }
 
-class SuggestionsFound extends ColorSuggestionsState {
-  const SuggestionsFound(this.colorSuggestions);
+class ColorSuggestionsFound extends ColorSuggestionsState {
+  const ColorSuggestionsFound(this.colorSuggestions);
 
   final List<NamedColor> colorSuggestions;
 }

@@ -76,6 +76,14 @@ void main() {
       });
     });
 
+    group("when dispose is called", () {
+      test("then stateController is closed", () {
+        expect(stateController.isClosed, false);
+        viewModel.dispose();
+        expect(stateController.isClosed, true);
+      });
+    });
+
     group("when fetchNaming is called", () {
       test("then a Changing state is added to the stream first", () async {
         final selection = ColorSelection(r: 0, g: 0, b: 0);
