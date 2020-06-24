@@ -1,15 +1,16 @@
-import 'package:colored/sources/data/color_helpers/format_converter/format_converter.dart';
+import 'package:colored/sources/data/color_helpers/converter/converter.dart';
 import 'package:colored/sources/common/factors.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 
-class HexConverter implements FormatConverter {
+class HexConverter implements Converter {
   const HexConverter();
 
   @override
-  String convert(int r, int g, int b) {
+  Map<Format, String> convert(int r, int g, int b) {
     final hexRed = _convertDecimalToHex(r);
     final hexGreen = _convertDecimalToHex(g);
     final hexBlue = _convertDecimalToHex(b);
-    return "#$hexRed$hexGreen$hexBlue";
+    return {Format.hex: "#$hexRed$hexGreen$hexBlue"};
   }
 
   String _convertDecimalToHex(int decimal) =>

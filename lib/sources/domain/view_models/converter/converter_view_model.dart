@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_helpers/color_converter/converter.dart';
 import 'package:colored/sources/data/color_helpers/color_parser/parser.dart';
 import 'package:colored/sources/data/color_helpers/color_transformer/transformer.dart';
+import 'package:colored/sources/data/color_helpers/converter/converter.dart';
 import 'package:colored/sources/data/services/device_orientation/device_orientation_service.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
@@ -96,11 +96,7 @@ class ConverterViewModel {
     final r = (selection.r * decimal8Bit).round();
     final g = (selection.g * decimal8Bit).round();
     final b = (selection.b * decimal8Bit).round();
-
-    final formatData = {
-      for (var format in Format.values)
-        format: _converter.convertToFormat(r, g, b, format)
-    };
+    final formatData = _converter.convert(r, g, b);
 
     return ConverterState(
       color: Color.fromRGBO(r, g, b, 1),

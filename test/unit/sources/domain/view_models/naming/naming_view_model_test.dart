@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:colored/sources/data/color_helpers/format_converter/format_converter.dart';
+import 'package:colored/sources/data/color_helpers/converter/converter.dart';
 import 'package:colored/sources/data/network_client/response_status.dart';
 import 'package:colored/sources/data/services/connectivity/connectivity_service.dart';
 import 'package:colored/sources/data/services/naming/naming_response.dart';
 import 'package:colored/sources/data/services/naming/naming_service.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/data_models/naming_result.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_view_model.dart';
@@ -30,9 +31,10 @@ class NamingServiceFailureStub implements NamingService {
       const NamingResponse(response: ResponseStatus.failed);
 }
 
-class FormatConverterStub implements FormatConverter {
+class ConverterStub implements Converter {
   @override
-  String convert(int r, int g, int b) => "mockedConversion";
+  Map<Format, String> convert(int r, int g, int b) =>
+      {Format.hex: "mockedConversion"};
 }
 
 class ConnectivityServiceSuccessStub implements ConnectivityService {
@@ -45,17 +47,17 @@ void main() {
   NamingViewModel viewModel;
   StreamController<NamingState> stateController;
   NamingService namingService;
-  FormatConverter formatConverter;
+  Converter converter;
 
   group("Given a NamingViewModel with successful NamingService requests", () {
     setUp(() {
       stateController = StreamController<NamingState>();
       namingService = NamingServiceSuccessStub();
-      formatConverter = FormatConverterStub();
+      converter = ConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,
         namingService: namingService,
-        converter: formatConverter,
+        converter: converter,
       );
     });
 
@@ -63,7 +65,7 @@ void main() {
       stateController.close();
       stateController = null;
       namingService = null;
-      formatConverter = null;
+      converter = null;
       viewModel = null;
     });
 
@@ -105,11 +107,11 @@ void main() {
     setUp(() {
       stateController = StreamController<NamingState>();
       namingService = NamingServiceFailureStub();
-      formatConverter = FormatConverterStub();
+      converter = ConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,
         namingService: namingService,
-        converter: formatConverter,
+        converter: converter,
       );
     });
 
@@ -117,7 +119,7 @@ void main() {
       stateController.close();
       stateController = null;
       namingService = null;
-      formatConverter = null;
+      converter = null;
       viewModel = null;
     });
 
