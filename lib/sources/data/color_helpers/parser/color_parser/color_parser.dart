@@ -1,5 +1,5 @@
-import 'package:colored/sources/data/color_helpers/color_parser/parser.dart';
-import 'package:colored/sources/data/color_helpers/format_parser/format_parser.dart';
+import 'package:colored/sources/data/color_helpers/parser/color_parser/parser.dart';
+import 'package:colored/sources/data/color_helpers/parser/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class ColorParser implements Parser {
   }
 
   @override
-  ColorSelection parseToFormat(String string, Format format) {
+  ColorSelection parseFromFormat(String string, Format format) {
     try {
       return _formatParsers[format].parse(string);
     } on Exception catch (_) {

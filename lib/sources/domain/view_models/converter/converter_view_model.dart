@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_helpers/color_parser/parser.dart';
-import 'package:colored/sources/data/color_helpers/color_transformer/transformer.dart';
+import 'package:colored/sources/data/color_helpers/parser/color_parser/parser.dart';
+import 'package:colored/sources/data/color_helpers/transformer/transformer.dart';
 import 'package:colored/sources/data/color_helpers/converter/converter.dart';
 import 'package:colored/sources/data/services/device_orientation/device_orientation_service.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
@@ -70,7 +70,7 @@ class ConverterViewModel {
   }
 
   void convertStringToColor(String string, Format format) {
-    final selection = _parser.parseToFormat(string, format);
+    final selection = _parser.parseFromFormat(string, format);
     notifySelectionEnded(selection);
   }
 

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/data/color_helpers/color_transformer/transformer.dart';
+import 'package:colored/sources/data/color_helpers/transformer/transformer.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:vector_math/vector_math.dart';
 

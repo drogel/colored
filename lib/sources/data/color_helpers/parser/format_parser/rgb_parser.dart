@@ -1,6 +1,6 @@
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
-import 'package:colored/sources/data/color_helpers/format_parser/format_parser.dart';
+import 'package:colored/sources/data/color_helpers/parser/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 
 class RgbParser extends FormatParser {
