@@ -1,4 +1,3 @@
-import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/color_card_tile.dart';
