@@ -1,6 +1,7 @@
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
+import 'package:colored/sources/presentation/widgets/containers/color_card_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -20,31 +21,24 @@ class ColorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColorDark = Theme.of(context).primaryColorDark;
-    final opacity = OpacityData.of(context).opacityScheme;
     final padding = PaddingData.of(context).paddingScheme;
     final radii = RadiusData.of(context).radiiScheme;
+    final borderRadius = BorderRadius.all(radii.large);
     return Padding(
       padding: padding.medium,
       child: FloatingActionButton(
         onPressed: () => onPressed(backgroundColor),
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(radii.medium),
+          borderRadius: borderRadius,
         ),
         backgroundColor: backgroundColor,
         child: Align(
           alignment: Alignment.bottomCenter,
-          child: Container(
-            margin: padding.small,
-            decoration: BoxDecoration(
-              color: primaryColorDark.withOpacity(opacity.overlay),
-              borderRadius: BorderRadius.all(radii.medium),
-            ),
-            child: ListTile(
-              title: Text(title),
-              subtitle: Text(subtitle),
-            ),
+          child: ColorCardTile(
+            title: title,
+            subtitle: subtitle,
+            borderRadius: borderRadius,
           ),
         ),
       ),
