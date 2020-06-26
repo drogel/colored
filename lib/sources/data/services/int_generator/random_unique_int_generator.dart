@@ -6,10 +6,16 @@ class RandomUniqueIntGenerator implements IntGenerator {
   const RandomUniqueIntGenerator();
 
   @override
-  List<int> generate({int max, int length}) {
+  List<int> generate({int max, int length}) => max <= length
+      ? _getAllPossibleInts(max)
+      : _getRandomUniqueInts(max, length);
+
+  List<int> _getAllPossibleInts(int max) => List.generate(max, (i) => i + 1);
+
+  List<int> _getRandomUniqueInts(int max, int length) {
     final random = Random();
     final intSet = <int>{};
-    for (var i = 0; i <= length; i++) {
+    while (intSet.length < length) {
       intSet.add(random.nextInt(max));
     }
     return intSet.toList();
