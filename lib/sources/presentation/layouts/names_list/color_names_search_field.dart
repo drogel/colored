@@ -26,6 +26,19 @@ class _ColorNamesSearchFieldState extends State<ColorNamesSearchField> {
   }
 
   @override
+  void didChangeDependencies() {
+    final data = NamesListData.of(context);
+    _controller.value = TextEditingValue(
+      text: data.state.search,
+      selection: TextSelection(
+        baseOffset: data.state.search.length,
+        extentOffset: data.state.search.length,
+      ),
+    );
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final data = NamesListData.of(context);
     final localization = Localization.of(context).namesList;
@@ -61,7 +74,7 @@ class _ColorNamesSearchFieldState extends State<ColorNamesSearchField> {
               borderRadius: borderRadius,
             ),
           ),
-          onChanged: (_) => _onTextChanged(data),
+          onChanged: data.onSearchChanged,
         ),
       ),
     );
@@ -78,7 +91,4 @@ class _ColorNamesSearchFieldState extends State<ColorNamesSearchField> {
     _controller.clear();
     data.onSearchChanged(_controller.text);
   }
-
-  void _onTextChanged(NamesListData data) =>
-      setState(() => data.onSearchChanged(_controller.text));
 }

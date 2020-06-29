@@ -22,6 +22,7 @@ dependencies:
   auto_size_text: ^2.1.0
   http: ^0.12.1
   animations: ^1.0.0+5
+  async: ^2.4.1
   connectivity: '>=0.4.8+6 <2.0.0'
 
 dev_dependencies:

@@ -25,7 +25,7 @@ class _NamesListNotifierState extends State<NamesListNotifier> {
 
   @override
   void initState() {
-    _viewModel = widget.injector.injectViewModel()..init();
+    _viewModel = widget.injector.injectViewModel();
     super.initState();
   }
 

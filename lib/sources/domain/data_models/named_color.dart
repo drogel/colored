@@ -7,6 +7,9 @@ class NamedColor {
     @required this.hex,
   });
 
+  factory NamedColor.fromMapEntry(MapEntry<String, dynamic> entry) =>
+      NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
+
   final String name;
   final String hex;
 

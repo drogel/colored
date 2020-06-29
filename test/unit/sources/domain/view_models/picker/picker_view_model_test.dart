@@ -28,6 +28,14 @@ void main() {
       });
     });
 
+    group("when dispose is called", () {
+      test("then stateController is closed", () {
+        expect(stateController.isClosed, false);
+        viewModel.dispose();
+        expect(stateController.isClosed, true);
+      });
+    });
+
     group("when updatePickerStyle is called for a valid index", () {
       test("then the PickerStyle of the given index is retrieved", () {
         viewModel.stateStream.listen((event) {

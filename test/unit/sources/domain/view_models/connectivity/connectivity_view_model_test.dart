@@ -12,11 +12,7 @@ class ConnectivityServiceStub implements ConnectivityService {
   final StreamController<ConnectivityResult> connectivityController;
 
   @override
-  Future<ConnectivityResult> checkConnectivity() async =>
-      ConnectivityResult.none;
-
-  @override
-  Stream<ConnectivityResult> get connectivityStream =>
+  Stream<ConnectivityResult> get onConnectivityChanged =>
       connectivityController.stream;
 }
 
@@ -47,6 +43,14 @@ void main() {
 
   group("Given a ConnectivityViewModel", () {
     group("when ConnectivityResult.none retrieved from connectivityStream", () {
+      group("when dispose is called", () {
+        test("then stateController is closed", () {
+          expect(stateController.isClosed, false);
+          viewModel.dispose();
+          expect(stateController.isClosed, true);
+        });
+      });
+
       test("then a NoConnection state is added to the state stream", () async {
         stateController.stream.listen((event) {
           expectLater(event.runtimeType, NoConnection);

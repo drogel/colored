@@ -1,4 +1,4 @@
-import 'package:colored/sources/data/services/api_response.dart';
+import 'package:colored/sources/data/network_client/response_status.dart';
 import 'package:colored/sources/data/services/naming/mock_naming_service.dart';
 import 'package:colored/sources/data/services/naming/naming_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,7 +21,7 @@ void main() {
       test("then expected sample color is retrieved", () async {
         final namingResponse = await namingService.getNaming(hexColor: "");
         final result = namingResponse.result;
-        expect(namingResponse.response, ApiResponse.ok);
+        expect(namingResponse.response, ResponseStatus.ok);
         expect(result.hex, "#212121");
         expect(result.name, "Sample Color");
       });
