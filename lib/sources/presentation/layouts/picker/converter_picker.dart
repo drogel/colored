@@ -8,8 +8,16 @@ import 'package:colored/sources/presentation/widgets/color_pickers/hsv/hsv_picke
 import 'package:colored/sources/presentation/widgets/color_pickers/rgb/rgb_picker.dart';
 import 'package:flutter/material.dart';
 
+const _kSaturationPickersMaxConstraints = BoxConstraints(maxHeight: 200);
+const _kSaturationPickersMinConstraints = BoxConstraints(maxHeight: 100);
+
 class ConverterPicker extends StatelessWidget {
-  const ConverterPicker({Key key}) : super(key: key);
+  const ConverterPicker({
+    @required this.availableHeight,
+    Key key,
+  }) : super(key: key);
+
+  final double availableHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +60,7 @@ class ConverterPicker extends StatelessWidget {
         onChangeEnd: converterData.onSelectionEnd,
         onChanged: converterData.onSelectionChanged,
         onChangeStart: converterData.onSelectionStarted,
+        saturationLightnessPickerConstraints: _getLayoutConstraints(),
       );
 
   Widget _buildHsvPicker(ConverterData converterData) => HsvPicker(
@@ -59,5 +68,11 @@ class ConverterPicker extends StatelessWidget {
         onChangeEnd: converterData.onSelectionEnd,
         onChanged: converterData.onSelectionChanged,
         onChangeStart: converterData.onSelectionStarted,
+        saturationValuePickerConstraints: _getLayoutConstraints(),
       );
+
+  BoxConstraints _getLayoutConstraints() =>
+      availableHeight / 2 > _kSaturationPickersMaxConstraints.maxHeight
+          ? _kSaturationPickersMaxConstraints
+          : _kSaturationPickersMinConstraints;
 }

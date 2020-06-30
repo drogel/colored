@@ -56,48 +56,47 @@ class _RgbPickerState extends State<RgbPicker> {
   @override
   Widget build(BuildContext context) {
     final opacity = OpacityData.of(context).opacityScheme;
-    return LayoutBuilder(
-      builder: (_, constraints) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ExpandableSlider(
-            value: _firstValue,
-            activeColor: colors.red,
-            inactiveColor: colors.red.withOpacity(opacity.fadedColor),
-            estimatedValueStep: widget.step,
-            onChangeEnd: _onChangeEnd,
-            onChanged: (value) {
-              _firstValue = value;
-              widget.onChanged(_getSelection());
-            },
-            controller: widget.controller,
-          ),
-          ExpandableSlider(
-            value: _secondValue,
-            activeColor: colors.green,
-            inactiveColor: colors.green.withOpacity(opacity.fadedColor),
-            estimatedValueStep: widget.step,
-            onChangeEnd: _onChangeEnd,
-            onChanged: (value) {
-              _secondValue = value;
-              widget.onChanged(_getSelection());
-            },
-            controller: widget.controller,
-          ),
-          ExpandableSlider(
-            value: _thirdValue,
-            activeColor: colors.blue,
-            inactiveColor: colors.blue.withOpacity(opacity.fadedColor),
-            estimatedValueStep: widget.step,
-            onChangeEnd: _onChangeEnd,
-            onChanged: (value) {
-              _thirdValue = value;
-              widget.onChanged(_getSelection());
-            },
-            controller: widget.controller,
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        ExpandableSlider(
+          value: _firstValue,
+          activeColor: colors.red,
+          inactiveColor: colors.red.withOpacity(opacity.fadedColor),
+          estimatedValueStep: widget.step,
+          onChangeEnd: _onChangeEnd,
+          onChanged: (value) {
+            _firstValue = value;
+            widget.onChanged(_getSelection());
+          },
+          controller: widget.controller,
+        ),
+        ExpandableSlider(
+          value: _secondValue,
+          activeColor: colors.green,
+          inactiveColor: colors.green.withOpacity(opacity.fadedColor),
+          estimatedValueStep: widget.step,
+          onChangeEnd: _onChangeEnd,
+          onChanged: (value) {
+            _secondValue = value;
+            widget.onChanged(_getSelection());
+          },
+          controller: widget.controller,
+        ),
+        ExpandableSlider(
+          value: _thirdValue,
+          activeColor: colors.blue,
+          inactiveColor: colors.blue.withOpacity(opacity.fadedColor),
+          estimatedValueStep: widget.step,
+          onChangeEnd: _onChangeEnd,
+          onChanged: (value) {
+            _thirdValue = value;
+            widget.onChanged(_getSelection());
+          },
+          controller: widget.controller,
+        ),
+      ],
     );
   }
 

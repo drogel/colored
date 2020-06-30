@@ -54,7 +54,9 @@ class ConverterBodyLayout extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: _getInnerPadding(padding),
-                    child: const ConverterPicker(),
+                    child: ConverterPicker(
+                      availableHeight: outerBox.maxHeight,
+                    ),
                   ),
                 );
               },
