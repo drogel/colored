@@ -9,8 +9,11 @@ class PickerTabBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final data = PickerData.of(context);
+    final selectedPicker = data.state.pickerStyle;
+    final selectedPickerIndex = PickerStyle.values.indexOf(selectedPicker);
     final padding = PaddingData.of(context).paddingScheme;
     return DefaultTabController(
+      initialIndex: selectedPickerIndex,
       length: PickerStyle.values.length,
       child: TabBar(
         tabs: PickerStyle.values
