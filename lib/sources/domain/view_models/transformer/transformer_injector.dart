@@ -1,0 +1,3 @@
+class TransformerInjector {
+  const TransformerInjector();
+}
