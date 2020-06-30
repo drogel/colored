@@ -5,3 +5,11 @@ class TransformerState {
 
   final ColorSelection selection;
 }
+
+class SelectionStarted extends TransformerState {
+  const SelectionStarted(ColorSelection selection) : super(selection);
+}
+
+class SelectionEnded extends TransformerState {
+  const SelectionEnded(ColorSelection selection) : super(selection);
+}

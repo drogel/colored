@@ -1,9 +1,9 @@
-import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_view_model.dart';
+import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
+import 'package:colored/sources/domain/view_models/transformer/transformer_state.dart';
 import 'package:flutter/material.dart';
 
 class NamingNotifier extends StatefulWidget {
@@ -33,7 +33,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
 
   @override
   void didChangeDependencies() {
-    final state = ConverterData.of(context).state;
+    final state = TransformerData.of(context).state;
     _handleConverterStateChange(state);
     super.didChangeDependencies();
   }
@@ -54,7 +54,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
     super.dispose();
   }
 
-  void _handleConverterStateChange(ConverterState state) {
+  void _handleConverterStateChange(TransformerState state) {
     switch (state.runtimeType) {
       case SelectionEnded:
         _viewModel.fetchNaming(state.selection);

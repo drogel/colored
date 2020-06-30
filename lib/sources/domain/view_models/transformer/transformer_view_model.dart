@@ -22,13 +22,22 @@ class TransformerViewModel {
 
   final ColorTransformer _transformer;
 
-  Stream<TransformerState> get stateStream => _stateController.stream;
-
   TransformerState get initialData {
     const initialColor = colors.primaryDark;
     final selection = ColorSelection.fromColor(initialColor);
     return TransformerState(selection);
   }
+
+  Stream<TransformerState> get stateStream => _stateController.stream;
+
+  void notifySelectionChanged(ColorSelection selection) =>
+      _stateController.sink.add(TransformerState(selection));
+
+  void notifySelectionStarted(ColorSelection selection) =>
+      _stateController.sink.add(SelectionStarted(selection));
+
+  void notifySelectionEnded(ColorSelection selection) =>
+      _stateController.sink.add(SelectionEnded(selection));
 
   void rotateColor(double change, ColorSelection current) {
     final selection = _transformer.rotate(current, change);

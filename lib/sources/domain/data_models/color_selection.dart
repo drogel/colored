@@ -71,6 +71,9 @@ class ColorSelection {
   }
 
   @override
+  String toString() => """ColorSelection(r: $r, g: $g, b: $b)""";
+
+  @override
   bool operator ==(Object other) =>
       other is ColorSelection && other.r == r && other.g == g && other.b == b;
 

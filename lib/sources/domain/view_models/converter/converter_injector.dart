@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:colored/sources/data/color_helpers/converter/color_converter.dart';
 import 'package:colored/sources/data/color_helpers/parser/color_parser/color_parser.dart';
-import 'package:colored/sources/data/color_helpers/transformer/color_transformer.dart';
 import 'package:colored/sources/data/color_helpers/converter/hex_converter.dart';
 import 'package:colored/sources/data/color_helpers/converter/hsl_converter.dart';
 import 'package:colored/sources/data/color_helpers/converter/hsv_converter.dart';
@@ -40,7 +39,6 @@ class ConverterInjector {
             HsvConverter(),
           ],
         ),
-        colorTransformer: const ColorTransformer(),
         deviceOrientationService: const SystemChromeService(),
       );
 }
