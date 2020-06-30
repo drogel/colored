@@ -38,7 +38,7 @@ class NamesListLayout extends StatelessWidget {
       constraints: const BoxConstraints.expand(),
       padding: EdgeInsets.symmetric(
         horizontal: padding.base,
-        vertical: padding.base / 2,
+        vertical: padding.vertical.top,
       ),
       child: Text(localization.noColorsFound),
     );
