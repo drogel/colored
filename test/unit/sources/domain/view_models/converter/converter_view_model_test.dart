@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
@@ -28,14 +27,8 @@ void main() {
   group("Given a ConverterViewModel,", () {
     group("when convertToColor is called with a selection", () {
       test("then a state with corresponding color is added to the stream", () {
-        final selection = ColorSelection(
-          r: 1,
-          g: 0.2,
-          b: 0.4,
-        );
+        final selection = ColorSelection(r: 1, g: 0.2, b: 0.4);
         final expected = ConverterState(
-          color: const Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
-          converterStep: 1 / _kDecimal8Bit,
           selection: selection,
           formatData: {
             Format.hex: "#FF3366",
@@ -127,14 +120,8 @@ void main() {
     group("when convertStringToColor is called with RGB color format", () {
       test("then a state with parsed RGB color is added to the stream", () {
         const rgbString = "255, 51, 102";
-        final selection = ColorSelection(
-          r: 1,
-          g: 0.2,
-          b: 0.4,
-        );
+        final selection = ColorSelection(r: 1, g: 0.2, b: 0.4);
         final expected = ConverterState(
-          color: const Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
-          converterStep: 1 / _kDecimal8Bit,
           selection: selection,
           formatData: {
             Format.hex: "#FF3366",
@@ -151,14 +138,8 @@ void main() {
     group("when convertStringToColor is called with hex color format", () {
       test("then a state with parsed hex color is added to the stream", () {
         const hexString = "#FF3366";
-        final selection = ColorSelection(
-          r: 1,
-          g: 0.2,
-          b: 0.4,
-        );
+        final selection = ColorSelection(r: 1, g: 0.2, b: 0.4);
         final expected = ConverterState(
-          color: const Color.fromRGBO(_kDecimal8Bit, 51, 102, 1),
-          converterStep: 1 / _kDecimal8Bit,
           selection: selection,
           formatData: {
             Format.hex: hexString,
@@ -174,14 +155,8 @@ void main() {
 
     group("when changeLightness is called with positive change", () {
       test("then a state with a higher RGB color is retrieved", () {
-        final selection = ColorSelection(
-          r: 0,
-          g: 0.2,
-          b: 0.4,
-        );
+        final selection = ColorSelection(r: 0, g: 0.2, b: 0.4);
         final expected = ConverterState(
-          color: const Color.fromRGBO(10, 61, 112, 1),
-          converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
             r: 10 / _kDecimal8Bit,
             g: 61 / _kDecimal8Bit,
@@ -199,14 +174,8 @@ void main() {
       });
 
       test("then a clamped state with a higher RGB color is retrieved", () {
-        final selection = ColorSelection(
-          r: 1,
-          g: 0.2,
-          b: 0.4,
-        );
+        final selection = ColorSelection(r: 1, g: 0.2, b: 0.4);
         final expected = ConverterState(
-          color: const Color.fromRGBO(_kDecimal8Bit, 61, 112, 1),
-          converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
             r: 1,
             g: 61 / _kDecimal8Bit,
@@ -226,14 +195,8 @@ void main() {
 
     group("when changeLightness is called with negative change", () {
       test("then a state with a lower RGB color is retrieved", () {
-        final selection = ColorSelection(
-          r: 1,
-          g: 0.2,
-          b: 0.4,
-        );
+        final selection = ColorSelection(r: 1, g: 0.2, b: 0.4);
         final expected = ConverterState(
-          color: const Color.fromRGBO(245, 41, 92, 1),
-          converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
             r: 245 / _kDecimal8Bit,
             g: 41 / _kDecimal8Bit,
@@ -251,14 +214,8 @@ void main() {
       });
 
       test("then a clamped state with a lower RGB color is retrieved", () {
-        final selection = ColorSelection(
-          r: 0,
-          g: 0.2,
-          b: 0.4,
-        );
+        final selection = ColorSelection(r: 0, g: 0.2, b: 0.4);
         final expectedState = ConverterState(
-          color: const Color.fromRGBO(0, 41, 92, 1),
-          converterStep: 1 / _kDecimal8Bit,
           selection: ColorSelection(
             r: 0,
             g: 41 / _kDecimal8Bit,
@@ -279,11 +236,7 @@ void main() {
 
     group("when rotateColor is called with a positive 180 degrees change", () {
       test("then a state with an opposite color selection is retrieved", () {
-        final selection = ColorSelection(
-          r: 1,
-          g: 0,
-          b: 0,
-        );
+        final selection = ColorSelection(r: 1, g: 0, b: 0);
         stateController.stream.listen(
           (state) => expect(state.selection.r, 0),
         );
@@ -293,11 +246,7 @@ void main() {
 
     group("when rotateColor is called with a negative 90 degrees change", () {
       test("then a state with rotated color selection is retrieved", () {
-        final selection = ColorSelection(
-          r: 1,
-          g: 0,
-          b: 0,
-        );
+        final selection = ColorSelection(r: 1, g: 0, b: 0);
         stateController.stream.listen(
           (state) => expect(state.selection.r.toStringAsFixed(4), "0.3333"),
         );
@@ -307,11 +256,7 @@ void main() {
 
     group("when rotateColor is called with a positive 360 degrees change", () {
       test("then a state with the same selection is retrieved", () {
-        final selection = ColorSelection(
-          r: 1,
-          g: 0,
-          b: 0,
-        );
+        final selection = ColorSelection(r: 1, g: 0, b: 0);
         stateController.stream.listen(
           (state) => expect(state.selection.r.toStringAsFixed(4), "1.0000"),
         );
@@ -321,11 +266,7 @@ void main() {
 
     group("when rotateColor is called with a positive 540 degrees change", () {
       test("then a state with an opposite color selection is retrieved", () {
-        final selection = ColorSelection(
-          r: 1,
-          g: 0,
-          b: 0,
-        );
+        final selection = ColorSelection(r: 1, g: 0, b: 0);
         stateController.stream.listen(
           (state) => expect(state.selection.r, 0),
         );

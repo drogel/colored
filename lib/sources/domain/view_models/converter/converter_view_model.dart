@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/parser/color_parser/parser.dart';
@@ -10,9 +9,7 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/painting.dart';
 
-const _kConverterStep = 1 / decimal8Bit;
 const _kTunedChangeFactor = 2;
 
 class ConverterViewModel {
@@ -99,8 +96,6 @@ class ConverterViewModel {
     final formatData = _converter.convert(r, g, b);
 
     return ConverterState(
-      color: Color.fromRGBO(r, g, b, 1),
-      converterStep: _kConverterStep,
       selection: selection,
       formatData: formatData,
     );

@@ -52,11 +52,10 @@ class ConverterPicker extends StatelessWidget {
         selection: converterData.state.selection,
         onChanged: converterData.onSelectionChanged,
         onChangeEnd: converterData.onSelectionEnd,
-        step: converterData.state.converterStep,
       );
 
   Widget _buildHslPicker(ConverterData converterData) => HslPicker(
-        color: converterData.state.color,
+        color: converterData.state.selection.toColor(),
         onChangeEnd: converterData.onSelectionEnd,
         onChanged: converterData.onSelectionChanged,
         onChangeStart: converterData.onSelectionStarted,
@@ -64,7 +63,7 @@ class ConverterPicker extends StatelessWidget {
       );
 
   Widget _buildHsvPicker(ConverterData converterData) => HsvPicker(
-        color: converterData.state.color,
+        color: converterData.state.selection.toColor(),
         onChangeEnd: converterData.onSelectionEnd,
         onChanged: converterData.onSelectionChanged,
         onChangeStart: converterData.onSelectionStarted,

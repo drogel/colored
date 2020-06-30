@@ -1,16 +1,19 @@
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
+import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
 import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/material.dart';
 
+const _kDefaultStep = 1 / decimal8Bit;
+
 class RgbPicker extends StatefulWidget {
   const RgbPicker({
     @required this.selection,
     @required this.onChanged,
     @required this.onChangeEnd,
-    @required this.step,
+    this.step = _kDefaultStep,
     this.controller,
     Key key,
   })  : assert(onChanged != null),

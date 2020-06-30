@@ -40,7 +40,7 @@ class _ConverterLayoutState extends State<ConverterLayout> {
             : ConnectivityLayout(
                 body: ConverterBodyLayout(
                   background: SwipingColorContainer(
-                    color: data.state.color,
+                    color: data.state.selection.toColor(),
                     onColorSwipedVertical: data.onColorSwipedVertical,
                     onColorSwipedHorizontal: data.onColorSwipedHorizontal,
                     onColorSwipeEnd: () => data.onSelectionEnd(selection),

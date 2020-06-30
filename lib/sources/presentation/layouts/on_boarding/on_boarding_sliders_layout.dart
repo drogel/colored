@@ -16,7 +16,7 @@ class OnBoardingSlidersLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final localization = Localization.of(context).onBoarding;
-    final stateColor = ConverterData.of(context).state.color;
+    final stateColor = ConverterData.of(context).state.selection.toColor();
     final pixelRatio = MediaQuery.of(context).devicePixelRatio;
     final padding = PaddingData.of(context).paddingScheme;
     return OnBoardingBodyLayout(
