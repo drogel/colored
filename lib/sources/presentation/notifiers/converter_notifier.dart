@@ -3,7 +3,6 @@ import 'package:colored/sources/domain/view_models/converter/converter_data.dart
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
-import 'package:colored/sources/common/extensions/list_swap.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
 
 import 'package:flutter/material.dart';
@@ -25,7 +24,6 @@ class ConverterNotifier extends StatefulWidget {
 }
 
 class _ConverterNotifierState extends State<ConverterNotifier> {
-  final List<Format> _displayedFormats = List<Format>.from(Format.values);
   ConverterViewModel _viewModel;
 
   @override
@@ -48,8 +46,6 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
           state: snapshot.data,
           clipboardShouldFail: _viewModel.clipboardShouldFail,
           onClipboardRetrieved: _onClipBoardRetrieved,
-          onFormatSelection: _updateDisplayedFormats,
-          displayedFormats: _displayedFormats,
           child: widget.child,
         ),
       );
@@ -58,16 +54,6 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
   void dispose() {
     _viewModel.dispose();
     super.dispose();
-  }
-
-  void _updateDisplayedFormats(Format selected, Format previous) {
-    final previousIndex = _displayedFormats.indexOf(previous);
-    if (_displayedFormats.contains(selected)) {
-      final selectedIndex = _displayedFormats.indexOf(selected);
-      setState(() => _displayedFormats.swap(selectedIndex, previousIndex));
-    } else {
-      setState(() => _displayedFormats[previousIndex] = selected);
-    }
   }
 
   void _onClipBoardRetrieved(String string, Format format) {
