@@ -56,12 +56,12 @@ class ConverterViewModel {
     void Function(ColorSelection) onDone,
   }) {
     final selection = _parser.parseFromFormat(string, format);
+    final state = _convertToState(selection);
+    _stateController.sink.add(state);
+
     if (onDone != null) {
       onDone(selection);
     }
-
-    final state = _convertToState(selection);
-    _stateController.sink.add(state);
   }
 
   bool clipboardShouldFail(String string, Format format) =>
