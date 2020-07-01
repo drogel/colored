@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
-import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/material.dart';
 
 class ConverterData extends InheritedWidget {
@@ -11,7 +10,6 @@ class ConverterData extends InheritedWidget {
     @required this.onClipboardRetrieved,
     @required this.onFormatSelection,
     @required this.displayedFormats,
-    this.slidersController,
     Widget child,
     Key key,
   })  : assert(state != null),
@@ -22,7 +20,6 @@ class ConverterData extends InheritedWidget {
   final void Function(String, Format) onClipboardRetrieved;
   final void Function(Format, Format) onFormatSelection;
   final List<Format> displayedFormats;
-  final ExpandableSliderController slidersController;
 
   static ConverterData of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<ConverterData>();

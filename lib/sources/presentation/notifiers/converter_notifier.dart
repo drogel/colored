@@ -6,7 +6,6 @@ import 'package:colored/sources/domain/view_models/converter/converter_view_mode
 import 'package:colored/sources/common/extensions/list_swap.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_state.dart';
-import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/material.dart';
 
 class ConverterNotifier extends StatefulWidget {
@@ -26,7 +25,6 @@ class ConverterNotifier extends StatefulWidget {
 }
 
 class _ConverterNotifierState extends State<ConverterNotifier> {
-  final ExpandableSliderController _controller = ExpandableSliderController();
   final List<Format> _displayedFormats = List<Format>.from(Format.values);
   ConverterViewModel _viewModel;
 
@@ -39,7 +37,7 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
   @override
   void didChangeDependencies() {
     final transformerState = TransformerData.of(context).state;
-    _updateFromTransformerState(transformerState);
+    _viewModel.notifySelectionChanged(transformerState.selection);
     super.didChangeDependencies();
   }
 
@@ -52,7 +50,6 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
           clipboardShouldFail: _viewModel.clipboardShouldFail,
           onClipboardRetrieved: _onClipBoardRetrieved,
           onFormatSelection: _updateDisplayedFormats,
-          slidersController: _controller,
           displayedFormats: _displayedFormats,
           child: widget.child,
         ),
@@ -62,13 +59,6 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
   void dispose() {
     _viewModel.dispose();
     super.dispose();
-  }
-
-  void _updateFromTransformerState(TransformerState newState) {
-    if (newState is SelectionStarted && _controller.isExpanded) {
-      _controller.shrink();
-    }
-    _viewModel.notifySelectionChanged(newState.selection);
   }
 
   void _updateDisplayedFormats(Format selected, Format previous) {
