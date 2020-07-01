@@ -41,13 +41,13 @@ class TransformerViewModel {
 
   void rotateColor(double change, ColorSelection current) {
     final selection = _transformer.rotate(current, change);
-    _stateController.sink.add(TransformerState(selection));
+    _stateController.sink.add(SelectionStarted(selection));
   }
 
   void changeLightness(double change, ColorSelection current) {
     final tunedChange = change / _kTunedChangeFactor;
     final selection = _transformer.changeLightness(current, tunedChange);
-    _stateController.sink.add(TransformerState(selection));
+    _stateController.sink.add(SelectionStarted(selection));
   }
 
   void dispose() => _stateController.close();

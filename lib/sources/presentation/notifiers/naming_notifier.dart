@@ -34,7 +34,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
   @override
   void didChangeDependencies() {
     final state = TransformerData.of(context).state;
-    _handleConverterStateChange(state);
+    _handleTransformerStateChange(state);
     super.didChangeDependencies();
   }
 
@@ -54,7 +54,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
     super.dispose();
   }
 
-  void _handleConverterStateChange(TransformerState state) {
+  void _handleTransformerStateChange(TransformerState state) {
     switch (state.runtimeType) {
       case SelectionEnded:
         _viewModel.fetchNaming(state.selection);

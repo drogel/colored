@@ -1,6 +1,7 @@
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/domain/data_models/picker_style.dart';
+import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_data.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
 import 'package:colored/sources/presentation/widgets/color_pickers/hsl/hsl_picker.dart';
@@ -23,6 +24,7 @@ class ConverterPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = PickerData.of(context);
     final transformerData = TransformerData.of(context);
+    final converterData = ConverterData.of(context);
     final duration = DurationData.of(context).durationScheme;
     final curves = CurveData.of(context).curveScheme;
     return AnimatedSwitcher(
@@ -32,6 +34,7 @@ class ConverterPicker extends StatelessWidget {
       child: _buildPicker(
         data: data,
         transformerData: transformerData,
+        converterData: converterData,
       ),
     );
   }
@@ -39,9 +42,10 @@ class ConverterPicker extends StatelessWidget {
   Widget _buildPicker({
     @required PickerData data,
     @required TransformerData transformerData,
+    @required ConverterData converterData,
   }) {
     if (data == null) {
-      return _buildDefaultPicker(transformerData);
+      return _buildDefaultPicker(transformerData, converterData);
     }
 
     switch (data.state.pickerStyle) {
@@ -50,17 +54,19 @@ class ConverterPicker extends StatelessWidget {
       case PickerStyle.hsv:
         return _buildHsvPicker(transformerData);
       default:
-        return _buildDefaultPicker(transformerData);
+        return _buildDefaultPicker(transformerData, converterData);
     }
   }
 
   Widget _buildDefaultPicker(
     TransformerData transformerData,
+    ConverterData converterData,
   ) =>
       RgbPicker(
         selection: transformerData.state.selection,
         onChanged: transformerData.onSelectionChanged,
         onChangeEnd: transformerData.onSelectionEnd,
+        controller: converterData.slidersController,
       );
 
   Widget _buildHslPicker(

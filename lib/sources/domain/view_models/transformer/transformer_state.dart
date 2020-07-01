@@ -16,8 +16,22 @@ class TransformerState {
 
 class SelectionStarted extends TransformerState {
   const SelectionStarted(ColorSelection selection) : super(selection);
+
+  @override
+  bool operator ==(Object other) =>
+      other is SelectionStarted && selection == other.selection;
+
+  @override
+  int get hashCode => hashObjects([this, selection]);
 }
 
 class SelectionEnded extends TransformerState {
   const SelectionEnded(ColorSelection selection) : super(selection);
+
+  @override
+  bool operator ==(Object other) =>
+      other is SelectionEnded && selection == other.selection;
+
+  @override
+  int get hashCode => hashObjects([this, selection]);
 }
