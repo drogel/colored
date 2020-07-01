@@ -36,8 +36,7 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
 
   @override
   void didChangeDependencies() {
-    final transformerState = TransformerData.of(context).state;
-    _viewModel.notifySelectionChanged(transformerState.selection);
+    _handleTransformerStateChange();
     super.didChangeDependencies();
   }
 
@@ -73,7 +72,12 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
 
   void _onClipBoardRetrieved(String string, Format format) {
     final transformerData = TransformerData.of(context);
-    final onDone = transformerData.onSelectionEnd;
+    final onDone = transformerData.onSelectionEnded;
     _viewModel.convertStringToColor(string, format, onDone: onDone);
+  }
+
+  void _handleTransformerStateChange() {
+    final transformerState = TransformerData.of(context).state;
+    _viewModel.notifySelectionChanged(transformerState.selection);
   }
 }

@@ -61,7 +61,7 @@ class ConverterPicker extends StatelessWidget {
       RgbPicker(
         selection: transformerData.state.selection,
         onChanged: transformerData.onSelectionChanged,
-        onChangeEnd: transformerData.onSelectionEnd,
+        onChangeEnd: transformerData.onSelectionEnded,
         shouldShrink: transformerData.state is SelectionStarted,
       );
 
@@ -70,7 +70,7 @@ class ConverterPicker extends StatelessWidget {
   ) =>
       HslPicker(
         color: transformerData.state.selection.toColor(),
-        onChangeEnd: transformerData.onSelectionEnd,
+        onChangeEnd: transformerData.onSelectionEnded,
         onChanged: transformerData.onSelectionChanged,
         onChangeStart: transformerData.onSelectionStarted,
         saturationLightnessPickerConstraints: _getLayoutConstraints(),
@@ -81,7 +81,7 @@ class ConverterPicker extends StatelessWidget {
   ) =>
       HsvPicker(
         color: transformerData.state.selection.toColor(),
-        onChangeEnd: transformerData.onSelectionEnd,
+        onChangeEnd: transformerData.onSelectionEnded,
         onChanged: transformerData.onSelectionChanged,
         onChangeStart: transformerData.onSelectionStarted,
         saturationValuePickerConstraints: _getLayoutConstraints(),

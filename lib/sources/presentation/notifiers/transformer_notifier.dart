@@ -39,7 +39,7 @@ class _TransformerNotifierState extends State<TransformerNotifier> {
             state: snapshot.data,
             onSelectionChanged: _viewModel.notifySelectionChanged,
             onSelectionStarted: _viewModel.notifySelectionStarted,
-            onSelectionEnd: _viewModel.notifySelectionEnded,
+            onSelectionEnded: _viewModel.notifySelectionEnded,
             onColorSwipedVertical: (dy) => _viewModel.changeLightness(dy, sel),
             onColorSwipedHorizontal: (dx) => _viewModel.rotateColor(dx, sel),
             child: widget.child,

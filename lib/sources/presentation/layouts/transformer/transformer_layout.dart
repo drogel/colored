@@ -12,7 +12,7 @@ class TransformerLayout extends StatelessWidget {
       color: data.state.selection.toColor(),
       onColorSwipedVertical: data.onColorSwipedVertical,
       onColorSwipedHorizontal: data.onColorSwipedHorizontal,
-      onColorSwipeEnd: () => data.onSelectionEnd(data.state.selection),
+      onColorSwipeEnd: () => data.onSelectionEnded(data.state.selection),
     );
   }
 }

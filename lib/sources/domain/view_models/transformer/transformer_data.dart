@@ -9,7 +9,7 @@ class TransformerData extends InheritedWidget {
     @required this.onColorSwipedHorizontal,
     @required this.onSelectionChanged,
     @required this.onSelectionStarted,
-    @required this.onSelectionEnd,
+    @required this.onSelectionEnded,
     @required Widget child,
     Key key,
   })  : assert(state != null),
@@ -18,7 +18,7 @@ class TransformerData extends InheritedWidget {
 
   final TransformerState state;
   final void Function(ColorSelection) onSelectionChanged;
-  final void Function(ColorSelection) onSelectionEnd;
+  final void Function(ColorSelection) onSelectionEnded;
   final void Function(ColorSelection) onSelectionStarted;
   final void Function(double) onColorSwipedVertical;
   final void Function(double) onColorSwipedHorizontal;

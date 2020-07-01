@@ -62,7 +62,7 @@ class _ConverterLayoutState extends State<ConverterLayout> {
   void _onColorCardPressed(Color color) {
     final selection = ColorSelection.fromColor(color);
     FocusScope.of(context).unfocus();
-    TransformerData.of(context).onSelectionEnd(selection);
+    TransformerData.of(context).onSelectionEnded(selection);
     _updateSearchingState();
   }
 }

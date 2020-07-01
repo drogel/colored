@@ -40,4 +40,10 @@ class _NamesListNotifierState extends State<NamesListNotifier> {
           child: widget.child,
         ),
       );
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
 }
