@@ -5,7 +5,7 @@ import 'package:colored/sources/domain/view_models/converter/converter_state.dar
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
 import 'package:colored/sources/common/extensions/list_swap.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_state.dart';
+
 import 'package:flutter/material.dart';
 
 class ConverterNotifier extends StatefulWidget {
