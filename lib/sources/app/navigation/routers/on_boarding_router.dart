@@ -1,5 +1,6 @@
 import 'package:colored/sources/app/navigation/routers/converter_router.dart';
 import 'package:colored/sources/app/navigation/routers/flow_router.dart';
+import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
@@ -28,7 +29,7 @@ class OnBoardingRouter implements FlowRouter {
 
   Route _buildOnBoarding(RouteSettings settings) => MaterialPageRoute(
         builder: (_) => const TransformerNotifier(
-          injector: TransformerInjector(),
+          injector: TransformerInjector(initialColor: colors.primaryDark),
           child: ConverterNotifier(
             injector: ConverterInjector(),
             child: DisplayedFormatsNotifier(
