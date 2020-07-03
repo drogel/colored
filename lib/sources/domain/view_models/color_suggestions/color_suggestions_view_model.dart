@@ -21,7 +21,7 @@ class ColorSuggestionsViewModel {
 
   Stream<ColorSuggestionsState> get stateStream => _stateController.stream;
 
-  ColorSuggestionsState get initialData => const Loading();
+  ColorSuggestionsState get initialState => const Loading();
 
   Future<void> init() async {
     final map = await _suggestionsService.fetchSuggestions(_kSuggestionsLength);

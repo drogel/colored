@@ -21,9 +21,9 @@ void main() {
   });
 
   group("Given a PickerViewModel", () {
-    group("when initialData is called", () {
+    group("when initialState is called", () {
       test("then a PickerState with PickerStyle.rgb is retrieved", () {
-        final actual = viewModel.initialData;
+        final actual = viewModel.initialState;
         expect(actual.pickerStyle, PickerStyle.rgb);
       });
     });

@@ -44,9 +44,9 @@ void main() {
     namesService = null;
   });
 
-  group("When initialData is called", () {
+  group("When initialState is called", () {
     test("then a Pending state is received", () {
-      final initialState = viewModel.initialData;
+      final initialState = viewModel.initialState;
       expect(initialState.runtimeType, Pending);
     });
   });

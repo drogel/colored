@@ -3,8 +3,8 @@ import 'package:colored/sources/presentation/layouts/naming/naming_cross_fade_te
 import 'package:colored/sources/presentation/layouts/picker/picker_tab_bar.dart';
 import 'package:flutter/material.dart';
 
-class NamingAppBar extends StatelessWidget {
-  const NamingAppBar({this.onSearchPressed, Key key}) : super(key: key);
+class NamingLayout extends StatelessWidget {
+  const NamingLayout({this.onSearchPressed, Key key}) : super(key: key);
 
   final void Function() onSearchPressed;
 

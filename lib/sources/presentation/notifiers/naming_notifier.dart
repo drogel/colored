@@ -1,9 +1,9 @@
-import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_view_model.dart';
+import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
+import 'package:colored/sources/domain/view_models/transformer/transformer_state.dart';
 import 'package:flutter/material.dart';
 
 class NamingNotifier extends StatefulWidget {
@@ -33,14 +33,13 @@ class _NamingNotifierState extends State<NamingNotifier> {
 
   @override
   void didChangeDependencies() {
-    final state = ConverterData.of(context).state;
-    _handleConverterStateChange(state);
+    _handleTransformerStateChange();
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) => StreamBuilder<NamingState>(
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => NamingData(
           state: snapshot.data,
@@ -54,11 +53,10 @@ class _NamingNotifierState extends State<NamingNotifier> {
     super.dispose();
   }
 
-  void _handleConverterStateChange(ConverterState state) {
-    switch (state.runtimeType) {
-      case SelectionEnded:
-        _viewModel.fetchNaming(state.selection);
-        break;
+  void _handleTransformerStateChange() {
+    final state = TransformerData.of(context).state;
+    if (state is SelectionEnded) {
+      _viewModel.fetchNaming(state.selection);
     }
   }
 }

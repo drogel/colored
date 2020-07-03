@@ -63,6 +63,16 @@ class ColorSelection {
   final double g;
   final double b;
 
+  Color toColor() {
+    final red = (r * decimal8Bit).round();
+    final green = (g * decimal8Bit).round();
+    final blue = (b * decimal8Bit).round();
+    return Color.fromRGBO(red, green, blue, 1);
+  }
+
+  @override
+  String toString() => """ColorSelection(r: $r, g: $g, b: $b)""";
+
   @override
   bool operator ==(Object other) =>
       other is ColorSelection && other.r == r && other.g == g && other.b == b;

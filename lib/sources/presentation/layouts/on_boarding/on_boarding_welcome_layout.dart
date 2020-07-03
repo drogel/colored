@@ -1,6 +1,6 @@
 import 'package:colored/resources/asset_paths.dart' as paths;
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_body_layout.dart';
+import 'package:colored/sources/presentation/widgets/layouts/presentation_layout.dart';
 import 'package:colored/sources/presentation/widgets/faded_in_image.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class OnBoardingWelcomeLayout extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final localization = Localization.of(context);
-    return OnBoardingBodyLayout(
+    return PresentationLayout(
       columnAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         FadedInImage(

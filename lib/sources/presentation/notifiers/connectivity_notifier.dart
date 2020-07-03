@@ -32,7 +32,7 @@ class _ConnectivityNotifierState extends State<ConnectivityNotifier> {
   @override
   Widget build(BuildContext context) => StreamBuilder<ConnectivityState>(
         stream: _viewModel.stateStream,
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         builder: (context, snapshot) => ConnectivityData(
           state: snapshot.data,
           child: widget.child,

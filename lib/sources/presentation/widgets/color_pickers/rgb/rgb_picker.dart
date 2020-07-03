@@ -1,17 +1,20 @@
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
+import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
 import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/material.dart';
 
+const _kDefaultStep = 1 / decimal8Bit;
+
 class RgbPicker extends StatefulWidget {
   const RgbPicker({
     @required this.selection,
     @required this.onChanged,
     @required this.onChangeEnd,
-    @required this.step,
-    this.controller,
+    this.step = _kDefaultStep,
+    this.shouldShrink = false,
     Key key,
   })  : assert(onChanged != null),
         super(key: key);
@@ -20,19 +23,21 @@ class RgbPicker extends StatefulWidget {
   final void Function(ColorSelection) onChangeEnd;
   final ColorSelection selection;
   final double step;
-  final ExpandableSliderController controller;
+  final bool shouldShrink;
 
   @override
   _RgbPickerState createState() => _RgbPickerState();
 }
 
 class _RgbPickerState extends State<RgbPicker> {
+  ExpandableSliderController _controller;
   double _firstValue;
   double _secondValue;
   double _thirdValue;
 
   @override
   void initState() {
+    _controller = ExpandableSliderController();
     _firstValue = widget.selection.r;
     _secondValue = widget.selection.g;
     _thirdValue = widget.selection.b;
@@ -49,6 +54,9 @@ class _RgbPickerState extends State<RgbPicker> {
     }
     if (oldWidget.selection.b != widget.selection.b) {
       _thirdValue = widget.selection.b;
+    }
+    if (oldWidget.shouldShrink != widget.shouldShrink && widget.shouldShrink) {
+      _controller.shrink();
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -70,7 +78,7 @@ class _RgbPickerState extends State<RgbPicker> {
             _firstValue = value;
             widget.onChanged(_getSelection());
           },
-          controller: widget.controller,
+          controller: _controller,
         ),
         ExpandableSlider(
           value: _secondValue,
@@ -82,7 +90,7 @@ class _RgbPickerState extends State<RgbPicker> {
             _secondValue = value;
             widget.onChanged(_getSelection());
           },
-          controller: widget.controller,
+          controller: _controller,
         ),
         ExpandableSlider(
           value: _thirdValue,
@@ -94,10 +102,16 @@ class _RgbPickerState extends State<RgbPicker> {
             _thirdValue = value;
             widget.onChanged(_getSelection());
           },
-          controller: widget.controller,
+          controller: _controller,
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _controller = null;
+    super.dispose();
   }
 
   ColorSelection _getSelection() => ColorSelection(

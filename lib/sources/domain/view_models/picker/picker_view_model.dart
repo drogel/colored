@@ -14,7 +14,7 @@ class PickerViewModel {
 
   Stream<PickerState> get stateStream => _stateController.stream;
 
-  PickerState get initialData => const PickerState(PickerStyle.rgb);
+  PickerState get initialState => const PickerState(PickerStyle.rgb);
 
   void updatePickerStyle(int pickerStyleIndex) {
     if (pickerStyleIndex < 0 || pickerStyleIndex >= PickerStyle.values.length) {
