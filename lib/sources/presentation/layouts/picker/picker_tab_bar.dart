@@ -1,6 +1,6 @@
-import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/domain/data_models/picker_style.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_data.dart';
+import 'package:colored/sources/presentation/layouts/picker/picker_tab.dart';
 import 'package:flutter/material.dart';
 
 class PickerTabBar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,14 +11,11 @@ class PickerTabBar extends StatelessWidget implements PreferredSizeWidget {
     final data = PickerData.of(context);
     final selectedPicker = data.state.pickerStyle;
     final selectedPickerIndex = PickerStyle.values.indexOf(selectedPicker);
-    final padding = PaddingData.of(context).paddingScheme;
     return DefaultTabController(
       initialIndex: selectedPickerIndex,
       length: PickerStyle.values.length,
       child: TabBar(
-        tabs: PickerStyle.values
-            .map((style) => _buildTab(style, padding.medium.left))
-            .toList(),
+        tabs: PickerStyle.values.map((p) => PickerTab(style: p)).toList(),
         onTap: data.onPickerSelected,
       ),
     );
@@ -26,27 +23,4 @@ class PickerTabBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kTextTabBarHeight);
-
-  Icon _buildIcon(PickerStyle pickerStyle) {
-    switch (pickerStyle) {
-      case PickerStyle.hsl:
-        return const Icon(Icons.blur_linear);
-      case PickerStyle.hsv:
-        return const Icon(Icons.gradient);
-      default:
-        return const Icon(Icons.tune);
-    }
-  }
-
-  Widget _buildTab(PickerStyle pickerStyle, double spacing) => Tab(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildIcon(pickerStyle),
-            SizedBox(width: spacing),
-            Text(pickerStyle.rawValue)
-          ],
-        ),
-      );
 }
