@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';
@@ -7,6 +8,7 @@ import 'package:colored/sources/domain/view_models/transformer/transformer_view_
 import 'package:flutter_test/flutter_test.dart';
 
 const _kDecimal8Bit = 255;
+const _kInitialColor = Color(0x00000000);
 
 void main() {
   TransformerViewModel viewModel;
@@ -14,7 +16,8 @@ void main() {
 
   setUp(() {
     stateController = StreamController<TransformerState>();
-    viewModel = const TransformerInjector().injectViewModel(stateController);
+    viewModel = const TransformerInjector(initialColor: _kInitialColor)
+        .injectViewModel(stateController);
   });
 
   tearDown(() {
@@ -29,6 +32,13 @@ void main() {
         expect(stateController.isClosed, false);
         viewModel.dispose();
         expect(stateController.isClosed, true);
+      });
+    });
+
+    group("when initialState is get", () {
+      test("then a TransformerState of the initial color is received", () {
+        final actual = viewModel.initialState;
+        expect(actual.selection, ColorSelection.fromColor(_kInitialColor));
       });
     });
 

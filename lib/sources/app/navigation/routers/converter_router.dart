@@ -1,4 +1,5 @@
 import 'package:colored/sources/app/navigation/routers/flow_router.dart';
+import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
 import 'package:colored/sources/domain/view_models/color_suggestions/color_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
@@ -39,7 +40,7 @@ class ConverterRouter implements FlowRouter {
           child: NamesListNotifier(
             injector: NamesListInjector(),
             child: TransformerNotifier(
-              injector: TransformerInjector(),
+              injector: TransformerInjector(initialColor: colors.logoBlue),
               child: ConverterNotifier(
                 injector: ConverterInjector(),
                 child: DisplayedFormatsNotifier(

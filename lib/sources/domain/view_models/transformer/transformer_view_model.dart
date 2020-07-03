@@ -1,7 +1,6 @@
 import 'dart:async';
+import 'dart:ui';
 
-import 'package:colored/sources/app/styling/colors/color_constants.dart'
-    as colors;
 import 'package:colored/sources/data/color_helpers/transformer/color_transformer.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_state.dart';
@@ -13,8 +12,11 @@ class TransformerViewModel {
   const TransformerViewModel({
     @required StreamController<TransformerState> stateController,
     @required ColorTransformer transformer,
+    @required Color initialColor,
   })  : assert(transformer != null),
         assert(stateController != null),
+        assert(initialColor != null),
+        _initialColor = initialColor,
         _stateController = stateController,
         _transformer = transformer;
 
@@ -22,10 +24,11 @@ class TransformerViewModel {
 
   final ColorTransformer _transformer;
 
+  final Color _initialColor;
+
   TransformerState get initialState {
-    const initialColor = colors.primaryDark;
-    final selection = ColorSelection.fromColor(initialColor);
-    return TransformerState(selection);
+    final initialSelection = ColorSelection.fromColor(_initialColor);
+    return TransformerState(initialSelection);
   }
 
   Stream<TransformerState> get stateStream => _stateController.stream;
