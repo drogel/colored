@@ -31,7 +31,7 @@ class _NamesListNotifierState extends State<NamesListNotifier> {
 
   @override
   Widget build(BuildContext context) => StreamBuilder<NamesListState>(
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => NamesListData(
           state: snapshot.data,

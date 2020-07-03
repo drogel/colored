@@ -29,7 +29,7 @@ class NamingViewModel {
 
   Stream<NamingState> get stateStream => _stateController.stream;
 
-  NamingState get initialData => const Unknown();
+  NamingState get initialState => const Unknown();
 
   Future<void> fetchNaming(ColorSelection selection) async {
     _stateController.sink.add(const Changing());

@@ -27,7 +27,7 @@ class OnBoardingViewModel {
 
   Stream<OnBoardingState> get stateStream => _stateController.stream;
 
-  OnBoardingState get initialData =>
+  OnBoardingState get initialState =>
       const OnBoardingState(pageScrollFraction: 0);
 
   void init() => _deviceOrientationService.setPortraitOrientation();

@@ -22,7 +22,7 @@ class TransformerViewModel {
 
   final ColorTransformer _transformer;
 
-  TransformerState get initialData {
+  TransformerState get initialState {
     const initialColor = colors.primaryDark;
     final selection = ColorSelection.fromColor(initialColor);
     return TransformerState(selection);

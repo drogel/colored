@@ -18,7 +18,7 @@ class DisplayedFormatsViewModel {
 
   Stream<DisplayedFormatsState> get stateStream => _stateController.stream;
 
-  DisplayedFormatsState get initialData =>
+  DisplayedFormatsState get initialState =>
       DisplayedFormatsState(_displayedFormats);
 
   void updateDisplayedFormats(Format selected, Format previous) {

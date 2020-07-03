@@ -30,7 +30,7 @@ class _ColorSuggestionsNotifierState extends State<ColorSuggestionsNotifier> {
 
   @override
   Widget build(BuildContext context) => StreamBuilder<ColorSuggestionsState>(
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => ColorSuggestionsData(
           state: snapshot.data,

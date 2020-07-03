@@ -39,7 +39,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
 
   @override
   Widget build(BuildContext context) => StreamBuilder<NamingState>(
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => NamingData(
           state: snapshot.data,

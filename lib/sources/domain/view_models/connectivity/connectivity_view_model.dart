@@ -21,7 +21,7 @@ class ConnectivityViewModel {
 
   Stream<ConnectivityState> get stateStream => _stateController.stream;
 
-  ConnectivityState get initialData => const Unknown();
+  ConnectivityState get initialState => const Unknown();
 
   void init() {
     final stream = _connectivityService.onConnectivityChanged;

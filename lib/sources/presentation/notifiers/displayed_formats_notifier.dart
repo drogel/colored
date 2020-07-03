@@ -30,7 +30,7 @@ class _DisplayedFormatsNotifierState extends State<DisplayedFormatsNotifier> {
 
   @override
   Widget build(BuildContext context) => StreamBuilder<DisplayedFormatsState>(
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => DisplayedFormatsData(
           state: snapshot.data,

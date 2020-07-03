@@ -40,7 +40,7 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
 
   @override
   Widget build(BuildContext context) => StreamBuilder<ConverterState>(
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => ConverterData(
           state: snapshot.data,

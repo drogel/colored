@@ -23,9 +23,9 @@ void main() {
       stateController = null;
     });
 
-    group("when initialData is called", () {
+    group("when initialState is called", () {
       test("then a DisplayedFormatsState with all formats is retrieved", () {
-        final actual = viewModel.initialData;
+        final actual = viewModel.initialState;
         expect(actual.formats, allFormats);
       });
     });
@@ -48,7 +48,7 @@ void main() {
 
       test("then Format list is unchanged if selected equals previous", () {
         viewModel.stateStream.listen((event) {
-          expect(event.formats, viewModel.initialData.formats);
+          expect(event.formats, viewModel.initialState.formats);
         });
         viewModel.updateDisplayedFormats(Format.hex, Format.hex);
       });

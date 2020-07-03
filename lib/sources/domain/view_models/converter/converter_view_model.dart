@@ -32,7 +32,7 @@ class ConverterViewModel {
 
   Stream<ConverterState> get stateStream => _stateController.stream;
 
-  ConverterState get initialData {
+  ConverterState get initialState {
     const initialColor = colors.primaryDark;
     return _convertToState(
       ColorSelection(

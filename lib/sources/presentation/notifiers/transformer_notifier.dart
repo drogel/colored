@@ -31,7 +31,7 @@ class _TransformerNotifierState extends State<TransformerNotifier> {
 
   @override
   Widget build(BuildContext context) => StreamBuilder<TransformerState>(
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) {
           final sel = snapshot.data.selection;

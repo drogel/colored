@@ -41,9 +41,9 @@ void main() {
       stateController = null;
     });
 
-    group("when initialData is called", () {
+    group("when initialState is called", () {
       test("then a Loading state is received", () {
-        final actual = viewModel.initialData;
+        final actual = viewModel.initialState;
         expect(actual.runtimeType, Loading);
       });
     });
