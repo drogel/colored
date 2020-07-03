@@ -2,6 +2,7 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
+import 'package:colored/sources/presentation/widgets/layouts/dynamic_row.dart';
 import 'package:flutter/material.dart';
 
 class DisplayedFormatsLayout extends StatelessWidget {
@@ -20,28 +21,14 @@ class DisplayedFormatsLayout extends StatelessWidget {
     return LayoutBuilder(
       builder: (_, constraints) {
         final availableWidth = constraints.maxWidth;
-        return Row(
-          mainAxisAlignment: _computeButtonCount(availableWidth) == 1
-              ? MainAxisAlignment.spaceAround
-              : MainAxisAlignment.spaceBetween,
-          children: _buildFormatButtons(data, availableWidth),
+        final count = _computeButtonCount(availableWidth);
+        return DynamicRow(
+          itemCount: count,
+          mainAxisAlignment: _getButtonAlignment(count),
+          itemBuilder: (_, index) => _buildFormatButton(data, index),
         );
       },
     );
-  }
-
-  List<Widget> _buildFormatButtons(
-    DisplayedFormatsData data,
-    double availableWidth,
-  ) {
-    final buttonCount = _computeButtonCount(availableWidth);
-    var buttonList = <Widget>[];
-
-    for (var i = 0; i < buttonCount; i += 1) {
-      buttonList.add(_buildFormatButton(data, i));
-    }
-
-    return buttonList;
   }
 
   Widget _buildFormatButton(DisplayedFormatsData data, int index) {
@@ -61,4 +48,8 @@ class DisplayedFormatsLayout extends StatelessWidget {
     final buttonCount = buttonCountSpace.clamp(0, Format.values.length);
     return buttonCount;
   }
+
+  MainAxisAlignment _getButtonAlignment(int buttonCount) => buttonCount == 1
+      ? MainAxisAlignment.spaceAround
+      : MainAxisAlignment.spaceBetween;
 }

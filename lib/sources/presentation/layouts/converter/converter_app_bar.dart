@@ -1,5 +1,5 @@
 import 'package:colored/sources/presentation/layouts/names_list/color_names_app_bar.dart';
-import 'package:colored/sources/presentation/layouts/naming/naming_app_bar.dart';
+import 'package:colored/sources/presentation/layouts/naming/naming_layout.dart';
 import 'package:colored/sources/presentation/widgets/animations/default_animated_switcher.dart';
 
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class ConverterAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) => DefaultAnimatedSwitcher(
         child: isSearching
             ? ColorNamesAppBar(onBackPressed: onSearchStateChange)
-            : NamingAppBar(onSearchPressed: onSearchStateChange),
+            : NamingLayout(onSearchPressed: onSearchStateChange),
       );
 
   @override

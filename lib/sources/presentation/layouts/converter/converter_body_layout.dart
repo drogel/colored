@@ -5,7 +5,7 @@ import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/layouts/displayed_formats/displayed_formats_layout.dart';
 import 'package:colored/sources/presentation/layouts/picker/picker_layout.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
-import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
+import 'package:colored/sources/presentation/widgets/animations/swiping_cross_fade.dart';
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
