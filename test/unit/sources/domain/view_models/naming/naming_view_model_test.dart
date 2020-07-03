@@ -69,9 +69,9 @@ void main() {
       viewModel = null;
     });
 
-    group("when initialData is called", () {
+    group("when initialState is called", () {
       test("then an Unknown state is retrieved", () async {
-        final initialState = viewModel.initialData;
+        final initialState = viewModel.initialState;
         expect(initialState.runtimeType, Unknown);
       });
     });
@@ -131,9 +131,9 @@ void main() {
       viewModel = null;
     });
 
-    group("when initialData is called", () {
+    group("when initialState is called", () {
       test("then an Unknown state is retrieved", () async {
-        final initialState = viewModel.initialData;
+        final initialState = viewModel.initialState;
         expect(initialState.runtimeType, Unknown);
       });
     });

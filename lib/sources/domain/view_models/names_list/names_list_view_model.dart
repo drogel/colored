@@ -20,7 +20,7 @@ class NamesListViewModel {
 
   Stream<NamesListState> get stateStream => _stateController.stream;
 
-  NamesListState get initialData => Pending.emptySearch();
+  NamesListState get initialState => Pending.emptySearch();
 
   Future<void> searchColorName(String searchString) async {
     final cleanSearch = _cleanSearch(searchString);

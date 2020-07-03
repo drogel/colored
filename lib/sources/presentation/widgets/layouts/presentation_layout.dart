@@ -1,8 +1,8 @@
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingBodyLayout extends StatelessWidget {
-  const OnBoardingBodyLayout({
+class PresentationLayout extends StatelessWidget {
+  const PresentationLayout({
     @required this.children,
     this.columnAlignment = MainAxisAlignment.start,
     Key key,

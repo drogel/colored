@@ -1,14 +1,14 @@
 import 'package:animations/animations.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
+import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
 import 'package:colored/sources/presentation/layouts/connectivity/connectivity_bar.dart';
 import 'package:colored/sources/presentation/layouts/connectivity/connectivity_layout.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_app_bar.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_body_layout.dart';
 import 'package:colored/sources/presentation/layouts/names_list/names_list_layout.dart';
 import 'package:colored/sources/presentation/layouts/naming/naming_error_row.dart';
-import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
+import 'package:colored/sources/presentation/layouts/transformer/transformer_layout.dart';
 import 'package:flutter/material.dart';
 
 class ConverterLayout extends StatefulWidget {
@@ -23,9 +23,7 @@ class _ConverterLayoutState extends State<ConverterLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final data = ConverterData.of(context);
     final durations = DurationData.of(context).durationScheme;
-    final selection = data.state.selection;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: ConverterAppBar(
@@ -37,16 +35,9 @@ class _ConverterLayoutState extends State<ConverterLayout> {
         transitionBuilder: _buildPageTransition,
         child: isSearching
             ? NamesListLayout(onColorCardPressed: _onColorCardPressed)
-            : ConnectivityLayout(
-                body: ConverterBodyLayout(
-                  background: SwipingColorContainer(
-                    color: data.state.selection.toColor(),
-                    onColorSwipedVertical: data.onColorSwipedVertical,
-                    onColorSwipedHorizontal: data.onColorSwipedHorizontal,
-                    onColorSwipeEnd: () => data.onSelectionEnd(selection),
-                  ),
-                ),
-                child: const ConnectivityBar(child: NamingErrorRow()),
+            : const ConnectivityLayout(
+                body: ConverterBodyLayout(background: TransformerLayout()),
+                child: ConnectivityBar(child: NamingErrorRow()),
               ),
       ),
     );
@@ -71,7 +62,7 @@ class _ConverterLayoutState extends State<ConverterLayout> {
   void _onColorCardPressed(Color color) {
     final selection = ColorSelection.fromColor(color);
     FocusScope.of(context).unfocus();
-    ConverterData.of(context).onSelectionEnd(selection);
+    TransformerData.of(context).onSelectionEnded(selection);
     _updateSearchingState();
   }
 }

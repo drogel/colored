@@ -2,10 +2,10 @@ import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
-import 'package:colored/sources/presentation/layouts/picker/converter_picker.dart';
+import 'package:colored/sources/presentation/layouts/displayed_formats/displayed_formats_layout.dart';
+import 'package:colored/sources/presentation/layouts/picker/picker_layout.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
-import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
-import 'package:colored/sources/presentation/widgets/buttons/dropdown_format_button.dart';
+import 'package:colored/sources/presentation/widgets/animations/swiping_cross_fade.dart';
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
@@ -41,20 +41,14 @@ class ConverterBodyLayout extends StatelessWidget {
                   enableGestures: false,
                   header: Padding(
                     padding: EdgeInsets.symmetric(horizontal: padding.base),
-                    child: LayoutBuilder(
-                      builder: (_, constraints) => Row(
-                        mainAxisAlignment:
-                            _computeButtonCount(constraints.maxWidth) == 1
-                                ? MainAxisAlignment.spaceAround
-                                : MainAxisAlignment.spaceBetween,
-                        children:
-                            _buildFormatButtons(data, constraints.maxWidth),
-                      ),
+                    child: DisplayedFormatsLayout(
+                      buttonMinSpace: _kFormatButtonMinSpace,
+                      converterData: data,
                     ),
                   ),
                   child: Padding(
                     padding: _getInnerPadding(padding),
-                    child: ConverterPicker(
+                    child: PickerLayout(
                       availableHeight: outerBox.maxHeight,
                     ),
                   ),
@@ -65,31 +59,6 @@ class ConverterBodyLayout extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  List<Widget> _buildFormatButtons(ConverterData data, double availableWidth) {
-    final buttonCount = _computeButtonCount(availableWidth);
-    var buttonList = <Widget>[];
-    for (var i = 0; i < buttonCount; i += 1) {
-      buttonList.add(_buildFormatButton(data, i));
-    }
-    return buttonList;
-  }
-
-  Widget _buildFormatButton(ConverterData data, int index) =>
-      DropdownFormatButton(
-        title: data.displayedFormats[index].rawValue,
-        format: data.displayedFormats[index],
-        clipboardShouldFail: data.clipboardShouldFail,
-        onClipboardRetrieved: data.onClipboardRetrieved,
-        content: data.state.formatData[data.displayedFormats[index]],
-        onDropdownSelection: data.onFormatSelection,
-      );
-
-  int _computeButtonCount(double availableWidth) {
-    final buttonCountSpace = (availableWidth / _kFormatButtonMinSpace).floor();
-    final buttonCount = buttonCountSpace.clamp(0, Format.values.length);
-    return buttonCount;
   }
 
   bool _shouldShowOverlayChild(double availableHeight) {
