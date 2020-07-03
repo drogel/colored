@@ -17,20 +17,16 @@ class ColorSuggestionsLayout extends StatelessWidget
     final data = ColorSuggestionsData.of(context);
     switch (data.state.runtimeType) {
       case ColorSuggestionsFound:
-        return _buildSuggestionsWidget(data.state as ColorSuggestionsFound);
+        final suggestions = data.state as ColorSuggestionsFound;
+        return ColorSuggestionsList(
+          suggestions: suggestions.colorSuggestions,
+          onSuggestionSelected: onSuggestionSelected,
+        );
       default:
-        return _buildDefaultWidget();
+        return Container();
     }
   }
 
   @override
   Size get preferredSize => const Size.fromHeight(kTextTabBarHeight);
-
-  Widget _buildSuggestionsWidget(ColorSuggestionsFound suggestions) =>
-      ColorSuggestionsList(
-        suggestions: suggestions.colorSuggestions,
-        onSuggestionSelected: onSuggestionSelected,
-      );
-
-  Widget _buildDefaultWidget() => Container();
 }
