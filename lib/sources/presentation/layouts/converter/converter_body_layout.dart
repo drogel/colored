@@ -3,7 +3,7 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/layouts/displayed_formats/displayed_formats_layout.dart';
-import 'package:colored/sources/presentation/layouts/picker/converter_picker.dart';
+import 'package:colored/sources/presentation/layouts/picker/picker_layout.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/containers/swiping_cross_fade.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +48,7 @@ class ConverterBodyLayout extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: _getInnerPadding(padding),
-                    child: ConverterPicker(
+                    child: PickerLayout(
                       availableHeight: outerBox.maxHeight,
                     ),
                   ),
