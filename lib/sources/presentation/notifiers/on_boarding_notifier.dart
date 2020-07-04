@@ -49,6 +49,7 @@ class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
 
   Future<void> _onOnBoardingFinished() async {
     await _viewModel.onOnBoardingFinish();
-    await Navigator.of(context).pushReplacementNamed(ConverterRouter.name);
+    await Navigator.of(context)
+        .pushReplacementNamed(ConverterRouter.routerName);
   }
 }
