@@ -1,5 +1,6 @@
-import 'package:colored/sources/app/navigation/routers/flow_router.dart';
-import 'package:colored/sources/app/styling/colors/color_constants.dart' as colors;
+import 'package:colored/sources/app/navigation/router.dart';
+import 'package:colored/sources/app/styling/colors/color_constants.dart'
+    as colors;
 import 'package:colored/sources/domain/view_models/color_suggestions/color_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
@@ -21,13 +22,17 @@ import 'package:colored/sources/presentation/widgets/page_routes/fade_out_route.
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ConverterRouter implements FlowRouter {
-  const ConverterRouter();
+class ConverterRouter extends Router {
+  const ConverterRouter({List<Router> children})
+      : super(children: children);
 
-  static const name = "converter/";
+  static const routerName = "converter/";
 
   @override
-  Route generateRoute(RouteSettings settings) {
+  String get name => routerName;
+
+  @override
+  Route buildRoute(RouteSettings settings) {
     switch (settings.name) {
       default:
         return _buildConverter(settings);
