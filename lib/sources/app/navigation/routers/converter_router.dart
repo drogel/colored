@@ -1,4 +1,4 @@
-import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/navigation/router.dart';
+import 'package:colored/sources/app/navigation/router.dart';
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
 import 'package:colored/sources/domain/view_models/color_suggestions/color_suggestions_injector.dart';

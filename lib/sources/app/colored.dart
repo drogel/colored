@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/navigation/router.dart';
+import 'package:colored/sources/app/navigation/router.dart';
 import 'package:colored/sources/app/styling/theme/theme_builder.dart';
 import 'package:colored/sources/app/styling/style.dart';
 import 'package:flutter/material.dart';

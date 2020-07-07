@@ -2,7 +2,7 @@ import 'package:colored/configuration/flavor.dart';
 import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/app/colored.dart';
 import 'package:colored/sources/app/navigation/routers/converter_router.dart';
-import 'file:///D:/Programas/Flutter/colored/colored/lib/sources/app/navigation/router.dart';
+import 'package:colored/sources/app/navigation/router.dart';
 import 'package:colored/sources/app/navigation/routers/on_boarding_router.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage_keys.dart'
