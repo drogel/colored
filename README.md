@@ -1,7 +1,6 @@
 <p align="center">
   <img src="./showcase/graphics/header.png">
 </p>
-<h1 align="center">Colored</h1>
 <h3 align="center">An open-source Flutter app that helps developers and designers work with colors.</h3>
 
 <p align="center">
@@ -44,6 +43,7 @@ This project has been built using the [Flutter](https://flutter.io/) framework, 
 - **Color converter**: convert any color to and from the available formats: Hex, RGB, HSL and HSV.
 - **Color naming**: explore the RGB space and get the name of the color you are looking for.
 - **Color search**: search in the color dictionary. Look up by name or by hex value.
+- **Color families**: get suggestions of color families based on color names.
 
 ## Download & install
 
