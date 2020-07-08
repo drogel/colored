@@ -1,7 +1,6 @@
 <p align="center">
   <img src="./showcase/graphics/header.png">
 </p>
-<h1 align="center">Colored</h1>
 <h3 align="center">An open-source Flutter app that helps developers and designers work with colors.</h3>
 
 <p align="center">
