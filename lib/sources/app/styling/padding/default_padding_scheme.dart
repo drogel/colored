@@ -19,5 +19,5 @@ class DefaultPaddingScheme implements PaddingScheme {
   EdgeInsets get small => padding.small;
 
   @override
-  EdgeInsets get vertical => padding.vertical;
+  EdgeInsets get vertical => padding.list;
 }

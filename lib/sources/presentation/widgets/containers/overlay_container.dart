@@ -33,10 +33,7 @@ class OverlayContainer extends StatelessWidget {
             elevation: elevation.low,
             color: colors.primary.withOpacity(opacity.overlay),
             borderRadius: BorderRadius.all(radii.large),
-            child: Padding(
-              padding: this.padding ?? _getInnerPadding(padding),
-              child: child,
-            ),
+            child: child,
           ),
         ),
       ),
@@ -59,10 +56,5 @@ class OverlayContainer extends StatelessWidget {
         return paddingScheme.small;
       }
     }
-  }
-
-  EdgeInsets _getInnerPadding(PaddingScheme padding) {
-    final defaultPaddingValue = padding.large.bottom + padding.small.top;
-    return EdgeInsets.only(bottom: defaultPaddingValue, top: padding.small.top);
   }
 }

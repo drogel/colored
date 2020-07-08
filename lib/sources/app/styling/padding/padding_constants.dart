@@ -8,4 +8,4 @@ const medium = EdgeInsets.all(base / 3);
 
 const small = EdgeInsets.all(base / 6);
 
-const vertical = EdgeInsets.symmetric(horizontal: base / 3, vertical: base / 2);
+const list = EdgeInsets.symmetric(horizontal: base / 2, vertical: base);

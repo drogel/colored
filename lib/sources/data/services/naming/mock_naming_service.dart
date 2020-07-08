@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:colored/resources/mock_data_paths.dart' as mock_paths;
-import 'package:colored/sources/data/services/api_response.dart';
+import 'package:colored/sources/data/network_client/response_status.dart';
 import 'package:colored/sources/data/services/naming/naming_response.dart';
 import 'package:colored/sources/data/services/naming/naming_service.dart';
 import 'package:colored/sources/domain/data_models/naming_result.dart';
@@ -16,6 +16,6 @@ class MockNamingService implements NamingService {
     final map = jsonDecode(sampleColorStr);
     final namingMap = map["colors"].first;
     final result = NamingResult.fromMap(namingMap);
-    return NamingResponse(result: result, response: ApiResponse.ok);
+    return NamingResponse(result: result, response: ResponseStatus.ok);
   }
 }

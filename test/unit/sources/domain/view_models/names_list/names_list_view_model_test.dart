@@ -13,13 +13,14 @@ class NamesServiceStub implements NamesService {
   static const Map<String, String> namesMap = {"testHex": "testName"};
 
   @override
-  void dispose() {}
+  Future<Map<String, String>> fetchNamesContaining(String searchString) async =>
+      namesMap;
+}
 
+class NamesServiceEmptyStub implements NamesService {
   @override
-  Map<String, String> fetchNamesContaining(String searchString) => namesMap;
-
-  @override
-  Future<void> loadNames() async {}
+  Future<Map<String, String>> fetchNamesContaining(String searchString) async =>
+      {};
 }
 
 void main() {
@@ -43,33 +44,27 @@ void main() {
     namesService = null;
   });
 
-  group("When initialData is called", () {
+  group("When initialState is called", () {
     test("then a Pending state is received", () {
-      final initialState = viewModel.initialData;
+      final initialState = viewModel.initialState;
       expect(initialState.runtimeType, Pending);
-    });
-  });
-
-  group("when init is called", () {
-    test("then namesService is asked to load the names data", () {
-      viewModel.init();
-      verify(namesService.loadNames());
-    });
-  });
-
-  group("when dispose is called", () {
-    test("then namesService is asked to dispose", () {
-      viewModel.dispose();
-      verify(namesService.dispose());
     });
   });
 
   group("When clearSearch is called", () {
     test("then a Pending state is received", () {
       stateController.stream.listen(
-            (event) => expect(event.runtimeType, Pending),
+        (event) => expect(event.runtimeType, Pending),
       );
       viewModel.clearSearch();
+    });
+  });
+
+  group("when dispose is called", () {
+    test("then stateController is closed", () {
+      expect(stateController.isClosed, false);
+      viewModel.dispose();
+      expect(stateController.isClosed, true);
     });
   });
 
@@ -104,6 +99,22 @@ void main() {
         viewModel.searchColorName("red");
       });
 
+      test("with a searchString of lenght < 3, then search is retrieved", () {
+        const expected = "se";
+        stateController.stream.listen(
+          (event) => expect(event.search, expected),
+        );
+        viewModel.searchColorName(expected);
+      });
+
+      test("with a searchString of lenght >= 3, then search is retrieved", () {
+        const expected = "search";
+        stateController.stream.listen(
+          (event) => expect(event.search, expected),
+        );
+        viewModel.searchColorName(expected);
+      });
+
       test("with searchString.lenght >= 3, then namedColors are retrieved", () {
         stateController.stream.listen((event) {
           final found = event as Found;
@@ -114,6 +125,39 @@ void main() {
           final actual = found.namedColors.first;
           expect(actual, expected);
         });
+        viewModel.searchColorName("red");
+      });
+    });
+  });
+
+  group("Given a NamesListViewModel with an empty NamesService", () {
+    setUp(() {
+      stateController = StreamController<NamesListState>();
+      namesService = NamesServiceEmptyStub();
+      viewModel = NamesListViewModel(
+        stateController: stateController,
+        namesService: namesService,
+      );
+    });
+
+    tearDown(() {
+      stateController.close();
+      stateController = null;
+      namesService = null;
+    });
+
+    group("when searchColorName is called", () {
+      test("with a searchString of lenght < 3, then Pending is added", () {
+        stateController.stream.listen(
+          (event) => expect(event.runtimeType, Pending),
+        );
+        viewModel.searchColorName("se");
+      });
+
+      test("with searchString.lenght >= 3, then NoneFound is retrieved", () {
+        stateController.stream.listen(
+          (event) => expect(event.runtimeType, NoneFound),
+        );
         viewModel.searchColorName("red");
       });
     });

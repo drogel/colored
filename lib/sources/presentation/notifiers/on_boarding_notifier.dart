@@ -32,7 +32,7 @@ class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
   @override
   Widget build(BuildContext context) => StreamBuilder<OnBoardingState>(
         stream: _viewModel.stateStream,
-        initialData: _viewModel.initialData,
+        initialData: _viewModel.initialState,
         builder: (_, snapshot) => OnBoardingData(
           state: snapshot.data,
           onPageScroll: _viewModel.computeScrollFraction,
@@ -49,6 +49,7 @@ class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
 
   Future<void> _onOnBoardingFinished() async {
     await _viewModel.onOnBoardingFinish();
-    await Navigator.of(context).pushReplacementNamed(ConverterRouter.name);
+    await Navigator.of(context)
+        .pushReplacementNamed(ConverterRouter.routerName);
   }
 }

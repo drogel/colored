@@ -21,16 +21,18 @@ class ConnectivityViewModel {
 
   Stream<ConnectivityState> get stateStream => _stateController.stream;
 
-  ConnectivityState get initialData => const Unknown();
+  ConnectivityState get initialState => const Unknown();
 
   void init() {
-    final stream = _connectivityService.connectivityStream;
+    final stream = _connectivityService.onConnectivityChanged;
     _subscription = stream.listen(_onConnectivityChanged);
   }
 
   void dispose() {
-    _subscription.cancel();
-    _subscription = null;
+    if (_subscription != null) {
+      _subscription.cancel();
+      _subscription = null;
+    }
     _stateController.close();
   }
 

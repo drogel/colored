@@ -57,6 +57,7 @@ class ColoredThemeComposer implements ThemeComposer {
         ),
         textTheme: TextTheme(
           bodyText2: TextStyle(color: colors.text),
+          bodyText1: TextStyle(color: colors.text),
           headline5: TextStyle(color: colors.primary),
           subtitle1: TextStyle(color: colors.text, fontFamily: fonts.secondary),
           headline6: TextStyle(color: colors.text),
@@ -69,7 +70,7 @@ class ColoredThemeComposer implements ThemeComposer {
           caption: TextStyle(color: colors.textVariant),
         ),
         highlightColor: colors.secondaryDark.withOpacity(opacity.shadow),
-        canvasColor: colors.textVariant,
+        canvasColor: colors.primaryVariant,
         splashColor: colors.secondary.withOpacity(opacity.fadedColor),
         buttonColor: colors.primaryDark,
         disabledColor: colors.primary,

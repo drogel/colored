@@ -31,7 +31,7 @@ class PrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.all(radii.medium),
       ),
       padding: padding ?? paddingScheme.large,
-      child: Text(title, style: textStyle, textScaleFactor: 0.82),
+      child: Text(title, style: textStyle, textScaleFactor: 0.77),
     );
   }
 }

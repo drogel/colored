@@ -1,77 +1,75 @@
-import 'package:animations/animations.dart';
-import 'package:colored/sources/app/styling/duration/duration_data.dart';
-import 'package:colored/sources/domain/data_models/color_selection.dart';
+import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
-import 'package:colored/sources/presentation/layouts/connectivity/connectivity_bar.dart';
-import 'package:colored/sources/presentation/layouts/connectivity/connectivity_layout.dart';
-import 'package:colored/sources/presentation/layouts/converter/converter_app_bar.dart';
-import 'package:colored/sources/presentation/layouts/converter/converter_body_layout.dart';
-import 'package:colored/sources/presentation/layouts/names_list/names_list_layout.dart';
-import 'package:colored/sources/presentation/layouts/naming/naming_error_row.dart';
-import 'package:colored/sources/presentation/widgets/containers/swiping_color_container.dart';
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
+import 'package:colored/sources/presentation/layouts/displayed_formats/displayed_formats_layout.dart';
+import 'package:colored/sources/presentation/layouts/picker/picker_layout.dart';
+import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
+import 'package:colored/sources/presentation/widgets/animations/swiping_cross_fade.dart';
 import 'package:flutter/material.dart';
 
-class ConverterLayout extends StatefulWidget {
-  const ConverterLayout({Key key}) : super(key: key);
+const _kFormatButtonMinSpace = 140.0;
+const _kOverlayContainerMaxHeight = 300.0;
 
-  @override
-  _ConverterLayoutState createState() => _ConverterLayoutState();
-}
+class ConverterLayout extends StatelessWidget {
+  const ConverterLayout({
+    this.background,
+    this.slidersShownIfSpaceAvailable = true,
+  });
 
-class _ConverterLayoutState extends State<ConverterLayout> {
-  bool isSearching = false;
+  final Widget background;
+  final bool slidersShownIfSpaceAvailable;
 
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
-    final durations = DurationData.of(context).durationScheme;
-    final selection = data.state.selection;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: ConverterAppBar(
-        isSearching: isSearching,
-        onSearchStateChange: _updateSearchingState,
-      ),
-      body: PageTransitionSwitcher(
-        duration: durations.longPresenting,
-        transitionBuilder: _buildPageTransition,
-        child: isSearching
-            ? NamesListLayout(onColorCardPressed: _onColorCardPressed)
-            : ConnectivityLayout(
-                body: ConverterBodyLayout(
-                  background: SwipingColorContainer(
-                    color: data.state.color,
-                    onColorSwipedVertical: data.onColorSwipedVertical,
-                    onColorSwipedHorizontal: data.onColorSwipedHorizontal,
-                    onColorSwipeEnd: () => data.onSelectionEnd(selection),
+    final padding = PaddingData.of(context).paddingScheme;
+    final maxButtonCount = Format.values.length;
+    final maxContainerWidth = (maxButtonCount + 1.5) * _kFormatButtonMinSpace;
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        if (background != null) background,
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxContainerWidth),
+          child: OverlayContainer(
+            child: LayoutBuilder(
+              builder: (_, outerBox) {
+                final showChild = _shouldShowOverlayChild(outerBox.maxHeight);
+                return SwipingCrossFade(
+                  showChild: showChild,
+                  enableGestures: false,
+                  header: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: padding.base),
+                    child: DisplayedFormatsLayout(
+                      buttonMinSpace: _kFormatButtonMinSpace,
+                      converterData: data,
+                    ),
                   ),
-                ),
-                child: const ConnectivityBar(child: NamingErrorRow()),
-              ),
-      ),
+                  child: Padding(
+                    padding: _getInnerPadding(padding),
+                    child: PickerLayout(availableHeight: outerBox.maxHeight),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildPageTransition(
-    Widget child,
-    Animation<double> primaryAnimation,
-    Animation<double> secondaryAnimation,
-  ) =>
-      Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: FadeThroughTransition(
-          animation: primaryAnimation,
-          secondaryAnimation: secondaryAnimation,
-          child: child,
-        ),
-      );
+  bool _shouldShowOverlayChild(double availableHeight) {
+    if (slidersShownIfSpaceAvailable) {
+      final hasAvailableRoom = availableHeight >= _kOverlayContainerMaxHeight;
+      return hasAvailableRoom;
+    } else {
+      return slidersShownIfSpaceAvailable;
+    }
+  }
 
-  void _updateSearchingState() => setState(() => isSearching = !isSearching);
-
-  void _onColorCardPressed(Color color) {
-    final selection = ColorSelection.fromColor(color);
-    FocusScope.of(context).unfocus();
-    ConverterData.of(context).onSelectionEnd(selection);
-    _updateSearchingState();
+  EdgeInsets _getInnerPadding(PaddingScheme padding) {
+    final defaultPaddingValue = padding.large.bottom + padding.small.top;
+    return EdgeInsets.only(bottom: defaultPaddingValue, top: padding.small.top);
   }
 }
