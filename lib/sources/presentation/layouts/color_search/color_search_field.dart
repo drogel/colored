@@ -4,16 +4,16 @@ import 'package:colored/sources/domain/view_models/names_list/names_list_data.da
 import 'package:colored/sources/presentation/widgets/buttons/plain_icon_button.dart';
 import 'package:flutter/material.dart';
 
-class ColorNamesSearchField extends StatefulWidget {
-  const ColorNamesSearchField({this.prefixIcon, Key key}) : super(key: key);
+class ColorSearchField extends StatefulWidget {
+  const ColorSearchField({this.prefixIcon, Key key}) : super(key: key);
 
   final Widget prefixIcon;
 
   @override
-  _ColorNamesSearchFieldState createState() => _ColorNamesSearchFieldState();
+  _ColorSearchFieldState createState() => _ColorSearchFieldState();
 }
 
-class _ColorNamesSearchFieldState extends State<ColorNamesSearchField> {
+class _ColorSearchFieldState extends State<ColorSearchField> {
   FocusNode _focusNode;
   TextEditingController _controller;
 

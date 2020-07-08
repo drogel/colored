@@ -9,7 +9,8 @@ import 'package:colored/sources/domain/view_models/names_list/names_list_injecto
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_injector.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';
-import 'package:colored/sources/presentation/layouts/converter/converter_layout.dart';
+import 'package:colored/sources/presentation/layouts/converter_page/converter_page_body.dart';
+import 'package:colored/sources/presentation/layouts/converter_page/converter_page_layout.dart';
 import 'package:colored/sources/presentation/notifiers/color_suggestions_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/connectivity_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/converter_notifier.dart';
@@ -56,7 +57,7 @@ class ConverterRouter extends Router {
                       injector: ConnectivityInjector(),
                       child: NamingNotifier(
                         injector: NamingInjector(),
-                        child: ConverterLayout(),
+                        child: ConverterPageLayout(),
                       ),
                     ),
                   ),

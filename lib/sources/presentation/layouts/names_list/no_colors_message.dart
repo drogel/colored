@@ -8,8 +8,6 @@ class NoColorsMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localization = Localization.of(context).namesList;
-    return EmptyListLayout(
-      child: Text(localization.noColorsFound),
-    );
+    return EmptyListLayout(child: Text(localization.noColorsFound));
   }
 }

@@ -13,7 +13,7 @@ class DefaultAnimatedSwitcher extends StatelessWidget {
     final duration = DurationData.of(context).durationScheme;
     final curves = CurveData.of(context).curveScheme;
     return AnimatedSwitcher(
-      switchInCurve: curves.incoming,
+      switchInCurve: curves.exiting,
       switchOutCurve: curves.exiting,
       duration: duration.mediumPresenting,
       reverseDuration: duration.mediumDismissing,
