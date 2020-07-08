@@ -1,19 +1,24 @@
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
-import 'package:colored/sources/presentation/layouts/color_suggestions/color_suggestions_layout.dart';
-import 'package:colored/sources/presentation/layouts/names_list/color_names_search_field.dart';
+import 'package:colored/sources/presentation/layouts/color_search/color_search_field.dart';
 import 'package:colored/sources/presentation/widgets/buttons/plain_icon_button.dart';
 import 'package:flutter/material.dart';
 
-class ColorNamesAppBar extends StatelessWidget {
-  const ColorNamesAppBar({this.onBackPressed, Key key}) : super(key: key);
+class ColorSearchLayout extends StatelessWidget {
+  const ColorSearchLayout({
+    @required this.flexibleSpaceChild,
+    this.onBackPressed,
+    Key key,
+  })  : assert(flexibleSpaceChild != null),
+        super(key: key);
 
+  final Widget flexibleSpaceChild;
   final void Function() onBackPressed;
 
   @override
   Widget build(BuildContext context) {
     final data = NamesListData.of(context);
     return AppBar(
-      title: ColorNamesSearchField(
+      title: ColorSearchField(
         prefixIcon: PlainIconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => _onBackPressed(data),
@@ -22,9 +27,7 @@ class ColorNamesAppBar extends StatelessWidget {
       centerTitle: true,
       flexibleSpace: Align(
         alignment: Alignment.bottomCenter,
-        child: ColorSuggestionsLayout(
-          onSuggestionSelected: data.onSearchChanged
-        ),
+        child: flexibleSpaceChild,
       ),
     );
   }
