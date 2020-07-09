@@ -26,6 +26,15 @@ void main() {
         expect(palette.namedColors, _kColors);
       });
     });
+
+    group("when toString is called", () {
+      test("then a description of the palette is obtained", () {
+        expect(
+          palette.toString(),
+          "Palette(name: $_kName, namedColors: $_kColors)",
+        );
+      });
+    });
   });
 
   group("Given a non-valid palette", () {

@@ -21,4 +21,7 @@ class Palette {
 
   @override
   int get hashCode => hashObjects([name, namedColors]);
+
+  @override
+  String toString() => "Palette(name: $name, namedColors: $namedColors)";
 }
