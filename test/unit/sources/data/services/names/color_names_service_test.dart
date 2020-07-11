@@ -48,19 +48,19 @@ void main() {
       });
     });
 
-    group("when fetchNamesContaining is called", () {
+    group("when fetchContainingSearch is called", () {
       test("then the color can be found by its hex code", () async {
-        final actual = await namesService.fetchNamesContaining("2121");
+        final actual = await namesService.fetchContainingSearch("2121");
         expect(actual, MockNamesDataSource.mockColorNames);
       });
 
       test("then the color can be found by its name", () async {
-        final actual = await namesService.fetchNamesContaining("Sample");
+        final actual = await namesService.fetchContainingSearch("Sample");
         expect(actual, MockNamesDataSource.mockColorNames);
       });
 
       test("then an empty map is returned if search missed", () async {
-        final actual = await namesService.fetchNamesContaining("Black");
+        final actual = await namesService.fetchContainingSearch("Black");
         expect(actual, {});
       });
     });

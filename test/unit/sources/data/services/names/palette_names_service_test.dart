@@ -46,14 +46,14 @@ void main() {
       });
     });
 
-    group("when fetchNamesContaining is called", () {
+    group("when fetchContainingSearch is called", () {
       test("then the palette can be found by its name", () async {
-        final actual = await service.fetchNamesContaining("Test");
+        final actual = await service.fetchContainingSearch("Test");
         expect(actual, MockPalettesDataLoader.mockPalettes);
       });
 
       test("then an empty map is returned if search missed", () async {
-        final actual = await service.fetchNamesContaining("Black");
+        final actual = await service.fetchContainingSearch("Black");
         expect(actual, {});
       });
     });

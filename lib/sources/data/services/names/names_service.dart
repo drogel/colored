@@ -1,3 +1,3 @@
 abstract class NamesService {
-  Future<Map<String, dynamic>> fetchNamesContaining(String searchString);
+  Future<Map<String, dynamic>> fetchContainingSearch(String searchString);
 }

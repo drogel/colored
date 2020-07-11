@@ -16,7 +16,7 @@ class PaletteNamesService implements NamesService {
   final MapFilter _filter;
 
   @override
-  Future<Map<String, List<String>>> fetchNamesContaining(
+  Future<Map<String, List<String>>> fetchContainingSearch(
     String searchString,
   ) async {
     final palettes = await _dataLoader.load();

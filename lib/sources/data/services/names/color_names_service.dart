@@ -16,7 +16,7 @@ class ColorNamesService implements NamesService {
   final MapFilter _filter;
 
   @override
-  Future<Map<String, String>> fetchNamesContaining(String searchString) async {
+  Future<Map<String, String>> fetchContainingSearch(String searchString) async {
     final colorNames = await _dataLoader.load();
     final filteredColorNames = _filter.filter(searchString, colorNames);
     return filteredColorNames;
