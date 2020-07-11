@@ -18,7 +18,7 @@ class PalettesLoader implements DataLoader<List<String>> {
   Future<Map<String, List<String>>> load() async => _memoizer.runOnce(_load);
 
   Future<Map<String, List<String>>> _load() async {
-    final colorNamesStr = await rootBundle.loadString(paths.palettes);
-    return Map<String, List<String>>.from(jsonDecode(colorNamesStr));
+    final palettesStr = await rootBundle.loadString(paths.palettes);
+    return Map<String, List<String>>.from(jsonDecode(palettesStr));
   }
 }
