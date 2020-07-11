@@ -43,7 +43,7 @@ class NamesListViewModel {
 
   void dispose() => _stateController.close();
 
-  NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
+  NamedColor _convertToNamedColor(MapEntry<String, dynamic> entry) =>
       NamedColor.fromMapEntry(entry);
 
   String _cleanSearch(String searchString) => searchString
