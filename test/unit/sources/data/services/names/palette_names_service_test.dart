@@ -1,4 +1,6 @@
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
+import 'package:colored/sources/data/services/map_filter/map_filter.dart';
+import 'package:colored/sources/data/services/map_filter/palette_filter.dart';
 import 'package:colored/sources/data/services/names/palette_names_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -14,10 +16,12 @@ class MockPalettesDataLoader implements DataLoader {
 void main() {
   PaletteNamesService service;
   DataLoader dataLoader;
+  MapFilter filter;
 
   setUp(() {
     dataLoader = MockPalettesDataLoader();
-    service = PaletteNamesService(dataLoader: dataLoader);
+    filter = const PaletteFilter();
+    service = PaletteNamesService(dataLoader: dataLoader, filter: filter);
   });
 
   tearDown(() {
@@ -27,9 +31,16 @@ void main() {
 
   group("Given a PaletteNamesService with a mocked data source", () {
     group("when constructed", () {
-      test("then should throw if given dataLoader name", () {
+      test("then should throw if given a null dataLoader", () {
         expect(
-          () => PaletteNamesService(dataLoader: null),
+          () => PaletteNamesService(dataLoader: null, filter: filter),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then should throw if given a null filter", () {
+        expect(
+          () => PaletteNamesService(dataLoader: dataLoader, filter: null),
           throwsA(isA<AssertionError>()),
         );
       });

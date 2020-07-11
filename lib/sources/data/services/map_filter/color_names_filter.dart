@@ -6,7 +6,7 @@ class ColorNamesFilter implements MapFilter<String> {
   @override
   Map<String, String> filter(String search, Map<String, String> map) {
     final tmpCopy = Map<String, String>.from(map);
-    tmpCopy.removeWhere((hex, name) => _noKeyOrValueFound(hex, name, search));
+    tmpCopy.removeWhere((key, value) => _noKeyOrValueFound(key, value, search));
     return tmpCopy;
   }
 
