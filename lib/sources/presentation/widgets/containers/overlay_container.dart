@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:colored/sources/app/styling/blur/blur_data.dart';
 import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
@@ -25,15 +28,23 @@ class OverlayContainer extends StatelessWidget {
     final padding = PaddingData.of(context).paddingScheme;
     final deviceSafeArea = MediaQuery.of(context).padding;
     final opacity = OpacityData.of(context).opacityScheme;
+    final blur = BlurData.of(context).blurScheme.medium;
+    final borderRadius =  BorderRadius.all(radii.large);
     return SafeArea(
       child: OrientationBuilder(
         builder: (_, orientation) => Padding(
           padding: _getOuterPadding(orientation, deviceSafeArea, padding),
-          child: Material(
-            elevation: elevation.low,
-            color: colors.primary.withOpacity(opacity.overlay),
-            borderRadius: BorderRadius.all(radii.large),
-            child: child,
+          child: ClipRRect(
+            borderRadius: borderRadius,
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: blur.x, sigmaY: blur.y),
+              child: Material(
+                elevation: elevation.low,
+                color: colors.primary.withOpacity(opacity.overlay),
+                borderRadius: borderRadius,
+                child: child,
+              ),
+            ),
           ),
         ),
       ),

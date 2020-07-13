@@ -1,3 +1,6 @@
+import 'package:colored/sources/app/styling/blur/blur_data.dart';
+import 'package:colored/sources/app/styling/blur/blur_scheme.dart';
+import 'package:colored/sources/app/styling/blur/default_blur_scheme.dart';
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/curves/curve_scheme.dart';
 import 'package:colored/sources/app/styling/curves/default_curve_scheme.dart';
@@ -25,6 +28,7 @@ class Style extends StatelessWidget {
     this.curveScheme = const DefaultCurveScheme(),
     this.durationScheme = const DefaultDurationScheme(),
     this.opacityScheme = const DefaultOpacityScheme(),
+    this.blurScheme = const DefaultBlurScheme(),
     this.paddingScheme = const DefaultPaddingScheme(),
     this.radiiScheme = const DefaultRadiiScheme(),
     this.elevationScheme = const DefaultElevationScheme(),
@@ -32,12 +36,14 @@ class Style extends StatelessWidget {
         assert(durationScheme != null),
         assert(opacityScheme != null),
         assert(paddingScheme != null),
+        assert(blurScheme != null),
         assert(radiiScheme != null),
         super(key: key);
 
   final CurveScheme curveScheme;
   final DurationScheme durationScheme;
   final OpacityScheme opacityScheme;
+  final BlurScheme blurScheme;
   final PaddingScheme paddingScheme;
   final RadiiScheme radiiScheme;
   final ElevationScheme elevationScheme;
@@ -50,13 +56,16 @@ class Style extends StatelessWidget {
           radiiScheme: radiiScheme,
           child: PaddingData(
             paddingScheme: paddingScheme,
-            child: OpacityData(
-              opacityScheme: opacityScheme,
-              child: DurationData(
-                durationScheme: durationScheme,
-                child: CurveData(
-                  curveScheme: curveScheme,
-                  child: child,
+            child: BlurData(
+              blurScheme: blurScheme,
+              child: OpacityData(
+                opacityScheme: opacityScheme,
+                child: DurationData(
+                  durationScheme: durationScheme,
+                  child: CurveData(
+                    curveScheme: curveScheme,
+                    child: child,
+                  ),
                 ),
               ),
             ),

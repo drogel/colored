@@ -1,8 +1,8 @@
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:flutter/material.dart';
 
-class FloatingActionCard extends StatelessWidget {
-  const FloatingActionCard({this.child, this.backgroundColor, Key key})
+class FloatingCard extends StatelessWidget {
+  const FloatingCard({this.child, this.backgroundColor, Key key})
       : super(key: key);
 
   final Widget child;
