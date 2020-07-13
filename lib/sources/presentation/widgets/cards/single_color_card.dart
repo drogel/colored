@@ -19,6 +19,7 @@ class SingleColorCard extends StatelessWidget {
   Widget build(BuildContext context) => ColorCard(
         title: title,
         subtitle: subtitle,
+        backgroundColor: backgroundColor,
         onPressed: () => onPressed(backgroundColor),
         child: Container(color: backgroundColor),
       );
