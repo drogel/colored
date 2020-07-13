@@ -1,3 +1,5 @@
+import 'package:colored/sources/data/services/map_filter/color_names_filter.dart';
+import 'package:colored/sources/data/services/map_filter/map_filter.dart';
 import 'package:colored/sources/data/services/names/color_names_service.dart';
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
@@ -11,33 +13,54 @@ class MockNamesDataSource implements DataLoader {
 }
 
 void main() {
-  DataLoader namesDataSource;
+  DataLoader dataLoader;
   NamesService namesService;
+  MapFilter filter;
 
   setUp(() {
-    namesDataSource = MockNamesDataSource();
-    namesService = ColorNamesService(dataLoader: namesDataSource);
+    dataLoader = MockNamesDataSource();
+    filter = const ColorNamesFilter();
+    namesService = ColorNamesService(
+      dataLoader: dataLoader,
+      filter: filter,
+    );
   });
 
   tearDown(() {
-    namesDataSource = null;
+    dataLoader = null;
     namesService = null;
   });
 
   group("Given a ColorNamesService with a mocked data source", () {
-    group("when fetchColorNames is called", () {
+    group("when constructed", () {
+      test("then should throw if given null dataLoader", () {
+        expect(
+          () => ColorNamesService(dataLoader: null, filter: filter),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then should throw if given null filter", () {
+        expect(
+          () => ColorNamesService(dataLoader: dataLoader, filter: null),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+    });
+
+    group("when fetchContainingSearch is called", () {
       test("then the color can be found by its hex code", () async {
-        final actual = await namesService.fetchNamesContaining("2121");
+        final actual = await namesService.fetchContainingSearch("2121");
         expect(actual, MockNamesDataSource.mockColorNames);
       });
 
       test("then the color can be found by its name", () async {
-        final actual = await namesService.fetchNamesContaining("Sample");
+        final actual = await namesService.fetchContainingSearch("Sample");
         expect(actual, MockNamesDataSource.mockColorNames);
       });
 
       test("then an empty map is returned if search missed", () async {
-        final actual = await namesService.fetchNamesContaining("Black");
+        final actual = await namesService.fetchContainingSearch("Black");
         expect(actual, {});
       });
     });

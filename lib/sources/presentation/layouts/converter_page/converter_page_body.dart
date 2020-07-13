@@ -2,7 +2,6 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
 import 'package:colored/sources/presentation/layouts/connectivity/connectivity_bar.dart';
 import 'package:colored/sources/presentation/layouts/connectivity/connectivity_layout.dart';
-import 'package:colored/sources/presentation/layouts/converter_page/converter_page_app_bar.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_layout.dart';
 import 'package:colored/sources/presentation/layouts/names_list/names_list_layout.dart';
 import 'package:colored/sources/presentation/layouts/naming/naming_error_row.dart';

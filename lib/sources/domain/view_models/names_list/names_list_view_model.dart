@@ -29,7 +29,7 @@ class NamesListViewModel {
       return _stateController.sink.add(Pending(search: searchString));
     }
 
-    final namesMap = await _namesService.fetchNamesContaining(cleanSearch);
+    final namesMap = await _namesService.fetchContainingSearch(cleanSearch);
     final namedColors = namesMap.entries.map(_convertToNamedColor).toList();
 
     if (namedColors.isEmpty) {
@@ -43,7 +43,7 @@ class NamesListViewModel {
 
   void dispose() => _stateController.close();
 
-  NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
+  NamedColor _convertToNamedColor(MapEntry<String, dynamic> entry) =>
       NamedColor.fromMapEntry(entry);
 
   String _cleanSearch(String searchString) => searchString

@@ -6,8 +6,8 @@ import 'package:colored/sources/data/services/memoizer/memoizer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-class ColorNamesDataLoader implements DataLoader {
-  ColorNamesDataLoader({@required Memoizer<Map<String, String>> memoizer})
+class ColorNamesLoader implements DataLoader<String> {
+  ColorNamesLoader({@required Memoizer<Map<String, String>> memoizer})
       : assert(memoizer != null),
         _memoizer = memoizer;
 

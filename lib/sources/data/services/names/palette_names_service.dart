@@ -3,8 +3,8 @@ import 'package:colored/sources/data/services/map_filter/map_filter.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:flutter/foundation.dart';
 
-class ColorNamesService implements NamesService {
-  ColorNamesService({
+class PaletteNamesService implements NamesService {
+  const PaletteNamesService({
     @required DataLoader dataLoader,
     @required MapFilter filter,
   })  : assert(dataLoader != null),
@@ -16,9 +16,11 @@ class ColorNamesService implements NamesService {
   final MapFilter _filter;
 
   @override
-  Future<Map<String, String>> fetchContainingSearch(String searchString) async {
-    final colorNames = await _dataLoader.load();
-    final filteredColorNames = _filter.filter(searchString, colorNames);
-    return filteredColorNames;
+  Future<Map<String, List<String>>> fetchContainingSearch(
+    String searchString,
+  ) async {
+    final palettes = await _dataLoader.load();
+    final filteredPalettes = _filter.filter(searchString, palettes);
+    return filteredPalettes;
   }
 }
