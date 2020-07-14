@@ -4,8 +4,8 @@ import 'package:colored/sources/data/services/data_loader/color_names_loader.dar
 import 'package:colored/sources/data/services/memoizer/memoizer.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockMemoizer implements Memoizer<Map<String, String>> {
-  const MockMemoizer();
+class MemoizerStub implements Memoizer<Map<String, String>> {
+  const MemoizerStub();
 
   static const mockResult = {
     "TestKey": "TestValue"
@@ -23,7 +23,7 @@ void main() {
   Memoizer memoizer;
 
   setUp(() {
-    memoizer = const MockMemoizer();
+    memoizer = const MemoizerStub();
     loader = ColorNamesLoader(memoizer: memoizer);
   });
 
@@ -45,7 +45,7 @@ void main() {
     group("when load is called", () {
       test("then returns value of the computation in the memoizer", () async {
         final actual = await loader.load();
-        expect(actual, MockMemoizer.mockResult);
+        expect(actual, MemoizerStub.mockResult);
       });
     });
   });

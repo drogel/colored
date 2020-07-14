@@ -9,7 +9,7 @@ class FirstChildRoute extends Mock implements Route {}
 
 class SecondChildRoute extends Mock implements Route {}
 
-class FirstChildRouter extends Router {
+class FirstChildRouterStub extends Router {
   static const routerName = "firstChild";
 
   @override
@@ -19,7 +19,7 @@ class FirstChildRouter extends Router {
   Route buildRoute(RouteSettings settings) => FirstChildRoute();
 }
 
-class SecondChildRouter extends Router {
+class SecondChildRouterStub extends Router {
   static const routerName = "secondChild";
 
   @override

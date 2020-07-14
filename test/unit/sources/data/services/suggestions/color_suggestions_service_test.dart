@@ -5,7 +5,7 @@ import 'package:colored/sources/data/services/suggestions/color_suggestions_serv
 import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockSuggestionsDataLoader implements DataLoader {
+class SuggestionsDataLoaderStub implements DataLoader {
   static const mockSuggestions = {
     "111111": "First",
     "222222": "Second",
@@ -29,7 +29,7 @@ void main() {
   SuggestionsService suggestionsService;
 
   setUp(() {
-    suggestionsDataLoader = MockSuggestionsDataLoader();
+    suggestionsDataLoader = SuggestionsDataLoaderStub();
     suggestionsService = ColorSuggestionsService(
       dataLoader: suggestionsDataLoader,
       listPicker: StringListPicker(

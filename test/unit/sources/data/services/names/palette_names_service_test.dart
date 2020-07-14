@@ -4,7 +4,7 @@ import 'package:colored/sources/data/services/map_filter/palette_filter.dart';
 import 'package:colored/sources/data/services/names/palette_names_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockPalettesDataLoader implements DataLoader {
+class PalettesDataLoaderStub implements DataLoader {
   static const mockPalettes = {
     "Test": ["000000", "ffffff"]
   };
@@ -19,7 +19,7 @@ void main() {
   MapFilter filter;
 
   setUp(() {
-    dataLoader = MockPalettesDataLoader();
+    dataLoader = PalettesDataLoaderStub();
     filter = const PaletteFilter();
     service = PaletteNamesService(dataLoader: dataLoader, filter: filter);
   });
@@ -49,7 +49,7 @@ void main() {
     group("when fetchContainingSearch is called", () {
       test("then the palette can be found by its name", () async {
         final actual = await service.fetchContainingSearch("Test");
-        expect(actual, MockPalettesDataLoader.mockPalettes);
+        expect(actual, PalettesDataLoaderStub.mockPalettes);
       });
 
       test("then an empty map is returned if search missed", () async {
