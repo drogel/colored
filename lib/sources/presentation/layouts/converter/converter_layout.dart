@@ -6,6 +6,7 @@ import 'package:colored/sources/presentation/layouts/displayed_formats/displayed
 import 'package:colored/sources/presentation/layouts/picker/picker_layout.dart';
 import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/animations/swiping_cross_fade.dart';
+import 'package:colored/sources/presentation/widgets/layouts/dynamic_bottom_padding.dart';
 import 'package:flutter/material.dart';
 
 const _kFormatButtonMinSpace = 140.0;
@@ -32,26 +33,28 @@ class ConverterLayout extends StatelessWidget {
         if (background != null) background,
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: maxContainerWidth),
-          child: OverlayContainer(
-            child: LayoutBuilder(
-              builder: (_, outerBox) {
-                final showChild = _shouldShowOverlayChild(outerBox.maxHeight);
-                return SwipingCrossFade(
-                  showChild: showChild,
-                  enableGestures: false,
-                  header: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: padding.base),
-                    child: DisplayedFormatsLayout(
-                      buttonMinSpace: _kFormatButtonMinSpace,
-                      converterData: data,
+          child: DynamicBottomPadding(
+            child: OverlayContainer(
+              child: LayoutBuilder(
+                builder: (_, outerBox) {
+                  final showChild = _shouldShowOverlayChild(outerBox.maxHeight);
+                  return SwipingCrossFade(
+                    showChild: showChild,
+                    enableGestures: false,
+                    header: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: padding.base),
+                      child: DisplayedFormatsLayout(
+                        buttonMinSpace: _kFormatButtonMinSpace,
+                        converterData: data,
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: _getInnerPadding(padding),
-                    child: PickerLayout(availableHeight: outerBox.maxHeight),
-                  ),
-                );
-              },
+                    child: Padding(
+                      padding: _getInnerPadding(padding),
+                      child: PickerLayout(availableHeight: outerBox.maxHeight),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),

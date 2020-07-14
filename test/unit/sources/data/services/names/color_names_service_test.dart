@@ -5,7 +5,7 @@ import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockNamesDataSource implements DataLoader {
+class NamesDataSourceStub implements DataLoader {
   static const mockColorNames = {"212121": "Sample Color"};
 
   @override
@@ -18,7 +18,7 @@ void main() {
   MapFilter filter;
 
   setUp(() {
-    dataLoader = MockNamesDataSource();
+    dataLoader = NamesDataSourceStub();
     filter = const ColorNamesFilter();
     namesService = ColorNamesService(
       dataLoader: dataLoader,
@@ -51,12 +51,12 @@ void main() {
     group("when fetchContainingSearch is called", () {
       test("then the color can be found by its hex code", () async {
         final actual = await namesService.fetchContainingSearch("2121");
-        expect(actual, MockNamesDataSource.mockColorNames);
+        expect(actual, NamesDataSourceStub.mockColorNames);
       });
 
       test("then the color can be found by its name", () async {
         final actual = await namesService.fetchContainingSearch("Sample");
-        expect(actual, MockNamesDataSource.mockColorNames);
+        expect(actual, NamesDataSourceStub.mockColorNames);
       });
 
       test("then an empty map is returned if search missed", () async {

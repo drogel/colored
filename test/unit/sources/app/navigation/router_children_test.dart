@@ -10,8 +10,8 @@ void main() {
 
   group("Given a Router with children", () {
     setUp(() {
-      firstChild = FirstChildRouter();
-      secondChild = SecondChildRouter();
+      firstChild = FirstChildRouterStub();
+      secondChild = SecondChildRouterStub();
       routerUnderTest = RouterUnderTest(children: [firstChild, secondChild]);
     });
 
@@ -42,11 +42,11 @@ void main() {
         test("then Route returned by the corresponding child is obtained", () {
           runOnGenerateRouteTest(
             routerUnderTest,
-            routeName: FirstChildRouter.routerName,
+            routeName: FirstChildRouterStub.routerName,
             expectedRouteType: FirstChildRoute(),
           );
 
-          const routeName = "${FirstChildRouter.routerName}someRouteName";
+          const routeName = "${FirstChildRouterStub.routerName}someRouteName";
           runOnGenerateRouteTest(
             routerUnderTest,
             routeName: routeName,
@@ -57,11 +57,11 @@ void main() {
         test("then Route returned by the corresponding child is obtained", () {
           runOnGenerateRouteTest(
             routerUnderTest,
-            routeName: SecondChildRouter.routerName,
+            routeName: SecondChildRouterStub.routerName,
             expectedRouteType: SecondChildRoute(),
           );
 
-          const routeName = "${SecondChildRouter.routerName}someRouteName";
+          const routeName = "${SecondChildRouterStub.routerName}someRouteName";
           runOnGenerateRouteTest(
             routerUnderTest,
             routeName: routeName,

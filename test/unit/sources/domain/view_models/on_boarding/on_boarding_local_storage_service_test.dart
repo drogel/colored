@@ -9,14 +9,14 @@ import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class LocalStorageStub extends Mock implements LocalStorage {}
+class MockLocalStorage extends Mock implements LocalStorage {}
 
 void main() {
   OnBoardingViewModel viewModel;
   LocalStorage service;
 
   setUp(() {
-    service = LocalStorageStub();
+    service = MockLocalStorage();
     viewModel = OnBoardingViewModel(
       stateController: StreamController<OnBoardingState>(),
       localStorage: service,
