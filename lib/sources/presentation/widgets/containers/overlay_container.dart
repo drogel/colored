@@ -28,15 +28,18 @@ class OverlayContainer extends StatelessWidget {
     final opacity = OpacityData.of(context).opacityScheme;
     final blur = BlurData.of(context).blurScheme.medium;
     final borderRadius = this.borderRadius ?? BorderRadius.all(radii.large);
-    return ClipRRect(
+    return Material(
+      elevation: elevation ?? elevationScheme.low,
+      color: Colors.transparent,
       borderRadius: borderRadius,
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: blur.x, sigmaY: blur.y),
-        child: Material(
-          elevation: elevation ?? elevationScheme.low,
-          color: colors.primary.withOpacity(opacity.overlay),
-          borderRadius: borderRadius,
-          child: child,
+      child: ClipRRect(
+        borderRadius: borderRadius,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: blur.x, sigmaY: blur.y),
+          child: Container(
+            color: colors.primary.withOpacity(opacity.overlay),
+            child: child,
+          ),
         ),
       ),
     );
