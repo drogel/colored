@@ -75,6 +75,12 @@ class ColoredThemeComposer implements ThemeComposer {
         buttonColor: colors.primaryDark,
         disabledColor: colors.primary,
         iconTheme: IconThemeData(color: colors.secondary, size: 32),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          elevation: elevation.medium,
+          backgroundColor: colors.primary,
+          selectedItemColor: colors.text,
+          unselectedItemColor: colors.textVariant,
+        ),
         cupertinoOverrideTheme: CupertinoThemeData(
           primaryColor: colors.secondary,
           primaryContrastingColor: colors.primary,

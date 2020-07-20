@@ -15,20 +15,16 @@ class BottomTabBar extends StatelessWidget {
   final int currentIndex;
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context).appBarTheme;
-    return BottomNavigationBar(
-      elevation: theme.elevation,
-      onTap: onTap,
-      currentIndex: currentIndex,
-      items: _buildTabItems(context),
-    );
-  }
+  Widget build(BuildContext context) => BottomNavigationBar(
+        onTap: onTap,
+        currentIndex: currentIndex,
+        items: _buildTabItems(context),
+      );
 
   List<BottomNavigationBarItem> _buildTabItems(BuildContext context) => tabs
       .map(
         (page) => BottomNavigationBarItem(
-          icon: page.tabIcon,
+          icon: Icon(page.tabIcon),
           title: Text(page.getTabTitle(context)),
         ),
       )

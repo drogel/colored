@@ -9,7 +9,11 @@ import 'package:colored/sources/domain/view_models/names_list/names_list_injecto
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_injector.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';
-import 'package:colored/sources/presentation/layouts/converter_page/converter_page_layout.dart';
+import 'package:colored/sources/presentation/layouts/color_search/color_search_layout.dart';
+import 'package:colored/sources/presentation/layouts/converter/converter_page.dart';
+import 'package:colored/sources/presentation/layouts/main/main_tabs_layout.dart';
+import 'package:colored/sources/presentation/layouts/names_list/names_list_page.dart';
+import 'package:colored/sources/presentation/layouts/naming/naming_layout.dart';
 import 'package:colored/sources/presentation/notifiers/color_suggestions_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/connectivity_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/converter_notifier.dart';
@@ -23,8 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ConverterRouter extends Router {
-  const ConverterRouter({List<Router> children})
-      : super(children: children);
+  const ConverterRouter({List<Router> children}) : super(children: children);
 
   static const routerName = "converter/";
 
@@ -40,23 +43,33 @@ class ConverterRouter extends Router {
   }
 
   Route _buildConverter(RouteSettings settings) => FadeOutRoute(
-        builder: (_) => const ColorSuggestionsNotifier(
-          injector: ColorSuggestionsInjector(),
+        builder: (_) => ColorSuggestionsNotifier(
+          injector: const ColorSuggestionsInjector(),
           child: NamesListNotifier(
-            injector: NamesListInjector(),
+            injector: const NamesListInjector(),
             child: TransformerNotifier(
-              injector: TransformerInjector(initialColor: colors.logoBlue),
+              injector:
+                  const TransformerInjector(initialColor: colors.logoBlue),
               child: ConverterNotifier(
-                injector: ConverterInjector(),
+                injector: const ConverterInjector(),
                 child: DisplayedFormatsNotifier(
-                  injector: DisplayedFormatsInjector(),
+                  injector: const DisplayedFormatsInjector(),
                   child: PickerNotifier(
-                    injector: PickerInjector(),
+                    injector: const PickerInjector(),
                     child: ConnectivityNotifier(
-                      injector: ConnectivityInjector(),
+                      injector: const ConnectivityInjector(),
                       child: NamingNotifier(
-                        injector: NamingInjector(),
-                        child: ConverterPageLayout(),
+                        injector: const NamingInjector(),
+                        child: MainTabsLayout(
+                          appBars: const [
+                            NamingLayout(),
+                            ColorSearchLayout(),
+                          ],
+                          pages: const [
+                            ConverterPage(),
+                            NamesListPage(),
+                          ],
+                        ),
                       ),
                     ),
                   ),

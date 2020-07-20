@@ -6,7 +6,11 @@ import 'package:colored/sources/presentation/widgets/containers/background_conta
 import 'package:flutter/material.dart';
 
 class NamesListLayout extends StatelessWidget {
-  const NamesListLayout({this.onColorCardPressed, Key key}) : super(key: key);
+  const NamesListLayout({
+    @required this.onColorCardPressed,
+    Key key,
+  })  : assert(onColorCardPressed != null),
+        super(key: key);
 
   final void Function(Color) onColorCardPressed;
 

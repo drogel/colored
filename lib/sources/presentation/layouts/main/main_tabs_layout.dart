@@ -8,6 +8,7 @@ class MainTabsLayout extends StatefulWidget {
   const MainTabsLayout({@required this.pages, @required this.appBars, Key key})
       : assert(pages != null),
         assert(appBars != null),
+        assert(pages.length == appBars.length),
         super(key: key);
 
   final List<TabPage> pages;
@@ -28,6 +29,7 @@ class _MainTabsLayoutState extends State<MainTabsLayout> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: MainAppBar(
           currentIndex: _currentIndex,
           children: widget.appBars,
