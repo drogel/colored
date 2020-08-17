@@ -5,6 +5,7 @@ import 'package:colored/sources/domain/view_models/color_suggestions/color_sugge
 import 'package:colored/sources/domain/view_models/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_injector.dart';
+import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_injector.dart';
@@ -18,6 +19,7 @@ import 'package:colored/sources/presentation/notifiers/color_suggestions_notifie
 import 'package:colored/sources/presentation/notifiers/connectivity_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/converter_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/displayed_formats_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/main_tabs_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/names_list_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/naming_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/picker_notifier.dart';
@@ -60,15 +62,18 @@ class ConverterRouter extends Router {
                       injector: const ConnectivityInjector(),
                       child: NamingNotifier(
                         injector: const NamingInjector(),
-                        child: MainTabsLayout(
-                          appBars: const [
-                            NamingLayout(),
-                            ColorSearchLayout(),
-                          ],
-                          pages: const [
-                            ConverterPage(),
-                            NamesListPage(),
-                          ],
+                        child: MainTabsNotifier(
+                          injector: const MainTabsInjector(),
+                          child: MainTabsLayout(
+                            appBars: const [
+                              NamingLayout(),
+                              ColorSearchLayout(),
+                            ],
+                            pages: const [
+                              ConverterPage(),
+                              NamesListPage(),
+                            ],
+                          ),
                         ),
                       ),
                     ),

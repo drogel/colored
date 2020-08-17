@@ -1,10 +1,11 @@
+import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
 import 'package:colored/sources/presentation/layouts/main/main_app_bar.dart';
 import 'package:colored/sources/presentation/layouts/main/main_body_layout.dart';
 import 'package:colored/sources/presentation/widgets/tabs/bottom_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
 
-class MainTabsLayout extends StatefulWidget {
+class MainTabsLayout extends StatelessWidget {
   const MainTabsLayout({@required this.pages, @required this.appBars, Key key})
       : assert(pages != null),
         assert(appBars != null),
@@ -15,36 +16,27 @@ class MainTabsLayout extends StatefulWidget {
   final List<PreferredSizeWidget> appBars;
 
   @override
-  _MainTabsLayoutState createState() => _MainTabsLayoutState();
-}
-
-class _MainTabsLayoutState extends State<MainTabsLayout> {
-  int _currentIndex;
-
-  @override
-  void initState() {
-    _currentIndex = 0;
-    super.initState();
+  Widget build(BuildContext context) {
+    final data = MainTabsData.of(context);
+    final currentIndex = data.state.currentIndex;
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: MainAppBar(
+        currentIndex: currentIndex,
+        children: appBars,
+      ),
+      body: MainBodyLayout(
+        currentIndex: currentIndex,
+        children: pages,
+      ),
+      bottomNavigationBar: BottomTabBar(
+        onTap: (newIndex) => _updateCurrentIndex(newIndex, data),
+        currentIndex: currentIndex,
+        tabs: pages,
+      ),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: MainAppBar(
-          currentIndex: _currentIndex,
-          children: widget.appBars,
-        ),
-        body: MainBodyLayout(
-          currentIndex: _currentIndex,
-          children: widget.pages,
-        ),
-        bottomNavigationBar: BottomTabBar(
-          onTap: _updateCurrentIndex,
-          currentIndex: _currentIndex,
-          tabs: widget.pages,
-        ),
-      );
-
-  void _updateCurrentIndex(int newIndex) =>
-      setState(() => _currentIndex = newIndex);
+  void _updateCurrentIndex(int newIndex, MainTabsData data) =>
+      data.onNavigationToTabIndex(newIndex);
 }
