@@ -1,4 +1,5 @@
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
+import 'package:colored/sources/presentation/widgets/colored_header.dart';
 import 'package:colored/sources/presentation/widgets/tabs/base_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class SideTabBar extends BaseTabBar {
         child: Theme(
           data: theme.copyWith(highlightColor: Colors.transparent),
           child: NavigationRail(
+            leading: const ColoredHeader(),
             extended: true,
             destinations: _buildTabItems(context),
             selectedIndex: currentIndex,

@@ -62,6 +62,10 @@ class ColoredThemeComposer implements ThemeComposer {
           subtitle1: TextStyle(color: colors.text, fontFamily: fonts.secondary),
           headline6: TextStyle(color: colors.text),
           headline4: TextStyle(color: colors.primary),
+          headline3: TextStyle(
+            color: colors.text,
+            fontFamily: fonts.secondary,
+          ),
           headline2: TextStyle(
             color: colors.primary,
             fontWeight: FontWeight.bold,
