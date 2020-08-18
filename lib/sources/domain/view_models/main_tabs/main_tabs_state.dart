@@ -1,8 +1,9 @@
+import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:flutter/foundation.dart';
 
 class MainTabsState {
-  const MainTabsState({@required this.currentIndex})
-      : assert(currentIndex != null);
+  const MainTabsState({@required this.currentSelection})
+      : assert(currentSelection != null);
 
-  final int currentIndex;
+  final MainTabsSelection currentSelection;
 }

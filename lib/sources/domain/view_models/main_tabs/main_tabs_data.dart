@@ -1,3 +1,4 @@
+import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_state.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class MainTabsData extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType(aspect: MainTabsData);
 
   final MainTabsState state;
-  final void Function(int) onNavigationToTabIndex;
+  final void Function(MainTabsSelection) onNavigationToTabIndex;
 
   @override
   bool updateShouldNotify(MainTabsData oldWidget) => state != oldWidget.state;

@@ -3,6 +3,7 @@ import 'package:colored/sources/presentation/layouts/main/main_app_bar.dart';
 import 'package:colored/sources/presentation/layouts/main/main_body_layout.dart';
 import 'package:colored/sources/presentation/widgets/tabs/bottom_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
+import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:flutter/material.dart';
 
 class MainTabsLayout extends StatelessWidget {
@@ -18,25 +19,27 @@ class MainTabsLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = MainTabsData.of(context);
-    final currentIndex = data.state.currentIndex;
+    final currentSelection = data.state.currentSelection;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MainAppBar(
-        currentIndex: currentIndex,
+        currentIndex: currentSelection.rawValue,
         children: appBars,
       ),
       body: MainBodyLayout(
-        currentIndex: currentIndex,
+        currentIndex: currentSelection.rawValue,
         children: pages,
       ),
       bottomNavigationBar: BottomTabBar(
-        onTap: (newIndex) => _updateCurrentIndex(newIndex, data),
-        currentIndex: currentIndex,
+        onTap: (newIndex) => _updateCurrentSelection(newIndex, data),
+        currentIndex: currentSelection.rawValue,
         tabs: pages,
       ),
     );
   }
 
-  void _updateCurrentIndex(int newIndex, MainTabsData data) =>
-      data.onNavigationToTabIndex(newIndex);
+  void _updateCurrentSelection(int newIndex, MainTabsData data) {
+    final newSelection = MainTabsSelectionBuilder.fromRawValue(newIndex);
+    data.onNavigationToTabIndex(newSelection);
+  }
 }

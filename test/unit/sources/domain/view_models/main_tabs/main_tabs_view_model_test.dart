@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_state.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -40,7 +41,7 @@ void main() {
     group("when initialState is called", () {
       test("then a state with currentIndex of 0 is retrieved", () {
         final actual = viewModel.initialState;
-        expect(actual.currentIndex, 0);
+        expect(actual.currentSelection, MainTabsSelection.converter);
       });
     });
 
@@ -53,11 +54,11 @@ void main() {
 
     group("when navigateToIndex is called", () {
       test("then a new state with the passed index is added to the stream", () {
-        const testTabIndex = 1;
+        const testSelection = MainTabsSelection.converter;
         stateController.stream.listen((event) {
-          expect(event.currentIndex, testTabIndex);
+          expect(event.currentSelection, testSelection);
         });
-        viewModel.navigateToIndex(testTabIndex);
+        viewModel.navigateToIndex(testSelection);
       });
     });
   });
