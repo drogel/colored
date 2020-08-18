@@ -81,6 +81,19 @@ class ColoredThemeComposer implements ThemeComposer {
           selectedItemColor: colors.text,
           unselectedItemColor: colors.textVariant,
         ),
+        navigationRailTheme: NavigationRailThemeData(
+          elevation: 0,
+          backgroundColor: colors.primary,
+          selectedIconTheme: IconThemeData(color: colors.text),
+          unselectedIconTheme: IconThemeData(color: colors.textVariant),
+          selectedLabelTextStyle: TextStyle(color: colors.text),
+          unselectedLabelTextStyle: TextStyle(color: colors.textVariant),
+        ),
+        dividerTheme: DividerThemeData(
+          color: colors.primaryVariant,
+          thickness: 1,
+          space: 1,
+        ),
         cupertinoOverrideTheme: CupertinoThemeData(
           primaryColor: colors.secondary,
           primaryContrastingColor: colors.primary,

@@ -1,18 +1,19 @@
+import 'package:colored/sources/presentation/widgets/tabs/base_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
 
-class BottomTabBar extends StatelessWidget {
+class BottomTabBar extends BaseTabBar {
   const BottomTabBar({
-    @required this.tabs,
-    this.onTap,
-    this.currentIndex,
+    @required List<TabPage> tabs,
+    void Function(int) onTap,
+    int currentIndex,
     Key key,
-  })  : assert(tabs != null),
-        super(key: key);
-
-  final List<TabPage> tabs;
-  final void Function(int) onTap;
-  final int currentIndex;
+  }) : super(
+          tabs: tabs,
+          onTap: onTap,
+          currentIndex: currentIndex,
+          key: key,
+        );
 
   @override
   Widget build(BuildContext context) => BottomNavigationBar(
