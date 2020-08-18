@@ -1,13 +1,12 @@
 import 'package:colored/resources/localization/localization.dart';
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/plain_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class ColorSearchField extends StatefulWidget {
-  const ColorSearchField({this.prefixIcon, Key key}) : super(key: key);
-
-  final Widget prefixIcon;
+  const ColorSearchField({Key key}) : super(key: key);
 
   @override
   _ColorSearchFieldState createState() => _ColorSearchFieldState();
@@ -45,6 +44,7 @@ class _ColorSearchFieldState extends State<ColorSearchField> {
     final theme = Theme.of(context);
     final radii = RadiusData.of(context).radiiScheme;
     final borderRadius = BorderRadius.all(radii.medium);
+    final padding = PaddingData.of(context).paddingScheme;
     return Theme(
       data: theme.copyWith(canvasColor: theme.colorScheme.primaryVariant),
       child: Material(
@@ -57,10 +57,9 @@ class _ColorSearchFieldState extends State<ColorSearchField> {
           textCapitalization: TextCapitalization.sentences,
           decoration: InputDecoration(
             hintText: localization.search,
-            contentPadding: EdgeInsets.zero,
+            contentPadding: EdgeInsets.only(left: padding.large.left),
             filled: true,
             fillColor: theme.colorScheme.primaryVariant,
-            prefixIcon: widget.prefixIcon,
             suffixIcon: PlainIconButton(
               icon: const Icon(Icons.clear),
               onPressed:

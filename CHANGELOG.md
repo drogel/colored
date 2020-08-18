@@ -1,3 +1,10 @@
+## [0.9.1] - August 18th, 2020
+
+- Added a side navigation bar for wide form factors.
+- Added a bottom navigation bar for narrow form factors.
+- The color search screen is no longer accessible from the color converter screen. Instead, it is 
+available from the navigation bars. 
+
 ## [0.9] - July 8th, 2020
 
 - Added HSV and HSL color pickers.

@@ -7,7 +7,7 @@ import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class DeviceOrientationServiceStub extends Mock
+class MockDeviceOrientationService extends Mock
     implements DeviceOrientationService {}
 
 void main() {
@@ -15,7 +15,7 @@ void main() {
   DeviceOrientationService service;
 
   setUp(() {
-    service = DeviceOrientationServiceStub();
+    service = MockDeviceOrientationService();
     viewModel = OnBoardingViewModel(
       stateController: StreamController<OnBoardingState>(),
       deviceOrientationService: service,

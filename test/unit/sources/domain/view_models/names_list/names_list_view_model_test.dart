@@ -13,13 +13,15 @@ class NamesServiceStub implements NamesService {
   static const Map<String, String> namesMap = {"testHex": "testName"};
 
   @override
-  Future<Map<String, String>> fetchNamesContaining(String searchString) async =>
+  Future<Map<String, String>> fetchContainingSearch(
+          String searchString) async =>
       namesMap;
 }
 
 class NamesServiceEmptyStub implements NamesService {
   @override
-  Future<Map<String, String>> fetchNamesContaining(String searchString) async =>
+  Future<Map<String, String>> fetchContainingSearch(
+          String searchString) async =>
       {};
 }
 

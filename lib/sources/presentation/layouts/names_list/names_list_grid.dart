@@ -4,8 +4,8 @@ import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/common/extensions/hex_color.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
+import 'package:colored/sources/presentation/widgets/cards/single_color_card.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
-import 'package:colored/sources/presentation/widgets/containers/color_card.dart';
 import 'package:flutter/material.dart';
 
 const _kEstimatedItemSize = 200;
@@ -45,22 +45,22 @@ class _NamesListGridState extends State<NamesListGrid> {
   Widget build(BuildContext context) {
     final padding = PaddingData.of(context).paddingScheme;
     final mediaQuery = MediaQuery.of(context);
-    final viewInsets = mediaQuery.viewInsets;
-    final safeAreaPadding = mediaQuery.padding;
+    final viewInsets = _computeEffectiveViewInsets(mediaQuery.viewInsets);
     return BackgroundContainer(
       child: SafeArea(
         bottom: false,
+        top: false,
         child: LayoutBuilder(
           builder: (_, constraints) => GridView.builder(
             key: _pageStorageKey,
             controller: _scrollController,
-            padding: padding.vertical.add(viewInsets).add(safeAreaPadding),
+            padding: padding.vertical.add(viewInsets),
             itemCount: widget.namedColors.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: _computeCrossAxisCount(constraints),
               childAspectRatio: 1,
             ),
-            itemBuilder: (_, i) => ColorCard(
+            itemBuilder: (_, i) => SingleColorCard(
               backgroundColor: HexColor.fromHex(widget.namedColors[i].hex),
               onPressed: widget.onCardPressed,
               title: widget.namedColors[i].name,
@@ -75,5 +75,14 @@ class _NamesListGridState extends State<NamesListGrid> {
   int _computeCrossAxisCount(BoxConstraints constraints) {
     final crossAxisCount = constraints.maxWidth ~/ _kEstimatedItemSize;
     return crossAxisCount.clamp(_kCrossAxisMinCount, _kCrossAxisMaxCount);
+  }
+
+  EdgeInsets _computeEffectiveViewInsets(EdgeInsets viewInsets) {
+    if (viewInsets.bottom != 0) {
+      const bottomInsets = EdgeInsets.only(bottom: kBottomNavigationBarHeight);
+      return viewInsets.subtract(bottomInsets);
+    } else {
+      return viewInsets;
+    }
   }
 }

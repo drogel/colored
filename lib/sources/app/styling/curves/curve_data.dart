@@ -7,7 +7,7 @@ class CurveData extends InheritedWidget {
     @required Widget child,
     Key key,
   })  : assert(child != null),
-        assert(child != null),
+        assert(curveScheme != null),
         super(key: key, child: child);
 
   final CurveScheme curveScheme;

@@ -1,3 +1,3 @@
-abstract class DataLoader {
-  Future<Map<String, dynamic>> load();
+abstract class DataLoader<T> {
+  Future<Map<String, T>> load();
 }

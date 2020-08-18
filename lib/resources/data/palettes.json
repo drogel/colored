@@ -1,0 +1,11 @@
+{
+  "Midnight": ["010c1e", "001e38", "4a6d88", "c6cdd7", "d5d9e0"],
+  "Colored": ["1a1a1a", "212121", "303030", "587c79", "80cbc4", "fc5659", "fafdfc"],
+  "Colored Logo": ["959595","c0e5e1", "faabad", "fafdfc"],
+  "Pure Blue": ["03045e","023e8a","0077b6","0096c7","00b4d8","48cae4","90e0ef","ade8f4","caf0f8"],
+  "Disappearing Rainbow": ["ffadad","ffd6a5","fdffb6","caffbf","9bf6ff","a0c4ff","bdb2ff","ffc6ff","fffffc"],
+  "Germany": ["03071e","370617","6a040f","9d0208","d00000","dc2f02","e85d04","f48c06","faa307","ffba08"],
+  "Camouflage": ["606c38","283618","fefae0","dda15e","bc6c25"],
+  "From Violet to Aquamarine": ["7400b8","6930c3","5e60ce","5390d9","4ea8de","48bfe3","56cfe1","64dfdf","72efdd","80ffdb"],
+  "Shades of Mint": ["d8f3dc","b7e4c7","95d5b2","74c69d","52b788","40916c","2d6a4f","1b4332","081c15"]
+}
