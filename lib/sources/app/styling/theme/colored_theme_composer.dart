@@ -51,7 +51,7 @@ class ColoredThemeComposer implements ThemeComposer {
           brightness: Brightness.light,
         ),
         appBarTheme: AppBarTheme(
-          elevation: elevation.medium,
+          elevation: elevation.low,
           color: colors.primary,
           actionsIconTheme: IconThemeData(color: colors.text),
         ),

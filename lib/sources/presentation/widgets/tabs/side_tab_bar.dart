@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 class SideTabBar extends BaseTabBar {
   const SideTabBar({
     @required List<TabPage> tabs,
+    this.extendedWidth = 256,
+    this.extended = true,
     void Function(int) onTap,
     int currentIndex,
     Key key,
@@ -16,6 +18,9 @@ class SideTabBar extends BaseTabBar {
           currentIndex: currentIndex,
           key: key,
         );
+
+  final double extendedWidth;
+  final bool extended;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,7 @@ class SideTabBar extends BaseTabBar {
             destinations: _buildTabItems(context),
             selectedIndex: currentIndex,
             onDestinationSelected: onTap,
+            minExtendedWidth: extendedWidth,
           ),
         ),
       ),
