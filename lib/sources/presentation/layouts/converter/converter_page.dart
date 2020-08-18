@@ -15,6 +15,7 @@ class ConverterPage extends StatelessWidget implements TabPage {
         child: ConnectivityBar(child: NamingErrorRow()),
       );
 
+  // TODO(drogel) - Add localized label name.
   @override
   String getTabTitle(BuildContext context) => "Converter";
 

@@ -15,6 +15,7 @@ class NamesListPage extends StatelessWidget implements TabPage {
           onColorCardPressed: (color) => _notifyColorSelected(context, color),
       );
 
+  // TODO(drogel) - Add localized label name.
   @override
   String getTabTitle(BuildContext context) => "Colors";
 
