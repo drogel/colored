@@ -40,6 +40,6 @@ class MainTabsLayout extends StatelessWidget {
 
   void _updateCurrentSelection(int newIndex, MainTabsData data) {
     final newSelection = MainTabsSelectionBuilder.fromRawValue(newIndex);
-    data.onNavigationToTabIndex(newSelection);
+    data.onNavigation(newSelection);
   }
 }

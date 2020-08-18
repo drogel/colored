@@ -35,7 +35,7 @@ class _MainTabsNotifierState extends State<MainTabsNotifier> {
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => MainTabsData(
           state: snapshot.data,
-          onNavigationToTabIndex: _viewModel.navigateToIndex,
+          onNavigation: _viewModel.navigateToIndex,
           child: widget.child,
         ),
       );

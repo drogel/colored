@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class MainTabsData extends InheritedWidget {
   const MainTabsData({
     @required this.state,
-    @required this.onNavigationToTabIndex,
+    @required this.onNavigation,
     @required Widget child,
     Key key,
   })  : assert(child != null),
@@ -16,7 +16,7 @@ class MainTabsData extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType(aspect: MainTabsData);
 
   final MainTabsState state;
-  final void Function(MainTabsSelection) onNavigationToTabIndex;
+  final void Function(MainTabsSelection) onNavigation;
 
   @override
   bool updateShouldNotify(MainTabsData oldWidget) => state != oldWidget.state;
