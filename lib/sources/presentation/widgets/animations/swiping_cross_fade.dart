@@ -2,7 +2,7 @@ import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/draggable_indicator.dart';
-import 'package:colored/sources/presentation/widgets/directional_pan_detector.dart';
+import 'package:colored/sources/presentation/widgets/gestures/directional_pan_detector.dart';
 import 'package:flutter/material.dart';
 
 class SwipingCrossFade extends StatefulWidget {

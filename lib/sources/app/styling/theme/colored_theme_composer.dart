@@ -51,7 +51,7 @@ class ColoredThemeComposer implements ThemeComposer {
           brightness: Brightness.light,
         ),
         appBarTheme: AppBarTheme(
-          elevation: elevation.medium,
+          elevation: elevation.low,
           color: colors.primary,
           actionsIconTheme: IconThemeData(color: colors.text),
         ),
@@ -62,6 +62,10 @@ class ColoredThemeComposer implements ThemeComposer {
           subtitle1: TextStyle(color: colors.text, fontFamily: fonts.secondary),
           headline6: TextStyle(color: colors.text),
           headline4: TextStyle(color: colors.primary),
+          headline3: TextStyle(
+            color: colors.text,
+            fontFamily: fonts.secondary,
+          ),
           headline2: TextStyle(
             color: colors.primary,
             fontWeight: FontWeight.bold,
@@ -75,6 +79,25 @@ class ColoredThemeComposer implements ThemeComposer {
         buttonColor: colors.primaryDark,
         disabledColor: colors.primary,
         iconTheme: IconThemeData(color: colors.secondary, size: 32),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          elevation: elevation.medium,
+          backgroundColor: colors.primary,
+          selectedItemColor: colors.text,
+          unselectedItemColor: colors.textVariant,
+        ),
+        navigationRailTheme: NavigationRailThemeData(
+          elevation: 0,
+          backgroundColor: colors.primary,
+          selectedIconTheme: IconThemeData(color: colors.text),
+          unselectedIconTheme: IconThemeData(color: colors.textVariant),
+          selectedLabelTextStyle: TextStyle(color: colors.text),
+          unselectedLabelTextStyle: TextStyle(color: colors.textVariant),
+        ),
+        dividerTheme: DividerThemeData(
+          color: colors.primaryVariant,
+          thickness: 1,
+          space: 1,
+        ),
         cupertinoOverrideTheme: CupertinoThemeData(
           primaryColor: colors.secondary,
           primaryContrastingColor: colors.primary,
