@@ -16,6 +16,7 @@ class MainTabsLayout extends StatelessWidget {
       : assert(pages != null),
         assert(appBars != null),
         assert(pages.length == appBars.length),
+        assert(pages.length == MainTabsSelection.values.length),
         super(key: key);
 
   final List<TabPage> pages;

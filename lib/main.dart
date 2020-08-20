@@ -1,7 +1,7 @@
 import 'package:colored/configuration/flavor.dart';
 import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/app/colored.dart';
-import 'package:colored/sources/app/navigation/routers/converter_router.dart';
+import 'package:colored/sources/app/navigation/routers/main_router.dart';
 import 'package:colored/sources/app/navigation/router.dart';
 import 'package:colored/sources/app/navigation/routers/on_boarding_router.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage.dart';
@@ -22,7 +22,7 @@ Future<void> main() async {
 
 Future<Router> _getInitialRoute(LocalStorage localStorage) async {
   if (kIsWeb) {
-    return const ConverterRouter();
+    return const MainRouter();
   } else {
     return _getMobileInitialRoute(localStorage);
   }
@@ -33,5 +33,5 @@ Future<Router> _getMobileInitialRoute(LocalStorage localStorage) async {
   if (didOnBoard == null) {
     return const OnBoardingRouter();
   }
-  return didOnBoard ? const ConverterRouter() : const OnBoardingRouter();
+  return didOnBoard ? const MainRouter() : const OnBoardingRouter();
 }

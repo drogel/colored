@@ -1,4 +1,4 @@
-import 'package:colored/sources/app/navigation/routers/converter_router.dart';
+import 'package:colored/sources/app/navigation/routers/main_router.dart';
 import 'package:colored/sources/app/navigation/router.dart';
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
@@ -14,7 +14,7 @@ import 'package:colored/sources/presentation/notifiers/transformer_notifier.dart
 import 'package:flutter/material.dart';
 
 class OnBoardingRouter extends Router {
-  const OnBoardingRouter() : super(children: const [ConverterRouter()]);
+  const OnBoardingRouter() : super(children: const [MainRouter()]);
 
   @override
   String get name => "onBoarding/";
