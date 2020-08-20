@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_view_model.dart';
+import 'package:colored/sources/domain/view_models/lists/base/list_search_configurator.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_state.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -38,6 +39,7 @@ void main() {
     viewModel = NamesListViewModel(
       stateController: stateController,
       namesService: namesService,
+      searchConfigurator: const ListSearchConfigurator(),
     );
   });
 
@@ -77,6 +79,7 @@ void main() {
       viewModel = NamesListViewModel(
         stateController: stateController,
         namesService: namesService,
+        searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
@@ -139,6 +142,7 @@ void main() {
       viewModel = NamesListViewModel(
         stateController: stateController,
         namesService: namesService,
+        searchConfigurator: const ListSearchConfigurator(),
       );
     });
 

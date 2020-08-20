@@ -1,7 +1,7 @@
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/plain_icon_button.dart';
 import 'package:flutter/material.dart';
 

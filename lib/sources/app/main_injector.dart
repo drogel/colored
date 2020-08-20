@@ -5,7 +5,7 @@ import 'package:colored/sources/domain/view_models/connectivity/connectivity_inj
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_injector.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_injector.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_injector.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';

@@ -1,4 +1,4 @@
-import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_data.dart';
 import 'package:colored/sources/presentation/layouts/color_search/color_search_field.dart';
 import 'package:colored/sources/presentation/layouts/color_suggestions/color_suggestions_layout.dart';
 import 'package:flutter/material.dart';

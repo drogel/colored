@@ -1,0 +1,3 @@
+class PalettesListViewModel {
+  const PalettesListViewModel();
+}
