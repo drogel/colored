@@ -44,31 +44,71 @@ void main() {
   });
 
   tearDown(() {
+    if (stateController != null) {
+      stateController.close();
+    }
     stateController = null;
     namesService = null;
   });
 
-  group("When initialState is called", () {
-    test("then a Pending state is received", () {
-      final initialState = viewModel.initialState;
-      expect(initialState.runtimeType, Pending);
+  group("Given a NamesListViewModel", () {
+    group("When initialState is called", () {
+      test("then a Pending state is received", () {
+        final initialState = viewModel.initialState;
+        expect(initialState.runtimeType, Pending);
+      });
     });
-  });
 
-  group("When clearSearch is called", () {
-    test("then a Pending state is received", () {
-      stateController.stream.listen(
-        (event) => expect(event.runtimeType, Pending),
-      );
-      viewModel.clearSearch();
+    group("When clearSearch is called", () {
+      test("then a Pending state is received", () {
+        stateController.stream.listen(
+          (event) => expect(event.runtimeType, Pending),
+        );
+        viewModel.clearSearch();
+      });
     });
-  });
 
-  group("when dispose is called", () {
-    test("then stateController is closed", () {
-      expect(stateController.isClosed, false);
-      viewModel.dispose();
-      expect(stateController.isClosed, true);
+    group("When dispose is called", () {
+      test("then stateController is closed", () {
+        expect(stateController.isClosed, false);
+        viewModel.dispose();
+        expect(stateController.isClosed, true);
+      });
+    });
+
+    group("when constructed", () {
+      test("then stateController must not be null", () {
+        expect(
+          () => NamesListViewModel(
+            stateController: null,
+            namesService: namesService,
+            searchConfigurator: const ListSearchConfigurator(),
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then namesService must not be null", () {
+        expect(
+          () => NamesListViewModel(
+            stateController: stateController,
+            namesService: null,
+            searchConfigurator: const ListSearchConfigurator(),
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then stateController must not be null", () {
+        expect(
+          () => NamesListViewModel(
+            stateController: stateController,
+            namesService: namesService,
+            searchConfigurator: null,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
     });
   });
 

@@ -14,6 +14,7 @@ class NamesListViewModel extends ListSearchConfigurator {
     @required SearchConfigurator searchConfigurator,
   })  : assert(stateController != null),
         assert(namesService != null),
+        assert(searchConfigurator != null),
         _stateController = stateController,
         _searchConfigurator = searchConfigurator,
         _namesService = namesService;
