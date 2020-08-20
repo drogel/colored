@@ -5,6 +5,8 @@ import 'package:colored/sources/presentation/layouts/converter/converter_page.da
 import 'package:colored/sources/presentation/layouts/main/main_tabs_layout.dart';
 import 'package:colored/sources/presentation/layouts/names_list/names_list_page.dart';
 import 'package:colored/sources/presentation/layouts/naming/naming_layout.dart';
+import 'package:colored/sources/presentation/layouts/palette_search/palette_search_layout.dart';
+import 'package:colored/sources/presentation/layouts/palettes_list/palettes_list_page.dart';
 import 'package:colored/sources/presentation/widgets/page_routes/fade_out_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -31,10 +33,12 @@ class MainRouter extends Router {
             appBars: const [
               NamingLayout(),
               ColorSearchLayout(),
+              PaletteSearchLayout(),
             ],
             pages: const [
               ConverterPage(),
               NamesListPage(),
+              PalettesListPage(),
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 enum MainTabsSelection {
   converter,
   colors,
+  palettes,
 }
 
 class MainTabsSelectionBuilder {
@@ -13,6 +14,7 @@ class MainTabsSelectionBuilder {
 const Map<MainTabsSelection, int> _values = {
   MainTabsSelection.converter: 0,
   MainTabsSelection.colors: 1,
+  MainTabsSelection.palettes: 2,
 };
 
 extension MainTabsValues on MainTabsSelection {
