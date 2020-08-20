@@ -1,4 +1,4 @@
-import 'package:colored/sources/app/navigation/routers/converter_router.dart';
+import 'package:colored/sources/app/navigation/routers/main_router.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
@@ -50,6 +50,6 @@ class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
   Future<void> _onOnBoardingFinished() async {
     await _viewModel.onOnBoardingFinish();
     await Navigator.of(context)
-        .pushReplacementNamed(ConverterRouter.routerName);
+        .pushReplacementNamed(MainRouter.routerName);
   }
 }
