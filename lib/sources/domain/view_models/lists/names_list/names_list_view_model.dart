@@ -27,7 +27,7 @@ class NamesListViewModel extends ListSearchConfigurator {
 
   NamesListState get initialState => Pending.emptySearch();
 
-  Future<void> searchColorName(String searchString) async {
+  Future<void> searchColorNames(String searchString) async {
     final cleanSearch = _searchConfigurator.cleanSearch(searchString);
 
     if (cleanSearch.length < _searchConfigurator.minSearchLength) {

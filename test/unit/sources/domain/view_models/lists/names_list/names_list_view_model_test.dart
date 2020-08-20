@@ -134,14 +134,14 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.runtimeType, Pending),
         );
-        viewModel.searchColorName("se");
+        viewModel.searchColorNames("se");
       });
 
       test("with a searchString of lenght >= 3, then Found state is added", () {
         stateController.stream.listen(
           (event) => expect(event.runtimeType, Found),
         );
-        viewModel.searchColorName("red");
+        viewModel.searchColorNames("red");
       });
 
       test("with a searchString of lenght < 3, then search is retrieved", () {
@@ -149,7 +149,7 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
-        viewModel.searchColorName(expected);
+        viewModel.searchColorNames(expected);
       });
 
       test("with a searchString of lenght >= 3, then search is retrieved", () {
@@ -157,7 +157,7 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
-        viewModel.searchColorName(expected);
+        viewModel.searchColorNames(expected);
       });
 
       test("with searchString.lenght >= 3, then namedColors are retrieved", () {
@@ -170,7 +170,7 @@ void main() {
           final actual = found.namedColors.first;
           expect(actual, expected);
         });
-        viewModel.searchColorName("red");
+        viewModel.searchColorNames("red");
       });
     });
   });
@@ -197,14 +197,14 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.runtimeType, Pending),
         );
-        viewModel.searchColorName("se");
+        viewModel.searchColorNames("se");
       });
 
       test("with searchString.lenght >= 3, then NoneFound is retrieved", () {
         stateController.stream.listen(
           (event) => expect(event.runtimeType, NoneFound),
         );
-        viewModel.searchColorName("red");
+        viewModel.searchColorNames("red");
       });
     });
   });

@@ -25,7 +25,7 @@ class PalettesListViewModel {
 
   PalettesListState get initialState => Pending.emptySearch();
 
-  Future<void> searchPalette(String searchString) async {
+  Future<void> searchPalettes(String searchString) async {
     final cleanSearch = _searchConfigurator.cleanSearch(searchString);
 
     if (cleanSearch.length < _searchConfigurator.minSearchLength) {
