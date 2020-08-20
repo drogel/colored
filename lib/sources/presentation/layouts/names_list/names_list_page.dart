@@ -1,3 +1,4 @@
+import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
@@ -10,13 +11,13 @@ class NamesListPage extends StatelessWidget implements TabPage {
   const NamesListPage({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      NamesListLayout(
-          onColorCardPressed: (color) => _notifyColorSelected(context, color),
+  Widget build(BuildContext context) => NamesListLayout(
+        onColorCardPressed: (color) => _notifyColorSelected(context, color),
       );
 
   @override
-  String getTabTitle(BuildContext context) => "Colors";
+  String getTabTitle(BuildContext context) =>
+      Localization.of(context).namesList.pageTitle;
 
   @override
   IconData get tabIcon => Icons.search;

@@ -1,3 +1,8 @@
+## [0.9.2] - August 20th, 2020
+
+- Side navigation bar now can be shrunk or extended, depending on the device's width.
+- Added internationalization to navigation bar routes.
+
 ## [0.9.1] - August 18th, 2020
 
 - Added a side navigation bar for wide form factors.
