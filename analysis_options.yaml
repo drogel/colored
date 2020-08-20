@@ -52,7 +52,6 @@ linter:
     - directives_ordering
     - empty_catches
     - empty_constructor_bodies
-    - flutter_style_todos
     - hash_and_equals
     - implementation_imports
     - invariant_booleans
