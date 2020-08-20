@@ -8,6 +8,9 @@ class Palette {
       : assert(name != null),
         assert(hexCodes != null);
 
+  factory Palette.fromMapEntry(MapEntry<String, List<String>> mapEntry) =>
+      Palette(name: mapEntry.key, hexCodes: mapEntry.value);
+
   final String name;
   final List<String> hexCodes;
 

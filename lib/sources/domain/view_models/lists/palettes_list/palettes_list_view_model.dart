@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:colored/sources/data/services/names/names_service.dart';
+import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/domain/view_models/lists/base/search_configurator.dart';
 import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_state.dart';
 import 'package:flutter/foundation.dart';
@@ -32,11 +33,20 @@ class PalettesListViewModel {
       return _stateController.sink.add(Pending(search: searchString));
     }
 
-    // TODO(drogel) - Finish searchPalette implementation.
-    final _ = await _namesService.fetchContainingSearch(cleanSearch);
+    final palettesMap = await _namesService.fetchContainingSearch(cleanSearch);
+    final palettes = _convertToPalettes(palettesMap);
+
+    if (palettes.isEmpty) {
+      _stateController.sink.add(NoneFound(search: searchString));
+    } else {
+      _stateController.sink.add(Found(palettes, search: searchString));
+    }
   }
 
   void clearSearch() => _stateController.sink.add(Pending.emptySearch());
 
   void dispose() => _stateController.close();
+
+  List<Palette> _convertToPalettes(Map<String, List<String>> palettesMap) =>
+      palettesMap.entries.map((entry) => Palette.fromMapEntry(entry)).toList();
 }
