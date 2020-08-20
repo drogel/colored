@@ -9,6 +9,20 @@ import 'package:mockito/mockito.dart';
 
 class MockNamesService extends Mock implements NamesService {}
 
+class PalettesServiceStub implements NamesService {
+  static const testPaletteName = "test";
+  static const black = "000000";
+  static const white = "ffffff";
+  static const palettesMap = {
+    testPaletteName: [black, white]
+  };
+
+  @override
+  Future<Map<String, List<String>>> fetchContainingSearch(
+          String searchString) async =>
+      palettesMap;
+}
+
 void main() {
   PalettesListViewModel viewModel;
   NamesService namesService;
