@@ -1,3 +1,4 @@
+import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/presentation/layouts/connectivity/connectivity_bar.dart';
 import 'package:colored/sources/presentation/layouts/connectivity/connectivity_layout.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_layout.dart';
@@ -15,9 +16,9 @@ class ConverterPage extends StatelessWidget implements TabPage {
         child: ConnectivityBar(child: NamingErrorRow()),
       );
 
-  // TODO(drogel) - Add localized label name.
   @override
-  String getTabTitle(BuildContext context) => "Converter";
+  String getTabTitle(BuildContext context) =>
+      Localization.of(context).converter.pageTitle;
 
   @override
   IconData get tabIcon => Icons.tune;

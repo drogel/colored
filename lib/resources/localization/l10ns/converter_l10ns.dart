@@ -5,6 +5,7 @@ class ConverterL10ns extends LocaleCodeAware {
 
   static final Map<String, Map<String, String>> _values = {
     'en': {
+      'pageTitle' : 'Converter',
       'tooltipMessage': 'Copied!',
       'tooltipError': 'Wrong format',
       'hex': 'Hex',
@@ -12,6 +13,7 @@ class ConverterL10ns extends LocaleCodeAware {
       'colorConverter': 'Color converter',
     },
     "es": {
+      'pageTitle' : 'Conversor',
       'tooltipMessage': '¡Copiado!',
       'tooltipError': 'Formato no válido',
       'hex': 'Hex',
@@ -20,6 +22,7 @@ class ConverterL10ns extends LocaleCodeAware {
     }
   };
 
+  String get pageTitle => _values[localeCode]['pageTitle'];
   String get tooltipMessage => _values[localeCode]['tooltipMessage'];
   String get tooltipError => _values[localeCode]['tooltipError'];
   String get hex => _values[localeCode]['hex'];

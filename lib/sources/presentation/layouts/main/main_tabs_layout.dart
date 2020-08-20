@@ -8,7 +8,8 @@ import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:flutter/material.dart';
 
 const _kSideBarWidth = 256.0;
-const _kSideBarShownThreshold = 3 * _kSideBarWidth;
+const _kSideBarShownThreshold = 2 * _kSideBarWidth;
+const _kSideBarExtendedThreshold = 4 * _kSideBarWidth;
 
 class MainTabsLayout extends StatelessWidget {
   const MainTabsLayout({@required this.pages, @required this.appBars, Key key})
@@ -27,6 +28,7 @@ class MainTabsLayout extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > _kSideBarShownThreshold;
+        final isExtended = constraints.maxWidth > _kSideBarExtendedThreshold;
         return Row(
           children: [
             if (isWide)
@@ -34,6 +36,7 @@ class MainTabsLayout extends StatelessWidget {
                 onTap: (newIndex) => _updateCurrentSelection(newIndex, data),
                 currentIndex: currentSelection.rawValue,
                 tabs: pages,
+                extended: isExtended,
                 extendedWidth: _kSideBarWidth,
               ),
             if (isWide) const VerticalDivider(),
