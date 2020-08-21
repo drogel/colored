@@ -6,21 +6,6 @@
     "c6cdd7",
     "d5d9e0"
   ],
-  "Colored": [
-    "1a1a1a",
-    "212121",
-    "303030",
-    "587c79",
-    "80cbc4",
-    "fc5659",
-    "fafdfc"
-  ],
-  "Colored Logo": [
-    "959595",
-    "c0e5e1",
-    "faabad",
-    "fafdfc"
-  ],
   "Pure Blue": [
     "03045e",
     "023e8a",
@@ -42,18 +27,6 @@
     "bdb2ff",
     "ffc6ff",
     "fffffc"
-  ],
-  "Germany": [
-    "03071e",
-    "370617",
-    "6a040f",
-    "9d0208",
-    "d00000",
-    "dc2f02",
-    "e85d04",
-    "f48c06",
-    "faa307",
-    "ffba08"
   ],
   "Camouflage": [
     "606c38",
@@ -84,5 +57,33 @@
     "2d6a4f",
     "1b4332",
     "081c15"
+  ],
+  "Casual": [
+    "4f6a8f",
+    "88a2bc",
+    "f0dbb0",
+    "efb680",
+    "d99477"
+  ],
+  "Facebook": [
+    "3b5998",
+    "8b9dc3",
+    "dfe3ee",
+    "f7f7f7",
+    "ffffff"
+  ],
+  "Caucasian": [
+    "ffe0bd",
+    "ffcd94",
+    "eac086",
+    "ffad60",
+    "ffe39f"
+  ],
+  "24k gold": [
+    "a67c00",
+    "bf9b30",
+    "ffbf00",
+    "ffcf40",
+    "ffdc73"
   ]
 }
