@@ -12,6 +12,7 @@ class ResponsiveGrid<T> extends StatefulWidget {
     this.estimatedItemSize = 200,
     this.crossAxisMinCount = 2,
     this.crossAxisMaxCount = 9,
+    this.childAspectRatio = 1,
     Key key,
   })  : assert(items != null),
         assert(pageStorageKeyId != null),
@@ -21,6 +22,7 @@ class ResponsiveGrid<T> extends StatefulWidget {
   final int crossAxisMinCount;
   final int crossAxisMaxCount;
   final int pageStorageKeyId;
+  final double childAspectRatio;
   final List<T> items;
 
   @override
@@ -59,7 +61,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
             itemCount: widget.items.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: _computeCrossAxisCount(constraints),
-              childAspectRatio: 1,
+              childAspectRatio: widget.childAspectRatio,
             ),
             itemBuilder: (_, i) => widget.items[i],
           ),

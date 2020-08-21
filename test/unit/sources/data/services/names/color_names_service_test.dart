@@ -5,7 +5,7 @@ import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class NamesDataSourceStub implements DataLoader {
+class NamesDataSourceStub implements DataLoader<String> {
   static const mockColorNames = {"212121": "Sample Color"};
 
   @override

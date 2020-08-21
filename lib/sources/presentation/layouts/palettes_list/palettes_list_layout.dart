@@ -11,7 +11,6 @@ class PalettesListLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = PalettesListData.of(context).state;
-    PalettesListData.of(context).onSearchChanged("Colo");
     switch (state.runtimeType) {
       case NoneFound:
         return const NoPalettesMessage();

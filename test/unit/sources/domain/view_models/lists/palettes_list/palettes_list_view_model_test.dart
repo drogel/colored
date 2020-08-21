@@ -8,9 +8,9 @@ import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockNamesService extends Mock implements NamesService {}
+class MockNamesService extends Mock implements NamesService<List<String>> {}
 
-class PalettesServiceStub implements NamesService {
+class PalettesServiceStub implements NamesService<List<String>> {
   static const testPaletteName = "test";
   static const black = "000000";
   static const white = "ffffff";

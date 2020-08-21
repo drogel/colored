@@ -4,7 +4,7 @@ import 'package:colored/sources/data/services/map_filter/palette_filter.dart';
 import 'package:colored/sources/data/services/names/palette_names_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class PalettesDataLoaderStub implements DataLoader {
+class PalettesDataLoaderStub implements DataLoader<List<String>> {
   static const mockPalettes = {
     "Test": ["000000", "ffffff"]
   };

@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 class ColorCard extends StatelessWidget {
   const ColorCard({
     @required this.title,
-    @required this.subtitle,
+    this.subtitle,
     this.onPressed,
     this.child,
     this.backgroundColor,
