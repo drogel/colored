@@ -1,16 +1,16 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/domain/view_models/lists/names_list/names_list_data.dart';
+import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_data.dart';
 import 'package:colored/sources/presentation/widgets/text_fields/search_field.dart';
 import 'package:flutter/material.dart';
 
-class ColorSearchField extends StatefulWidget {
-  const ColorSearchField({Key key}) : super(key: key);
+class PaletteSearchField extends StatefulWidget {
+  const PaletteSearchField({Key key}) : super(key: key);
 
   @override
-  _ColorSearchFieldState createState() => _ColorSearchFieldState();
+  _PaletteSearchFieldState createState() => _PaletteSearchFieldState();
 }
 
-class _ColorSearchFieldState extends State<ColorSearchField> {
+class _PaletteSearchFieldState extends State<PaletteSearchField> {
   FocusNode _focusNode;
   TextEditingController _controller;
 
@@ -24,7 +24,7 @@ class _ColorSearchFieldState extends State<ColorSearchField> {
 
   @override
   void didChangeDependencies() {
-    final data = NamesListData.of(context);
+    final data = PalettesListData.of(context);
     _controller.value = TextEditingValue(
       text: data.state.search,
       selection: TextSelection(
@@ -37,8 +37,8 @@ class _ColorSearchFieldState extends State<ColorSearchField> {
 
   @override
   Widget build(BuildContext context) {
-    final data = NamesListData.of(context);
-    final localization = Localization.of(context).namesList;
+    final data = PalettesListData.of(context);
+    final localization = Localization.of(context).palettes;
     return SearchField(
       hintText: localization.search,
       controller: _controller,

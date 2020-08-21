@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ColorCardTile extends StatelessWidget {
   const ColorCardTile({
     @required this.title,
-    @required this.subtitle,
+    this.subtitle,
     this.borderRadius,
     Key key,
   }) : super(key: key);
@@ -30,7 +30,7 @@ class ColorCardTile extends StatelessWidget {
         elevation: 0,
         child: ListTile(
           title: Text(title),
-          subtitle: Text(subtitle),
+          subtitle: subtitle != null ? Text(subtitle) : null,
         ),
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
+import 'package:colored/sources/presentation/layouts/palettes_list/palettes_list_layout.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,7 @@ class PalettesListPage extends StatelessWidget implements TabPage {
   const PalettesListPage({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const BackgroundContainer();
+  Widget build(BuildContext context) => const PalettesListLayout();
 
   @override
   String getTabTitle(BuildContext context) =>

@@ -1,31 +1,36 @@
 import 'dart:async';
 
-import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
+import 'package:colored/sources/domain/view_models/lists/base/list_search_configurator.dart';
+import 'package:colored/sources/domain/view_models/lists/base/search_configurator.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_state.dart';
 import 'package:flutter/foundation.dart';
 
-class NamesListViewModel {
+class NamesListViewModel extends ListSearchConfigurator {
   const NamesListViewModel({
     @required StreamController<NamesListState> stateController,
     @required NamesService namesService,
+    @required SearchConfigurator searchConfigurator,
   })  : assert(stateController != null),
         assert(namesService != null),
+        assert(searchConfigurator != null),
         _stateController = stateController,
+        _searchConfigurator = searchConfigurator,
         _namesService = namesService;
 
   final StreamController<NamesListState> _stateController;
   final NamesService _namesService;
+  final SearchConfigurator _searchConfigurator;
 
   Stream<NamesListState> get stateStream => _stateController.stream;
 
   NamesListState get initialState => Pending.emptySearch();
 
-  Future<void> searchColorName(String searchString) async {
-    final cleanSearch = _cleanSearch(searchString);
+  Future<void> searchColorNames(String searchString) async {
+    final cleanSearch = _searchConfigurator.cleanSearch(searchString);
 
-    if (cleanSearch.length < 3) {
+    if (cleanSearch.length < _searchConfigurator.minSearchLength) {
       return _stateController.sink.add(Pending(search: searchString));
     }
 
@@ -45,9 +50,4 @@ class NamesListViewModel {
 
   NamedColor _convertToNamedColor(MapEntry<String, dynamic> entry) =>
       NamedColor.fromMapEntry(entry);
-
-  String _cleanSearch(String searchString) => searchString
-      .trimLeft()
-      .replacingAllNonAlphanumericBy("")
-      .replaceAll("#", "");
 }

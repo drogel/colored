@@ -1,5 +1,5 @@
-import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_data.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_state.dart';
 import 'package:colored/sources/presentation/layouts/names_list/names_list_grid.dart';
 import 'package:colored/sources/presentation/layouts/names_list/no_colors_message.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';

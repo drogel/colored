@@ -4,8 +4,9 @@ import 'package:colored/sources/domain/view_models/color_suggestions/color_sugge
 import 'package:colored/sources/domain/view_models/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_injector.dart';
+import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_injector.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_injector.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_injector.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';
@@ -16,6 +17,7 @@ import 'package:colored/sources/presentation/notifiers/displayed_formats_notifie
 import 'package:colored/sources/presentation/notifiers/main_tabs_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/names_list_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/naming_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/palettes_list_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/picker_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/transformer_notifier.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +44,12 @@ class MainInjector extends StatelessWidget {
                     injector: const ConnectivityInjector(),
                     child: NamingNotifier(
                       injector: const NamingInjector(),
-                      child: MainTabsNotifier(
-                        injector: const MainTabsInjector(),
-                        child: child,
+                      child: PalettesListNotifier(
+                        injector: const PalettesListInjector(),
+                        child: MainTabsNotifier(
+                          injector: const MainTabsInjector(),
+                          child: child,
+                        ),
                       ),
                     ),
                   ),

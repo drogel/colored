@@ -19,6 +19,7 @@ class PalettesLoader implements DataLoader<List<String>> {
 
   Future<Map<String, List<String>>> _load() async {
     final palettesStr = await rootBundle.loadString(paths.palettes);
-    return Map<String, List<String>>.from(jsonDecode(palettesStr));
+    final jsonMap = Map<String, dynamic>.from(jsonDecode(palettesStr));
+    return jsonMap.map((k, v) => MapEntry(k, List<String>.from(v)));
   }
 }

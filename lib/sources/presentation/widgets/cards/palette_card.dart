@@ -5,7 +5,7 @@ class PaletteCard extends StatelessWidget {
   const PaletteCard({
     @required this.colors,
     @required this.title,
-    @required this.subtitle,
+    this.subtitle,
     this.onPressed,
     Key key,
   }) : super(key: key);

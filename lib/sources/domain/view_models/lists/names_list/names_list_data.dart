@@ -1,5 +1,6 @@
-import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
 import 'package:flutter/material.dart';
+
+import 'names_list_state.dart';
 
 class NamesListData extends InheritedWidget {
   const NamesListData({
