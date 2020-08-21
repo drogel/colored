@@ -85,10 +85,10 @@ void main() {
 
   group("Given a palette map entry", () {
     test("then the fromMapEntry factory method can build a Palette object", () {
-      final inputMap = {_kName : _kColors};
+      final inputMap = {_kName : ["000000", "ffffff"]};
       final actual = Palette.fromMapEntry(inputMap.entries.first);
       expect(actual.name, _kName);
-      expect(actual.hexCodes, _kColors);
+      expect(actual.hexCodes, ["#000000", "#FFFFFF"]);
     });
   });
 }

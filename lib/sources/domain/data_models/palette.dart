@@ -8,8 +8,10 @@ class Palette {
       : assert(name != null),
         assert(hexCodes != null);
 
-  factory Palette.fromMapEntry(MapEntry<String, List<String>> mapEntry) =>
-      Palette(name: mapEntry.key, hexCodes: mapEntry.value);
+  factory Palette.fromMapEntry(MapEntry<String, List<String>> mapEntry) {
+    final hexCodes = mapEntry.value.map((c) => "#${c.toUpperCase()}").toList();
+    return Palette(name: mapEntry.key, hexCodes: hexCodes);
+  }
 
   final String name;
   final List<String> hexCodes;
