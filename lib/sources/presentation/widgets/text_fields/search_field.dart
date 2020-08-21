@@ -10,6 +10,7 @@ class SearchField extends StatelessWidget {
     this.focusNode,
     this.onClearPressed,
     this.onChanged,
+    this.hintText,
     Key key,
   })  : assert(controller != null),
         super(key: key);
@@ -18,10 +19,10 @@ class SearchField extends StatelessWidget {
   final FocusNode focusNode;
   final void Function() onClearPressed;
   final void Function(String) onChanged;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
-    final localization = Localization.of(context).namesList;
     final theme = Theme.of(context);
     final radii = RadiusData.of(context).radiiScheme;
     final borderRadius = BorderRadius.all(radii.medium);
@@ -37,7 +38,7 @@ class SearchField extends StatelessWidget {
           focusNode: focusNode,
           textCapitalization: TextCapitalization.sentences,
           decoration: InputDecoration(
-            hintText: localization.search,
+            hintText: hintText,
             contentPadding: EdgeInsets.only(left: padding.large.left),
             filled: true,
             fillColor: theme.colorScheme.primaryVariant,

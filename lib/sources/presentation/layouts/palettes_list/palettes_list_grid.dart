@@ -4,9 +4,9 @@ import 'package:colored/sources/presentation/widgets/cards/palette_card.dart';
 import 'package:colored/sources/presentation/widgets/layouts/responsive_grid.dart';
 import 'package:flutter/material.dart';
 
-const _kEstimatedItemSize = 400.0;
+const _kEstimatedItemSize = 325.0;
 const _kCrossAxisMinCount = 1;
-const _kCrossAxisMaxCount = 3;
+const _kCrossAxisMaxCount = 4;
 const _kChildAspectRatio = 2.618;
 
 class PalettesListGrid extends StatelessWidget {
@@ -28,6 +28,7 @@ class PalettesListGrid extends StatelessWidget {
               (palette) => PaletteCard(
                 colors: palette.hexCodes.map(HexColor.fromHex).toList(),
                 title: palette.name,
+                onPressed: (_) {},
               ),
             )
             .toList(),
