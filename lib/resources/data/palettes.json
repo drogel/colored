@@ -1,4 +1,62 @@
 {
+  "24k gold": [
+    "a67c00",
+    "bf9b30",
+    "ffbf00",
+    "ffcf40",
+    "ffdc73"
+  ],
+  "Camouflage": [
+    "606c38",
+    "283618",
+    "fefae0",
+    "dda15e",
+    "bc6c25"
+  ],
+  "Casual": [
+    "4f6a8f",
+    "88a2bc",
+    "f0dbb0",
+    "efb680",
+    "d99477"
+  ],
+  "Caucasian": [
+    "ffe0bd",
+    "ffcd94",
+    "eac086",
+    "ffad60",
+    "ffe39f"
+  ],
+  "Disappearing Rainbow": [
+    "ffadad",
+    "ffd6a5",
+    "fdffb6",
+    "caffbf",
+    "9bf6ff",
+    "a0c4ff",
+    "bdb2ff",
+    "ffc6ff",
+    "fffffc"
+  ],
+  "Facebook": [
+    "3b5998",
+    "8b9dc3",
+    "dfe3ee",
+    "f7f7f7",
+    "ffffff"
+  ],
+  "From Violet to Aquamarine": [
+    "7400b8",
+    "6930c3",
+    "5e60ce",
+    "5390d9",
+    "4ea8de",
+    "48bfe3",
+    "56cfe1",
+    "64dfdf",
+    "72efdd",
+    "80ffdb"
+  ],
   "Midnight": [
     "010c1e",
     "001e38",
@@ -17,36 +75,6 @@
     "ade8f4",
     "caf0f8"
   ],
-  "Disappearing Rainbow": [
-    "ffadad",
-    "ffd6a5",
-    "fdffb6",
-    "caffbf",
-    "9bf6ff",
-    "a0c4ff",
-    "bdb2ff",
-    "ffc6ff",
-    "fffffc"
-  ],
-  "Camouflage": [
-    "606c38",
-    "283618",
-    "fefae0",
-    "dda15e",
-    "bc6c25"
-  ],
-  "From Violet to Aquamarine": [
-    "7400b8",
-    "6930c3",
-    "5e60ce",
-    "5390d9",
-    "4ea8de",
-    "48bfe3",
-    "56cfe1",
-    "64dfdf",
-    "72efdd",
-    "80ffdb"
-  ],
   "Shades of Mint": [
     "d8f3dc",
     "b7e4c7",
@@ -57,33 +85,5 @@
     "2d6a4f",
     "1b4332",
     "081c15"
-  ],
-  "Casual": [
-    "4f6a8f",
-    "88a2bc",
-    "f0dbb0",
-    "efb680",
-    "d99477"
-  ],
-  "Facebook": [
-    "3b5998",
-    "8b9dc3",
-    "dfe3ee",
-    "f7f7f7",
-    "ffffff"
-  ],
-  "Caucasian": [
-    "ffe0bd",
-    "ffcd94",
-    "eac086",
-    "ffad60",
-    "ffe39f"
-  ],
-  "24k gold": [
-    "a67c00",
-    "bf9b30",
-    "ffbf00",
-    "ffcf40",
-    "ffdc73"
   ]
 }
