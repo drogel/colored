@@ -20,7 +20,7 @@ class CherryPickedSuggestionsService<T> implements SuggestionsService<T> {
     final suggestions = await _dataLoader.load();
     final keys = suggestions.keys.toList();
     final chosenKeys = _listPicker.pick(from: keys, count: estimatedCount);
-    final chosenSuggestions = {
+    final chosenSuggestions = <String, T>{
       for (final key in chosenKeys) key: suggestions[key]
     };
     return chosenSuggestions;
