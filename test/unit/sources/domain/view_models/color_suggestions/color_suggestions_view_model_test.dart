@@ -6,22 +6,22 @@ import 'package:colored/sources/domain/view_models/color_suggestions/color_sugge
 import 'package:colored/sources/domain/view_models/color_suggestions/color_suggestions_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class SuggestionsServiceStub implements SuggestionsService {
+class SuggestionsServiceStub implements SuggestionsService<String> {
   static const mockSuggestions = {"1": "First", "2": "Second"};
 
   @override
-  Future<Map<String, dynamic>> fetchSuggestions(int estimatedCount) async =>
+  Future<Map<String, String>> fetchSuggestions(int estimatedCount) async =>
       mockSuggestions;
 }
 
-class SuggestionsServiceEmptyStub implements SuggestionsService {
+class SuggestionsServiceEmptyStub implements SuggestionsService<String> {
   @override
-  Future<Map<String, dynamic>> fetchSuggestions(int estimatedCount) async => {};
+  Future<Map<String, String>> fetchSuggestions(int estimatedCount) async => {};
 }
 
 void main() {
   ColorSuggestionsViewModel viewModel;
-  SuggestionsService suggestionsService;
+  SuggestionsService<String> suggestionsService;
   StreamController<ColorSuggestionsState> stateController;
 
   group("Given a ColorSuggestionsViewModel with a stubbed service", () {
