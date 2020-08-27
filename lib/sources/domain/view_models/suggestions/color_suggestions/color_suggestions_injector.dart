@@ -15,7 +15,8 @@ class ColorSuggestionsInjector {
     StreamController<ColorSuggestionsState> stateController,
   ]) =>
       ColorSuggestionsViewModel(
-        stateController: StreamController<ColorSuggestionsState>(),
+        stateController:
+            stateController ?? StreamController<ColorSuggestionsState>(),
         suggestionsService: CherryPickedSuggestionsService<String>(
           dataLoader: const ColorSuggestionsLoader(
             stringBundle: RootStringBundle(),
