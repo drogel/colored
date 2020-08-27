@@ -1,18 +1,17 @@
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
-import 'package:colored/sources/common/extensions/hex_color.dart';
 import 'package:flutter/material.dart';
 
-class ColorChip extends StatelessWidget {
-  const ColorChip({
+class SuggestionChip extends StatelessWidget {
+  const SuggestionChip({
     @required this.text,
-    @required this.colorHex,
+    @required this.avatar,
     this.onPressed,
     Key key,
   }) : super(key: key);
 
   final String text;
-  final String colorHex;
+  final Widget avatar;
   final void Function(String) onPressed;
 
   @override
@@ -30,12 +29,7 @@ class ColorChip extends StatelessWidget {
         onPressed: onPressed != null ? () => onPressed(text) : null,
         backgroundColor: colors.primaryVariant,
         shape: RoundedRectangleBorder(borderRadius: borderRadius),
-        avatar: Container(
-          decoration: BoxDecoration(
-            color: HexColor.fromHex(colorHex),
-            borderRadius: borderRadius,
-          ),
-        ),
+        avatar: avatar,
         label: Text(text),
         labelStyle: textTheme.bodyText1,
       ),

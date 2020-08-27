@@ -3,7 +3,7 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
-import 'package:colored/sources/presentation/layouts/names_list/names_list_layout.dart';
+import 'package:colored/sources/presentation/layouts/lists/names_list/names_list_layout.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
 

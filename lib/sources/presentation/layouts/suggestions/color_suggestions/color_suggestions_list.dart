@@ -1,6 +1,6 @@
-import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:colored/sources/presentation/widgets/containers/color_chip.dart';
+import 'package:colored/sources/presentation/widgets/chips/color_chip.dart';
+import 'package:colored/sources/presentation/widgets/layouts/horizontal_tab_bar_list.dart';
 import 'package:flutter/material.dart';
 
 class ColorSuggestionsList extends StatelessWidget {
@@ -14,19 +14,8 @@ class ColorSuggestionsList extends StatelessWidget {
   final void Function(String) onSuggestionSelected;
 
   @override
-  Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
-    final safeArea = MediaQuery.of(context).padding;
-    final horizontalPadding = padding.small.horizontal;
-    return SizedBox(
-      height: kTextTabBarHeight,
-      child: ListView.builder(
-        padding: EdgeInsets.only(
-          left: safeArea.left + horizontalPadding,
-          right: safeArea.right + 2 * horizontalPadding,
-        ),
+  Widget build(BuildContext context) => HorizontalTabBarList(
         itemCount: suggestions.length,
-        scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final suggestion = suggestions[index];
           return ColorChip(
@@ -35,7 +24,5 @@ class ColorSuggestionsList extends StatelessWidget {
             onPressed: onSuggestionSelected,
           );
         },
-      ),
-    );
-  }
+      );
 }
