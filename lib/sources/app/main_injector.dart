@@ -1,6 +1,6 @@
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
-import 'package:colored/sources/domain/view_models/color_suggestions/color_suggestions_injector.dart';
+import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_injector.dart';

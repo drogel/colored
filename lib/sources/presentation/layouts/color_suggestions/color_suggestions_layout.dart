@@ -1,5 +1,5 @@
-import 'package:colored/sources/domain/view_models/color_suggestions/color_suggestions_data.dart';
-import 'package:colored/sources/domain/view_models/color_suggestions/color_suggestions_state.dart';
+import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_data.dart';
+import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_state.dart';
 import 'package:colored/sources/presentation/layouts/color_suggestions/color_suggestions_list.dart';
 import 'package:flutter/material.dart';
 

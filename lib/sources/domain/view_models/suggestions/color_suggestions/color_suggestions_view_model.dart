@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:colored/sources/domain/view_models/color_suggestions/color_suggestions_state.dart';
+import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_state.dart';
 import 'package:flutter/foundation.dart';
 
 const _kSuggestionsLength = 15;
