@@ -9,9 +9,9 @@ class Loading extends PaletteSuggestionsState {
 }
 
 class PaletteSuggestionsFound extends PaletteSuggestionsState {
-  const PaletteSuggestionsFound(this.palettes);
+  const PaletteSuggestionsFound(this.paletteSuggestions);
 
-  final List<Palette> palettes;
+  final List<Palette> paletteSuggestions;
 }
 
 class Failed extends PaletteSuggestionsState {

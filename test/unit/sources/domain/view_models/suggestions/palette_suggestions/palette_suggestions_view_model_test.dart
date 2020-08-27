@@ -1,34 +1,40 @@
 import 'dart:async';
 
 import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
-import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_state.dart';
-import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_view_model.dart';
+import 'package:colored/sources/domain/data_models/palette.dart';
+import 'package:colored/sources/domain/view_models/suggestions/palette_suggestions/palette_suggestions_state.dart';
+import 'package:colored/sources/domain/view_models/suggestions/palette_suggestions/palette_suggestions_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class SuggestionsServiceStub implements SuggestionsService<String> {
-  static const mockSuggestions = {"1": "First", "2": "Second"};
+class SuggestionsServiceStub implements SuggestionsService<List<String>> {
+  static const mockSuggestions = <String, List<String>>{
+    "First": ["000000", "ffffff"],
+    "Second": [],
+  };
 
   @override
-  Future<Map<String, String>> fetchSuggestions(int estimatedCount) async =>
+  Future<Map<String, List<String>>> fetchSuggestions(
+          int estimatedCount) async =>
       mockSuggestions;
 }
 
-class SuggestionsServiceEmptyStub implements SuggestionsService<String> {
+class SuggestionsServiceEmptyStub implements SuggestionsService<List<String>> {
   @override
-  Future<Map<String, String>> fetchSuggestions(int estimatedCount) async => {};
+  Future<Map<String, List<String>>> fetchSuggestions(
+          int estimatedCount) async =>
+      {};
 }
 
 void main() {
-  ColorSuggestionsViewModel viewModel;
-  SuggestionsService<String> suggestionsService;
-  StreamController<ColorSuggestionsState> stateController;
+  PaletteSuggestionsViewModel viewModel;
+  SuggestionsService<List<String>> suggestionsService;
+  StreamController<PaletteSuggestionsState> stateController;
 
-  group("Given a ColorSuggestionsViewModel", () {
+  group("Given a PaletteSuggestionsViewModel", () {
     group("when constructed", () {
       test("then throws an assertion error if stateController is null", () {
         expect(
-          () => ColorSuggestionsViewModel(
+          () => PaletteSuggestionsViewModel(
             stateController: null,
             suggestionsService: SuggestionsServiceStub(),
           ),
@@ -38,8 +44,8 @@ void main() {
 
       test("then throws an assertion error if suggestionsSerice is null", () {
         expect(
-          () => ColorSuggestionsViewModel(
-            stateController: StreamController<ColorSuggestionsState>(),
+          () => PaletteSuggestionsViewModel(
+            stateController: StreamController<PaletteSuggestionsState>(),
             suggestionsService: null,
           ),
           throwsA(isA<AssertionError>()),
@@ -48,11 +54,11 @@ void main() {
     });
   });
 
-  group("Given a ColorSuggestionsViewModel with a stubbed service", () {
+  group("Given a PaletteSuggestionsViewModel with a stubbed service", () {
     setUp(() {
-      stateController = StreamController<ColorSuggestionsState>();
+      stateController = StreamController<PaletteSuggestionsState>();
       suggestionsService = SuggestionsServiceStub();
-      viewModel = ColorSuggestionsViewModel(
+      viewModel = PaletteSuggestionsViewModel(
         stateController: stateController,
         suggestionsService: suggestionsService,
       );
@@ -81,21 +87,21 @@ void main() {
     });
 
     group("when init is called", () {
-      test("then ColorSuggestionsFound state is retrieved", () async {
+      test("then PaletteSuggestionsViewModel state is retrieved", () async {
         stateController.stream.listen((event) {
-          expect(event.runtimeType, ColorSuggestionsFound);
+          expect(event.runtimeType, PaletteSuggestionsFound);
         });
         await viewModel.init();
       });
 
       test("then the expected NamedColor list is retrieved", () async {
         const expected = [
-          NamedColor(name: "First", hex: "#1"),
-          NamedColor(name: "Second", hex: "#2"),
+          Palette(name: "First", hexCodes: ["#000000", "#FFFFFF"]),
+          Palette(name: "Second", hexCodes: []),
         ];
         stateController.stream.listen((event) {
-          final actualSuggestionsState = event as ColorSuggestionsFound;
-          final actual = actualSuggestionsState.colorSuggestions;
+          final actualSuggestionsState = event as PaletteSuggestionsFound;
+          final actual = actualSuggestionsState.paletteSuggestions;
           expect(actual, expected);
         });
         await viewModel.init();
@@ -103,11 +109,11 @@ void main() {
     });
   });
 
-  group("Given a ColorSuggestionsViewModel with an empty service", () {
+  group("Given a PaletteSuggestionsViewModel with an empty service", () {
     setUp(() {
-      stateController = StreamController<ColorSuggestionsState>();
+      stateController = StreamController<PaletteSuggestionsState>();
       suggestionsService = SuggestionsServiceEmptyStub();
-      viewModel = ColorSuggestionsViewModel(
+      viewModel = PaletteSuggestionsViewModel(
         stateController: stateController,
         suggestionsService: suggestionsService,
       );
