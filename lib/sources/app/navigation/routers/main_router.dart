@@ -1,5 +1,5 @@
 import 'package:colored/sources/app/main_injector.dart';
-import 'package:colored/sources/app/navigation/router.dart';
+import 'package:colored/sources/app/navigation/flow_router.dart';
 import 'package:colored/sources/presentation/layouts/search/color_search/color_search_layout.dart';
 import 'package:colored/sources/presentation/layouts/converter/converter_page.dart';
 import 'package:colored/sources/presentation/layouts/main/main_tabs_layout.dart';
@@ -11,8 +11,8 @@ import 'package:colored/sources/presentation/widgets/page_routes/fade_out_route.
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class MainRouter extends Router {
-  const MainRouter({List<Router> children}) : super(children: children);
+class MainFlowRouter extends FlowRouter {
+  const MainFlowRouter({List<FlowRouter> children}) : super(children: children);
 
   static const routerName = "converter/";
 

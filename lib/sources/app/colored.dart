@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/app/navigation/router.dart';
+import 'package:colored/sources/app/navigation/flow_router.dart';
 import 'package:colored/sources/app/styling/theme/theme_builder.dart';
 import 'package:colored/sources/app/styling/style.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class Colored extends StatelessWidget {
   })  : assert(router != null),
         super(key: key);
 
-  final Router router;
+  final FlowRouter router;
 
   @override
   Widget build(BuildContext context) => Style(

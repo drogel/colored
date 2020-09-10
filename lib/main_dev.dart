@@ -8,5 +8,5 @@ import 'package:flutter/widgets.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(flavor: Flavor.dev);
-  runApp(const Colored(router: OnBoardingRouter()));
+  runApp(const Colored(router: OnBoardingFlowRouter()));
 }

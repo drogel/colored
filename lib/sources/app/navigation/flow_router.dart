@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-abstract class Router {
-  const Router({this.children});
+abstract class FlowRouter {
+  const FlowRouter({this.children});
 
-  final List<Router> children;
+  final List<FlowRouter> children;
 
   String get name;
 

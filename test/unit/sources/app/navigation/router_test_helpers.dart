@@ -1,4 +1,4 @@
-import 'package:colored/sources/app/navigation/router.dart';
+import 'package:colored/sources/app/navigation/flow_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -9,7 +9,7 @@ class FirstChildRoute extends Mock implements Route {}
 
 class SecondChildRoute extends Mock implements Route {}
 
-class FirstChildRouterStub extends Router {
+class FirstChildFlowRouterStub extends FlowRouter {
   static const routerName = "firstChild";
 
   @override
@@ -19,7 +19,7 @@ class FirstChildRouterStub extends Router {
   Route buildRoute(RouteSettings settings) => FirstChildRoute();
 }
 
-class SecondChildRouterStub extends Router {
+class SecondChildFlowRouterStub extends FlowRouter {
   static const routerName = "secondChild";
 
   @override
@@ -29,8 +29,9 @@ class SecondChildRouterStub extends Router {
   Route buildRoute(RouteSettings settings) => SecondChildRoute();
 }
 
-class RouterUnderTest extends Router {
-  const RouterUnderTest({List<Router> children}) : super(children: children);
+class FlowRouterUnderTest extends FlowRouter {
+  const FlowRouterUnderTest({List<FlowRouter> children})
+      : super(children: children);
 
   static const routerName = "routerUnderTest";
 
@@ -42,7 +43,7 @@ class RouterUnderTest extends Router {
 }
 
 void runOnGenerateRouteTest(
-  Router routerUnderTest, {
+  FlowRouter routerUnderTest, {
   @required String routeName,
   @required Route expectedRouteType,
 }) {
