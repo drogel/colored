@@ -1,4 +1,3 @@
-import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/plain_icon_button.dart';

@@ -17,7 +17,7 @@ class ColorNamesLoader implements DataLoader<String> {
   Future<Map<String, String>> load() async => _memoizer.runOnce(_load);
 
   Future<Map<String, String>> _load() async {
-    final colorNamesStr = await rootBundle.loadString(paths.colorNames);
+    final colorNamesStr = await rootBundle.loadString(paths.colors);
     return Map<String, String>.from(jsonDecode(colorNamesStr));
   }
 }

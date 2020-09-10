@@ -1,3 +1,3 @@
-abstract class SuggestionsService {
-  Future<Map<String, dynamic>> fetchSuggestions(int estimatedCount);
+abstract class SuggestionsService<T> {
+  Future<Map<String, T>> fetchSuggestions(int estimatedCount);
 }

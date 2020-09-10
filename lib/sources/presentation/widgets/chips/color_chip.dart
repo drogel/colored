@@ -3,33 +3,28 @@ import 'package:colored/sources/common/extensions/hex_color.dart';
 import 'package:colored/sources/presentation/widgets/chips/suggestion_chip.dart';
 import 'package:flutter/material.dart';
 
-class GradientChip extends StatelessWidget {
-  const GradientChip({
+class ColorChip extends StatelessWidget {
+  const ColorChip({
     @required this.text,
-    @required this.hexCodes,
+    @required this.colorHex,
     this.onPressed,
     Key key,
   })  : assert(text != null),
-        assert(hexCodes != null),
+        assert(colorHex != null),
         super(key: key);
 
   final String text;
   final void Function(String) onPressed;
-  final List<String> hexCodes;
+  final String colorHex;
 
   @override
   Widget build(BuildContext context) {
-    final gradientColors = hexCodes.map(HexColor.fromHex).toList();
     final borderRadius = RadiusData.of(context).radiiScheme.medium;
     return SuggestionChip(
       text: text,
       avatar: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: gradientColors,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: HexColor.fromHex(colorHex),
           borderRadius: BorderRadius.all(borderRadius),
         ),
       ),
