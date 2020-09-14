@@ -28,7 +28,6 @@ class PalettesListGrid extends StatelessWidget {
               (palette) => PaletteCard(
                 colors: palette.hexCodes.map(HexColor.fromHex).toList(),
                 title: palette.name,
-                onPressed: (_) {},
               ),
             )
             .toList(),
