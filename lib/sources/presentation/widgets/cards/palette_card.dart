@@ -20,7 +20,6 @@ class PaletteCard extends StatelessWidget {
         title: title,
         subtitle: subtitle,
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () => onPressed(title),
         child: Row(
           children: colors
               .map((color) => Expanded(child: Container(color: color)))
