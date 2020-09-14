@@ -1,3 +1,8 @@
+## [0.10] - September 14th, 2020
+
+- Adds color palettes search tab and color palettes suggestions.
+- Moves tab navigation to a side/bottom navigation bar.
+
 ## [0.9.2] - August 20th, 2020
 
 - Side navigation bar now can be shrunk or extended, depending on the device's width.
