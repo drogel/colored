@@ -5,7 +5,7 @@ class PaletteCard extends StatelessWidget {
   const PaletteCard({
     @required this.colors,
     @required this.title,
-    @required this.subtitle,
+    this.subtitle,
     this.onPressed,
     Key key,
   }) : super(key: key);
@@ -20,7 +20,6 @@ class PaletteCard extends StatelessWidget {
         title: title,
         subtitle: subtitle,
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () => onPressed(title),
         child: Row(
           children: colors
               .map((color) => Expanded(child: Container(color: color)))

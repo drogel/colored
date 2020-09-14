@@ -3,7 +3,7 @@ import 'package:colored/sources/data/services/map_filter/map_filter.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:flutter/foundation.dart';
 
-class ColorNamesService implements NamesService {
+class ColorNamesService implements NamesService<String> {
   ColorNamesService({
     @required DataLoader dataLoader,
     @required MapFilter filter,

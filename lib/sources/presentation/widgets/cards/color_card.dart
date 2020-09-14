@@ -7,8 +7,8 @@ import 'package:flutter/rendering.dart';
 class ColorCard extends StatelessWidget {
   const ColorCard({
     @required this.title,
-    @required this.subtitle,
     this.onPressed,
+    this.subtitle,
     this.child,
     this.backgroundColor,
     Key key,
@@ -31,9 +31,7 @@ class ColorCard extends StatelessWidget {
           children: [
             child,
             Material(
-              color: Colors.transparent,
-              child: InkWell(onTap: onPressed),
-            ),
+                color: Colors.transparent, child: InkWell(onTap: onPressed)),
             Align(
               alignment: Alignment.bottomCenter,
               child: ColorCardTile(

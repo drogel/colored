@@ -1,18 +1,19 @@
-import 'package:colored/sources/app/navigation/router.dart';
+import 'package:colored/sources/app/navigation/flow_router.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'router_test_helpers.dart';
 
 void main() {
-  Router routerUnderTest;
-  Router firstChild;
-  Router secondChild;
+  FlowRouter routerUnderTest;
+  FlowRouter firstChild;
+  FlowRouter secondChild;
 
-  group("Given a Router with children", () {
+  group("Given a FlowRouter with children", () {
     setUp(() {
-      firstChild = FirstChildRouterStub();
-      secondChild = SecondChildRouterStub();
-      routerUnderTest = RouterUnderTest(children: [firstChild, secondChild]);
+      firstChild = FirstChildFlowRouterStub();
+      secondChild = SecondChildFlowRouterStub();
+      routerUnderTest =
+          FlowRouterUnderTest(children: [firstChild, secondChild]);
     });
 
     tearDown(() {
@@ -26,7 +27,7 @@ void main() {
         test("then Route returned by its buildRoute method is obtained", () {
           runOnGenerateRouteTest(
             routerUnderTest,
-            routeName: RouterUnderTest.routerName,
+            routeName: FlowRouterUnderTest.routerName,
             expectedRouteType: MockRoute(),
           );
 
@@ -42,11 +43,12 @@ void main() {
         test("then Route returned by the corresponding child is obtained", () {
           runOnGenerateRouteTest(
             routerUnderTest,
-            routeName: FirstChildRouterStub.routerName,
+            routeName: FirstChildFlowRouterStub.routerName,
             expectedRouteType: FirstChildRoute(),
           );
 
-          const routeName = "${FirstChildRouterStub.routerName}someRouteName";
+          const routeName =
+              "${FirstChildFlowRouterStub.routerName}someRouteName";
           runOnGenerateRouteTest(
             routerUnderTest,
             routeName: routeName,
@@ -57,11 +59,12 @@ void main() {
         test("then Route returned by the corresponding child is obtained", () {
           runOnGenerateRouteTest(
             routerUnderTest,
-            routeName: SecondChildRouterStub.routerName,
+            routeName: SecondChildFlowRouterStub.routerName,
             expectedRouteType: SecondChildRoute(),
           );
 
-          const routeName = "${SecondChildRouterStub.routerName}someRouteName";
+          const routeName =
+              "${SecondChildFlowRouterStub.routerName}someRouteName";
           runOnGenerateRouteTest(
             routerUnderTest,
             routeName: routeName,

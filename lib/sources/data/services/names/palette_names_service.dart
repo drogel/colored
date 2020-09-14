@@ -3,7 +3,7 @@ import 'package:colored/sources/data/services/map_filter/map_filter.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:flutter/foundation.dart';
 
-class PaletteNamesService implements NamesService {
+class PaletteNamesService implements NamesService<List<String>> {
   const PaletteNamesService({
     @required DataLoader dataLoader,
     @required MapFilter filter,

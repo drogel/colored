@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 const NamedColor _kBlack = NamedColor(name: "Black", hex: "#000000");
 const NamedColor _kWhite = NamedColor(name: "White", hex: "#FFFFFF");
-const List<NamedColor> _kColors = [_kBlack, _kWhite];
+final List<String> _kColors = [_kBlack.hex, _kWhite.hex];
 const String _kName = "Black and white";
 
 void main() {
@@ -15,7 +15,7 @@ void main() {
   });
 
   group("Given a valid Palette", () {
-    setUp(() => palette = const Palette(name: _kName, namedColors: _kColors));
+    setUp(() => palette = Palette(name: _kName, hexCodes: _kColors));
 
     group("when constructed", () {
       test("then name can be accessed", () {
@@ -23,7 +23,7 @@ void main() {
       });
 
       test("then namedColors can be accessed", () {
-        expect(palette.namedColors, _kColors);
+        expect(palette.hexCodes, _kColors);
       });
     });
 
@@ -31,7 +31,7 @@ void main() {
       test("then a description of the palette is obtained", () {
         expect(
           palette.toString(),
-          "Palette(name: $_kName, namedColors: $_kColors)",
+          "Palette(name: $_kName, hexCodes: $_kColors)",
         );
       });
     });
@@ -41,14 +41,14 @@ void main() {
     group("when constructed", () {
       test("then should throw if given null name", () {
         expect(
-          () => Palette(name: null, namedColors: _kColors),
+          () => Palette(name: null, hexCodes: _kColors),
           throwsA(isA<AssertionError>()),
         );
       });
 
       test("then should throw if given null namedColors", () {
         expect(
-          () => Palette(name: _kName, namedColors: null),
+          () => Palette(name: _kName, hexCodes: null),
           throwsA(isA<AssertionError>()),
         );
       });
@@ -58,7 +58,7 @@ void main() {
   group("Given two valid palettes", () {
     Palette otherPalette;
 
-    setUp(() => palette = const Palette(name: _kName, namedColors: _kColors));
+    setUp(() => palette = Palette(name: _kName, hexCodes: _kColors));
 
     tearDown(() {
       palette = null;
@@ -67,19 +67,28 @@ void main() {
 
     group("when compared", () {
       test("palettes are equal if they have the same namedColors and name", () {
-        otherPalette = const Palette(name: _kName, namedColors: _kColors);
+        otherPalette = Palette(name: _kName, hexCodes: _kColors);
         expect(otherPalette == palette, true);
       });
 
       test("palettes are equal if they have the same namedColors", () {
-        otherPalette = const Palette(name: "Other", namedColors: _kColors);
+        otherPalette = Palette(name: "Other", hexCodes: _kColors);
         expect(otherPalette == palette, true);
       });
 
       test("palettes are not equal if they don't have same namedColors", () {
-        otherPalette = const Palette(name: "Other", namedColors: [_kWhite]);
+        otherPalette = Palette(name: "Other", hexCodes: [_kWhite.hex]);
         expect(otherPalette == palette, false);
       });
+    });
+  });
+
+  group("Given a palette map entry", () {
+    test("then the fromMapEntry factory method can build a Palette object", () {
+      final inputMap = {_kName : ["000000", "ffffff"]};
+      final actual = Palette.fromMapEntry(inputMap.entries.first);
+      expect(actual.name, _kName);
+      expect(actual.hexCodes, ["#000000", "#FFFFFF"]);
     });
   });
 }

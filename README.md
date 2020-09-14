@@ -7,9 +7,6 @@
   <a href="https://drogel.github.io/colored/#/">
     <img src="https://img.shields.io/badge/On_the_web-blue.svg?style=flat&logo=flutter">
   </a>
-  <a href="https://play.google.com/store/apps/details?id=com.drogel.colored">
-    <img src="https://img.shields.io/badge/PlayStore-yellowgreen.svg?style=flat&logo=google-play">
-  </a>
   <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">
     <img src="https://img.shields.io/github/license/drogel/colored.svg?style=flat">
   </a>
@@ -33,9 +30,9 @@ Colored aims to be light-weight, fast and easy to use. It is based on the BLoC p
 This project has been built using the [Flutter](https://flutter.io/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
 <p align="center">
-  <img src="./showcase/graphics/onboarding.png" width="256">
   <img src="./showcase/graphics/converter.png" width="256">
   <img src="./showcase/graphics/names.png" width="256">
+  <img src="./showcase/graphics/palettes.png" width="256">
 </p>
 
 ## Features
@@ -44,6 +41,7 @@ This project has been built using the [Flutter](https://flutter.io/) framework, 
 - **Color naming**: explore the RGB space and get the name of the color you are looking for.
 - **Color search**: search in the color dictionary. Look up by name or by hex value.
 - **Color families**: get suggestions of color families based on color names.
+- **Color palettes**: search in the color palette dictionary, and get suggestions of common color palettes.
 
 ## Download & install
 
@@ -63,7 +61,7 @@ There you go, you can now open & edit the project. Enjoy!
 
 - [Flutter](https://flutter.dev/) - Beautiful native apps in record time.
 - [Android Studio](https://developer.android.com/studio/index.html/) - Tools for building apps on every type of Android device.
-- [David Aerne's massive color dictionary](https://github.com/meodai/color-names) - A handpicked list of 18769 unique color names.
+- [David Aerne's massive color dictionary](https://github.com/meodai/color-names) - A handpicked list of thousands of unique color names.
 
 ## Authors
 

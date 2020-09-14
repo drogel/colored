@@ -1,7 +1,7 @@
-import 'package:colored/sources/domain/view_models/names_list/names_list_data.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_injector.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_state.dart';
-import 'package:colored/sources/domain/view_models/names_list/names_list_view_model.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_data.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_injector.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_state.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_view_model.dart';
 import 'package:flutter/material.dart';
 
 class NamesListNotifier extends StatefulWidget {
@@ -35,7 +35,7 @@ class _NamesListNotifierState extends State<NamesListNotifier> {
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => NamesListData(
           state: snapshot.data,
-          onSearchChanged: _viewModel.searchColorName,
+          onSearchChanged: _viewModel.searchColorNames,
           onBackPressed: _viewModel.clearSearch,
           child: widget.child,
         ),
