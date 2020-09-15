@@ -66,6 +66,26 @@ void main() {
           hslParser.parse("300°, 100%, 50%"),
           ColorSelection(r: 1, g: 0, b: 1),
         );
+        expect(
+          hslParser.parse("62°, 21%, 16%"),
+          ColorSelection(r: 0.19136000000000003, g: 0.1936, b: 0.1264),
+        );
+        expect(
+          hslParser.parse("142°, 21%, 16%"),
+          ColorSelection(r: 0.1264, g: 0.1936, b: 0.15104),
+        );
+        expect(
+          hslParser.parse("182°, 21%, 16%"),
+          ColorSelection(r: 0.1264, g: 0.19136000000000003, b: 0.1936),
+        );
+        expect(
+          hslParser.parse("242°, 21%, 16%"),
+          ColorSelection(r: 0.12864, g: 0.1264, b: 0.1936),
+        );
+        expect(
+          hslParser.parse("342°, 21%, 16%"),
+          ColorSelection(r: 0.1936, g: 0.1264, b: 0.14656000000000005),
+        );
       });
 
       test("then an assertion error is thrown on null input string", () {
