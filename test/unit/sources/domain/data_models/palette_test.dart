@@ -1,6 +1,7 @@
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vector_math/hash.dart';
 
 const NamedColor _kBlack = NamedColor(name: "Black", hex: "#000000");
 const NamedColor _kWhite = NamedColor(name: "White", hex: "#FFFFFF");
@@ -33,6 +34,16 @@ void main() {
           palette.toString(),
           "Palette(name: $_kName, hexCodes: $_kColors)",
         );
+      });
+    });
+
+    group("when hashCode is called", () {
+      test("then the hashCode is built based on name and hex codes", () {
+        const name = "test";
+
+        final namedColor = Palette(name: name, hexCodes: _kColors);
+
+        expect(namedColor.hashCode, hashObjects([name, _kColors]));
       });
     });
   });
@@ -85,7 +96,9 @@ void main() {
 
   group("Given a palette map entry", () {
     test("then the fromMapEntry factory method can build a Palette object", () {
-      final inputMap = {_kName : ["000000", "ffffff"]};
+      final inputMap = {
+        _kName: ["000000", "ffffff"]
+      };
       final actual = Palette.fromMapEntry(inputMap.entries.first);
       expect(actual.name, _kName);
       expect(actual.hexCodes, ["#000000", "#FFFFFF"]);
