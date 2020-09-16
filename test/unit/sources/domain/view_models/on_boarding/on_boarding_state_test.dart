@@ -2,7 +2,7 @@ import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group("given an OnBoardingState", () {
+  group("Given an OnBoardingState", () {
     group("when constructed", () {
       test("then an error is thrown if pageScrollFraction is null", () {
         expect(

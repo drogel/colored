@@ -6,7 +6,7 @@ import 'package:vector_math/hash.dart';
 class ConverterState {
   const ConverterState({
     @required this.formatData,
-  });
+  }) : assert(formatData != null);
 
   final Map<Format, String> formatData;
 
@@ -16,11 +16,8 @@ class ConverterState {
       const MapEquality().equals(formatData, other.formatData);
 
   @override
-  int get hashCode => hashObjects([this, formatData]);
+  int get hashCode => formatData.hashCode;
 
   @override
-  String toString() => """ConverterState(
-      formatData: $formatData,
-   )""";
+  String toString() => "$runtimeType(formatData: $formatData)";
 }
-
