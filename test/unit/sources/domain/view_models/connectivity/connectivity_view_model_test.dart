@@ -42,6 +42,44 @@ void main() {
   });
 
   group("Given a ConnectivityViewModel", () {
+    group("when constructed", () {
+      test("then an assertion error is thrown if stateController is null", () {
+        expect(
+          () => ConnectivityViewModel(
+            stateController: null,
+            connectivityService: connectivityService,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then assertion error throws if connectivityService is null", () {
+        expect(
+          () => ConnectivityViewModel(
+            stateController: stateController,
+            connectivityService: null,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+    });
+
+    group("when stateStream is called", () {
+      test("then the stream from the given stateStream is retrieved", () {
+        final actual = viewModel.stateStream;
+
+        expect(actual, stateController.stream);
+      });
+    });
+
+    group("when initialState is called", () {
+      test("then an Unknown state is returned", () {
+        final actual = viewModel.initialState;
+
+        expect(actual, isA<Unknown>());
+      });
+    });
+
     group("when ConnectivityResult.none retrieved from connectivityStream", () {
       group("when dispose is called", () {
         test("then stateController is closed", () {
