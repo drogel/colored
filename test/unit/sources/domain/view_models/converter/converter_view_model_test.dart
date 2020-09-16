@@ -1,11 +1,30 @@
 import 'dart:async';
 
-import 'package:colored/sources/domain/data_models/format.dart';
+import 'package:colored/sources/app/styling/colors/color_constants.dart'
+    as color_constants;
+import 'package:colored/sources/data/color_helpers/converter/converter.dart';
+import 'package:colored/sources/data/color_helpers/parser/color_parser/parser.dart';
+import 'package:colored/sources/data/services/device_orientation/device_orientation_service.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
+import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+class MockOrientationService extends Mock implements DeviceOrientationService {}
+
+class MockParser extends Mock implements Parser {}
+
+class MockConverter extends Mock implements Converter {}
+
+abstract class OnSelectionDoneCallbackProvider {
+  void onDone(ColorSelection selection);
+}
+
+class MockOnSelectionDoneCallbackProvider extends Mock
+    implements OnSelectionDoneCallbackProvider {}
 
 void main() {
   ConverterViewModel viewModel;
@@ -23,7 +42,87 @@ void main() {
   });
 
   group("Given a ConverterViewModel,", () {
-    group("when convertToColor is called with a selection", () {
+    group("when constructed", () {
+      test("then an assertion error is thrown if stateController is null", () {
+        expect(
+          () => ConverterViewModel(
+            stateController: null,
+            deviceOrientationService: MockOrientationService(),
+            colorConverter: MockConverter(),
+            colorParser: MockParser(),
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then an assertion error is thrown if colorParser is null", () {
+        expect(
+          () => ConverterViewModel(
+            stateController: stateController,
+            deviceOrientationService: MockOrientationService(),
+            colorConverter: MockConverter(),
+            colorParser: null,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then an assertion error is thrown if colorConverter is null", () {
+        expect(
+          () => ConverterViewModel(
+            stateController: stateController,
+            deviceOrientationService: MockOrientationService(),
+            colorConverter: null,
+            colorParser: MockParser(),
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then an error is thrown if deviceOrientationService is null", () {
+        expect(
+          () => ConverterViewModel(
+            stateController: stateController,
+            deviceOrientationService: null,
+            colorConverter: MockConverter(),
+            colorParser: MockParser(),
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+    });
+
+    group("when initialstate is called", () {
+      test("then an initial state with the primaryDark color is returned", () {
+        final actual = viewModel.initialState;
+
+        final expectedColor = color_constants.primaryDark;
+
+        expect(
+          actual.formatData[Format.rgb],
+          "${expectedColor.red}, ${expectedColor.green}, ${expectedColor.blue}",
+        );
+      });
+    });
+
+    group("when init is called", () {
+      test("then the orientation service is asked to set all orientations", () {
+        final orientationService = MockOrientationService();
+
+        final mockedViewModel = ConverterViewModel(
+          stateController: stateController,
+          colorParser: MockParser(),
+          colorConverter: MockConverter(),
+          deviceOrientationService: orientationService,
+        );
+
+        mockedViewModel.init();
+        verify(orientationService.setAllOrientations());
+        verifyNoMoreInteractions(orientationService);
+      });
+    });
+
+    group("when notifySelectionChanged is called with a selection", () {
       test("then a state with corresponding color is added to the stream", () {
         final selection = ColorSelection(r: 1, g: 0.2, b: 0.4);
         const expected = ConverterState(
@@ -111,6 +210,20 @@ void main() {
           Format.rgb,
         );
         expect(shouldHexStringFail, true);
+      });
+    });
+
+    group("when convertStringToColor is called", () {
+      test("then onDone is called", () {
+        final callbackProvider = MockOnSelectionDoneCallbackProvider();
+
+        viewModel.convertStringToColor(
+          "#000000",
+          Format.hex,
+          onDone: callbackProvider.onDone,
+        );
+
+        verify(callbackProvider.onDone(any));
       });
     });
 

@@ -4,14 +4,23 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 
 class HsvParser extends FormatParser {
-  final _hsvRegExp = RegExp(r"^(hsl)?\(?\s*(\d+)\s*(°)?(\W+)"
+  final _hsvRegExp = RegExp(r"^(hsv)?\(?\s*(\d+)\s*(°)?(\W+)"
       r"\s*(\d*(?:\.\d+)?(%)?)\s*(\W+)\s*(\d*(?:\.\d+)?(%)?)\)?");
 
   @override
-  bool hasMatch(String input) => _hsvRegExp.hasMatch(input);
+  bool hasMatch(String input) {
+    if (input == null) {
+      return false;
+    }
+
+    return _hsvRegExp.hasMatch(input);
+  }
 
   @override
   ColorSelection parse(String string) {
+    assert(string != null, "String color format to parse cannot be null");
+    assert(string.isNotEmpty, "String color format to parse cannot be empty");
+
     final hsvMatched = _hsvRegExp.firstMatch(string).group(0);
     final hsvWithoutSeparators = hsvMatched.replacingAllNonAlphanumericBy(" ");
     final hsvComponents = doubleRegExp

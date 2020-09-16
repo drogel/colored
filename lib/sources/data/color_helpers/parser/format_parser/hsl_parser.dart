@@ -8,10 +8,19 @@ class HslParser extends FormatParser {
       r"\s*(\d*(?:\.\d+)?(%)?)\s*(\W+)\s*(\d*(?:\.\d+)?(%)?)\)?");
 
   @override
-  bool hasMatch(String input) => _hslRegExp.hasMatch(input);
+  bool hasMatch(String input) {
+    if (input == null) {
+      return false;
+    }
+
+    return _hslRegExp.hasMatch(input);
+  }
 
   @override
   ColorSelection parse(String string) {
+    assert(string != null, "String color format to parse cannot be null");
+    assert(string.isNotEmpty, "String color format to parse cannot be empty");
+
     final hslMatched = _hslRegExp.firstMatch(string).group(0);
     final hslWithoutSeparators = hslMatched.replacingAllNonAlphanumericBy(" ");
     final hslComponents = doubleRegExp

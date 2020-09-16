@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:colored/sources/data/color_helpers/transformer/color_transformer.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_state.dart';
@@ -46,6 +47,74 @@ void main() {
       test("then stateController's stream is received", () {
         final actual = viewModel.stateStream;
         expect(actual, stateController.stream);
+      });
+    });
+
+    group("when constructed", () {
+      test("then an assertion error is thrown if transformer is null", () {
+        expect(
+          () => TransformerViewModel(
+            stateController: stateController,
+            transformer: null,
+            initialColor: _kInitialColor,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then an assertion error is thrown if stateController is null", () {
+        expect(
+          () => TransformerViewModel(
+            stateController: null,
+            transformer: const ColorTransformer(),
+            initialColor: _kInitialColor,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then an assertion error is thrown if initialColor is null", () {
+        expect(
+          () => TransformerViewModel(
+            stateController: stateController,
+            transformer: const ColorTransformer(),
+            initialColor: null,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+    });
+
+    group("when notifySelectionChanged is called", () {
+      test("then a TransformerState is added to the stream", () {
+        final selection = ColorSelection(r: 1, g: 0, b: 0);
+        stateController.stream.listen((state) {
+          expect(state, isA<TransformerState>());
+          expect(state.selection, selection);
+        });
+        viewModel.notifySelectionChanged(selection);
+      });
+    });
+
+    group("when notifySelectionStarted is called", () {
+      test("then a SelectionStarted is added to the stream", () {
+        final selection = ColorSelection(r: 1, g: 0, b: 0);
+        stateController.stream.listen((state) {
+          expect(state, isA<SelectionStarted>());
+          expect(state.selection, selection);
+        });
+        viewModel.notifySelectionStarted(selection);
+      });
+    });
+
+    group("when notifySelectionEnded is called", () {
+      test("then a SelectionEnded is added to the stream", () {
+        final selection = ColorSelection(r: 1, g: 0, b: 0);
+        stateController.stream.listen((state) {
+          expect(state, isA<SelectionEnded>());
+          expect(state.selection, selection);
+        });
+        viewModel.notifySelectionEnded(selection);
       });
     });
 

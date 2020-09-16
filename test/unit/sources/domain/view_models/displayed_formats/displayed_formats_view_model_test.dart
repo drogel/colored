@@ -23,6 +23,15 @@ void main() {
       stateController = null;
     });
 
+    group("when constructed", () {
+      test("then an assertion error is thrown if stateController is null", () {
+        expect(
+          () => DisplayedFormatsViewModel(stateController: null),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+    });
+
     group("when initialState is called", () {
       test("then a DisplayedFormatsState with all formats is retrieved", () {
         final actual = viewModel.initialState;
