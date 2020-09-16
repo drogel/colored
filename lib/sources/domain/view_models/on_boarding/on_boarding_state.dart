@@ -13,5 +13,5 @@ class OnBoardingState {
       other.pageScrollFraction == pageScrollFraction;
 
   @override
-  int get hashCode => 17 * 32 + pageScrollFraction.hashCode;
+  int get hashCode => pageScrollFraction.hashCode;
 }
