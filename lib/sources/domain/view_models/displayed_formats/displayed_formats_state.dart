@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
-import 'package:vector_math/hash.dart';
 
 class DisplayedFormatsState {
   const DisplayedFormatsState(this.formats) : assert(formats != null);

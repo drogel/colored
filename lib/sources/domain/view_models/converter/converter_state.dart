@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter/material.dart';
-import 'package:vector_math/hash.dart';
 
 class ConverterState {
   const ConverterState({
