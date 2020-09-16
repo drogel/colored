@@ -11,6 +11,10 @@ class ColorSelection {
     @required double g,
     @required double b,
   }) {
+    assert(r != null);
+    assert(g != null);
+    assert(b != null);
+
     final clampedFirst = r.clamp(selectionMin, selectionMax).toDouble();
     final clampedSecond = g.clamp(selectionMin, selectionMax).toDouble();
     final clampedThird = b.clamp(selectionMin, selectionMax).toDouble();
@@ -55,9 +59,7 @@ class ColorSelection {
     @required this.r,
     @required this.g,
     @required this.b,
-  })  : assert(r != null),
-        assert(g != null),
-        assert(b != null);
+  });
 
   final double r;
   final double g;
@@ -71,7 +73,7 @@ class ColorSelection {
   }
 
   @override
-  String toString() => """(r: $r, g: $g, b: $b)""";
+  String toString() => "$runtimeType(r: $r, g: $g, b: $b)";
 
   @override
   bool operator ==(Object other) =>
