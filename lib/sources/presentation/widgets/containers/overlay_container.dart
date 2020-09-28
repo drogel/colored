@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:colored/sources/app/styling/blur/blur_data.dart';
 import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
@@ -26,7 +23,6 @@ class OverlayContainer extends StatelessWidget {
     final elevationScheme = ElevationData.of(context).elevationScheme;
     final radii = RadiusData.of(context).radiiScheme;
     final opacity = OpacityData.of(context).opacityScheme;
-    final blur = BlurData.of(context).blurScheme.medium;
     final borderRadius = this.borderRadius ?? BorderRadius.all(radii.large);
     return Material(
       elevation: elevation ?? elevationScheme.low,
@@ -34,12 +30,9 @@ class OverlayContainer extends StatelessWidget {
       borderRadius: borderRadius,
       child: ClipRRect(
         borderRadius: borderRadius,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: blur.x, sigmaY: blur.y),
-          child: Container(
-            color: colors.primary.withOpacity(opacity.overlay),
-            child: child,
-          ),
+        child: Container(
+          color: colors.primary.withOpacity(opacity.overlay),
+          child: child,
         ),
       ),
     );

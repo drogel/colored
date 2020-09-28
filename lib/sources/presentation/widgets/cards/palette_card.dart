@@ -20,10 +20,13 @@ class PaletteCard extends StatelessWidget {
         title: title,
         subtitle: subtitle,
         backgroundColor: Theme.of(context).primaryColor,
-        child: Row(
-          children: colors
-              .map((color) => Expanded(child: Container(color: color)))
-              .toList(),
+        child: RepaintBoundary(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: colors
+                .map((color) => Expanded(child: Container(color: color)))
+                .toList(),
+          ),
         ),
       );
 }
