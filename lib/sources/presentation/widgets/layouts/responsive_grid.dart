@@ -53,17 +53,19 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
       child: SafeArea(
         bottom: false,
         top: false,
-        child: LayoutBuilder(
-          builder: (_, constraints) => GridView.builder(
-            key: _pageStorageKey,
-            controller: _scrollController,
-            padding: padding.vertical.add(viewInsets),
-            itemCount: widget.items.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: _computeCrossAxisCount(constraints),
-              childAspectRatio: widget.childAspectRatio,
+        child: Scrollbar(
+          child: LayoutBuilder(
+            builder: (_, constraints) => GridView.builder(
+              key: _pageStorageKey,
+              controller: _scrollController,
+              padding: padding.vertical.add(viewInsets),
+              itemCount: widget.items.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: _computeCrossAxisCount(constraints),
+                childAspectRatio: widget.childAspectRatio,
+              ),
+              itemBuilder: (_, i) => widget.items[i],
             ),
-            itemBuilder: (_, i) => widget.items[i],
           ),
         ),
       ),
