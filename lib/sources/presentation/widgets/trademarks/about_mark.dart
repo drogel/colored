@@ -1,3 +1,4 @@
+import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/presentation/widgets/trademarks/github_logo_link.dart';
 import 'package:flutter/material.dart';
 
@@ -18,12 +19,13 @@ class AboutMark extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.caption;
     final githubLogoSize = 2 * textStyle.fontSize;
+    final localization = Localization.of(context);
     return Row(
       children: [
         const SizedBox(width: 1),
         if (_style == _AboutMarkStyle.expanded)
           Text(
-            "Made with ",
+            localization.trademarkBegin,
             style: textStyle.copyWith(height: _kTextHeight),
           ),
         if (_style == _AboutMarkStyle.expanded)
@@ -34,7 +36,7 @@ class AboutMark extends StatelessWidget {
           ),
         if (_style == _AboutMarkStyle.expanded)
           Text(
-            " by Diego Rogel",
+            localization.trademarkEnd,
             style: textStyle.copyWith(height: _kTextHeight),
           ),
         GithubLogoLink(
