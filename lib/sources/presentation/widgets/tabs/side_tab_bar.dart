@@ -1,6 +1,7 @@
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
-import 'package:colored/sources/presentation/widgets/logos/colored_header.dart';
-import 'package:colored/sources/presentation/widgets/logos/colored_logo.dart';
+import 'package:colored/sources/presentation/widgets/trademarks/about_mark.dart';
+import 'package:colored/sources/presentation/widgets/trademarks/colored_header.dart';
+import 'package:colored/sources/presentation/widgets/trademarks/colored_logo.dart';
 import 'package:colored/sources/presentation/widgets/tabs/base_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
@@ -27,24 +28,38 @@ class SideTabBar extends BaseTabBar {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final padding = PaddingData.of(context).paddingScheme;
-    return Container(
+    return Material(
       color: theme.primaryColor,
       child: Padding(
-        padding: PaddingData.of(context).paddingScheme.large,
+        padding: padding.large,
         child: Theme(
           data: theme.copyWith(highlightColor: Colors.transparent),
           child: SafeArea(
-            child: NavigationRail(
-              extended: extended,
-              destinations: _buildTabItems(context),
-              selectedIndex: currentIndex,
-              onDestinationSelected: onTap,
-              minExtendedWidth: extendedWidth,
-              labelType: extended ? null : NavigationRailLabelType.all,
-              leading: Padding(
-                padding: EdgeInsets.only(bottom: padding.large.bottom),
-                child: extended ? const ColoredHeader() : const ColoredLogo(),
-              ),
+            child: Stack(
+              children: [
+                NavigationRail(
+                  extended: extended,
+                  destinations: _buildTabItems(context),
+                  selectedIndex: currentIndex,
+                  onDestinationSelected: onTap,
+                  minExtendedWidth: extendedWidth,
+                  labelType: extended ? null : NavigationRailLabelType.all,
+                  leading: Padding(
+                    padding: EdgeInsets.only(bottom: padding.large.bottom),
+                    child:
+                        extended ? const ColoredHeader() : const ColoredLogo(),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: padding.base),
+                    child: extended
+                        ? const AboutMark()
+                        : const AboutMark.compact(),
+                  ),
+                )
+              ],
             ),
           ),
         ),
