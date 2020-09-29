@@ -1,20 +1,20 @@
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
+import 'package:colored/sources/presentation/widgets/animations/animated_image_color.dart';
 import 'package:flutter/material.dart';
 import 'package:colored/resources/asset_paths.dart' as asset_paths;
 import 'package:url_launcher/url_launcher.dart';
 
 class GithubLogoLink extends StatefulWidget {
-  const GithubLogoLink({this.height, this.width, Key key}) : super(key: key);
+  const GithubLogoLink({this.size, Key key}) : super(key: key);
 
-  final double height;
-  final double width;
+  final double size;
 
   @override
   _GithubLogoLinkState createState() => _GithubLogoLinkState();
 }
 
 class _GithubLogoLinkState extends State<GithubLogoLink> {
-  Color _currentLogoColor;
+  AnimatedImageColorState _currentState;
   Color _idleLogoColor;
   Color _hoveringLogoColor;
 
@@ -22,7 +22,7 @@ class _GithubLogoLinkState extends State<GithubLogoLink> {
   void didChangeDependencies() {
     _idleLogoColor = Theme.of(context).colorScheme.onError;
     _hoveringLogoColor = Theme.of(context).colorScheme.secondary;
-    _currentLogoColor = _idleLogoColor;
+    _currentState = AnimatedImageColorState.beginColor;
     super.didChangeDependencies();
   }
 
@@ -34,11 +34,12 @@ class _GithubLogoLinkState extends State<GithubLogoLink> {
       child: InkWell(
         onTap: _launchGithubURL,
         onHover: _updateLogoColor,
-        child: Image.asset(
+        child: AnimatedImageColor(
           asset_paths.githubLogo,
-          height: widget.height,
-          width: widget.width,
-          color: _currentLogoColor,
+          size: widget.size,
+          begin: _idleLogoColor,
+          end: _hoveringLogoColor,
+          state: _currentState,
         ),
       ),
     );
@@ -52,6 +53,6 @@ class _GithubLogoLinkState extends State<GithubLogoLink> {
   }
 
   void _updateLogoColor(bool isHovering) => isHovering
-      ? setState(() => _currentLogoColor = _hoveringLogoColor)
-      : setState(() => _currentLogoColor = _idleLogoColor);
+      ? setState(() => _currentState = AnimatedImageColorState.endColor)
+      : setState(() => _currentState = AnimatedImageColorState.beginColor);
 }

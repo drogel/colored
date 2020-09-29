@@ -39,10 +39,7 @@ class AboutMark extends StatelessWidget {
             localization.trademarkEnd,
             style: textStyle.copyWith(height: _kTextHeight),
           ),
-        GithubLogoLink(
-          height: githubLogoSize,
-          width: githubLogoSize,
-        ),
+        GithubLogoLink(size: githubLogoSize),
       ],
     );
   }
