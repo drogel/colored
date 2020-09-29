@@ -45,9 +45,11 @@ class _GithubLogoLinkState extends State<GithubLogoLink> {
     );
   }
 
+  // TODO: - Refactor this into its own encapsulated class/logic.
   Future<void> _launchGithubURL() async {
     const url = asset_paths.githubColoredLink;
     if (await canLaunch(url)) {
+      setState(() => _currentState = AnimatedImageColorState.beginColor);
       await launch(url);
     }
   }
