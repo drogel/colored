@@ -8,4 +8,4 @@ const samplePalettes = "$_mockData/sample_palettes.json";
 const samplePaletteSuggestions = "$_mockData/sample_palette_suggestions.json";
 const sampleColorSuggestions = "$_mockData/sample_color_suggestions.json";
 
-const mockRepositoryLink = "$_mockData/mock_repository_info_page.html";
+const mockRepositoryLink = "https://google.com";
