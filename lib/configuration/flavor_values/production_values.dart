@@ -11,7 +11,7 @@ class ProductionValues implements FlavorValues {
   String get colorSuggestionData => data_paths.colorSuggestions;
 
   @override
-  String get repositoryLink => data_paths.githubColoredLink;
+  String get repositoryLink => data_paths.githubRepositoryLink;
 
   @override
   String get paletteData => data_paths.palettes;
