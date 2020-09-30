@@ -29,21 +29,21 @@ void main() {
     group("when constructed", () {
       test("an assertion error should throw if url is null", () {
         expect(
-              () => SafeUrlLauncher(url: null),
+          () => SafeUrlLauncher(url: null),
           throwsA(isA<AssertionError>()),
         );
       });
 
       test("an assertion error should throw if launchAction is null", () {
         expect(
-              () => SafeUrlLauncher(url: "test", launchAction: null),
+          () => SafeUrlLauncher(url: "test", launchAction: null),
           throwsA(isA<AssertionError>()),
         );
       });
 
       test("an assertion error should throw if launchAction is null", () {
         expect(
-              () => SafeUrlLauncher(url: "test", canLaunchCheck: null),
+          () => SafeUrlLauncher(url: "test", canLaunchCheck: null),
           throwsA(isA<AssertionError>()),
         );
       });
