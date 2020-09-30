@@ -1,3 +1,4 @@
+import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/resources/asset_paths.dart' as asset_paths;
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/data/services/url_launcher/safe_url_launcher.dart';
@@ -5,15 +6,14 @@ import 'package:colored/sources/data/services/url_launcher/url_launcher.dart';
 import 'package:colored/sources/presentation/widgets/animations/animated_image_color.dart';
 import 'package:flutter/material.dart';
 
-const _kUrlToLaunch = asset_paths.githubColoredLink;
+final repoUrl = FlavorConfig.instance?.values?.repositoryLink;
 
 class GithubLogoLink extends StatefulWidget {
   const GithubLogoLink({
     this.size,
-    UrlLauncher urlLauncher = const SafeUrlLauncher(url: _kUrlToLaunch),
+    UrlLauncher urlLauncher,
     Key key,
-  })  : assert(urlLauncher != null),
-        _urlLauncher = urlLauncher,
+  })  : _urlLauncher = urlLauncher,
         super(key: key);
 
   final double size;
@@ -56,8 +56,9 @@ class _GithubLogoLinkState extends State<GithubLogoLink> {
   }
 
   void _launchUrl() {
+    final urlLauncher = widget._urlLauncher ?? SafeUrlLauncher(url: repoUrl);
     setState(() => _currentState = AnimatedImageColorState.beginColor);
-    widget._urlLauncher.launch();
+    urlLauncher.launch();
   }
 
   void _updateLogoColor(bool isHovering) => isHovering
