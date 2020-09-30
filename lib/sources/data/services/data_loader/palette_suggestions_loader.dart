@@ -14,7 +14,7 @@ class PaletteSuggestionsLoader implements DataLoader<List<String>> {
 
   @override
   Future<Map<String, List<String>>> load() async {
-    final path = paths.paletteSuggestions;
+    const path = paths.paletteSuggestions;
     final suggestionsStr = await _stringBundle.load(path);
     final jsonMap = Map<String, dynamic>.from(jsonDecode(suggestionsStr));
 

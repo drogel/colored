@@ -71,7 +71,7 @@ class ColoredThemeComposer implements ThemeComposer {
             fontWeight: FontWeight.bold,
             fontFamily: fonts.secondary,
           ),
-          caption: TextStyle(color: colors.textVariant),
+          caption: TextStyle(color: colors.textVariant, fontSize: 10),
         ),
         highlightColor: colors.secondaryDark.withOpacity(opacity.shadow),
         canvasColor: colors.primaryVariant,
