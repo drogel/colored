@@ -10,7 +10,7 @@ class RandomUniqueIntGenerator implements IntGenerator {
       ? _getAllPossibleInts(max)
       : _getRandomUniqueInts(max, length);
 
-  List<int> _getAllPossibleInts(int max) => List.generate(max, (i) => i + 1);
+  List<int> _getAllPossibleInts(int max) => List.generate(max, (i) => i);
 
   List<int> _getRandomUniqueInts(int max, int length) {
     final random = Random();
