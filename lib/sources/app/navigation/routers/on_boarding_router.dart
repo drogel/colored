@@ -17,7 +17,7 @@ class OnBoardingFlowRouter extends FlowRouter {
   const OnBoardingFlowRouter() : super(children: const [MainFlowRouter()]);
 
   @override
-  String get name => "onBoarding/";
+  String get name => "onboarding/";
 
   @override
   Route buildRoute(RouteSettings settings) {
