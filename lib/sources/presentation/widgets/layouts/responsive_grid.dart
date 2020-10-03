@@ -3,6 +3,7 @@ import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
+import 'package:colored/sources/presentation/widgets/layouts/only_portrait_scrollbar.dart';
 import 'package:flutter/material.dart';
 
 class ResponsiveGrid<T> extends StatefulWidget {
@@ -50,10 +51,10 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
     final mediaQuery = MediaQuery.of(context);
     final viewInsets = _computeEffectiveViewInsets(mediaQuery.viewInsets);
     return BackgroundContainer(
-      child: SafeArea(
-        bottom: false,
-        top: false,
-        child: Scrollbar(
+      child: OnlyPortraitScrollbar(
+        child: SafeArea(
+          bottom: false,
+          top: false,
           child: LayoutBuilder(
             builder: (_, constraints) => GridView.builder(
               key: _pageStorageKey,
