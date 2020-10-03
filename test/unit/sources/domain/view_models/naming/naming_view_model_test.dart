@@ -69,6 +69,47 @@ void main() {
       viewModel = null;
     });
 
+    group("when constructed", () {
+      test("then an assertion error is thrown if stateController is null", () {
+        expect(
+          () => NamingViewModel(
+            stateController: null,
+            namingService: namingService,
+            converter: converter,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then an assertion error is thrown if namingService is null", () {
+        expect(
+          () => NamingViewModel(
+            stateController: stateController,
+            namingService: null,
+            converter: converter,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+
+      test("then an assertion error is thrown if converter is null", () {
+        expect(
+          () => NamingViewModel(
+            stateController: stateController,
+            namingService: namingService,
+            converter: null,
+          ),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+    });
+
+    group("when stateStream is called", () {
+      test("the stream of the provided state controller is retrieved", () {
+        expect(viewModel.stateStream, stateController.stream);
+      });
+    });
+
     group("when initialState is called", () {
       test("then an Unknown state is retrieved", () async {
         final initialState = viewModel.initialState;

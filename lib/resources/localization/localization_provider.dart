@@ -14,13 +14,19 @@ mixin LocalizationProvider on LocaleCodeAware {
   static final Map<String, Map<String, String>> _values = {
     'en': {
       'appTitle': 'Colored',
+      'trademarkBegin': 'Made with ',
+      'trademarkEnd': ' by Diego Rogel',
     },
     "es": {
       'appTitle': 'Colored',
+      'trademarkBegin': 'Hecho con ',
+      'trademarkEnd': ' por Diego Rogel',
     }
   };
 
   String get appTitle => _values[localeCode]['appTitle'];
+  String get trademarkBegin => _values[localeCode]['trademarkBegin'];
+  String get trademarkEnd => _values[localeCode]['trademarkEnd'];
 
   OnBoardingL10ns get onBoarding => OnBoardingL10ns(localeCode);
 

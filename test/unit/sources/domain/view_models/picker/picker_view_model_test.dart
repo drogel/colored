@@ -21,6 +21,15 @@ void main() {
   });
 
   group("Given a PickerViewModel", () {
+    group("when constructed", () {
+      test("then an assertion error is thrown if stateController is null", () {
+        expect(
+          () => PickerViewModel(stateController: null),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+    });
+
     group("when initialState is called", () {
       test("then a PickerState with PickerStyle.rgb is retrieved", () {
         final actual = viewModel.initialState;

@@ -13,19 +13,19 @@ class ColorParser implements Parser {
 
   @override
   bool isStringOfFormat(String string, Format format) {
-    try {
-      return _formatParsers[format].hasMatch(string);
-    } on Exception catch (_) {
+    if (_formatParsers[format] == null) {
       throw UnimplementedError("Unspecified $format in $runtimeType");
     }
+
+    return _formatParsers[format].hasMatch(string);
   }
 
   @override
   ColorSelection parseFromFormat(String string, Format format) {
-    try {
-      return _formatParsers[format].parse(string);
-    } on Exception catch (_) {
+    if (_formatParsers[format] == null) {
       throw UnimplementedError("Unspecified $format in $runtimeType");
     }
+
+    return _formatParsers[format].parse(string);
   }
 }

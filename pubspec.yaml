@@ -1,6 +1,6 @@
 name: colored
 description: A Flutter application that helps designers and developers work with colors.
-version: 0.10.0
+version: 0.10.1
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
@@ -23,6 +23,7 @@ dependencies:
   http: ^0.12.2
   async: ^2.4.2
   animations: ^1.1.2
+  url_launcher: ^5.7.2
   connectivity: '>=0.4.8+6 <2.0.0'
 
 dev_dependencies:

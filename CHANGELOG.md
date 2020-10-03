@@ -1,3 +1,9 @@
+## [0.10.1] - October 3rd, 2020
+
+- Adds a scroll indicator to palettes and colors lists.
+- Improves colors and palettes lists performance, UI and label legibility in some devices.
+- Adds a link to the Colored GitHub repository page.
+
 ## [0.10] - September 14th, 2020
 
 - Adds color palettes search tab and color palettes suggestions.

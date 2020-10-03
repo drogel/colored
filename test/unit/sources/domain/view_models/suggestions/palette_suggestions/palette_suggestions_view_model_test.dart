@@ -86,6 +86,12 @@ void main() {
       });
     });
 
+    group("when stateStream is called", () {
+      test("the stream of the provided state controller is retrieved", () {
+        expect(viewModel.stateStream, stateController.stream);
+      });
+    });
+
     group("when init is called", () {
       test("then PaletteSuggestionsViewModel state is retrieved", () async {
         stateController.stream.listen((event) {

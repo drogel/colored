@@ -52,14 +52,14 @@ void main() {
   });
 
   group("Given a NamesListViewModel", () {
-    group("When initialState is called", () {
+    group("when initialState is called", () {
       test("then a Pending state is received", () {
         final initialState = viewModel.initialState;
         expect(initialState.runtimeType, Pending);
       });
     });
 
-    group("When clearSearch is called", () {
+    group("when clearSearch is called", () {
       test("then a Pending state is received", () {
         stateController.stream.listen(
           (event) => expect(event.runtimeType, Pending),
@@ -68,11 +68,17 @@ void main() {
       });
     });
 
-    group("When dispose is called", () {
+    group("when dispose is called", () {
       test("then stateController is closed", () {
         expect(stateController.isClosed, false);
         viewModel.dispose();
         expect(stateController.isClosed, true);
+      });
+    });
+
+    group("when stateStream is called", () {
+      test("the stream of the provided state controller is retrieved", () {
+        expect(viewModel.stateStream, stateController.stream);
       });
     });
 

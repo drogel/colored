@@ -1,5 +1,5 @@
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/presentation/widgets/logos/colored_logo.dart';
+import 'package:colored/sources/presentation/widgets/trademarks/colored_logo.dart';
 import 'package:flutter/material.dart';
 
 class ColoredHeader extends StatelessWidget {

@@ -7,6 +7,10 @@ class SharedPreferences implements LocalStorage {
 
   @override
   Future<bool> storeBool({@required String key, @required bool value}) async {
+    if (key == null || value == null) {
+      return false;
+    }
+
     final instance = await preferences.SharedPreferences.getInstance();
     final didSet = await instance.setBool(key, value);
     return didSet;
@@ -14,6 +18,10 @@ class SharedPreferences implements LocalStorage {
 
   @override
   Future<bool> getBool({@required String key}) async {
+    if (key == null) {
+      return null;
+    }
+
     final instance = await preferences.SharedPreferences.getInstance();
     final value = await instance.get(key);
     return value is bool ? value : null;
