@@ -17,7 +17,7 @@ class OnBoardingFlowRouter extends FlowRouter {
   const OnBoardingFlowRouter() : super(children: const [MainFlowRouter()]);
 
   @override
-  String get name => "onboarding/";
+  String get name => "/onboarding";
 
   @override
   Route buildRoute(RouteSettings settings) {
@@ -41,6 +41,6 @@ class OnBoardingFlowRouter extends FlowRouter {
             ),
           ),
         ),
-        settings: settings,
+        settings: RouteSettings(name: name, arguments: settings.arguments),
       );
 }

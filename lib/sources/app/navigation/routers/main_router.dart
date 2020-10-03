@@ -14,7 +14,7 @@ import 'package:flutter/widgets.dart';
 class MainFlowRouter extends FlowRouter {
   const MainFlowRouter({List<FlowRouter> children}) : super(children: children);
 
-  static const routerName = "main/";
+  static const routerName = "/main";
 
   @override
   String get name => routerName;
@@ -42,6 +42,6 @@ class MainFlowRouter extends FlowRouter {
             ],
           ),
         ),
-        settings: settings,
+        settings: RouteSettings(name: name, arguments: settings.arguments),
       );
 }
