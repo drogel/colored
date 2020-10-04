@@ -1,7 +1,7 @@
-import 'package:colored/sources/domain/view_models/suggestions/palette_suggestions/palette_suggestions_data.dart';
-import 'package:colored/sources/domain/view_models/suggestions/palette_suggestions/palette_suggestions_injector.dart';
-import 'package:colored/sources/domain/view_models/suggestions/palette_suggestions/palette_suggestions_state.dart';
-import 'package:colored/sources/domain/view_models/suggestions/palette_suggestions/palette_suggestions_view_model.dart';
+import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_data.dart';
+import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_injector.dart';
+import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_state.dart';
+import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_view_model.dart';
 import 'package:flutter/material.dart';
 
 class PaletteSuggestionsNotifier extends StatefulWidget {

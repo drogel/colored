@@ -1,7 +1,7 @@
-import 'package:colored/sources/domain/view_models/picker/picker_data.dart';
-import 'package:colored/sources/domain/view_models/picker/picker_injector.dart';
-import 'package:colored/sources/domain/view_models/picker/picker_state.dart';
-import 'package:colored/sources/domain/view_models/picker/picker_view_model.dart';
+import 'package:colored/sources/domain/view_models/converter/picker/picker_data.dart';
+import 'package:colored/sources/domain/view_models/converter/picker/picker_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/picker/picker_state.dart';
+import 'package:colored/sources/domain/view_models/converter/picker/picker_view_model.dart';
 import 'package:flutter/material.dart';
 
 class PickerNotifier extends StatefulWidget {

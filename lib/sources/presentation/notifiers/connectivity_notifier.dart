@@ -1,7 +1,7 @@
-import 'package:colored/sources/domain/view_models/connectivity/connectivity_data.dart';
-import 'package:colored/sources/domain/view_models/connectivity/connectivity_injector.dart';
-import 'package:colored/sources/domain/view_models/connectivity/connectivity_state.dart';
-import 'package:colored/sources/domain/view_models/connectivity/connectivity_view_model.dart';
+import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_data.dart';
+import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_state.dart';
+import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_view_model.dart';
 import 'package:flutter/material.dart';
 
 class ConnectivityNotifier extends StatefulWidget {

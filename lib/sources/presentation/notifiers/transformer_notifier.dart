@@ -1,7 +1,7 @@
-import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_state.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_view_model.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_data.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_state.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_view_model.dart';
 import 'package:flutter/material.dart';
 
 class TransformerNotifier extends StatefulWidget {

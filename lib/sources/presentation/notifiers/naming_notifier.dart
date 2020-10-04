@@ -1,9 +1,9 @@
-import 'package:colored/sources/domain/view_models/naming/naming_data.dart';
-import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
-import 'package:colored/sources/domain/view_models/naming/naming_state.dart';
-import 'package:colored/sources/domain/view_models/naming/naming_view_model.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_state.dart';
+import 'package:colored/sources/domain/view_models/converter/naming/naming_data.dart';
+import 'package:colored/sources/domain/view_models/converter/naming/naming_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/naming/naming_state.dart';
+import 'package:colored/sources/domain/view_models/converter/naming/naming_view_model.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_data.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_state.dart';
 import 'package:flutter/material.dart';
 
 class NamingNotifier extends StatefulWidget {

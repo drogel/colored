@@ -1,7 +1,7 @@
-import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_data.dart';
-import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_injector.dart';
-import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_state.dart';
-import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_view_model.dart';
+import 'package:colored/sources/domain/view_models/colors/color_suggestions/color_suggestions_data.dart';
+import 'package:colored/sources/domain/view_models/colors/color_suggestions/color_suggestions_injector.dart';
+import 'package:colored/sources/domain/view_models/colors/color_suggestions/color_suggestions_state.dart';
+import 'package:colored/sources/domain/view_models/colors/color_suggestions/color_suggestions_view_model.dart';
 import 'package:flutter/material.dart';
 
 class ColorSuggestionsNotifier extends StatefulWidget {

@@ -2,10 +2,10 @@ import 'package:colored/sources/app/navigation/routers/main_router.dart';
 import 'package:colored/sources/app/navigation/flow_router.dart';
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
-import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
-import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/converter/converter_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/displayed_formats/displayed_formats_injector.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_injector.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_layout.dart';
 import 'package:colored/sources/presentation/notifiers/converter_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/displayed_formats_notifier.dart';

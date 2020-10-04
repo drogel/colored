@@ -1,9 +1,9 @@
 import 'package:colored/sources/domain/data_models/format.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_data.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_view_model.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
+import 'package:colored/sources/domain/view_models/converter/converter/converter_data.dart';
+import 'package:colored/sources/domain/view_models/converter/converter/converter_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/converter/converter_state.dart';
+import 'package:colored/sources/domain/view_models/converter/converter/converter_view_model.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_data.dart';
 
 import 'package:flutter/material.dart';
 

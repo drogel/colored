@@ -1,7 +1,7 @@
-import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_data.dart';
-import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_injector.dart';
-import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_state.dart';
-import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_view_model.dart';
+import 'package:colored/sources/domain/view_models/converter/displayed_formats/displayed_formats_data.dart';
+import 'package:colored/sources/domain/view_models/converter/displayed_formats/displayed_formats_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/displayed_formats/displayed_formats_state.dart';
+import 'package:colored/sources/domain/view_models/converter/displayed_formats/displayed_formats_view_model.dart';
 import 'package:flutter/material.dart';
 
 class DisplayedFormatsNotifier extends StatefulWidget {

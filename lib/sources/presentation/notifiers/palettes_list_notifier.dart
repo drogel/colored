@@ -1,7 +1,7 @@
-import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_data.dart';
-import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_injector.dart';
-import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_state.dart';
-import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_view_model.dart';
+import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_data.dart';
+import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_injector.dart';
+import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
+import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_view_model.dart';
 import 'package:flutter/material.dart';
 
 class PalettesListNotifier extends StatefulWidget {
