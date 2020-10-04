@@ -11,9 +11,9 @@ class PalettesBodyLayout extends StatelessWidget {
     final selection = PalettesNavigationData.of(context).state.currentIndex;
     return PageBodySwitcher(
       currentIndex: selection,
-      children: const [
-        PalettesListLayout(),
-        Scaffold(),
+      children: [
+        const PalettesListLayout(),
+        Container(color: Colors.blue),
       ],
     );
   }
