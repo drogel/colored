@@ -7,10 +7,10 @@ import 'package:colored/sources/domain/view_models/converter/displayed_formats/d
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_injector.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_layout.dart';
-import 'package:colored/sources/presentation/notifiers/converter_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/displayed_formats_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/on_boarding_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/transformer_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/converter_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/displayed_formats_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/on_boarding/on_boarding_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/transformer_notifier.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingFlowRouter extends FlowRouter {

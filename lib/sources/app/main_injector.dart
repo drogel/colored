@@ -12,18 +12,18 @@ import 'package:colored/sources/domain/view_models/converter/picker/picker_injec
 import 'package:colored/sources/domain/view_models/colors/color_suggestions/color_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_injector.dart';
-import 'package:colored/sources/presentation/notifiers/color_suggestions_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/connectivity_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/converter_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/displayed_formats_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/main_tabs_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/names_list_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/naming_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/palette_suggestions_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/palettes_list_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/palettes_navigation_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/picker_notifier.dart';
-import 'package:colored/sources/presentation/notifiers/transformer_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/colors/color_suggestions_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/connectivity_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/converter_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/displayed_formats_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/main_tabs/main_tabs_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/colors/names_list_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/naming_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/palettes/palette_suggestions_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/palettes/palettes_list_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/palettes/palettes_navigation_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/picker_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/converter/transformer_notifier.dart';
 import 'package:flutter/material.dart';
 
 class MainInjector extends StatelessWidget {
