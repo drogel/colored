@@ -26,7 +26,7 @@ class BottomTabBar extends BaseTabBar {
       .map(
         (page) => BottomNavigationBarItem(
           icon: Icon(page.tabIcon),
-          title: Text(page.getTabTitle(context)),
+          label: page.getTabTitle(context),
         ),
       )
       .toList();

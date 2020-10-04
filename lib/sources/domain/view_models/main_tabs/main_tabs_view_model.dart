@@ -21,7 +21,5 @@ class MainTabsViewModel {
   void navigateToIndex(MainTabsSelection selection) =>
       _stateController.sink.add(MainTabsState(currentSelection: selection));
 
-  void dispose() {
-    _stateController.close();
-  }
+  void dispose() => _stateController.close();
 }
