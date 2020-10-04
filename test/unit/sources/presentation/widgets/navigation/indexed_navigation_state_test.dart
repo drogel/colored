@@ -1,5 +1,5 @@
 import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
-import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_state.dart';
+import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -7,15 +7,15 @@ void main() {
     group("when constructed", () {
       test("then passing a null currentIndex throws an assertion error", () {
         expect(
-          () => MainTabsState(currentSelection: null),
+          () => IndexedNavigationState(null),
           throwsA(isA<AssertionError>()),
         );
       });
 
       test("then currentIndex stores the given index of the state", () {
         const testSelection = MainTabsSelection.colors;
-        const testState = MainTabsState(currentSelection: testSelection);
-        expect(testState.currentSelection, testSelection);
+        final testState = IndexedNavigationState(testSelection.index);
+        expect(testState.currentIndex, testSelection.index);
       });
     });
   });

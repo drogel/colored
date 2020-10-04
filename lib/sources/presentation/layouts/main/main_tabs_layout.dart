@@ -1,10 +1,10 @@
+import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
 import 'package:colored/sources/presentation/widgets/animations/app_bar_switcher.dart';
 import 'package:colored/sources/presentation/widgets/animations/page_body_switcher.dart';
 import 'package:colored/sources/presentation/widgets/tabs/bottom_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/side_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
-import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:flutter/material.dart';
 
 const _kSideBarWidth = 256.0;
@@ -25,7 +25,7 @@ class MainTabsLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = MainTabsData.of(context);
-    final currentSelection = data.state.currentSelection;
+    final currentSelection = data.state.currentIndex;
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > _kSideBarShownThreshold;
@@ -34,8 +34,8 @@ class MainTabsLayout extends StatelessWidget {
           children: [
             if (isWide)
               SideTabBar(
-                onTap: (newIndex) => _updateCurrentSelection(newIndex, data),
-                currentIndex: currentSelection.rawValue,
+                onTap: data.onNavigation,
+                currentIndex: currentSelection,
                 tabs: pages,
                 extended: isExtended,
                 extendedWidth: _kSideBarWidth,
@@ -45,18 +45,18 @@ class MainTabsLayout extends StatelessWidget {
               child: Scaffold(
                 resizeToAvoidBottomInset: false,
                 appBar: AppBarSwitcher(
-                  currentIndex: currentSelection.rawValue,
+                  currentIndex: currentSelection,
                   children: appBars,
                 ),
                 body: PageBodySwitcher(
-                  currentIndex: currentSelection.rawValue,
+                  currentIndex: currentSelection,
                   children: pages,
                 ),
                 bottomNavigationBar: isWide
                     ? null
                     : BottomTabBar(
-                        onTap: (index) => _updateCurrentSelection(index, data),
-                        currentIndex: currentSelection.rawValue,
+                        onTap: data.onNavigation,
+                        currentIndex: currentSelection,
                         tabs: pages,
                       ),
               ),
@@ -65,10 +65,5 @@ class MainTabsLayout extends StatelessWidget {
         );
       },
     );
-  }
-
-  void _updateCurrentSelection(int newIndex, MainTabsData data) {
-    final newSelection = MainTabsSelectionBuilder.fromRawValue(newIndex);
-    data.onNavigation(newSelection);
   }
 }

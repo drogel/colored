@@ -1,14 +1,14 @@
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
-import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/displayed_formats/displayed_formats_injector.dart';
+import 'package:colored/sources/domain/view_models/lists/names_list/names_list_injector.dart';
 import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_injector.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
-import 'package:colored/sources/domain/view_models/lists/names_list/names_list_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_injector.dart';
+import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/suggestions/palette_suggestions/palette_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/transformer/transformer_injector.dart';
 import 'package:colored/sources/presentation/notifiers/color_suggestions_notifier.dart';

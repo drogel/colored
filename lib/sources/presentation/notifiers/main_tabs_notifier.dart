@@ -1,7 +1,7 @@
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
-import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_state.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_view_model.dart';
+import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_state.dart';
 import 'package:flutter/material.dart';
 
 class MainTabsNotifier extends StatefulWidget {
@@ -30,7 +30,7 @@ class _MainTabsNotifierState extends State<MainTabsNotifier> {
   }
 
   @override
-  Widget build(BuildContext context) => StreamBuilder<MainTabsState>(
+  Widget build(BuildContext context) => StreamBuilder<IndexedNavigationState>(
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => MainTabsData(

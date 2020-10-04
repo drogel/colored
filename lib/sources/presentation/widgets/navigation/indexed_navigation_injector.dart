@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_view_model.dart';
+import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_controller.dart';
 import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_state.dart';
 
-class MainTabsInjector {
-  const MainTabsInjector();
+class IndexedNavigationInjector {
+  const IndexedNavigationInjector();
 
-  MainTabsViewModel injectViewModel(
+  IndexedNavigationController injectController(
           [StreamController<IndexedNavigationState> stateController]) =>
-      MainTabsViewModel(
+      IndexedNavigationController(
         stateController:
             stateController ?? StreamController<IndexedNavigationState>(),
       );

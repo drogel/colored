@@ -24,8 +24,9 @@ class NamesListPage extends StatelessWidget implements TabPage {
 
   void _notifyColorSelected(BuildContext context, Color color) {
     final selection = ColorSelection.fromColor(color);
+    final destinationIndex = MainTabsSelection.converter.index;
     FocusScope.of(context).unfocus();
     TransformerData.of(context).onSelectionEnded(selection);
-    MainTabsData.of(context).onNavigation(MainTabsSelection.converter);
+    MainTabsData.of(context).onNavigation(destinationIndex);
   }
 }
