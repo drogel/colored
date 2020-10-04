@@ -1,8 +1,8 @@
 import 'package:colored/sources/presentation/widgets/animations/default_transition_switcher.dart';
 import 'package:flutter/material.dart';
 
-class MainBodyLayout extends StatelessWidget {
-  const MainBodyLayout({
+class PageBodySwitcher extends StatelessWidget {
+  const PageBodySwitcher({
     @required this.children,
     @required this.currentIndex,
     Key key,

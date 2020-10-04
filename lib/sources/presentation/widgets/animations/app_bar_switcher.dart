@@ -1,8 +1,8 @@
 import 'package:colored/sources/presentation/widgets/animations/default_animated_switcher.dart';
 import 'package:flutter/material.dart';
 
-class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({
+class AppBarSwitcher extends StatelessWidget implements PreferredSizeWidget {
+  const AppBarSwitcher({
     @required this.children,
     @required this.currentIndex,
     Key key,

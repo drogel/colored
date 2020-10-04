@@ -1,6 +1,6 @@
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
-import 'package:colored/sources/presentation/layouts/main/main_app_bar.dart';
-import 'package:colored/sources/presentation/layouts/main/main_body_layout.dart';
+import 'package:colored/sources/presentation/widgets/animations/app_bar_switcher.dart';
+import 'package:colored/sources/presentation/widgets/animations/page_body_switcher.dart';
 import 'package:colored/sources/presentation/widgets/tabs/bottom_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/side_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
@@ -44,11 +44,11 @@ class MainTabsLayout extends StatelessWidget {
             Expanded(
               child: Scaffold(
                 resizeToAvoidBottomInset: false,
-                appBar: MainAppBar(
+                appBar: AppBarSwitcher(
                   currentIndex: currentSelection.rawValue,
                   children: appBars,
                 ),
-                body: MainBodyLayout(
+                body: PageBodySwitcher(
                   currentIndex: currentSelection.rawValue,
                   children: pages,
                 ),
