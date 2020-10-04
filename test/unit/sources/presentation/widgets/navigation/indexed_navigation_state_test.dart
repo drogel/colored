@@ -1,5 +1,5 @@
 import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
-import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_state.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

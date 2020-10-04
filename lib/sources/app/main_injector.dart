@@ -7,6 +7,7 @@ import 'package:colored/sources/domain/view_models/lists/names_list/names_list_i
 import 'package:colored/sources/domain/view_models/lists/palettes_list/palettes_list_injector.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
 import 'package:colored/sources/domain/view_models/naming/naming_injector.dart';
+import 'package:colored/sources/domain/view_models/palettes_navigation/palettes_navigation_injector.dart';
 import 'package:colored/sources/domain/view_models/picker/picker_injector.dart';
 import 'package:colored/sources/domain/view_models/suggestions/color_suggestions/color_suggestions_injector.dart';
 import 'package:colored/sources/domain/view_models/suggestions/palette_suggestions/palette_suggestions_injector.dart';
@@ -20,6 +21,7 @@ import 'package:colored/sources/presentation/notifiers/names_list_notifier.dart'
 import 'package:colored/sources/presentation/notifiers/naming_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palette_suggestions_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palettes_list_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/palettes_navigation_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/picker_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/transformer_notifier.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +53,12 @@ class MainInjector extends StatelessWidget {
                         injector: const NamingInjector(),
                         child: PalettesListNotifier(
                           injector: const PalettesListInjector(),
-                          child: MainTabsNotifier(
-                            injector: const MainTabsInjector(),
-                            child: child,
+                          child: PalettesNavigationNotifier(
+                            injector: const PalettesNavigationInjector(),
+                            child: MainTabsNotifier(
+                              injector: const MainTabsInjector(),
+                              child: child,
+                            ),
                           ),
                         ),
                       ),

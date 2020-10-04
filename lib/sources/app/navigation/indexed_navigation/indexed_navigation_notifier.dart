@@ -1,7 +1,7 @@
-import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_controller.dart';
-import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_data.dart';
-import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_injector.dart';
-import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_state.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_controller.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_data.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_injector.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_state.dart';
 import 'package:flutter/material.dart';
 
 class IndexedNavigationNotifier extends StatefulWidget {

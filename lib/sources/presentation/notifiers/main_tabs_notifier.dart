@@ -1,7 +1,7 @@
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_view_model.dart';
-import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_state.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_state.dart';
 import 'package:flutter/material.dart';
 
 class MainTabsNotifier extends StatefulWidget {

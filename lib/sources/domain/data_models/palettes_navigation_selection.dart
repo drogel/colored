@@ -1,0 +1,4 @@
+enum PalettesNavigationSelection {
+  list,
+  detail,
+}

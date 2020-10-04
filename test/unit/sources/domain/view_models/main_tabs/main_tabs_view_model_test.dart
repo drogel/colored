@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_view_model.dart';
-import 'package:colored/sources/presentation/widgets/navigation/indexed_navigation_state.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
