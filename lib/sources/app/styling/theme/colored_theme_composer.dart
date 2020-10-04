@@ -54,6 +54,7 @@ class ColoredThemeComposer implements ThemeComposer {
           elevation: elevation.low,
           color: colors.primary,
           actionsIconTheme: IconThemeData(color: colors.text),
+          iconTheme: IconThemeData(color: colors.text),
         ),
         textTheme: TextTheme(
           bodyText2: TextStyle(color: colors.text),

@@ -3,7 +3,7 @@ import 'package:colored/sources/app/styling/colors/color_constants.dart'
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/common/extensions/color_multi_lerp.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
-import 'package:colored/sources/presentation/layouts/converter/converter_layout.dart';
+import 'package:colored/sources/presentation/layouts/converter/converter/converter_layout.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_buttons_layout.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_sliders_layout.dart';
 import 'package:colored/sources/presentation/layouts/on_boarding/on_boarding_welcome_layout.dart';
