@@ -55,9 +55,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
     final padding = PaddingData.of(context).paddingScheme;
     final mediaQuery = MediaQuery.of(context);
     final viewInsets = _computeEffectiveViewInsets(mediaQuery.viewInsets);
-    final safeArea = mediaQuery.viewPadding;
-    final bottomSafeArea = EdgeInsets.only(bottom: safeArea.bottom);
-    final totalPadding = padding.vertical + viewInsets - bottomSafeArea;
+    final totalPadding = padding.vertical + viewInsets;
     return KeyboardDismisser(
       child: BackgroundContainer(
         child: OnlyPortraitScrollbar(
