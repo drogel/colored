@@ -1,3 +1,4 @@
+import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:flutter/material.dart';
 
 class OnlyPortraitScrollbar extends StatelessWidget {
@@ -17,7 +18,13 @@ class OnlyPortraitScrollbar extends StatelessWidget {
     if (hasHorizontalSafeArea && isLandscape) {
       return child;
     } else {
-      return Scrollbar(child: child);
+      final theme = Theme.of(context);
+      final scrollBarColor = theme.bottomNavigationBarTheme.unselectedItemColor;
+      final radius = RadiusData.of(context).radiiScheme;
+      return Theme(
+        data: theme.copyWith(highlightColor: scrollBarColor),
+        child: Scrollbar(radius: radius.small, child: child),
+      );
     }
   }
 
