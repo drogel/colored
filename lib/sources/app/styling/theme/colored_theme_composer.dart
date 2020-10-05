@@ -48,7 +48,7 @@ class ColoredThemeComposer implements ThemeComposer {
           onSurface: colors.secondary,
           onBackground: colors.secondary,
           onError: colors.text,
-          brightness: Brightness.light,
+          brightness: Brightness.dark,
         ),
         appBarTheme: AppBarTheme(
           elevation: elevation.low,
