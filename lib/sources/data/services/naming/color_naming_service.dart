@@ -5,7 +5,7 @@ import 'package:colored/sources/data/network_client/http_client.dart';
 import 'package:colored/sources/data/network_client/response_status.dart';
 import 'package:colored/sources/data/services/naming/naming_response.dart';
 import 'package:colored/sources/data/services/naming/naming_service.dart';
-import 'package:colored/sources/data/url_composer/url_composer.dart';
+import 'package:colored/sources/data/services/url_composer/url_composer.dart';
 import 'package:colored/sources/domain/data_models/naming_result.dart';
 import 'package:flutter/foundation.dart';
 
