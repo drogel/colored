@@ -1,3 +1,4 @@
+
 import 'package:colored/sources/data/services/url_composer/color_names_composer.dart';
 import 'package:colored/sources/data/services/url_composer/url_composer.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -35,6 +36,12 @@ void main() {
       test("then the path is appended as a URL removing # symbols", () {
         final actual = composer.compose(_kTestBaseUrl, path: "#$_kTestPath");
         expect(actual, "$_kTestBaseUrl/$_kTestPath");
+      });
+
+      test("then path is added as comma-separated list on several #", () {
+        final concatenatedPath = "#$_kTestPath" * 3;
+        final actual = composer.compose(_kTestBaseUrl, path: concatenatedPath);
+        expect(actual, "$_kTestBaseUrl/$_kTestPath,$_kTestPath,$_kTestPath");
       });
     });
   });

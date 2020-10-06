@@ -9,7 +9,8 @@ class ColorNamesComposer implements UrlComposer {
       return baseUrl;
     }
 
-    final cleanPath = path.replaceAll("#", "");
-    return "$baseUrl/$cleanPath";
+    final cleanPath = path.replaceFirst("#", "");
+    final pathAsColorNamesQueryList = cleanPath.replaceAll("#", ",");
+    return "$baseUrl/$pathAsColorNamesQueryList";
   }
 }
