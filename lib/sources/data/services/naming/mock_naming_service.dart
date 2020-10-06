@@ -16,6 +16,6 @@ class MockNamingService implements NamingService {
     final map = jsonDecode(sampleColorStr);
     final namingMap = map["colors"].first;
     final result = NamingResult.fromMap(namingMap);
-    return NamingResponse(result: result, response: ResponseStatus.ok);
+    return NamingResponse(ResponseStatus.ok, result: result);
   }
 }

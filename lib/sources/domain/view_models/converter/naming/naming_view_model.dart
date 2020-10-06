@@ -41,7 +41,7 @@ class NamingViewModel {
     final hexColor = _converter.convert(r, g, b)[Format.hex];
     final namingResult = await _namingService.getNaming(hexColor: hexColor);
 
-    if (namingResult.response == ResponseStatus.ok) {
+    if (namingResult.status == ResponseStatus.ok) {
       _stateController.sink.add(Named(namingResult.result.name));
     } else {
       _stateController.sink.add(const Unknown());

@@ -26,16 +26,16 @@ class ColorNamingService implements NamingService {
     final url = _urlComposer.compose(endpoints.baseUrl, path: hexColor);
     final response = await _client.get(url);
     if (response.status == ResponseStatus.failed) {
-      return const NamingResponse(response: ResponseStatus.failed);
+      return const NamingResponse(ResponseStatus.failed);
     }
 
     if (response.httpResponse.statusCode == 200) {
       final map = jsonDecode(response.httpResponse.body);
       final namingMap = map["colors"].first;
       final result = NamingResult.fromMap(namingMap);
-      return NamingResponse(result: result, response: ResponseStatus.ok);
+      return NamingResponse(ResponseStatus.ok, result: result);
     } else {
-      return const NamingResponse(response: ResponseStatus.failed);
+      return const NamingResponse(ResponseStatus.failed);
     }
   }
 }

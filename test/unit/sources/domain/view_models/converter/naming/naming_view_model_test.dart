@@ -20,15 +20,15 @@ class NamingServiceSuccessStub implements NamingService {
   @override
   Future<NamingResponse> getNaming({String hexColor}) async =>
       const NamingResponse(
+        ResponseStatus.ok,
         result: NamingResult(name: name, hex: "testHex"),
-        response: ResponseStatus.ok,
       );
 }
 
 class NamingServiceFailureStub implements NamingService {
   @override
   Future<NamingResponse> getNaming({String hexColor}) async =>
-      const NamingResponse(response: ResponseStatus.failed);
+      const NamingResponse(ResponseStatus.failed);
 }
 
 class ConverterStub implements Converter {
