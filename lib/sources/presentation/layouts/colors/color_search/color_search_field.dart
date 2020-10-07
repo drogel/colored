@@ -18,20 +18,14 @@ class _ColorSearchFieldState extends State<ColorSearchField> {
   void initState() {
     _controller = TextEditingController();
     _focusNode = FocusNode();
-    _focusNode.requestFocus();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
     final data = NamesListData.of(context);
-    _controller.value = TextEditingValue(
-      text: data.state.search,
-      selection: TextSelection(
-        baseOffset: data.state.search.length,
-        extentOffset: data.state.search.length,
-      ),
-    );
+    _setSearchStateValue(data.state.search);
+    _shouldRequestFocus(data.state.search);
     super.didChangeDependencies();
   }
 
@@ -53,5 +47,20 @@ class _ColorSearchFieldState extends State<ColorSearchField> {
     _controller.dispose();
     _focusNode.dispose();
     super.dispose();
+  }
+
+  void _setSearchStateValue(String search) =>
+      _controller.value = TextEditingValue(
+        text: search,
+        selection: TextSelection(
+          baseOffset: search.length,
+          extentOffset: search.length,
+        ),
+      );
+
+  void _shouldRequestFocus(String search) {
+    if (search == null || search.isEmpty) {
+      _focusNode.requestFocus();
+    }
   }
 }
