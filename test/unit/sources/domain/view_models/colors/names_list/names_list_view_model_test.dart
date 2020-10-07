@@ -55,14 +55,14 @@ void main() {
     group("when initialState is called", () {
       test("then a Pending state is received", () {
         final initialState = viewModel.initialState;
-        expect(initialState.runtimeType, Pending);
+        expect(initialState, isA<Pending>());
       });
     });
 
     group("when clearSearch is called", () {
       test("then a Pending state is received", () {
         stateController.stream.listen(
-          (event) => expect(event.runtimeType, Pending),
+          (event) => expect(event, isA<Pending>()),
         );
         viewModel.clearSearch();
       });
@@ -138,14 +138,14 @@ void main() {
     group("when searchColorName is called", () {
       test("with a searchString of lenght < 3, then Pending is added", () {
         stateController.stream.listen(
-          (event) => expect(event.runtimeType, Pending),
+          (event) => expect(event, isA<Pending>()),
         );
         viewModel.searchColorNames("se");
       });
 
       test("with a searchString of lenght >= 3, then Found state is added", () {
         stateController.stream.listen(
-          (event) => expect(event.runtimeType, Found),
+          (event) => expect(event, isA<Found>()),
         );
         viewModel.searchColorNames("red");
       });
@@ -201,14 +201,14 @@ void main() {
     group("when searchColorName is called", () {
       test("with a searchString of lenght < 3, then Pending is added", () {
         stateController.stream.listen(
-          (event) => expect(event.runtimeType, Pending),
+          (event) => expect(event, isA<Pending>()),
         );
         viewModel.searchColorNames("se");
       });
 
       test("with searchString.lenght >= 3, then NoneFound is retrieved", () {
         stateController.stream.listen(
-          (event) => expect(event.runtimeType, NoneFound),
+          (event) => expect(event, isA<NoneFound>()),
         );
         viewModel.searchColorNames("red");
       });

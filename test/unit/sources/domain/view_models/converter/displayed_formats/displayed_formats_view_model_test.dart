@@ -50,7 +50,7 @@ void main() {
     group("when updateDisplayedFormats is called", () {
       test("then a DisplayedFormatsState is emitted", () {
         viewModel.stateStream.listen((event) {
-          expect(event.runtimeType, DisplayedFormatsState);
+          expect(event, isA<DisplayedFormatsState>());
         });
         viewModel.updateDisplayedFormats(Format.hex, Format.hex);
       });

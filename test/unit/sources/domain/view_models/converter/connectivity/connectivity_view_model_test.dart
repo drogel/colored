@@ -91,7 +91,7 @@ void main() {
 
       test("then a NoConnection state is added to the state stream", () async {
         stateController.stream.listen((event) {
-          expectLater(event.runtimeType, NoConnection);
+          expectLater(event, isA<NoConnection>());
         });
         viewModel.init();
         connectivityController.sink.add(ConnectivityResult.none);
@@ -101,7 +101,7 @@ void main() {
     group("when ConnectivityResult.mobile comes from connectivityStream", () {
       test("then a NoConnection state is added to the state stream", () async {
         stateController.stream.listen((event) {
-          expectLater(event.runtimeType, Connected);
+          expectLater(event, isA<Connected>());
         });
         viewModel.init();
         connectivityController.sink.add(ConnectivityResult.mobile);
@@ -111,7 +111,7 @@ void main() {
     group("when ConnectivityResult.wifi retrieved from connectivityStream", () {
       test("then a NoConnection state is added to the state stream", () async {
         stateController.stream.listen((event) {
-          expectLater(event.runtimeType, Connected);
+          expectLater(event, isA<Connected>());
         });
         viewModel.init();
         connectivityController.sink.add(ConnectivityResult.wifi);
