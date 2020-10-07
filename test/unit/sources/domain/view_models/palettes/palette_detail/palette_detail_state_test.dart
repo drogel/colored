@@ -20,5 +20,13 @@ void main() {
         );
       });
     });
+
+    group("when a Pending state is constructed", () {
+      test("then the paletteName from its superclass is initialized", () {
+        const testPaletteName = "test";
+        const testState = Pending(testPaletteName);
+        expect(testState.paletteName, testPaletteName);
+      });
+    });
   });
 }
