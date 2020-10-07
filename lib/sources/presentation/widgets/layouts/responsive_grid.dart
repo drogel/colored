@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
@@ -43,8 +42,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
 
   @override
   void didUpdateWidget(ResponsiveGrid oldWidget) {
-    final isContentEqual = const ListEquality().equals;
-    if (!isContentEqual(widget.items, oldWidget.items)) {
+    if (!_contentHasEqualLengths(oldWidget)) {
       _animateToTop(context);
     }
     super.didUpdateWidget(oldWidget);
@@ -105,4 +103,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
 
   void _dismissKeyboard() =>
       WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+
+  bool _contentHasEqualLengths(ResponsiveGrid oldWidget) =>
+      oldWidget.items.length == widget.items.length;
 }
