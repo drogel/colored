@@ -19,7 +19,7 @@ class PalettesListGrid extends StatelessWidget {
   final List<Palette> palettes;
 
   @override
-  Widget build(BuildContext context) => ResponsiveGrid<PaletteCard>(
+  Widget build(BuildContext context) => ResponsiveGrid(
         pageStorageKeyId: 2,
         estimatedItemSize: _kEstimatedItemSize,
         crossAxisMinCount: _kCrossAxisMinCount,
