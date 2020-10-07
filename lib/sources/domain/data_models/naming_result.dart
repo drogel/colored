@@ -15,7 +15,7 @@ class NamingResult extends NamedColor {
 
   factory NamingResult.fromMap(Map<String, dynamic> map) => NamingResult(
         name: map["name"],
-        hex: map["hex"],
+        hex: map["hex"]?.toUpperCase(),
         r: map[_rgb]["r"],
         g: map[_rgb]["g"],
         b: map[_rgb]["b"],
