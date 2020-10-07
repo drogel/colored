@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/data/color_helpers/converter/hex_converter.dart';
 import 'package:colored/sources/data/network_client/safe_http_client.dart';
-import 'package:colored/sources/data/services/naming/color_naming_service.dart';
+import 'package:colored/sources/data/services/naming/meodai_naming_service.dart';
 import 'package:colored/sources/data/services/naming/mock_naming_service.dart';
-import 'package:colored/sources/data/services/url_composer/color_names_composer.dart';
+import 'package:colored/sources/data/services/url_composer/meodai_url_composer.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_state.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_view_model.dart';
 
@@ -31,8 +31,8 @@ class NamingInjector {
           StreamController<NamingState> stateController) =>
       NamingViewModel(
         stateController: stateController ?? StreamController<NamingState>(),
-        namingService: const ColorNamingService(
-          urlComposer: ColorNamesComposer(),
+        namingService: const MeodaiNamingService(
+          urlComposer: MeodaiUrlComposer(),
           networkClient: SafeHttpClient(),
         ),
         converter: const HexConverter(),

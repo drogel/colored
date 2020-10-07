@@ -9,8 +9,8 @@ import 'package:colored/sources/data/services/url_composer/url_composer.dart';
 import 'package:colored/sources/domain/data_models/naming_result.dart';
 import 'package:flutter/foundation.dart';
 
-class ColorNamingService implements NamingService {
-  const ColorNamingService({
+class MeodaiNamingService implements NamingService {
+  const MeodaiNamingService({
     @required UrlComposer urlComposer,
     @required HttpClient networkClient,
   })  : assert(urlComposer != null),
