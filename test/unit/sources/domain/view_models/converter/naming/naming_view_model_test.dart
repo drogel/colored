@@ -113,7 +113,7 @@ void main() {
     group("when initialState is called", () {
       test("then an Unknown state is retrieved", () async {
         final initialState = viewModel.initialState;
-        expect(initialState.runtimeType, Unknown);
+        expect(initialState, isA<Unknown>());
       });
     });
 
@@ -130,12 +130,12 @@ void main() {
         final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
         final state = await stateController.stream.first;
-        expect(state.runtimeType, Changing);
+        expect(state, isA<Changing>());
       });
 
       test("then a Named state is added to stream after Changing", () async {
         stateController.stream.skip(1).listen((event) {
-          expectLater(event.runtimeType, Named);
+          expectLater(event, isA<Named>());
         });
         final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
@@ -175,7 +175,7 @@ void main() {
     group("when initialState is called", () {
       test("then an Unknown state is retrieved", () async {
         final initialState = viewModel.initialState;
-        expect(initialState.runtimeType, Unknown);
+        expect(initialState, isA<Unknown>());
       });
     });
 
@@ -184,12 +184,12 @@ void main() {
         final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
         final state = await stateController.stream.first;
-        expect(state.runtimeType, Changing);
+        expect(state, isA<Changing>());
       });
 
       test("then an Unknown state is added to stream after Changing", () async {
         stateController.stream.skip(1).listen((event) {
-          expectLater(event.runtimeType, Unknown);
+          expectLater(event, isA<Unknown>());
         });
         final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);

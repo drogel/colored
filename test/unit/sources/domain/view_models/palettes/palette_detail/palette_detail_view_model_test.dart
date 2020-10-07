@@ -7,6 +7,9 @@ import 'package:colored/sources/domain/data_models/naming_result.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+class MockPaletteNamingService extends Mock implements PaletteNamingService {}
 
 class PaletteNamingServiceSuccessStub implements PaletteNamingService {
   static const black =
@@ -28,10 +31,10 @@ void main() {
   PaletteNamingService namingService;
   StreamController<PaletteDetailState> stateController;
 
-  group("Given a PaletteDetailViewModel with a sucessful response stub", () {
+  group("Given a PaletteDetailViewModel", () {
     setUp(() {
       stateController = StreamController<PaletteDetailState>();
-      namingService = PaletteNamingServiceSuccessStub();
+      namingService = MockPaletteNamingService();
       viewModel = PaletteDetailViewModel(
         stateController: stateController,
         paletteNamingService: namingService,
@@ -72,6 +75,20 @@ void main() {
         expect(stateController.isClosed, false);
         viewModel.dispose();
         expect(stateController.isClosed, true);
+      });
+    });
+
+    group("when stateStream is called", () {
+      test("then the stream of the stateController is retrieved", () {
+        final actual = viewModel.stateStream;
+        expect(actual, stateController.stream);
+      });
+    });
+
+    group("when initialState is called", () {
+      test("then a Pending state is retrieved", () {
+        final actual = viewModel.initialState;
+        expect(actual, isA<Pending>());
       });
     });
   });

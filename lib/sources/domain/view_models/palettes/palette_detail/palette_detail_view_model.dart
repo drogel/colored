@@ -14,5 +14,9 @@ class PaletteDetailViewModel {
 
   final StreamController<PaletteDetailState> _stateController;
 
+  Stream<PaletteDetailState> get stateStream => _stateController.stream;
+
+  PaletteDetailState get initialState => const Pending();
+
   void dispose() => _stateController.close();
 }

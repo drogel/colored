@@ -58,14 +58,14 @@ void main() {
     group("when initialState is called", () {
       test("then a Pending state is received", () {
         final initialState = viewModel.initialState;
-        expect(initialState.runtimeType, Pending);
+        expect(initialState, isA<Pending>());
       });
     });
 
     group("When clearSearch is called", () {
       test("then a Pending state is received", () {
         stateController.stream.listen(
-          (event) => expect(event.runtimeType, Pending),
+          (event) => expect(event, isA<Pending>()),
         );
         viewModel.clearSearch();
       });
@@ -138,7 +138,7 @@ void main() {
       test("then a Pending state is retrieved if searchString is short", () {
         const shortSearch = "te";
         viewModel.stateStream.listen((event) {
-          expect(event.runtimeType, Pending);
+          expect(event, isA<Pending>());
           expect(event.search, shortSearch);
         });
 
@@ -148,7 +148,7 @@ void main() {
       test("then a Found state is retrieved for a valid searchString", () {
         const validSearch = "testing";
         viewModel.stateStream.listen((event) {
-          expect(event.runtimeType, Found);
+          expect(event, isA<Found>());
         });
 
         viewModel.searchPalettes(validSearch);
@@ -197,7 +197,7 @@ void main() {
         const searchString = "test";
 
         viewModel.stateStream.listen((event) {
-          expect(event.runtimeType, NoneFound);
+          expect(event, isA<NoneFound>());
           expect(event.search, searchString);
         });
 
@@ -208,7 +208,7 @@ void main() {
         const shortString = "te";
 
         viewModel.stateStream.listen((event) {
-          expect(event.runtimeType, Pending);
+          expect(event, isA<Pending>());
           expect(event.search, shortString);
         });
 

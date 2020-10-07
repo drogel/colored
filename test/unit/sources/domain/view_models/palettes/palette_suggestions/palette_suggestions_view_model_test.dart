@@ -74,7 +74,7 @@ void main() {
     group("when initialState is called", () {
       test("then a Loading state is received", () {
         final actual = viewModel.initialState;
-        expect(actual.runtimeType, Loading);
+        expect(actual, isA<Loading>());
       });
     });
 
@@ -95,7 +95,7 @@ void main() {
     group("when init is called", () {
       test("then PaletteSuggestionsViewModel state is retrieved", () async {
         stateController.stream.listen((event) {
-          expect(event.runtimeType, PaletteSuggestionsFound);
+          expect(event, isA<PaletteSuggestionsFound>());
         });
         await viewModel.init();
       });
@@ -135,7 +135,7 @@ void main() {
     group("when init is called", () {
       test("then Failed state is retrieved", () async {
         stateController.stream.listen((event) {
-          expect(event.runtimeType, Failed);
+          expect(event, isA<Failed>());
         });
         await viewModel.init();
       });
