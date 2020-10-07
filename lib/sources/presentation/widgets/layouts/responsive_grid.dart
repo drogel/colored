@@ -7,7 +7,7 @@ import 'package:colored/sources/presentation/widgets/layouts/only_portrait_scrol
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-class ResponsiveGrid<T> extends StatefulWidget {
+class ResponsiveGrid extends StatefulWidget {
   const ResponsiveGrid({
     @required this.items,
     @required this.pageStorageKeyId,
@@ -25,7 +25,7 @@ class ResponsiveGrid<T> extends StatefulWidget {
   final int crossAxisMaxCount;
   final int pageStorageKeyId;
   final double childAspectRatio;
-  final List<T> items;
+  final List<Widget> items;
 
   @override
   _ResponsiveGridState createState() => _ResponsiveGridState();

@@ -4,6 +4,7 @@ import 'package:colored/sources/domain/view_models/converter/connectivity/connec
 import 'package:colored/sources/domain/view_models/converter/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/displayed_formats/displayed_formats_injector.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_injector.dart';
+import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_injector.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_injector.dart';
@@ -19,6 +20,7 @@ import 'package:colored/sources/presentation/notifiers/converter/displayed_forma
 import 'package:colored/sources/presentation/notifiers/main_tabs/main_tabs_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/colors/names_list_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/converter/naming_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/palettes/palette_detail_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palettes/palette_suggestions_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palettes/palettes_list_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palettes/palettes_navigation_notifier.dart';
@@ -55,9 +57,12 @@ class MainInjector extends StatelessWidget {
                           injector: const PalettesListInjector(),
                           child: PalettesNavigationNotifier(
                             injector: const PalettesNavigationInjector(),
-                            child: MainTabsNotifier(
-                              injector: const MainTabsInjector(),
-                              child: child,
+                            child: PaletteDetailNotifier(
+                              injector: const PaletteDetailInjector(),
+                              child: MainTabsNotifier(
+                                injector: const MainTabsInjector(),
+                                child: child,
+                              ),
                             ),
                           ),
                         ),

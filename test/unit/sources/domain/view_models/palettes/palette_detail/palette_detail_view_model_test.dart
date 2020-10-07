@@ -101,12 +101,22 @@ void main() {
 
     group("when fetchColorNames is called", () {
       test("then nothing is added to the stream if hexCodes is null", () async {
-        await viewModel.fetchColorNames(null);
+        await viewModel.fetchColorNames(null, "title");
         viewModel.stateStream.listen(neverCalled);
       });
 
       test("then nothing is added to stream if hexCodes is empty", () async {
-        await viewModel.fetchColorNames([]);
+        await viewModel.fetchColorNames([], "title");
+        viewModel.stateStream.listen(neverCalled);
+      });
+
+      test("then nothing is added to the stream if name is null", () async {
+        await viewModel.fetchColorNames(["test"], null);
+        viewModel.stateStream.listen(neverCalled);
+      });
+
+      test("then nothing is added to stream if name is empty", () async {
+        await viewModel.fetchColorNames(["test"], "");
         viewModel.stateStream.listen(neverCalled);
       });
     });
@@ -131,19 +141,19 @@ void main() {
 
     group("when fetchColorNames is called", () {
       test("then an event is added to stream on hexCodes not empty", () async {
-        await viewModel.fetchColorNames(["test"]);
+        await viewModel.fetchColorNames(["test"], "name");
         final isStreamEmpty = await viewModel.stateStream.isEmpty;
         expect(isStreamEmpty, isFalse);
       });
 
       test("then a PaletteFound state is added to the stream", () async {
-        await viewModel.fetchColorNames(["test"]);
+        await viewModel.fetchColorNames(["test"], "name");
         final actual = await viewModel.stateStream.first;
         expect(actual, isA<PaletteFound>());
       });
 
       test("then PaletteFound has NamedColors provided by service", () async {
-        await viewModel.fetchColorNames(["test"]);
+        await viewModel.fetchColorNames(["test"], "name");
         final actual = await viewModel.stateStream.first;
         final foundState = actual as PaletteFound;
         final firstFound = foundState.namedColors.first;
@@ -174,13 +184,13 @@ void main() {
 
     group("when fetchColorNames is called", () {
       test("then an event is added to stream on hexCodes not empty", () async {
-        await viewModel.fetchColorNames(["test"]);
+        await viewModel.fetchColorNames(["test"], "name");
         final isStreamEmpty = await viewModel.stateStream.isEmpty;
         expect(isStreamEmpty, isFalse);
       });
 
       test("then a Failed state is added to the stream", () async {
-        await viewModel.fetchColorNames(["test"]);
+        await viewModel.fetchColorNames(["test"], "name");
         final actual = await viewModel.stateStream.first;
         expect(actual, isA<Failed>());
       });

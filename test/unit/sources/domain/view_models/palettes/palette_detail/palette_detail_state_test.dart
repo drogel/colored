@@ -6,9 +6,26 @@ void main() {
     group("when PaletteFound state is constructed", () {
       test("then an assertion error is thrown if namedColors is null", () {
         expect(
-          () => PaletteFound(null),
+          () => PaletteFound(null, "title"),
           throwsA(isA<AssertionError>()),
         );
+      });
+    });
+
+    group("when a PaletteDetailState is constructed", () {
+      test("then an assertion error is thrown if paletteName is null", () {
+        expect(
+          () => PaletteDetailState(null),
+          throwsA(isA<AssertionError>()),
+        );
+      });
+    });
+
+    group("when a Pending state is constructed", () {
+      test("then the paletteName from its superclass is initialized", () {
+        const testPaletteName = "test";
+        const testState = Pending(testPaletteName);
+        expect(testState.paletteName, testPaletteName);
       });
     });
   });

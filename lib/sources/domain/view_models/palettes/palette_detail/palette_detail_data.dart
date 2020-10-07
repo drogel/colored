@@ -15,7 +15,7 @@ class PaletteDetailData extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType(aspect: PaletteDetailData);
 
   final PaletteDetailState state;
-  final void Function(List<String>) onPaletteSelected;
+  final void Function(List<String>, String) onPaletteSelected;
 
   @override
   bool updateShouldNotify(PaletteDetailData oldWidget) =>
