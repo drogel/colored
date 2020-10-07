@@ -31,15 +31,23 @@ class PalettesListGrid extends StatelessWidget {
               (palette) => PaletteCard(
                 colors: palette.hexCodes.map(HexColor.fromHex).toList(),
                 title: palette.name,
-                onPressed: (_) => _onPaletteSelected(context, palette.hexCodes),
+                onPressed: (paletteName) => _onPaletteSelected(
+                  context: context,
+                  hexCodes: palette.hexCodes,
+                  paletteName: paletteName,
+                ),
               ),
             )
             .toList(),
       );
 
-  void _onPaletteSelected(BuildContext context, List<String> hexCodes) {
+  void _onPaletteSelected({
+    @required BuildContext context,
+    @required List<String> hexCodes,
+    @required String paletteName,
+  }) {
     final destination = PalettesNavigationSelection.detail.index;
     PalettesNavigationData.of(context).onNavigation(destination);
-    PaletteDetailData.of(context).onPaletteSelected(hexCodes);
+    PaletteDetailData.of(context).onPaletteSelected(hexCodes, paletteName);
   }
 }

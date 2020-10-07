@@ -19,19 +19,22 @@ class PaletteDetailViewModel {
 
   Stream<PaletteDetailState> get stateStream => _stateController.stream;
 
-  PaletteDetailState get initialState => const Pending();
+  PaletteDetailState get initialState => Pending.empty();
 
-  Future<void> fetchColorNames(List<String> hexCodes) async {
+  Future<void> fetchColorNames(List<String> hexCodes, String name) async {
     if (hexCodes == null || hexCodes.isEmpty) {
+      return;
+    }
+    if (name == null || name.isEmpty) {
       return;
     }
 
     final response = await _namingService.getNaming(hexColors: hexCodes);
 
     if (response.status == ResponseStatus.ok) {
-      _stateController.sink.add(PaletteFound(response.results));
+      _stateController.sink.add(PaletteFound(response.results, name));
     } else {
-      _stateController.sink.add(const Failed());
+      _stateController.sink.add(Failed(name));
     }
   }
 
