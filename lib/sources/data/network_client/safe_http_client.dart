@@ -24,4 +24,10 @@ class SafeHttpClient implements HttpClient {
       return const HttpResponse(status: ResponseStatus.failed);
     }
   }
+
+  @override
+  bool isResponseOk(HttpResponse response) =>
+      response.status == ResponseStatus.ok &&
+      response.httpResponse.statusCode == 200 &&
+      response.httpResponse.body != null;
 }
