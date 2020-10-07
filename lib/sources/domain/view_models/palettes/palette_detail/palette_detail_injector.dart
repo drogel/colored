@@ -1,0 +1,3 @@
+class PaletteDetailInjector {
+  const PaletteDetailInjector();
+}

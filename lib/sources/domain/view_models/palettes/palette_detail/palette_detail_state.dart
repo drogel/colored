@@ -1,0 +1,3 @@
+class PaletteDetailState {
+  const PaletteDetailState();
+}
