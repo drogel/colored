@@ -31,7 +31,7 @@ class ColorNamingService implements NamingService {
 
     if (response.httpResponse.statusCode == 200) {
       final map = jsonDecode(response.httpResponse.body);
-      final namingMap = map["colors"].first;
+      final namingMap = map[NamingResult.mappingKey].first;
       final result = NamingResult.fromMap(namingMap);
       return NamingResponse(ResponseStatus.ok, result: result);
     } else {

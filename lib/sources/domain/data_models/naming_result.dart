@@ -24,6 +24,7 @@ class NamingResult extends NamedColor {
         requestedHex: map["requestedHex"],
       );
 
+  static const mappingKey = "colors";
   static const _rgb = "rgb";
 
   final int r;
