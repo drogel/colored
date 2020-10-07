@@ -1,66 +1,20 @@
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_data.dart';
-import 'package:colored/sources/presentation/widgets/text_fields/search_field.dart';
+import 'package:colored/sources/presentation/widgets/text_fields/auto_focusing_search_field.dart';
 import 'package:flutter/material.dart';
 
-class PaletteSearchField extends StatefulWidget {
+class PaletteSearchField extends StatelessWidget {
   const PaletteSearchField({Key key}) : super(key: key);
-
-  @override
-  _PaletteSearchFieldState createState() => _PaletteSearchFieldState();
-}
-
-class _PaletteSearchFieldState extends State<PaletteSearchField> {
-  FocusNode _focusNode;
-  TextEditingController _controller;
-
-  @override
-  void initState() {
-    _controller = TextEditingController();
-    _focusNode = FocusNode();
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    final data = PalettesListData.of(context);
-    _setSearchStateValue(data.state.search);
-    _shouldRequestFocus(data.state.search);
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
     final data = PalettesListData.of(context);
     final localization = Localization.of(context).palettes;
-    return SearchField(
+    return AutoFocusingSearchField(
       hintText: localization.search,
-      controller: _controller,
-      focusNode: _focusNode,
-      onClearPressed: () => data.onSearchChanged(_controller.text),
+      onClearPressed: () => data.onSearchChanged(""),
       onChanged: data.onSearchChanged,
+      searchText: data.state.search,
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  void _setSearchStateValue(String search) =>
-      _controller.value = TextEditingValue(
-        text: search,
-        selection: TextSelection(
-          baseOffset: search.length,
-          extentOffset: search.length,
-        ),
-      );
-
-  void _shouldRequestFocus(String search) {
-    if (search == null || search.isEmpty) {
-      _focusNode.requestFocus();
-    }
   }
 }
