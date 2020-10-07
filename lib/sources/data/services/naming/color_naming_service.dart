@@ -25,17 +25,13 @@ class ColorNamingService implements NamingService {
   Future<NamingResponse> getNaming({String hexColor}) async {
     final url = _urlComposer.compose(endpoints.baseUrl, path: hexColor);
     final response = await _client.get(url);
-    if (response.status == ResponseStatus.failed) {
+    if (!_client.isResponseOk(response)) {
       return const NamingResponse(ResponseStatus.failed);
     }
 
-    if (response.httpResponse.statusCode == 200) {
-      final map = jsonDecode(response.httpResponse.body);
-      final namingMap = map[NamingResult.mappingKey].first;
-      final result = NamingResult.fromMap(namingMap);
-      return NamingResponse(ResponseStatus.ok, result: result);
-    } else {
-      return const NamingResponse(ResponseStatus.failed);
-    }
+    final map = jsonDecode(response.httpResponse.body);
+    final namingMap = map[NamingResult.mappingKey].first;
+    final result = NamingResult.fromMap(namingMap);
+    return NamingResponse(ResponseStatus.ok, result: result);
   }
 }
