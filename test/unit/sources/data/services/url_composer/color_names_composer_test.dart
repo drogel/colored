@@ -1,5 +1,5 @@
 
-import 'package:colored/sources/data/services/url_composer/color_names_composer.dart';
+import 'package:colored/sources/data/services/url_composer/meodai_url_composer.dart';
 import 'package:colored/sources/data/services/url_composer/url_composer.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,7 +9,7 @@ void main() {
   UrlComposer composer;
 
   setUp(() {
-    composer = const ColorNamesComposer();
+    composer = const MeodaiUrlComposer();
   });
 
   tearDown(() {

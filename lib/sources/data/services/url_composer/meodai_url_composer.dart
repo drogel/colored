@@ -1,7 +1,7 @@
 import 'package:colored/sources/data/services/url_composer/url_composer.dart';
 
-class ColorNamesComposer implements UrlComposer {
-  const ColorNamesComposer();
+class MeodaiUrlComposer implements UrlComposer {
+  const MeodaiUrlComposer();
 
   @override
   String compose(String baseUrl, {String path}) {
