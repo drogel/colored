@@ -1,3 +1,4 @@
+@Timeout(Duration(milliseconds: 500))
 import 'dart:async';
 
 import 'package:colored/sources/data/network_client/response_status.dart';
@@ -24,6 +25,12 @@ class PaletteNamingServiceSuccessStub implements PaletteNamingService {
         ResponseStatus.ok,
         results: [black, white],
       );
+}
+
+class PaletteNamingServiceFailedStub implements PaletteNamingService {
+  @override
+  Future<PaletteNamingResponse> getNaming({List<String> hexColors}) async =>
+      const PaletteNamingResponse(ResponseStatus.failed);
 }
 
 void main() {
@@ -89,6 +96,93 @@ void main() {
       test("then a Pending state is retrieved", () {
         final actual = viewModel.initialState;
         expect(actual, isA<Pending>());
+      });
+    });
+
+    group("when fetchColorNames is called", () {
+      test("then nothing is added to the stream if hexCodes is null", () async {
+        await viewModel.fetchColorNames(null);
+        viewModel.stateStream.listen(neverCalled);
+      });
+
+      test("then nothing is added to stream if hexCodes is empty", () async {
+        await viewModel.fetchColorNames([]);
+        viewModel.stateStream.listen(neverCalled);
+      });
+    });
+  });
+
+  group("Given a PaletteDetailViewModel with a successful service stub", () {
+    setUp(() {
+      stateController = StreamController<PaletteDetailState>();
+      namingService = PaletteNamingServiceSuccessStub();
+      viewModel = PaletteDetailViewModel(
+        stateController: stateController,
+        paletteNamingService: namingService,
+      );
+    });
+
+    tearDown(() {
+      stateController.close();
+      viewModel = null;
+      stateController = null;
+      namingService = null;
+    });
+
+    group("when fetchColorNames is called", () {
+      test("then an event is added to stream on hexCodes not empty", () async {
+        await viewModel.fetchColorNames(["test"]);
+        final isStreamEmpty = await viewModel.stateStream.isEmpty;
+        expect(isStreamEmpty, isFalse);
+      });
+
+      test("then a PaletteFound state is added to the stream", () async {
+        await viewModel.fetchColorNames(["test"]);
+        final actual = await viewModel.stateStream.first;
+        expect(actual, isA<PaletteFound>());
+      });
+
+      test("then PaletteFound has NamedColors provided by service", () async {
+        await viewModel.fetchColorNames(["test"]);
+        final actual = await viewModel.stateStream.first;
+        final foundState = actual as PaletteFound;
+        final firstFound = foundState.namedColors.first;
+        final lastFound = foundState.namedColors.last;
+        expect(foundState.namedColors.length, 2);
+        expect(firstFound, PaletteNamingServiceSuccessStub.black);
+        expect(lastFound, PaletteNamingServiceSuccessStub.white);
+      });
+    });
+  });
+
+  group("Given a PaletteDetailViewModel with a failing service stub", () {
+    setUp(() {
+      stateController = StreamController<PaletteDetailState>();
+      namingService = PaletteNamingServiceFailedStub();
+      viewModel = PaletteDetailViewModel(
+        stateController: stateController,
+        paletteNamingService: namingService,
+      );
+    });
+
+    tearDown(() {
+      stateController.close();
+      viewModel = null;
+      stateController = null;
+      namingService = null;
+    });
+
+    group("when fetchColorNames is called", () {
+      test("then an event is added to stream on hexCodes not empty", () async {
+        await viewModel.fetchColorNames(["test"]);
+        final isStreamEmpty = await viewModel.stateStream.isEmpty;
+        expect(isStreamEmpty, isFalse);
+      });
+
+      test("then a Failed state is added to the stream", () async {
+        await viewModel.fetchColorNames(["test"]);
+        final actual = await viewModel.stateStream.first;
+        expect(actual, isA<Failed>());
       });
     });
   });

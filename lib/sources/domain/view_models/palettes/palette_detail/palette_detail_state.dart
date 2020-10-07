@@ -8,10 +8,6 @@ class Pending extends PaletteDetailState {
   const Pending();
 }
 
-class EmptyPalette extends PaletteDetailState {
-  const EmptyPalette();
-}
-
 class Failed extends PaletteDetailState {
   const Failed();
 }
