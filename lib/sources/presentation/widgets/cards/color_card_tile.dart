@@ -12,8 +12,8 @@ class ColorCardTile extends StatelessWidget {
   }) : super(key: key);
 
   final BorderRadius borderRadius;
-  final String title;
-  final String subtitle;
+  final Widget title;
+  final Widget subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class ColorCardTile extends StatelessWidget {
         borderRadius: decorationBorderRadius,
         elevation: 0,
         child: ListTile(
-          title: Text(title),
-          subtitle: subtitle != null ? Text(subtitle) : null,
+          title: title,
+          subtitle: subtitle,
         ),
       ),
     );

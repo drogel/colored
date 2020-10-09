@@ -5,12 +5,8 @@ import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_data.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
 import 'package:colored/sources/presentation/widgets/cards/single_color_card.dart';
-import 'package:colored/sources/presentation/widgets/lists/responsive_grid.dart';
+import 'package:colored/sources/presentation/widgets/lists/square_responsive_grid.dart';
 import 'package:flutter/material.dart';
-
-const _kEstimatedItemSize = 200.0;
-const _kCrossAxisMinCount = 2;
-const _kCrossAxisMaxCount = 9;
 
 class NamesListGrid extends StatelessWidget {
   const NamesListGrid({
@@ -23,11 +19,8 @@ class NamesListGrid extends StatelessWidget {
   final List<NamedColor> namedColors;
 
   @override
-  Widget build(BuildContext context) => ResponsiveGrid(
+  Widget build(BuildContext context) => SquareResponsiveGrid(
       pageStorageKey: pageStorageKey,
-      crossAxisMaxCount: _kCrossAxisMaxCount,
-      crossAxisMinCount: _kCrossAxisMinCount,
-      estimatedItemSize: _kEstimatedItemSize,
       itemCount: namedColors.length,
       itemBuilder: (context, index) {
         final namedColor = namedColors[index];
