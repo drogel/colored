@@ -9,20 +9,19 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 class ResponsiveGrid extends StatefulWidget {
   const ResponsiveGrid({
     @required this.items,
-    @required this.pageStorageKeyId,
+    this.pageStorageKey,
     this.estimatedItemSize = 200,
     this.crossAxisMinCount = 2,
     this.crossAxisMaxCount = 9,
     this.childAspectRatio = 1,
     Key key,
   })  : assert(items != null),
-        assert(pageStorageKeyId != null),
         super(key: key);
 
   final double estimatedItemSize;
   final int crossAxisMinCount;
   final int crossAxisMaxCount;
-  final int pageStorageKeyId;
+  final PageStorageKey<String> pageStorageKey;
   final double childAspectRatio;
   final List<Widget> items;
 
@@ -32,7 +31,6 @@ class ResponsiveGrid extends StatefulWidget {
 
 class _ResponsiveGridState extends State<ResponsiveGrid> {
   final _scrollController = ScrollController();
-  PageStorageKey<int> _pageStorageKey;
 
   @override
   void initState() {
@@ -62,7 +60,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
             top: false,
             child: LayoutBuilder(
               builder: (_, constraints) => GridView.builder(
-                key: _pageStorageKey,
+                key: widget.pageStorageKey,
                 controller: _scrollController,
                 padding: totalPadding,
                 itemCount: widget.items.length,

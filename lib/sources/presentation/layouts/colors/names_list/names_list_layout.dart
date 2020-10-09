@@ -16,7 +16,10 @@ class NamesListLayout extends StatelessWidget {
         return const NoColorsMessage();
       case Found:
         final foundState = state as Found;
-        return NamesListGrid(namedColors: foundState.namedColors);
+        return NamesListGrid(
+          pageStorageKey: PageStorageKey(runtimeType.toString()),
+          namedColors: foundState.namedColors,
+        );
       default:
         return const BackgroundContainer();
     }

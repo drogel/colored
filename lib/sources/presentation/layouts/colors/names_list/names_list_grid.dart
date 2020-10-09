@@ -15,14 +15,16 @@ const _kCrossAxisMaxCount = 9;
 class NamesListGrid extends StatelessWidget {
   const NamesListGrid({
     @required this.namedColors,
+    this.pageStorageKey,
     Key key,
   }) : super(key: key);
 
+  final PageStorageKey<String> pageStorageKey;
   final List<NamedColor> namedColors;
 
   @override
   Widget build(BuildContext context) => ResponsiveGrid(
-        pageStorageKeyId: 1,
+        pageStorageKey: pageStorageKey,
         crossAxisMaxCount: _kCrossAxisMaxCount,
         crossAxisMinCount: _kCrossAxisMinCount,
         estimatedItemSize: _kEstimatedItemSize,

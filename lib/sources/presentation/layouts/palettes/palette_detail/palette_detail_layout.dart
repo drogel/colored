@@ -15,7 +15,10 @@ class PaletteDetailLayout extends StatelessWidget {
         return const BackgroundContainer();
       case PaletteFound:
         final foundState = state as PaletteFound;
-        return NamesListGrid(namedColors: foundState.namedColors);
+        return NamesListGrid(
+          pageStorageKey: PageStorageKey(runtimeType.toString()),
+          namedColors: foundState.namedColors,
+        );
       default:
         return const BackgroundContainer();
     }

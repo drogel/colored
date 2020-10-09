@@ -53,13 +53,11 @@ class TransitionSwitcher extends StatelessWidget {
     Color defaultBackgroundColor,
     Widget child,
   }) =>
-      Container(
-        color: backgroundColor ?? defaultBackgroundColor,
-        child: FadeThroughTransition(
-          animation: primaryAnimation,
-          secondaryAnimation: secondaryAnimation,
-          child: child,
-        ),
+      FadeThroughTransition(
+        fillColor: backgroundColor ?? defaultBackgroundColor,
+        animation: primaryAnimation,
+        secondaryAnimation: secondaryAnimation,
+        child: child,
       );
 
   Widget _buildSharedZAxis({
