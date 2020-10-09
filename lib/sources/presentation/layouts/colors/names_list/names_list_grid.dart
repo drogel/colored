@@ -5,7 +5,7 @@ import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_data.dart';
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_data.dart';
 import 'package:colored/sources/presentation/widgets/cards/single_color_card.dart';
-import 'package:colored/sources/presentation/widgets/layouts/responsive_grid.dart';
+import 'package:colored/sources/presentation/widgets/lists/responsive_grid.dart';
 import 'package:flutter/material.dart';
 
 const _kEstimatedItemSize = 200.0;
@@ -24,21 +24,20 @@ class NamesListGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ResponsiveGrid(
-        pageStorageKey: pageStorageKey,
-        crossAxisMaxCount: _kCrossAxisMaxCount,
-        crossAxisMinCount: _kCrossAxisMinCount,
-        estimatedItemSize: _kEstimatedItemSize,
-        items: namedColors
-            .map(
-              (namedColor) => SingleColorCard(
-                backgroundColor: HexColor.fromHex(namedColor.hex),
-                onPressed: (color) => _notifyColorSelected(context, color),
-                title: namedColor.name,
-                subtitle: namedColor.hex,
-              ),
-            )
-            .toList(),
-      );
+      pageStorageKey: pageStorageKey,
+      crossAxisMaxCount: _kCrossAxisMaxCount,
+      crossAxisMinCount: _kCrossAxisMinCount,
+      estimatedItemSize: _kEstimatedItemSize,
+      itemCount: namedColors.length,
+      itemBuilder: (context, index) {
+        final namedColor = namedColors[index];
+        return SingleColorCard(
+          backgroundColor: HexColor.fromHex(namedColor.hex),
+          onPressed: (color) => _notifyColorSelected(context, color),
+          title: namedColor.name,
+          subtitle: namedColor.hex,
+        );
+      });
 
   void _notifyColorSelected(BuildContext context, Color color) {
     final selection = ColorSelection.fromColor(color);

@@ -2,20 +2,22 @@ import 'package:colored/sources/app/styling/curves/curve_data.dart';
 import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
-import 'package:colored/sources/presentation/widgets/layouts/only_portrait_scrollbar.dart';
+import 'package:colored/sources/presentation/widgets/lists/only_portrait_scrollbar.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class ResponsiveGrid extends StatefulWidget {
   const ResponsiveGrid({
-    @required this.items,
+    @required this.itemBuilder,
+    @required this.itemCount,
     this.pageStorageKey,
     this.estimatedItemSize = 200,
     this.crossAxisMinCount = 2,
     this.crossAxisMaxCount = 9,
     this.childAspectRatio = 1,
     Key key,
-  })  : assert(items != null),
+  })  : assert(itemBuilder != null),
+        assert(itemCount != null),
         super(key: key);
 
   final double estimatedItemSize;
@@ -23,7 +25,8 @@ class ResponsiveGrid extends StatefulWidget {
   final int crossAxisMaxCount;
   final PageStorageKey<String> pageStorageKey;
   final double childAspectRatio;
-  final List<Widget> items;
+  final int itemCount;
+  final IndexedWidgetBuilder itemBuilder;
 
   @override
   _ResponsiveGridState createState() => _ResponsiveGridState();
@@ -40,7 +43,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
 
   @override
   void didUpdateWidget(ResponsiveGrid oldWidget) {
-    if (!_contentHasEqualLengths(oldWidget)) {
+    if (_isItemCountDifferent(oldWidget)) {
       _animateToTop(context);
     }
     super.didUpdateWidget(oldWidget);
@@ -63,12 +66,12 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
                 key: widget.pageStorageKey,
                 controller: _scrollController,
                 padding: totalPadding,
-                itemCount: widget.items.length,
+                itemCount: widget.itemCount,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: _computeCrossAxisCount(constraints),
                   childAspectRatio: widget.childAspectRatio,
                 ),
-                itemBuilder: (_, i) => widget.items[i],
+                itemBuilder: widget.itemBuilder,
               ),
             ),
           ),
@@ -102,6 +105,6 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
   void _dismissKeyboard() =>
       WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
 
-  bool _contentHasEqualLengths(ResponsiveGrid oldWidget) =>
-      oldWidget.items.length == widget.items.length;
+  bool _isItemCountDifferent(ResponsiveGrid oldWidget) =>
+      oldWidget.itemCount != widget.itemCount;
 }

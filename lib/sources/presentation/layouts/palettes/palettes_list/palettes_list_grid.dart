@@ -4,7 +4,7 @@ import 'package:colored/sources/domain/data_models/palettes_navigation_selection
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_data.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_navigation/palettes_navigation_data.dart';
 import 'package:colored/sources/presentation/widgets/cards/palette_card.dart';
-import 'package:colored/sources/presentation/widgets/layouts/responsive_grid.dart';
+import 'package:colored/sources/presentation/widgets/lists/responsive_grid.dart';
 import 'package:flutter/material.dart';
 
 const _kEstimatedItemSize = 325.0;
@@ -25,25 +25,24 @@ class PalettesListGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ResponsiveGrid(
-        pageStorageKey: pageStorageKey,
-        estimatedItemSize: _kEstimatedItemSize,
-        crossAxisMinCount: _kCrossAxisMinCount,
-        crossAxisMaxCount: _kCrossAxisMaxCount,
-        childAspectRatio: _kChildAspectRatio,
-        items: palettes
-            .map(
-              (palette) => PaletteCard(
-                colors: palette.hexCodes.map(HexColor.fromHex).toList(),
-                title: palette.name,
-                onPressed: (paletteName) => _onPaletteSelected(
-                  context: context,
-                  hexCodes: palette.hexCodes,
-                  paletteName: paletteName,
-                ),
-              ),
-            )
-            .toList(),
-      );
+      pageStorageKey: pageStorageKey,
+      estimatedItemSize: _kEstimatedItemSize,
+      crossAxisMinCount: _kCrossAxisMinCount,
+      crossAxisMaxCount: _kCrossAxisMaxCount,
+      childAspectRatio: _kChildAspectRatio,
+      itemCount: palettes.length,
+      itemBuilder: (context, index) {
+        final palette = palettes[index];
+        return PaletteCard(
+          colors: palette.hexCodes.map(HexColor.fromHex).toList(),
+          title: palette.name,
+          onPressed: (paletteName) => _onPaletteSelected(
+            context: context,
+            hexCodes: palette.hexCodes,
+            paletteName: paletteName,
+          ),
+        );
+      });
 
   void _onPaletteSelected({
     @required BuildContext context,

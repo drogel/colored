@@ -1,6 +1,6 @@
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/presentation/widgets/chips/gradient_chip.dart';
-import 'package:colored/sources/presentation/widgets/layouts/horizontal_tab_bar_list.dart';
+import 'package:colored/sources/presentation/widgets/lists/horizontal_tab_bar_list.dart';
 import 'package:flutter/material.dart';
 
 class PaletteSuggestionsList extends StatelessWidget {
