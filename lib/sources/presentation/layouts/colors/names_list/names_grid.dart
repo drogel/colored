@@ -8,8 +8,8 @@ import 'package:colored/sources/presentation/widgets/cards/single_color_card.dar
 import 'package:colored/sources/presentation/widgets/lists/square_responsive_grid.dart';
 import 'package:flutter/material.dart';
 
-class NamesListGrid extends StatelessWidget {
-  const NamesListGrid({
+class NamesGrid extends StatelessWidget {
+  const NamesGrid({
     @required this.namedColors,
     this.pageStorageKey,
     Key key,
