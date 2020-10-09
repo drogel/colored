@@ -26,6 +26,7 @@ dependencies:
   url_launcher: ^5.7.2
   keyboard_dismisser: ^1.0.2
   connectivity: '>=0.4.8+6 <2.0.0'
+  fake_async: ^1.1.0
 
 dev_dependencies:
   flutter_test:
