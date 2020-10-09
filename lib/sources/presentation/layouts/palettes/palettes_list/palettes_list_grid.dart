@@ -13,15 +13,19 @@ const _kCrossAxisMaxCount = 4;
 const _kChildAspectRatio = 2.618;
 
 class PalettesListGrid extends StatelessWidget {
-  const PalettesListGrid({@required this.palettes, Key key})
-      : assert(palettes != null),
+  const PalettesListGrid({
+    @required this.palettes,
+    this.pageStorageKey,
+    Key key,
+  })  : assert(palettes != null),
         super(key: key);
 
+  final PageStorageKey<String> pageStorageKey;
   final List<Palette> palettes;
 
   @override
   Widget build(BuildContext context) => ResponsiveGrid(
-        pageStorageKeyId: 2,
+        pageStorageKey: pageStorageKey,
         estimatedItemSize: _kEstimatedItemSize,
         crossAxisMinCount: _kCrossAxisMinCount,
         crossAxisMaxCount: _kCrossAxisMaxCount,

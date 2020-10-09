@@ -16,7 +16,10 @@ class PalettesListLayout extends StatelessWidget {
         return const NoPalettesMessage();
       case Found:
         final foundState = state as Found;
-        return PalettesListGrid(palettes: foundState.palettes);
+        return PalettesListGrid(
+          pageStorageKey: PageStorageKey(runtimeType.toString()),
+          palettes: foundState.palettes,
+        );
       default:
         return const BackgroundContainer();
     }
