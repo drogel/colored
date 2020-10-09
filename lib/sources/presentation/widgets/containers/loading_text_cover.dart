@@ -1,13 +1,33 @@
+import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:flutter/material.dart';
 
 class LoadingTextCover extends StatelessWidget {
-  const LoadingTextCover({Key key}) : super(key: key);
+  const LoadingTextCover({
+    this.parentWidthFraction = 1,
+    this.coveringTextStyle,
+    Key key,
+  }) : super(key: key);
 
-  // TODO(754824): add variables and methods to LoadingTextCover
+  final double parentWidthFraction;
+  final TextStyle coveringTextStyle;
 
   @override
   Widget build(BuildContext context) {
-    // TODO(754824): define widget build method in LoadingTextCover
-    return null;
+    final theme = Theme.of(context);
+    final radius = RadiusData.of(context).radiiScheme;
+    final textStyle = coveringTextStyle ?? theme.textTheme.caption;
+    final color = textStyle.color;
+    final height = textStyle.fontSize;
+    return FractionallySizedBox(
+      widthFactor: parentWidthFraction,
+      alignment: Alignment.centerLeft,
+      child: Container(
+        height: height,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.all(radius.small),
+        ),
+      ),
+    );
   }
 }

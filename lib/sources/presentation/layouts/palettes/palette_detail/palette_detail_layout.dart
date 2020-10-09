@@ -1,6 +1,7 @@
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_data.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_state.dart';
-import 'package:colored/sources/presentation/layouts/colors/names_list/names_list_grid.dart';
+import 'package:colored/sources/presentation/layouts/colors/names_list/names_grid.dart';
+import 'package:colored/sources/presentation/layouts/palettes/palette_detail/palette_detail_loading_grid.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
 import 'package:flutter/material.dart';
 
@@ -11,14 +12,12 @@ class PaletteDetailLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = PaletteDetailData.of(context).state;
     switch (state.runtimeType) {
-      case Failed:
-        return const BackgroundContainer();
+      case Pending:
+        final pending = state as Pending;
+        return PaletteDetailLoadingGrid(hexCodes: pending.requestedHexCodes);
       case PaletteFound:
-        final foundState = state as PaletteFound;
-        return NamesListGrid(
-          pageStorageKey: PageStorageKey(runtimeType.toString()),
-          namedColors: foundState.namedColors,
-        );
+        final found = state as PaletteFound;
+        return NamesGrid(namedColors: found.namedColors);
       default:
         return const BackgroundContainer();
     }

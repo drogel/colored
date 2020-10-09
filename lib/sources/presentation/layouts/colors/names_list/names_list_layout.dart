@@ -1,6 +1,6 @@
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_data.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
-import 'package:colored/sources/presentation/layouts/colors/names_list/names_list_grid.dart';
+import 'package:colored/sources/presentation/layouts/colors/names_list/names_grid.dart';
 import 'package:colored/sources/presentation/layouts/colors/names_list/no_colors_message.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class NamesListLayout extends StatelessWidget {
         return const NoColorsMessage();
       case Found:
         final foundState = state as Found;
-        return NamesListGrid(
+        return NamesGrid(
           pageStorageKey: PageStorageKey(runtimeType.toString()),
           namedColors: foundState.namedColors,
         );
