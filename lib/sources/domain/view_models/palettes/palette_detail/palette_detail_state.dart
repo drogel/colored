@@ -7,9 +7,14 @@ class PaletteDetailState {
 }
 
 class Pending extends PaletteDetailState {
-  const Pending(String paletteName) : super(paletteName);
+  const Pending(
+    String paletteName,
+    this.requestedHexCodes,
+  )   : assert(requestedHexCodes != null),
+        super(paletteName);
 
-  factory Pending.empty() => const Pending("");
+  factory Pending.empty() => const Pending("", []);
+  final List<String> requestedHexCodes;
 }
 
 class Failed extends PaletteDetailState {

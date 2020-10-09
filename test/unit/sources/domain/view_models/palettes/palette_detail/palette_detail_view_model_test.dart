@@ -97,6 +97,11 @@ void main() {
         final actual = viewModel.initialState;
         expect(actual, isA<Pending>());
       });
+
+      test("then the Pending state is empty", () {
+        final actual = viewModel.initialState;
+        expect(actual.paletteName.isEmpty, isTrue);
+      });
     });
 
     group("when fetchColorNames is called", () {
@@ -159,6 +164,14 @@ void main() {
         expect(actual.paletteName, testName);
       });
 
+      test("then a Pending state with hex colors is added", () async {
+        const testName = "name";
+        const requestedCodes = ["test1", "test2"];
+        await viewModel.fetchColorNames(requestedCodes, testName);
+        final actual = await viewModel.stateStream.first as Pending;
+        expect(actual.requestedHexCodes, requestedCodes);
+      });
+
       test("then PaletteFound is added to stream after Pending", () async {
         await viewModel.fetchColorNames(["test"], "name");
         final actual = await viewModel.stateStream.skip(1).first;
@@ -206,6 +219,14 @@ void main() {
         await viewModel.fetchColorNames(["test"], "name");
         final actual = await viewModel.stateStream.first;
         expect(actual, isA<Pending>());
+      });
+
+      test("then a Pending state with hex colors is added", () async {
+        const testName = "name";
+        const requestedCodes = ["test1", "test2"];
+        await viewModel.fetchColorNames(requestedCodes, testName);
+        final actual = await viewModel.stateStream.first as Pending;
+        expect(actual.requestedHexCodes, requestedCodes);
       });
 
       test("then a Failed state is added to stream after Pending", () async {

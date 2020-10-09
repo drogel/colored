@@ -29,7 +29,7 @@ class PaletteDetailViewModel {
       return;
     }
 
-    _stateController.sink.add(Pending(name));
+    _stateController.sink.add(Pending(name, hexCodes));
     final response = await _namingService.getNaming(hexColors: hexCodes);
 
     if (response.status == ResponseStatus.ok) {
