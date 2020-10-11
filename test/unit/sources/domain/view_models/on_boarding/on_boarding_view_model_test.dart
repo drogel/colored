@@ -48,7 +48,7 @@ void main() {
             deviceOrientationService: MockOrientationService(),
             localStorage: const MockLocalStorage(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -59,7 +59,7 @@ void main() {
             deviceOrientationService: null,
             localStorage: const MockLocalStorage(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -70,7 +70,7 @@ void main() {
             deviceOrientationService: MockOrientationService(),
             localStorage: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

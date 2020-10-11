@@ -49,7 +49,7 @@ void main() {
             stateController: null,
             connectivityService: connectivityService,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -59,7 +59,7 @@ void main() {
             stateController: stateController,
             connectivityService: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

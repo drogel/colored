@@ -8,7 +8,7 @@ void main() {
       test("then an error is thrown if formatData is null", () {
         expect(
           () => ConverterState(formatData: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

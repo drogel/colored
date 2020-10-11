@@ -7,7 +7,7 @@ void main() {
       test("then an assertion error is thrown if status is null", () {
         expect(
           () => PaletteNamingResponse(null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

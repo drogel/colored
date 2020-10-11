@@ -7,7 +7,7 @@ void main() {
       test("then an error is thrown if pageScrollFraction is null", () {
         expect(
           () => OnBoardingState(pageScrollFraction: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

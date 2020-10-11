@@ -11,7 +11,10 @@ void main() {
   ColorSuggestionsLoader loader;
 
   setUp(() {
-    loader = ColorSuggestionsLoader(stringBundle: StringBundleStub());
+    loader = ColorSuggestionsLoader(
+      stringBundle: StringBundleStub(),
+      colorSuggestionsDataPath: "testPath",
+    );
   });
 
   tearDown(() {
@@ -22,8 +25,21 @@ void main() {
     group("when constructed", () {
       test("an assertion error is thrown if the stringBundle is null", () {
         expect(
-          () => ColorSuggestionsLoader(stringBundle: null),
-          throwsA(isA<AssertionError>()),
+          () => ColorSuggestionsLoader(
+            stringBundle: null,
+            colorSuggestionsDataPath: "testPath",
+          ),
+          throwsAssertionError,
+        );
+      });
+
+      test("an assertion error is thrown if the stringBundle is null", () {
+        expect(
+          () => ColorSuggestionsLoader(
+            stringBundle: StringBundleStub(),
+            colorSuggestionsDataPath: null,
+          ),
+          throwsAssertionError,
         );
       });
     });

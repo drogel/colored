@@ -1,3 +1,4 @@
+import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
 import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_injector.dart';
@@ -52,13 +53,17 @@ class MainInjector extends StatelessWidget {
                     child: ConnectivityNotifier(
                       injector: const ConnectivityInjector(),
                       child: NamingNotifier(
-                        injector: const NamingInjector(),
+                        injector: NamingInjector(
+                          flavor: FlavorConfig.instance,
+                        ),
                         child: PalettesListNotifier(
                           injector: const PalettesListInjector(),
                           child: PalettesNavigationNotifier(
                             injector: const PalettesNavigationInjector(),
                             child: PaletteDetailNotifier(
-                              injector: const PaletteDetailInjector(),
+                              injector: PaletteDetailInjector(
+                                flavor: FlavorConfig.instance,
+                              ),
                               child: MainTabsNotifier(
                                 injector: const MainTabsInjector(),
                                 child: child,

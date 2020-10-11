@@ -53,14 +53,14 @@ void main() {
       test("then should throw if given null name", () {
         expect(
           () => Palette(name: null, hexCodes: _kColors),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
       test("then should throw if given null namedColors", () {
         expect(
           () => Palette(name: _kName, hexCodes: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

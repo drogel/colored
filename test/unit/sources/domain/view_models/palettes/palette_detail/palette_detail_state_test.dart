@@ -7,7 +7,7 @@ void main() {
       test("then an assertion error is thrown if namedColors is null", () {
         expect(
           () => PaletteFound(null, "title"),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });
@@ -16,7 +16,7 @@ void main() {
       test("then an assertion error is thrown if paletteName is null", () {
         expect(
           () => PaletteDetailState(null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

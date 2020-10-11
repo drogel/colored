@@ -28,7 +28,7 @@ void main() {
       test("then converters must not be null", () {
         expect(
           () => ColorConverter(converters: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

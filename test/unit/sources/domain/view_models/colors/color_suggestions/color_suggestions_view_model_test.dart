@@ -32,7 +32,7 @@ void main() {
             stateController: null,
             suggestionsService: SuggestionsServiceStub(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -42,7 +42,7 @@ void main() {
             stateController: StreamController<ColorSuggestionsState>(),
             suggestionsService: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

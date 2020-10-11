@@ -60,14 +60,14 @@ void main() {
       test("then should throw if given null name", () {
         expect(
           () => NamedColor(name: null, hex: _kHexCode),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
       test("then should throw if given null hex code", () {
         expect(
           () => NamedColor(name: _kName, hex: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

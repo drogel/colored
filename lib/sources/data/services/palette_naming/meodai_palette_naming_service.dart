@@ -23,9 +23,14 @@ class MeodaiPaletteNamingService implements PaletteNamingService {
 
   @override
   Future<PaletteNamingResponse> getNaming({List<String> hexColors}) async {
+    if (hexColors == null || hexColors.isEmpty) {
+      return const PaletteNamingResponse(ResponseStatus.failed);
+    }
+
     final hexColorsPath = hexColors.join();
     final url = _urlComposer.compose(endpoints.baseUrl, path: hexColorsPath);
     final response = await _client.get(url);
+
     if (!_client.isResponseOk(response)) {
       return const PaletteNamingResponse(ResponseStatus.failed);
     }

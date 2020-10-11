@@ -1,20 +1,24 @@
 import 'dart:convert';
 
-import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/string_bundle/string_bundle.dart';
 import 'package:flutter/foundation.dart';
 
 class PaletteSuggestionsLoader implements DataLoader<List<String>> {
-  const PaletteSuggestionsLoader({@required StringBundle stringBundle})
-      : assert(stringBundle != null),
+  const PaletteSuggestionsLoader({
+    @required StringBundle stringBundle,
+    @required String paletteSuggestionsDataPath,
+  })  : assert(stringBundle != null),
+        assert(paletteSuggestionsDataPath!= null),
+        _paletteSuggestionsDataPath = paletteSuggestionsDataPath,
         _stringBundle = stringBundle;
 
   final StringBundle _stringBundle;
+  final String _paletteSuggestionsDataPath;
 
   @override
   Future<Map<String, List<String>>> load() async {
-    final dataPath = FlavorConfig.instance?.values?.paletteSuggestionData;
+    final dataPath = _paletteSuggestionsDataPath;
     final suggestionsStr = await _stringBundle.load(dataPath);
     final jsonMap = Map<String, dynamic>.from(jsonDecode(suggestionsStr));
 

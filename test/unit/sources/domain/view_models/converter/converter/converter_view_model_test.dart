@@ -51,7 +51,7 @@ void main() {
             colorConverter: MockConverter(),
             colorParser: MockParser(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -63,7 +63,7 @@ void main() {
             colorConverter: MockConverter(),
             colorParser: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -75,7 +75,7 @@ void main() {
             colorConverter: null,
             colorParser: MockParser(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -87,7 +87,7 @@ void main() {
             colorConverter: MockConverter(),
             colorParser: MockParser(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

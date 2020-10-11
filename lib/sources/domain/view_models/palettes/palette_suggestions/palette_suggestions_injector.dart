@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/data/services/data_loader/palette_suggestions_loader.dart';
 import 'package:colored/sources/data/services/int_generator/random_unique_int_generator.dart';
 import 'package:colored/sources/data/services/list_picker/string_list_picker.dart';
@@ -13,17 +14,20 @@ class PaletteSuggestionsInjector {
 
   PaletteSuggestionsViewModel injectViewModel([
     StreamController<PaletteSuggestionsState> stateController,
-  ]) =>
-      PaletteSuggestionsViewModel(
-        stateController:
-            stateController ?? StreamController<PaletteSuggestionsState>(),
-        suggestionsService: CherryPickedSuggestionsService<List<String>>(
-          dataLoader: const PaletteSuggestionsLoader(
-            stringBundle: RootStringBundle(),
-          ),
-          listPicker: const StringListPicker(
-            intGenerator: RandomUniqueIntGenerator(),
-          ),
+  ]) {
+    final dataPath = FlavorConfig.instance.values.paletteSuggestionData;
+    return PaletteSuggestionsViewModel(
+      stateController:
+          stateController ?? StreamController<PaletteSuggestionsState>(),
+      suggestionsService: CherryPickedSuggestionsService<List<String>>(
+        dataLoader: PaletteSuggestionsLoader(
+          stringBundle: const RootStringBundle(),
+          paletteSuggestionsDataPath: dataPath,
         ),
-      );
+        listPicker: const StringListPicker(
+          intGenerator: RandomUniqueIntGenerator(),
+        ),
+      ),
+    );
+  }
 }

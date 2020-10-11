@@ -23,7 +23,7 @@ void main() {
       test("an assertion error is thrown if the initial color is null", () {
         expect(
           () => TransformerInjector(initialColor: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

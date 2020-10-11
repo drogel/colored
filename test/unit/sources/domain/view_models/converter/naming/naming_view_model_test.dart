@@ -77,7 +77,7 @@ void main() {
             namingService: namingService,
             converter: converter,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -88,7 +88,7 @@ void main() {
             namingService: null,
             converter: converter,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -99,7 +99,7 @@ void main() {
             namingService: namingService,
             converter: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

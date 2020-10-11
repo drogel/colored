@@ -8,7 +8,7 @@ void main() {
       test("then an error is thrown if formats is null", () {
         expect(
           () => DisplayedFormatsState(null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

@@ -62,7 +62,7 @@ void main() {
             stateController: null,
             paletteNamingService: namingService,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -72,7 +72,7 @@ void main() {
             stateController: stateController,
             paletteNamingService: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

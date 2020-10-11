@@ -56,7 +56,7 @@ void main() {
       test("then throws an assertion error if httpWrapper is null", () {
         expect(
           () => SafeHttpClient(httpWrapper: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

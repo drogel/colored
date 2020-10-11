@@ -7,7 +7,7 @@ void main() {
       test("then an assertion error is thrown if the status is null", () {
         expect(
           () => HttpResponse(status: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

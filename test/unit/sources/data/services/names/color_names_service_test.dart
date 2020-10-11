@@ -36,14 +36,14 @@ void main() {
       test("then should throw if given null dataLoader", () {
         expect(
           () => ColorNamesService(dataLoader: null, filter: filter),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
       test("then should throw if given null filter", () {
         expect(
           () => ColorNamesService(dataLoader: dataLoader, filter: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

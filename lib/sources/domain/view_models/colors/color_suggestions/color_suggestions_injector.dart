@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/data/services/data_loader/color_suggestions_loader.dart';
 import 'package:colored/sources/data/services/int_generator/random_unique_int_generator.dart';
 import 'package:colored/sources/data/services/list_picker/string_list_picker.dart';
@@ -13,17 +14,20 @@ class ColorSuggestionsInjector {
 
   ColorSuggestionsViewModel injectViewModel([
     StreamController<ColorSuggestionsState> stateController,
-  ]) =>
-      ColorSuggestionsViewModel(
-        stateController:
-            stateController ?? StreamController<ColorSuggestionsState>(),
-        suggestionsService: CherryPickedSuggestionsService<String>(
-          dataLoader: const ColorSuggestionsLoader(
-            stringBundle: RootStringBundle(),
-          ),
-          listPicker: const StringListPicker(
-            intGenerator: RandomUniqueIntGenerator(),
-          ),
+  ]) {
+    final dataPath = FlavorConfig.instance.values.colorSuggestionData;
+    return ColorSuggestionsViewModel(
+      stateController:
+          stateController ?? StreamController<ColorSuggestionsState>(),
+      suggestionsService: CherryPickedSuggestionsService<String>(
+        dataLoader: ColorSuggestionsLoader(
+          stringBundle: const RootStringBundle(),
+          colorSuggestionsDataPath: dataPath,
         ),
-      );
+        listPicker: const StringListPicker(
+          intGenerator: RandomUniqueIntGenerator(),
+        ),
+      ),
+    );
+  }
 }
