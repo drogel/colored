@@ -87,7 +87,7 @@ void main() {
             namesService: namesService,
             searchConfigurator: const ListSearchConfigurator(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -98,7 +98,7 @@ void main() {
             namesService: null,
             searchConfigurator: const ListSearchConfigurator(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -109,7 +109,7 @@ void main() {
             namesService: namesService,
             searchConfigurator: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

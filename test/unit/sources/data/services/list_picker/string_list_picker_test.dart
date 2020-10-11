@@ -31,7 +31,7 @@ void main() {
       test("then an assertion error is thrown if intGenerator is null", () {
         expect(
           () => StringListPicker(intGenerator: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

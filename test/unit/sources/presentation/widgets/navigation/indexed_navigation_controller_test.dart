@@ -24,7 +24,7 @@ void main() {
       test("then should throw if given null stateController", () {
         expect(
           () => IndexedNavigationController(stateController: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

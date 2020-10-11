@@ -18,13 +18,8 @@ class OnlyPortraitScrollbar extends StatelessWidget {
     if (hasHorizontalSafeArea && isLandscape) {
       return child;
     } else {
-      final theme = Theme.of(context);
-      final scrollBarColor = theme.bottomNavigationBarTheme.unselectedItemColor;
       final radius = RadiusData.of(context).radiiScheme;
-      return Theme(
-        data: theme.copyWith(highlightColor: scrollBarColor),
-        child: Scrollbar(radius: radius.small, child: child),
-      );
+      return Scrollbar(radius: radius.small, child: child);
     }
   }
 

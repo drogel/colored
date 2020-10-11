@@ -25,7 +25,7 @@ void main() {
       test("then should throw if given null stateController", () {
         expect(
           () => MainTabsViewModel(stateController: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

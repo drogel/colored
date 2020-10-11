@@ -34,14 +34,14 @@ void main() {
       test("then should throw if given a null dataLoader", () {
         expect(
           () => PaletteNamesService(dataLoader: null, filter: filter),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
       test("then should throw if given a null filter", () {
         expect(
           () => PaletteNamesService(dataLoader: dataLoader, filter: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

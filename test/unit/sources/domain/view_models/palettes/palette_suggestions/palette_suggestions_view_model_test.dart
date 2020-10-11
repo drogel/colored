@@ -38,7 +38,7 @@ void main() {
             stateController: null,
             suggestionsService: SuggestionsServiceStub(),
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -48,7 +48,7 @@ void main() {
             stateController: StreamController<PaletteSuggestionsState>(),
             suggestionsService: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

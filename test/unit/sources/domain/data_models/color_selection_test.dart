@@ -9,21 +9,21 @@ void main() {
       test("then an assertion error is thrown if r is null", () {
         expect(
           () => ColorSelection(r: null, g: 0, b: 0),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
       test("then an assertion error is thrown if g is null", () {
         expect(
           () => ColorSelection(r: 0, g: null, b: 0),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
       test("then an assertion error is thrown if b is null", () {
         expect(
           () => ColorSelection(r: 0, g: 0, b: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

@@ -27,7 +27,7 @@ void main() {
       test("then an assertion error is thrown if stateController is null", () {
         expect(
           () => DisplayedFormatsViewModel(stateController: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

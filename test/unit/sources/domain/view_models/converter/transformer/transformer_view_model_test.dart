@@ -58,7 +58,7 @@ void main() {
             transformer: null,
             initialColor: _kInitialColor,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -69,7 +69,7 @@ void main() {
             transformer: const ColorTransformer(),
             initialColor: _kInitialColor,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
@@ -80,7 +80,7 @@ void main() {
             transformer: const ColorTransformer(),
             initialColor: null,
           ),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/data/services/data_loader/palettes_loader.dart';
 import 'package:colored/sources/data/services/map_filter/palette_filter.dart';
 import 'package:colored/sources/data/services/memoizer/default_memoizer.dart';
@@ -21,6 +22,7 @@ class PalettesListInjector {
           dataLoader: PalettesLoader(
             memoizer: DefaultMemoizer(),
             stringBundle: const RootStringBundle(),
+            palettesDataPath: FlavorConfig.instance.values.paletteData,
           ),
           filter: const PaletteFilter(),
         ),

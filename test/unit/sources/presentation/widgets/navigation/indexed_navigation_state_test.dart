@@ -8,7 +8,7 @@ void main() {
       test("then passing a null currentIndex throws an assertion error", () {
         expect(
           () => IndexedNavigationState(null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 

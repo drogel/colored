@@ -20,7 +20,7 @@ void main() {
       test("an assertion error is thrown if formatParsers is null", () {
         expect(
           () => ColorParser(formatParsers: null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

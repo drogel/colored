@@ -33,7 +33,11 @@ void main() {
   setUp(() {
     memoizer = const MemoizerStub();
     stringBundle = const StringBundleStub();
-    loader = ColorNamesLoader(memoizer: memoizer, stringBundle: stringBundle);
+    loader = ColorNamesLoader(
+      memoizer: memoizer,
+      stringBundle: stringBundle,
+      colorsDataPath: "testPath",
+    );
   });
 
   tearDown(() {
@@ -45,15 +49,34 @@ void main() {
     group("when constructed", () {
       test("then should throw if given a null memoizer", () {
         expect(
-          () => ColorNamesLoader(memoizer: null, stringBundle: stringBundle),
-          throwsA(isA<AssertionError>()),
+          () => ColorNamesLoader(
+            memoizer: null,
+            stringBundle: stringBundle,
+            colorsDataPath: "testPath",
+          ),
+          throwsAssertionError,
         );
       });
 
       test("then should throw if given a null stringBundle", () {
         expect(
-          () => ColorNamesLoader(memoizer: memoizer, stringBundle: null),
-          throwsA(isA<AssertionError>()),
+          () => ColorNamesLoader(
+            memoizer: memoizer,
+            stringBundle: null,
+            colorsDataPath: "testPath",
+          ),
+          throwsAssertionError,
+        );
+      });
+
+      test("then should throw if given a null stringBundle", () {
+        expect(
+          () => ColorNamesLoader(
+            memoizer: memoizer,
+            stringBundle: const StringBundleStub(),
+            colorsDataPath: null,
+          ),
+          throwsAssertionError,
         );
       });
     });
@@ -70,7 +93,11 @@ void main() {
     setUp(() {
       memoizer = DefaultMemoizer<Map<String, String>>();
       stringBundle = const StringBundleStub();
-      loader = ColorNamesLoader(memoizer: memoizer, stringBundle: stringBundle);
+      loader = ColorNamesLoader(
+        memoizer: memoizer,
+        stringBundle: stringBundle,
+        colorsDataPath: "testPath",
+      );
     });
 
     tearDown(() {
