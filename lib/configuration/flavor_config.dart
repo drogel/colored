@@ -1,33 +1,33 @@
+import 'package:colored/configuration/flavor.dart';
+import 'package:colored/configuration/flavor_type.dart';
 import 'package:colored/configuration/flavor_values/flavor_values.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'flavor.dart';
 
-class FlavorConfig {
+class FlavorConfig implements Flavor {
   factory FlavorConfig({
-    @required Flavor flavor,
+    @required FlavorType flavorType,
     @required FlavorValues values,
-    Color color = Colors.blue,
   }) =>
       _instance ??= FlavorConfig._internal(
-        flavor,
-        flavor.toString().split('.').last,
-        color,
+        flavorType,
         values,
       );
 
-  FlavorConfig._internal(this.flavor, this.name, this.color, this.values);
-
-  final Flavor flavor;
-  final String name;
-  final Color color;
-  final FlavorValues values;
-
-  static FlavorConfig _instance;
+  const FlavorConfig._internal(this.flavorType, this.values);
 
   static FlavorConfig get instance => _instance;
 
-  static bool isProduction() => _instance.flavor == Flavor.production;
+  static FlavorConfig _instance;
 
-  static bool isDevelopment() => _instance.flavor == Flavor.dev;
+  final FlavorType flavorType;
+
+  @override
+  final FlavorValues values;
+
+  @override
+  bool isProduction() => _instance.flavorType == FlavorType.production;
+
+  @override
+  bool isDevelopment() => _instance.flavorType == FlavorType.dev;
 }
