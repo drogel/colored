@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/memoizer/memoizer.dart';
 import 'package:colored/sources/data/services/string_bundle/string_bundle.dart';
