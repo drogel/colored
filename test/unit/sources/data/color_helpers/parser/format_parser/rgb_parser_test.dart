@@ -66,14 +66,14 @@ void main() {
       test("then an assertion error is thrown on null input string", () {
         expect(
           () => rgbParser.parse(null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
       test("then an assertion error is thrown on empty input string", () {
         expect(
           () => rgbParser.parse(""),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

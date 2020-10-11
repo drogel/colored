@@ -1,23 +1,15 @@
-import 'package:colored/sources/domain/data_models/main_tabs_selection.dart';
-import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_state.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_data.dart';
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_state.dart';
 import 'package:flutter/material.dart';
 
-class MainTabsData extends InheritedWidget {
+class MainTabsData extends IndexedNavigationData {
   const MainTabsData({
-    @required this.state,
-    @required this.onNavigation,
+    @required IndexedNavigationState state,
+    @required void Function(int) onNavigation,
     @required Widget child,
     Key key,
-  })  : assert(child != null),
-        assert(state != null),
-        super(key: key, child: child);
+  }) : super(state: state, onNavigation: onNavigation, child: child, key: key);
 
   static MainTabsData of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: MainTabsData);
-
-  final MainTabsState state;
-  final void Function(MainTabsSelection) onNavigation;
-
-  @override
-  bool updateShouldNotify(MainTabsData oldWidget) => state != oldWidget.state;
 }

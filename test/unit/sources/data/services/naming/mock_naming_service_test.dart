@@ -21,7 +21,7 @@ void main() {
       test("then expected sample color is retrieved", () async {
         final namingResponse = await namingService.getNaming(hexColor: "");
         final result = namingResponse.result;
-        expect(namingResponse.response, ResponseStatus.ok);
+        expect(namingResponse.status, ResponseStatus.ok);
         expect(result.hex, "#212121");
         expect(result.name, "Sample Color");
       });

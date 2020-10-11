@@ -1,10 +1,11 @@
 import 'package:colored/sources/data/network_client/response_status.dart';
+import 'package:colored/sources/data/network_client/response_wrapper.dart';
 import 'package:colored/sources/domain/data_models/naming_result.dart';
-import 'package:flutter/foundation.dart';
 
-class NamingResponse {
-  const NamingResponse({@required this.response, this.result});
+class NamingResponse extends ResponseWrapper {
+  const NamingResponse(ResponseStatus status, {this.result})
+      : assert(status != null),
+        super(status);
 
-  final ResponseStatus response;
   final NamingResult result;
 }

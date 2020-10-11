@@ -1,6 +1,6 @@
 import 'package:colored/sources/presentation/widgets/animations/cross_switchers/cross_switcher.dart';
 import 'package:colored/sources/presentation/widgets/animations/cross_switchers/cross_switcher_state.dart';
-import 'package:colored/sources/presentation/widgets/animations/default_transition_switcher.dart';
+import 'package:colored/sources/presentation/widgets/animations/transition_switcher.dart';
 import 'package:flutter/material.dart';
 
 class CrossTransitionSwitcher extends CrossSwitcher {
@@ -20,7 +20,7 @@ class CrossTransitionSwitcher extends CrossSwitcher {
         );
 
   @override
-  Widget build(BuildContext context) => DefaultTransitionSwitcher(
+  Widget build(BuildContext context) => TransitionSwitcher(
         child: state == CrossSwitcherState.showFirst ? firstChild : secondChild,
       );
 }

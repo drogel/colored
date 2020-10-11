@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:colored/sources/domain/view_models/converter/converter_injector.dart';
-import 'package:colored/sources/domain/view_models/converter/converter_state.dart';
+import 'package:colored/sources/domain/view_models/converter/converter/converter_injector.dart';
+import 'package:colored/sources/domain/view_models/converter/converter/converter_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

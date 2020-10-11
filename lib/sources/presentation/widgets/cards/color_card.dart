@@ -14,8 +14,8 @@ class ColorCard extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  final String title;
-  final String subtitle;
+  final Widget title;
+  final Widget subtitle;
   final Widget child;
   final Color backgroundColor;
   final void Function() onPressed;

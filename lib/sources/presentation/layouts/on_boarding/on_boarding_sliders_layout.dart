@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
-import 'package:colored/sources/domain/view_models/transformer/transformer_data.dart';
+import 'package:colored/sources/domain/view_models/converter/transformer/transformer_data.dart';
 import 'package:colored/sources/presentation/widgets/layouts/presentation_layout.dart';
 import 'package:colored/sources/presentation/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';

@@ -47,7 +47,7 @@ void main() {
                     intGenerator: RandomGeneratorStub(),
                   ),
                 ),
-            throwsA(isA<AssertionError>()));
+            throwsAssertionError);
       });
 
       test("then an assertion error is thrown if listPicker is null", () {
@@ -56,7 +56,7 @@ void main() {
                   dataLoader: ColorSuggestionsLoaderStub(),
                   listPicker: null,
                 ),
-            throwsA(isA<AssertionError>()));
+            throwsAssertionError);
       });
     });
   });

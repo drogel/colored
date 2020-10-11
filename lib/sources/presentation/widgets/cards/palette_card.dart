@@ -8,7 +8,9 @@ class PaletteCard extends StatelessWidget {
     this.subtitle,
     this.onPressed,
     Key key,
-  }) : super(key: key);
+  })  : assert(colors != null),
+        assert(title != null),
+        super(key: key);
 
   final List<Color> colors;
   final String title;
@@ -17,9 +19,10 @@ class PaletteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ColorCard(
-        title: title,
-        subtitle: subtitle,
+        title: Text(title),
+        subtitle: subtitle != null ? Text(subtitle) : null,
         backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () => onPressed(title),
         child: RepaintBoundary(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

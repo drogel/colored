@@ -91,14 +91,14 @@ void main() {
       test("then an assertion error is thrown on null input string", () {
         expect(
           () => hslParser.parse(null),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
 
       test("then an assertion error is thrown on empty input string", () {
         expect(
           () => hslParser.parse(""),
-          throwsA(isA<AssertionError>()),
+          throwsAssertionError,
         );
       });
     });

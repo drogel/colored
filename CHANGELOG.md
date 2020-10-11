@@ -1,3 +1,8 @@
+## [0.10.2] - October 11th, 2020
+
+- Adds a palette detail page that let users see the color codes and names in a palette.
+- Fixes minor UI/UX bugs.
+
 ## [0.10.1] - October 3rd, 2020
 
 - Adds a scroll indicator to palettes and colors lists.

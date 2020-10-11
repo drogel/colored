@@ -6,6 +6,7 @@ import 'package:colored/sources/presentation/widgets/trademarks/colored_logo.dar
 import 'package:colored/sources/presentation/widgets/tabs/base_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class SideTabBar extends BaseTabBar {
   const SideTabBar({
@@ -28,29 +29,31 @@ class SideTabBar extends BaseTabBar {
   @override
   Widget build(BuildContext context) {
     final padding = PaddingData.of(context).paddingScheme;
-    return SideTabBarBackground(
-      child: Stack(
-        children: [
-          NavigationRail(
-            extended: extended,
-            destinations: _buildTabItems(context),
-            selectedIndex: currentIndex,
-            onDestinationSelected: onTap,
-            minExtendedWidth: extendedWidth,
-            labelType: extended ? null : NavigationRailLabelType.all,
-            leading: Padding(
-              padding: EdgeInsets.only(bottom: padding.large.bottom),
-              child: extended ? const ColoredHeader() : const ColoredLogo(),
+    return KeyboardDismisser(
+      child: SideTabBarBackground(
+        child: Stack(
+          children: [
+            NavigationRail(
+              extended: extended,
+              destinations: _buildTabItems(context),
+              selectedIndex: currentIndex,
+              onDestinationSelected: onTap,
+              minExtendedWidth: extendedWidth,
+              labelType: extended ? null : NavigationRailLabelType.all,
+              leading: Padding(
+                padding: EdgeInsets.only(bottom: padding.large.bottom),
+                child: extended ? const ColoredHeader() : const ColoredLogo(),
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(left: padding.base),
-              child: extended ? const AboutMark() : const AboutMark.compact(),
-            ),
-          )
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(left: padding.base),
+                child: extended ? const AboutMark() : const AboutMark.compact(),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -39,7 +39,11 @@ void main() {
   setUp(() {
     memoizer = const MemoizerStub();
     stringBundle = const StringBundleStub();
-    loader = PalettesLoader(memoizer: memoizer, stringBundle: stringBundle);
+    loader = PalettesLoader(
+      memoizer: memoizer,
+      stringBundle: stringBundle,
+      palettesDataPath: "testPath",
+    );
   });
 
   tearDown(() {
@@ -51,15 +55,34 @@ void main() {
     group("when constructed", () {
       test("then should throw if given a null memoizer", () {
         expect(
-          () => PalettesLoader(memoizer: null, stringBundle: stringBundle),
-          throwsA(isA<AssertionError>()),
+          () => PalettesLoader(
+            memoizer: null,
+            stringBundle: stringBundle,
+            palettesDataPath: "testPath",
+          ),
+          throwsAssertionError,
         );
       });
 
       test("then should throw if given a null stringBundle", () {
         expect(
-          () => PalettesLoader(memoizer: memoizer, stringBundle: null),
-          throwsA(isA<AssertionError>()),
+          () => PalettesLoader(
+            memoizer: memoizer,
+            stringBundle: null,
+            palettesDataPath: "testPath",
+          ),
+          throwsAssertionError,
+        );
+      });
+
+      test("then should throw if given a null palettesDataPath", () {
+        expect(
+          () => PalettesLoader(
+            memoizer: memoizer,
+            stringBundle: const StringBundleStub(),
+            palettesDataPath: null,
+          ),
+          throwsAssertionError,
         );
       });
     });
@@ -76,7 +99,11 @@ void main() {
     setUp(() {
       memoizer = MockMemoizer();
       stringBundle = const StringBundleStub();
-      loader = PalettesLoader(memoizer: memoizer, stringBundle: stringBundle);
+      loader = PalettesLoader(
+        memoizer: memoizer,
+        stringBundle: stringBundle,
+        palettesDataPath: "testPath",
+      );
     });
 
     tearDown(() {
@@ -96,7 +123,11 @@ void main() {
     setUp(() {
       memoizer = DefaultMemoizer<Map<String, List<String>>>();
       stringBundle = const StringBundleStub();
-      loader = PalettesLoader(memoizer: memoizer, stringBundle: stringBundle);
+      loader = PalettesLoader(
+        memoizer: memoizer,
+        stringBundle: stringBundle,
+        palettesDataPath: "testPath",
+      );
     });
 
     tearDown(() {

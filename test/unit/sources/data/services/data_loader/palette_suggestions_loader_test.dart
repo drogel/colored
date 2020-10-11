@@ -11,7 +11,9 @@ void main() {
   PaletteSuggestionsLoader loader;
 
   setUp(() {
-    loader = PaletteSuggestionsLoader(stringBundle: StringBundleStub());
+    loader = PaletteSuggestionsLoader(
+        stringBundle: StringBundleStub(),
+        paletteSuggestionsDataPath: "testDataPath");
   });
 
   tearDown(() {
@@ -22,8 +24,21 @@ void main() {
     group("when constructed", () {
       test("an AssertionError is thrown if stringBundle is null", () {
         expect(
-          () => PaletteSuggestionsLoader(stringBundle: null),
-          throwsA(isA<AssertionError>()),
+          () => PaletteSuggestionsLoader(
+            stringBundle: null,
+            paletteSuggestionsDataPath: "test",
+          ),
+          throwsAssertionError,
+        );
+      });
+
+      test("an AssertionError throws on null paletteSuggestionsDataPath", () {
+        expect(
+          () => PaletteSuggestionsLoader(
+            stringBundle: StringBundleStub(),
+            paletteSuggestionsDataPath: null,
+          ),
+          throwsAssertionError,
         );
       });
     });
