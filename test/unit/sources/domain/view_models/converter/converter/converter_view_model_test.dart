@@ -96,7 +96,7 @@ void main() {
       test("then an initial state with the primaryDark color is returned", () {
         final actual = viewModel.initialState;
 
-        final expectedColor = color_constants.primaryDark;
+        const expectedColor = color_constants.primaryDark;
 
         expect(
           actual.formatData[Format.rgb],
