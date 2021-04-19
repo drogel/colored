@@ -22,7 +22,7 @@ class ColorNamesLoader implements DataLoader<String> {
   Future<Map<String, String>> load() async => _memoizer.runOnce(_load);
 
   Future<Map<String, String>> _load() async {
-    final dataPath = FlavorConfig.instance?.values?.colorData;
+    final dataPath = FlavorConfig.instance?.values?.dataPath?.colorData;
     final colorNamesStr = await _stringBundle.load(dataPath);
     return Map<String, String>.from(jsonDecode(colorNamesStr));
   }

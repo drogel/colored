@@ -14,8 +14,8 @@ class PaletteSuggestionsLoader implements DataLoader<List<String>> {
 
   @override
   Future<Map<String, List<String>>> load() async {
-    final dataPath = FlavorConfig.instance?.values?.paletteSuggestionData;
-    final suggestionsStr = await _stringBundle.load(dataPath);
+    final path = FlavorConfig.instance?.values?.dataPath?.paletteSuggestionData;
+    final suggestionsStr = await _stringBundle.load(path);
     final jsonMap = Map<String, dynamic>.from(jsonDecode(suggestionsStr));
 
     return jsonMap.map((k, v) => MapEntry(k, List<String>.from(v)));

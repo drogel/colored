@@ -14,8 +14,8 @@ class ColorSuggestionsLoader implements DataLoader<String> {
 
   @override
   Future<Map<String, String>> load() async {
-    final dataPath = FlavorConfig.instance?.values?.colorSuggestionData;
-    final suggestionsStr = await _stringBundle.load(dataPath);
+    final path = FlavorConfig.instance?.values?.dataPath?.colorSuggestionData;
+    final suggestionsStr = await _stringBundle.load(path);
     return Map<String, String>.from(jsonDecode(suggestionsStr));
   }
 }

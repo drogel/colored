@@ -22,7 +22,7 @@ class PalettesLoader implements DataLoader<List<String>> {
   Future<Map<String, List<String>>> load() async => _memoizer.runOnce(_load);
 
   Future<Map<String, List<String>>> _load() async {
-    final dataPath = FlavorConfig.instance?.values?.paletteData;
+    final dataPath = FlavorConfig.instance?.values?.dataPath?.paletteData;
     final palettesStr = await _stringBundle.load(dataPath);
     final jsonMap = Map<String, dynamic>.from(jsonDecode(palettesStr));
     return jsonMap.map((k, v) => MapEntry(k, List<String>.from(v)));
