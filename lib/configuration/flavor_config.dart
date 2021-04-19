@@ -1,19 +1,21 @@
+import 'package:colored/configuration/flavor_values/dev_values.dart';
 import 'package:colored/configuration/flavor_values/flavor_values.dart';
+import 'package:colored/configuration/flavor_values/production_values.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'flavor.dart';
 
 class FlavorConfig {
   factory FlavorConfig({
     @required Flavor flavor,
-    @required FlavorValues values,
     Color color = Colors.blue,
-  }) =>
+  n}) =>
       _instance ??= FlavorConfig._internal(
         flavor,
         flavor.toString().split('.').last,
         color,
-        values,
+        _getFlavorValuesForFlavor(flavor),
       );
 
   FlavorConfig._internal(this.flavor, this.name, this.color, this.values);
@@ -26,6 +28,11 @@ class FlavorConfig {
   static FlavorConfig _instance;
 
   static FlavorConfig get instance => _instance;
+
+  static FlavorValues _getFlavorValuesForFlavor(Flavor flavor) =>
+      flavor == Flavor.production
+          ? const ProductionValues()
+          : const DevValues();
 
   static bool isProduction() => _instance.flavor == Flavor.production;
 

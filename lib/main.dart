@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlavorConfig(flavor: Flavor.production, values: const ProductionValues());
+  FlavorConfig(flavor: Flavor.production);
 
   final initialFlowRouter = await _getInitialRoute(const SharedPreferences());
 
