@@ -1,4 +1,4 @@
 enum FlavorType {
   dev,
-  production
+  localData
 }

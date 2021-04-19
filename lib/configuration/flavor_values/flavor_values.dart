@@ -1,11 +1,7 @@
+import 'package:colored/configuration/flavor_values/data_paths/data_path.dart';
+
 abstract class FlavorValues {
-  String get colorData;
-
-  String get colorSuggestionData;
-
-  String get paletteData;
-
-  String get paletteSuggestionData;
+  DataPath get dataPath;
 
   String get repositoryLink;
 }

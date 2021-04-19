@@ -9,7 +9,7 @@ class PaletteSuggestionsLoader implements DataLoader<List<String>> {
     @required StringBundle stringBundle,
     @required String paletteSuggestionsDataPath,
   })  : assert(stringBundle != null),
-        assert(paletteSuggestionsDataPath!= null),
+        assert(paletteSuggestionsDataPath != null),
         _paletteSuggestionsDataPath = paletteSuggestionsDataPath,
         _stringBundle = stringBundle;
 
@@ -21,7 +21,6 @@ class PaletteSuggestionsLoader implements DataLoader<List<String>> {
     final dataPath = _paletteSuggestionsDataPath;
     final suggestionsStr = await _stringBundle.load(dataPath);
     final jsonMap = Map<String, dynamic>.from(jsonDecode(suggestionsStr));
-
     return jsonMap.map((k, v) => MapEntry(k, List<String>.from(v)));
   }
 }

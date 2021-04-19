@@ -13,10 +13,8 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlavorConfig(flavorType: FlavorType.production);
-
+  FlavorConfig(flavorType: FlavorType.localData);
   final initialFlowRouter = await _getInitialRoute(const SharedPreferences());
-
   runApp(Colored(router: initialFlowRouter));
 }
 

@@ -15,7 +15,7 @@ class ColorSuggestionsInjector {
   ColorSuggestionsViewModel injectViewModel([
     StreamController<ColorSuggestionsState> stateController,
   ]) {
-    final dataPath = FlavorConfig.instance.values.colorSuggestionData;
+    final dataPath = FlavorConfig.instance.values.dataPath.colorSuggestionData;
     return ColorSuggestionsViewModel(
       stateController:
           stateController ?? StreamController<ColorSuggestionsState>(),
