@@ -28,13 +28,15 @@ class ColoredThemeComposer implements ThemeComposer {
         primaryColorDark: colors.primaryVariant,
         accentColor: colors.secondary,
         scaffoldBackgroundColor: colors.primary,
-        cursorColor: colors.secondary,
         indicatorColor: colors.secondary,
         primarySwatch: colors.swatch,
-        textSelectionHandleColor: colors.secondary,
-        textSelectionColor: colors.secondaryDark,
         hintColor: colors.textVariant,
         hoverColor: colors.secondaryDark.withOpacity(opacity.hover),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: colors.secondary,
+          selectionHandleColor: colors.secondary,
+          selectionColor: colors.secondaryDark,
+        ),
         colorScheme: ColorScheme(
           primary: colors.primary,
           primaryVariant: colors.primaryVariant,
@@ -105,5 +107,6 @@ class ColoredThemeComposer implements ThemeComposer {
           scaffoldBackgroundColor: colors.primary,
           barBackgroundColor: colors.primary,
         ),
+        visualDensity: VisualDensity.standard,
       );
 }

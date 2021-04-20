@@ -54,7 +54,7 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
               child: Padding(
                 padding: margin,
                 child: Stack(
-                  overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     widget.child,
                     AnimatedPositioned(
