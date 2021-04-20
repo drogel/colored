@@ -6,5 +6,5 @@ class DartHttpWrapper implements HttpWrapper {
 
   @override
   Future<http.Response> get(String url, {Map<String, String> headers}) =>
-      http.get(url, headers: headers);
+      http.get(Uri.parse(url), headers: headers);
 }
