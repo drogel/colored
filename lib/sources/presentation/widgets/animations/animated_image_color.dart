@@ -10,13 +10,13 @@ enum AnimatedImageColorState {
 class AnimatedImageColor extends StatelessWidget {
   const AnimatedImageColor(
     this.imagePath, {
-    @required this.begin,
-    @required this.end,
-    @required this.state,
+    required this.begin,
+    required this.end,
+    required this.state,
     this.duration,
     this.size,
     this.curve,
-    Key key,
+    Key? key,
   })  : assert(begin != null),
         assert(imagePath != null),
         assert(end != null),
@@ -27,14 +27,14 @@ class AnimatedImageColor extends StatelessWidget {
   final AnimatedImageColorState state;
   final Color begin;
   final Color end;
-  final Duration duration;
-  final Curve curve;
-  final double size;
+  final Duration? duration;
+  final Curve? curve;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
-    final durationScheme = DurationData.of(context).durationScheme;
-    final curveScheme = CurveData.of(context).curveScheme;
+    final durationScheme = DurationData.of(context)!.durationScheme;
+    final curveScheme = CurveData.of(context)!.curveScheme;
     final defaultCurve = curveScheme.main;
     final defaultDuration = durationScheme.shortPresenting;
     final currentColor = _setCurrentColor();
@@ -42,7 +42,7 @@ class AnimatedImageColor extends StatelessWidget {
       tween: ColorTween(begin: begin, end: currentColor),
       duration: duration ?? defaultDuration,
       curve: curve ?? defaultCurve,
-      builder: (context, value, child) => Image.asset(
+      builder: (context, dynamic value, child) => Image.asset(
         imagePath,
         height: size,
         width: size,

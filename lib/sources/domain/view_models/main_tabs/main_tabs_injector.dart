@@ -7,7 +7,7 @@ class MainTabsInjector {
   const MainTabsInjector();
 
   MainTabsViewModel injectViewModel(
-          [StreamController<IndexedNavigationState> stateController]) =>
+          [StreamController<IndexedNavigationState>? stateController]) =>
       MainTabsViewModel(
         stateController:
             stateController ?? StreamController<IndexedNavigationState>(),

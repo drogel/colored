@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class TransformerNotifier extends StatefulWidget {
   const TransformerNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         assert(child != null),
         super(key: key);
@@ -21,7 +21,7 @@ class TransformerNotifier extends StatefulWidget {
 }
 
 class _TransformerNotifierState extends State<TransformerNotifier> {
-  TransformerViewModel _viewModel;
+  late TransformerViewModel _viewModel;
 
   @override
   void initState() {
@@ -34,9 +34,9 @@ class _TransformerNotifierState extends State<TransformerNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) {
-          final sel = snapshot.data.selection;
+          final sel = snapshot.data!.selection;
           return TransformerData(
-            state: snapshot.data,
+            state: snapshot.data!,
             onSelectionChanged: _viewModel.notifySelectionChanged,
             onSelectionStarted: _viewModel.notifySelectionStarted,
             onSelectionEnded: _viewModel.notifySelectionEnded,

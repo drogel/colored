@@ -7,9 +7,9 @@ import 'package:flutter/foundation.dart';
 
 class PalettesLoader implements DataLoader<List<String>> {
   const PalettesLoader({
-    @required Memoizer<Map<String, List<String>>> memoizer,
-    @required StringBundle stringBundle,
-    @required String palettesDataPath,
+    required Memoizer<Map<String, List<String>>> memoizer,
+    required StringBundle stringBundle,
+    required String palettesDataPath,
   })  : assert(memoizer != null),
         assert(palettesDataPath != null),
         assert(stringBundle != null),

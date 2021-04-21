@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 
 class OnBoardingNotifier extends StatefulWidget {
   const OnBoardingNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         super(key: key);
 
@@ -21,7 +21,7 @@ class OnBoardingNotifier extends StatefulWidget {
 }
 
 class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
-  OnBoardingViewModel _viewModel;
+  late OnBoardingViewModel _viewModel;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
         stream: _viewModel.stateStream,
         initialData: _viewModel.initialState,
         builder: (_, snapshot) => OnBoardingData(
-          state: snapshot.data,
+          state: snapshot.data!,
           onPageScroll: _viewModel.computeScrollFraction,
           onFinished: _onOnBoardingFinished,
           child: widget.child,

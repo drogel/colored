@@ -7,14 +7,14 @@ import 'package:colored/sources/domain/view_models/converter/transformer/transfo
 import 'package:flutter/foundation.dart';
 
 class TransformerInjector {
-  const TransformerInjector({@required Color initialColor})
+  const TransformerInjector({required Color initialColor})
       : assert(initialColor != null),
         _initialColor = initialColor;
 
   final Color _initialColor;
 
   TransformerViewModel injectViewModel([
-    StreamController<TransformerState> stateController,
+    StreamController<TransformerState>? stateController,
   ]) =>
       TransformerViewModel(
         stateController:

@@ -6,7 +6,7 @@ import 'package:colored/sources/presentation/widgets/animations/default_animated
 import 'package:flutter/material.dart';
 
 class NamingCrossFadeText extends StatelessWidget {
-  const NamingCrossFadeText({@required this.defaultText, Key key})
+  const NamingCrossFadeText({required this.defaultText, Key? key})
       : assert(defaultText != null),
         super(key: key);
 
@@ -14,8 +14,8 @@ class NamingCrossFadeText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = NamingData.of(context).state;
-    final connectivityState = ConnectivityData.of(context).state;
+    final state = NamingData.of(context)!.state;
+    final connectivityState = ConnectivityData.of(context)!.state;
     return DefaultAnimatedSwitcher(
       child: _buildText(state, connectivityState),
     );

@@ -18,18 +18,18 @@ class ConverterLayout extends StatelessWidget {
     this.slidersShownIfSpaceAvailable = true,
   });
 
-  final Widget background;
+  final Widget? background;
   final bool slidersShownIfSpaceAvailable;
 
   @override
   Widget build(BuildContext context) {
     final data = ConverterData.of(context);
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     final maxButtonCount = Format.values.length;
     final maxContainerWidth = (maxButtonCount + 1.5) * _kFormatButtonMinSpace;
     return Stack(
       alignment: Alignment.bottomCenter,
-      children: <Widget>[
+      (children: <Widget?>[
         if (background != null) background,
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: maxContainerWidth),
@@ -58,7 +58,7 @@ class ConverterLayout extends StatelessWidget {
             ),
           ),
         ),
-      ],
+      ]) as List<Widget>,
     );
   }
 

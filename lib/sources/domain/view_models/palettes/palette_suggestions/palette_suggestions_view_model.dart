@@ -9,15 +9,15 @@ const _kSuggestionsLength = 15;
 
 class PaletteSuggestionsViewModel {
   const PaletteSuggestionsViewModel({
-    @required StreamController<PaletteSuggestionsState> stateController,
-    @required SuggestionsService<List<String>> suggestionsService,
+    required StreamController<PaletteSuggestionsState> stateController,
+    required SuggestionsService<List<String>?> suggestionsService,
   })  : assert(stateController != null),
         assert(suggestionsService != null),
         _stateController = stateController,
         _suggestionsService = suggestionsService;
 
   final StreamController<PaletteSuggestionsState> _stateController;
-  final SuggestionsService<List<String>> _suggestionsService;
+  final SuggestionsService<List<String>?> _suggestionsService;
 
   Stream<PaletteSuggestionsState> get stateStream => _stateController.stream;
 
@@ -36,6 +36,6 @@ class PaletteSuggestionsViewModel {
 
   void dispose() => _stateController.close();
 
-  Palette _convertToPalette(MapEntry<String, List<String>> entry) =>
+  Palette _convertToPalette(MapEntry<String, List<String>?> entry) =>
       Palette.fromMapEntry(entry);
 }

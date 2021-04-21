@@ -3,8 +3,8 @@ import 'package:vector_math/hash.dart';
 
 class NamedColor {
   const NamedColor({
-    @required this.name,
-    @required this.hex,
+    required this.name,
+    required this.hex,
   })  : assert(name != null),
         assert(hex != null);
 

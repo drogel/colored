@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 class PaletteSuggestionsData extends InheritedWidget {
   const PaletteSuggestionsData({
-    @required this.state,
-    @required Widget child,
-    Key key,
+    required this.state,
+    required Widget child,
+    Key? key,
   })  : assert(child != null),
         super(key: key, child: child);
 
-  static PaletteSuggestionsData of(BuildContext context) => context
+  static PaletteSuggestionsData? of(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType(aspect: PaletteSuggestionsData);
 
-  final PaletteSuggestionsState state;
+  final PaletteSuggestionsState? state;
 
   @override
   bool updateShouldNotify(PaletteSuggestionsData oldWidget) =>

@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 
 class PaletteNamesService implements NamesService<List<String>> {
   const PaletteNamesService({
-    @required DataLoader dataLoader,
-    @required MapFilter filter,
+    required DataLoader dataLoader,
+    required MapFilter filter,
   })  : assert(dataLoader != null),
         assert(filter != null),
         _dataLoader = dataLoader,
@@ -21,6 +21,6 @@ class PaletteNamesService implements NamesService<List<String>> {
   ) async {
     final palettes = await _dataLoader.load();
     final filteredPalettes = _filter.filter(searchString, palettes);
-    return filteredPalettes;
+    return filteredPalettes as FutureOr<Map<String, List<String>>>;
   }
 }

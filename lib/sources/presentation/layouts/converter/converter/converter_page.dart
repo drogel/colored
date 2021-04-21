@@ -8,7 +8,7 @@ import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
 
 class ConverterPage extends StatelessWidget implements TabPage {
-  const ConverterPage({Key key}) : super(key: key);
+  const ConverterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => const ConnectivityLayout(
@@ -17,8 +17,8 @@ class ConverterPage extends StatelessWidget implements TabPage {
       );
 
   @override
-  String getTabTitle(BuildContext context) =>
-      Localization.of(context).converter.pageTitle;
+  String? getTabTitle(BuildContext context) =>
+      Localization.of(context)!.converter.pageTitle;
 
   @override
   IconData get tabIcon => Icons.tune;

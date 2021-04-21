@@ -37,7 +37,7 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
 
   @override
   void didChangeDependencies() {
-    final scrollFraction = OnBoardingData.of(context).state.pageScrollFraction;
+    final scrollFraction = OnBoardingData.of(context)!.state.pageScrollFraction;
     final maxScrollFraction = _kBackgroundColors.length - 1;
     _scrollFraction = scrollFraction.clamp(0, maxScrollFraction).toDouble();
     _showSliders = _scrollFraction > _kSlidersScrollFractionTrigger;
@@ -46,7 +46,7 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: MultiLerp.multiLerp(_kBackgroundColors, _scrollFraction),
@@ -96,7 +96,7 @@ class _OnBoardingLayoutState extends State<OnBoardingLayout> {
   }
 
   void _handleScroll() {
-    final data = OnBoardingData.of(context);
+    final data = OnBoardingData.of(context)!;
     final screenWidth = MediaQuery.of(context).size.width;
     data.onPageScroll(_scroll.position.pixels, screenWidth);
   }

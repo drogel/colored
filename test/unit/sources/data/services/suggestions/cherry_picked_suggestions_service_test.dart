@@ -33,7 +33,7 @@ class RandomGeneratorStub implements IntGenerator {
   static const stubbedIntList = [1, 3];
 
   @override
-  List<int> generate({int max, int length}) => stubbedIntList;
+  List<int> generate({int? max, int? length}) => stubbedIntList;
 }
 
 void main() {
@@ -62,13 +62,13 @@ void main() {
   });
 
   group("Given a CherryPickedSuggestionsService with a color data loader", () {
-    DataLoader<String> suggestionsDataLoader;
-    SuggestionsService<String> suggestionsService;
+    DataLoader<String>? suggestionsDataLoader;
+    SuggestionsService<String?>? suggestionsService;
 
     setUp(() {
       suggestionsDataLoader = ColorSuggestionsLoaderStub();
       suggestionsService = CherryPickedSuggestionsService<String>(
-        dataLoader: suggestionsDataLoader,
+        dataLoader: suggestionsDataLoader!,
         listPicker: StringListPicker(
           intGenerator: RandomGeneratorStub(),
         ),
@@ -82,7 +82,7 @@ void main() {
 
     group("when fetchSuggestions is called", () {
       test("then the expected map is retrieved", () async {
-        final actual = await suggestionsService.fetchSuggestions(2);
+        final actual = await suggestionsService!.fetchSuggestions(2);
         final expected = {"222222": "Second", "444444": "Fourth"};
         expect(actual, expected);
       });
@@ -90,13 +90,13 @@ void main() {
   });
 
   group("Given a CherryPickerSuggestionsService with a palette loader", () {
-    DataLoader<List<String>> suggestionsDataLoader;
-    SuggestionsService<List<String>> suggestionsService;
+    DataLoader<List<String>>? suggestionsDataLoader;
+    SuggestionsService<List<String>?>? suggestionsService;
 
     setUp(() {
       suggestionsDataLoader = PaletteSuggestionsLoaderStub();
       suggestionsService = CherryPickedSuggestionsService<List<String>>(
-        dataLoader: suggestionsDataLoader,
+        dataLoader: suggestionsDataLoader!,
         listPicker: StringListPicker(
           intGenerator: RandomGeneratorStub(),
         ),
@@ -110,7 +110,7 @@ void main() {
 
     group("when fetchSuggestions is called", () {
       test("then the exected palette map is retrieved", () async {
-        final actual = await suggestionsService.fetchSuggestions(2);
+        final actual = await suggestionsService!.fetchSuggestions(2);
         final expected = <String, List<String>>{
           "Second": ["000000", "ffffff"],
           "Fourth": ["000000"]

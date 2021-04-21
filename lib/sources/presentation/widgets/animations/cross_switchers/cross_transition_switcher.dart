@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class CrossTransitionSwitcher extends CrossSwitcher {
   const CrossTransitionSwitcher({
-    @required Widget firstChild,
-    @required Widget secondChild,
-    @required CrossSwitcherState state,
-    Key key,
+    required Widget firstChild,
+    required Widget secondChild,
+    required CrossSwitcherState state,
+    Key? key,
   })  : assert(firstChild != null),
         assert(secondChild != null),
         assert(state != null),

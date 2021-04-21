@@ -6,8 +6,9 @@ import 'package:colored/sources/app/navigation/indexed_navigation/indexed_naviga
 class IndexedNavigationInjector {
   const IndexedNavigationInjector();
 
-  IndexedNavigationController injectController(
-          [StreamController<IndexedNavigationState> stateController]) =>
+  IndexedNavigationController injectController([
+    StreamController<IndexedNavigationState>? stateController,
+  ]) =>
       IndexedNavigationController(
         stateController:
             stateController ?? StreamController<IndexedNavigationState>(),

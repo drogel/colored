@@ -7,16 +7,16 @@ import 'package:flutter/services.dart';
 
 class FormatButton extends StatefulWidget {
   const FormatButton({
-    @required this.content,
-    @required this.format,
-    @required this.onClipboardRetrieved,
-    @required this.clipboardShouldFail,
-    Key key,
+    required this.content,
+    required this.format,
+    required this.onClipboardRetrieved,
+    required this.clipboardShouldFail,
+    Key? key,
   }) : super(key: key);
 
-  final String content;
-  final void Function(String, Format) onClipboardRetrieved;
-  final bool Function(String, Format) clipboardShouldFail;
+  final String? content;
+  final void Function(String?, Format) onClipboardRetrieved;
+  final bool Function(String?, Format) clipboardShouldFail;
   final Format format;
 
   @override
@@ -25,8 +25,8 @@ class FormatButton extends StatefulWidget {
 
 class _FormatButtonState extends State<FormatButton> {
   final GlobalKey _tooltip = GlobalKey();
-  String _tooltipMessage;
-  Color _tooltipColor;
+  String? _tooltipMessage;
+  Color? _tooltipColor;
 
   @override
   void didChangeDependencies() {
@@ -36,7 +36,7 @@ class _FormatButtonState extends State<FormatButton> {
 
   @override
   Widget build(BuildContext context) {
-    final localization = Localization.of(context).converter;
+    final localization = Localization.of(context)!.converter;
     return ColoredTooltip(
       tooltipKey: _tooltip,
       message: _tooltipMessage ?? localization.tooltipMessage,
@@ -50,14 +50,14 @@ class _FormatButtonState extends State<FormatButton> {
   }
 
   Future<void> _getClipboardData() async {
-    final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+    final clipboardData = await (Clipboard.getData(Clipboard.kTextPlain) as FutureOr<ClipboardData>);
     final isError = widget.clipboardShouldFail(
       clipboardData.text,
       widget.format,
     );
     if (isError) {
       setState(() {
-        _tooltipMessage = Localization.of(context).converter.tooltipError;
+        _tooltipMessage = Localization.of(context)!.converter.tooltipError;
         _tooltipColor = Theme.of(context).colorScheme.error;
       });
       _showTooltip();
@@ -69,7 +69,7 @@ class _FormatButtonState extends State<FormatButton> {
   Future<void> _setTitleInClipboardData() async {
     await Clipboard.setData(ClipboardData(text: widget.content));
     setState(() {
-      _tooltipMessage = Localization.of(context).converter.tooltipMessage;
+      _tooltipMessage = Localization.of(context)!.converter.tooltipMessage;
       _tooltipColor = Theme.of(context).buttonColor;
     });
     _showTooltip();
@@ -77,7 +77,7 @@ class _FormatButtonState extends State<FormatButton> {
 
   void _showTooltip() {
     HapticFeedback.mediumImpact();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       final dynamic tooltipState = _tooltip.currentState;
       tooltipState.ensureTooltipVisible();
     });

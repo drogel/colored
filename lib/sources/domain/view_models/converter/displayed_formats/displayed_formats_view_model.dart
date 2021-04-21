@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 
 class DisplayedFormatsViewModel {
   DisplayedFormatsViewModel({
-    @required StreamController<DisplayedFormatsState> stateController,
+    required StreamController<DisplayedFormatsState> stateController,
   })  : assert(stateController != null),
         _stateController = stateController;
 

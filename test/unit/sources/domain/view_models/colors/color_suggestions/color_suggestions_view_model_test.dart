@@ -20,9 +20,9 @@ class SuggestionsServiceEmptyStub implements SuggestionsService<String> {
 }
 
 void main() {
-  ColorSuggestionsViewModel viewModel;
-  SuggestionsService<String> suggestionsService;
-  StreamController<ColorSuggestionsState> stateController;
+  ColorSuggestionsViewModel? viewModel;
+  SuggestionsService<String>? suggestionsService;
+  StreamController<ColorSuggestionsState>? stateController;
 
   group("Given a ColorSuggestionsViewModel", () {
     group("when constructed", () {
@@ -53,13 +53,13 @@ void main() {
       stateController = StreamController<ColorSuggestionsState>();
       suggestionsService = SuggestionsServiceStub();
       viewModel = ColorSuggestionsViewModel(
-        stateController: stateController,
-        suggestionsService: suggestionsService,
+        stateController: stateController!,
+        suggestionsService: suggestionsService!,
       );
     });
 
     tearDown(() {
-      stateController.close();
+      stateController!.close();
       viewModel = null;
       suggestionsService = null;
       stateController = null;
@@ -67,31 +67,31 @@ void main() {
 
     group("when initialState is called", () {
       test("then a Loading state is received", () {
-        final actual = viewModel.initialState;
+        final actual = viewModel!.initialState;
         expect(actual, isA<Loading>());
       });
     });
 
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController.isClosed, false);
-        viewModel.dispose();
-        expect(stateController.isClosed, true);
+        expect(stateController!.isClosed, false);
+        viewModel!.dispose();
+        expect(stateController!.isClosed, true);
       });
     });
 
     group("when stateStream is called", () {
       test("the stream of the provided state controller is retrieved", () {
-        expect(viewModel.stateStream, stateController.stream);
+        expect(viewModel!.stateStream, stateController!.stream);
       });
     });
 
     group("when init is called", () {
       test("then ColorSuggestionsFound state is retrieved", () async {
-        stateController.stream.listen((event) {
+        stateController!.stream.listen((event) {
           expect(event, isA<ColorSuggestionsFound>());
         });
-        await viewModel.init();
+        await viewModel!.init();
       });
 
       test("then the expected NamedColor list is retrieved", () async {
@@ -99,12 +99,12 @@ void main() {
           NamedColor(name: "First", hex: "#1"),
           NamedColor(name: "Second", hex: "#2"),
         ];
-        stateController.stream.listen((event) {
+        stateController!.stream.listen((event) {
           final actualSuggestionsState = event as ColorSuggestionsFound;
           final actual = actualSuggestionsState.colorSuggestions;
           expect(actual, expected);
         });
-        await viewModel.init();
+        await viewModel!.init();
       });
     });
   });
@@ -114,13 +114,13 @@ void main() {
       stateController = StreamController<ColorSuggestionsState>();
       suggestionsService = SuggestionsServiceEmptyStub();
       viewModel = ColorSuggestionsViewModel(
-        stateController: stateController,
-        suggestionsService: suggestionsService,
+        stateController: stateController!,
+        suggestionsService: suggestionsService!,
       );
     });
 
     tearDown(() {
-      stateController.close();
+      stateController!.close();
       viewModel = null;
       suggestionsService = null;
       stateController = null;
@@ -128,10 +128,10 @@ void main() {
 
     group("when init is called", () {
       test("then Failed state is retrieved", () async {
-        stateController.stream.listen((event) {
+        stateController!.stream.listen((event) {
           expect(event, isA<Failed>());
         });
-        await viewModel.init();
+        await viewModel!.init();
       });
     });
   });

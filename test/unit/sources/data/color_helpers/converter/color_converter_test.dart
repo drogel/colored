@@ -8,7 +8,7 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Converter colorConverter;
+  Converter? colorConverter;
 
   setUp(() {
     colorConverter = const ColorConverter(converters: [
@@ -49,7 +49,7 @@ void main() {
           Format.hsl: "103°, 17%, 25%",
           Format.hsv: "103°, 28%, 29%",
         };
-        expect(colorConverter.convert(59, 74, 53), expected);
+        expect(colorConverter!.convert(59, 74, 53), expected);
       });
     });
   });

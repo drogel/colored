@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 class ColorConverter implements Converter {
   const ColorConverter({
-    @required List<Converter> converters,
+    required List<Converter> converters,
   })  : assert(converters != null),
         _converters = converters;
 

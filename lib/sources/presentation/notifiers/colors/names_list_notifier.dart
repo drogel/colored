@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class NamesListNotifier extends StatefulWidget {
   const NamesListNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         assert(child != null),
         super(key: key);
@@ -21,7 +21,7 @@ class NamesListNotifier extends StatefulWidget {
 }
 
 class _NamesListNotifierState extends State<NamesListNotifier> {
-  NamesListViewModel _viewModel;
+  late NamesListViewModel _viewModel;
 
   @override
   void initState() {

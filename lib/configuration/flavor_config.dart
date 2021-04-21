@@ -3,13 +3,12 @@ import 'package:colored/configuration/flavor_type.dart';
 import 'package:colored/configuration/flavor_values/dev_values.dart';
 import 'package:colored/configuration/flavor_values/flavor_values.dart';
 import 'package:colored/configuration/flavor_values/local_data_values.dart';
-import 'package:flutter/foundation.dart';
 
 class FlavorConfig implements Flavor {
   factory FlavorConfig({
-    @required FlavorType flavorType,
+    required FlavorType flavorType,
   }) =>
-      _instance ??= FlavorConfig._internal(
+      _instance = FlavorConfig._internal(
         flavorType,
         _getFlavorValuesForFlavor(flavorType),
       );
@@ -18,7 +17,7 @@ class FlavorConfig implements Flavor {
 
   static FlavorConfig get instance => _instance;
 
-  static FlavorConfig _instance;
+  static late FlavorConfig _instance;
 
   final FlavorType flavorType;
 

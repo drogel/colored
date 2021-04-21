@@ -32,14 +32,14 @@ class OnBoardingL10ns extends LocaleCodeAware {
     }
   };
 
-  String get welcome => _values[localeCode]['welcome'];
-  String get slogan => _values[localeCode]['slogan'];
-  String get tap => _values[localeCode]['tap'];
-  String get longPress => _values[localeCode]['longPress'];
-  String get tapBody => _values[localeCode]['tapBody'];
-  String get longPressBody => _values[localeCode]['longPressBody'];
-  String get useSliders => _values[localeCode]['useSliders'];
-  String get useSlidersBody => _values[localeCode]['useSlidersBody'];
-  String get useSlidersFooter => _values[localeCode]['useSlidersFooter'];
-  String get done => _values[localeCode]['done'];
+  String get welcome => _values[localeCode]!['welcome']!;
+  String get slogan => _values[localeCode]!['slogan']!;
+  String get tap => _values[localeCode]!['tap']!;
+  String get longPress => _values[localeCode]!['longPress']!;
+  String get tapBody => _values[localeCode]!['tapBody']!;
+  String get longPressBody => _values[localeCode]!['longPressBody']!;
+  String get useSliders => _values[localeCode]!['useSliders']!;
+  String get useSlidersBody => _values[localeCode]!['useSlidersBody']!;
+  String get useSlidersFooter => _values[localeCode]!['useSlidersFooter']!;
+  String get done => _values[localeCode]!['done']!;
 }

@@ -6,11 +6,11 @@ import 'package:colored/sources/presentation/widgets/containers/background_conta
 import 'package:flutter/material.dart';
 
 class PalettesListLayout extends StatelessWidget {
-  const PalettesListLayout({Key key}) : super(key: key);
+  const PalettesListLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final state = PalettesListData.of(context).state;
+    final state = PalettesListData.of(context)!.state;
     switch (state.runtimeType) {
       case NoneFound:
         return const NoPalettesMessage();

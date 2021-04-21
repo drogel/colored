@@ -9,9 +9,9 @@ import 'package:flutter/foundation.dart';
 
 class NamesListViewModel extends ListSearchConfigurator {
   const NamesListViewModel({
-    @required StreamController<NamesListState> stateController,
-    @required NamesService namesService,
-    @required SearchConfigurator searchConfigurator,
+    required StreamController<NamesListState> stateController,
+    required NamesService namesService,
+    required SearchConfigurator searchConfigurator,
   })  : assert(stateController != null),
         assert(namesService != null),
         assert(searchConfigurator != null),

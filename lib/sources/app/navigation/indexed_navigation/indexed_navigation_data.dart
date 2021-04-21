@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 
 class IndexedNavigationData extends InheritedWidget {
   const IndexedNavigationData({
-    @required this.state,
-    @required this.onNavigation,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        assert(onNavigation != null),
-        super(key: key, child: child);
+    required this.state,
+    required this.onNavigation,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
-  static IndexedNavigationData of(BuildContext context) =>
+  static IndexedNavigationData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: IndexedNavigationData);
 
   final IndexedNavigationState state;

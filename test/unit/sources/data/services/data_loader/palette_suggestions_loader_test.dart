@@ -8,7 +8,7 @@ class StringBundleStub implements StringBundle {
 }
 
 void main() {
-  PaletteSuggestionsLoader loader;
+  PaletteSuggestionsLoader? loader;
 
   setUp(() {
     loader = PaletteSuggestionsLoader(
@@ -48,7 +48,7 @@ void main() {
         final expected = <String, List<String>>{
           "test": ["000000", "ffffff"]
         };
-        final actual = await loader.load();
+        final actual = await loader!.load();
 
         expect(expected, actual);
       });

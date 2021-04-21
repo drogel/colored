@@ -9,22 +9,22 @@ enum PageTransitionType {
 
 class TransitionSwitcher extends StatelessWidget {
   const TransitionSwitcher({
-    @required this.child,
+    required this.child,
     this.reverse = false,
     this.type = PageTransitionType.fadeThrough,
     this.backgroundColor,
-    Key key,
+    Key? key,
   })  : assert(child != null),
         super(key: key);
 
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final Widget child;
   final bool reverse;
   final PageTransitionType type;
 
   @override
   Widget build(BuildContext context) {
-    final durations = DurationData.of(context).durationScheme;
+    final durations = DurationData.of(context)!.durationScheme;
     final defaultBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
     return PageTransitionSwitcher(
       reverse: reverse,
@@ -48,10 +48,10 @@ class TransitionSwitcher extends StatelessWidget {
   }
 
   Widget _buildFadeThrough({
-    Animation<double> primaryAnimation,
-    Animation<double> secondaryAnimation,
-    Color defaultBackgroundColor,
-    Widget child,
+    required Animation<double> primaryAnimation,
+    required Animation<double> secondaryAnimation,
+    Color? defaultBackgroundColor,
+    Widget? child,
   }) =>
       FadeThroughTransition(
         fillColor: backgroundColor ?? defaultBackgroundColor,
@@ -61,10 +61,10 @@ class TransitionSwitcher extends StatelessWidget {
       );
 
   Widget _buildSharedZAxis({
-    Animation<double> primaryAnimation,
-    Animation<double> secondaryAnimation,
-    Color defaultBackgroundColor,
-    Widget child,
+    required Animation<double> primaryAnimation,
+    required Animation<double> secondaryAnimation,
+    Color? defaultBackgroundColor,
+    Widget? child,
   }) =>
       SharedAxisTransition(
         animation: primaryAnimation,

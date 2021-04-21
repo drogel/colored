@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ConverterState {
   const ConverterState({
-    @required this.formatData,
+    required this.formatData,
   }) : assert(formatData != null);
 
   final Map<Format, String> formatData;

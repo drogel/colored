@@ -9,15 +9,15 @@ const _kSuggestionsLength = 15;
 
 class ColorSuggestionsViewModel {
   const ColorSuggestionsViewModel({
-    @required StreamController<ColorSuggestionsState> stateController,
-    @required SuggestionsService<String> suggestionsService,
+    required StreamController<ColorSuggestionsState> stateController,
+    required SuggestionsService<String?> suggestionsService,
   })  : assert(stateController != null),
         assert(suggestionsService != null),
         _stateController = stateController,
         _suggestionsService = suggestionsService;
 
   final StreamController<ColorSuggestionsState> _stateController;
-  final SuggestionsService<String> _suggestionsService;
+  final SuggestionsService<String?> _suggestionsService;
 
   Stream<ColorSuggestionsState> get stateStream => _stateController.stream;
 
@@ -36,6 +36,6 @@ class ColorSuggestionsViewModel {
 
   void dispose() => _stateController.close();
 
-  NamedColor _convertToNamedColor(MapEntry<String, String> entry) =>
+  NamedColor _convertToNamedColor(MapEntry<String, String?> entry) =>
       NamedColor.fromMapEntry(entry);
 }

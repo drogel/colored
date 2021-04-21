@@ -8,14 +8,14 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class ResponsiveGrid extends StatefulWidget {
   const ResponsiveGrid({
-    @required this.itemBuilder,
-    @required this.itemCount,
+    required this.itemBuilder,
+    required this.itemCount,
     this.pageStorageKey,
     this.estimatedItemSize = 200,
     this.crossAxisMinCount = 2,
     this.crossAxisMaxCount = 9,
     this.childAspectRatio = 1,
-    Key key,
+    Key? key,
   })  : assert(itemBuilder != null),
         assert(itemCount != null),
         super(key: key);
@@ -23,7 +23,7 @@ class ResponsiveGrid extends StatefulWidget {
   final double estimatedItemSize;
   final int crossAxisMinCount;
   final int crossAxisMaxCount;
-  final PageStorageKey<String> pageStorageKey;
+  final PageStorageKey<String>? pageStorageKey;
   final double childAspectRatio;
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;
@@ -51,7 +51,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     final mediaQuery = MediaQuery.of(context);
     final viewInsets = _computeEffectiveViewInsets(mediaQuery.viewInsets);
     final totalPadding = padding.vertical + viewInsets;
@@ -90,20 +90,20 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
   EdgeInsets _computeEffectiveViewInsets(EdgeInsets viewInsets) {
     if (viewInsets.bottom != 0) {
       const bottomInsets = EdgeInsets.only(bottom: kBottomNavigationBarHeight);
-      return viewInsets.subtract(bottomInsets);
+      return viewInsets.subtract(bottomInsets) as EdgeInsets;
     } else {
       return viewInsets;
     }
   }
 
   void _animateToTop(BuildContext context) {
-    final curve = CurveData.of(context).curveScheme.main;
-    final duration = DurationData.of(context).durationScheme.mediumPresenting;
+    final curve = CurveData.of(context)!.curveScheme.main;
+    final duration = DurationData.of(context)!.durationScheme.mediumPresenting;
     _scrollController.animateTo(0, duration: duration, curve: curve);
   }
 
   void _dismissKeyboard() =>
-      WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+      WidgetsBinding.instance!.focusManager.primaryFocus?.unfocus();
 
   bool _isItemCountDifferent(ResponsiveGrid oldWidget) =>
       oldWidget.itemCount != widget.itemCount;

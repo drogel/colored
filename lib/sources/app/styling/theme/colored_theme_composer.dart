@@ -8,13 +8,11 @@ import 'package:flutter/material.dart';
 
 class ColoredThemeComposer implements ThemeComposer {
   const ColoredThemeComposer({
-    @required this.colors,
-    @required this.opacity,
-    @required this.fonts,
-    @required this.elevation,
-  })  : assert(colors != null),
-        assert(fonts != null),
-        assert(opacity != null);
+    required this.colors,
+    required this.opacity,
+    required this.fonts,
+    required this.elevation,
+  });
 
   final ColoredColorScheme colors;
   final OpacityScheme opacity;
@@ -29,7 +27,7 @@ class ColoredThemeComposer implements ThemeComposer {
         accentColor: colors.secondary,
         scaffoldBackgroundColor: colors.primary,
         indicatorColor: colors.secondary,
-        primarySwatch: colors.swatch,
+        primarySwatch: colors.swatch as MaterialColor?,
         hintColor: colors.textVariant,
         hoverColor: colors.secondaryDark.withOpacity(opacity.hover),
         textSelectionTheme: TextSelectionThemeData(

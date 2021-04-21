@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 class ColorSuggestionsData extends InheritedWidget {
   const ColorSuggestionsData({
-    @required this.state,
-    @required Widget child,
-    Key key,
+    required this.state,
+    required Widget child,
+    Key? key,
   })  : assert(child != null),
         super(key: key, child: child);
 
-  final ColorSuggestionsState state;
+  final ColorSuggestionsState? state;
 
-  static ColorSuggestionsData of(BuildContext context) =>
+  static ColorSuggestionsData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: ColorSuggestionsData);
 
   @override

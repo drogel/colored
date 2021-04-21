@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 
 class MainTabsViewModel extends IndexedNavigationController {
   const MainTabsViewModel({
-    @required StreamController<IndexedNavigationState> stateController,
+    required StreamController<IndexedNavigationState> stateController,
   })  : assert(stateController != null),
         super(stateController: stateController);
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class OnlyPortraitScrollbar extends StatelessWidget {
   const OnlyPortraitScrollbar({
-    @required this.child,
-    Key key,
+    required this.child,
+    Key? key,
   })  : assert(child != null),
         super(key: key);
 

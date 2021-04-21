@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class BackgroundContainer extends StatelessWidget {
-  const BackgroundContainer({this.child, Key key}) : super(key: key);
+  const BackgroundContainer({this.child, Key? key}) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) => Container(

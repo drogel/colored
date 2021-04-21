@@ -6,7 +6,7 @@ class RandomUniqueIntGenerator implements IntGenerator {
   const RandomUniqueIntGenerator();
 
   @override
-  List<int> generate({int max, int length}) => max <= length
+  List<int> generate({required int max, int? length}) => max <= length!
       ? _getAllPossibleInts(max)
       : _getRandomUniqueInts(max, length);
 

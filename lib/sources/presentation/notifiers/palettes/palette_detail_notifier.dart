@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class PaletteDetailNotifier extends StatefulWidget {
   const PaletteDetailNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         assert(child != null),
         super(key: key);
@@ -21,7 +21,7 @@ class PaletteDetailNotifier extends StatefulWidget {
 }
 
 class _PaletteDetailNotifierState extends State<PaletteDetailNotifier> {
-  PaletteDetailViewModel _viewModel;
+  late PaletteDetailViewModel _viewModel;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _PaletteDetailNotifierState extends State<PaletteDetailNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => PaletteDetailData(
-          state: snapshot.data,
+          state: snapshot.data!,
           onPaletteSelected: _viewModel.fetchColorNames,
           child: widget.child,
         ),

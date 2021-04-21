@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 
 class DisplayedFormatsLayout extends StatelessWidget {
   const DisplayedFormatsLayout({
-    @required this.buttonMinSpace,
-    @required this.converterData,
-    Key key,
+    required this.buttonMinSpace,
+    required this.converterData,
+    Key? key,
   }) : super(key: key);
 
   final double buttonMinSpace;
-  final ConverterData converterData;
+  final ConverterData? converterData;
 
   @override
   Widget build(BuildContext context) {
@@ -25,28 +25,28 @@ class DisplayedFormatsLayout extends StatelessWidget {
         return DynamicRow(
           itemCount: count,
           mainAxisAlignment: _getButtonAlignment(count),
-          itemBuilder: (_, index) => _buildFormatButton(data, index),
+          itemBuilder: (_, index) => _buildFormatButton(data!, index),
         );
       },
     );
   }
 
   Widget _buildFormatButton(DisplayedFormatsData data, int index) {
-    final displayedFormats = data.state.formats;
+    final displayedFormats = data.state!.formats;
     return DropdownFormatButton(
       title: displayedFormats[index].rawValue,
       format: displayedFormats[index],
-      clipboardShouldFail: converterData.clipboardShouldFail,
-      onClipboardRetrieved: converterData.onClipboardRetrieved,
-      content: converterData.state.formatData[displayedFormats[index]],
+      clipboardShouldFail: converterData!.clipboardShouldFail,
+      onClipboardRetrieved: converterData!.onClipboardRetrieved,
+      content: converterData!.state.formatData[displayedFormats[index]],
       onDropdownSelection: data.onFormatSelection,
     );
   }
 
   int _computeButtonCount(double availableWidth) {
     final buttonCountSpace = (availableWidth / buttonMinSpace).floor();
-    final buttonCount = buttonCountSpace.clamp(0, Format.values.length);
-    return buttonCount;
+    final num buttonCount = buttonCountSpace.clamp(0, Format.values.length);
+    return buttonCount as int;
   }
 
   MainAxisAlignment _getButtonAlignment(int buttonCount) => buttonCount == 1

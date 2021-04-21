@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 class PaletteDetailData extends InheritedWidget {
   const PaletteDetailData({
-    @required this.state,
-    @required this.onPaletteSelected,
-    @required Widget child,
-    Key key,
+    required this.state,
+    required this.onPaletteSelected,
+    required Widget child,
+    Key? key,
   })  : assert(child != null),
         assert(state != null),
         super(key: key, child: child);
 
-  static PaletteDetailData of(BuildContext context) =>
+  static PaletteDetailData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: PaletteDetailData);
 
   final PaletteDetailState state;

@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 
 class NamingResult extends NamedColor {
   const NamingResult({
-    @required String name,
-    @required String hex,
+    required String name,
+    required String hex,
     this.r,
     this.g,
     this.b,
@@ -27,10 +27,10 @@ class NamingResult extends NamedColor {
   static const mappingKey = "colors";
   static const _rgb = "rgb";
 
-  final int r;
-  final int g;
-  final int b;
-  final double distance;
-  final double luminance;
-  final String requestedHex;
+  final int? r;
+  final int? g;
+  final int? b;
+  final double? distance;
+  final double? luminance;
+  final String? requestedHex;
 }

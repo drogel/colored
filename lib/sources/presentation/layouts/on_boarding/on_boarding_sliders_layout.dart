@@ -10,15 +10,15 @@ import 'package:flutter/material.dart';
 const _kInfoPixelRatio = 2.0;
 
 class OnBoardingSlidersLayout extends StatelessWidget {
-  const OnBoardingSlidersLayout({Key key}) : super(key: key);
+  const OnBoardingSlidersLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final localization = Localization.of(context).onBoarding;
-    final stateColor = TransformerData.of(context).state.selection.toColor();
+    final localization = Localization.of(context)!.onBoarding;
+    final stateColor = TransformerData.of(context)!.state.selection.toColor();
     final pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return PresentationLayout(
       children: <Widget>[
         if (pixelRatio >= _kInfoPixelRatio) SizedBox(height: padding.base),
@@ -27,13 +27,13 @@ class OnBoardingSlidersLayout extends StatelessWidget {
           child: Column(
             children: <Widget>[
               AutoSizeText(
-                localization.useSliders,
+                localization.useSliders!,
                 maxLines: 1,
                 style: textTheme.headline2,
                 textAlign: TextAlign.center,
               ),
               AutoSizeText(
-                localization.useSlidersBody,
+                localization.useSlidersBody!,
                 maxLines: 2,
                 style: textTheme.headline5,
                 textAlign: TextAlign.center,
@@ -43,7 +43,7 @@ class OnBoardingSlidersLayout extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: padding.base),
                     AutoSizeText(
-                      localization.useSlidersFooter,
+                      localization.useSlidersFooter!,
                       maxLines: 2,
                       style: textTheme.headline5,
                       textAlign: TextAlign.center,
@@ -53,7 +53,7 @@ class OnBoardingSlidersLayout extends StatelessWidget {
                 ),
               PrimaryButton(
                 title: localization.done,
-                onPressed: OnBoardingData.of(context).onFinished,
+                onPressed: OnBoardingData.of(context)!.onFinished,
                 backgroundColor: stateColor,
                 padding: EdgeInsets.symmetric(
                   horizontal: 2 * padding.base,

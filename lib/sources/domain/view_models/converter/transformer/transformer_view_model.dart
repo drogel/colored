@@ -10,9 +10,9 @@ const _kTunedChangeFactor = 2;
 
 class TransformerViewModel {
   const TransformerViewModel({
-    @required StreamController<TransformerState> stateController,
-    @required ColorTransformer transformer,
-    @required Color initialColor,
+    required StreamController<TransformerState> stateController,
+    required ColorTransformer transformer,
+    required Color initialColor,
   })  : assert(transformer != null),
         assert(stateController != null),
         assert(initialColor != null),

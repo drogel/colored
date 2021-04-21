@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class HueBasedTrack extends StatelessWidget {
   const HueBasedTrack({
-    @required this.painter,
-    Key key,
+    required this.painter,
+    Key? key,
   })  : assert(painter != null),
         super(key: key);
 
@@ -12,7 +12,7 @@ class HueBasedTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radii = RadiusData.of(context).radiiScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
     return SizedBox.expand(
       child: ClipRRect(
         borderRadius: BorderRadius.all(radii.medium),

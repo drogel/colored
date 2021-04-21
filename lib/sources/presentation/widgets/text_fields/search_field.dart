@@ -5,32 +5,32 @@ import 'package:flutter/material.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({
-    @required this.controller,
+    required this.controller,
     this.focusNode,
     this.onClearPressed,
     this.onChanged,
     this.hintText,
-    Key key,
+    Key? key,
   })  : assert(controller != null),
         super(key: key);
 
   final TextEditingController controller;
-  final FocusNode focusNode;
-  final void Function() onClearPressed;
-  final void Function(String) onChanged;
-  final String hintText;
+  final FocusNode? focusNode;
+  final void Function()? onClearPressed;
+  final void Function(String)? onChanged;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final radii = RadiusData.of(context).radiiScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
     final borderRadius = BorderRadius.all(radii.medium);
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return Theme(
       data: theme.copyWith(canvasColor: theme.colorScheme.primaryVariant),
       child: Material(
         borderRadius: borderRadius,
-        elevation: theme.appBarTheme.elevation,
+        elevation: theme.appBarTheme.elevation!,
         child: TextField(
           controller: controller,
           style: theme.textTheme.headline6,
@@ -62,6 +62,6 @@ class SearchField extends StatelessWidget {
 
   void _onClearPressed() {
     controller.clear();
-    onClearPressed();
+    onClearPressed!();
   }
 }

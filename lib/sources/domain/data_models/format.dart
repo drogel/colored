@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart' show IterableExtension;
+
 enum Format {
   hex,
   rgb,
@@ -13,10 +15,9 @@ Map<Format, String> _values = {
 };
 
 extension FormatValue on Format {
-  String get rawValue => _values[this];
+  String? get rawValue => _values[this];
 }
 
-Format formatValue(String rawValue) => _values.keys.firstWhere(
+Format? formatValue(String? rawValue) => _values.keys.firstWhereOrNull(
       (key) => _values[key] == rawValue,
-      orElse: () => null,
     );

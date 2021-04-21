@@ -16,8 +16,8 @@ const _kTestMaxWidth = 100.0;
 class MockOrientationService extends Mock implements DeviceOrientationService {}
 
 void main() {
-  OnBoardingViewModel viewModel;
-  StreamController<OnBoardingState> stateController;
+  OnBoardingViewModel? viewModel;
+  StreamController<OnBoardingState>? stateController;
 
   setUp(() {
     stateController = StreamController<OnBoardingState>();
@@ -25,18 +25,18 @@ void main() {
   });
 
   tearDown(() {
-    stateController.close();
+    stateController!.close();
     stateController = null;
     viewModel = null;
   });
 
   void runScrollFractionTest({
-    @required OnBoardingState expectedState,
-    @required double scrollPosition,
+    required OnBoardingState expectedState,
+    required double scrollPosition,
     double maxWidth = _kTestMaxWidth,
   }) {
-    stateController.stream.listen((state) => expect(state, expectedState));
-    viewModel.computeScrollFraction(scrollPosition, maxWidth);
+    stateController!.stream.listen((state) => expect(state, expectedState));
+    viewModel!.computeScrollFraction(scrollPosition, maxWidth);
   }
 
   group("Given an OnBoardingViewModel", () {
@@ -77,7 +77,7 @@ void main() {
 
     group("when initialState is called", () {
       test("then an OnBoardingState with 0 pageScrollFraction is returned", () {
-        final actual = viewModel.initialState;
+        final actual = viewModel!.initialState;
 
         expect(actual, isA<OnBoardingState>());
         expect(actual.pageScrollFraction, 0);
@@ -86,9 +86,9 @@ void main() {
 
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController.isClosed, false);
-        viewModel.dispose();
-        expect(stateController.isClosed, true);
+        expect(stateController!.isClosed, false);
+        viewModel!.dispose();
+        expect(stateController!.isClosed, true);
       });
     });
 

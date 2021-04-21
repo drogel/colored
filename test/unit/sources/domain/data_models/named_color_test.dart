@@ -6,7 +6,7 @@ const String _kName = "Black";
 const String _kHexCode = "#000000";
 
 void main() {
-  NamedColor namedColor;
+  NamedColor? namedColor;
 
   tearDown(() {
     namedColor = null;
@@ -17,11 +17,11 @@ void main() {
 
     group("when constructed", () {
       test("then name can be accessed", () {
-        expect(namedColor.name, _kName);
+        expect(namedColor!.name, _kName);
       });
 
       test("then hex can be accessed", () {
-        expect(namedColor.hex, _kHexCode);
+        expect(namedColor!.hex, _kHexCode);
       });
     });
 
@@ -74,7 +74,7 @@ void main() {
   });
 
   group("Given two valid palettes", () {
-    NamedColor otherNamedColor;
+    NamedColor? otherNamedColor;
 
     setUp(() => namedColor = const NamedColor(name: _kName, hex: _kHexCode));
 

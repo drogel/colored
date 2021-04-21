@@ -4,8 +4,8 @@ class MockLocalStorage implements LocalStorage {
   const MockLocalStorage();
 
   @override
-  Future<bool> getBool({String key}) async => false;
+  Future<bool> getBool({String? key}) async => false;
 
   @override
-  Future<bool> storeBool({String key, bool value}) async => true;
+  Future<bool> storeBool({String? key, bool? value}) async => true;
 }

@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 
 class PaletteSuggestionsLoader implements DataLoader<List<String>> {
   const PaletteSuggestionsLoader({
-    @required StringBundle stringBundle,
-    @required String paletteSuggestionsDataPath,
+    required StringBundle stringBundle,
+    required String paletteSuggestionsDataPath,
   })  : assert(stringBundle != null),
         assert(paletteSuggestionsDataPath != null),
         _paletteSuggestionsDataPath = paletteSuggestionsDataPath,

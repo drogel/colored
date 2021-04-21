@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 class HueBasedPicker extends StatelessWidget {
   const HueBasedPicker({
-    @required this.color,
-    @required this.selector,
-    @required this.constraints,
+    required this.color,
+    required this.selector,
+    required this.constraints,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
     this.track,
-    Key key,
+    Key? key,
   })  : assert(color != null),
         assert(selector != null),
         assert(constraints != null),
@@ -20,11 +20,11 @@ class HueBasedPicker extends StatelessWidget {
 
   final BoxConstraints constraints;
   final Color color;
-  final Widget track;
+  final Widget? track;
   final HueBasedSelector selector;
-  final void Function(ColorSelection) onChanged;
-  final void Function(ColorSelection) onChangeStart;
-  final void Function(ColorSelection) onChangeEnd;
+  final void Function(ColorSelection)? onChanged;
+  final void Function(ColorSelection)? onChangeStart;
+  final void Function(ColorSelection)? onChangeEnd;
 
   @override
   Widget build(BuildContext context) => ConstrainedBox(
@@ -32,14 +32,14 @@ class HueBasedPicker extends StatelessWidget {
         child: SurfaceColorPicker(
           value: selector.pickValue(),
           color: color,
-          track: track,
+          track: track!,
           onChanged: (x, y) => _note(selector.select(x, y), onChanged),
           onChangeStart: (x, y) => _note(selector.select(x, y), onChangeStart),
           onChangeEnd: (x, y) => _note(selector.select(x, y), onChangeEnd),
         ),
       );
 
-  void _note(ColorSelection selection, void Function(ColorSelection) notifier) {
+  void _note(ColorSelection selection, void Function(ColorSelection)? notifier) {
     if (notifier != null) {
       notifier(selection);
     }

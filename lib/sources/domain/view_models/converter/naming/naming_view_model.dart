@@ -13,9 +13,9 @@ import 'naming_state.dart';
 
 class NamingViewModel {
   NamingViewModel({
-    @required StreamController<NamingState> stateController,
-    @required NamingService namingService,
-    @required Converter converter,
+    required StreamController<NamingState> stateController,
+    required NamingService namingService,
+    required Converter converter,
   })  : assert(stateController != null),
         assert(namingService != null),
         assert(converter != null),
@@ -42,7 +42,7 @@ class NamingViewModel {
     final namingResult = await _namingService.getNaming(hexColor: hexColor);
 
     if (namingResult.status == ResponseStatus.ok) {
-      _stateController.sink.add(Named(namingResult.result.name));
+      _stateController.sink.add(Named(namingResult.result!.name));
     } else {
       _stateController.sink.add(const Unknown());
     }

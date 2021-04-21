@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 
 class ColorSuggestionsLoader implements DataLoader<String> {
   const ColorSuggestionsLoader({
-    @required StringBundle stringBundle,
-    @required String colorSuggestionsDataPath,
+    required StringBundle stringBundle,
+    required String colorSuggestionsDataPath,
   })  : assert(stringBundle != null),
         assert(colorSuggestionsDataPath != null),
         _colorSuggestionsDataPath = colorSuggestionsDataPath,

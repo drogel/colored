@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 
 class CurveData extends InheritedWidget {
   const CurveData({
-    @required this.curveScheme,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        assert(curveScheme != null),
-        super(key: key, child: child);
+    required this.curveScheme,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final CurveScheme curveScheme;
 
-  static CurveData of(BuildContext context) =>
+  static CurveData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: CurveData);
 
   @override

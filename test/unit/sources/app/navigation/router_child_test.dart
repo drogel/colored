@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'router_test_helpers.dart';
 
 void main() {
-  FlowRouter routerUnderTest;
-  FlowRouter childFlowRouter;
+  FlowRouter? routerUnderTest;
+  FlowRouter? childFlowRouter;
 
   group("Given a FlowRouter with a child", () {
     setUp(() {
@@ -22,13 +22,13 @@ void main() {
       group("with a route name different from its children route names", () {
         test("then Route returned by its buildRoute method is obtained", () {
           runOnGenerateRouteTest(
-            routerUnderTest,
+            routerUnderTest!,
             routeName: FlowRouterUnderTest.routerName,
             expectedRouteType: MockRoute(),
           );
 
           runOnGenerateRouteTest(
-            routerUnderTest,
+            routerUnderTest!,
             routeName: "someOtherName",
             expectedRouteType: MockRoute(),
           );
@@ -38,7 +38,7 @@ void main() {
       group("with a route name that starts with a child router's name", () {
         test("then Route returned by the corresponding child is obtained", () {
           runOnGenerateRouteTest(
-            routerUnderTest,
+            routerUnderTest!,
             routeName: FirstChildFlowRouterStub.routerName,
             expectedRouteType: FirstChildRoute(),
           );
@@ -46,7 +46,7 @@ void main() {
           const routeName =
               "${FirstChildFlowRouterStub.routerName}someRouteName";
           runOnGenerateRouteTest(
-            routerUnderTest,
+            routerUnderTest!,
             routeName: routeName,
             expectedRouteType: FirstChildRoute(),
           );

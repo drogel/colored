@@ -23,8 +23,8 @@ import 'package:flutter/material.dart';
 
 class Style extends StatelessWidget {
   const Style({
-    @required this.child,
-    Key key,
+    required this.child,
+    Key? key,
     this.curveScheme = const DefaultCurveScheme(),
     this.durationScheme = const DefaultDurationScheme(),
     this.opacityScheme = const DefaultOpacityScheme(),
@@ -32,13 +32,7 @@ class Style extends StatelessWidget {
     this.paddingScheme = const DefaultPaddingScheme(),
     this.radiiScheme = const DefaultRadiiScheme(),
     this.elevationScheme = const DefaultElevationScheme(),
-  })  : assert(curveScheme != null),
-        assert(durationScheme != null),
-        assert(opacityScheme != null),
-        assert(paddingScheme != null),
-        assert(blurScheme != null),
-        assert(radiiScheme != null),
-        super(key: key);
+  }) : super(key: key);
 
   final CurveScheme curveScheme;
   final DurationScheme durationScheme;

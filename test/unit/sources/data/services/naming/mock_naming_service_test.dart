@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  NamingService namingService;
+  NamingService? namingService;
 
   setUp(() {
     namingService = const MockNamingService();
@@ -19,8 +19,8 @@ void main() {
   group("Given a MockNamingService", () {
     group("when fetchNaming is called for any hexColor", () {
       test("then expected sample color is retrieved", () async {
-        final namingResponse = await namingService.getNaming(hexColor: "");
-        final result = namingResponse.result;
+        final namingResponse = await namingService!.getNaming(hexColor: "");
+        final result = namingResponse.result!;
         expect(namingResponse.status, ResponseStatus.ok);
         expect(result.hex, "#212121");
         expect(result.name, "Sample Color");

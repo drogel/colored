@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class PalettesNavigationNotifier extends StatefulWidget {
   const PalettesNavigationNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   }) : super(key: key);
 
   final PalettesNavigationInjector injector;
@@ -21,7 +21,7 @@ class PalettesNavigationNotifier extends StatefulWidget {
 
 class _PalettesNavigationNotifierState
     extends State<PalettesNavigationNotifier> {
-  PalettesNavigationViewModel _viewModel;
+  late PalettesNavigationViewModel _viewModel;
 
   @override
   void initState() {

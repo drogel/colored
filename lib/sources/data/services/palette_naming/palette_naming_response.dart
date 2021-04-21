@@ -7,5 +7,5 @@ class PaletteNamingResponse extends ResponseWrapper {
       : assert(status != null),
         super(status);
 
-  final List<NamingResult> results;
+  final List<NamingResult>? results;
 }

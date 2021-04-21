@@ -10,12 +10,12 @@ const _kDefaultStep = 1 / decimal8Bit;
 
 class RgbPicker extends StatefulWidget {
   const RgbPicker({
-    @required this.selection,
-    @required this.onChanged,
-    @required this.onChangeEnd,
+    required this.selection,
+    required this.onChanged,
+    required this.onChangeEnd,
     this.step = _kDefaultStep,
     this.shouldShrink = false,
-    Key key,
+    Key? key,
   })  : assert(onChanged != null),
         super(key: key);
 
@@ -30,10 +30,10 @@ class RgbPicker extends StatefulWidget {
 }
 
 class _RgbPickerState extends State<RgbPicker> {
-  ExpandableSliderController _controller;
-  double _firstValue;
-  double _secondValue;
-  double _thirdValue;
+  ExpandableSliderController? _controller;
+  late double _firstValue;
+  late double _secondValue;
+  late double _thirdValue;
 
   @override
   void initState() {
@@ -56,14 +56,14 @@ class _RgbPickerState extends State<RgbPicker> {
       _thirdValue = widget.selection.b;
     }
     if (oldWidget.shouldShrink != widget.shouldShrink && widget.shouldShrink) {
-      _controller.shrink();
+      _controller!.shrink();
     }
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
-    final opacity = OpacityData.of(context).opacityScheme;
+    final opacity = OpacityData.of(context)!.opacityScheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -71,7 +71,7 @@ class _RgbPickerState extends State<RgbPicker> {
         ExpandableSlider(
           value: _firstValue,
           activeColor: colors.red,
-          inactiveColor: colors.red.withOpacity(opacity.fadedColor),
+          inactiveColor: colors.red!.withOpacity(opacity.fadedColor),
           estimatedValueStep: widget.step,
           onChangeEnd: _onChangeEnd,
           onChanged: (value) {
@@ -83,7 +83,7 @@ class _RgbPickerState extends State<RgbPicker> {
         ExpandableSlider(
           value: _secondValue,
           activeColor: colors.green,
-          inactiveColor: colors.green.withOpacity(opacity.fadedColor),
+          inactiveColor: colors.green!.withOpacity(opacity.fadedColor),
           estimatedValueStep: widget.step,
           onChangeEnd: _onChangeEnd,
           onChanged: (value) {
@@ -95,7 +95,7 @@ class _RgbPickerState extends State<RgbPicker> {
         ExpandableSlider(
           value: _thirdValue,
           activeColor: colors.blue,
-          inactiveColor: colors.blue.withOpacity(opacity.fadedColor),
+          inactiveColor: colors.blue!.withOpacity(opacity.fadedColor),
           estimatedValueStep: widget.step,
           onChangeEnd: _onChangeEnd,
           onChanged: (value) {

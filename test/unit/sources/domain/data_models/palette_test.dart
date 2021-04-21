@@ -9,7 +9,7 @@ final List<String> _kColors = [_kBlack.hex, _kWhite.hex];
 const String _kName = "Black and white";
 
 void main() {
-  Palette palette;
+  Palette? palette;
 
   tearDown(() {
     palette = null;
@@ -20,11 +20,11 @@ void main() {
 
     group("when constructed", () {
       test("then name can be accessed", () {
-        expect(palette.name, _kName);
+        expect(palette!.name, _kName);
       });
 
       test("then namedColors can be accessed", () {
-        expect(palette.hexCodes, _kColors);
+        expect(palette!.hexCodes, _kColors);
       });
     });
 
@@ -67,7 +67,7 @@ void main() {
   });
 
   group("Given two valid palettes", () {
-    Palette otherPalette;
+    Palette? otherPalette;
 
     setUp(() => palette = Palette(name: _kName, hexCodes: _kColors));
 

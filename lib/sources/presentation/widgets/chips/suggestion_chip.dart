@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 
 class SuggestionChip extends StatelessWidget {
   const SuggestionChip({
-    @required this.text,
-    @required this.avatar,
+    required this.text,
+    required this.avatar,
     this.onPressed,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final String text;
   final Widget avatar;
-  final void Function(String) onPressed;
+  final void Function(String)? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
-    final radii = RadiusData.of(context).radiiScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
     final borderRadius = BorderRadius.all(radii.medium);
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
@@ -26,7 +26,7 @@ class SuggestionChip extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: horizontalPadding),
       child: InputChip(
-        onPressed: onPressed != null ? () => onPressed(text) : null,
+        onPressed: onPressed != null ? () => onPressed!(text) : null,
         backgroundColor: colors.primaryVariant,
         shape: RoundedRectangleBorder(borderRadius: borderRadius),
         avatar: avatar,

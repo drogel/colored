@@ -7,7 +7,7 @@ class PalettesNavigationInjector {
   const PalettesNavigationInjector();
 
   PalettesNavigationViewModel injectViewModel(
-          [StreamController<IndexedNavigationState> stateController]) =>
+          [StreamController<IndexedNavigationState>? stateController]) =>
       PalettesNavigationViewModel(
         stateController:
             stateController ?? StreamController<IndexedNavigationState>(),

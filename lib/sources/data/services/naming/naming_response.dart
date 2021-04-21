@@ -7,5 +7,5 @@ class NamingResponse extends ResponseWrapper {
       : assert(status != null),
         super(status);
 
-  final NamingResult result;
+  final NamingResult? result;
 }

@@ -11,5 +11,5 @@ Map<PickerStyle, String> _values = {
 };
 
 extension PickerStyleValue on PickerStyle {
-  String get rawValue => _values[this];
+  String? get rawValue => _values[this];
 }

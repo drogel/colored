@@ -9,7 +9,7 @@ class RgbParser extends FormatParser {
       r"[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$");
 
   @override
-  bool hasMatch(String input) {
+  bool hasMatch(String? input) {
     if (input == null) {
       return false;
     }
@@ -18,15 +18,15 @@ class RgbParser extends FormatParser {
   }
 
   @override
-  ColorSelection parse(String string) {
+  ColorSelection parse(String? string) {
     assert(string != null, "String color format to parse cannot be null");
-    assert(string.isNotEmpty, "String color format to parse cannot be empty");
+    assert(string!.isNotEmpty, "String color format to parse cannot be empty");
 
-    final rgbMatched = _rgbRegExp.firstMatch(string).group(0);
+    final rgbMatched = _rgbRegExp.firstMatch(string!)!.group(0)!;
     final rgbWithoutSeparators = rgbMatched.replacingAllNonAlphanumericBy(" ");
     final rgbComponents = doubleRegExp
         .allMatches(rgbWithoutSeparators)
-        .map((match) => double.parse(match.group(0)))
+        .map((match) => double.parse(match.group(0)!))
         .toList();
 
     final selection = ColorSelection(

@@ -16,11 +16,11 @@ class MockFlavor implements Flavor {
   bool isProduction() => false;
 
   @override
-  FlavorValues get values => null;
+  FlavorValues? get values => null;
 }
 
 void main() {
-  PaletteDetailInjector injector;
+  PaletteDetailInjector? injector;
 
   setUp(() {
     injector = const PaletteDetailInjector(flavor: MockFlavor());
@@ -39,13 +39,13 @@ void main() {
 
     group("when injectViewModel is called", () {
       test("then a StreamController is given by default if not specified", () {
-        final viewModel = injector.injectViewModel();
+        final viewModel = injector!.injectViewModel();
         expect(viewModel.stateStream, isNotNull);
       });
 
       test("then a StreamController<TransformerState> can be provided", () {
         final stateController = StreamController<PaletteDetailState>();
-        final viewModel = injector.injectViewModel(stateController);
+        final viewModel = injector!.injectViewModel(stateController);
         expect(viewModel.stateStream, stateController.stream);
       });
     });

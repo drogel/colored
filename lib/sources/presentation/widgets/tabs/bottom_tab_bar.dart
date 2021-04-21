@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 class BottomTabBar extends BaseTabBar {
   const BottomTabBar({
-    @required List<TabPage> tabs,
-    void Function(int) onTap,
-    int currentIndex,
-    Key key,
+    required List<TabPage> tabs,
+    void Function(int)? onTap,
+    int? currentIndex,
+    Key? key,
   }) : super(
           tabs: tabs,
           onTap: onTap,
@@ -18,7 +18,7 @@ class BottomTabBar extends BaseTabBar {
   @override
   Widget build(BuildContext context) => BottomNavigationBar(
         onTap: onTap,
-        currentIndex: currentIndex,
+        currentIndex: currentIndex!,
         items: _buildTabItems(context),
       );
 

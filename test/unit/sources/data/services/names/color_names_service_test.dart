@@ -13,15 +13,15 @@ class NamesDataSourceStub implements DataLoader<String> {
 }
 
 void main() {
-  DataLoader dataLoader;
-  NamesService namesService;
-  MapFilter filter;
+  DataLoader? dataLoader;
+  NamesService? namesService;
+  late MapFilter filter;
 
   setUp(() {
     dataLoader = NamesDataSourceStub();
     filter = const ColorNamesFilter();
     namesService = ColorNamesService(
-      dataLoader: dataLoader,
+      dataLoader: dataLoader!,
       filter: filter,
     );
   });
@@ -42,7 +42,7 @@ void main() {
 
       test("then should throw if given null filter", () {
         expect(
-          () => ColorNamesService(dataLoader: dataLoader, filter: null),
+          () => ColorNamesService(dataLoader: dataLoader!, filter: null),
           throwsAssertionError,
         );
       });
@@ -50,17 +50,17 @@ void main() {
 
     group("when fetchContainingSearch is called", () {
       test("then the color can be found by its hex code", () async {
-        final actual = await namesService.fetchContainingSearch("2121");
+        final actual = await namesService!.fetchContainingSearch("2121");
         expect(actual, NamesDataSourceStub.mockColorNames);
       });
 
       test("then the color can be found by its name", () async {
-        final actual = await namesService.fetchContainingSearch("Sample");
+        final actual = await namesService!.fetchContainingSearch("Sample");
         expect(actual, NamesDataSourceStub.mockColorNames);
       });
 
       test("then an empty map is returned if search missed", () async {
-        final actual = await namesService.fetchContainingSearch("Black");
+        final actual = await namesService!.fetchContainingSearch("Black");
         expect(actual, {});
       });
     });

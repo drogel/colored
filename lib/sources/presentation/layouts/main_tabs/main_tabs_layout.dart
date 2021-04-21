@@ -12,7 +12,7 @@ const _kSideBarShownThreshold = 2 * _kSideBarWidth;
 const _kSideBarExtendedThreshold = 4 * _kSideBarWidth;
 
 class MainTabsLayout extends StatelessWidget {
-  const MainTabsLayout({@required this.pages, @required this.appBars, Key key})
+  const MainTabsLayout({required this.pages, required this.appBars, Key? key})
       : assert(pages != null),
         assert(appBars != null),
         assert(pages.length == appBars.length),
@@ -24,8 +24,8 @@ class MainTabsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = MainTabsData.of(context);
-    final currentSelection = data.state.currentIndex;
+    final data = MainTabsData.of(context)!;
+    final currentSelection = data.state!.currentIndex;
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > _kSideBarShownThreshold;

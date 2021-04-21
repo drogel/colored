@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 
 class PickerViewModel {
   const PickerViewModel({
-    @required StreamController<PickerState> stateController,
+    required StreamController<PickerState> stateController,
   })  : assert(stateController != null),
         _stateController = stateController;
 

@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 
 class ColorNamesService implements NamesService<String> {
   ColorNamesService({
-    @required DataLoader dataLoader,
-    @required MapFilter filter,
+    required DataLoader dataLoader,
+    required MapFilter filter,
   })  : assert(dataLoader != null),
         assert(filter != null),
         _dataLoader = dataLoader,
@@ -19,6 +19,6 @@ class ColorNamesService implements NamesService<String> {
   Future<Map<String, String>> fetchContainingSearch(String searchString) async {
     final colorNames = await _dataLoader.load();
     final filteredColorNames = _filter.filter(searchString, colorNames);
-    return filteredColorNames;
+    return filteredColorNames as FutureOr<Map<String, String>>;
   }
 }

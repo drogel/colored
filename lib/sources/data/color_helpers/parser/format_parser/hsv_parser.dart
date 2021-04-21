@@ -8,7 +8,7 @@ class HsvParser extends FormatParser {
       r"\s*(\d*(?:\.\d+)?(%)?)\s*(\W+)\s*(\d*(?:\.\d+)?(%)?)\)?");
 
   @override
-  bool hasMatch(String input) {
+  bool hasMatch(String? input) {
     if (input == null) {
       return false;
     }
@@ -17,15 +17,15 @@ class HsvParser extends FormatParser {
   }
 
   @override
-  ColorSelection parse(String string) {
+  ColorSelection parse(String? string) {
     assert(string != null, "String color format to parse cannot be null");
-    assert(string.isNotEmpty, "String color format to parse cannot be empty");
+    assert(string!.isNotEmpty, "String color format to parse cannot be empty");
 
-    final hsvMatched = _hsvRegExp.firstMatch(string).group(0);
+    final hsvMatched = _hsvRegExp.firstMatch(string!)!.group(0)!;
     final hsvWithoutSeparators = hsvMatched.replacingAllNonAlphanumericBy(" ");
     final hsvComponents = doubleRegExp
         .allMatches(hsvWithoutSeparators)
-        .map((match) => double.parse(match.group(0)))
+        .map((match) => double.parse(match.group(0)!))
         .toList();
     var rgb = <double>[0, 0, 0];
 

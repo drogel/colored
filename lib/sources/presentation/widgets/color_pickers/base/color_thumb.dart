@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 
 class ColorThumb extends StatefulWidget {
   const ColorThumb({
-    @required this.color,
+    required this.color,
     this.isPressed = false,
-    Key key,
+    Key? key,
   })  : assert(color != null),
         super(key: key);
 
@@ -23,11 +23,11 @@ class ColorThumb extends StatefulWidget {
 class _ColorThumbState extends State<ColorThumb> {
   @override
   Widget build(BuildContext context) {
-    final elevation = ElevationData.of(context).elevationScheme;
-    final duration = DurationData.of(context).durationScheme;
+    final elevation = ElevationData.of(context)!.elevationScheme;
+    final duration = DurationData.of(context)!.durationScheme;
     final buttonColor = Theme.of(context).buttonColor;
-    final textColor = Theme.of(context).appBarTheme.actionsIconTheme.color;
-    final curves = CurveData.of(context).curveScheme;
+    final textColor = Theme.of(context).appBarTheme.actionsIconTheme!.color;
+    final curves = CurveData.of(context)!.curveScheme;
     return LayoutBuilder(
       builder: (_, constraints) => Stack(
         alignment: Alignment.center,
@@ -72,18 +72,18 @@ class _ColorThumbState extends State<ColorThumb> {
       ? EdgeInsets.zero
       : EdgeInsets.all(constraints.maxHeight / 4);
 
-  Color _getOuterColor({@required Color dark, @required Color light}) {
-    final opacity = OpacityData.of(context).opacityScheme.fadedColor;
-    final contrastingColor = _getContrastingColor(dark, light);
+  Color _getOuterColor({required Color dark, required Color? light}) {
+    final opacity = OpacityData.of(context)!.opacityScheme.fadedColor;
+    final contrastingColor = _getContrastingColor(dark, light)!;
     final fadedContrastingColor = contrastingColor.withOpacity(opacity);
     return widget.isPressed ? widget.color : fadedContrastingColor;
   }
 
-  Color _getContrastingColor(Color dark, Color light) {
+  Color? _getContrastingColor(Color dark, Color? light) {
     final contrastingColor = widget.color.isDark() ? light : dark;
     return contrastingColor;
   }
 
-  Color _getThumbColor({@required Color dark, @required Color light}) =>
+  Color? _getThumbColor({required Color dark, required Color? light}) =>
       widget.isPressed ? _getContrastingColor(dark, light) : widget.color;
 }

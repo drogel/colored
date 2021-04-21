@@ -8,7 +8,7 @@ class StringBundleStub implements StringBundle {
 }
 
 void main() {
-  ColorSuggestionsLoader loader;
+  ColorSuggestionsLoader? loader;
 
   setUp(() {
     loader = ColorSuggestionsLoader(
@@ -47,7 +47,7 @@ void main() {
     group("when load is called", () {
       test("then a Map<String, String> is decoded from StringBundle", () async {
         final expected = <String, String>{"test": "000000"};
-        final actual = await loader.load();
+        final actual = await loader!.load();
 
         expect(expected, actual);
       });

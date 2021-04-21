@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class DynamicRow extends StatelessWidget {
   const DynamicRow({
-    @required this.itemBuilder,
-    @required this.itemCount,
-    Key key,
+    required this.itemBuilder,
+    required this.itemCount,
+    Key? key,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
     this.crossAxisAlignment = CrossAxisAlignment.center,

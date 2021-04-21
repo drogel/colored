@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  ColorPurifier purifier;
+  ColorPurifier? purifier;
 
   setUp(() {
     purifier = const DefaultColorPurifier();
@@ -17,20 +17,20 @@ void main() {
     purifier = null;
   });
 
-  void runPurifyTest({@required Color pureColor, @required Color inputColor}) =>
-      expect(purifier.purify(inputColor), pureColor);
+  void runPurifyTest({required Color pureColor, required Color inputColor}) =>
+      expect(purifier!.purify(inputColor), pureColor);
 
   void runGetHueTest({
-    @required double expectedHue,
-    @required Color inputColor,
+    required double expectedHue,
+    required Color inputColor,
   }) =>
-      expect(purifier.getHue(inputColor), expectedHue);
+      expect(purifier!.getHue(inputColor), expectedHue);
 
   void runGetPureColorFromHueTest({
-    @required Color expectedColor,
-    @required double inputHue,
+    required Color expectedColor,
+    required double inputHue,
   }) =>
-      expect(purifier.getPureColorFromHue(inputHue), expectedColor);
+      expect(purifier!.getPureColorFromHue(inputHue), expectedColor);
 
   group("Given a DefaultColorPurifier", () {
     group("when purify is called", () {

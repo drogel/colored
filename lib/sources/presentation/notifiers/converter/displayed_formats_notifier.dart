@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class DisplayedFormatsNotifier extends StatefulWidget {
   const DisplayedFormatsNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   }) : super(key: key);
 
   final DisplayedFormatsInjector injector;
@@ -20,7 +20,7 @@ class DisplayedFormatsNotifier extends StatefulWidget {
 }
 
 class _DisplayedFormatsNotifierState extends State<DisplayedFormatsNotifier> {
-  DisplayedFormatsViewModel _viewModel;
+  late DisplayedFormatsViewModel _viewModel;
 
   @override
   void initState() {

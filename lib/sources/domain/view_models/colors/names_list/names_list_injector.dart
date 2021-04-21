@@ -15,7 +15,7 @@ class NamesListInjector {
   const NamesListInjector();
 
   NamesListViewModel injectViewModel([
-    StreamController<NamesListState> stateController,
+    StreamController<NamesListState>? stateController,
   ]) =>
       NamesListViewModel(
         stateController: stateController ?? StreamController<NamesListState>(),
@@ -24,7 +24,7 @@ class NamesListInjector {
           dataLoader: ColorNamesLoader(
             memoizer: DefaultMemoizer<Map<String, String>>(),
             stringBundle: const RootStringBundle(),
-            colorsDataPath: FlavorConfig.instance.values.dataPath.colorData,
+            colorsDataPath: FlavorConfig.instance!.values.dataPath.colorData,
           ),
           filter: const ColorNamesFilter(),
         ),

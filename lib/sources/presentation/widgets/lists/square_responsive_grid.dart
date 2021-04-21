@@ -7,15 +7,15 @@ const _kCrossAxisMaxCount = 9;
 
 class SquareResponsiveGrid extends StatelessWidget {
   const SquareResponsiveGrid({
-    @required this.itemCount,
-    @required this.itemBuilder,
+    required this.itemCount,
+    required this.itemBuilder,
     this.pageStorageKey,
-    Key key,
+    Key? key,
   })  : assert(itemCount != null),
         assert(itemBuilder != null),
         super(key: key);
 
-  final PageStorageKey<String> pageStorageKey;
+  final PageStorageKey<String>? pageStorageKey;
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;
 

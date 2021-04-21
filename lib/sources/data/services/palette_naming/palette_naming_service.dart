@@ -2,5 +2,5 @@ import 'package:colored/sources/data/services/palette_naming/palette_naming_resp
 import 'package:flutter/foundation.dart';
 
 abstract class PaletteNamingService {
-  Future<PaletteNamingResponse> getNaming({@required List<String> hexColors});
+  Future<PaletteNamingResponse> getNaming({required List<String>? hexColors});
 }

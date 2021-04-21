@@ -32,15 +32,15 @@ class StringBundleStub implements StringBundle {
 }
 
 void main() {
-  PalettesLoader loader;
-  Memoizer memoizer;
-  StringBundle stringBundle;
+  PalettesLoader? loader;
+  Memoizer? memoizer;
+  late StringBundle stringBundle;
 
   setUp(() {
     memoizer = const MemoizerStub();
     stringBundle = const StringBundleStub();
     loader = PalettesLoader(
-      memoizer: memoizer,
+      memoizer: memoizer as Memoizer<Map<String, List<String>>>,
       stringBundle: stringBundle,
       palettesDataPath: "testPath",
     );
@@ -67,7 +67,7 @@ void main() {
       test("then should throw if given a null stringBundle", () {
         expect(
           () => PalettesLoader(
-            memoizer: memoizer,
+            memoizer: memoizer as Memoizer<Map<String, List<String>>>,
             stringBundle: null,
             palettesDataPath: "testPath",
           ),
@@ -78,7 +78,7 @@ void main() {
       test("then should throw if given a null palettesDataPath", () {
         expect(
           () => PalettesLoader(
-            memoizer: memoizer,
+            memoizer: memoizer as Memoizer<Map<String, List<String>>>,
             stringBundle: const StringBundleStub(),
             palettesDataPath: null,
           ),
@@ -89,7 +89,7 @@ void main() {
 
     group("when load is called", () {
       test("then returns value of the computation in the memoizer", () async {
-        final actual = await loader.load();
+        final actual = await loader!.load();
         expect(actual, MemoizerStub.mockResult);
       });
     });
@@ -100,7 +100,7 @@ void main() {
       memoizer = MockMemoizer();
       stringBundle = const StringBundleStub();
       loader = PalettesLoader(
-        memoizer: memoizer,
+        memoizer: memoizer as Memoizer<Map<String, List<String>>>,
         stringBundle: stringBundle,
         palettesDataPath: "testPath",
       );
@@ -113,8 +113,8 @@ void main() {
 
     group("when load is called", () {
       test("then the runOnce method from the memoizer is called", () async {
-        final _ = await loader.load();
-        verify(memoizer.runOnce(any));
+        final _ = await loader!.load();
+        verify(memoizer!.runOnce(any!));
       });
     });
   });
@@ -124,7 +124,7 @@ void main() {
       memoizer = DefaultMemoizer<Map<String, List<String>>>();
       stringBundle = const StringBundleStub();
       loader = PalettesLoader(
-        memoizer: memoizer,
+        memoizer: memoizer as Memoizer<Map<String, List<String>>>,
         stringBundle: stringBundle,
         palettesDataPath: "testPath",
       );
@@ -137,7 +137,7 @@ void main() {
 
     group("when load is called", () {
       test("then returns the decoded json string from the bundle", () async {
-        final actual = await loader.load();
+        final actual = await loader!.load();
         expect(actual, {
           "test": ["000000", "ffffff"]
         });

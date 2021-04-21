@@ -3,13 +3,13 @@ import 'package:colored/sources/domain/data_models/picker_style.dart';
 import 'package:flutter/material.dart';
 
 class PickerTab extends StatelessWidget {
-  const PickerTab({@required this.style, Key key}) : super(key: key);
+  const PickerTab({required this.style, Key? key}) : super(key: key);
 
   final PickerStyle style;
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return Tab(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -17,7 +17,7 @@ class PickerTab extends StatelessWidget {
         children: [
           _buildIcon(style),
           SizedBox(width: padding.medium.left),
-          Text(style.rawValue)
+          Text(style.rawValue!)
         ],
       ),
     );

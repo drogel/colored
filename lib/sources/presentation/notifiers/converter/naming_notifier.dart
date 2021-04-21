@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 
 class NamingNotifier extends StatefulWidget {
   const NamingNotifier({
-    @required NamingInjector injector,
-    @required this.child,
-    Key key,
+    required NamingInjector injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         _injector = injector,
         super(key: key);
@@ -23,7 +23,7 @@ class NamingNotifier extends StatefulWidget {
 }
 
 class _NamingNotifierState extends State<NamingNotifier> {
-  NamingViewModel _viewModel;
+  late NamingViewModel _viewModel;
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => NamingData(
-          state: snapshot.data,
+          state: snapshot.data!,
           child: widget.child,
         ),
       );
@@ -54,7 +54,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
   }
 
   void _handleTransformerStateChange() {
-    final state = TransformerData.of(context).state;
+    final state = TransformerData.of(context)!.state;
     if (state is SelectionEnded) {
       _viewModel.fetchNaming(state.selection);
     }

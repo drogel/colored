@@ -7,7 +7,7 @@ const _kKey = "test";
 const _kValue = true;
 
 void main() {
-  LocalStorage localStorage;
+  LocalStorage? localStorage;
 
   setUp(() async {
     localStorage = const SharedPreferences();
@@ -25,7 +25,7 @@ void main() {
           _kKey: _kValue,
         });
 
-        final actual = await localStorage.getBool(key: _kKey);
+        final actual = await localStorage!.getBool(key: _kKey);
         expect(actual, _kValue);
       });
 
@@ -34,12 +34,12 @@ void main() {
           _kKey: _kValue,
         });
 
-        final actual = await localStorage.getBool(key: "other");
+        final actual = await localStorage!.getBool(key: "other");
         expect(actual, isNull);
       });
 
       test("then null is retrieved if given a null key", () async {
-        final actual = await localStorage.getBool(key: null);
+        final actual = await localStorage!.getBool(key: null);
 
         expect(actual, isNull);
       });
@@ -47,23 +47,23 @@ void main() {
 
     group("when storeBool is called", () {
       test("false is returned if key is null", () async {
-        final actual = await localStorage.storeBool(key: null, value: _kValue);
+        final actual = await localStorage!.storeBool(key: null, value: _kValue);
 
         expect(actual, isFalse);
       });
 
       test("false is returned if value is null", () async {
-        final actual = await localStorage.storeBool(key: _kKey, value: null);
+        final actual = await localStorage!.storeBool(key: _kKey, value: null);
 
         expect(actual, isFalse);
       });
 
       test("then the expected value is stored", () async {
-        await expectLater(await localStorage.getBool(key: _kKey), isNull);
+        await expectLater(await localStorage!.getBool(key: _kKey), isNull);
 
-        await localStorage.storeBool(key: _kKey, value: _kValue);
+        await localStorage!.storeBool(key: _kKey, value: _kValue);
 
-        await expectLater(await localStorage.getBool(key: _kKey), _kValue);
+        await expectLater(await localStorage!.getBool(key: _kKey), _kValue);
       });
     });
   });

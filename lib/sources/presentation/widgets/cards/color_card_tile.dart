@@ -5,20 +5,20 @@ import 'package:flutter/material.dart';
 
 class ColorCardTile extends StatelessWidget {
   const ColorCardTile({
-    @required this.title,
+    required this.title,
     this.subtitle,
     this.borderRadius,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final BorderRadius borderRadius;
+  final BorderRadius? borderRadius;
   final Widget title;
-  final Widget subtitle;
+  final Widget? subtitle;
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
-    final radii = RadiusData.of(context).radiiScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
     final parentRadius = borderRadius ?? BorderRadius.all(radii.large);
     final titleMargin = padding.small;
     final marginBorderRadius = BorderRadius.circular(titleMargin.left);
@@ -26,7 +26,7 @@ class ColorCardTile extends StatelessWidget {
     return Padding(
       padding: titleMargin,
       child: OverlayContainer(
-        borderRadius: decorationBorderRadius,
+        borderRadius: decorationBorderRadius as BorderRadius?,
         elevation: 0,
         child: ListTile(
           title: title,

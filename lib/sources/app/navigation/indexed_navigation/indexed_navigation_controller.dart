@@ -1,13 +1,11 @@
 import 'dart:async';
 
 import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_state.dart';
-import 'package:flutter/foundation.dart';
 
 class IndexedNavigationController {
   const IndexedNavigationController({
-    @required StreamController<IndexedNavigationState> stateController,
-  })  : assert(stateController != null),
-        _stateController = stateController;
+    required StreamController<IndexedNavigationState> stateController,
+  }) : _stateController = stateController;
 
   final StreamController<IndexedNavigationState> _stateController;
 

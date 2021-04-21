@@ -11,20 +11,20 @@ class MockDeviceOrientationService extends Mock
     implements DeviceOrientationService {}
 
 void main() {
-  OnBoardingViewModel viewModel;
-  DeviceOrientationService service;
+  OnBoardingViewModel? viewModel;
+  DeviceOrientationService? service;
 
   setUp(() {
     service = MockDeviceOrientationService();
     viewModel = OnBoardingViewModel(
       stateController: StreamController<OnBoardingState>(),
-      deviceOrientationService: service,
+      deviceOrientationService: service!,
       localStorage: const MockLocalStorage(),
     );
   });
 
   tearDown(() {
-    viewModel.dispose();
+    viewModel!.dispose();
     service = null;
     viewModel = null;
   });
@@ -33,8 +33,8 @@ void main() {
       () {
     group("when init is called", () {
       test("then DeviceOrientationService sets portrait orientation", () {
-        viewModel.init();
-        verify(service.setPortraitOrientation());
+        viewModel!.init();
+        verify(service!.setPortraitOrientation());
       });
     });
   });

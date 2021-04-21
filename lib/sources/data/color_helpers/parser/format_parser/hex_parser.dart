@@ -8,7 +8,7 @@ class HexParser extends FormatParser {
   final _hexRegExp = RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
 
   @override
-  bool hasMatch(String input) {
+  bool hasMatch(String? input) {
     if (input == null) {
       return false;
     }
@@ -17,12 +17,12 @@ class HexParser extends FormatParser {
   }
 
   @override
-  ColorSelection parse(String string) {
+  ColorSelection parse(String? string) {
     assert(string != null, "String color format to parse cannot be null");
-    assert(string.isNotEmpty, "String color format to parse cannot be empty");
+    assert(string!.isNotEmpty, "String color format to parse cannot be empty");
 
     final buffer = StringBuffer();
-    if (string.length == 6 || string.length == 7) {
+    if (string!.length == 6 || string.length == 7) {
       buffer.write('ff');
     }
     buffer.write(string.replaceFirst('#', ''));

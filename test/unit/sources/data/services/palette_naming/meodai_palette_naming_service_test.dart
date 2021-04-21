@@ -13,12 +13,12 @@ class UrlComposerStub implements UrlComposer {
   static const url = "testUrl";
 
   @override
-  String compose(String baseUrl, {String path}) => "testUrl";
+  String compose(String baseUrl, {String? path}) => "testUrl";
 }
 
 class HttpClientSuccessfulStub implements HttpClient {
   @override
-  Future<HttpResponse> get(String url, {Map<String, String> headers}) async {
+  Future<HttpResponse> get(String url, {Map<String, String>? headers}) async {
     final httpResponse = http.Response('{"colors": []}', 200);
     return HttpResponse(status: ResponseStatus.ok, httpResponse: httpResponse);
   }
@@ -29,7 +29,7 @@ class HttpClientSuccessfulStub implements HttpClient {
 
 class HttpClientFailingStub implements HttpClient {
   @override
-  Future<HttpResponse> get(String url, {Map<String, String> headers}) async =>
+  Future<HttpResponse> get(String url, {Map<String, String>? headers}) async =>
       const HttpResponse(status: ResponseStatus.failed);
 
   @override
@@ -37,7 +37,7 @@ class HttpClientFailingStub implements HttpClient {
 }
 
 void main() {
-  PaletteNamingService service;
+  PaletteNamingService? service;
 
   group("Given a MeodaiPaletteNamingService", () {
     setUp(() {
@@ -75,19 +75,19 @@ void main() {
 
     group("when getNaming is called", () {
       test("then a failed response is returned if hexColors is null", () async {
-        final actual = await service.getNaming(hexColors: null);
+        final actual = await service!.getNaming(hexColors: null);
 
         expect(actual.status, ResponseStatus.failed);
       });
 
       test("then a failed response is returned on empty hexColors", () async {
-        final actual = await service.getNaming(hexColors: []);
+        final actual = await service!.getNaming(hexColors: []);
 
         expect(actual.status, ResponseStatus.failed);
       });
 
       test("then succesful response returned on non-empty hexColors", () async {
-        final actual = await service.getNaming(hexColors: ["test"]);
+        final actual = await service!.getNaming(hexColors: ["test"]);
 
         expect(actual.status, ResponseStatus.ok);
         expect(actual.results, []);
@@ -109,7 +109,7 @@ void main() {
 
     group("when getNaming is called", () {
       test("then a failed response is retrieved", () async {
-        final actual = await service.getNaming(hexColors: ["test"]);
+        final actual = await service!.getNaming(hexColors: ["test"]);
         expect(actual.status, ResponseStatus.failed);
       });
     });

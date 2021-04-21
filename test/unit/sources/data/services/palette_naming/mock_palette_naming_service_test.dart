@@ -6,12 +6,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  PaletteNamingService mockService;
-  PaletteNamingResponse response;
+  PaletteNamingService? mockService;
+  PaletteNamingResponse? response;
 
   setUp(() async {
     mockService = const MockPaletteNamingService();
-    response = await mockService.getNaming(hexColors: []);
+    response = await mockService!.getNaming(hexColors: []);
   });
 
   tearDown(() {
@@ -22,21 +22,21 @@ void main() {
   group("Given a MockPaletteNamingService", () {
     group("when getNaming is called", () {
       test("then a response status ok is retrieved", () async {
-        expect(response.status, ResponseStatus.ok);
+        expect(response!.status, ResponseStatus.ok);
       });
 
       test("then color amount from sample palette is retrieved", () async {
-        expect(response.results.length, 5);
+        expect(response!.results!.length, 5);
       });
 
       test("then the sample colors are retrieved", () async {
-        expect(response.results.first.name, "Lead");
-        expect(response.results.first.hex, "#212121");
-        expect(response.results.first.r, 33);
+        expect(response!.results!.first.name, "Lead");
+        expect(response!.results!.first.hex, "#212121");
+        expect(response!.results!.first.r, 33);
       });
 
       test("then the named colors have uppercase hex codes", () async {
-        expect(response.results[2].hex, "#FF0011");
+        expect(response!.results![2].hex, "#FF0011");
       });
     });
   });

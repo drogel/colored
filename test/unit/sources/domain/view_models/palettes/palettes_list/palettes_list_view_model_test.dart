@@ -32,23 +32,23 @@ class PalettesServiceEmptyStub implements NamesService {
 }
 
 void main() {
-  PalettesListViewModel viewModel;
-  NamesService namesService;
-  StreamController<PalettesListState> stateController;
+  late PalettesListViewModel viewModel;
+  NamesService? namesService;
+  StreamController<PalettesListState>? stateController;
 
   setUp(() {
     stateController = StreamController<PalettesListState>();
     namesService = MockNamesService();
     viewModel = PalettesListViewModel(
-      stateController: stateController,
-      namesService: namesService,
+      stateController: stateController!,
+      namesService: namesService!,
       searchConfigurator: const ListSearchConfigurator(),
     );
   });
 
   tearDown(() {
     if (stateController != null) {
-      stateController.close();
+      stateController!.close();
     }
     stateController = null;
     namesService = null;
@@ -64,7 +64,7 @@ void main() {
 
     group("When clearSearch is called", () {
       test("then a Pending state is received", () {
-        stateController.stream.listen(
+        stateController!.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
         viewModel.clearSearch();
@@ -73,9 +73,9 @@ void main() {
 
     group("When dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController.isClosed, false);
+        expect(stateController!.isClosed, false);
         viewModel.dispose();
-        expect(stateController.isClosed, true);
+        expect(stateController!.isClosed, true);
       });
     });
 
@@ -84,7 +84,7 @@ void main() {
         expect(
           () => PalettesListViewModel(
             stateController: null,
-            namesService: namesService,
+            namesService: namesService!,
             searchConfigurator: const ListSearchConfigurator(),
           ),
           throwsAssertionError,
@@ -94,7 +94,7 @@ void main() {
       test("then namesService must not be null", () {
         expect(
           () => PalettesListViewModel(
-            stateController: stateController,
+            stateController: stateController!,
             namesService: null,
             searchConfigurator: const ListSearchConfigurator(),
           ),
@@ -105,8 +105,8 @@ void main() {
       test("then stateController must not be null", () {
         expect(
           () => PalettesListViewModel(
-            stateController: stateController,
-            namesService: namesService,
+            stateController: stateController!,
+            namesService: namesService!,
             searchConfigurator: null,
           ),
           throwsAssertionError,
@@ -120,15 +120,15 @@ void main() {
       stateController = StreamController<PalettesListState>();
       namesService = PalettesServiceStub();
       viewModel = PalettesListViewModel(
-        stateController: stateController,
-        namesService: namesService,
+        stateController: stateController!,
+        namesService: namesService!,
         searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
     tearDown(() {
       if (stateController != null) {
-        stateController.close();
+        stateController!.close();
       }
       stateController = null;
       namesService = null;
@@ -178,15 +178,15 @@ void main() {
       stateController = StreamController<PalettesListState>();
       namesService = PalettesServiceEmptyStub();
       viewModel = PalettesListViewModel(
-        stateController: stateController,
-        namesService: namesService,
+        stateController: stateController!,
+        namesService: namesService!,
         searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
     tearDown(() {
       if (stateController != null) {
-        stateController.close();
+        stateController!.close();
       }
       stateController = null;
       namesService = null;

@@ -11,9 +11,9 @@ import 'package:flutter/foundation.dart';
 
 class OnBoardingViewModel {
   const OnBoardingViewModel({
-    @required StreamController<OnBoardingState> stateController,
-    @required DeviceOrientationService deviceOrientationService,
-    @required LocalStorage localStorage,
+    required StreamController<OnBoardingState> stateController,
+    required DeviceOrientationService deviceOrientationService,
+    required LocalStorage localStorage,
   })  : assert(stateController != null),
         assert(deviceOrientationService != null),
         assert(localStorage != null),

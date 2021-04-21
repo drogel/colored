@@ -7,7 +7,7 @@ class DisplayedFormatsInjector {
   const DisplayedFormatsInjector();
 
   DisplayedFormatsViewModel injectViewModel([
-    StreamController<DisplayedFormatsState> stateController,
+    StreamController<DisplayedFormatsState>? stateController,
   ]) =>
       DisplayedFormatsViewModel(
         stateController:

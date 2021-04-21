@@ -18,7 +18,7 @@ class NamingServiceSuccessStub implements NamingService {
   static const String name = "testColor";
 
   @override
-  Future<NamingResponse> getNaming({String hexColor}) async =>
+  Future<NamingResponse> getNaming({String? hexColor}) async =>
       const NamingResponse(
         ResponseStatus.ok,
         result: NamingResult(name: name, hex: "testHex"),
@@ -27,7 +27,7 @@ class NamingServiceSuccessStub implements NamingService {
 
 class NamingServiceFailureStub implements NamingService {
   @override
-  Future<NamingResponse> getNaming({String hexColor}) async =>
+  Future<NamingResponse> getNaming({String? hexColor}) async =>
       const NamingResponse(ResponseStatus.failed);
 }
 
@@ -44,10 +44,10 @@ class ConnectivityServiceSuccessStub implements ConnectivityService {
 }
 
 void main() {
-  NamingViewModel viewModel;
-  StreamController<NamingState> stateController;
-  NamingService namingService;
-  Converter converter;
+  NamingViewModel? viewModel;
+  StreamController<NamingState>? stateController;
+  NamingService? namingService;
+  Converter? converter;
 
   group("Given a NamingViewModel with successful NamingService requests", () {
     setUp(() {
@@ -55,14 +55,14 @@ void main() {
       namingService = NamingServiceSuccessStub();
       converter = ConverterStub();
       viewModel = NamingViewModel(
-        stateController: stateController,
-        namingService: namingService,
-        converter: converter,
+        stateController: stateController!,
+        namingService: namingService!,
+        converter: converter!,
       );
     });
 
     tearDown(() {
-      stateController.close();
+      stateController!.close();
       stateController = null;
       namingService = null;
       converter = null;
@@ -74,8 +74,8 @@ void main() {
         expect(
           () => NamingViewModel(
             stateController: null,
-            namingService: namingService,
-            converter: converter,
+            namingService: namingService!,
+            converter: converter!,
           ),
           throwsAssertionError,
         );
@@ -84,9 +84,9 @@ void main() {
       test("then an assertion error is thrown if namingService is null", () {
         expect(
           () => NamingViewModel(
-            stateController: stateController,
+            stateController: stateController!,
             namingService: null,
-            converter: converter,
+            converter: converter!,
           ),
           throwsAssertionError,
         );
@@ -95,8 +95,8 @@ void main() {
       test("then an assertion error is thrown if converter is null", () {
         expect(
           () => NamingViewModel(
-            stateController: stateController,
-            namingService: namingService,
+            stateController: stateController!,
+            namingService: namingService!,
             converter: null,
           ),
           throwsAssertionError,
@@ -106,48 +106,48 @@ void main() {
 
     group("when stateStream is called", () {
       test("the stream of the provided state controller is retrieved", () {
-        expect(viewModel.stateStream, stateController.stream);
+        expect(viewModel!.stateStream, stateController!.stream);
       });
     });
 
     group("when initialState is called", () {
       test("then an Unknown state is retrieved", () async {
-        final initialState = viewModel.initialState;
+        final initialState = viewModel!.initialState;
         expect(initialState, isA<Unknown>());
       });
     });
 
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController.isClosed, false);
-        viewModel.dispose();
-        expect(stateController.isClosed, true);
+        expect(stateController!.isClosed, false);
+        viewModel!.dispose();
+        expect(stateController!.isClosed, true);
       });
     });
 
     group("when fetchNaming is called", () {
       test("then a Changing state is added to the stream first", () async {
         final selection = ColorSelection(r: 0, g: 0, b: 0);
-        await viewModel.fetchNaming(selection);
-        final state = await stateController.stream.first;
+        await viewModel!.fetchNaming(selection);
+        final state = await stateController!.stream.first;
         expect(state, isA<Changing>());
       });
 
       test("then a Named state is added to stream after Changing", () async {
-        stateController.stream.skip(1).listen((event) {
+        stateController!.stream.skip(1).listen((event) {
           expectLater(event, isA<Named>());
         });
         final selection = ColorSelection(r: 0, g: 0, b: 0);
-        await viewModel.fetchNaming(selection);
+        await viewModel!.fetchNaming(selection);
       });
 
       test("then a Named state with expected name is retrieved", () async {
-        stateController.stream.skip(1).listen((event) {
+        stateController!.stream.skip(1).listen((event) {
           final name = (event as Named).name;
           expectLater(name, NamingServiceSuccessStub.name);
         });
         final selection = ColorSelection(r: 0, g: 0, b: 0);
-        await viewModel.fetchNaming(selection);
+        await viewModel!.fetchNaming(selection);
       });
     });
   });
@@ -158,14 +158,14 @@ void main() {
       namingService = NamingServiceFailureStub();
       converter = ConverterStub();
       viewModel = NamingViewModel(
-        stateController: stateController,
-        namingService: namingService,
-        converter: converter,
+        stateController: stateController!,
+        namingService: namingService!,
+        converter: converter!,
       );
     });
 
     tearDown(() {
-      stateController.close();
+      stateController!.close();
       stateController = null;
       namingService = null;
       converter = null;
@@ -174,7 +174,7 @@ void main() {
 
     group("when initialState is called", () {
       test("then an Unknown state is retrieved", () async {
-        final initialState = viewModel.initialState;
+        final initialState = viewModel!.initialState;
         expect(initialState, isA<Unknown>());
       });
     });
@@ -182,17 +182,17 @@ void main() {
     group("when fetchNaming is called", () {
       test("then a Changing state is added to the stream first", () async {
         final selection = ColorSelection(r: 0, g: 0, b: 0);
-        await viewModel.fetchNaming(selection);
-        final state = await stateController.stream.first;
+        await viewModel!.fetchNaming(selection);
+        final state = await stateController!.stream.first;
         expect(state, isA<Changing>());
       });
 
       test("then an Unknown state is added to stream after Changing", () async {
-        stateController.stream.skip(1).listen((event) {
+        stateController!.stream.skip(1).listen((event) {
           expectLater(event, isA<Unknown>());
         });
         final selection = ColorSelection(r: 0, g: 0, b: 0);
-        await viewModel.fetchNaming(selection);
+        await viewModel!.fetchNaming(selection);
       });
     });
   });

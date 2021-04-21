@@ -6,7 +6,7 @@ class SharedPreferences implements LocalStorage {
   const SharedPreferences();
 
   @override
-  Future<bool> storeBool({@required String key, @required bool value}) async {
+  Future<bool> storeBool({required String? key, required bool? value}) async {
     if (key == null || value == null) {
       return false;
     }
@@ -17,7 +17,7 @@ class SharedPreferences implements LocalStorage {
   }
 
   @override
-  Future<bool> getBool({@required String key}) async {
+  Future<bool?> getBool({required String? key}) async {
     if (key == null) {
       return null;
     }

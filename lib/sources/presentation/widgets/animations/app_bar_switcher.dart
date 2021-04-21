@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class AppBarSwitcher extends StatelessWidget implements PreferredSizeWidget {
   const AppBarSwitcher({
-    @required this.children,
-    @required this.currentIndex,
-    Key key,
+    required this.children,
+    required this.currentIndex,
+    Key? key,
   })  : assert(children != null),
         assert(currentIndex != null),
         super(key: key);

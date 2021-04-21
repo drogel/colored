@@ -12,10 +12,10 @@ import 'package:flutter/foundation.dart';
 
 class ConverterViewModel {
   const ConverterViewModel({
-    @required StreamController<ConverterState> stateController,
-    @required Parser colorParser,
-    @required Converter colorConverter,
-    @required DeviceOrientationService deviceOrientationService,
+    required StreamController<ConverterState> stateController,
+    required Parser colorParser,
+    required Converter colorConverter,
+    required DeviceOrientationService deviceOrientationService,
   })  : assert(stateController != null),
         assert(colorParser != null),
         assert(colorConverter != null),
@@ -53,7 +53,7 @@ class ConverterViewModel {
   void convertStringToColor(
     String string,
     Format format, {
-    void Function(ColorSelection) onDone,
+    void Function(ColorSelection)? onDone,
   }) {
     final selection = _parser.parseFromFormat(string, format);
     final state = _convertToState(selection);

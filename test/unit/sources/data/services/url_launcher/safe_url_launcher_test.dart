@@ -12,12 +12,12 @@ class MockCanLaunchCheck extends Mock {
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  Future<void> Function(String) launchAction;
-  Future<bool> Function(String) canLaunchCheck;
+  Future<void> Function(String)? launchAction;
+  Future<bool> Function(String)? canLaunchCheck;
 
   setUp(() {
-    launchAction = MockLaunchAction();
-    canLaunchCheck = MockCanLaunchCheck();
+    launchAction = MockLaunchAction() as Future<void> Function(String)?;
+    canLaunchCheck = MockCanLaunchCheck() as Future<bool> Function(String)?;
   });
 
   tearDown(() {
@@ -54,16 +54,16 @@ void main() {
     group("when launch is called", () {
       test("then the launchAction function is called", () async {
         const url = "https://google.com";
-        when(canLaunchCheck(url)).thenAnswer((realInvocation) async => true);
+        when(canLaunchCheck!(url)).thenAnswer((realInvocation) async => true);
         final urlLauncher = SafeUrlLauncher(
           url: url,
-          launchAction: launchAction,
-          canLaunchCheck: canLaunchCheck,
+          launchAction: launchAction!,
+          canLaunchCheck: canLaunchCheck!,
         );
 
         await urlLauncher.launch();
 
-        verify(launchAction.call(url));
+        verify(launchAction!.call(url));
       });
     });
   });
@@ -72,16 +72,16 @@ void main() {
     group("then launch is called", () {
       test("then the launchAction function is not called", () async {
         const url = "test";
-        when(canLaunchCheck(url)).thenAnswer((realInvocation) async => false);
+        when(canLaunchCheck!(url)).thenAnswer((realInvocation) async => false);
         final urlLauncher = SafeUrlLauncher(
           url: url,
-          launchAction: launchAction,
-          canLaunchCheck: canLaunchCheck,
+          launchAction: launchAction!,
+          canLaunchCheck: canLaunchCheck!,
         );
 
         await urlLauncher.launch();
 
-        verifyNever(launchAction.call(any));
+        verifyNever(launchAction!.call(any!));
       });
     });
   });

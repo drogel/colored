@@ -7,8 +7,8 @@ import 'package:flutter/foundation.dart';
 
 class ConnectivityViewModel {
   ConnectivityViewModel({
-    @required StreamController<ConnectivityState> stateController,
-    @required ConnectivityService connectivityService,
+    required StreamController<ConnectivityState> stateController,
+    required ConnectivityService connectivityService,
   })  : assert(stateController != null),
         assert(connectivityService != null),
         _connectivityService = connectivityService,
@@ -17,7 +17,7 @@ class ConnectivityViewModel {
   final StreamController<ConnectivityState> _stateController;
   final ConnectivityService _connectivityService;
 
-  StreamSubscription<ConnectivityResult> _subscription;
+  StreamSubscription<ConnectivityResult>? _subscription;
 
   Stream<ConnectivityState> get stateStream => _stateController.stream;
 
@@ -30,7 +30,7 @@ class ConnectivityViewModel {
 
   void dispose() {
     if (_subscription != null) {
-      _subscription.cancel();
+      _subscription!.cancel();
       _subscription = null;
     }
     _stateController.close();

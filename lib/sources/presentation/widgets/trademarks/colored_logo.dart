@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 const _kIconSize = 56.0;
 
 class ColoredLogo extends StatelessWidget {
-  const ColoredLogo({Key key}) : super(key: key);
+  const ColoredLogo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.headline3;
-    final radii = RadiusData.of(context).radiiScheme;
-    final padding = PaddingData.of(context).paddingScheme;
+    final textStyle = Theme.of(context).textTheme.headline3!;
+    final radii = RadiusData.of(context)!.radiiScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return Center(
       child: Container(
         height: _kIconSize,

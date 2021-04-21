@@ -5,7 +5,7 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter/material.dart';
 
 class ColorParser implements Parser {
-  const ColorParser({@required Map<Format, FormatParser> formatParsers})
+  const ColorParser({required Map<Format, FormatParser> formatParsers})
       : assert(formatParsers != null),
         _formatParsers = formatParsers;
 
@@ -17,7 +17,7 @@ class ColorParser implements Parser {
       throw UnimplementedError("Unspecified $format in $runtimeType");
     }
 
-    return _formatParsers[format].hasMatch(string);
+    return _formatParsers[format]!.hasMatch(string);
   }
 
   @override
@@ -26,6 +26,6 @@ class ColorParser implements Parser {
       throw UnimplementedError("Unspecified $format in $runtimeType");
     }
 
-    return _formatParsers[format].parse(string);
+    return _formatParsers[format]!.parse(string);
   }
 }

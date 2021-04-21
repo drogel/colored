@@ -4,11 +4,11 @@ import 'package:colored/sources/presentation/layouts/converter/picker/picker_tab
 import 'package:flutter/material.dart';
 
 class PickerTabBar extends StatelessWidget implements PreferredSizeWidget {
-  const PickerTabBar({Key key}) : super(key: key);
+  const PickerTabBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final data = PickerData.of(context);
+    final data = PickerData.of(context)!;
     final selectedPicker = data.state.pickerStyle;
     final selectedPickerIndex = PickerStyle.values.indexOf(selectedPicker);
     return DefaultTabController(

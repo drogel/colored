@@ -14,7 +14,7 @@ class PalettesListInjector {
   const PalettesListInjector();
 
   PalettesListViewModel injectViewModel(
-          [StreamController<PalettesListState> stateController]) =>
+          [StreamController<PalettesListState>? stateController]) =>
       PalettesListViewModel(
         stateController:
             stateController ?? StreamController<PalettesListState>(),
@@ -22,7 +22,7 @@ class PalettesListInjector {
           dataLoader: PalettesLoader(
             memoizer: DefaultMemoizer(),
             stringBundle: const RootStringBundle(),
-            palettesDataPath: FlavorConfig.instance.values.dataPath.paletteData,
+            palettesDataPath: FlavorConfig.instance!.values.dataPath.paletteData,
           ),
           filter: const PaletteFilter(),
         ),

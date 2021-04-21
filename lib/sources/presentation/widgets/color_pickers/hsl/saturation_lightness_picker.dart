@@ -8,22 +8,22 @@ import 'package:flutter/material.dart';
 
 class SaturationLightnessPicker extends StatelessWidget {
   const SaturationLightnessPicker({
-    @required this.color,
+    required this.color,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
     this.purifier = const DefaultColorPurifier(),
     this.constraints,
-    Key key,
+    Key? key,
   })  : assert(color != null),
         super(key: key);
 
-  final BoxConstraints constraints;
+  final BoxConstraints? constraints;
   final Color color;
   final ColorPurifier purifier;
-  final void Function(ColorSelection) onChanged;
-  final void Function(ColorSelection) onChangeStart;
-  final void Function(ColorSelection) onChangeEnd;
+  final void Function(ColorSelection)? onChanged;
+  final void Function(ColorSelection)? onChangeStart;
+  final void Function(ColorSelection)? onChangeEnd;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class SaturationLightnessPicker extends StatelessWidget {
 }
 
 class _HslPickerSelector implements HueBasedSelector {
-  const _HslPickerSelector({@required this.color, @required this.purifier});
+  const _HslPickerSelector({required this.color, required this.purifier});
 
   final Color color;
   final ColorPurifier purifier;

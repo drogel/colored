@@ -8,9 +8,9 @@ import 'package:flutter/foundation.dart';
 
 class PalettesListViewModel {
   const PalettesListViewModel({
-    @required StreamController<PalettesListState> stateController,
-    @required NamesService namesService,
-    @required SearchConfigurator searchConfigurator,
+    required StreamController<PalettesListState> stateController,
+    required NamesService namesService,
+    required SearchConfigurator searchConfigurator,
   })  : assert(stateController != null),
         assert(namesService != null),
         assert(searchConfigurator != null),
@@ -34,7 +34,7 @@ class PalettesListViewModel {
     }
 
     final palettesMap = await _namesService.fetchContainingSearch(cleanSearch);
-    final palettes = _convertToPalettes(palettesMap);
+    final palettes = _convertToPalettes(palettesMap as Map<String, List<String>>);
 
     if (palettes.isEmpty) {
       _stateController.sink.add(NoneFound(search: searchString));

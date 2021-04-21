@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 
 class SingleColorCard extends StatelessWidget {
   const SingleColorCard({
-    @required this.backgroundColor,
-    @required this.title,
-    @required this.subtitle,
+    required this.backgroundColor,
+    required this.title,
+    required this.subtitle,
     this.onPressed,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Color backgroundColor;
   final String title;
   final String subtitle;
-  final void Function(Color) onPressed;
+  final void Function(Color)? onPressed;
 
   @override
   Widget build(BuildContext context) => ColorCard(
         title: Text(title),
         subtitle: Text(subtitle),
         backgroundColor: backgroundColor,
-        onPressed: () => onPressed(backgroundColor),
+        onPressed: () => onPressed!(backgroundColor),
         child: Container(color: backgroundColor),
       );
 }

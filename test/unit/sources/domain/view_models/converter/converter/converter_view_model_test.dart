@@ -27,8 +27,8 @@ class MockOnSelectionDoneCallbackProvider extends Mock
     implements OnSelectionDoneCallbackProvider {}
 
 void main() {
-  ConverterViewModel viewModel;
-  StreamController<ConverterState> stateController;
+  ConverterViewModel? viewModel;
+  StreamController<ConverterState>? stateController;
 
   setUp(() {
     stateController = StreamController<ConverterState>();
@@ -36,7 +36,7 @@ void main() {
   });
 
   tearDown(() {
-    stateController.close();
+    stateController!.close();
     stateController = null;
     viewModel = null;
   });
@@ -58,7 +58,7 @@ void main() {
       test("then an assertion error is thrown if colorParser is null", () {
         expect(
           () => ConverterViewModel(
-            stateController: stateController,
+            stateController: stateController!,
             deviceOrientationService: MockOrientationService(),
             colorConverter: MockConverter(),
             colorParser: null,
@@ -70,7 +70,7 @@ void main() {
       test("then an assertion error is thrown if colorConverter is null", () {
         expect(
           () => ConverterViewModel(
-            stateController: stateController,
+            stateController: stateController!,
             deviceOrientationService: MockOrientationService(),
             colorConverter: null,
             colorParser: MockParser(),
@@ -82,7 +82,7 @@ void main() {
       test("then an error is thrown if deviceOrientationService is null", () {
         expect(
           () => ConverterViewModel(
-            stateController: stateController,
+            stateController: stateController!,
             deviceOrientationService: null,
             colorConverter: MockConverter(),
             colorParser: MockParser(),
@@ -94,7 +94,7 @@ void main() {
 
     group("when initialstate is called", () {
       test("then an initial state with the primaryDark color is returned", () {
-        final actual = viewModel.initialState;
+        final actual = viewModel!.initialState;
 
         const expectedColor = color_constants.primaryDark;
 
@@ -110,7 +110,7 @@ void main() {
         final orientationService = MockOrientationService();
 
         final mockedViewModel = ConverterViewModel(
-          stateController: stateController,
+          stateController: stateController!,
           colorParser: MockParser(),
           colorConverter: MockConverter(),
           deviceOrientationService: orientationService,
@@ -133,35 +133,35 @@ void main() {
             Format.hsv: "345°, 80%, 100%",
           },
         );
-        stateController.stream.listen((state) => expect(state, expected));
-        viewModel.notifySelectionChanged(selection);
+        stateController!.stream.listen((state) => expect(state, expected));
+        viewModel!.notifySelectionChanged(selection);
       });
     });
 
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController.isClosed, false);
-        viewModel.dispose();
-        expect(stateController.isClosed, true);
+        expect(stateController!.isClosed, false);
+        viewModel!.dispose();
+        expect(stateController!.isClosed, true);
       });
     });
 
     group("when stateStream is get", () {
       test("then stateController's stream is received", () {
-        final actual = viewModel.stateStream;
-        expect(actual, stateController.stream);
+        final actual = viewModel!.stateStream;
+        expect(actual, stateController!.stream);
       });
     });
 
     group("when clipboardShouldFail is called with hex color format", () {
       test("then false should be returned if string is a valid hex color", () {
-        final shouldHexStringFail = viewModel.clipboardShouldFail(
+        final shouldHexStringFail = viewModel!.clipboardShouldFail(
           "#FF00FF",
           Format.hex,
         );
         expect(shouldHexStringFail, false);
 
-        final shouldHexStringWithoutHashFail = viewModel.clipboardShouldFail(
+        final shouldHexStringWithoutHashFail = viewModel!.clipboardShouldFail(
           "FF00FF",
           Format.hex,
         );
@@ -169,13 +169,13 @@ void main() {
       });
 
       test("then false should return if string is not a valid hex color", () {
-        final shouldNonHexStringFail = viewModel.clipboardShouldFail(
+        final shouldNonHexStringFail = viewModel!.clipboardShouldFail(
           "This is a sentence",
           Format.hex,
         );
         expect(shouldNonHexStringFail, true);
 
-        final shouldRGBStringFail = viewModel.clipboardShouldFail(
+        final shouldRGBStringFail = viewModel!.clipboardShouldFail(
           "(_kDecimal8Bit, _kDecimal8Bit, _kDecimal8Bit)",
           Format.hex,
         );
@@ -185,13 +185,13 @@ void main() {
 
     group("when clipboardShouldFail is called with RGB color format", () {
       test("then false should be returned if string is a valid RGB color", () {
-        final shouldRGBStringFail = viewModel.clipboardShouldFail(
+        final shouldRGBStringFail = viewModel!.clipboardShouldFail(
           "255, 255, 0",
           Format.rgb,
         );
         expect(shouldRGBStringFail, false);
 
-        final shouldRGBStringParenthesisFail = viewModel.clipboardShouldFail(
+        final shouldRGBStringParenthesisFail = viewModel!.clipboardShouldFail(
           "(0, 0, 0)",
           Format.rgb,
         );
@@ -199,13 +199,13 @@ void main() {
       });
 
       test("then false should return if string is not a valid RGB color", () {
-        final shouldNonRGBStringFail = viewModel.clipboardShouldFail(
+        final shouldNonRGBStringFail = viewModel!.clipboardShouldFail(
           "This is a sentence",
           Format.rgb,
         );
         expect(shouldNonRGBStringFail, true);
 
-        final shouldHexStringFail = viewModel.clipboardShouldFail(
+        final shouldHexStringFail = viewModel!.clipboardShouldFail(
           "#FFFFFF",
           Format.rgb,
         );
@@ -217,13 +217,13 @@ void main() {
       test("then onDone is called", () {
         final callbackProvider = MockOnSelectionDoneCallbackProvider();
 
-        viewModel.convertStringToColor(
+        viewModel!.convertStringToColor(
           "#000000",
           Format.hex,
           onDone: callbackProvider.onDone,
         );
 
-        verify(callbackProvider.onDone(any));
+        verify(callbackProvider.onDone(any!));
       });
     });
 
@@ -238,8 +238,8 @@ void main() {
             Format.hsv: "345°, 80%, 100%",
           },
         );
-        stateController.stream.listen((state) => expect(state, expected));
-        viewModel.convertStringToColor(rgbString, Format.rgb);
+        stateController!.stream.listen((state) => expect(state, expected));
+        viewModel!.convertStringToColor(rgbString, Format.rgb);
       });
     });
 
@@ -254,8 +254,8 @@ void main() {
             Format.hsv: "345°, 80%, 100%"
           },
         );
-        stateController.stream.listen((state) => expect(state, expected));
-        viewModel.convertStringToColor(hexString, Format.hex);
+        stateController!.stream.listen((state) => expect(state, expected));
+        viewModel!.convertStringToColor(hexString, Format.hex);
       });
     });
   });

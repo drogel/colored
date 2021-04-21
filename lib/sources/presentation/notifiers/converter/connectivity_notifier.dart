@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class ConnectivityNotifier extends StatefulWidget {
   const ConnectivityNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(child != null),
         assert(injector != null),
         super(key: key);
@@ -21,7 +21,7 @@ class ConnectivityNotifier extends StatefulWidget {
 }
 
 class _ConnectivityNotifierState extends State<ConnectivityNotifier> {
-  ConnectivityViewModel _viewModel;
+  late ConnectivityViewModel _viewModel;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _ConnectivityNotifierState extends State<ConnectivityNotifier> {
         stream: _viewModel.stateStream,
         initialData: _viewModel.initialState,
         builder: (context, snapshot) => ConnectivityData(
-          state: snapshot.data,
+          state: snapshot.data!,
           child: widget.child,
         ),
       );

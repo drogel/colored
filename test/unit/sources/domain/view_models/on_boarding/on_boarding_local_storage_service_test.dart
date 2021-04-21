@@ -12,20 +12,20 @@ import 'package:mockito/mockito.dart';
 class MockLocalStorage extends Mock implements LocalStorage {}
 
 void main() {
-  OnBoardingViewModel viewModel;
-  LocalStorage service;
+  OnBoardingViewModel? viewModel;
+  LocalStorage? service;
 
   setUp(() {
     service = MockLocalStorage();
     viewModel = OnBoardingViewModel(
       stateController: StreamController<OnBoardingState>(),
-      localStorage: service,
+      localStorage: service!,
       deviceOrientationService: const SystemChromeService(),
     );
   });
 
   tearDown(() {
-    viewModel.dispose();
+    viewModel!.dispose();
     viewModel = null;
     service = null;
   });
@@ -33,8 +33,8 @@ void main() {
   group("Given an OnBoardingViewModel with stubbed LocalStorage service", () {
     group("when onOnBoardingFinish is called", () {
       test("then LocalStorage is asked to store true for didOnBoard key", () {
-        viewModel.onOnBoardingFinish();
-        service.storeBool(key: keys.didOnBoard, value: true);
+        viewModel!.onOnBoardingFinish();
+        service!.storeBool(key: keys.didOnBoard, value: true);
       });
     });
   });

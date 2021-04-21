@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ColoredTooltip extends StatelessWidget {
   const ColoredTooltip({
-    Key key,
+    Key? key,
     this.tooltipKey,
     this.message,
     this.color,
@@ -12,19 +12,19 @@ class ColoredTooltip extends StatelessWidget {
     this.showOnMouseHover = false,
   }) : super(key: key);
 
-  final Key tooltipKey;
+  final Key? tooltipKey;
   final bool showOnMouseHover;
   final bool preferBelow;
-  final String message;
-  final Color color;
-  final Widget child;
+  final String? message;
+  final Color? color;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    final radii = RadiusData.of(context).radiiScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
     return Tooltip(
       key: tooltipKey,
-      message: message,
+      message: message!,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.all(radii.small),

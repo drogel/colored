@@ -7,9 +7,9 @@ import 'package:flutter/foundation.dart';
 
 class ColorNamesLoader implements DataLoader<String> {
   ColorNamesLoader({
-    @required Memoizer<Map<String, String>> memoizer,
-    @required StringBundle stringBundle,
-    @required String colorsDataPath,
+    required Memoizer<Map<String, String>> memoizer,
+    required StringBundle stringBundle,
+    required String colorsDataPath,
   })  : assert(memoizer != null),
         assert(stringBundle != null),
         assert(colorsDataPath != null),

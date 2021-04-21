@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class MainTabsNotifier extends StatefulWidget {
   const MainTabsNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         assert(child != null),
         super(key: key);
@@ -21,7 +21,7 @@ class MainTabsNotifier extends StatefulWidget {
 }
 
 class _MainTabsNotifierState extends State<MainTabsNotifier> {
-  MainTabsViewModel _viewModel;
+  late MainTabsViewModel _viewModel;
 
   @override
   void initState() {

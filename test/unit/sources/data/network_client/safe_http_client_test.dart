@@ -16,7 +16,7 @@ class TimeoutHttpWrapper implements HttpWrapper {
   static const timeoutForcingSeconds = SafeHttpClient.timeoutLimitSeconds + 1;
 
   @override
-  Future<Response> get(String url, {Map<String, String> headers}) =>
+  Future<Response> get(String url, {Map<String, String>? headers}) =>
       Future.delayed(const Duration(seconds: timeoutForcingSeconds));
 }
 
@@ -24,7 +24,7 @@ class SocketExceptionHttpWrapper implements HttpWrapper {
   const SocketExceptionHttpWrapper();
 
   @override
-  Future<Response> get(String url, {Map<String, String> headers}) =>
+  Future<Response> get(String url, {Map<String, String>? headers}) =>
       throw SocketException(runtimeType.toString());
 }
 
@@ -35,13 +35,13 @@ class ResponseHttpWrapper implements HttpWrapper {
   static const responseStatus = 200;
 
   @override
-  Future<Response> get(String url, {Map<String, String> headers}) async =>
+  Future<Response> get(String url, {Map<String, String>? headers}) async =>
       Response(responseBody, responseStatus);
 }
 
 void main() {
   final _kValidHttpResponse = Response("testBody", 200);
-  HttpClient client;
+  HttpClient? client;
 
   group("Given a SafeHttpClient", () {
     setUp(() {
@@ -67,7 +67,7 @@ void main() {
           status: ResponseStatus.ok,
           httpResponse: _kValidHttpResponse,
         );
-        final actual = client.isResponseOk(validResponse);
+        final actual = client!.isResponseOk(validResponse);
         expect(actual, isTrue);
       });
 
@@ -76,7 +76,7 @@ void main() {
           status: ResponseStatus.failed,
           httpResponse: _kValidHttpResponse,
         );
-        final actual = client.isResponseOk(invalidResponse);
+        final actual = client!.isResponseOk(invalidResponse);
         expect(actual, isFalse);
       });
 
@@ -85,7 +85,7 @@ void main() {
           status: ResponseStatus.ok,
           httpResponse: Response("testBody", 400),
         );
-        final actual = client.isResponseOk(invalidResponse);
+        final actual = client!.isResponseOk(invalidResponse);
         expect(actual, isFalse);
       });
     });
@@ -103,7 +103,7 @@ void main() {
     group("when get is called", () {
       test("then a failed status is returned on timeout", () {
         fakeAsync((async) {
-          client
+          client!
               .get("test")
               .then((actual) => expect(actual.status, ResponseStatus.failed));
           async.elapse(
@@ -125,7 +125,7 @@ void main() {
 
     group("when get is called", () {
       test("then a failed status is returned on socket exception", () async {
-        final actual = await client.get("test");
+        final actual = await client!.get("test");
         expect(actual.status, ResponseStatus.failed);
       });
     });
@@ -142,8 +142,8 @@ void main() {
 
     group("when get is called", () {
       test("then an ok status is recieved with the response", () async {
-        final actual = await client.get("test");
-        final response = actual.httpResponse;
+        final actual = await client!.get("test");
+        final response = actual.httpResponse!;
         expect(actual.status, ResponseStatus.ok);
         expect(response.body, ResponseHttpWrapper.responseBody);
         expect(response.statusCode, ResponseHttpWrapper.responseStatus);

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class ConverterData extends InheritedWidget {
   const ConverterData({
-    @required this.state,
-    @required this.clipboardShouldFail,
-    @required this.onClipboardRetrieved,
-    Widget child,
-    Key key,
+    required this.state,
+    required this.clipboardShouldFail,
+    required this.onClipboardRetrieved,
+    required Widget child,
+    Key? key,
   })  : assert(state != null),
         super(key: key, child: child);
 
@@ -16,7 +16,7 @@ class ConverterData extends InheritedWidget {
   final bool Function(String, Format) clipboardShouldFail;
   final void Function(String, Format) onClipboardRetrieved;
 
-  static ConverterData of(BuildContext context) =>
+  static ConverterData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<ConverterData>();
 
   @override

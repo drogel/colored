@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 
 class PaletteDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const PaletteDetailAppBar({Key key}) : super(key: key);
+  const PaletteDetailAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final navigation = PalettesNavigationData.of(context);
-    final data = PaletteDetailData.of(context).state;
+    final data = PaletteDetailData.of(context)!.state;
     return AppBar(
       automaticallyImplyLeading: false,
       leading: BackButton(
-        onPressed: () => _navigateBackToPalettes(navigation),
+        onPressed: () => _navigateBackToPalettes(navigation!),
       ),
       title: Text(data.paletteName),
     );

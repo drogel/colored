@@ -7,14 +7,14 @@ class SwipingColorContainer extends StatelessWidget {
     this.onColorSwipeStart,
     this.onColorSwipeEnd,
     this.color,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final Color color;
-  final void Function(double) onColorSwipedVertical;
-  final void Function(double) onColorSwipedHorizontal;
-  final void Function() onColorSwipeStart;
-  final void Function() onColorSwipeEnd;
+  final Color? color;
+  final void Function(double)? onColorSwipedVertical;
+  final void Function(double)? onColorSwipedHorizontal;
+  final void Function()? onColorSwipeStart;
+  final void Function()? onColorSwipeEnd;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -29,25 +29,25 @@ class SwipingColorContainer extends StatelessWidget {
 
   void _onDragStart(DragStartDetails details) {
     if (onColorSwipeStart != null) {
-      onColorSwipeStart();
+      onColorSwipeStart!();
     }
   }
 
   void _onDragEnd(DragEndDetails details) {
     if (onColorSwipeEnd != null) {
-      onColorSwipeEnd();
+      onColorSwipeEnd!();
     }
   }
 
   void _onVerticalDragUpdate(DragUpdateDetails details) {
     if (onColorSwipedVertical != null) {
-      onColorSwipedVertical(details.delta.dy);
+      onColorSwipedVertical!(details.delta.dy);
     }
   }
 
   void _onHorizontalDragUpdate(DragUpdateDetails details) {
     if (onColorSwipedHorizontal != null) {
-      onColorSwipedHorizontal(details.delta.dx);
+      onColorSwipedHorizontal!(details.delta.dx);
     }
   }
 }

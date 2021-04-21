@@ -16,7 +16,7 @@ class SafeHttpClient implements HttpClient {
   final HttpWrapper _httpWrapper;
 
   @override
-  Future<HttpResponse> get(String url, {Map<String, String> headers}) async {
+  Future<HttpResponse> get(String url, {Map<String, String>? headers}) async {
     try {
       final response = await _httpWrapper
           .get(url, headers: headers)
@@ -32,6 +32,6 @@ class SafeHttpClient implements HttpClient {
   @override
   bool isResponseOk(HttpResponse response) =>
       response.status == ResponseStatus.ok &&
-      response.httpResponse.statusCode == 200 &&
-      response.httpResponse.body != null;
+      response.httpResponse!.statusCode == 200 &&
+      response.httpResponse!.body != null;
 }

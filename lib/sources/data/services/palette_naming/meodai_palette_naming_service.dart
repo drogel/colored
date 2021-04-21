@@ -11,8 +11,8 @@ import 'package:flutter/foundation.dart';
 
 class MeodaiPaletteNamingService implements PaletteNamingService {
   const MeodaiPaletteNamingService({
-    @required UrlComposer urlComposer,
-    @required HttpClient networkClient,
+    required UrlComposer urlComposer,
+    required HttpClient networkClient,
   })  : assert(urlComposer != null),
         assert(networkClient != null),
         _client = networkClient,
@@ -22,7 +22,7 @@ class MeodaiPaletteNamingService implements PaletteNamingService {
   final HttpClient _client;
 
   @override
-  Future<PaletteNamingResponse> getNaming({List<String> hexColors}) async {
+  Future<PaletteNamingResponse> getNaming({List<String>? hexColors}) async {
     if (hexColors == null || hexColors.isEmpty) {
       return const PaletteNamingResponse(ResponseStatus.failed);
     }
@@ -35,7 +35,7 @@ class MeodaiPaletteNamingService implements PaletteNamingService {
       return const PaletteNamingResponse(ResponseStatus.failed);
     }
 
-    final map = jsonDecode(response.httpResponse.body);
+    final map = jsonDecode(response.httpResponse!.body);
     final paletteMapList = map[NamingResult.mappingKey];
     final palettes = List<Map<String, dynamic>>.from(paletteMapList);
     final results = palettes.map((map) => NamingResult.fromMap(map)).toList();

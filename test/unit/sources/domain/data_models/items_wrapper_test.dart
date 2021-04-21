@@ -2,8 +2,8 @@ import 'package:colored/sources/domain/data_models/items_wrapper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  ItemsWrapper<int> testWrapper;
-  List<int> testItems;
+  ItemsWrapper<int>? testWrapper;
+  List<int>? testItems;
 
   setUp(() {
     testItems = [1, 2, 3, 4];

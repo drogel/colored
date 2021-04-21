@@ -26,15 +26,15 @@ class StringBundleStub implements StringBundle {
 }
 
 void main() {
-  ColorNamesLoader loader;
-  Memoizer memoizer;
-  StringBundle stringBundle;
+  ColorNamesLoader? loader;
+  Memoizer? memoizer;
+  late StringBundle stringBundle;
 
   setUp(() {
     memoizer = const MemoizerStub();
     stringBundle = const StringBundleStub();
     loader = ColorNamesLoader(
-      memoizer: memoizer,
+      memoizer: memoizer as Memoizer<Map<String, String>>,
       stringBundle: stringBundle,
       colorsDataPath: "testPath",
     );
@@ -61,7 +61,7 @@ void main() {
       test("then should throw if given a null stringBundle", () {
         expect(
           () => ColorNamesLoader(
-            memoizer: memoizer,
+            memoizer: memoizer as Memoizer<Map<String, String>>,
             stringBundle: null,
             colorsDataPath: "testPath",
           ),
@@ -72,7 +72,7 @@ void main() {
       test("then should throw if given a null stringBundle", () {
         expect(
           () => ColorNamesLoader(
-            memoizer: memoizer,
+            memoizer: memoizer as Memoizer<Map<String, String>>,
             stringBundle: const StringBundleStub(),
             colorsDataPath: null,
           ),
@@ -83,7 +83,7 @@ void main() {
 
     group("when load is called", () {
       test("then returns value of the computation in the memoizer", () async {
-        final actual = await loader.load();
+        final actual = await loader!.load();
         expect(actual, MemoizerStub.mockResult);
       });
     });
@@ -94,7 +94,7 @@ void main() {
       memoizer = DefaultMemoizer<Map<String, String>>();
       stringBundle = const StringBundleStub();
       loader = ColorNamesLoader(
-        memoizer: memoizer,
+        memoizer: memoizer as Memoizer<Map<String, String>>,
         stringBundle: stringBundle,
         colorsDataPath: "testPath",
       );
@@ -107,7 +107,7 @@ void main() {
 
     group("when load is called", () {
       test("then returns the decoded json string from the bundle", () async {
-        final actual = await loader.load();
+        final actual = await loader!.load();
         expect(actual, {"000000": "test"});
       });
     });

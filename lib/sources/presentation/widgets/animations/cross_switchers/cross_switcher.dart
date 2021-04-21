@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 abstract class CrossSwitcher extends StatelessWidget {
   const CrossSwitcher({
-    @required this.firstChild,
-    @required this.secondChild,
-    @required this.state,
-    Key key,
+    required this.firstChild,
+    required this.secondChild,
+    required this.state,
+    Key? key,
   })  : assert(firstChild != null),
         assert(secondChild != null),
         assert(state != null),

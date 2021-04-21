@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class ColorSuggestionsNotifier extends StatefulWidget {
   const ColorSuggestionsNotifier({
-    @required this.child,
-    @required this.injector,
-    Key key,
+    required this.child,
+    required this.injector,
+    Key? key,
   }) : super(key: key);
 
   final Widget child;
@@ -20,7 +20,7 @@ class ColorSuggestionsNotifier extends StatefulWidget {
 }
 
 class _ColorSuggestionsNotifierState extends State<ColorSuggestionsNotifier> {
-  ColorSuggestionsViewModel _viewModel;
+  late ColorSuggestionsViewModel _viewModel;
 
   @override
   void initState() {

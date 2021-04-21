@@ -10,21 +10,21 @@ import 'package:colored/sources/domain/view_models/palettes/palette_detail/palet
 import 'package:flutter/foundation.dart';
 
 class PaletteDetailInjector {
-  const PaletteDetailInjector({@required Flavor flavor})
+  const PaletteDetailInjector({required Flavor flavor})
       : assert(flavor != null),
         _flavor = flavor;
 
   final Flavor _flavor;
 
   PaletteDetailViewModel injectViewModel([
-    StreamController<PaletteDetailState> stateController,
+    StreamController<PaletteDetailState>? stateController,
   ]) =>
       _flavor.isProduction()
           ? _injectViewModel(stateController)
           : _injectMockViewModel(stateController);
 
   PaletteDetailViewModel _injectMockViewModel(
-    StreamController<PaletteDetailState> stateController,
+    StreamController<PaletteDetailState>? stateController,
   ) =>
       PaletteDetailViewModel(
         stateController:
@@ -33,7 +33,7 @@ class PaletteDetailInjector {
       );
 
   PaletteDetailViewModel _injectViewModel(
-    StreamController<PaletteDetailState> stateController,
+    StreamController<PaletteDetailState>? stateController,
   ) =>
       PaletteDetailViewModel(
         stateController:

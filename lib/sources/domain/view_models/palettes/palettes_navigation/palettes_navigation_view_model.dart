@@ -6,6 +6,6 @@ import 'package:flutter/foundation.dart';
 
 class PalettesNavigationViewModel extends IndexedNavigationController {
   const PalettesNavigationViewModel({
-    @required StreamController<IndexedNavigationState> stateController,
+    required StreamController<IndexedNavigationState> stateController,
   }) : super(stateController: stateController);
 }

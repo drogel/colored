@@ -11,7 +11,7 @@ class MockPaletteNamingService implements PaletteNamingService {
   const MockPaletteNamingService();
 
   @override
-  Future<PaletteNamingResponse> getNaming({List<String> hexColors}) async {
+  Future<PaletteNamingResponse> getNaming({List<String>? hexColors}) async {
     final samplePalette = await rootBundle.loadString(mock_paths.samplePalette);
     final jsonResponse = jsonDecode(samplePalette);
     final mapList = jsonResponse[NamingResult.mappingKey];

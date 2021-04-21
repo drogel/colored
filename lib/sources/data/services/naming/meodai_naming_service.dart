@@ -11,8 +11,8 @@ import 'package:flutter/foundation.dart';
 
 class MeodaiNamingService implements NamingService {
   const MeodaiNamingService({
-    @required UrlComposer urlComposer,
-    @required HttpClient networkClient,
+    required UrlComposer urlComposer,
+    required HttpClient networkClient,
   })  : assert(urlComposer != null),
         assert(networkClient != null),
         _client = networkClient,
@@ -22,14 +22,14 @@ class MeodaiNamingService implements NamingService {
   final HttpClient _client;
 
   @override
-  Future<NamingResponse> getNaming({String hexColor}) async {
+  Future<NamingResponse> getNaming({String? hexColor}) async {
     final url = _urlComposer.compose(endpoints.baseUrl, path: hexColor);
     final response = await _client.get(url);
     if (!_client.isResponseOk(response)) {
       return const NamingResponse(ResponseStatus.failed);
     }
 
-    final map = jsonDecode(response.httpResponse.body);
+    final map = jsonDecode(response.httpResponse!.body);
     final namingMap = map[NamingResult.mappingKey].first;
     final result = NamingResult.fromMap(namingMap);
     return NamingResponse(ResponseStatus.ok, result: result);

@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class PaletteSuggestionsNotifier extends StatefulWidget {
   const PaletteSuggestionsNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         assert(child != null),
         super(key: key);
@@ -23,7 +23,7 @@ class PaletteSuggestionsNotifier extends StatefulWidget {
 
 class _PaletteSuggestionsNotifierState
     extends State<PaletteSuggestionsNotifier> {
-  PaletteSuggestionsViewModel _viewModel;
+  late PaletteSuggestionsViewModel _viewModel;
 
   @override
   void initState() {

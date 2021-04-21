@@ -3,15 +3,15 @@ import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:flutter/material.dart';
 
 class DefaultAnimatedSwitcher extends StatelessWidget {
-  const DefaultAnimatedSwitcher({@required this.child, Key key})
+  const DefaultAnimatedSwitcher({required this.child, Key? key})
       : super(key: key);
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final duration = DurationData.of(context).durationScheme;
-    final curves = CurveData.of(context).curveScheme;
+    final duration = DurationData.of(context)!.durationScheme;
+    final curves = CurveData.of(context)!.curveScheme;
     return AnimatedSwitcher(
       switchInCurve: curves.exiting,
       switchOutCurve: curves.exiting,

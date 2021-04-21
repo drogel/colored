@@ -9,16 +9,16 @@ class IntGeneratorStub implements IntGenerator {
   static const List<int> stubbedInts = [1, 2];
 
   @override
-  List<int> generate({int max, int length}) => stubbedInts;
+  List<int> generate({int? max, int? length}) => stubbedInts;
 }
 
 void main() {
-  ListPicker<String> listPicker;
-  IntGenerator intGenerator;
+  ListPicker<String>? listPicker;
+  IntGenerator? intGenerator;
 
   setUp(() {
     intGenerator = const IntGeneratorStub();
-    listPicker = StringListPicker(intGenerator: intGenerator);
+    listPicker = StringListPicker(intGenerator: intGenerator!);
   });
 
   tearDown(() {
@@ -39,7 +39,7 @@ void main() {
     group("when pick is called", () {
       test("then selected indexes are returned, based on generated ints", () {
         const inputStrings = ["test1", "test2", "test3", "test4"];
-        final actual = listPicker.pick(from: inputStrings, count: 2);
+        final actual = listPicker!.pick(from: inputStrings, count: 2);
 
         expect(actual, ["test2", "test3"]);
       });

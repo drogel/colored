@@ -7,8 +7,8 @@ import 'package:flutter/foundation.dart';
 
 class PaletteDetailViewModel {
   const PaletteDetailViewModel({
-    @required StreamController<PaletteDetailState> stateController,
-    @required PaletteNamingService paletteNamingService,
+    required StreamController<PaletteDetailState> stateController,
+    required PaletteNamingService paletteNamingService,
   })  : assert(stateController != null),
         assert(paletteNamingService != null),
         _namingService = paletteNamingService,
@@ -21,7 +21,7 @@ class PaletteDetailViewModel {
 
   PaletteDetailState get initialState => Pending.empty();
 
-  Future<void> fetchColorNames(List<String> hexCodes, String name) async {
+  Future<void> fetchColorNames(List<String>? hexCodes, String? name) async {
     if (hexCodes == null || hexCodes.isEmpty) {
       return;
     }
@@ -33,7 +33,7 @@ class PaletteDetailViewModel {
     final response = await _namingService.getNaming(hexColors: hexCodes);
 
     if (response.status == ResponseStatus.ok) {
-      _stateController.sink.add(PaletteFound(response.results, name));
+      _stateController.sink.add(PaletteFound(response.results!, name));
     } else {
       _stateController.sink.add(Failed(name));
     }

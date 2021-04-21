@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class PageBodySwitcher extends StatelessWidget {
   const PageBodySwitcher({
-    @required this.children,
-    @required this.currentIndex,
+    required this.children,
+    required this.currentIndex,
     this.reverse = false,
     this.type = PageTransitionType.fadeThrough,
-    Key key,
+    Key? key,
   })  : assert(children != null),
         assert(currentIndex != null),
         super(key: key);

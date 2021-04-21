@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class PalettesListNotifier extends StatefulWidget {
   const PalettesListNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         assert(child != null),
         super(key: key);
@@ -21,7 +21,7 @@ class PalettesListNotifier extends StatefulWidget {
 }
 
 class _PalettesListNotifierState extends State<PalettesListNotifier> {
-  PalettesListViewModel _viewModel;
+  late PalettesListViewModel _viewModel;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _PalettesListNotifierState extends State<PalettesListNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => PalettesListData(
-          state: snapshot.data,
+          state: snapshot.data!,
           onSearchChanged: _viewModel.searchPalettes,
           child: widget.child,
         ),

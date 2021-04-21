@@ -11,21 +11,21 @@ import 'package:colored/sources/domain/view_models/converter/naming/naming_view_
 import 'package:flutter/foundation.dart';
 
 class NamingInjector {
-  const NamingInjector({@required Flavor flavor})
+  const NamingInjector({required Flavor flavor})
       : assert(flavor != null),
         _flavor = flavor;
 
   final Flavor _flavor;
 
   NamingViewModel injectViewModel([
-    StreamController<NamingState> stateController,
+    StreamController<NamingState>? stateController,
   ]) =>
       _flavor.isProduction()
           ? _injectViewModel(stateController)
           : _injectMockViewModel(stateController);
 
   NamingViewModel _injectMockViewModel(
-    StreamController<NamingState> stateController,
+    StreamController<NamingState>? stateController,
   ) =>
       NamingViewModel(
         stateController: stateController ?? StreamController<NamingState>(),
@@ -34,7 +34,7 @@ class NamingInjector {
       );
 
   NamingViewModel _injectViewModel(
-    StreamController<NamingState> stateController,
+    StreamController<NamingState>? stateController,
   ) =>
       NamingViewModel(
         stateController: stateController ?? StreamController<NamingState>(),

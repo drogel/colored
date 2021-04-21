@@ -10,12 +10,12 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class SideTabBar extends BaseTabBar {
   const SideTabBar({
-    @required List<TabPage> tabs,
+    required List<TabPage> tabs,
     this.extendedWidth = 256,
     this.extended = true,
-    void Function(int) onTap,
-    int currentIndex,
-    Key key,
+    void Function(int)? onTap,
+    int? currentIndex,
+    Key? key,
   }) : super(
           tabs: tabs,
           onTap: onTap,
@@ -28,7 +28,7 @@ class SideTabBar extends BaseTabBar {
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return KeyboardDismisser(
       child: SideTabBarBackground(
         child: Stack(
@@ -36,7 +36,7 @@ class SideTabBar extends BaseTabBar {
             NavigationRail(
               extended: extended,
               destinations: _buildTabItems(context),
-              selectedIndex: currentIndex,
+              selectedIndex: currentIndex!,
               onDestinationSelected: onTap,
               minExtendedWidth: extendedWidth,
               labelType: extended ? null : NavigationRailLabelType.all,
@@ -62,7 +62,7 @@ class SideTabBar extends BaseTabBar {
       .map(
         (page) => NavigationRailDestination(
           icon: Icon(page.tabIcon),
-          label: Text(page.getTabTitle(context)),
+          label: Text(page.getTabTitle(context)!),
         ),
       )
       .toList();

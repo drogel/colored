@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 class PageTransitionRoute<T> extends PageRoute<T> {
   PageTransitionRoute({
-    @required this.builder,
-    RouteSettings settings,
+    required this.builder,
+    RouteSettings? settings,
     this.maintainState = true,
     bool fullscreenDialog = false,
   })  : assert(builder != null),
@@ -15,10 +15,10 @@ class PageTransitionRoute<T> extends PageRoute<T> {
   final Widget Function(BuildContext) builder;
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Widget buildPage(

@@ -18,9 +18,9 @@ class DataWrapper<T> {
         data: itemsWrapper,
       );
 
-  final String apiVersion;
-  final String method;
-  final ItemsWrapper<T> data;
+  final String? apiVersion;
+  final String? method;
+  final ItemsWrapper<T>? data;
 
   @override
   bool operator ==(Object other) =>
@@ -32,5 +32,5 @@ class DataWrapper<T> {
           data == other.data;
 
   @override
-  int get hashCode => hashObjects([apiVersion, method, data]);
+  int get hashCode => hashObjects([apiVersion!, method!, data!]);
 }

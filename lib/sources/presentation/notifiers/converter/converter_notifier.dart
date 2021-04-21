@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 
 class ConverterNotifier extends StatefulWidget {
   const ConverterNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   })  : assert(injector != null),
         assert(child != null),
         super(key: key);
@@ -24,7 +24,7 @@ class ConverterNotifier extends StatefulWidget {
 }
 
 class _ConverterNotifierState extends State<ConverterNotifier> {
-  ConverterViewModel _viewModel;
+  late ConverterViewModel _viewModel;
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => ConverterData(
-          state: snapshot.data,
+          state: snapshot.data!,
           clipboardShouldFail: _viewModel.clipboardShouldFail,
           onClipboardRetrieved: _onClipBoardRetrieved,
           child: widget.child,
@@ -57,13 +57,13 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
   }
 
   void _onClipBoardRetrieved(String string, Format format) {
-    final transformerData = TransformerData.of(context);
+    final transformerData = TransformerData.of(context)!;
     final onDone = transformerData.onSelectionEnded;
     _viewModel.convertStringToColor(string, format, onDone: onDone);
   }
 
   void _handleTransformerStateChange() {
-    final transformerState = TransformerData.of(context).state;
+    final transformerState = TransformerData.of(context)!.state;
     _viewModel.notifySelectionChanged(transformerState.selection);
   }
 }
