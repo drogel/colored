@@ -1,7 +1,6 @@
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/parser/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 
 class HslParser extends FormatParser {
   final _hslRegExp = RegExp(r"^(hsl)?\(?\s*(\d+)\s*(°)?(\W+)"
@@ -12,21 +11,22 @@ class HslParser extends FormatParser {
     if (input == null) {
       return false;
     }
-
     return _hslRegExp.hasMatch(input);
   }
 
   @override
-  ColorSelection parse(String? string) {
-    assert(string != null, "String color format to parse cannot be null");
-    assert(string!.isNotEmpty, "String color format to parse cannot be empty");
+  ColorSelection parse(String string) {
+    assert(string.isNotEmpty, 'String color format to parse cannot be empty');
+    final hslMatches = _hslRegExp.firstMatch(string);
+    if (hslMatches == null) {
+      throw ArgumentError("String can't be parsed to HSL");
+    }
+    final hslMatched = hslMatches.group(0);
+    if (hslMatched == null) {
+      throw ArgumentError("String can't be parsed to HSL");
+    }
 
-    final hslMatched = _hslRegExp.firstMatch(string!)!.group(0)!;
-    final hslWithoutSeparators = hslMatched.replacingAllNonAlphanumericBy(" ");
-    final hslComponents = doubleRegExp
-        .allMatches(hslWithoutSeparators)
-        .map((match) => double.parse(match.group(0)!))
-        .toList();
+    final hslComponents = getDoubleComponents(hslMatched);
     var rgb = <double>[0, 0, 0];
 
     final hue = hslComponents[0] / degreesInTurn % 1;
