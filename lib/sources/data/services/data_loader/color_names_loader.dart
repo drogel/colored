@@ -3,17 +3,13 @@ import 'dart:convert';
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/memoizer/memoizer.dart';
 import 'package:colored/sources/data/services/string_bundle/string_bundle.dart';
-import 'package:flutter/foundation.dart';
 
 class ColorNamesLoader implements DataLoader<String> {
   ColorNamesLoader({
     required Memoizer<Map<String, String>> memoizer,
     required StringBundle stringBundle,
     required String colorsDataPath,
-  })  : assert(memoizer != null),
-        assert(stringBundle != null),
-        assert(colorsDataPath != null),
-        _colorsDataPath = colorsDataPath,
+  })   : _colorsDataPath = colorsDataPath,
         _stringBundle = stringBundle,
         _memoizer = memoizer;
 

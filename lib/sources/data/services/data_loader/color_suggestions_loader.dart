@@ -2,15 +2,12 @@ import 'dart:convert';
 
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/string_bundle/string_bundle.dart';
-import 'package:flutter/foundation.dart';
 
 class ColorSuggestionsLoader implements DataLoader<String> {
   const ColorSuggestionsLoader({
     required StringBundle stringBundle,
     required String colorSuggestionsDataPath,
-  })  : assert(stringBundle != null),
-        assert(colorSuggestionsDataPath != null),
-        _colorSuggestionsDataPath = colorSuggestionsDataPath,
+  })   : _colorSuggestionsDataPath = colorSuggestionsDataPath,
         _stringBundle = stringBundle;
 
   final StringBundle _stringBundle;
