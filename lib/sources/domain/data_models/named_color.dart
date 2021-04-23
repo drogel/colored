@@ -1,12 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:vector_math/hash.dart';
 
 class NamedColor {
   const NamedColor({
     required this.name,
     required this.hex,
-  })  : assert(name != null),
-        assert(hex != null);
+  });
 
   factory NamedColor.fromMapEntry(MapEntry<String, dynamic> entry) =>
       NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");

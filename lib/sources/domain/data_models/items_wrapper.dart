@@ -56,16 +56,19 @@ class ItemsWrapper<T> {
           items == other.items;
 
   @override
-  int get hashCode => hashObjects([
-        kind!,
-        currentItemCount!,
-        itemsPerPage!,
-        startIndex!,
-        totalItems!,
-        pageIndex!,
-        totalPages!,
-        nextLink!,
-        previousLink!,
-        items!,
-      ]);
+  int get hashCode {
+    final nullFiltered = [
+      kind,
+      currentItemCount,
+      itemsPerPage,
+      startIndex,
+      totalItems,
+      pageIndex,
+      totalPages,
+      nextLink,
+      previousLink,
+      items,
+    ].map((e) => e ?? 0).toList();
+    return hashObjects(nullFiltered);
+  }
 }

@@ -18,6 +18,6 @@ extension FormatValue on Format {
   String? get rawValue => _values[this];
 }
 
-Format? formatValue(String? rawValue) => _values.keys.firstWhereOrNull(
+Format? formatValue(String rawValue) => _values.keys.firstWhereOrNull(
       (key) => _values[key] == rawValue,
     );
