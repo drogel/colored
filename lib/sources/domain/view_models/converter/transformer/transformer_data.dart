@@ -12,9 +12,7 @@ class TransformerData extends InheritedWidget {
     required this.onSelectionEnded,
     required Widget child,
     Key? key,
-  })  : assert(state != null),
-        assert(child != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   final TransformerState state;
   final void Function(ColorSelection) onSelectionChanged;

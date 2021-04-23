@@ -9,8 +9,7 @@ class ConverterData extends InheritedWidget {
     required this.onClipboardRetrieved,
     required Widget child,
     Key? key,
-  })  : assert(state != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   final ConverterState state;
   final bool Function(String, Format) clipboardShouldFail;

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class MainTabsData extends IndexedNavigationData {
   const MainTabsData({
-    required IndexedNavigationState? state,
+    required IndexedNavigationState state,
     required void Function(int) onNavigation,
     required Widget child,
     Key? key,

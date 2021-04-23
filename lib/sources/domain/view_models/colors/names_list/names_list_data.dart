@@ -1,6 +1,5 @@
+import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
 import 'package:flutter/material.dart';
-
-import 'names_list_state.dart';
 
 class NamesListData extends InheritedWidget {
   const NamesListData({
@@ -9,11 +8,9 @@ class NamesListData extends InheritedWidget {
     required this.onBackPressed,
     required Widget child,
     Key? key,
-  })  : assert(child != null),
-        assert(onSearchChanged != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
 
-  final NamesListState? state;
+  final NamesListState state;
   final void Function(String) onSearchChanged;
   final void Function() onBackPressed;
 

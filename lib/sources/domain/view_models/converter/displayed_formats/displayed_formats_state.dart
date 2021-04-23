@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 
 class DisplayedFormatsState {
-  const DisplayedFormatsState(this.formats) : assert(formats != null);
+  const DisplayedFormatsState(this.formats);
 
   final List<Format> formats;
 

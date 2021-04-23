@@ -7,15 +7,13 @@ class PalettesListData extends InheritedWidget {
     required this.onSearchChanged,
     required Widget child,
     Key? key,
-  })  : assert(child != null),
-        assert(state != null),
-        super(key: key, child: child);
-
-  static PalettesListData? of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType(aspect: PalettesListData);
+  }) : super(key: key, child: child);
 
   final PalettesListState state;
   final void Function(String) onSearchChanged;
+
+  static PalettesListData? of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType(aspect: PalettesListData);
 
   @override
   bool updateShouldNotify(PalettesListData oldWidget) =>

@@ -1,5 +1,4 @@
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:flutter/foundation.dart';
 
 class NamesListState {
   const NamesListState(this.search);

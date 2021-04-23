@@ -6,13 +6,12 @@ class PaletteSuggestionsData extends InheritedWidget {
     required this.state,
     required Widget child,
     Key? key,
-  })  : assert(child != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
+
+  final PaletteSuggestionsState state;
 
   static PaletteSuggestionsData? of(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType(aspect: PaletteSuggestionsData);
-
-  final PaletteSuggestionsState? state;
 
   @override
   bool updateShouldNotify(PaletteSuggestionsData oldWidget) =>

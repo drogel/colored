@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 
 class PalettesNavigationData extends IndexedNavigationData {
   const PalettesNavigationData({
-    required IndexedNavigationState? state,
+    required IndexedNavigationState state,
     required void Function(int) onNavigation,
     required Widget child,
     Key? key,
-  })  : assert(child != null),
-        super(key: key, state: state, onNavigation: onNavigation, child: child);
+  }) : super(key: key, state: state, onNavigation: onNavigation, child: child);
 
   static PalettesNavigationData? of(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType(aspect: PalettesNavigationData);

@@ -9,10 +9,9 @@ class DisplayedFormatsData extends InheritedWidget {
     required this.onFormatSelection,
     required Widget child,
     Key? key,
-  })  : assert(child != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
 
-  final DisplayedFormatsState? state;
+  final DisplayedFormatsState state;
   final void Function(Format, Format) onFormatSelection;
 
   static DisplayedFormatsData? of(BuildContext context) =>

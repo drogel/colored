@@ -24,7 +24,7 @@ class NamesListInjector {
           dataLoader: ColorNamesLoader(
             memoizer: DefaultMemoizer<Map<String, String>>(),
             stringBundle: const RootStringBundle(),
-            colorsDataPath: FlavorConfig.instance!.values.dataPath.colorData,
+            colorsDataPath: FlavorConfig.instance.values.dataPath.colorData,
           ),
           filter: const ColorNamesFilter(),
         ),

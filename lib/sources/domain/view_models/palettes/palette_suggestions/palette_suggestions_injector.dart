@@ -15,7 +15,7 @@ class PaletteSuggestionsInjector {
   PaletteSuggestionsViewModel injectViewModel([
     StreamController<PaletteSuggestionsState>? stateController,
   ]) {
-    final path = FlavorConfig.instance!.values.dataPath.paletteSuggestionData;
+    final path = FlavorConfig.instance.values.dataPath.paletteSuggestionData;
     return PaletteSuggestionsViewModel(
       stateController:
           stateController ?? StreamController<PaletteSuggestionsState>(),

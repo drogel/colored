@@ -5,14 +5,12 @@ class PickerData extends InheritedWidget {
   const PickerData({
     required this.state,
     required Widget child,
-    this.onPickerSelected,
+    required this.onPickerSelected,
     Key? key,
-  })  : assert(child != null),
-        assert(state != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   final PickerState state;
-  final void Function(int)? onPickerSelected;
+  final void Function(int) onPickerSelected;
 
   static PickerData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: PickerData);

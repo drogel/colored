@@ -7,12 +7,9 @@ import 'package:colored/sources/data/services/palette_naming/mock_palette_naming
 import 'package:colored/sources/data/services/url_composer/meodai_url_composer.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_view_model.dart';
-import 'package:flutter/foundation.dart';
 
 class PaletteDetailInjector {
-  const PaletteDetailInjector({required Flavor flavor})
-      : assert(flavor != null),
-        _flavor = flavor;
+  const PaletteDetailInjector({required Flavor flavor}) : _flavor = flavor;
 
   final Flavor _flavor;
 
@@ -23,18 +20,18 @@ class PaletteDetailInjector {
           ? _injectViewModel(stateController)
           : _injectMockViewModel(stateController);
 
-  PaletteDetailViewModel _injectMockViewModel(
+  PaletteDetailViewModel _injectMockViewModel([
     StreamController<PaletteDetailState>? stateController,
-  ) =>
+  ]) =>
       PaletteDetailViewModel(
         stateController:
             stateController ?? StreamController<PaletteDetailState>(),
         paletteNamingService: const MockPaletteNamingService(),
       );
 
-  PaletteDetailViewModel _injectViewModel(
+  PaletteDetailViewModel _injectViewModel([
     StreamController<PaletteDetailState>? stateController,
-  ) =>
+  ]) =>
       PaletteDetailViewModel(
         stateController:
             stateController ?? StreamController<PaletteDetailState>(),

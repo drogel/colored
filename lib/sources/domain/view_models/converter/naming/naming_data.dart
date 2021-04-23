@@ -6,9 +6,7 @@ class NamingData extends InheritedWidget {
     required this.state,
     required Widget child,
     Key? key,
-  })  : assert(child != null),
-        assert(state != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   final NamingState state;
 

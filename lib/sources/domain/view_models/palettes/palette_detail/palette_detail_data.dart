@@ -7,15 +7,13 @@ class PaletteDetailData extends InheritedWidget {
     required this.onPaletteSelected,
     required Widget child,
     Key? key,
-  })  : assert(child != null),
-        assert(state != null),
-        super(key: key, child: child);
-
-  static PaletteDetailData? of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType(aspect: PaletteDetailData);
+  }) : super(key: key, child: child);
 
   final PaletteDetailState state;
   final void Function(List<String>, String) onPaletteSelected;
+
+  static PaletteDetailData? of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType(aspect: PaletteDetailData);
 
   @override
   bool updateShouldNotify(PaletteDetailData oldWidget) =>

@@ -6,10 +6,9 @@ class ColorSuggestionsData extends InheritedWidget {
     required this.state,
     required Widget child,
     Key? key,
-  })  : assert(child != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
 
-  final ColorSuggestionsState? state;
+  final ColorSuggestionsState state;
 
   static ColorSuggestionsData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: ColorSuggestionsData);

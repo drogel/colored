@@ -1,5 +1,4 @@
 import 'package:colored/sources/domain/data_models/palette.dart';
-import 'package:flutter/foundation.dart';
 
 class PalettesListState {
   const PalettesListState(this.search);
