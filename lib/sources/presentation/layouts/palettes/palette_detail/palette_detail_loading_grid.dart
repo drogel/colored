@@ -8,8 +8,7 @@ class PaletteDetailLoadingGrid extends StatelessWidget {
     required this.hexCodes,
     this.pageStorageKey,
     Key? key,
-  })  : assert(hexCodes != null),
-        super(key: key);
+  }) : super(key: key);
 
   final PageStorageKey<String>? pageStorageKey;
   final List<String> hexCodes;

@@ -17,8 +17,7 @@ class PalettesListGrid extends StatelessWidget {
     required this.palettes,
     this.pageStorageKey,
     Key? key,
-  })  : assert(palettes != null),
-        super(key: key);
+  }) : super(key: key);
 
   final PageStorageKey<String>? pageStorageKey;
   final List<Palette> palettes;

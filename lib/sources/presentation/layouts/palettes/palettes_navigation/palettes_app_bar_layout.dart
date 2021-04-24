@@ -10,7 +10,7 @@ class PalettesAppBarLayout extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final selection = PalettesNavigationData.of(context)!.state!.currentIndex;
+    final selection = PalettesNavigationData.of(context)!.state.currentIndex;
     return AppBarSwitcher(
       currentIndex: selection,
       children: const [

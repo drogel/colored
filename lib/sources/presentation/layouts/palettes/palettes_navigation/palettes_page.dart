@@ -10,10 +10,9 @@ class PalettesPage extends StatelessWidget implements TabPage {
   Widget build(BuildContext context) => const PalettesBodyLayout();
 
   @override
-  String? getTabTitle(BuildContext context) =>
+  String getTabTitle(BuildContext context) =>
       Localization.of(context)!.palettes.pageTitle;
 
   @override
   IconData get tabIcon => Icons.palette;
 }
-

@@ -20,26 +20,26 @@ class OnBoardingButtonsLayout extends StatelessWidget {
           child: Column(
             children: <Widget>[
               AutoSizeText(
-                localization.longPress!,
+                localization.longPress,
                 maxLines: 1,
                 style: textTheme.headline2,
                 textAlign: TextAlign.center,
               ),
               AutoSizeText(
-                localization.longPressBody!,
+                localization.longPressBody,
                 maxLines: 2,
                 style: textTheme.headline5,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: padding.base),
               AutoSizeText(
-                localization.tap!,
+                localization.tap,
                 maxLines: 1,
                 style: textTheme.headline2,
                 textAlign: TextAlign.center,
               ),
               AutoSizeText(
-                localization.tapBody!,
+                localization.tapBody,
                 maxLines: 2,
                 style: textTheme.headline5,
                 textAlign: TextAlign.center,

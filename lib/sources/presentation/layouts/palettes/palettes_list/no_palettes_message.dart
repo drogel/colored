@@ -8,6 +8,6 @@ class NoPalettesMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localization = Localization.of(context)!.palettes;
-    return EmptyListLayout(child: Text(localization.noPalettesFound!));
+    return EmptyListLayout(child: Text(localization.noPalettesFound));
   }
 }

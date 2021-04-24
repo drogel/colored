@@ -1,7 +1,7 @@
 import 'package:colored/resources/asset_paths.dart' as paths;
 import 'package:colored/resources/localization/localization.dart';
-import 'package:colored/sources/presentation/widgets/layouts/presentation_layout.dart';
 import 'package:colored/sources/presentation/widgets/animations/faded_in_image.dart';
+import 'package:colored/sources/presentation/widgets/layouts/presentation_layout.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingWelcomeLayout extends StatelessWidget {
@@ -23,15 +23,15 @@ class OnBoardingWelcomeLayout extends StatelessWidget {
           fit: BoxFit.fitHeight,
           child: Column(
             children: <Widget>[
-              Text(localization.onBoarding.welcome!, style: textTheme.headline4),
-              Text(localization.appTitle!, style: textTheme.headline2),
+              Text(localization.onBoarding.welcome, style: textTheme.headline4),
+              Text(localization.appTitle, style: textTheme.headline2),
             ],
           ),
         ),
         FittedBox(
           fit: BoxFit.fitHeight,
           child: Text(
-            localization.onBoarding.slogan!,
+            localization.onBoarding.slogan,
             style: textTheme.headline5,
             textAlign: TextAlign.center,
           ),

@@ -6,16 +6,15 @@ class PaletteDetailPopScope extends StatelessWidget {
   const PaletteDetailPopScope({
     required this.child,
     Key? key,
-  })  : assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final navigation = PalettesNavigationData.of(context);
+    final navigation = PalettesNavigationData.of(context)!;
     return WillPopScope(
-      onWillPop: () => _onBackPressed(navigation!),
+      onWillPop: () => _onBackPressed(navigation),
       child: child,
     );
   }

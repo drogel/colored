@@ -9,12 +9,12 @@ class PaletteDetailAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final navigation = PalettesNavigationData.of(context);
+    final navigation = PalettesNavigationData.of(context)!;
     final data = PaletteDetailData.of(context)!.state;
     return AppBar(
       automaticallyImplyLeading: false,
       leading: BackButton(
-        onPressed: () => _navigateBackToPalettes(navigation!),
+        onPressed: () => _navigateBackToPalettes(navigation),
       ),
       title: Text(data.paletteName),
     );

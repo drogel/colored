@@ -11,7 +11,7 @@ class PalettesBodyLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selection = PalettesNavigationData.of(context)!.state!.currentIndex;
+    final selection = PalettesNavigationData.of(context)!.state.currentIndex;
     return PageBodySwitcher(
       reverse: selection == PalettesNavigationSelection.list.index,
       type: PageTransitionType.sharedZAxis,

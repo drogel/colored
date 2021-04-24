@@ -8,6 +8,6 @@ class PaletteDetailErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localization = Localization.of(context)!.palettes;
-    return EmptyListLayout(child: Text(localization.detailLoadingError!));
+    return EmptyListLayout(child: Text(localization.detailLoadingError));
   }
 }
