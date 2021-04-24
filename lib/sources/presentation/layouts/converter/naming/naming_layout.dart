@@ -10,7 +10,7 @@ class NamingLayout extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final localization = Localization.of(context)!.converter;
     return AppBar(
-      title: NamingCrossFadeText(defaultText: localization.colorConverter!),
+      title: NamingCrossFadeText(defaultText: localization.colorConverter),
       bottom: const PickerTabBar(),
     );
   }

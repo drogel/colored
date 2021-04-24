@@ -17,7 +17,7 @@ class ConverterPage extends StatelessWidget implements TabPage {
       );
 
   @override
-  String? getTabTitle(BuildContext context) =>
+  String getTabTitle(BuildContext context) =>
       Localization.of(context)!.converter.pageTitle;
 
   @override

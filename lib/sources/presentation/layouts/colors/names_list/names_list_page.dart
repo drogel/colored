@@ -10,7 +10,7 @@ class NamesListPage extends StatelessWidget implements TabPage {
   Widget build(BuildContext context) => const NamesListLayout();
 
   @override
-  String? getTabTitle(BuildContext context) =>
+  String getTabTitle(BuildContext context) =>
       Localization.of(context)!.namesList.pageTitle;
 
   @override

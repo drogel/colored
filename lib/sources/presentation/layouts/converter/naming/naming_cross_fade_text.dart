@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 
 class NamingCrossFadeText extends StatelessWidget {
   const NamingCrossFadeText({required this.defaultText, Key? key})
-      : assert(defaultText != null),
-        super(key: key);
+      : super(key: key);
 
   final String defaultText;
 

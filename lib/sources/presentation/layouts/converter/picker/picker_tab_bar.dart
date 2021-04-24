@@ -11,11 +11,12 @@ class PickerTabBar extends StatelessWidget implements PreferredSizeWidget {
     final data = PickerData.of(context)!;
     final selectedPicker = data.state.pickerStyle;
     final selectedPickerIndex = PickerStyle.values.indexOf(selectedPicker);
+    const allPickerStyles = PickerStyle.values;
     return DefaultTabController(
       initialIndex: selectedPickerIndex,
       length: PickerStyle.values.length,
       child: TabBar(
-        tabs: PickerStyle.values.map((p) => PickerTab(style: p)).toList(),
+        tabs: allPickerStyles.map((style) => PickerTab(style: style)).toList(),
         onTap: data.onPickerSelected,
       ),
     );

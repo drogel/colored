@@ -17,7 +17,7 @@ class PickerTab extends StatelessWidget {
         children: [
           _buildIcon(style),
           SizedBox(width: padding.medium.left),
-          Text(style.rawValue!)
+          Text(style.rawValue)
         ],
       ),
     );

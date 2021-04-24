@@ -17,7 +17,7 @@ class DropdownFormatButton extends StatelessWidget {
   final String? content;
   final void Function(String, Format) onClipboardRetrieved;
   final bool Function(String, Format) clipboardShouldFail;
-  final void Function(Format?, Format) onDropdownSelection;
+  final void Function(Format, Format) onDropdownSelection;
   final Format format;
   final String? title;
 

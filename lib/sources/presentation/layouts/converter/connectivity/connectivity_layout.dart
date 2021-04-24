@@ -9,9 +9,9 @@ class ConnectivityLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Stack(
         alignment: Alignment.topCenter,
-        (children: <Widget?>[
-          if (body != null) body,
-          if (child != null) child,
-        ]) as List<Widget>,
+        children: <Widget>[
+          if (body != null) body!,
+          if (child != null) child!,
+        ],
       );
 }

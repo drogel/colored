@@ -14,7 +14,7 @@ class ColorSearchField extends StatelessWidget {
       hintText: localization.search,
       onClearPressed: () => data.onSearchChanged(""),
       onChanged: data.onSearchChanged,
-      searchText: data.state!.search,
+      searchText: data.state.search,
     );
   }
 }

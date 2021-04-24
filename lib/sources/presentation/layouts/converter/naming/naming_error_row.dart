@@ -8,12 +8,12 @@ class NamingErrorRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localization = Localization.of(context)!.naming;
-    final bodyTextStyle = Theme.of(context).textTheme.bodyText1!;
+    final bodyTextSize = Theme.of(context).textTheme.bodyText1?.fontSize ?? 16;
     final colors = Theme.of(context).colorScheme;
     return NotificationRow(
       icon: Icon(
         Icons.offline_bolt,
-        size: bodyTextStyle.fontSize! + 3,
+        size: bodyTextSize + 3,
         color: colors.error,
       ),
       message: localization.noConnection,
