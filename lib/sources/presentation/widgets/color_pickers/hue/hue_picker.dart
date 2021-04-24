@@ -16,8 +16,7 @@ class HuePicker extends StatelessWidget {
     this.constraints = const BoxConstraints(maxHeight: 44),
     this.purifier = const DefaultColorPurifier(),
     Key? key,
-  })  : assert(color != null),
-        super(key: key);
+  }) : super(key: key);
 
   final BoxConstraints constraints;
   final Color color;

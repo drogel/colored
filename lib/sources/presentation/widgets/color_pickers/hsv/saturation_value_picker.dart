@@ -1,9 +1,9 @@
 import 'package:colored/sources/data/color_helpers/color_purifier/color_purifier.dart';
 import 'package:colored/sources/data/color_helpers/color_purifier/default_color_purifier.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/presentation/widgets/color_pickers/hsv/saturation_value_track.dart';
 import 'package:colored/sources/presentation/widgets/color_pickers/base/hue_base/hue_based_picker.dart';
 import 'package:colored/sources/presentation/widgets/color_pickers/base/hue_base/hue_based_selector.dart';
+import 'package:colored/sources/presentation/widgets/color_pickers/hsv/saturation_value_track.dart';
 import 'package:flutter/material.dart';
 
 class SaturationValuePicker extends StatelessWidget {
@@ -15,8 +15,7 @@ class SaturationValuePicker extends StatelessWidget {
     this.purifier = const DefaultColorPurifier(),
     this.constraints,
     Key? key,
-  })  : assert(color != null),
-        super(key: key);
+  }) : super(key: key);
 
   final BoxConstraints? constraints;
   final Color color;

@@ -29,9 +29,11 @@ class ColorCard extends StatelessWidget {
         backgroundColor: backgroundColor,
         child: Stack(
           children: [
-            child!,
+            if (child != null) child!,
             Material(
-                color: Colors.transparent, child: InkWell(onTap: onPressed)),
+              color: Colors.transparent,
+              child: InkWell(onTap: onPressed),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: ColorCardTile(

@@ -15,10 +15,7 @@ class SurfaceSlider extends StatefulWidget {
     this.onChangeEnd,
     this.hitTestMargin = EdgeInsets.zero,
     Key? key,
-  })  : assert(thumbBuilder != null),
-        assert(child != null),
-        assert(value != null),
-        super(key: key);
+  }) : super(key: key);
 
   final ValueChanged? onChanged;
   final ValueChanged? onChangeStart;
@@ -91,9 +88,9 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
         ..onUpdate = ((d) => _onUpdate(d.globalPosition, context, h, w));
 
   Offset _normalize(Offset offset, BuildContext context, double h, double w) {
-    RenderBox getBox = context.findRenderObject() as RenderBox;
+    final box = context.findRenderObject() as RenderBox;
     final margin = widget.hitTestMargin;
-    final localOffset = getBox.globalToLocal(offset);
+    final localOffset = box.globalToLocal(offset);
     final shiftedLocalX = localOffset.dx - margin.left;
     final shiftedLocalY = localOffset.dy - margin.top;
     final marginShiftedOffset = Offset(shiftedLocalX, shiftedLocalY);

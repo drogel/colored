@@ -8,9 +8,7 @@ class PaletteCard extends StatelessWidget {
     this.subtitle,
     this.onPressed,
     Key? key,
-  })  : assert(colors != null),
-        assert(title != null),
-        super(key: key);
+  }) : super(key: key);
 
   final List<Color> colors;
   final String title;
@@ -18,18 +16,22 @@ class PaletteCard extends StatelessWidget {
   final void Function(String)? onPressed;
 
   @override
-  Widget build(BuildContext context) => ColorCard(
-        title: Text(title),
-        subtitle: subtitle != null ? Text(subtitle!) : null,
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () => onPressed!(title),
-        child: RepaintBoundary(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: colors
-                .map((color) => Expanded(child: Container(color: color)))
-                .toList(),
-          ),
+  Widget build(BuildContext context) {
+    final subtitle = this.subtitle;
+    final onPressed = this.onPressed;
+    return ColorCard(
+      title: Text(title),
+      subtitle: subtitle != null ? Text(subtitle) : null,
+      backgroundColor: Theme.of(context).primaryColor,
+      onPressed: onPressed != null ? () => onPressed(title) : null,
+      child: RepaintBoundary(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: colors
+              .map((color) => Expanded(child: Container(color: color)))
+              .toList(),
         ),
-      );
+      ),
+    );
+  }
 }

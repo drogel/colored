@@ -16,11 +16,14 @@ class SingleColorCard extends StatelessWidget {
   final void Function(Color)? onPressed;
 
   @override
-  Widget build(BuildContext context) => ColorCard(
-        title: Text(title),
-        subtitle: Text(subtitle),
-        backgroundColor: backgroundColor,
-        onPressed: () => onPressed!(backgroundColor),
-        child: Container(color: backgroundColor),
-      );
+  Widget build(BuildContext context) {
+    final onPressed = this.onPressed;
+    return ColorCard(
+      title: Text(title),
+      subtitle: Text(subtitle),
+      backgroundColor: backgroundColor,
+      onPressed: onPressed != null ? () => onPressed(backgroundColor) : null,
+      child: Container(color: backgroundColor),
+    );
+  }
 }

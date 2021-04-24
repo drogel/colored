@@ -12,9 +12,7 @@ class SurfaceColorPicker extends StatelessWidget {
     this.onChangeStart,
     this.onChangeEnd,
     Key? key,
-  })  : assert(color != null),
-        assert(track != null),
-        assert(value != null),
+  })  :
         super(key: key);
 
   final Color color;

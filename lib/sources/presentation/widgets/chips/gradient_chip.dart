@@ -9,9 +9,7 @@ class GradientChip extends StatelessWidget {
     required this.hexCodes,
     this.onPressed,
     Key? key,
-  })  : assert(text != null),
-        assert(hexCodes != null),
-        super(key: key);
+  }) : super(key: key);
 
   final String text;
   final void Function(String)? onPressed;

@@ -26,7 +26,7 @@ class ColorCardTile extends StatelessWidget {
     return Padding(
       padding: titleMargin,
       child: OverlayContainer(
-        borderRadius: decorationBorderRadius as BorderRadius?,
+        borderRadius: decorationBorderRadius.resolve(TextDirection.ltr),
         elevation: 0,
         child: ListTile(
           title: title,

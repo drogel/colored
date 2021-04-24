@@ -9,9 +9,7 @@ class ColorChip extends StatelessWidget {
     required this.colorHex,
     this.onPressed,
     Key? key,
-  })  : assert(text != null),
-        assert(colorHex != null),
-        super(key: key);
+  }) : super(key: key);
 
   final String text;
   final void Function(String)? onPressed;
