@@ -8,14 +8,15 @@ class PlainIconButton extends StatelessWidget {
   }) : super(key: key);
 
   final Icon icon;
-  final void Function()? onPressed;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final actionsTheme = Theme.of(context).appBarTheme.actionsIconTheme!;
+    final actionsTheme = Theme.of(context).appBarTheme.actionsIconTheme;
+    final primaryColor = Theme.of(context).primaryColor;
     return Theme(
       data: Theme.of(context).copyWith(
-        iconTheme: IconThemeData(color: actionsTheme.color),
+        iconTheme: IconThemeData(color: actionsTheme?.color ?? primaryColor),
       ),
       child: IconButton(
         highlightColor: Colors.transparent,

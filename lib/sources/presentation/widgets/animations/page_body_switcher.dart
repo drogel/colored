@@ -8,9 +8,7 @@ class PageBodySwitcher extends StatelessWidget {
     this.reverse = false,
     this.type = PageTransitionType.fadeThrough,
     Key? key,
-  })  : assert(children != null),
-        assert(currentIndex != null),
-        super(key: key);
+  }) : super(key: key);
 
   final List<Widget> children;
   final int currentIndex;

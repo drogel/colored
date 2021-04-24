@@ -7,10 +7,7 @@ abstract class CrossSwitcher extends StatelessWidget {
     required this.secondChild,
     required this.state,
     Key? key,
-  })  : assert(firstChild != null),
-        assert(secondChild != null),
-        assert(state != null),
-        super(key: key);
+  }) : super(key: key);
 
   final Widget firstChild;
   final Widget secondChild;

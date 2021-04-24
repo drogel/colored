@@ -14,8 +14,7 @@ class TransitionSwitcher extends StatelessWidget {
     this.type = PageTransitionType.fadeThrough,
     this.backgroundColor,
     Key? key,
-  })  : assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final Color? backgroundColor;
   final Widget child;
@@ -50,8 +49,8 @@ class TransitionSwitcher extends StatelessWidget {
   Widget _buildFadeThrough({
     required Animation<double> primaryAnimation,
     required Animation<double> secondaryAnimation,
-    Color? defaultBackgroundColor,
-    Widget? child,
+    required Color defaultBackgroundColor,
+    required Widget child,
   }) =>
       FadeThroughTransition(
         fillColor: backgroundColor ?? defaultBackgroundColor,
@@ -63,8 +62,8 @@ class TransitionSwitcher extends StatelessWidget {
   Widget _buildSharedZAxis({
     required Animation<double> primaryAnimation,
     required Animation<double> secondaryAnimation,
-    Color? defaultBackgroundColor,
-    Widget? child,
+    required Color defaultBackgroundColor,
+    required Widget child,
   }) =>
       SharedAxisTransition(
         animation: primaryAnimation,

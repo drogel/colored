@@ -12,7 +12,7 @@ class PrimaryButton extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final String? title;
+  final String title;
   final void Function() onPressed;
   final void Function()? onLongPress;
   final Color? backgroundColor;
@@ -31,7 +31,7 @@ class PrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.all(radii.medium),
       ),
       padding: padding ?? paddingScheme.large,
-      child: Text(title!, style: textStyle, textScaleFactor: 0.77),
+      child: Text(title, style: textStyle, textScaleFactor: 0.77),
     );
   }
 }

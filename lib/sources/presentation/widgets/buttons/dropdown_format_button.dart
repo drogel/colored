@@ -14,12 +14,12 @@ class DropdownFormatButton extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final String? content;
+  final String content;
   final void Function(String, Format) onClipboardRetrieved;
   final bool Function(String, Format) clipboardShouldFail;
   final void Function(Format, Format) onDropdownSelection;
   final Format format;
-  final String? title;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +36,12 @@ class DropdownFormatButton extends StatelessWidget {
               items: Format.values
                   .map((format) => DropdownMenuItem<String>(
                         value: format.rawValue,
-                        child: Text(format.rawValue!),
+                        child: Text(format.rawValue),
                       ))
                   .toList(),
               iconEnabledColor: Theme.of(context).colorScheme.secondary,
               underline: Container(),
-              onChanged: (str) => onDropdownSelection(formatValue(str), format),
+              onChanged: _onDropdownSelectionChanged,
             ),
             FormatButton(
               format: format,
@@ -53,5 +53,12 @@ class DropdownFormatButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onDropdownSelectionChanged(String? value) {
+    if (value == null) {
+      return;
+    }
+    onDropdownSelection(FormatValue.format(value), format);
   }
 }

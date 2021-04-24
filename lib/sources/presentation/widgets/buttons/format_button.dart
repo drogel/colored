@@ -14,9 +14,9 @@ class FormatButton extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final String? content;
-  final void Function(String?, Format) onClipboardRetrieved;
-  final bool Function(String?, Format) clipboardShouldFail;
+  final String content;
+  final void Function(String, Format) onClipboardRetrieved;
+  final bool Function(String, Format) clipboardShouldFail;
   final Format format;
 
   @override
@@ -25,8 +25,8 @@ class FormatButton extends StatefulWidget {
 
 class _FormatButtonState extends State<FormatButton> {
   final GlobalKey _tooltip = GlobalKey();
+  late Color _tooltipColor;
   String? _tooltipMessage;
-  Color? _tooltipColor;
 
   @override
   void didChangeDependencies() {
@@ -50,9 +50,13 @@ class _FormatButtonState extends State<FormatButton> {
   }
 
   Future<void> _getClipboardData() async {
-    final clipboardData = await (Clipboard.getData(Clipboard.kTextPlain) as FutureOr<ClipboardData>);
+    final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+    final clipboardText = clipboardData?.text;
+    if (clipboardText == null) {
+      return;
+    }
     final isError = widget.clipboardShouldFail(
-      clipboardData.text,
+      clipboardText,
       widget.format,
     );
     if (isError) {
@@ -62,7 +66,7 @@ class _FormatButtonState extends State<FormatButton> {
       });
       _showTooltip();
     } else {
-      widget.onClipboardRetrieved(clipboardData.text, widget.format);
+      widget.onClipboardRetrieved(clipboardText, widget.format);
     }
   }
 
@@ -77,7 +81,7 @@ class _FormatButtonState extends State<FormatButton> {
 
   void _showTooltip() {
     HapticFeedback.mediumImpact();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       final dynamic tooltipState = _tooltip.currentState;
       tooltipState.ensureTooltipVisible();
     });

@@ -7,8 +7,7 @@ class FadedInImage extends StatelessWidget {
     required this.image,
     this.size = 256,
     Key? key,
-  })  : assert(image != null),
-        super(key: key);
+  }) : super(key: key);
 
   final ImageProvider image;
   final double size;

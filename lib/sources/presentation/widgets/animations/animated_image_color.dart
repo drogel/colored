@@ -17,11 +17,7 @@ class AnimatedImageColor extends StatelessWidget {
     this.size,
     this.curve,
     Key? key,
-  })  : assert(begin != null),
-        assert(imagePath != null),
-        assert(end != null),
-        assert(state != null),
-        super(key: key);
+  }) : super(key: key);
 
   final String imagePath;
   final AnimatedImageColorState state;
@@ -38,15 +34,15 @@ class AnimatedImageColor extends StatelessWidget {
     final defaultCurve = curveScheme.main;
     final defaultDuration = durationScheme.shortPresenting;
     final currentColor = _setCurrentColor();
-    return TweenAnimationBuilder(
-      tween: ColorTween(begin: begin, end: currentColor),
+    return TweenAnimationBuilder<Color>(
+      tween: Tween<Color>(begin: begin, end: currentColor),
       duration: duration ?? defaultDuration,
       curve: curve ?? defaultCurve,
-      builder: (context, dynamic value, child) => Image.asset(
+      builder: (context, color, child) => Image.asset(
         imagePath,
         height: size,
         width: size,
-        color: value,
+        color: color,
       ),
     );
   }

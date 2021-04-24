@@ -9,10 +9,7 @@ class CrossTransitionSwitcher extends CrossSwitcher {
     required Widget secondChild,
     required CrossSwitcherState state,
     Key? key,
-  })  : assert(firstChild != null),
-        assert(secondChild != null),
-        assert(state != null),
-        super(
+  }) : super(
           firstChild: firstChild,
           secondChild: secondChild,
           state: state,

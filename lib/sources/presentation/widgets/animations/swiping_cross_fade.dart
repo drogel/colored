@@ -36,7 +36,7 @@ class SwipingCrossFade extends StatefulWidget {
 }
 
 class _SwipingCrossFadeState extends State<SwipingCrossFade> {
-  CrossFadeState? _state;
+  late CrossFadeState _state;
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
             children: <Widget>[
               widget.header,
               AnimatedCrossFade(
-                crossFadeState: _state!,
+                crossFadeState: _state,
                 firstChild: widget.child,
                 secondChild: Container(
                   height: padding.large.bottom + padding.small.bottom,

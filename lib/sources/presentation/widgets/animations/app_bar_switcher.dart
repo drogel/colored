@@ -6,9 +6,7 @@ class AppBarSwitcher extends StatelessWidget implements PreferredSizeWidget {
     required this.children,
     required this.currentIndex,
     Key? key,
-  })  : assert(children != null),
-        assert(currentIndex != null),
-        super(key: key);
+  }) : super(key: key);
 
   final List<PreferredSizeWidget> children;
   final int currentIndex;
