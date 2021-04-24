@@ -11,8 +11,7 @@ class NamingNotifier extends StatefulWidget {
     required NamingInjector injector,
     required this.child,
     Key? key,
-  })  : assert(injector != null),
-        _injector = injector,
+  })  : _injector = injector,
         super(key: key);
 
   final NamingInjector _injector;
@@ -42,7 +41,7 @@ class _NamingNotifierState extends State<NamingNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => NamingData(
-          state: snapshot.data!,
+          state: snapshot.data ?? _viewModel.initialState,
           child: widget.child,
         ),
       );

@@ -9,9 +9,7 @@ class ConnectivityNotifier extends StatefulWidget {
     required this.injector,
     required this.child,
     Key? key,
-  })  : assert(child != null),
-        assert(injector != null),
-        super(key: key);
+  }) : super(key: key);
 
   final ConnectivityInjector injector;
   final Widget child;
@@ -34,7 +32,7 @@ class _ConnectivityNotifierState extends State<ConnectivityNotifier> {
         stream: _viewModel.stateStream,
         initialData: _viewModel.initialState,
         builder: (context, snapshot) => ConnectivityData(
-          state: snapshot.data!,
+          state: snapshot.data ?? _viewModel.initialState,
           child: widget.child,
         ),
       );

@@ -4,7 +4,6 @@ import 'package:colored/sources/domain/view_models/converter/converter/converter
 import 'package:colored/sources/domain/view_models/converter/converter/converter_state.dart';
 import 'package:colored/sources/domain/view_models/converter/converter/converter_view_model.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_data.dart';
-
 import 'package:flutter/material.dart';
 
 class ConverterNotifier extends StatefulWidget {
@@ -12,9 +11,7 @@ class ConverterNotifier extends StatefulWidget {
     required this.injector,
     required this.child,
     Key? key,
-  })  : assert(injector != null),
-        assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final ConverterInjector injector;
   final Widget child;
@@ -43,7 +40,7 @@ class _ConverterNotifierState extends State<ConverterNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => ConverterData(
-          state: snapshot.data!,
+          state: snapshot.data ?? _viewModel.initialState,
           clipboardShouldFail: _viewModel.clipboardShouldFail,
           onClipboardRetrieved: _onClipBoardRetrieved,
           child: widget.child,

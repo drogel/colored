@@ -33,7 +33,7 @@ class _ColorSuggestionsNotifierState extends State<ColorSuggestionsNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => ColorSuggestionsData(
-          state: snapshot.data,
+          state: snapshot.data ?? _viewModel.initialState,
           child: widget.child,
         ),
       );

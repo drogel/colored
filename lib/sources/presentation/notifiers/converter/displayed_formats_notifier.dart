@@ -33,7 +33,7 @@ class _DisplayedFormatsNotifierState extends State<DisplayedFormatsNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => DisplayedFormatsData(
-          state: snapshot.data,
+          state: snapshot.data ?? _viewModel.initialState,
           onFormatSelection: _viewModel.updateDisplayedFormats,
           child: widget.child,
         ),

@@ -1,7 +1,7 @@
+import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_navigation/palettes_navigation_data.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_navigation/palettes_navigation_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_navigation/palettes_navigation_view_model.dart';
-import 'package:colored/sources/app/navigation/indexed_navigation/indexed_navigation_state.dart';
 import 'package:flutter/material.dart';
 
 class PalettesNavigationNotifier extends StatefulWidget {
@@ -34,7 +34,7 @@ class _PalettesNavigationNotifierState
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => PalettesNavigationData(
-          state: snapshot.data,
+          state: snapshot.data ?? _viewModel.initialState,
           onNavigation: _viewModel.navigateToIndex,
           child: widget.child,
         ),

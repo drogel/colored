@@ -9,9 +9,7 @@ class PalettesListNotifier extends StatefulWidget {
     required this.injector,
     required this.child,
     Key? key,
-  })  : assert(injector != null),
-        assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final PalettesListInjector injector;
   final Widget child;
@@ -34,7 +32,7 @@ class _PalettesListNotifierState extends State<PalettesListNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => PalettesListData(
-          state: snapshot.data!,
+          state: snapshot.data ?? _viewModel.initialState,
           onSearchChanged: _viewModel.searchPalettes,
           child: widget.child,
         ),

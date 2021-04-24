@@ -9,9 +9,7 @@ class PaletteSuggestionsNotifier extends StatefulWidget {
     required this.injector,
     required this.child,
     Key? key,
-  })  : assert(injector != null),
-        assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final PaletteSuggestionsInjector injector;
   final Widget child;
@@ -36,7 +34,7 @@ class _PaletteSuggestionsNotifierState
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => PaletteSuggestionsData(
-          state: snapshot.data,
+          state: snapshot.data ?? _viewModel.initialState,
           child: widget.child,
         ),
       );

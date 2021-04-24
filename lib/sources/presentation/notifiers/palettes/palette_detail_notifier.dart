@@ -9,9 +9,7 @@ class PaletteDetailNotifier extends StatefulWidget {
     required this.injector,
     required this.child,
     Key? key,
-  })  : assert(injector != null),
-        assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final PaletteDetailInjector injector;
   final Widget child;
@@ -34,7 +32,7 @@ class _PaletteDetailNotifierState extends State<PaletteDetailNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => PaletteDetailData(
-          state: snapshot.data!,
+          state: snapshot.data ?? _viewModel.initialState,
           onPaletteSelected: _viewModel.fetchColorNames,
           child: widget.child,
         ),

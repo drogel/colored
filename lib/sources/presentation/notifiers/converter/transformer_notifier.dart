@@ -9,9 +9,7 @@ class TransformerNotifier extends StatefulWidget {
     required this.injector,
     required this.child,
     Key? key,
-  })  : assert(injector != null),
-        assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final TransformerInjector injector;
   final Widget child;
@@ -34,9 +32,10 @@ class _TransformerNotifierState extends State<TransformerNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) {
-          final sel = snapshot.data!.selection;
+          final data = snapshot.data ?? _viewModel.initialState;
+          final sel = data.selection;
           return TransformerData(
-            state: snapshot.data!,
+            state: data,
             onSelectionChanged: _viewModel.notifySelectionChanged,
             onSelectionStarted: _viewModel.notifySelectionStarted,
             onSelectionEnded: _viewModel.notifySelectionEnded,

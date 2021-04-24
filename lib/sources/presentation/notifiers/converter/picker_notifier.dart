@@ -32,7 +32,7 @@ class _PickerNotifierState extends State<PickerNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => PickerData(
-          state: snapshot.data!,
+          state: snapshot.data ?? _viewModel.initialState,
           onPickerSelected: _viewModel.updatePickerStyle,
           child: widget.child,
         ),

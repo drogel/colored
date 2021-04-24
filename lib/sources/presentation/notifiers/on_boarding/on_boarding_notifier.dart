@@ -10,8 +10,7 @@ class OnBoardingNotifier extends StatefulWidget {
     required this.injector,
     required this.child,
     Key? key,
-  })  : assert(injector != null),
-        super(key: key);
+  }) : super(key: key);
 
   final Widget child;
   final OnBoardingInjector injector;
@@ -34,7 +33,7 @@ class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
         stream: _viewModel.stateStream,
         initialData: _viewModel.initialState,
         builder: (_, snapshot) => OnBoardingData(
-          state: snapshot.data!,
+          state: snapshot.data ?? _viewModel.initialState,
           onPageScroll: _viewModel.computeScrollFraction,
           onFinished: _onOnBoardingFinished,
           child: widget.child,
@@ -49,7 +48,6 @@ class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
 
   Future<void> _onOnBoardingFinished() async {
     await _viewModel.onOnBoardingFinish();
-    await Navigator.of(context)
-        .pushReplacementNamed(MainFlowRouter.routerName);
+    await Navigator.of(context).pushReplacementNamed(MainFlowRouter.routerName);
   }
 }
