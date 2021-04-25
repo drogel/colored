@@ -15,9 +15,9 @@ class LoadingTextCover extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final radius = RadiusData.of(context)!.radiiScheme;
-    final textStyle = coveringTextStyle ?? theme.textTheme.caption!;
-    final color = textStyle.color;
-    final height = textStyle.fontSize;
+    final textStyle = coveringTextStyle ?? theme.textTheme.caption;
+    final color = textStyle?.color ?? theme.colorScheme.onBackground;
+    final height = textStyle?.fontSize ?? 12;
     return FractionallySizedBox(
       widthFactor: parentWidthFraction,
       alignment: Alignment.centerLeft,
