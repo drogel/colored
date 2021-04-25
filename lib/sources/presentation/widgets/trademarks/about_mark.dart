@@ -18,14 +18,14 @@ class AboutMark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.caption!;
-    final githubLogoSize = 2 * textStyle.fontSize!;
-    final localization = Localization.of(context);
+    final githubLogoSize = 2 * (textStyle.fontSize ?? 11.0);
+    final localization = Localization.of(context)!;
     return Row(
       children: [
         const SizedBox(width: 1),
         if (_style == _AboutMarkStyle.expanded)
           Text(
-            localization!.trademarkBegin!,
+            localization.trademarkBegin,
             style: textStyle.copyWith(height: _kTextHeight),
           ),
         if (_style == _AboutMarkStyle.expanded)
@@ -36,7 +36,7 @@ class AboutMark extends StatelessWidget {
           ),
         if (_style == _AboutMarkStyle.expanded)
           Text(
-            localization!.trademarkEnd!,
+            localization.trademarkEnd,
             style: textStyle.copyWith(height: _kTextHeight),
           ),
         GithubLogoLink(size: githubLogoSize),

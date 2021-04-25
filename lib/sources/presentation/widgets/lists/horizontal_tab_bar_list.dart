@@ -6,9 +6,7 @@ class HorizontalTabBarList extends StatelessWidget {
     required this.itemCount,
     required this.itemBuilder,
     Key? key,
-  })  : assert(itemCount != null),
-        assert(itemBuilder != null),
-        super(key: key);
+  }) : super(key: key);
 
   final int itemCount;
   final Widget Function(BuildContext, int) itemBuilder;

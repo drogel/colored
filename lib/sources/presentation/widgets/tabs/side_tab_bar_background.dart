@@ -2,9 +2,7 @@ import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:flutter/material.dart';
 
 class SideTabBarBackground extends StatelessWidget {
-  const SideTabBarBackground({required this.child, Key? key})
-      : assert(child != null),
-        super(key: key);
+  const SideTabBarBackground({required this.child, Key? key}) : super(key: key);
 
   final Widget child;
 

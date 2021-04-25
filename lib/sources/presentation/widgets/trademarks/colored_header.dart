@@ -12,7 +12,7 @@ class ColoredHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(localization.appTitle!, style: textStyle),
+        Text(localization.appTitle, style: textStyle),
         const ColoredLogo(),
       ],
     );

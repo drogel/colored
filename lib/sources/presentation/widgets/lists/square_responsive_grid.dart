@@ -11,9 +11,7 @@ class SquareResponsiveGrid extends StatelessWidget {
     required this.itemBuilder,
     this.pageStorageKey,
     Key? key,
-  })  : assert(itemCount != null),
-        assert(itemBuilder != null),
-        super(key: key);
+  }) : super(key: key);
 
   final PageStorageKey<String>? pageStorageKey;
   final int itemCount;

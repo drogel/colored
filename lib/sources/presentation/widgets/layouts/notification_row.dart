@@ -5,7 +5,7 @@ class NotificationRow extends StatelessWidget {
   const NotificationRow({required this.message, this.icon, Key? key})
       : super(key: key);
 
-  final String? message;
+  final String message;
   final Icon? icon;
 
   @override
@@ -14,11 +14,11 @@ class NotificationRow extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
-      (children: <Widget?>[
-        if (icon != null) icon,
+      children: <Widget>[
+        if (icon != null) icon!,
         SizedBox(width: paddingScheme.large.top),
-        Text(message!),
-      ]) as List<Widget>,
+        Text(message),
+      ],
     );
   }
 }

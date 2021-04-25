@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 abstract class BaseTabBar extends StatelessWidget {
   const BaseTabBar({
     required this.tabs,
+    required this.currentIndex,
     this.onTap,
-    this.currentIndex,
     Key? key,
-  })  : assert(tabs != null),
-        super(key: key);
+  }) : super(key: key);
 
   final List<TabPage> tabs;
   final void Function(int)? onTap;
-  final int? currentIndex;
+  final int currentIndex;
 }

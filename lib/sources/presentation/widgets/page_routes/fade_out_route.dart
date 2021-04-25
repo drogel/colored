@@ -9,8 +9,7 @@ class FadeOutRoute<T> extends PageRoute<T> {
     RouteSettings? settings,
     this.maintainState = true,
     bool fullscreenDialog = false,
-  })  : assert(builder != null),
-        super(settings: settings, fullscreenDialog: fullscreenDialog);
+  }) : super(settings: settings, fullscreenDialog: fullscreenDialog);
 
   final Widget Function(BuildContext) builder;
 

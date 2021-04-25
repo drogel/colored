@@ -11,8 +11,7 @@ class SearchField extends StatelessWidget {
     this.onChanged,
     this.hintText,
     Key? key,
-  })  : assert(controller != null),
-        super(key: key);
+  }) : super(key: key);
 
   final TextEditingController controller;
   final FocusNode? focusNode;
@@ -62,6 +61,9 @@ class SearchField extends StatelessWidget {
 
   void _onClearPressed() {
     controller.clear();
-    onClearPressed!();
+    final onClearPressed = this.onClearPressed;
+    if (onClearPressed != null) {
+      onClearPressed();
+    }
   }
 }

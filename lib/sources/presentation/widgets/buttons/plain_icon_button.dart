@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class PlainIconButton extends StatelessWidget {
   const PlainIconButton({
     required this.icon,
-    required this.onPressed,
+    this.onPressed,
     Key? key,
   }) : super(key: key);
 
   final Icon icon;
-  final void Function() onPressed;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {

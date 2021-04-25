@@ -16,9 +16,7 @@ class ResponsiveGrid extends StatefulWidget {
     this.crossAxisMaxCount = 9,
     this.childAspectRatio = 1,
     Key? key,
-  })  : assert(itemBuilder != null),
-        assert(itemCount != null),
-        super(key: key);
+  }) : super(key: key);
 
   final double estimatedItemSize;
   final int crossAxisMinCount;
@@ -103,7 +101,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
   }
 
   void _dismissKeyboard() =>
-      WidgetsBinding.instance!.focusManager.primaryFocus?.unfocus();
+      WidgetsBinding.instance?.focusManager.primaryFocus?.unfocus();
 
   bool _isItemCountDifferent(ResponsiveGrid oldWidget) =>
       oldWidget.itemCount != widget.itemCount;

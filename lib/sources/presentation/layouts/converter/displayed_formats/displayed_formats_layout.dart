@@ -33,12 +33,16 @@ class DisplayedFormatsLayout extends StatelessWidget {
 
   Widget _buildFormatButton(DisplayedFormatsData data, int index) {
     final displayedFormats = data.state.formats;
+    final content = converterData.state.formatData[displayedFormats[index]];
+    if (content == null) {
+      throw ArgumentError("Format not contained in state formatData map");
+    }
     return DropdownFormatButton(
       title: displayedFormats[index].rawValue,
       format: displayedFormats[index],
       clipboardShouldFail: converterData.clipboardShouldFail,
       onClipboardRetrieved: converterData.onClipboardRetrieved,
-      content: converterData.state.formatData[displayedFormats[index]],
+      content: content,
       onDropdownSelection: data.onFormatSelection,
     );
   }
