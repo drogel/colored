@@ -5,30 +5,17 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Parser? colorParser;
+  late Parser colorParser;
 
   setUp(() {
     colorParser = const ColorParser(formatParsers: {});
   });
 
-  tearDown(() {
-    colorParser = null;
-  });
-
   group("Given a ColorParser", () {
-    group("when constructed", () {
-      test("an assertion error is thrown if formatParsers is null", () {
-        expect(
-          () => ColorParser(formatParsers: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when isStringOfFormat is called", () {
-      test("an UnimplmementedError is thrown if formatParsers is empty", () {
+      test("an UnimplementedError is thrown if formatParsers is empty", () {
         expect(
-          () => colorParser!.isStringOfFormat("test", Format.hex),
+          () => colorParser.isStringOfFormat("test", Format.hex),
           throwsA(isA<UnimplementedError>()),
         );
       });
@@ -46,9 +33,9 @@ void main() {
     });
 
     group("when parseFromFormat is called", () {
-      test("an UnimplmementedError is thrown if formatParsers is empty", () {
+      test("an UnimplementedError is thrown if formatParsers is empty", () {
         expect(
-          () => colorParser!.parseFromFormat("test", Format.hex),
+          () => colorParser.parseFromFormat("test", Format.hex),
           throwsA(isA<UnimplementedError>()),
         );
       });

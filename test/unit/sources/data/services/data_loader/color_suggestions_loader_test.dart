@@ -8,7 +8,7 @@ class StringBundleStub implements StringBundle {
 }
 
 void main() {
-  ColorSuggestionsLoader? loader;
+  late ColorSuggestionsLoader loader;
 
   setUp(() {
     loader = ColorSuggestionsLoader(
@@ -17,37 +17,11 @@ void main() {
     );
   });
 
-  tearDown(() {
-    loader = null;
-  });
-
   group("Given a stubbed ColorSuggestionsLoader", () {
-    group("when constructed", () {
-      test("an assertion error is thrown if the stringBundle is null", () {
-        expect(
-          () => ColorSuggestionsLoader(
-            stringBundle: null,
-            colorSuggestionsDataPath: "testPath",
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("an assertion error is thrown if the stringBundle is null", () {
-        expect(
-          () => ColorSuggestionsLoader(
-            stringBundle: StringBundleStub(),
-            colorSuggestionsDataPath: null,
-          ),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when load is called", () {
       test("then a Map<String, String> is decoded from StringBundle", () async {
         final expected = <String, String>{"test": "000000"};
-        final actual = await loader!.load();
+        final actual = await loader.load();
 
         expect(expected, actual);
       });

@@ -30,7 +30,7 @@ class SecondChildFlowRouterStub extends FlowRouter {
 }
 
 class FlowRouterUnderTest extends FlowRouter {
-  const FlowRouterUnderTest({List<FlowRouter?>? children})
+  const FlowRouterUnderTest({List<FlowRouter>? children})
       : super(children: children);
 
   static const routerName = "routerUnderTest";

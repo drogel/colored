@@ -32,8 +32,8 @@ class StringBundleStub implements StringBundle {
 }
 
 void main() {
-  PalettesLoader? loader;
-  Memoizer? memoizer;
+  late PalettesLoader loader;
+  late Memoizer memoizer;
   late StringBundle stringBundle;
 
   setUp(() {
@@ -46,50 +46,10 @@ void main() {
     );
   });
 
-  tearDown(() {
-    memoizer = null;
-    loader = null;
-  });
-
   group("Given a PalettesLoader", () {
-    group("when constructed", () {
-      test("then should throw if given a null memoizer", () {
-        expect(
-          () => PalettesLoader(
-            memoizer: null,
-            stringBundle: stringBundle,
-            palettesDataPath: "testPath",
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then should throw if given a null stringBundle", () {
-        expect(
-          () => PalettesLoader(
-            memoizer: memoizer as Memoizer<Map<String, List<String>>>,
-            stringBundle: null,
-            palettesDataPath: "testPath",
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then should throw if given a null palettesDataPath", () {
-        expect(
-          () => PalettesLoader(
-            memoizer: memoizer as Memoizer<Map<String, List<String>>>,
-            stringBundle: const StringBundleStub(),
-            palettesDataPath: null,
-          ),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when load is called", () {
       test("then returns value of the computation in the memoizer", () async {
-        final actual = await loader!.load();
+        final actual = await loader.load();
         expect(actual, MemoizerStub.mockResult);
       });
     });
@@ -105,18 +65,6 @@ void main() {
         palettesDataPath: "testPath",
       );
     });
-
-    tearDown(() {
-      memoizer = null;
-      loader = null;
-    });
-
-    group("when load is called", () {
-      test("then the runOnce method from the memoizer is called", () async {
-        final _ = await loader!.load();
-        verify(memoizer!.runOnce(any!));
-      });
-    });
   });
 
   group("Given a PalettesLoader with a DefaultMemoizer", () {
@@ -130,14 +78,9 @@ void main() {
       );
     });
 
-    tearDown(() {
-      memoizer = null;
-      loader = null;
-    });
-
     group("when load is called", () {
       test("then returns the decoded json string from the bundle", () async {
-        final actual = await loader!.load();
+        final actual = await loader.load();
         expect(actual, {
           "test": ["000000", "ffffff"]
         });

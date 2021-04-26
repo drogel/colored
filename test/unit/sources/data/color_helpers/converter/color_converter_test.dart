@@ -8,7 +8,7 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Converter? colorConverter;
+  late Converter colorConverter;
 
   setUp(() {
     colorConverter = const ColorConverter(converters: [
@@ -19,20 +19,7 @@ void main() {
     ]);
   });
 
-  tearDown(() {
-    colorConverter = null;
-  });
-
   group("Given a ColorConverter with all format converters", () {
-    group("when constructed", () {
-      test("then converters must not be null", () {
-        expect(
-          () => ColorConverter(converters: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when given an empty list of converters", () {
       test("then convert returns an empty map", () {
         const emptyColorConverter = ColorConverter(converters: []);
@@ -49,7 +36,7 @@ void main() {
           Format.hsl: "103°, 17%, 25%",
           Format.hsv: "103°, 28%, 29%",
         };
-        expect(colorConverter!.convert(59, 74, 53), expected);
+        expect(colorConverter.convert(59, 74, 53), expected);
       });
     });
   });

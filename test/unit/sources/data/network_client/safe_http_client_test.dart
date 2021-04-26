@@ -41,33 +41,20 @@ class ResponseHttpWrapper implements HttpWrapper {
 
 void main() {
   final _kValidHttpResponse = Response("testBody", 200);
-  HttpClient? client;
+  late HttpClient client;
 
   group("Given a SafeHttpClient", () {
     setUp(() {
       client = const SafeHttpClient();
     });
 
-    tearDown(() {
-      client = null;
-    });
-
-    group("when constructed", () {
-      test("then throws an assertion error if httpWrapper is null", () {
-        expect(
-          () => SafeHttpClient(httpWrapper: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when isResponseOk is called", () {
-      test("then returns true if status=okay, code=200 and body!=null", () {
+      test("then returns true if status=okay, code=200 and body=null", () {
         final validResponse = HttpResponse(
           status: ResponseStatus.ok,
           httpResponse: _kValidHttpResponse,
         );
-        final actual = client!.isResponseOk(validResponse);
+        final actual = client.isResponseOk(validResponse);
         expect(actual, isTrue);
       });
 
@@ -76,7 +63,7 @@ void main() {
           status: ResponseStatus.failed,
           httpResponse: _kValidHttpResponse,
         );
-        final actual = client!.isResponseOk(invalidResponse);
+        final actual = client.isResponseOk(invalidResponse);
         expect(actual, isFalse);
       });
 
@@ -85,7 +72,7 @@ void main() {
           status: ResponseStatus.ok,
           httpResponse: Response("testBody", 400),
         );
-        final actual = client!.isResponseOk(invalidResponse);
+        final actual = client.isResponseOk(invalidResponse);
         expect(actual, isFalse);
       });
     });
@@ -96,14 +83,10 @@ void main() {
       client = const SafeHttpClient(httpWrapper: TimeoutHttpWrapper());
     });
 
-    tearDown(() {
-      client = null;
-    });
-
     group("when get is called", () {
       test("then a failed status is returned on timeout", () {
         fakeAsync((async) {
-          client!
+          client
               .get("test")
               .then((actual) => expect(actual.status, ResponseStatus.failed));
           async.elapse(
@@ -119,13 +102,9 @@ void main() {
       client = const SafeHttpClient(httpWrapper: SocketExceptionHttpWrapper());
     });
 
-    tearDown(() {
-      client = null;
-    });
-
     group("when get is called", () {
       test("then a failed status is returned on socket exception", () async {
-        final actual = await client!.get("test");
+        final actual = await client.get("test");
         expect(actual.status, ResponseStatus.failed);
       });
     });
@@ -136,17 +115,17 @@ void main() {
       client = const SafeHttpClient(httpWrapper: ResponseHttpWrapper());
     });
 
-    tearDown(() {
-      client = null;
-    });
-
     group("when get is called", () {
-      test("then an ok status is recieved with the response", () async {
-        final actual = await client!.get("test");
-        final response = actual.httpResponse!;
-        expect(actual.status, ResponseStatus.ok);
-        expect(response.body, ResponseHttpWrapper.responseBody);
-        expect(response.statusCode, ResponseHttpWrapper.responseStatus);
+      test("then an ok status is received with the response", () async {
+        final actual = await client.get("test");
+        final response = actual.httpResponse;
+        if (response != null) {
+          expect(actual.status, ResponseStatus.ok);
+          expect(response.body, ResponseHttpWrapper.responseBody);
+          expect(response.statusCode, ResponseHttpWrapper.responseStatus);
+        } else {
+          fail("httpResponse should be null for this test to pass");
+        }
       });
     });
   });
