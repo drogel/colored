@@ -2,17 +2,12 @@ import 'package:colored/sources/domain/data_models/items_wrapper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  ItemsWrapper<int>? testWrapper;
-  List<int>? testItems;
+  late ItemsWrapper<int> testWrapper;
+  late List<int> testItems;
 
   setUp(() {
     testItems = [1, 2, 3, 4];
     testWrapper = ItemsWrapper(items: testItems);
-  });
-
-  tearDown(() {
-    testItems = null;
-    testWrapper = null;
   });
 
   group("Given an ItemWrapper", () {

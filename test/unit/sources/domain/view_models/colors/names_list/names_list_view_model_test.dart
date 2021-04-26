@@ -30,25 +30,21 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late NamesListViewModel viewModel;
-  StreamController<NamesListState>? stateController;
-  NamesService? namesService;
+  late StreamController<NamesListState> stateController;
+  late NamesService namesService;
 
   setUp(() {
     stateController = StreamController<NamesListState>();
     namesService = MockNamesService();
     viewModel = NamesListViewModel(
-      stateController: stateController!,
-      namesService: namesService!,
+      stateController: stateController,
+      namesService: namesService,
       searchConfigurator: const ListSearchConfigurator(),
     );
   });
 
   tearDown(() {
-    if (stateController != null) {
-      stateController!.close();
-    }
-    stateController = null;
-    namesService = null;
+    stateController.close();
   });
 
   group("Given a NamesListViewModel", () {
@@ -61,7 +57,7 @@ void main() {
 
     group("when clearSearch is called", () {
       test("then a Pending state is received", () {
-        stateController!.stream.listen(
+        stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
         viewModel.clearSearch();
@@ -70,50 +66,15 @@ void main() {
 
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController!.isClosed, false);
+        expect(stateController.isClosed, false);
         viewModel.dispose();
-        expect(stateController!.isClosed, true);
+        expect(stateController.isClosed, true);
       });
     });
 
     group("when stateStream is called", () {
       test("the stream of the provided state controller is retrieved", () {
-        expect(viewModel.stateStream, stateController!.stream);
-      });
-    });
-
-    group("when constructed", () {
-      test("then stateController must not be null", () {
-        expect(
-          () => NamesListViewModel(
-            stateController: null,
-            namesService: namesService!,
-            searchConfigurator: const ListSearchConfigurator(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then namesService must not be null", () {
-        expect(
-          () => NamesListViewModel(
-            stateController: stateController!,
-            namesService: null,
-            searchConfigurator: const ListSearchConfigurator(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then stateController must not be null", () {
-        expect(
-          () => NamesListViewModel(
-            stateController: stateController!,
-            namesService: namesService!,
-            searchConfigurator: null,
-          ),
-          throwsAssertionError,
-        );
+        expect(viewModel.stateStream, stateController.stream);
       });
     });
   });
@@ -123,28 +84,26 @@ void main() {
       stateController = StreamController<NamesListState>();
       namesService = NamesServiceStub();
       viewModel = NamesListViewModel(
-        stateController: stateController!,
-        namesService: namesService!,
+        stateController: stateController,
+        namesService: namesService,
         searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
     tearDown(() {
-      stateController!.close();
-      stateController = null;
-      namesService = null;
+      stateController.close();
     });
 
     group("when searchColorName is called", () {
       test("with a searchString of lenght < 3, then Pending is added", () {
-        stateController!.stream.listen(
+        stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
         viewModel.searchColorNames("se");
       });
 
       test("with a searchString of lenght >= 3, then Found state is added", () {
-        stateController!.stream.listen(
+        stateController.stream.listen(
           (event) => expect(event, isA<Found>()),
         );
         viewModel.searchColorNames("red");
@@ -152,7 +111,7 @@ void main() {
 
       test("with a searchString of lenght < 3, then search is retrieved", () {
         const expected = "se";
-        stateController!.stream.listen(
+        stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
         viewModel.searchColorNames(expected);
@@ -160,14 +119,14 @@ void main() {
 
       test("with a searchString of lenght >= 3, then search is retrieved", () {
         const expected = "search";
-        stateController!.stream.listen(
+        stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
         viewModel.searchColorNames(expected);
       });
 
       test("with searchString.lenght >= 3, then namedColors are retrieved", () {
-        stateController!.stream.listen((event) {
+        stateController.stream.listen((event) {
           final found = event as Found;
           final expected = NamedColor(
             name: NamesServiceStub.namesMap.values.first,
@@ -186,28 +145,26 @@ void main() {
       stateController = StreamController<NamesListState>();
       namesService = NamesServiceEmptyStub();
       viewModel = NamesListViewModel(
-        stateController: stateController!,
-        namesService: namesService!,
+        stateController: stateController,
+        namesService: namesService,
         searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
     tearDown(() {
-      stateController!.close();
-      stateController = null;
-      namesService = null;
+      stateController.close();
     });
 
     group("when searchColorName is called", () {
-      test("with a searchString of lenght < 3, then Pending is added", () {
-        stateController!.stream.listen(
+      test("with a searchString of length < 3, then Pending is added", () {
+        stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
         viewModel.searchColorNames("se");
       });
 
-      test("with searchString.lenght >= 3, then NoneFound is retrieved", () {
-        stateController!.stream.listen(
+      test("with searchString.length >= 3, then NoneFound is retrieved", () {
+        stateController.stream.listen(
           (event) => expect(event, isA<NoneFound>()),
         );
         viewModel.searchColorNames("red");

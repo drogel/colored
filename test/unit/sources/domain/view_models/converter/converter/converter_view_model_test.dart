@@ -23,12 +23,17 @@ abstract class OnSelectionDoneCallbackProvider {
   void onDone(ColorSelection selection);
 }
 
-class MockOnSelectionDoneCallbackProvider extends Mock
-    implements OnSelectionDoneCallbackProvider {}
+class OnSelectionDoneCallbackProviderStub
+    implements OnSelectionDoneCallbackProvider {
+  int timesOnDoneInvoked = 0;
+
+  @override
+  void onDone(ColorSelection selection) => timesOnDoneInvoked++;
+}
 
 void main() {
-  ConverterViewModel? viewModel;
-  StreamController<ConverterState>? stateController;
+  late ConverterViewModel viewModel;
+  late StreamController<ConverterState> stateController;
 
   setUp(() {
     stateController = StreamController<ConverterState>();
@@ -36,68 +41,14 @@ void main() {
   });
 
   tearDown(() {
-    stateController!.close();
-    stateController = null;
-    viewModel = null;
+    stateController.close();
   });
 
   group("Given a ConverterViewModel,", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => ConverterViewModel(
-            stateController: null,
-            deviceOrientationService: MockOrientationService(),
-            colorConverter: MockConverter(),
-            colorParser: MockParser(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if colorParser is null", () {
-        expect(
-          () => ConverterViewModel(
-            stateController: stateController!,
-            deviceOrientationService: MockOrientationService(),
-            colorConverter: MockConverter(),
-            colorParser: null,
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if colorConverter is null", () {
-        expect(
-          () => ConverterViewModel(
-            stateController: stateController!,
-            deviceOrientationService: MockOrientationService(),
-            colorConverter: null,
-            colorParser: MockParser(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an error is thrown if deviceOrientationService is null", () {
-        expect(
-          () => ConverterViewModel(
-            stateController: stateController!,
-            deviceOrientationService: null,
-            colorConverter: MockConverter(),
-            colorParser: MockParser(),
-          ),
-          throwsAssertionError,
-        );
-      });
-    });
-
-    group("when initialstate is called", () {
+    group("when initialState is called", () {
       test("then an initial state with the primaryDark color is returned", () {
-        final actual = viewModel!.initialState;
-
+        final actual = viewModel.initialState;
         const expectedColor = color_constants.primaryDark;
-
         expect(
           actual.formatData[Format.rgb],
           "${expectedColor.red}, ${expectedColor.green}, ${expectedColor.blue}",
@@ -108,14 +59,12 @@ void main() {
     group("when init is called", () {
       test("then the orientation service is asked to set all orientations", () {
         final orientationService = MockOrientationService();
-
         final mockedViewModel = ConverterViewModel(
-          stateController: stateController!,
+          stateController: stateController,
           colorParser: MockParser(),
           colorConverter: MockConverter(),
           deviceOrientationService: orientationService,
         );
-
         mockedViewModel.init();
         verify(orientationService.setAllOrientations());
         verifyNoMoreInteractions(orientationService);
@@ -133,35 +82,35 @@ void main() {
             Format.hsv: "345°, 80%, 100%",
           },
         );
-        stateController!.stream.listen((state) => expect(state, expected));
-        viewModel!.notifySelectionChanged(selection);
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.notifySelectionChanged(selection);
       });
     });
 
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController!.isClosed, false);
-        viewModel!.dispose();
-        expect(stateController!.isClosed, true);
+        expect(stateController.isClosed, false);
+        viewModel.dispose();
+        expect(stateController.isClosed, true);
       });
     });
 
     group("when stateStream is get", () {
       test("then stateController's stream is received", () {
-        final actual = viewModel!.stateStream;
-        expect(actual, stateController!.stream);
+        final actual = viewModel.stateStream;
+        expect(actual, stateController.stream);
       });
     });
 
     group("when clipboardShouldFail is called with hex color format", () {
       test("then false should be returned if string is a valid hex color", () {
-        final shouldHexStringFail = viewModel!.clipboardShouldFail(
+        final shouldHexStringFail = viewModel.clipboardShouldFail(
           "#FF00FF",
           Format.hex,
         );
         expect(shouldHexStringFail, false);
 
-        final shouldHexStringWithoutHashFail = viewModel!.clipboardShouldFail(
+        final shouldHexStringWithoutHashFail = viewModel.clipboardShouldFail(
           "FF00FF",
           Format.hex,
         );
@@ -169,13 +118,13 @@ void main() {
       });
 
       test("then false should return if string is not a valid hex color", () {
-        final shouldNonHexStringFail = viewModel!.clipboardShouldFail(
+        final shouldNonHexStringFail = viewModel.clipboardShouldFail(
           "This is a sentence",
           Format.hex,
         );
         expect(shouldNonHexStringFail, true);
 
-        final shouldRGBStringFail = viewModel!.clipboardShouldFail(
+        final shouldRGBStringFail = viewModel.clipboardShouldFail(
           "(_kDecimal8Bit, _kDecimal8Bit, _kDecimal8Bit)",
           Format.hex,
         );
@@ -185,13 +134,13 @@ void main() {
 
     group("when clipboardShouldFail is called with RGB color format", () {
       test("then false should be returned if string is a valid RGB color", () {
-        final shouldRGBStringFail = viewModel!.clipboardShouldFail(
+        final shouldRGBStringFail = viewModel.clipboardShouldFail(
           "255, 255, 0",
           Format.rgb,
         );
         expect(shouldRGBStringFail, false);
 
-        final shouldRGBStringParenthesisFail = viewModel!.clipboardShouldFail(
+        final shouldRGBStringParenthesisFail = viewModel.clipboardShouldFail(
           "(0, 0, 0)",
           Format.rgb,
         );
@@ -199,13 +148,13 @@ void main() {
       });
 
       test("then false should return if string is not a valid RGB color", () {
-        final shouldNonRGBStringFail = viewModel!.clipboardShouldFail(
+        final shouldNonRGBStringFail = viewModel.clipboardShouldFail(
           "This is a sentence",
           Format.rgb,
         );
         expect(shouldNonRGBStringFail, true);
 
-        final shouldHexStringFail = viewModel!.clipboardShouldFail(
+        final shouldHexStringFail = viewModel.clipboardShouldFail(
           "#FFFFFF",
           Format.rgb,
         );
@@ -215,15 +164,13 @@ void main() {
 
     group("when convertStringToColor is called", () {
       test("then onDone is called", () {
-        final callbackProvider = MockOnSelectionDoneCallbackProvider();
-
-        viewModel!.convertStringToColor(
+        final callbackProvider = OnSelectionDoneCallbackProviderStub();
+        viewModel.convertStringToColor(
           "#000000",
           Format.hex,
           onDone: callbackProvider.onDone,
         );
-
-        verify(callbackProvider.onDone(any!));
+        expect(callbackProvider.timesOnDoneInvoked, equals(1));
       });
     });
 
@@ -238,8 +185,8 @@ void main() {
             Format.hsv: "345°, 80%, 100%",
           },
         );
-        stateController!.stream.listen((state) => expect(state, expected));
-        viewModel!.convertStringToColor(rgbString, Format.rgb);
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.convertStringToColor(rgbString, Format.rgb);
       });
     });
 
@@ -254,8 +201,8 @@ void main() {
             Format.hsv: "345°, 80%, 100%"
           },
         );
-        stateController!.stream.listen((state) => expect(state, expected));
-        viewModel!.convertStringToColor(hexString, Format.hex);
+        stateController.stream.listen((state) => expect(state, expected));
+        viewModel.convertStringToColor(hexString, Format.hex);
       });
     });
   });

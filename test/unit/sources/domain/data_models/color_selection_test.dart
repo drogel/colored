@@ -5,29 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("Given a ColorSelection", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown if r is null", () {
-        expect(
-          () => ColorSelection(r: null, g: 0, b: 0),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if g is null", () {
-        expect(
-          () => ColorSelection(r: 0, g: null, b: 0),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if b is null", () {
-        expect(
-          () => ColorSelection(r: 0, g: 0, b: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when fromHSV is called", () {
       test("then a ColorSelection is built from the HSV values", () {
         final black = ColorSelection.fromHSV(h: 0, s: 0, v: 0);
