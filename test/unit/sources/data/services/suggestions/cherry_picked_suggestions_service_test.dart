@@ -37,52 +37,23 @@ class RandomGeneratorStub implements IntGenerator {
 }
 
 void main() {
-  group("Given a CherryPickedSuggestionsService", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown if dataLoader is null", () {
-        expect(
-            () => CherryPickedSuggestionsService(
-                  dataLoader: null,
-                  listPicker: StringListPicker(
-                    intGenerator: RandomGeneratorStub(),
-                  ),
-                ),
-            throwsAssertionError);
-      });
-
-      test("then an assertion error is thrown if listPicker is null", () {
-        expect(
-            () => CherryPickedSuggestionsService(
-                  dataLoader: ColorSuggestionsLoaderStub(),
-                  listPicker: null,
-                ),
-            throwsAssertionError);
-      });
-    });
-  });
-
   group("Given a CherryPickedSuggestionsService with a color data loader", () {
-    DataLoader<String>? suggestionsDataLoader;
-    SuggestionsService<String?>? suggestionsService;
+    late DataLoader<String> suggestionsDataLoader;
+    late SuggestionsService<String> suggestionsService;
 
     setUp(() {
       suggestionsDataLoader = ColorSuggestionsLoaderStub();
       suggestionsService = CherryPickedSuggestionsService<String>(
-        dataLoader: suggestionsDataLoader!,
+        dataLoader: suggestionsDataLoader,
         listPicker: StringListPicker(
           intGenerator: RandomGeneratorStub(),
         ),
       );
     });
 
-    tearDown(() {
-      suggestionsDataLoader = null;
-      suggestionsService = null;
-    });
-
     group("when fetchSuggestions is called", () {
       test("then the expected map is retrieved", () async {
-        final actual = await suggestionsService!.fetchSuggestions(2);
+        final actual = await suggestionsService.fetchSuggestions(2);
         final expected = {"222222": "Second", "444444": "Fourth"};
         expect(actual, expected);
       });
@@ -90,27 +61,22 @@ void main() {
   });
 
   group("Given a CherryPickerSuggestionsService with a palette loader", () {
-    DataLoader<List<String>>? suggestionsDataLoader;
-    SuggestionsService<List<String>?>? suggestionsService;
+    late DataLoader<List<String>> suggestionsDataLoader;
+    late SuggestionsService<List<String>> suggestionsService;
 
     setUp(() {
       suggestionsDataLoader = PaletteSuggestionsLoaderStub();
       suggestionsService = CherryPickedSuggestionsService<List<String>>(
-        dataLoader: suggestionsDataLoader!,
+        dataLoader: suggestionsDataLoader,
         listPicker: StringListPicker(
           intGenerator: RandomGeneratorStub(),
         ),
       );
     });
 
-    tearDown(() {
-      suggestionsDataLoader = null;
-      suggestionsService = null;
-    });
-
     group("when fetchSuggestions is called", () {
-      test("then the exected palette map is retrieved", () async {
-        final actual = await suggestionsService!.fetchSuggestions(2);
+      test("then the expected palette map is retrieved", () async {
+        final actual = await suggestionsService.fetchSuggestions(2);
         final expected = <String, List<String>>{
           "Second": ["000000", "ffffff"],
           "Fourth": ["000000"]

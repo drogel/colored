@@ -1,87 +1,71 @@
 import 'package:colored/sources/data/services/url_launcher/safe_url_launcher.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
-class MockLaunchAction extends Mock {
+abstract class LaunchAction {
   Future<void> call(String url);
 }
 
-class MockCanLaunchCheck extends Mock {
+abstract class CanLaunchCheck {
   Future<bool> call(String url);
+}
+
+class LaunchActionStub implements LaunchAction {
+  int timesCallWasInvoked = 0;
+
+  @override
+  Future<void> call(String url) async => timesCallWasInvoked++;
+}
+
+class CanLaunchCheckStub implements CanLaunchCheck {
+  CanLaunchCheckStub({required this.canLaunch});
+
+  final bool canLaunch;
+
+  @override
+  Future<bool> call(String url) async => canLaunch;
 }
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  Future<void> Function(String)? launchAction;
-  Future<bool> Function(String)? canLaunchCheck;
-
-  setUp(() {
-    launchAction = MockLaunchAction() as Future<void> Function(String)?;
-    canLaunchCheck = MockCanLaunchCheck() as Future<bool> Function(String)?;
-  });
-
-  tearDown(() {
-    launchAction = null;
-    canLaunchCheck = null;
-  });
-
-  group("Given a SafeUrlLauncher", () {
-    group("when constructed", () {
-      test("an assertion error should throw if url is null", () {
-        expect(
-          () => SafeUrlLauncher(url: null),
-          throwsAssertionError,
-        );
-      });
-
-      test("an assertion error should throw if launchAction is null", () {
-        expect(
-          () => SafeUrlLauncher(url: "test", launchAction: null),
-          throwsAssertionError,
-        );
-      });
-
-      test("an assertion error should throw if launchAction is null", () {
-        expect(
-          () => SafeUrlLauncher(url: "test", canLaunchCheck: null),
-          throwsAssertionError,
-        );
-      });
-    });
-  });
+  late LaunchActionStub launchAction;
+  late CanLaunchCheck canLaunchCheck;
 
   group("Given a SafeUrlLauncher with a valid URL", () {
+    setUp(() {
+      launchAction = LaunchActionStub();
+      canLaunchCheck = CanLaunchCheckStub(canLaunch: true);
+    });
+
     group("when launch is called", () {
       test("then the launchAction function is called", () async {
         const url = "https://google.com";
-        when(canLaunchCheck!(url)).thenAnswer((realInvocation) async => true);
         final urlLauncher = SafeUrlLauncher(
           url: url,
-          launchAction: launchAction!,
-          canLaunchCheck: canLaunchCheck!,
+          launchAction: launchAction,
+          canLaunchCheck: canLaunchCheck,
         );
-
         await urlLauncher.launch();
-
-        verify(launchAction!.call(url));
+        expect(launchAction.timesCallWasInvoked, equals(1));
       });
     });
   });
 
   group("Given a SafeUrlLauncher with an invalid URL", () {
-    group("then launch is called", () {
+    setUp(() {
+      launchAction = LaunchActionStub();
+      canLaunchCheck = CanLaunchCheckStub(canLaunch: false);
+    });
+
+    group("when launch is called", () {
       test("then the launchAction function is not called", () async {
         const url = "test";
-        when(canLaunchCheck!(url)).thenAnswer((realInvocation) async => false);
         final urlLauncher = SafeUrlLauncher(
           url: url,
-          launchAction: launchAction!,
-          canLaunchCheck: canLaunchCheck!,
+          launchAction: launchAction,
+          canLaunchCheck: canLaunchCheck,
         );
-
         await urlLauncher.launch();
-
-        verifyNever(launchAction!.call(any!));
+        expect(launchAction.timesCallWasInvoked, equals(0));
       });
     });
   });

@@ -6,37 +6,47 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  PaletteNamingService? mockService;
-  PaletteNamingResponse? response;
+  late PaletteNamingService mockService;
+  late PaletteNamingResponse response;
 
   setUp(() async {
     mockService = const MockPaletteNamingService();
-    response = await mockService!.getNaming(hexColors: []);
-  });
-
-  tearDown(() {
-    mockService = null;
-    response = null;
+    response = await mockService.getNaming(hexColors: []);
   });
 
   group("Given a MockPaletteNamingService", () {
     group("when getNaming is called", () {
       test("then a response status ok is retrieved", () async {
-        expect(response!.status, ResponseStatus.ok);
+        expect(response.status, ResponseStatus.ok);
       });
 
       test("then color amount from sample palette is retrieved", () async {
-        expect(response!.results!.length, 5);
+        final results = response.results;
+        if (results != null) {
+          expect(results.length, 5);
+        } else {
+          fail("Results from the response in this test should never be null");
+        }
       });
 
       test("then the sample colors are retrieved", () async {
-        expect(response!.results!.first.name, "Lead");
-        expect(response!.results!.first.hex, "#212121");
-        expect(response!.results!.first.r, 33);
+        final results = response.results;
+        if (results != null) {
+          expect(results.first.name, "Lead");
+          expect(results.first.hex, "#212121");
+          expect(results.first.r, 33);
+        } else {
+          fail("Results from the response in this test should never be null");
+        }
       });
 
       test("then the named colors have uppercase hex codes", () async {
-        expect(response!.results![2].hex, "#FF0011");
+        final results = response.results;
+        if (results != null) {
+          expect(results[2].hex, "#FF0011");
+        } else {
+          fail("Results from the response in this test should never be null");
+        }
       });
     });
   });
