@@ -13,34 +13,19 @@ class IntGeneratorStub implements IntGenerator {
 }
 
 void main() {
-  ListPicker<String>? listPicker;
-  IntGenerator? intGenerator;
+  late ListPicker<String> listPicker;
+  late IntGenerator intGenerator;
 
   setUp(() {
     intGenerator = const IntGeneratorStub();
-    listPicker = StringListPicker(intGenerator: intGenerator!);
-  });
-
-  tearDown(() {
-    intGenerator = null;
-    listPicker = null;
+    listPicker = StringListPicker(intGenerator: intGenerator);
   });
 
   group("Given a StringListPicker", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown if intGenerator is null", () {
-        expect(
-          () => StringListPicker(intGenerator: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when pick is called", () {
       test("then selected indexes are returned, based on generated ints", () {
         const inputStrings = ["test1", "test2", "test3", "test4"];
-        final actual = listPicker!.pick(from: inputStrings, count: 2);
-
+        final actual = listPicker.pick(from: inputStrings, count: 2);
         expect(actual, ["test2", "test3"]);
       });
     });
