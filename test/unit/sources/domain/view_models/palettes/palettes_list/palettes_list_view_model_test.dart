@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
-import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,7 +24,7 @@ class PalettesServiceStub implements NamesService<List<String>> {
       palettesMap;
 }
 
-class PalettesServiceEmptyStub implements NamesService {
+class PalettesServiceEmptyStub implements NamesService<List<String>> {
   @override
   Future<Map<String, List<String>>> fetchContainingSearch(
           String searchString) async =>
@@ -33,25 +33,21 @@ class PalettesServiceEmptyStub implements NamesService {
 
 void main() {
   late PalettesListViewModel viewModel;
-  NamesService? namesService;
-  StreamController<PalettesListState>? stateController;
+  late NamesService<List<String>> namesService;
+  late StreamController<PalettesListState> stateController;
 
   setUp(() {
     stateController = StreamController<PalettesListState>();
     namesService = MockNamesService();
     viewModel = PalettesListViewModel(
-      stateController: stateController!,
-      namesService: namesService!,
+      stateController: stateController,
+      namesService: namesService,
       searchConfigurator: const ListSearchConfigurator(),
     );
   });
 
   tearDown(() {
-    if (stateController != null) {
-      stateController!.close();
-    }
-    stateController = null;
-    namesService = null;
+    stateController.close();
   });
 
   group("Given a PalettesListViewModel", () {
@@ -64,7 +60,7 @@ void main() {
 
     group("When clearSearch is called", () {
       test("then a Pending state is received", () {
-        stateController!.stream.listen(
+        stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
         viewModel.clearSearch();
@@ -73,44 +69,9 @@ void main() {
 
     group("When dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController!.isClosed, false);
+        expect(stateController.isClosed, false);
         viewModel.dispose();
-        expect(stateController!.isClosed, true);
-      });
-    });
-
-    group("when constructed", () {
-      test("then stateController must not be null", () {
-        expect(
-          () => PalettesListViewModel(
-            stateController: null,
-            namesService: namesService!,
-            searchConfigurator: const ListSearchConfigurator(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then namesService must not be null", () {
-        expect(
-          () => PalettesListViewModel(
-            stateController: stateController!,
-            namesService: null,
-            searchConfigurator: const ListSearchConfigurator(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then stateController must not be null", () {
-        expect(
-          () => PalettesListViewModel(
-            stateController: stateController!,
-            namesService: namesService!,
-            searchConfigurator: null,
-          ),
-          throwsAssertionError,
-        );
+        expect(stateController.isClosed, true);
       });
     });
   });
@@ -120,18 +81,14 @@ void main() {
       stateController = StreamController<PalettesListState>();
       namesService = PalettesServiceStub();
       viewModel = PalettesListViewModel(
-        stateController: stateController!,
-        namesService: namesService!,
+        stateController: stateController,
+        namesService: namesService,
         searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
     tearDown(() {
-      if (stateController != null) {
-        stateController!.close();
-      }
-      stateController = null;
-      namesService = null;
+      stateController.close();
     });
 
     group("when searchPalettes is called", () {
@@ -178,18 +135,14 @@ void main() {
       stateController = StreamController<PalettesListState>();
       namesService = PalettesServiceEmptyStub();
       viewModel = PalettesListViewModel(
-        stateController: stateController!,
-        namesService: namesService!,
+        stateController: stateController,
+        namesService: namesService,
         searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
     tearDown(() {
-      if (stateController != null) {
-        stateController!.close();
-      }
-      stateController = null;
-      namesService = null;
+      stateController.close();
     });
 
     group("when searchPalettes is called", () {
@@ -204,7 +157,7 @@ void main() {
         viewModel.searchPalettes(searchString);
       });
 
-      test("with a short searchString then a Pending state is reitreved", () {
+      test("with a short searchString then a Pending state is retrieved", () {
         const shortString = "te";
 
         viewModel.stateStream.listen((event) {

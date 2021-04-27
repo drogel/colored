@@ -5,59 +5,48 @@ import 'package:colored/sources/app/navigation/indexed_navigation/indexed_naviga
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  IndexedNavigationController? viewModel;
-  StreamController<IndexedNavigationState>? stateController;
+  late IndexedNavigationController viewModel;
+  late StreamController<IndexedNavigationState> stateController;
 
   setUp(() {
     stateController = StreamController<IndexedNavigationState>();
-    viewModel = IndexedNavigationController(stateController: stateController!);
+    viewModel = IndexedNavigationController(stateController: stateController);
   });
 
   tearDown(() {
-    stateController!.close();
-    stateController = null;
-    viewModel = null;
+    stateController.close();
   });
 
   group("Given a IndexedNavigationController", () {
-    group("when constructed", () {
-      test("then should throw if given null stateController", () {
-        expect(
-          () => IndexedNavigationController(stateController: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController!.isClosed, false);
-        viewModel!.dispose();
-        expect(stateController!.isClosed, true);
+        expect(stateController.isClosed, false);
+        viewModel.dispose();
+        expect(stateController.isClosed, true);
       });
     });
 
     group("when initialState is called", () {
       test("then a state with currentIndex of 0 is retrieved", () {
-        final actual = viewModel!.initialState;
+        final actual = viewModel.initialState;
         expect(actual.currentIndex, 0);
       });
     });
 
     group("when stateStream is called", () {
       test("then the stream from the stateController is retrieved", () {
-        final actual = viewModel!.stateStream;
-        expect(actual, stateController!.stream);
+        final actual = viewModel.stateStream;
+        expect(actual, stateController.stream);
       });
     });
 
     group("when navigateToIndex is called", () {
       test("then a new state with the passed index is added to the stream", () {
         const testIndex = 1;
-        stateController!.stream.listen((event) {
+        stateController.stream.listen((event) {
           expect(event.currentIndex, testIndex);
         });
-        viewModel!.navigateToIndex(testIndex);
+        viewModel.navigateToIndex(testIndex);
       });
     });
   });

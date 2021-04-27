@@ -6,59 +6,48 @@ import 'package:colored/sources/app/navigation/indexed_navigation/indexed_naviga
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  MainTabsViewModel? viewModel;
-  StreamController<IndexedNavigationState>? stateController;
+  late MainTabsViewModel viewModel;
+  late StreamController<IndexedNavigationState> stateController;
 
   setUp(() {
     stateController = StreamController<IndexedNavigationState>();
-    viewModel = MainTabsViewModel(stateController: stateController!);
+    viewModel = MainTabsViewModel(stateController: stateController);
   });
 
   tearDown(() {
-    stateController!.close();
-    stateController = null;
-    viewModel = null;
+    stateController.close();
   });
 
   group("Given a MainTabsViewController", () {
-    group("when constructed", () {
-      test("then should throw if given null stateController", () {
-        expect(
-          () => MainTabsViewModel(stateController: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController!.isClosed, false);
-        viewModel!.dispose();
-        expect(stateController!.isClosed, true);
+        expect(stateController.isClosed, false);
+        viewModel.dispose();
+        expect(stateController.isClosed, true);
       });
     });
 
     group("when initialState is called", () {
       test("then a state with currentIndex of 0 is retrieved", () {
-        final actual = viewModel!.initialState;
+        final actual = viewModel.initialState;
         expect(actual.currentIndex, MainTabsSelection.converter.index);
       });
     });
 
     group("when stateStream is called", () {
       test("then the stream from the stateController is retrieved", () {
-        final actual = viewModel!.stateStream;
-        expect(actual, stateController!.stream);
+        final actual = viewModel.stateStream;
+        expect(actual, stateController.stream);
       });
     });
 
     group("when navigateToIndex is called", () {
       test("then a new state with the passed index is added to the stream", () {
         const testSelection = MainTabsSelection.converter;
-        stateController!.stream.listen((event) {
+        stateController.stream.listen((event) {
           expect(event.currentIndex, testSelection.index);
         });
-        viewModel!.navigateToIndex(testSelection.index);
+        viewModel.navigateToIndex(testSelection.index);
       });
     });
   });

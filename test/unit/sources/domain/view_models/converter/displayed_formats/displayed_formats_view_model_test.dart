@@ -6,60 +6,49 @@ import 'package:colored/sources/domain/view_models/converter/displayed_formats/d
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  DisplayedFormatsViewModel? viewModel;
-  StreamController<DisplayedFormatsState>? stateController;
+  late DisplayedFormatsViewModel viewModel;
+  late StreamController<DisplayedFormatsState> stateController;
 
   group("Given a DisplayedFormatsViewModel with all the possible formats", () {
     const allFormats = Format.values;
 
     setUp(() {
       stateController = StreamController<DisplayedFormatsState>();
-      viewModel = DisplayedFormatsViewModel(stateController: stateController!);
+      viewModel = DisplayedFormatsViewModel(stateController: stateController);
     });
 
     tearDown(() {
-      stateController!.close();
-      viewModel = null;
-      stateController = null;
-    });
-
-    group("when constructed", () {
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => DisplayedFormatsViewModel(stateController: null),
-          throwsAssertionError,
-        );
-      });
+      stateController.close();
     });
 
     group("when initialState is called", () {
       test("then a DisplayedFormatsState with all formats is retrieved", () {
-        final actual = viewModel!.initialState;
+        final actual = viewModel.initialState;
         expect(actual.formats, allFormats);
       });
     });
 
     group("when dispose is called", () {
       test("then stateController is closed", () {
-        expect(stateController!.isClosed, false);
-        viewModel!.dispose();
-        expect(stateController!.isClosed, true);
+        expect(stateController.isClosed, false);
+        viewModel.dispose();
+        expect(stateController.isClosed, true);
       });
     });
 
     group("when updateDisplayedFormats is called", () {
       test("then a DisplayedFormatsState is emitted", () {
-        viewModel!.stateStream.listen((event) {
+        viewModel.stateStream.listen((event) {
           expect(event, isA<DisplayedFormatsState>());
         });
-        viewModel!.updateDisplayedFormats(Format.hex, Format.hex);
+        viewModel.updateDisplayedFormats(Format.hex, Format.hex);
       });
 
       test("then Format list is unchanged if selected equals previous", () {
-        viewModel!.stateStream.listen((event) {
-          expect(event.formats, viewModel!.initialState.formats);
+        viewModel.stateStream.listen((event) {
+          expect(event.formats, viewModel.initialState.formats);
         });
-        viewModel!.updateDisplayedFormats(Format.hex, Format.hex);
+        viewModel.updateDisplayedFormats(Format.hex, Format.hex);
       });
 
       test("then format list keeps its length if selected != previous", () {
@@ -68,11 +57,11 @@ void main() {
         final selected = allFormats[selectedFormatIndex];
         final previous = allFormats[previousFormatIndex];
 
-        viewModel!.stateStream.listen((event) {
+        viewModel.stateStream.listen((event) {
           expect(event.formats.length, allFormats.length);
         });
 
-        viewModel!.updateDisplayedFormats(selected, previous);
+        viewModel.updateDisplayedFormats(selected, previous);
       });
 
       test("then selected Format swaps place in the list with previous", () {
@@ -81,12 +70,12 @@ void main() {
         final selected = allFormats[selectedFormatIndex];
         final previous = allFormats[previousFormatIndex];
 
-        viewModel!.stateStream.listen((event) {
+        viewModel.stateStream.listen((event) {
           expect(event.formats.indexOf(selected), allFormats.indexOf(previous));
           expect(event.formats.indexOf(previous), allFormats.indexOf(selected));
         });
 
-        viewModel!.updateDisplayedFormats(selected, previous);
+        viewModel.updateDisplayedFormats(selected, previous);
       });
     });
   });
