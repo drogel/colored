@@ -20,7 +20,7 @@ class DisplayedFormatsNotifier extends StatefulWidget {
 }
 
 class _DisplayedFormatsNotifierState extends State<DisplayedFormatsNotifier> {
-  late DisplayedFormatsViewModel _viewModel;
+  late final DisplayedFormatsViewModel _viewModel;
 
   @override
   void initState() {

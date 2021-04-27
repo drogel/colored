@@ -19,7 +19,7 @@ class PaletteDetailNotifier extends StatefulWidget {
 }
 
 class _PaletteDetailNotifierState extends State<PaletteDetailNotifier> {
-  late PaletteDetailViewModel _viewModel;
+  late final PaletteDetailViewModel _viewModel;
 
   @override
   void initState() {

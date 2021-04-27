@@ -19,7 +19,7 @@ class PickerNotifier extends StatefulWidget {
 }
 
 class _PickerNotifierState extends State<PickerNotifier> {
-  late PickerViewModel _viewModel;
+  late final PickerViewModel _viewModel;
 
   @override
   void initState() {

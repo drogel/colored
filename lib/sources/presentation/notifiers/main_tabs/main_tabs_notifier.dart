@@ -19,7 +19,7 @@ class MainTabsNotifier extends StatefulWidget {
 }
 
 class _MainTabsNotifierState extends State<MainTabsNotifier> {
-  late MainTabsViewModel _viewModel;
+  late final MainTabsViewModel _viewModel;
 
   @override
   void initState() {

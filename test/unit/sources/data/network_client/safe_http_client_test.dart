@@ -17,7 +17,13 @@ class TimeoutHttpWrapper implements HttpWrapper {
 
   @override
   Future<Response> get(String url, {Map<String, String>? headers}) =>
-      Future.delayed(const Duration(seconds: timeoutForcingSeconds));
+      Future.delayed(
+        const Duration(seconds: timeoutForcingSeconds),
+        () => Response(
+          ResponseHttpWrapper.responseBody,
+          ResponseHttpWrapper.responseStatus,
+        ),
+      );
 }
 
 class SocketExceptionHttpWrapper implements HttpWrapper {

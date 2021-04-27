@@ -20,7 +20,7 @@ class OnBoardingNotifier extends StatefulWidget {
 }
 
 class _OnBoardingNotifierState extends State<OnBoardingNotifier> {
-  late OnBoardingViewModel _viewModel;
+  late final OnBoardingViewModel _viewModel;
 
   @override
   void initState() {

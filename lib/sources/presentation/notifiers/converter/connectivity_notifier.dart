@@ -19,7 +19,7 @@ class ConnectivityNotifier extends StatefulWidget {
 }
 
 class _ConnectivityNotifierState extends State<ConnectivityNotifier> {
-  late ConnectivityViewModel _viewModel;
+  late final ConnectivityViewModel _viewModel;
 
   @override
   void initState() {

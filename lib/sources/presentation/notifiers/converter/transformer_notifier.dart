@@ -19,7 +19,7 @@ class TransformerNotifier extends StatefulWidget {
 }
 
 class _TransformerNotifierState extends State<TransformerNotifier> {
-  late TransformerViewModel _viewModel;
+  late final TransformerViewModel _viewModel;
 
   @override
   void initState() {

@@ -17,7 +17,7 @@ class FlavorConfig implements Flavor {
 
   static FlavorConfig get instance => _instance;
 
-  static late FlavorConfig _instance;
+  static late final FlavorConfig _instance;
 
   final FlavorType flavorType;
 

@@ -21,7 +21,7 @@ class ConverterNotifier extends StatefulWidget {
 }
 
 class _ConverterNotifierState extends State<ConverterNotifier> {
-  late ConverterViewModel _viewModel;
+  late final ConverterViewModel _viewModel;
 
   @override
   void initState() {

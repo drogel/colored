@@ -22,7 +22,7 @@ class NamingNotifier extends StatefulWidget {
 }
 
 class _NamingNotifierState extends State<NamingNotifier> {
-  late NamingViewModel _viewModel;
+  late final NamingViewModel _viewModel;
 
   @override
   void initState() {

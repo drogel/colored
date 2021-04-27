@@ -13,41 +13,39 @@ void main() {
 
   group("Given a ColorParser", () {
     group("when isStringOfFormat is called", () {
-      test("an UnimplementedError is thrown if formatParsers is empty", () {
+      test("an ArgumentError is thrown if formatParsers is empty", () {
         expect(
           () => colorParser.isStringOfFormat("test", Format.hex),
-          throwsA(isA<UnimplementedError>()),
+          throwsArgumentError,
         );
       });
 
-      test("an error is thrown if the given format is not found", () {
+      test("an ArgumentError is thrown if the given format is not found", () {
         final rgbOnlyParser = ColorParser(formatParsers: {
           Format.rgb: RgbParser(),
         });
-
         expect(
           () => rgbOnlyParser.isStringOfFormat("test", Format.hex),
-          throwsA(isA<UnimplementedError>()),
+          throwsArgumentError,
         );
       });
     });
 
     group("when parseFromFormat is called", () {
-      test("an UnimplementedError is thrown if formatParsers is empty", () {
+      test("an ArgumentError is thrown if formatParsers is empty", () {
         expect(
           () => colorParser.parseFromFormat("test", Format.hex),
-          throwsA(isA<UnimplementedError>()),
+          throwsA(isA<ArgumentError>()),
         );
       });
 
-      test("an error is thrown if the given format is not found", () {
+      test("an ArgumentError is thrown if the given format is not found", () {
         final rgbOnlyParser = ColorParser(formatParsers: {
           Format.rgb: RgbParser(),
         });
-
         expect(
           () => rgbOnlyParser.parseFromFormat("test", Format.hex),
-          throwsA(isA<UnimplementedError>()),
+          throwsA(isA<ArgumentError>()),
         );
       });
     });

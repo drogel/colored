@@ -19,7 +19,7 @@ class NamesListNotifier extends StatefulWidget {
 }
 
 class _NamesListNotifierState extends State<NamesListNotifier> {
-  late NamesListViewModel _viewModel;
+  late final NamesListViewModel _viewModel;
 
   @override
   void initState() {

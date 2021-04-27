@@ -21,7 +21,7 @@ class PaletteSuggestionsNotifier extends StatefulWidget {
 
 class _PaletteSuggestionsNotifierState
     extends State<PaletteSuggestionsNotifier> {
-  late PaletteSuggestionsViewModel _viewModel;
+  late final PaletteSuggestionsViewModel _viewModel;
 
   @override
   void initState() {

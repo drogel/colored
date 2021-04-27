@@ -20,8 +20,11 @@ void main() {
         expect(FormatValue.format("HSV"), Format.hsv);
       });
 
-      test("then retrieves null if the description doesn't map to value", () {
-        expect(FormatValue.format("Invalid Description"), isNull);
+      test("then throws if the description doesn't map to value", () {
+        expect(
+          () => FormatValue.format("Invalid Description"),
+          throwsArgumentError,
+        );
       });
     });
   });

@@ -21,7 +21,7 @@ class PalettesNavigationNotifier extends StatefulWidget {
 
 class _PalettesNavigationNotifierState
     extends State<PalettesNavigationNotifier> {
-  late PalettesNavigationViewModel _viewModel;
+  late final PalettesNavigationViewModel _viewModel;
 
   @override
   void initState() {

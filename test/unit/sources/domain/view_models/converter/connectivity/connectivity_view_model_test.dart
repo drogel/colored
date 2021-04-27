@@ -48,7 +48,6 @@ void main() {
     group("when initialState is called", () {
       test("then an Unknown state is returned", () {
         final actual = viewModel.initialState;
-
         expect(actual, isA<Unknown>());
       });
     });
@@ -56,6 +55,7 @@ void main() {
     group("when ConnectivityResult.none retrieved from connectivityStream", () {
       group("when dispose is called", () {
         test("then stateController is closed", () {
+          viewModel.init();
           expect(stateController.isClosed, false);
           viewModel.dispose();
           expect(stateController.isClosed, true);

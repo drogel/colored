@@ -20,7 +20,7 @@ class ColorSuggestionsNotifier extends StatefulWidget {
 }
 
 class _ColorSuggestionsNotifierState extends State<ColorSuggestionsNotifier> {
-  late ColorSuggestionsViewModel _viewModel;
+  late final ColorSuggestionsViewModel _viewModel;
 
   @override
   void initState() {

@@ -7,16 +7,28 @@ import 'package:colored/sources/data/services/local_storage/local_storage_keys.d
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
-class MockLocalStorage extends Mock implements LocalStorage {}
+class LocalStorageStub implements LocalStorage {
+  int timesCalledStoreBoolWithTrueValue = 0;
+
+  @override
+  Future<bool?> getBool({required String key}) async => true;
+
+  @override
+  Future<bool> storeBool({required String key, required bool value}) async {
+    if (value) {
+      timesCalledStoreBoolWithTrueValue++;
+    }
+    return true;
+  }
+}
 
 void main() {
   late OnBoardingViewModel viewModel;
-  late LocalStorage service;
+  late LocalStorageStub service;
 
   setUp(() {
-    service = MockLocalStorage();
+    service = LocalStorageStub();
     viewModel = OnBoardingViewModel(
       stateController: StreamController<OnBoardingState>(),
       localStorage: service,
@@ -32,7 +44,7 @@ void main() {
     group("when onOnBoardingFinish is called", () {
       test("then LocalStorage is asked to store true for didOnBoard key", () {
         viewModel.onOnBoardingFinish();
-        service.storeBool(key: keys.didOnBoard, value: true);
+        expect(service.timesCalledStoreBoolWithTrueValue, equals(1));
       });
     });
   });
