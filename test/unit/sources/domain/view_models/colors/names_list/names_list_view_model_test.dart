@@ -95,21 +95,21 @@ void main() {
     });
 
     group("when searchColorName is called", () {
-      test("with a searchString of lenght < 3, then Pending is added", () {
+      test("with a searchString of length < 3, then Pending is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
         viewModel.searchColorNames("se");
       });
 
-      test("with a searchString of lenght >= 3, then Found state is added", () {
+      test("with a searchString of length >= 3, then Found state is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Found>()),
         );
         viewModel.searchColorNames("red");
       });
 
-      test("with a searchString of lenght < 3, then search is retrieved", () {
+      test("with a searchString of length < 3, then search is retrieved", () {
         const expected = "se";
         stateController.stream.listen(
           (event) => expect(event.search, expected),
@@ -117,7 +117,7 @@ void main() {
         viewModel.searchColorNames(expected);
       });
 
-      test("with a searchString of lenght >= 3, then search is retrieved", () {
+      test("with a searchString of length >= 3, then search is retrieved", () {
         const expected = "search";
         stateController.stream.listen(
           (event) => expect(event.search, expected),
@@ -125,7 +125,7 @@ void main() {
         viewModel.searchColorNames(expected);
       });
 
-      test("with searchString.lenght >= 3, then namedColors are retrieved", () {
+      test("with searchString.length >= 3, then namedColors are retrieved", () {
         stateController.stream.listen((event) {
           final found = event as Found;
           final expected = NamedColor(

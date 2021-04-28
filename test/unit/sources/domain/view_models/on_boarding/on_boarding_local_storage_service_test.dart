@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:colored/sources/data/services/device_orientation/system_chrome_service.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage.dart';
-import 'package:colored/sources/data/services/local_storage/local_storage_keys.dart'
-    as keys;
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state.dart';
 import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -4,8 +4,7 @@ class OnlyPortraitScrollbar extends StatelessWidget {
   const OnlyPortraitScrollbar({
     required this.child,
     Key? key,
-  })  : assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final Widget child;
 

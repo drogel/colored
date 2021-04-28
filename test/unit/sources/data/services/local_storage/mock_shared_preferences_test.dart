@@ -25,7 +25,7 @@ void main() {
         expect(actual, _kValue);
       });
 
-      test("then null is retrieved if given a non-existant key", () async {
+      test("then null is retrieved if given a non-existent key", () async {
         preferences.SharedPreferences.setMockInitialValues({
           _kKey: _kValue,
         });
