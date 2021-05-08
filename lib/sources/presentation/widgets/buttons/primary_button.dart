@@ -21,16 +21,20 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final radii = RadiusData.of(context)!.radiiScheme;
+    final colors = Theme.of(context).colorScheme;
     final textStyle = Theme.of(context).textTheme.headline6;
     final paddingScheme = PaddingData.of(context)!.paddingScheme;
-    return RaisedButton(
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: backgroundColor,
+        onPrimary: colors.secondary,
+        padding: padding ?? paddingScheme.large,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(radii.medium),
+        ),
+      ),
       onPressed: onPressed,
       onLongPress: onLongPress,
-      color: backgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(radii.medium),
-      ),
-      padding: padding ?? paddingScheme.large,
       child: Text(title, style: textStyle, textScaleFactor: 0.77),
     );
   }
