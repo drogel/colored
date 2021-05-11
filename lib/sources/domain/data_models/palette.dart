@@ -1,14 +1,11 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:vector_math/hash.dart';
 
 class Palette {
-  const Palette({@required this.name, @required this.hexCodes})
-      : assert(name != null),
-        assert(hexCodes != null);
+  const Palette({required this.name, required this.hexCodes});
 
-  factory Palette.fromMapEntry(MapEntry<String, List<String>> mapEntry) {
-    final hexCodes = mapEntry.value.map((c) => "#${c.toUpperCase()}").toList();
+  factory Palette.fromMapEntry(MapEntry<String, List<String>?> mapEntry) {
+    final hexCodes = mapEntry.value!.map((c) => "#${c.toUpperCase()}").toList();
     return Palette(name: mapEntry.key, hexCodes: hexCodes);
   }
 

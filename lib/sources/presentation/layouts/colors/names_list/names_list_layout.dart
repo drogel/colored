@@ -6,11 +6,11 @@ import 'package:colored/sources/presentation/widgets/containers/background_conta
 import 'package:flutter/material.dart';
 
 class NamesListLayout extends StatelessWidget {
-  const NamesListLayout({Key key}) : super(key: key);
+  const NamesListLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final state = NamesListData.of(context).state;
+    final state = NamesListData.of(context)!.state;
     switch (state.runtimeType) {
       case NoneFound:
         return const NoColorsMessage();

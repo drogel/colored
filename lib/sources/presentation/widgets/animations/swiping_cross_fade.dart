@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 
 class SwipingCrossFade extends StatefulWidget {
   const SwipingCrossFade({
-    @required this.header,
-    @required this.child,
+    required this.header,
+    required this.child,
     this.showChild = true,
     this.enableGestures = true,
     this.sizeDuration,
@@ -17,16 +17,16 @@ class SwipingCrossFade extends StatefulWidget {
     this.hideFadeCurve,
     this.sizeCurve,
     this.hasIndicator = true,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Widget child;
   final Widget header;
-  final Duration sizeDuration;
-  final Duration reverseFadeDuration;
-  final Curve showFadeCurve;
-  final Curve hideFadeCurve;
-  final Curve sizeCurve;
+  final Duration? sizeDuration;
+  final Duration? reverseFadeDuration;
+  final Curve? showFadeCurve;
+  final Curve? hideFadeCurve;
+  final Curve? sizeCurve;
   final bool showChild;
   final bool enableGestures;
   final bool hasIndicator;
@@ -36,7 +36,7 @@ class SwipingCrossFade extends StatefulWidget {
 }
 
 class _SwipingCrossFadeState extends State<SwipingCrossFade> {
-  CrossFadeState _state;
+  late CrossFadeState _state;
 
   @override
   void initState() {
@@ -54,9 +54,9 @@ class _SwipingCrossFadeState extends State<SwipingCrossFade> {
 
   @override
   Widget build(BuildContext context) {
-    final durations = DurationData.of(context).durationScheme;
-    final curves = CurveData.of(context).curveScheme;
-    final padding = PaddingData.of(context).paddingScheme;
+    final durations = DurationData.of(context)!.durationScheme;
+    final curves = CurveData.of(context)!.curveScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return DirectionalPanDetector(
       onPanUpdateUp: widget.enableGestures ? (_) => _show() : null,
       onPanUpdateDown: widget.enableGestures ? (_) => _hide() : null,

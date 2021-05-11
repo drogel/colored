@@ -5,17 +5,16 @@ import 'package:flutter/material.dart';
 
 class DisplayedFormatsData extends InheritedWidget {
   const DisplayedFormatsData({
-    @required this.state,
-    @required this.onFormatSelection,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        super(key: key, child: child);
+    required this.state,
+    required this.onFormatSelection,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final DisplayedFormatsState state;
   final void Function(Format, Format) onFormatSelection;
 
-  static DisplayedFormatsData of(BuildContext context) =>
+  static DisplayedFormatsData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: DisplayedFormatsData);
 
   @override

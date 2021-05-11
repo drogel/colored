@@ -4,14 +4,10 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  FormatParser hslParser;
+  late FormatParser hslParser;
 
   setUp(() {
     hslParser = HslParser();
-  });
-
-  tearDown(() {
-    hslParser = null;
   });
 
   group("Given a HslParser", () {
@@ -85,13 +81,6 @@ void main() {
         expect(
           hslParser.parse("342°, 21%, 16%"),
           ColorSelection(r: 0.1936, g: 0.1264, b: 0.14656000000000005),
-        );
-      });
-
-      test("then an assertion error is thrown on null input string", () {
-        expect(
-          () => hslParser.parse(null),
-          throwsAssertionError,
         );
       });
 

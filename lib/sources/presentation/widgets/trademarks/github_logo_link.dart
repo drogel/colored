@@ -6,27 +6,27 @@ import 'package:colored/sources/data/services/url_launcher/url_launcher.dart';
 import 'package:colored/sources/presentation/widgets/animations/animated_image_color.dart';
 import 'package:flutter/material.dart';
 
-final repoUrl = FlavorConfig.instance?.values?.repositoryLink;
+final repoUrl = FlavorConfig.instance.values.repositoryLink;
 
 class GithubLogoLink extends StatefulWidget {
   const GithubLogoLink({
     this.size,
-    UrlLauncher urlLauncher,
-    Key key,
+    UrlLauncher? urlLauncher,
+    Key? key,
   })  : _urlLauncher = urlLauncher,
         super(key: key);
 
-  final double size;
-  final UrlLauncher _urlLauncher;
+  final double? size;
+  final UrlLauncher? _urlLauncher;
 
   @override
   _GithubLogoLinkState createState() => _GithubLogoLinkState();
 }
 
 class _GithubLogoLinkState extends State<GithubLogoLink> {
-  AnimatedImageColorState _currentState;
-  Color _idleLogoColor;
-  Color _hoveringLogoColor;
+  late AnimatedImageColorState _currentState;
+  late Color _idleLogoColor;
+  late Color _hoveringLogoColor;
 
   @override
   void didChangeDependencies() {
@@ -38,7 +38,7 @@ class _GithubLogoLinkState extends State<GithubLogoLink> {
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding.medium.left),
       child: InkWell(

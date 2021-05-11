@@ -5,14 +5,14 @@ const double _kIndicatorHeight = 5;
 const double _kIndicatorWidth = 36;
 
 class DraggableIndicator extends StatelessWidget {
-  const DraggableIndicator({Key key, this.onTap}) : super(key: key);
+  const DraggableIndicator({Key? key, this.onTap}) : super(key: key);
 
-  final void Function() onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final radii = RadiusData.of(context).radiiScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
     return Stack(
       alignment: Alignment.topCenter,
       children: [

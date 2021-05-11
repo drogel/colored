@@ -7,14 +7,14 @@ class PaletteSuggestionsLayout extends StatelessWidget
     implements PreferredSizeWidget {
   const PaletteSuggestionsLayout({
     this.onSuggestionSelected,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final void Function(String) onSuggestionSelected;
+  final void Function(String)? onSuggestionSelected;
 
   @override
   Widget build(BuildContext context) {
-    final data = PaletteSuggestionsData.of(context);
+    final data = PaletteSuggestionsData.of(context)!;
     switch (data.state.runtimeType) {
       case PaletteSuggestionsFound:
         final suggestions = data.state as PaletteSuggestionsFound;

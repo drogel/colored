@@ -20,11 +20,8 @@ class PalettesL10ns extends LocaleCodeAware {
     }
   };
 
-  String get pageTitle => _values[localeCode]['pageTitle'];
-
-  String get noPalettesFound => _values[localeCode]['noPalettesFound'];
-
-  String get search => _values[localeCode]['search'];
-
-  String get detailLoadingError => _values[localeCode]['detailLoadingError'];
+  String get pageTitle => _values[localeCode]!['pageTitle']!;
+  String get noPalettesFound => _values[localeCode]!['noPalettesFound']!;
+  String get search => _values[localeCode]!['search']!;
+  String get detailLoadingError => _values[localeCode]!['detailLoadingError']!;
 }

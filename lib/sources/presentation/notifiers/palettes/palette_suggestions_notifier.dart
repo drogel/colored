@@ -6,12 +6,10 @@ import 'package:flutter/material.dart';
 
 class PaletteSuggestionsNotifier extends StatefulWidget {
   const PaletteSuggestionsNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
-  })  : assert(injector != null),
-        assert(child != null),
-        super(key: key);
+    required this.injector,
+    required this.child,
+    Key? key,
+  }) : super(key: key);
 
   final PaletteSuggestionsInjector injector;
   final Widget child;
@@ -23,7 +21,7 @@ class PaletteSuggestionsNotifier extends StatefulWidget {
 
 class _PaletteSuggestionsNotifierState
     extends State<PaletteSuggestionsNotifier> {
-  PaletteSuggestionsViewModel _viewModel;
+  late final PaletteSuggestionsViewModel _viewModel;
 
   @override
   void initState() {
@@ -36,7 +34,7 @@ class _PaletteSuggestionsNotifierState
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => PaletteSuggestionsData(
-          state: snapshot.data,
+          state: snapshot.data ?? _viewModel.initialState,
           child: widget.child,
         ),
       );

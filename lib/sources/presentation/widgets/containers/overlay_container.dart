@@ -9,20 +9,20 @@ class OverlayContainer extends StatelessWidget {
     this.child,
     this.elevation,
     this.borderRadius,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final Widget child;
-  final double elevation;
-  final BorderRadius borderRadius;
+  final Widget? child;
+  final double? elevation;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
-    final elevationScheme = ElevationData.of(context).elevationScheme;
-    final radii = RadiusData.of(context).radiiScheme;
-    final opacity = OpacityData.of(context).opacityScheme;
+    final elevationScheme = ElevationData.of(context)!.elevationScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
+    final opacity = OpacityData.of(context)!.opacityScheme;
     final borderRadius = this.borderRadius ?? BorderRadius.all(radii.large);
     return Material(
       elevation: elevation ?? elevationScheme.low,

@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 
 class NamesGrid extends StatelessWidget {
   const NamesGrid({
-    @required this.namedColors,
+    required this.namedColors,
     this.pageStorageKey,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final PageStorageKey<String> pageStorageKey;
+  final PageStorageKey<String>? pageStorageKey;
   final List<NamedColor> namedColors;
 
   @override
@@ -36,7 +36,7 @@ class NamesGrid extends StatelessWidget {
     final selection = ColorSelection.fromColor(color);
     final destinationIndex = MainTabsSelection.converter.index;
     FocusScope.of(context).unfocus();
-    TransformerData.of(context).onSelectionEnded(selection);
-    MainTabsData.of(context).onNavigation(destinationIndex);
+    TransformerData.of(context)!.onSelectionEnded(selection);
+    MainTabsData.of(context)!.onNavigation(destinationIndex);
   }
 }

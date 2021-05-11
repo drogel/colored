@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 class DynamicBottomPadding extends StatelessWidget {
   const DynamicBottomPadding({
     this.child,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     final deviceSafeArea = MediaQuery.of(context).padding;
     return SafeArea(
       child: OrientationBuilder(

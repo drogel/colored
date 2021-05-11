@@ -4,14 +4,10 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Converter hsv;
+  late Converter hsv;
 
   setUp(() {
     hsv = const HsvConverter();
-  });
-
-  tearDown(() {
-    hsv = null;
   });
 
   group("Given a HsvConverter", () {

@@ -9,18 +9,18 @@ import 'package:flutter_test/flutter_test.dart';
 class ConnectivityServiceStub implements ConnectivityService {
   const ConnectivityServiceStub(this.connectivityController);
 
-  final StreamController<ConnectivityResult> connectivityController;
+  final StreamController<ConnectivityResult>? connectivityController;
 
   @override
   Stream<ConnectivityResult> get onConnectivityChanged =>
-      connectivityController.stream;
+      connectivityController!.stream;
 }
 
 void main() {
-  ConnectivityViewModel viewModel;
-  StreamController<ConnectivityState> stateController;
-  StreamController<ConnectivityResult> connectivityController;
-  ConnectivityService connectivityService;
+  late ConnectivityViewModel viewModel;
+  late StreamController<ConnectivityState> stateController;
+  late StreamController<ConnectivityResult> connectivityController;
+  late ConnectivityService connectivityService;
 
   setUp(() {
     stateController = StreamController<ConnectivityState>();
@@ -34,40 +34,13 @@ void main() {
 
   tearDown(() {
     connectivityController.close();
-    connectivityController = null;
     stateController.close();
-    stateController = null;
-    connectivityService = null;
-    viewModel = null;
   });
 
   group("Given a ConnectivityViewModel", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => ConnectivityViewModel(
-            stateController: null,
-            connectivityService: connectivityService,
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then assertion error throws if connectivityService is null", () {
-        expect(
-          () => ConnectivityViewModel(
-            stateController: stateController,
-            connectivityService: null,
-          ),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when stateStream is called", () {
       test("then the stream from the given stateStream is retrieved", () {
         final actual = viewModel.stateStream;
-
         expect(actual, stateController.stream);
       });
     });
@@ -75,7 +48,6 @@ void main() {
     group("when initialState is called", () {
       test("then an Unknown state is returned", () {
         final actual = viewModel.initialState;
-
         expect(actual, isA<Unknown>());
       });
     });
@@ -83,6 +55,7 @@ void main() {
     group("when ConnectivityResult.none retrieved from connectivityStream", () {
       group("when dispose is called", () {
         test("then stateController is closed", () {
+          viewModel.init();
           expect(stateController.isClosed, false);
           viewModel.dispose();
           expect(stateController.isClosed, true);

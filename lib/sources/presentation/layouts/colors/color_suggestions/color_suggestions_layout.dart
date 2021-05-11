@@ -7,14 +7,14 @@ class ColorSuggestionsLayout extends StatelessWidget
     implements PreferredSizeWidget {
   const ColorSuggestionsLayout({
     this.onSuggestionSelected,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final void Function(String) onSuggestionSelected;
+  final void Function(String)? onSuggestionSelected;
 
   @override
   Widget build(BuildContext context) {
-    final data = ColorSuggestionsData.of(context);
+    final data = ColorSuggestionsData.of(context)!;
     switch (data.state.runtimeType) {
       case ColorSuggestionsFound:
         final suggestions = data.state as ColorSuggestionsFound;

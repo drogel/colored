@@ -4,12 +4,12 @@ import 'package:colored/sources/presentation/widgets/text_fields/auto_focusing_s
 import 'package:flutter/material.dart';
 
 class PaletteSearchField extends StatelessWidget {
-  const PaletteSearchField({Key key}) : super(key: key);
+  const PaletteSearchField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final data = PalettesListData.of(context);
-    final localization = Localization.of(context).palettes;
+    final data = PalettesListData.of(context)!;
+    final localization = Localization.of(context)!.palettes;
     return AutoFocusingSearchField(
       hintText: localization.search,
       onClearPressed: () => data.onSearchChanged(""),

@@ -5,8 +5,8 @@ import 'package:colored/sources/app/navigation/indexed_navigation/indexed_naviga
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  IndexedNavigationController viewModel;
-  StreamController<IndexedNavigationState> stateController;
+  late IndexedNavigationController viewModel;
+  late StreamController<IndexedNavigationState> stateController;
 
   setUp(() {
     stateController = StreamController<IndexedNavigationState>();
@@ -15,20 +15,9 @@ void main() {
 
   tearDown(() {
     stateController.close();
-    stateController = null;
-    viewModel = null;
   });
 
   group("Given a IndexedNavigationController", () {
-    group("when constructed", () {
-      test("then should throw if given null stateController", () {
-        expect(
-          () => IndexedNavigationController(stateController: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when dispose is called", () {
       test("then stateController is closed", () {
         expect(stateController.isClosed, false);

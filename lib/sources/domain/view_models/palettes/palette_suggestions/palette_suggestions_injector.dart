@@ -13,16 +13,16 @@ class PaletteSuggestionsInjector {
   const PaletteSuggestionsInjector();
 
   PaletteSuggestionsViewModel injectViewModel([
-    StreamController<PaletteSuggestionsState> stateController,
+    StreamController<PaletteSuggestionsState>? stateController,
   ]) {
-    final dataPath = FlavorConfig.instance.values.paletteSuggestionData;
+    final path = FlavorConfig.instance.values.dataPath.paletteSuggestionData;
     return PaletteSuggestionsViewModel(
       stateController:
           stateController ?? StreamController<PaletteSuggestionsState>(),
       suggestionsService: CherryPickedSuggestionsService<List<String>>(
         dataLoader: PaletteSuggestionsLoader(
           stringBundle: const RootStringBundle(),
-          paletteSuggestionsDataPath: dataPath,
+          paletteSuggestionsDataPath: path,
         ),
         listPicker: const StringListPicker(
           intGenerator: RandomUniqueIntGenerator(),

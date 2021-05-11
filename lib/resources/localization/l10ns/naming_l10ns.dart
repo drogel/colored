@@ -12,5 +12,5 @@ class NamingL10ns extends LocaleCodeAware {
     }
   };
 
-  String get noConnection => _values[localeCode]['noConnection'];
+  String get noConnection => _values[localeCode]!['noConnection']!;
 }

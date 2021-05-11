@@ -3,14 +3,14 @@ import 'package:colored/sources/presentation/widgets/color_pickers/hsl/hsl_picke
 import 'package:flutter/material.dart';
 
 class HslTransformer extends StatelessWidget {
-  const HslTransformer({@required this.saturationLightnessConstraints, Key key})
+  const HslTransformer({required this.saturationLightnessConstraints, Key? key})
       : super(key: key);
 
   final BoxConstraints saturationLightnessConstraints;
 
   @override
   Widget build(BuildContext context) {
-    final data = TransformerData.of(context);
+    final data = TransformerData.of(context)!;
     return HslPicker(
       color: data.state.selection.toColor(),
       onChangeEnd: data.onSelectionEnded,

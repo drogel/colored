@@ -7,11 +7,11 @@ import 'package:colored/sources/presentation/widgets/containers/background_conta
 import 'package:flutter/material.dart';
 
 class PaletteDetailLayout extends StatelessWidget {
-  const PaletteDetailLayout({Key key}) : super(key: key);
+  const PaletteDetailLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final state = PaletteDetailData.of(context).state;
+    final state = PaletteDetailData.of(context)!.state;
     switch (state.runtimeType) {
       case Failed:
         return const PaletteDetailErrorMessage();

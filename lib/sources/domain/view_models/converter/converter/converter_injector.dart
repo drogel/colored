@@ -19,7 +19,7 @@ class ConverterInjector {
   const ConverterInjector();
 
   ConverterViewModel injectViewModel([
-    StreamController<ConverterState> stateController,
+    StreamController<ConverterState>? stateController,
   ]) =>
       ConverterViewModel(
         stateController: stateController ?? StreamController<ConverterState>(),

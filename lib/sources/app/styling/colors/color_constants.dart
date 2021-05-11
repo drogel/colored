@@ -27,9 +27,9 @@ const Color textVariant = Color.fromRGBO(163, 166, 165, 1);
 const Color errorDark = Color.fromRGBO(102, 35, 37, 1);
 const Color error = Color.fromRGBO(252, 86, 89, 1);
 
-final Color blue = Colors.blueAccent[700];
-final Color red = Colors.redAccent[700];
-final Color green = Colors.lightGreenAccent[700];
+final Color blue = Colors.blueAccent[700]!;
+final Color red = Colors.redAccent[700]!;
+final Color green = Colors.lightGreenAccent[700]!;
 
 const Color logoBlue = Color.fromRGBO(192, 229, 225, 1);
 const Color logoRed = Color.fromRGBO(250, 171, 173, 1);

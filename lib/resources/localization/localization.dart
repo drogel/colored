@@ -8,7 +8,7 @@ class Localization extends LocaleCodeAware with LocalizationProvider {
 
   final Locale locale;
 
-  static Localization of(BuildContext context) =>
+  static Localization? of(BuildContext context) =>
       Localizations.of<Localization>(context, Localization);
 }
 

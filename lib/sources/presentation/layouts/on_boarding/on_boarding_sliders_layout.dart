@@ -1,24 +1,25 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:colored/resources/localization/localization.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
-import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_data.dart';
-import 'package:colored/sources/presentation/widgets/layouts/presentation_layout.dart';
+import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_data.dart';
 import 'package:colored/sources/presentation/widgets/buttons/primary_button.dart';
+import 'package:colored/sources/presentation/widgets/layouts/presentation_layout.dart';
 import 'package:flutter/material.dart';
 
 const _kInfoPixelRatio = 2.0;
 
 class OnBoardingSlidersLayout extends StatelessWidget {
-  const OnBoardingSlidersLayout({Key key}) : super(key: key);
+  const OnBoardingSlidersLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final localization = Localization.of(context).onBoarding;
-    final stateColor = TransformerData.of(context).state.selection.toColor();
+    final localization = Localization.of(context)!.onBoarding;
+    final stateColor = TransformerData.of(context)!.state.selection.toColor();
     final pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
+    final onBoardingData = OnBoardingData.of(context)!;
     return PresentationLayout(
       children: <Widget>[
         if (pixelRatio >= _kInfoPixelRatio) SizedBox(height: padding.base),
@@ -53,7 +54,7 @@ class OnBoardingSlidersLayout extends StatelessWidget {
                 ),
               PrimaryButton(
                 title: localization.done,
-                onPressed: OnBoardingData.of(context).onFinished,
+                onPressed: onBoardingData.onFinished,
                 backgroundColor: stateColor,
                 padding: EdgeInsets.symmetric(
                   horizontal: 2 * padding.base,

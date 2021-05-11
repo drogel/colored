@@ -8,7 +8,7 @@ class ConnectivityInjector {
   const ConnectivityInjector();
 
   ConnectivityViewModel injectViewModel([
-    StreamController<ConnectivityState> stateController,
+    StreamController<ConnectivityState>? stateController,
   ]) =>
       ConnectivityViewModel(
         stateController:

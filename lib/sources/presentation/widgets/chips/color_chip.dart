@@ -5,21 +5,19 @@ import 'package:flutter/material.dart';
 
 class ColorChip extends StatelessWidget {
   const ColorChip({
-    @required this.text,
-    @required this.colorHex,
+    required this.text,
+    required this.colorHex,
     this.onPressed,
-    Key key,
-  })  : assert(text != null),
-        assert(colorHex != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   final String text;
-  final void Function(String) onPressed;
+  final void Function(String)? onPressed;
   final String colorHex;
 
   @override
   Widget build(BuildContext context) {
-    final borderRadius = RadiusData.of(context).radiiScheme.medium;
+    final borderRadius = RadiusData.of(context)!.radiiScheme.medium;
     return SuggestionChip(
       text: text,
       avatar: Container(

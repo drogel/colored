@@ -13,7 +13,6 @@ class HsvConverter implements Converter {
     final hue = hsvColor.hue.round();
     final saturation = (hsvColor.saturation * percentFactor).round();
     final value = (hsvColor.value * percentFactor).round();
-
     return {Format.hsv: "$hue°, $saturation%, $value%"};
   }
 }

@@ -3,17 +3,14 @@ import 'dart:async';
 import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_state.dart';
-import 'package:flutter/foundation.dart';
 
 const _kSuggestionsLength = 15;
 
 class PaletteSuggestionsViewModel {
   const PaletteSuggestionsViewModel({
-    @required StreamController<PaletteSuggestionsState> stateController,
-    @required SuggestionsService<List<String>> suggestionsService,
-  })  : assert(stateController != null),
-        assert(suggestionsService != null),
-        _stateController = stateController,
+    required StreamController<PaletteSuggestionsState> stateController,
+    required SuggestionsService<List<String>> suggestionsService,
+  })   : _stateController = stateController,
         _suggestionsService = suggestionsService;
 
   final StreamController<PaletteSuggestionsState> _stateController;

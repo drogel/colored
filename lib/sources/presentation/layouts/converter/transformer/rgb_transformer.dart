@@ -4,11 +4,11 @@ import 'package:colored/sources/presentation/widgets/color_pickers/rgb/rgb_picke
 import 'package:flutter/material.dart';
 
 class RgbTransformer extends StatelessWidget {
-  const RgbTransformer({Key key}) : super(key: key);
+  const RgbTransformer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final data = TransformerData.of(context);
+    final data = TransformerData.of(context)!;
     return RgbPicker(
       selection: data.state.selection,
       onChanged: data.onSelectionChanged,

@@ -16,7 +16,7 @@ class NamesListL10ns extends LocaleCodeAware {
     }
   };
 
-  String get pageTitle => _values[localeCode]['pageTitle'];
-  String get search => _values[localeCode]['search'];
-  String get noColorsFound => _values[localeCode]['noColorsFound'];
+  String get pageTitle => _values[localeCode]!['pageTitle']!;
+  String get search => _values[localeCode]!['search']!;
+  String get noColorsFound => _values[localeCode]!['noColorsFound']!;
 }

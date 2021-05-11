@@ -4,33 +4,37 @@ import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
-    @required this.title,
-    @required this.onPressed,
+    required this.title,
+    required this.onPressed,
     this.onLongPress,
     this.backgroundColor,
     this.padding,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final String title;
   final void Function() onPressed;
-  final void Function() onLongPress;
-  final Color backgroundColor;
-  final EdgeInsets padding;
+  final void Function()? onLongPress;
+  final Color? backgroundColor;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
-    final radii = RadiusData.of(context).radiiScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
+    final colors = Theme.of(context).colorScheme;
     final textStyle = Theme.of(context).textTheme.headline6;
-    final paddingScheme = PaddingData.of(context).paddingScheme;
-    return RaisedButton(
+    final paddingScheme = PaddingData.of(context)!.paddingScheme;
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: backgroundColor,
+        onPrimary: colors.secondary,
+        padding: padding ?? paddingScheme.large,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(radii.medium),
+        ),
+      ),
       onPressed: onPressed,
       onLongPress: onLongPress,
-      color: backgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(radii.medium),
-      ),
-      padding: padding ?? paddingScheme.large,
       child: Text(title, style: textStyle, textScaleFactor: 0.77),
     );
   }

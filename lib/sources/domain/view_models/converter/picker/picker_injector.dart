@@ -7,7 +7,7 @@ class PickerInjector {
   const PickerInjector();
 
   PickerViewModel injectViewModel([
-    StreamController<PickerState> stateController,
+    StreamController<PickerState>? stateController,
   ]) =>
       PickerViewModel(
         stateController: stateController ?? StreamController<PickerState>(),

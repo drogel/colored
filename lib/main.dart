@@ -1,9 +1,8 @@
-import 'package:colored/configuration/flavor_type.dart';
 import 'package:colored/configuration/flavor_config.dart';
-import 'package:colored/configuration/flavor_values/production_values.dart';
+import 'package:colored/configuration/flavor_type.dart';
 import 'package:colored/sources/app/colored.dart';
-import 'package:colored/sources/app/navigation/routers/main_router.dart';
 import 'package:colored/sources/app/navigation/flow_router.dart';
+import 'package:colored/sources/app/navigation/routers/main_router.dart';
 import 'package:colored/sources/app/navigation/routers/on_boarding_router.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage.dart';
 import 'package:colored/sources/data/services/local_storage/local_storage_keys.dart'
@@ -14,13 +13,8 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlavorConfig(
-    flavorType: FlavorType.production,
-    values: const ProductionValues(),
-  );
-
+  FlavorConfig(flavorType: FlavorType.localData);
   final initialFlowRouter = await _getInitialRoute(const SharedPreferences());
-
   runApp(Colored(router: initialFlowRouter));
 }
 

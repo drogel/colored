@@ -14,14 +14,17 @@ void main() {
 
     group("when formatValue is called", () {
       test("then the format for the given description is retrieved", () {
-        expect(formatValue("Hex"), Format.hex);
-        expect(formatValue("RGB"), Format.rgb);
-        expect(formatValue("HSL"), Format.hsl);
-        expect(formatValue("HSV"), Format.hsv);
+        expect(FormatValue.format("Hex"), Format.hex);
+        expect(FormatValue.format("RGB"), Format.rgb);
+        expect(FormatValue.format("HSL"), Format.hsl);
+        expect(FormatValue.format("HSV"), Format.hsv);
       });
 
-      test("then retrieves null if the description doesn't map to value", () {
-        expect(formatValue("Invalid Description"), isNull);
+      test("then throws if the description doesn't map to value", () {
+        expect(
+          () => FormatValue.format("Invalid Description"),
+          throwsArgumentError,
+        );
       });
     });
   });

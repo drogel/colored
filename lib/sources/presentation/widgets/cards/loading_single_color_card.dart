@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class LoadingSingleColorCard extends StatelessWidget {
   const LoadingSingleColorCard({
-    @required this.backgroundColor,
-    @required this.subtitle,
+    required this.backgroundColor,
+    required this.subtitle,
     this.titleWidthFraction = 0.84,
     this.subtitleWidthFraction = 0.56,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Color backgroundColor;

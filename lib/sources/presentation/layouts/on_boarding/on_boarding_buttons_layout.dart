@@ -5,13 +5,13 @@ import 'package:colored/sources/presentation/widgets/layouts/presentation_layout
 import 'package:flutter/material.dart';
 
 class OnBoardingButtonsLayout extends StatelessWidget {
-  const OnBoardingButtonsLayout({Key key}) : super(key: key);
+  const OnBoardingButtonsLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     final textTheme = Theme.of(context).textTheme;
-    final localization = Localization.of(context).onBoarding;
+    final localization = Localization.of(context)!.onBoarding;
     return PresentationLayout(
       children: <Widget>[
         SizedBox(height: padding.base),

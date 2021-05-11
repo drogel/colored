@@ -5,28 +5,26 @@ import 'package:flutter/material.dart';
 
 class SurfaceColorPicker extends StatelessWidget {
   const SurfaceColorPicker({
-    @required this.color,
-    @required this.value,
-    @required this.track,
+    required this.color,
+    required this.value,
+    required this.track,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
-    Key key,
-  })  : assert(color != null),
-        assert(track != null),
-        assert(value != null),
+    Key? key,
+  })  :
         super(key: key);
 
   final Color color;
   final Offset value;
   final Widget track;
-  final void Function(double, double) onChanged;
-  final void Function(double, double) onChangeStart;
-  final void Function(double, double) onChangeEnd;
+  final void Function(double, double)? onChanged;
+  final void Function(double, double)? onChangeStart;
+  final void Function(double, double)? onChangeEnd;
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return SurfaceSlider(
       value: value,
       onChanged: onChanged,

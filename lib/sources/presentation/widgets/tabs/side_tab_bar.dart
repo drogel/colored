@@ -1,21 +1,21 @@
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
+import 'package:colored/sources/presentation/widgets/tabs/base_tab_bar.dart';
 import 'package:colored/sources/presentation/widgets/tabs/side_tab_bar_background.dart';
+import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:colored/sources/presentation/widgets/trademarks/about_mark.dart';
 import 'package:colored/sources/presentation/widgets/trademarks/colored_header.dart';
 import 'package:colored/sources/presentation/widgets/trademarks/colored_logo.dart';
-import 'package:colored/sources/presentation/widgets/tabs/base_tab_bar.dart';
-import 'package:colored/sources/presentation/widgets/tabs/tab_page.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class SideTabBar extends BaseTabBar {
   const SideTabBar({
-    @required List<TabPage> tabs,
+    required List<TabPage> tabs,
+    required int currentIndex,
     this.extendedWidth = 256,
     this.extended = true,
-    void Function(int) onTap,
-    int currentIndex,
-    Key key,
+    void Function(int)? onTap,
+    Key? key,
   }) : super(
           tabs: tabs,
           onTap: onTap,
@@ -28,7 +28,7 @@ class SideTabBar extends BaseTabBar {
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return KeyboardDismisser(
       child: SideTabBarBackground(
         child: Stack(

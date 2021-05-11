@@ -30,7 +30,7 @@ class SecondChildFlowRouterStub extends FlowRouter {
 }
 
 class FlowRouterUnderTest extends FlowRouter {
-  const FlowRouterUnderTest({List<FlowRouter> children})
+  const FlowRouterUnderTest({List<FlowRouter>? children})
       : super(children: children);
 
   static const routerName = "routerUnderTest";
@@ -44,8 +44,8 @@ class FlowRouterUnderTest extends FlowRouter {
 
 void runOnGenerateRouteTest(
   FlowRouter routerUnderTest, {
-  @required String routeName,
-  @required Route expectedRouteType,
+  required String routeName,
+  required Route expectedRouteType,
 }) {
   final settings = RouteSettings(name: routeName);
   final actual = routerUnderTest.onGenerateRoute(settings);

@@ -3,14 +3,10 @@ import 'package:colored/sources/data/services/int_generator/random_unique_int_ge
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  IntGenerator generator;
+  late IntGenerator generator;
 
   setUp(() {
     generator = const RandomUniqueIntGenerator();
-  });
-
-  tearDown(() {
-    generator = null;
   });
 
   void runIntBoundedTest(int max, {int length = 10}) {

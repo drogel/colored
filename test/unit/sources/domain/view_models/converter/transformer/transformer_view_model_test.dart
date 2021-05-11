@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:colored/sources/data/color_helpers/transformer/color_transformer.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_state.dart';
@@ -12,8 +11,8 @@ const _kDecimal8Bit = 255;
 const _kInitialColor = Color(0x00000000);
 
 void main() {
-  TransformerViewModel viewModel;
-  StreamController<TransformerState> stateController;
+  late TransformerViewModel viewModel;
+  late StreamController<TransformerState> stateController;
 
   setUp(() {
     stateController = StreamController<TransformerState>();
@@ -23,8 +22,6 @@ void main() {
 
   tearDown(() {
     stateController.close();
-    stateController = null;
-    viewModel = null;
   });
 
   group("Given a TransformerViewModel", () {
@@ -47,41 +44,6 @@ void main() {
       test("then stateController's stream is received", () {
         final actual = viewModel.stateStream;
         expect(actual, stateController.stream);
-      });
-    });
-
-    group("when constructed", () {
-      test("then an assertion error is thrown if transformer is null", () {
-        expect(
-          () => TransformerViewModel(
-            stateController: stateController,
-            transformer: null,
-            initialColor: _kInitialColor,
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => TransformerViewModel(
-            stateController: null,
-            transformer: const ColorTransformer(),
-            initialColor: _kInitialColor,
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if initialColor is null", () {
-        expect(
-          () => TransformerViewModel(
-            stateController: stateController,
-            transformer: const ColorTransformer(),
-            initialColor: null,
-          ),
-          throwsAssertionError,
-        );
       });
     });
 
@@ -119,7 +81,7 @@ void main() {
     });
 
     group("when changeLightness is called with positive change", () {
-      test("then a state with a higher ligthness color is retrieved", () {
+      test("then a state with a higher lightness color is retrieved", () {
         final selection = ColorSelection(r: 0, g: 0.2, b: 0.4);
         final expected = TransformerState(
           ColorSelection(

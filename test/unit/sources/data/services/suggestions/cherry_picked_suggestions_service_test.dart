@@ -33,37 +33,13 @@ class RandomGeneratorStub implements IntGenerator {
   static const stubbedIntList = [1, 3];
 
   @override
-  List<int> generate({int max, int length}) => stubbedIntList;
+  List<int> generate({int? max, int? length}) => stubbedIntList;
 }
 
 void main() {
-  group("Given a CherryPickedSuggestionsService", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown if dataLoader is null", () {
-        expect(
-            () => CherryPickedSuggestionsService(
-                  dataLoader: null,
-                  listPicker: StringListPicker(
-                    intGenerator: RandomGeneratorStub(),
-                  ),
-                ),
-            throwsAssertionError);
-      });
-
-      test("then an assertion error is thrown if listPicker is null", () {
-        expect(
-            () => CherryPickedSuggestionsService(
-                  dataLoader: ColorSuggestionsLoaderStub(),
-                  listPicker: null,
-                ),
-            throwsAssertionError);
-      });
-    });
-  });
-
   group("Given a CherryPickedSuggestionsService with a color data loader", () {
-    DataLoader<String> suggestionsDataLoader;
-    SuggestionsService<String> suggestionsService;
+    late DataLoader<String> suggestionsDataLoader;
+    late SuggestionsService<String> suggestionsService;
 
     setUp(() {
       suggestionsDataLoader = ColorSuggestionsLoaderStub();
@@ -73,11 +49,6 @@ void main() {
           intGenerator: RandomGeneratorStub(),
         ),
       );
-    });
-
-    tearDown(() {
-      suggestionsDataLoader = null;
-      suggestionsService = null;
     });
 
     group("when fetchSuggestions is called", () {
@@ -90,8 +61,8 @@ void main() {
   });
 
   group("Given a CherryPickerSuggestionsService with a palette loader", () {
-    DataLoader<List<String>> suggestionsDataLoader;
-    SuggestionsService<List<String>> suggestionsService;
+    late DataLoader<List<String>> suggestionsDataLoader;
+    late SuggestionsService<List<String>> suggestionsService;
 
     setUp(() {
       suggestionsDataLoader = PaletteSuggestionsLoaderStub();
@@ -103,13 +74,8 @@ void main() {
       );
     });
 
-    tearDown(() {
-      suggestionsDataLoader = null;
-      suggestionsService = null;
-    });
-
     group("when fetchSuggestions is called", () {
-      test("then the exected palette map is retrieved", () async {
+      test("then the expected palette map is retrieved", () async {
         final actual = await suggestionsService.fetchSuggestions(2);
         final expected = <String, List<String>>{
           "Second": ["000000", "ffffff"],

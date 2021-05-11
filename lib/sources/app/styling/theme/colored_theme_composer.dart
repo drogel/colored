@@ -8,13 +8,11 @@ import 'package:flutter/material.dart';
 
 class ColoredThemeComposer implements ThemeComposer {
   const ColoredThemeComposer({
-    @required this.colors,
-    @required this.opacity,
-    @required this.fonts,
-    @required this.elevation,
-  })  : assert(colors != null),
-        assert(fonts != null),
-        assert(opacity != null);
+    required this.colors,
+    required this.opacity,
+    required this.fonts,
+    required this.elevation,
+  });
 
   final ColoredColorScheme colors;
   final OpacityScheme opacity;
@@ -28,13 +26,15 @@ class ColoredThemeComposer implements ThemeComposer {
         primaryColorDark: colors.primaryVariant,
         accentColor: colors.secondary,
         scaffoldBackgroundColor: colors.primary,
-        cursorColor: colors.secondary,
         indicatorColor: colors.secondary,
-        primarySwatch: colors.swatch,
-        textSelectionHandleColor: colors.secondary,
-        textSelectionColor: colors.secondaryDark,
+        primarySwatch: colors.swatch as MaterialColor?,
         hintColor: colors.textVariant,
         hoverColor: colors.secondaryDark.withOpacity(opacity.hover),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: colors.secondary,
+          selectionHandleColor: colors.secondary,
+          selectionColor: colors.secondaryDark,
+        ),
         colorScheme: ColorScheme(
           primary: colors.primary,
           primaryVariant: colors.primaryVariant,
@@ -105,5 +105,12 @@ class ColoredThemeComposer implements ThemeComposer {
           scaffoldBackgroundColor: colors.primary,
           barBackgroundColor: colors.primary,
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: colors.primaryDark,
+            onPrimary: colors.secondary,
+          ),
+        ),
+        visualDensity: VisualDensity.standard,
       );
 }

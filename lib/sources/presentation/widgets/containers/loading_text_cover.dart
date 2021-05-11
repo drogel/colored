@@ -5,19 +5,19 @@ class LoadingTextCover extends StatelessWidget {
   const LoadingTextCover({
     this.parentWidthFraction = 1,
     this.coveringTextStyle,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final double parentWidthFraction;
-  final TextStyle coveringTextStyle;
+  final TextStyle? coveringTextStyle;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final radius = RadiusData.of(context).radiiScheme;
+    final radius = RadiusData.of(context)!.radiiScheme;
     final textStyle = coveringTextStyle ?? theme.textTheme.caption;
-    final color = textStyle.color;
-    final height = textStyle.fontSize;
+    final color = textStyle?.color ?? theme.colorScheme.onBackground;
+    final height = textStyle?.fontSize ?? 12;
     return FractionallySizedBox(
       widthFactor: parentWidthFraction,
       alignment: Alignment.centerLeft,

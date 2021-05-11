@@ -10,24 +10,24 @@ import 'package:flutter/material.dart';
 
 class ConnectivityBar extends StatelessWidget {
   const ConnectivityBar({
-    Key key,
+    Key? key,
     this.child,
     this.backgroundColor,
   }) : super(key: key);
 
-  final Widget child;
-  final Color backgroundColor;
+  final Widget? child;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
-    final elevation = ElevationData.of(context).elevationScheme;
+    final elevation = ElevationData.of(context)!.elevationScheme;
     final colors = Theme.of(context).colorScheme;
-    final state = ConnectivityData.of(context).state;
-    final curves = CurveData.of(context).curveScheme;
-    final radii = RadiusData.of(context).radiiScheme;
-    final durations = DurationData.of(context).durationScheme;
-    final paddingScheme = PaddingData.of(context).paddingScheme;
-    final opacity = OpacityData.of(context).opacityScheme;
+    final state = ConnectivityData.of(context)!.state;
+    final curves = CurveData.of(context)!.curveScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
+    final durations = DurationData.of(context)!.durationScheme;
+    final paddingScheme = PaddingData.of(context)!.paddingScheme;
+    final opacity = OpacityData.of(context)!.opacityScheme;
     final crossFadeState = _getCrossFadeState(state);
     return Padding(
       padding: paddingScheme.small,

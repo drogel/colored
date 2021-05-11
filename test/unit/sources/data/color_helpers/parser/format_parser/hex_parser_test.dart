@@ -4,14 +4,10 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  FormatParser hexParser;
+  late FormatParser hexParser;
 
   setUp(() {
     hexParser = HexParser();
-  });
-
-  tearDown(() {
-    hexParser = null;
   });
 
   group("Given a HexParser", () {
@@ -34,7 +30,7 @@ void main() {
         expect(hexParser.hasMatch("2w"), isFalse);
         expect(hexParser.hasMatch("hello"), isFalse);
         expect(hexParser.hasMatch("#ffwcff"), isFalse);
-        expect(hexParser.hasMatch("#232323%!"), isFalse);
+        expect(hexParser.hasMatch("#232323%"), isFalse);
       });
 
       test("false is returned if input String is a hex code with opacity", () {
@@ -49,13 +45,6 @@ void main() {
         expect(hexParser.parse("#FFFFFF"), ColorSelection(r: 1, g: 1, b: 1));
         expect(hexParser.parse("FF0000"), ColorSelection(r: 1, g: 0, b: 0));
         expect(hexParser.parse("FF00FF"), ColorSelection(r: 1, g: 0, b: 1));
-      });
-
-      test("then an assertion error is thrown on null input string", () {
-        expect(
-          () => hexParser.parse(null),
-          throwsAssertionError,
-        );
       });
 
       test("then an assertion error is thrown on empty input string", () {

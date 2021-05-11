@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 
 class DurationData extends InheritedWidget {
   const DurationData({
-    @required this.durationScheme,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        assert(durationScheme != null),
-        super(key: key, child: child);
+    required this.durationScheme,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final DurationScheme durationScheme;
 
-  static DurationData of(BuildContext context) =>
+  static DurationData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: DurationData);
 
   @override

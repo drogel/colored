@@ -4,19 +4,15 @@ import 'dart:ui';
 import 'package:colored/sources/data/color_helpers/transformer/color_transformer.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/view_models/converter/transformer/transformer_state.dart';
-import 'package:flutter/foundation.dart';
 
 const _kTunedChangeFactor = 2;
 
 class TransformerViewModel {
   const TransformerViewModel({
-    @required StreamController<TransformerState> stateController,
-    @required ColorTransformer transformer,
-    @required Color initialColor,
-  })  : assert(transformer != null),
-        assert(stateController != null),
-        assert(initialColor != null),
-        _initialColor = initialColor,
+    required StreamController<TransformerState> stateController,
+    required ColorTransformer transformer,
+    required Color initialColor,
+  })   : _initialColor = initialColor,
         _stateController = stateController,
         _transformer = transformer;
 

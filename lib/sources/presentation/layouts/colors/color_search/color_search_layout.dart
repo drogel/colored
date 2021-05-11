@@ -4,7 +4,7 @@ import 'package:colored/sources/presentation/layouts/colors/color_suggestions/co
 import 'package:flutter/material.dart';
 
 class ColorSearchLayout extends StatelessWidget implements PreferredSizeWidget {
-  const ColorSearchLayout({Key key}) : super(key: key);
+  const ColorSearchLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => AppBar(
@@ -13,7 +13,7 @@ class ColorSearchLayout extends StatelessWidget implements PreferredSizeWidget {
         flexibleSpace: Align(
           alignment: Alignment.bottomCenter,
           child: ColorSuggestionsLayout(
-            onSuggestionSelected: NamesListData.of(context).onSearchChanged,
+            onSuggestionSelected: NamesListData.of(context)!.onSearchChanged,
           ),
         ),
       );

@@ -3,14 +3,10 @@ import 'package:colored/sources/common/search_configurator/search_configurator.d
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  SearchConfigurator configurator;
+  late SearchConfigurator configurator;
 
   setUp(() {
     configurator = const ListSearchConfigurator();
-  });
-
-  tearDown(() {
-    configurator = null;
   });
 
   group("Given a ListSearchConfigurator", () {

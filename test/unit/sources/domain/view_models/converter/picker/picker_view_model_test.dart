@@ -6,8 +6,8 @@ import 'package:colored/sources/domain/view_models/converter/picker/picker_view_
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  PickerViewModel viewModel;
-  StreamController<PickerState> stateController;
+  late PickerViewModel viewModel;
+  late StreamController<PickerState> stateController;
 
   setUp(() {
     stateController = StreamController<PickerState>();
@@ -16,20 +16,9 @@ void main() {
 
   tearDown(() {
     stateController.close();
-    viewModel = null;
-    stateController = null;
   });
 
   group("Given a PickerViewModel", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => PickerViewModel(stateController: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when initialState is called", () {
       test("then a PickerState with PickerStyle.rgb is retrieved", () {
         final actual = viewModel.initialState;

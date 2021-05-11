@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 
 class HorizontalTabBarList extends StatelessWidget {
   const HorizontalTabBarList({
-    @required this.itemCount,
-    @required this.itemBuilder,
-    Key key,
-  })  : assert(itemCount != null),
-        assert(itemBuilder != null),
-        super(key: key);
+    required this.itemCount,
+    required this.itemBuilder,
+    Key? key,
+  }) : super(key: key);
 
   final int itemCount;
   final Widget Function(BuildContext, int) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     final safeArea = MediaQuery.of(context).padding;
     final horizontalPadding = padding.small.horizontal;
     return SizedBox(

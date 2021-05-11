@@ -3,17 +3,13 @@ import 'dart:convert';
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/memoizer/memoizer.dart';
 import 'package:colored/sources/data/services/string_bundle/string_bundle.dart';
-import 'package:flutter/foundation.dart';
 
 class PalettesLoader implements DataLoader<List<String>> {
   const PalettesLoader({
-    @required Memoizer<Map<String, List<String>>> memoizer,
-    @required StringBundle stringBundle,
-    @required String palettesDataPath,
-  })  : assert(memoizer != null),
-        assert(palettesDataPath != null),
-        assert(stringBundle != null),
-        _palettesDataPath = palettesDataPath,
+    required Memoizer<Map<String, List<String>>> memoizer,
+    required StringBundle stringBundle,
+    required String palettesDataPath,
+  })   : _palettesDataPath = palettesDataPath,
         _stringBundle = stringBundle,
         _memoizer = memoizer;
 

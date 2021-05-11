@@ -7,11 +7,11 @@ import 'package:colored/sources/presentation/widgets/animations/page_body_switch
 import 'package:flutter/material.dart';
 
 class PalettesBodyLayout extends StatelessWidget {
-  const PalettesBodyLayout({Key key}) : super(key: key);
+  const PalettesBodyLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final selection = PalettesNavigationData.of(context).state.currentIndex;
+    final selection = PalettesNavigationData.of(context)!.state.currentIndex;
     return PageBodySwitcher(
       reverse: selection == PalettesNavigationSelection.list.index,
       type: PageTransitionType.sharedZAxis,

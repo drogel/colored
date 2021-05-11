@@ -4,17 +4,15 @@ import 'package:flutter/material.dart';
 
 class TransformerData extends InheritedWidget {
   const TransformerData({
-    @required this.state,
-    @required this.onColorSwipedVertical,
-    @required this.onColorSwipedHorizontal,
-    @required this.onSelectionChanged,
-    @required this.onSelectionStarted,
-    @required this.onSelectionEnded,
-    @required Widget child,
-    Key key,
-  })  : assert(state != null),
-        assert(child != null),
-        super(key: key, child: child);
+    required this.state,
+    required this.onColorSwipedVertical,
+    required this.onColorSwipedHorizontal,
+    required this.onSelectionChanged,
+    required this.onSelectionStarted,
+    required this.onSelectionEnded,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final TransformerState state;
   final void Function(ColorSelection) onSelectionChanged;
@@ -23,7 +21,7 @@ class TransformerData extends InheritedWidget {
   final void Function(double) onColorSwipedVertical;
   final void Function(double) onColorSwipedHorizontal;
 
-  static TransformerData of(BuildContext context) =>
+  static TransformerData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: TransformerData);
 
   @override

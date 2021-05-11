@@ -4,18 +4,17 @@ import 'package:transparent_image/transparent_image.dart';
 
 class FadedInImage extends StatelessWidget {
   const FadedInImage({
-    @required this.image,
+    required this.image,
     this.size = 256,
-    Key key,
-  })  : assert(image != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   final ImageProvider image;
   final double size;
 
   @override
   Widget build(BuildContext context) {
-    final durations = DurationData.of(context).durationScheme;
+    final durations = DurationData.of(context)!.durationScheme;
     return SizedBox(
       height: size,
       width: size,

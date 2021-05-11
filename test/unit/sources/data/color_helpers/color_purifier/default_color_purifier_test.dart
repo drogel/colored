@@ -2,33 +2,28 @@ import 'dart:ui';
 
 import 'package:colored/sources/data/color_helpers/color_purifier/color_purifier.dart';
 import 'package:colored/sources/data/color_helpers/color_purifier/default_color_purifier.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  ColorPurifier purifier;
+  late ColorPurifier purifier;
 
   setUp(() {
     purifier = const DefaultColorPurifier();
   });
 
-  tearDown(() {
-    purifier = null;
-  });
-
-  void runPurifyTest({@required Color pureColor, @required Color inputColor}) =>
+  void runPurifyTest({required Color pureColor, required Color inputColor}) =>
       expect(purifier.purify(inputColor), pureColor);
 
   void runGetHueTest({
-    @required double expectedHue,
-    @required Color inputColor,
+    required double expectedHue,
+    required Color inputColor,
   }) =>
       expect(purifier.getHue(inputColor), expectedHue);
 
   void runGetPureColorFromHueTest({
-    @required Color expectedColor,
-    @required double inputHue,
+    required Color expectedColor,
+    required double inputHue,
   }) =>
       expect(purifier.getPureColorFromHue(inputHue), expectedColor);
 

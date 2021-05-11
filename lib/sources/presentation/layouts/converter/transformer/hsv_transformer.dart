@@ -3,14 +3,14 @@ import 'package:colored/sources/presentation/widgets/color_pickers/hsv/hsv_picke
 import 'package:flutter/material.dart';
 
 class HsvTransformer extends StatelessWidget {
-  const HsvTransformer({@required this.saturationValueConstraints, Key key})
+  const HsvTransformer({required this.saturationValueConstraints, Key? key})
       : super(key: key);
 
   final BoxConstraints saturationValueConstraints;
 
   @override
   Widget build(BuildContext context) {
-    final data = TransformerData.of(context);
+    final data = TransformerData.of(context)!;
     return HsvPicker(
       color: data.state.selection.toColor(),
       onChangeEnd: data.onSelectionEnded,

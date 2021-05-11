@@ -1,15 +1,12 @@
-import 'package:colored/sources/data/services/list_picker/list_picker.dart';
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
+import 'package:colored/sources/data/services/list_picker/list_picker.dart';
 import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
-import 'package:flutter/foundation.dart';
 
 class CherryPickedSuggestionsService<T> implements SuggestionsService<T> {
   CherryPickedSuggestionsService({
-    @required DataLoader dataLoader,
-    @required ListPicker<String> listPicker,
-  })  : assert(dataLoader != null),
-        assert(listPicker != null),
-        _dataLoader = dataLoader,
+    required DataLoader<T> dataLoader,
+    required ListPicker<String> listPicker,
+  })   : _dataLoader = dataLoader,
         _listPicker = listPicker;
 
   final DataLoader _dataLoader;

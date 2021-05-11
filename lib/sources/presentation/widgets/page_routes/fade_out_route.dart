@@ -5,20 +5,19 @@ import 'package:flutter/material.dart';
 
 class FadeOutRoute<T> extends PageRoute<T> {
   FadeOutRoute({
-    @required this.builder,
-    RouteSettings settings,
+    required this.builder,
+    RouteSettings? settings,
     this.maintainState = true,
     bool fullscreenDialog = false,
-  })  : assert(builder != null),
-        super(settings: settings, fullscreenDialog: fullscreenDialog);
+  }) : super(settings: settings, fullscreenDialog: fullscreenDialog);
 
   final Widget Function(BuildContext) builder;
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Widget buildPage(
@@ -35,7 +34,7 @@ class FadeOutRoute<T> extends PageRoute<T> {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    final curves = CurveData.of(context).curveScheme;
+    final curves = CurveData.of(context)!.curveScheme;
     return FadeTransition(
       opacity: Tween<double>(begin: 0, end: 1).animate(
         CurvedAnimation(

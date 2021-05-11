@@ -5,26 +5,23 @@ import 'package:flutter/material.dart';
 
 class HueBasedPicker extends StatelessWidget {
   const HueBasedPicker({
-    @required this.color,
-    @required this.selector,
-    @required this.constraints,
+    required this.color,
+    required this.selector,
+    required this.constraints,
+    required this.track,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
-    this.track,
-    Key key,
-  })  : assert(color != null),
-        assert(selector != null),
-        assert(constraints != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   final BoxConstraints constraints;
   final Color color;
-  final Widget track;
   final HueBasedSelector selector;
-  final void Function(ColorSelection) onChanged;
-  final void Function(ColorSelection) onChangeStart;
-  final void Function(ColorSelection) onChangeEnd;
+  final Widget track;
+  final void Function(ColorSelection)? onChanged;
+  final void Function(ColorSelection)? onChangeStart;
+  final void Function(ColorSelection)? onChangeEnd;
 
   @override
   Widget build(BuildContext context) => ConstrainedBox(
@@ -39,7 +36,10 @@ class HueBasedPicker extends StatelessWidget {
         ),
       );
 
-  void _note(ColorSelection selection, void Function(ColorSelection) notifier) {
+  void _note(
+    ColorSelection selection,
+    void Function(ColorSelection)? notifier,
+  ) {
     if (notifier != null) {
       notifier(selection);
     }

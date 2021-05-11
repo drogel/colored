@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 
 class OpacityData extends InheritedWidget {
   const OpacityData({
-    @required this.opacityScheme,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        assert(opacityScheme != null),
-        super(key: key, child: child);
+    required this.opacityScheme,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final OpacityScheme opacityScheme;
 
-  static OpacityData of(BuildContext context) =>
+  static OpacityData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: OpacityData);
 
   @override

@@ -8,34 +8,31 @@ import 'package:colored/sources/data/services/naming/mock_naming_service.dart';
 import 'package:colored/sources/data/services/url_composer/meodai_url_composer.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_state.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_view_model.dart';
-import 'package:flutter/foundation.dart';
 
 class NamingInjector {
-  const NamingInjector({@required Flavor flavor})
-      : assert(flavor != null),
-        _flavor = flavor;
+  const NamingInjector({required Flavor flavor}) : _flavor = flavor;
 
   final Flavor _flavor;
 
   NamingViewModel injectViewModel([
-    StreamController<NamingState> stateController,
+    StreamController<NamingState>? stateController,
   ]) =>
       _flavor.isProduction()
           ? _injectViewModel(stateController)
           : _injectMockViewModel(stateController);
 
-  NamingViewModel _injectMockViewModel(
-    StreamController<NamingState> stateController,
-  ) =>
+  NamingViewModel _injectMockViewModel([
+    StreamController<NamingState>? stateController,
+  ]) =>
       NamingViewModel(
         stateController: stateController ?? StreamController<NamingState>(),
         namingService: const MockNamingService(),
         converter: const HexConverter(),
       );
 
-  NamingViewModel _injectViewModel(
-    StreamController<NamingState> stateController,
-  ) =>
+  NamingViewModel _injectViewModel([
+    StreamController<NamingState>? stateController,
+  ]) =>
       NamingViewModel(
         stateController: stateController ?? StreamController<NamingState>(),
         namingService: const MeodaiNamingService(

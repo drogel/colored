@@ -26,89 +26,46 @@ class StringBundleStub implements StringBundle {
 }
 
 void main() {
-  ColorNamesLoader loader;
-  Memoizer memoizer;
-  StringBundle stringBundle;
+  late ColorNamesLoader loader;
+  late Memoizer memoizer;
+  late StringBundle stringBundle;
 
   setUp(() {
     memoizer = const MemoizerStub();
     stringBundle = const StringBundleStub();
     loader = ColorNamesLoader(
-      memoizer: memoizer,
+      memoizer: memoizer as Memoizer<Map<String, String>>,
       stringBundle: stringBundle,
       colorsDataPath: "testPath",
     );
   });
 
-  tearDown(() {
-    memoizer = null;
-    loader = null;
-  });
-
   group("Given a ColorNamesLoader", () {
     group("when constructed", () {
-      test("then should throw if given a null memoizer", () {
-        expect(
-          () => ColorNamesLoader(
-            memoizer: null,
-            stringBundle: stringBundle,
-            colorsDataPath: "testPath",
-          ),
-          throwsAssertionError,
+      group("when load is called", () {
+        test("then returns value of the computation in the memoizer", () async {
+          final actual = await loader.load();
+          expect(actual, MemoizerStub.mockResult);
+        });
+      });
+    });
+
+    group("Given a ColorsNamesLoader with a DefaultMemoizer", () {
+      setUp(() {
+        memoizer = DefaultMemoizer<Map<String, String>>();
+        stringBundle = const StringBundleStub();
+        loader = ColorNamesLoader(
+          memoizer: memoizer as Memoizer<Map<String, String>>,
+          stringBundle: stringBundle,
+          colorsDataPath: "testPath",
         );
       });
 
-      test("then should throw if given a null stringBundle", () {
-        expect(
-          () => ColorNamesLoader(
-            memoizer: memoizer,
-            stringBundle: null,
-            colorsDataPath: "testPath",
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then should throw if given a null stringBundle", () {
-        expect(
-          () => ColorNamesLoader(
-            memoizer: memoizer,
-            stringBundle: const StringBundleStub(),
-            colorsDataPath: null,
-          ),
-          throwsAssertionError,
-        );
-      });
-    });
-
-    group("when load is called", () {
-      test("then returns value of the computation in the memoizer", () async {
-        final actual = await loader.load();
-        expect(actual, MemoizerStub.mockResult);
-      });
-    });
-  });
-
-  group("Given a ColorsNamesLoader with a DefaultMemoizer", () {
-    setUp(() {
-      memoizer = DefaultMemoizer<Map<String, String>>();
-      stringBundle = const StringBundleStub();
-      loader = ColorNamesLoader(
-        memoizer: memoizer,
-        stringBundle: stringBundle,
-        colorsDataPath: "testPath",
-      );
-    });
-
-    tearDown(() {
-      memoizer = null;
-      loader = null;
-    });
-
-    group("when load is called", () {
-      test("then returns the decoded json string from the bundle", () async {
-        final actual = await loader.load();
-        expect(actual, {"000000": "test"});
+      group("when load is called", () {
+        test("then returns the decoded json string from the bundle", () async {
+          final actual = await loader.load();
+          expect(actual, {"000000": "test"});
+        });
       });
     });
   });

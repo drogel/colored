@@ -1,7 +1,7 @@
 import 'package:colored/sources/domain/data_models/named_color.dart';
 
 class PaletteDetailState {
-  const PaletteDetailState(this.paletteName) : assert(paletteName != null);
+  const PaletteDetailState(this.paletteName);
 
   final String paletteName;
 }
@@ -10,10 +10,10 @@ class Pending extends PaletteDetailState {
   const Pending(
     String paletteName,
     this.requestedHexCodes,
-  )   : assert(requestedHexCodes != null),
-        super(paletteName);
+  ) : super(paletteName);
 
   factory Pending.empty() => const Pending("", []);
+
   final List<String> requestedHexCodes;
 }
 
@@ -22,9 +22,7 @@ class Failed extends PaletteDetailState {
 }
 
 class PaletteFound extends PaletteDetailState {
-  const PaletteFound(this.namedColors, String paletteName)
-      : assert(namedColors != null),
-        super(paletteName);
+  const PaletteFound(this.namedColors, String paletteName) : super(paletteName);
 
   final List<NamedColor> namedColors;
 }

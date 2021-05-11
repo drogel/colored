@@ -9,22 +9,21 @@ import 'package:flutter/material.dart';
 
 class HuePicker extends StatelessWidget {
   const HuePicker({
-    @required this.color,
+    required this.color,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
     this.constraints = const BoxConstraints(maxHeight: 44),
     this.purifier = const DefaultColorPurifier(),
-    Key key,
-  })  : assert(color != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   final BoxConstraints constraints;
   final Color color;
   final ColorPurifier purifier;
-  final void Function(ColorSelection) onChanged;
-  final void Function(ColorSelection) onChangeStart;
-  final void Function(ColorSelection) onChangeEnd;
+  final void Function(ColorSelection)? onChanged;
+  final void Function(ColorSelection)? onChangeStart;
+  final void Function(ColorSelection)? onChangeEnd;
 
   @override
   Widget build(BuildContext context) => HueBasedPicker(
@@ -39,7 +38,7 @@ class HuePicker extends StatelessWidget {
 }
 
 class _HuePickerSelector implements HueBasedSelector {
-  const _HuePickerSelector({@required this.color, @required this.purifier});
+  const _HuePickerSelector({required this.color, required this.purifier});
 
   final Color color;
   final ColorPurifier purifier;

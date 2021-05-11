@@ -23,12 +23,17 @@ abstract class OnSelectionDoneCallbackProvider {
   void onDone(ColorSelection selection);
 }
 
-class MockOnSelectionDoneCallbackProvider extends Mock
-    implements OnSelectionDoneCallbackProvider {}
+class OnSelectionDoneCallbackProviderStub
+    implements OnSelectionDoneCallbackProvider {
+  int timesOnDoneInvoked = 0;
+
+  @override
+  void onDone(ColorSelection selection) => timesOnDoneInvoked++;
+}
 
 void main() {
-  ConverterViewModel viewModel;
-  StreamController<ConverterState> stateController;
+  late ConverterViewModel viewModel;
+  late StreamController<ConverterState> stateController;
 
   setUp(() {
     stateController = StreamController<ConverterState>();
@@ -37,67 +42,13 @@ void main() {
 
   tearDown(() {
     stateController.close();
-    stateController = null;
-    viewModel = null;
   });
 
   group("Given a ConverterViewModel,", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => ConverterViewModel(
-            stateController: null,
-            deviceOrientationService: MockOrientationService(),
-            colorConverter: MockConverter(),
-            colorParser: MockParser(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if colorParser is null", () {
-        expect(
-          () => ConverterViewModel(
-            stateController: stateController,
-            deviceOrientationService: MockOrientationService(),
-            colorConverter: MockConverter(),
-            colorParser: null,
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if colorConverter is null", () {
-        expect(
-          () => ConverterViewModel(
-            stateController: stateController,
-            deviceOrientationService: MockOrientationService(),
-            colorConverter: null,
-            colorParser: MockParser(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an error is thrown if deviceOrientationService is null", () {
-        expect(
-          () => ConverterViewModel(
-            stateController: stateController,
-            deviceOrientationService: null,
-            colorConverter: MockConverter(),
-            colorParser: MockParser(),
-          ),
-          throwsAssertionError,
-        );
-      });
-    });
-
-    group("when initialstate is called", () {
+    group("when initialState is called", () {
       test("then an initial state with the primaryDark color is returned", () {
         final actual = viewModel.initialState;
-
-        final expectedColor = color_constants.primaryDark;
-
+        const expectedColor = color_constants.primaryDark;
         expect(
           actual.formatData[Format.rgb],
           "${expectedColor.red}, ${expectedColor.green}, ${expectedColor.blue}",
@@ -108,14 +59,12 @@ void main() {
     group("when init is called", () {
       test("then the orientation service is asked to set all orientations", () {
         final orientationService = MockOrientationService();
-
         final mockedViewModel = ConverterViewModel(
           stateController: stateController,
           colorParser: MockParser(),
           colorConverter: MockConverter(),
           deviceOrientationService: orientationService,
         );
-
         mockedViewModel.init();
         verify(orientationService.setAllOrientations());
         verifyNoMoreInteractions(orientationService);
@@ -215,15 +164,13 @@ void main() {
 
     group("when convertStringToColor is called", () {
       test("then onDone is called", () {
-        final callbackProvider = MockOnSelectionDoneCallbackProvider();
-
+        final callbackProvider = OnSelectionDoneCallbackProviderStub();
         viewModel.convertStringToColor(
           "#000000",
           Format.hex,
           onDone: callbackProvider.onDone,
         );
-
-        verify(callbackProvider.onDone(any));
+        expect(callbackProvider.timesOnDoneInvoked, equals(1));
       });
     });
 

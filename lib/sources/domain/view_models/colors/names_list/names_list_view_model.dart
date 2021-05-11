@@ -1,21 +1,17 @@
 import 'dart:async';
 
-import 'package:colored/sources/data/services/names/names_service.dart';
-import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/common/search_configurator/search_configurator.dart';
+import 'package:colored/sources/data/services/names/names_service.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
-import 'package:flutter/foundation.dart';
 
 class NamesListViewModel extends ListSearchConfigurator {
   const NamesListViewModel({
-    @required StreamController<NamesListState> stateController,
-    @required NamesService namesService,
-    @required SearchConfigurator searchConfigurator,
-  })  : assert(stateController != null),
-        assert(namesService != null),
-        assert(searchConfigurator != null),
-        _stateController = stateController,
+    required StreamController<NamesListState> stateController,
+    required NamesService namesService,
+    required SearchConfigurator searchConfigurator,
+  })   : _stateController = stateController,
         _searchConfigurator = searchConfigurator,
         _namesService = namesService;
 

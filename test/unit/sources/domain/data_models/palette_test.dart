@@ -9,11 +9,7 @@ final List<String> _kColors = [_kBlack.hex, _kWhite.hex];
 const String _kName = "Black and white";
 
 void main() {
-  Palette palette;
-
-  tearDown(() {
-    palette = null;
-  });
+  late Palette palette;
 
   group("Given a valid Palette", () {
     setUp(() => palette = Palette(name: _kName, hexCodes: _kColors));
@@ -40,41 +36,16 @@ void main() {
     group("when hashCode is called", () {
       test("then the hashCode is built based on name and hex codes", () {
         const name = "test";
-
         final namedColor = Palette(name: name, hexCodes: _kColors);
-
         expect(namedColor.hashCode, hashObjects([name, _kColors]));
       });
     });
   });
 
-  group("Given a non-valid palette", () {
-    group("when constructed", () {
-      test("then should throw if given null name", () {
-        expect(
-          () => Palette(name: null, hexCodes: _kColors),
-          throwsAssertionError,
-        );
-      });
-
-      test("then should throw if given null namedColors", () {
-        expect(
-          () => Palette(name: _kName, hexCodes: null),
-          throwsAssertionError,
-        );
-      });
-    });
-  });
-
   group("Given two valid palettes", () {
-    Palette otherPalette;
+    late Palette otherPalette;
 
     setUp(() => palette = Palette(name: _kName, hexCodes: _kColors));
-
-    tearDown(() {
-      palette = null;
-      otherPalette = null;
-    });
 
     group("when compared", () {
       test("palettes are equal if they have the same namedColors and name", () {

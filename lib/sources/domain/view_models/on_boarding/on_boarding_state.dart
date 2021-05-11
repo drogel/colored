@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-
 class OnBoardingState {
   const OnBoardingState({
-    @required this.pageScrollFraction,
-  }) : assert(pageScrollFraction != null);
+    required this.pageScrollFraction,
+  });
 
   final double pageScrollFraction;
 
