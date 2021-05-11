@@ -1,4 +1,3 @@
-
 import 'package:colored/sources/data/services/url_composer/meodai_url_composer.dart';
 import 'package:colored/sources/data/services/url_composer/url_composer.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,14 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   const _kTestBaseUrl = "test.com";
   const _kTestPath = "path";
-  UrlComposer composer;
+  late UrlComposer composer;
 
   setUp(() {
     composer = const MeodaiUrlComposer();
-  });
-
-  tearDown(() {
-    composer = null;
   });
 
   group("Given a ColorNamesComposer", () {

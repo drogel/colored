@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 
 class ColoredTooltip extends StatelessWidget {
   const ColoredTooltip({
-    Key key,
+    required this.message,
     this.tooltipKey,
-    this.message,
     this.color,
     this.child,
     this.preferBelow = false,
     this.showOnMouseHover = false,
+    Key? key,
   }) : super(key: key);
 
-  final Key tooltipKey;
+  final Key? tooltipKey;
   final bool showOnMouseHover;
   final bool preferBelow;
   final String message;
-  final Color color;
-  final Widget child;
+  final Color? color;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    final radii = RadiusData.of(context).radiiScheme;
+    final radii = RadiusData.of(context)!.radiiScheme;
     return Tooltip(
       key: tooltipKey,
       message: message,

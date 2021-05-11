@@ -4,14 +4,10 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Converter hsl;
+  late Converter hsl;
 
   setUp(() {
     hsl = const HslConverter();
-  });
-
-  tearDown(() {
-    hsl = null;
   });
 
   group("Given a HslConverter", () {

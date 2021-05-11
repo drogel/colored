@@ -6,8 +6,8 @@ import 'package:colored/sources/domain/view_models/converter/displayed_formats/d
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  DisplayedFormatsViewModel viewModel;
-  StreamController<DisplayedFormatsState> stateController;
+  late DisplayedFormatsViewModel viewModel;
+  late StreamController<DisplayedFormatsState> stateController;
 
   group("Given a DisplayedFormatsViewModel with all the possible formats", () {
     const allFormats = Format.values;
@@ -19,17 +19,6 @@ void main() {
 
     tearDown(() {
       stateController.close();
-      viewModel = null;
-      stateController = null;
-    });
-
-    group("when constructed", () {
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => DisplayedFormatsViewModel(stateController: null),
-          throwsAssertionError,
-        );
-      });
     });
 
     group("when initialState is called", () {

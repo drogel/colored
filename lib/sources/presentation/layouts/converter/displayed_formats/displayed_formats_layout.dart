@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 
 class DisplayedFormatsLayout extends StatelessWidget {
   const DisplayedFormatsLayout({
-    @required this.buttonMinSpace,
-    @required this.converterData,
-    Key key,
+    required this.buttonMinSpace,
+    required this.converterData,
+    Key? key,
   }) : super(key: key);
 
   final double buttonMinSpace;
@@ -17,7 +17,7 @@ class DisplayedFormatsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = DisplayedFormatsData.of(context);
+    final data = DisplayedFormatsData.of(context)!;
     return LayoutBuilder(
       builder: (_, constraints) {
         final availableWidth = constraints.maxWidth;
@@ -33,20 +33,24 @@ class DisplayedFormatsLayout extends StatelessWidget {
 
   Widget _buildFormatButton(DisplayedFormatsData data, int index) {
     final displayedFormats = data.state.formats;
+    final content = converterData.state.formatData[displayedFormats[index]];
+    if (content == null) {
+      throw ArgumentError("Format not contained in state formatData map");
+    }
     return DropdownFormatButton(
       title: displayedFormats[index].rawValue,
       format: displayedFormats[index],
       clipboardShouldFail: converterData.clipboardShouldFail,
       onClipboardRetrieved: converterData.onClipboardRetrieved,
-      content: converterData.state.formatData[displayedFormats[index]],
+      content: content,
       onDropdownSelection: data.onFormatSelection,
     );
   }
 
   int _computeButtonCount(double availableWidth) {
     final buttonCountSpace = (availableWidth / buttonMinSpace).floor();
-    final buttonCount = buttonCountSpace.clamp(0, Format.values.length);
-    return buttonCount;
+    final num buttonCount = buttonCountSpace.clamp(0, Format.values.length);
+    return buttonCount as int;
   }
 
   MainAxisAlignment _getButtonAlignment(int buttonCount) => buttonCount == 1

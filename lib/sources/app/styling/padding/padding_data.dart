@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 
 class PaddingData extends InheritedWidget {
   const PaddingData({
-    @required this.paddingScheme,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        super(key: key, child: child);
+    required this.paddingScheme,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final PaddingScheme paddingScheme;
 
-  static PaddingData of(BuildContext context) =>
+  static PaddingData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: PaddingData);
 
   @override

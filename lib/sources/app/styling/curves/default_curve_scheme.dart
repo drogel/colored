@@ -12,5 +12,5 @@ class DefaultCurveScheme implements CurveScheme {
   Cubic get incoming => curves.incoming;
 
   @override
-  Cubic get main => curves.main;
+  Cubic get main => curves.base;
 }

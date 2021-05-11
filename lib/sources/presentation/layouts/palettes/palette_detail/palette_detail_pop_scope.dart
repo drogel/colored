@@ -4,16 +4,15 @@ import 'package:flutter/material.dart';
 
 class PaletteDetailPopScope extends StatelessWidget {
   const PaletteDetailPopScope({
-    @required this.child,
-    Key key,
-  })  : assert(child != null),
-        super(key: key);
+    required this.child,
+    Key? key,
+  }) : super(key: key);
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final navigation = PalettesNavigationData.of(context);
+    final navigation = PalettesNavigationData.of(context)!;
     return WillPopScope(
       onWillPop: () => _onBackPressed(navigation),
       child: child,

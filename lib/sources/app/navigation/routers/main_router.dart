@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class MainFlowRouter extends FlowRouter {
-  const MainFlowRouter({List<FlowRouter> children}) : super(children: children);
+  const MainFlowRouter({List<FlowRouter>? children})
+      : super(children: children);
 
   static const routerName = "/main";
 

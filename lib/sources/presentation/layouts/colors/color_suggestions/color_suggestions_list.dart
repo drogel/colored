@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class ColorSuggestionsList extends StatelessWidget {
   const ColorSuggestionsList({
-    @required this.suggestions,
+    required this.suggestions,
     this.onSuggestionSelected,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final List<NamedColor> suggestions;
-  final void Function(String) onSuggestionSelected;
+  final void Function(String)? onSuggestionSelected;
 
   @override
   Widget build(BuildContext context) => HorizontalTabBarList(

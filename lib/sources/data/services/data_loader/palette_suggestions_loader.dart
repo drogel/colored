@@ -2,15 +2,12 @@ import 'dart:convert';
 
 import 'package:colored/sources/data/services/data_loader/data_loader.dart';
 import 'package:colored/sources/data/services/string_bundle/string_bundle.dart';
-import 'package:flutter/foundation.dart';
 
 class PaletteSuggestionsLoader implements DataLoader<List<String>> {
   const PaletteSuggestionsLoader({
-    @required StringBundle stringBundle,
-    @required String paletteSuggestionsDataPath,
-  })  : assert(stringBundle != null),
-        assert(paletteSuggestionsDataPath != null),
-        _paletteSuggestionsDataPath = paletteSuggestionsDataPath,
+    required StringBundle stringBundle,
+    required String paletteSuggestionsDataPath,
+  })   : _paletteSuggestionsDataPath = paletteSuggestionsDataPath,
         _stringBundle = stringBundle;
 
   final StringBundle _stringBundle;

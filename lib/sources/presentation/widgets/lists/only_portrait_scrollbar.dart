@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 
 class OnlyPortraitScrollbar extends StatelessWidget {
   const OnlyPortraitScrollbar({
-    @required this.child,
-    Key key,
-  })  : assert(child != null),
-        super(key: key);
+    required this.child,
+    Key? key,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -18,7 +17,7 @@ class OnlyPortraitScrollbar extends StatelessWidget {
     if (hasHorizontalSafeArea && isLandscape) {
       return child;
     } else {
-      final radius = RadiusData.of(context).radiiScheme;
+      final radius = RadiusData.of(context)!.radiiScheme;
       return Scrollbar(radius: radius.small, child: child);
     }
   }

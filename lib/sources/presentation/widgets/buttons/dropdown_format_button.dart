@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class DropdownFormatButton extends StatelessWidget {
   const DropdownFormatButton({
-    @required this.title,
-    @required this.content,
-    @required this.format,
-    @required this.onClipboardRetrieved,
-    @required this.clipboardShouldFail,
-    @required this.onDropdownSelection,
-    Key key,
+    required this.title,
+    required this.content,
+    required this.format,
+    required this.onClipboardRetrieved,
+    required this.clipboardShouldFail,
+    required this.onDropdownSelection,
+    Key? key,
   }) : super(key: key);
 
   final String content;
@@ -24,7 +24,7 @@ class DropdownFormatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return Theme(
       data: theme.copyWith(canvasColor: theme.buttonColor),
       child: Padding(
@@ -41,7 +41,7 @@ class DropdownFormatButton extends StatelessWidget {
                   .toList(),
               iconEnabledColor: Theme.of(context).colorScheme.secondary,
               underline: Container(),
-              onChanged: (str) => onDropdownSelection(formatValue(str), format),
+              onChanged: _onDropdownSelectionChanged,
             ),
             FormatButton(
               format: format,
@@ -53,5 +53,12 @@ class DropdownFormatButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onDropdownSelectionChanged(String? value) {
+    if (value == null) {
+      return;
+    }
+    onDropdownSelection(FormatValue.format(value), format);
   }
 }

@@ -30,7 +30,7 @@ import 'package:colored/sources/presentation/notifiers/converter/transformer_not
 import 'package:flutter/material.dart';
 
 class MainInjector extends StatelessWidget {
-  const MainInjector({@required this.child, Key key}) : super(key: key);
+  const MainInjector({required this.child, Key? key}) : super(key: key);
 
   final Widget child;
 

@@ -1,11 +1,11 @@
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/converter/converter_data.dart';
-import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/layouts/converter/displayed_formats/displayed_formats_layout.dart';
 import 'package:colored/sources/presentation/layouts/converter/picker/picker_layout.dart';
-import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/animations/swiping_cross_fade.dart';
+import 'package:colored/sources/presentation/widgets/containers/overlay_container.dart';
 import 'package:colored/sources/presentation/widgets/layouts/dynamic_bottom_padding.dart';
 import 'package:flutter/material.dart';
 
@@ -18,19 +18,19 @@ class ConverterLayout extends StatelessWidget {
     this.slidersShownIfSpaceAvailable = true,
   });
 
-  final Widget background;
+  final Widget? background;
   final bool slidersShownIfSpaceAvailable;
 
   @override
   Widget build(BuildContext context) {
-    final data = ConverterData.of(context);
-    final padding = PaddingData.of(context).paddingScheme;
+    final data = ConverterData.of(context)!;
+    final padding = PaddingData.of(context)!.paddingScheme;
     final maxButtonCount = Format.values.length;
     final maxContainerWidth = (maxButtonCount + 1.5) * _kFormatButtonMinSpace;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
-        if (background != null) background,
+        if (background != null) background!,
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: maxContainerWidth),
           child: DynamicBottomPadding(

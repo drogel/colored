@@ -15,7 +15,7 @@ class NamesListInjector {
   const NamesListInjector();
 
   NamesListViewModel injectViewModel([
-    StreamController<NamesListState> stateController,
+    StreamController<NamesListState>? stateController,
   ]) =>
       NamesListViewModel(
         stateController: stateController ?? StreamController<NamesListState>(),

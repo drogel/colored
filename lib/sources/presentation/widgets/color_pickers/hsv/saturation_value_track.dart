@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class SaturationValueTrack extends StatelessWidget {
   const SaturationValueTrack({
-    @required this.hue,
-    Key key,
+    required this.hue,
+    Key? key,
   }) : super(key: key);
 
   final double hue;
@@ -19,7 +19,7 @@ class SaturationValueTrack extends StatelessWidget {
 
 class _SaturationValuePainter extends CustomPainter {
   const _SaturationValuePainter({
-    @required this.color,
+    required this.color,
   });
 
   final Color color;

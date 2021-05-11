@@ -22,10 +22,10 @@ class ConverterL10ns extends LocaleCodeAware {
     }
   };
 
-  String get pageTitle => _values[localeCode]['pageTitle'];
-  String get tooltipMessage => _values[localeCode]['tooltipMessage'];
-  String get tooltipError => _values[localeCode]['tooltipError'];
-  String get hex => _values[localeCode]['hex'];
-  String get rgb => _values[localeCode]['rgb'];
-  String get colorConverter => _values[localeCode]['colorConverter'];
+  String get pageTitle => _values[localeCode]!['pageTitle']!;
+  String get tooltipMessage => _values[localeCode]!['tooltipMessage']!;
+  String get tooltipError => _values[localeCode]!['tooltipError']!;
+  String get hex => _values[localeCode]!['hex']!;
+  String get rgb => _values[localeCode]!['rgb']!;
+  String get colorConverter => _values[localeCode]!['colorConverter']!;
 }

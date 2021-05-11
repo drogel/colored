@@ -1,32 +1,32 @@
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/parser/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
-import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 
 class HsvParser extends FormatParser {
   final _hsvRegExp = RegExp(r"^(hsv)?\(?\s*(\d+)\s*(°)?(\W+)"
       r"\s*(\d*(?:\.\d+)?(%)?)\s*(\W+)\s*(\d*(?:\.\d+)?(%)?)\)?");
 
   @override
-  bool hasMatch(String input) {
+  bool hasMatch(String? input) {
     if (input == null) {
       return false;
     }
-
     return _hsvRegExp.hasMatch(input);
   }
 
   @override
   ColorSelection parse(String string) {
-    assert(string != null, "String color format to parse cannot be null");
     assert(string.isNotEmpty, "String color format to parse cannot be empty");
+    final hsvMatches = _hsvRegExp.firstMatch(string);
+    if (hsvMatches == null) {
+      throw ArgumentError("String can't be parsed to HSV");
+    }
+    final hsvMatched = hsvMatches.group(0);
+    if (hsvMatched == null) {
+      throw ArgumentError("String can't be parsed to HSV");
+    }
 
-    final hsvMatched = _hsvRegExp.firstMatch(string).group(0);
-    final hsvWithoutSeparators = hsvMatched.replacingAllNonAlphanumericBy(" ");
-    final hsvComponents = doubleRegExp
-        .allMatches(hsvWithoutSeparators)
-        .map((match) => double.parse(match.group(0)))
-        .toList();
+    final hsvComponents = getDoubleComponents(hsvMatched);
     var rgb = <double>[0, 0, 0];
 
     final hue = hsvComponents[0];

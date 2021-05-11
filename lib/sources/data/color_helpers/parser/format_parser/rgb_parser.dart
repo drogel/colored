@@ -1,5 +1,4 @@
 import 'package:colored/sources/common/factors.dart';
-import 'package:colored/sources/common/extensions/string_replace_non_alphanumeric.dart';
 import 'package:colored/sources/data/color_helpers/parser/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 
@@ -9,26 +8,26 @@ class RgbParser extends FormatParser {
       r"[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$");
 
   @override
-  bool hasMatch(String input) {
+  bool hasMatch(String? input) {
     if (input == null) {
       return false;
     }
-
     return _rgbRegExp.hasMatch(input);
   }
 
   @override
   ColorSelection parse(String string) {
-    assert(string != null, "String color format to parse cannot be null");
     assert(string.isNotEmpty, "String color format to parse cannot be empty");
+    final rgbMatches = _rgbRegExp.firstMatch(string);
+    if (rgbMatches == null) {
+      throw ArgumentError("String can't be parsed to RGB");
+    }
+    final rgbMatched = rgbMatches.group(0);
+    if (rgbMatched == null) {
+      throw ArgumentError("String can't be parsed to RGB");
+    }
 
-    final rgbMatched = _rgbRegExp.firstMatch(string).group(0);
-    final rgbWithoutSeparators = rgbMatched.replacingAllNonAlphanumericBy(" ");
-    final rgbComponents = doubleRegExp
-        .allMatches(rgbWithoutSeparators)
-        .map((match) => double.parse(match.group(0)))
-        .toList();
-
+    final rgbComponents = getDoubleComponents(rgbMatched);
     final selection = ColorSelection(
       r: rgbComponents[0] / decimal8Bit,
       g: rgbComponents[1] / decimal8Bit,

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 const _kDegreesPerHueDivision = 60.0;
 
 class HueTrack extends StatelessWidget {
-  const HueTrack({Key key}) : super(key: key);
+  const HueTrack({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => const HueBasedTrack(

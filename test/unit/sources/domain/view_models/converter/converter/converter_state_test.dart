@@ -4,24 +4,15 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("Given an ConverterState", () {
-    group("when constructed", () {
-      test("then an error is thrown if formatData is null", () {
-        expect(
-          () => ConverterState(formatData: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when checking for equality", () {
-      test("then two states are equal if formatDatas are equal", () {
+      test("then two states are equal if formatData are equal", () {
         const firstState = ConverterState(formatData: {Format.hex: "#000000"});
         const secondState = ConverterState(formatData: {Format.hex: "#000000"});
 
         expect(firstState == secondState, isTrue);
       });
 
-      test("then two states are not equal if formatDatas differ", () {
+      test("then two states are not equal if formatData differ", () {
         const firstState = ConverterState(formatData: {Format.hex: "#000000"});
         const secondState = ConverterState(formatData: {Format.hex: "#121212"});
 

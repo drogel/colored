@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class PaletteSearchLayout extends StatelessWidget
     implements PreferredSizeWidget {
-  const PaletteSearchLayout({Key key}) : super(key: key);
+  const PaletteSearchLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => AppBar(
@@ -14,7 +14,7 @@ class PaletteSearchLayout extends StatelessWidget
         flexibleSpace: Align(
           alignment: Alignment.bottomCenter,
           child: PaletteSuggestionsLayout(
-            onSuggestionSelected: PalettesListData.of(context).onSearchChanged,
+            onSuggestionSelected: PalettesListData.of(context)!.onSearchChanged,
           ),
         ),
       );

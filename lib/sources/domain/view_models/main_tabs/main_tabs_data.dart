@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class MainTabsData extends IndexedNavigationData {
   const MainTabsData({
-    @required IndexedNavigationState state,
-    @required void Function(int) onNavigation,
-    @required Widget child,
-    Key key,
+    required IndexedNavigationState state,
+    required void Function(int) onNavigation,
+    required Widget child,
+    Key? key,
   }) : super(state: state, onNavigation: onNavigation, child: child, key: key);
 
-  static MainTabsData of(BuildContext context) =>
+  static MainTabsData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: MainTabsData);
 }

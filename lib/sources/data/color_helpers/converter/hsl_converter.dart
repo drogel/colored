@@ -13,7 +13,6 @@ class HslConverter implements Converter {
     final hue = hslColor.hue.round();
     final saturation = (hslColor.saturation * percentFactor).round();
     final lightness = (hslColor.lightness * percentFactor).round();
-
     return {Format.hsl: "$hue°, $saturation%, $lightness%"};
   }
 }

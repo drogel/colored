@@ -6,12 +6,10 @@ import 'package:flutter/material.dart';
 
 class NamesListNotifier extends StatefulWidget {
   const NamesListNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
-  })  : assert(injector != null),
-        assert(child != null),
-        super(key: key);
+    required this.injector,
+    required this.child,
+    Key? key,
+  }) : super(key: key);
 
   final Widget child;
   final NamesListInjector injector;
@@ -21,7 +19,7 @@ class NamesListNotifier extends StatefulWidget {
 }
 
 class _NamesListNotifierState extends State<NamesListNotifier> {
-  NamesListViewModel _viewModel;
+  late final NamesListViewModel _viewModel;
 
   @override
   void initState() {
@@ -34,7 +32,7 @@ class _NamesListNotifierState extends State<NamesListNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => NamesListData(
-          state: snapshot.data,
+          state: snapshot.data ?? _viewModel.initialState,
           onSearchChanged: _viewModel.searchColorNames,
           onBackPressed: _viewModel.clearSearch,
           child: widget.child,

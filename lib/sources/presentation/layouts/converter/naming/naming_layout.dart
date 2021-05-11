@@ -4,11 +4,11 @@ import 'package:colored/sources/presentation/layouts/converter/picker/picker_tab
 import 'package:flutter/material.dart';
 
 class NamingLayout extends StatelessWidget implements PreferredSizeWidget {
-  const NamingLayout({Key key}) : super(key: key);
+  const NamingLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final localization = Localization.of(context).converter;
+    final localization = Localization.of(context)!.converter;
     return AppBar(
       title: NamingCrossFadeText(defaultText: localization.colorConverter),
       bottom: const PickerTabBar(),

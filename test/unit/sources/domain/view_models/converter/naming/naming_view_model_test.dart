@@ -18,7 +18,7 @@ class NamingServiceSuccessStub implements NamingService {
   static const String name = "testColor";
 
   @override
-  Future<NamingResponse> getNaming({String hexColor}) async =>
+  Future<NamingResponse> getNaming({String? hexColor}) async =>
       const NamingResponse(
         ResponseStatus.ok,
         result: NamingResult(name: name, hex: "testHex"),
@@ -27,7 +27,7 @@ class NamingServiceSuccessStub implements NamingService {
 
 class NamingServiceFailureStub implements NamingService {
   @override
-  Future<NamingResponse> getNaming({String hexColor}) async =>
+  Future<NamingResponse> getNaming({String? hexColor}) async =>
       const NamingResponse(ResponseStatus.failed);
 }
 
@@ -44,10 +44,10 @@ class ConnectivityServiceSuccessStub implements ConnectivityService {
 }
 
 void main() {
-  NamingViewModel viewModel;
-  StreamController<NamingState> stateController;
-  NamingService namingService;
-  Converter converter;
+  late NamingViewModel viewModel;
+  late StreamController<NamingState> stateController;
+  late NamingService namingService;
+  late Converter converter;
 
   group("Given a NamingViewModel with successful NamingService requests", () {
     setUp(() {
@@ -63,45 +63,6 @@ void main() {
 
     tearDown(() {
       stateController.close();
-      stateController = null;
-      namingService = null;
-      converter = null;
-      viewModel = null;
-    });
-
-    group("when constructed", () {
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => NamingViewModel(
-            stateController: null,
-            namingService: namingService,
-            converter: converter,
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if namingService is null", () {
-        expect(
-          () => NamingViewModel(
-            stateController: stateController,
-            namingService: null,
-            converter: converter,
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if converter is null", () {
-        expect(
-          () => NamingViewModel(
-            stateController: stateController,
-            namingService: namingService,
-            converter: null,
-          ),
-          throwsAssertionError,
-        );
-      });
     });
 
     group("when stateStream is called", () {
@@ -166,10 +127,6 @@ void main() {
 
     tearDown(() {
       stateController.close();
-      stateController = null;
-      namingService = null;
-      converter = null;
-      viewModel = null;
     });
 
     group("when initialState is called", () {

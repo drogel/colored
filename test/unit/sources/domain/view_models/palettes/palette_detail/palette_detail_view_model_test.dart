@@ -20,7 +20,7 @@ class PaletteNamingServiceSuccessStub implements PaletteNamingService {
       NamingResult(name: "White", hex: "#FFFFFF", r: 255, b: 255, g: 255);
 
   @override
-  Future<PaletteNamingResponse> getNaming({List<String> hexColors}) async =>
+  Future<PaletteNamingResponse> getNaming({List<String>? hexColors}) async =>
       const PaletteNamingResponse(
         ResponseStatus.ok,
         results: [black, white],
@@ -29,14 +29,14 @@ class PaletteNamingServiceSuccessStub implements PaletteNamingService {
 
 class PaletteNamingServiceFailedStub implements PaletteNamingService {
   @override
-  Future<PaletteNamingResponse> getNaming({List<String> hexColors}) async =>
+  Future<PaletteNamingResponse> getNaming({List<String>? hexColors}) async =>
       const PaletteNamingResponse(ResponseStatus.failed);
 }
 
 void main() {
-  PaletteDetailViewModel viewModel;
-  PaletteNamingService namingService;
-  StreamController<PaletteDetailState> stateController;
+  late PaletteDetailViewModel viewModel;
+  late PaletteNamingService namingService;
+  late StreamController<PaletteDetailState> stateController;
 
   group("Given a PaletteDetailViewModel", () {
     setUp(() {
@@ -50,31 +50,6 @@ void main() {
 
     tearDown(() {
       stateController.close();
-      viewModel = null;
-      stateController = null;
-      namingService = null;
-    });
-
-    group("when constructed", () {
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => PaletteDetailViewModel(
-            stateController: null,
-            paletteNamingService: namingService,
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown if stateController is null", () {
-        expect(
-          () => PaletteDetailViewModel(
-            stateController: stateController,
-            paletteNamingService: null,
-          ),
-          throwsAssertionError,
-        );
-      });
     });
 
     group("when dispose is called", () {
@@ -139,9 +114,6 @@ void main() {
 
     tearDown(() {
       stateController.close();
-      viewModel = null;
-      stateController = null;
-      namingService = null;
     });
 
     group("when fetchColorNames is called", () {
@@ -203,9 +175,6 @@ void main() {
 
     tearDown(() {
       stateController.close();
-      viewModel = null;
-      stateController = null;
-      namingService = null;
     });
 
     group("when fetchColorNames is called", () {

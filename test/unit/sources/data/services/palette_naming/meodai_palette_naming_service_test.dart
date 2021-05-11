@@ -13,12 +13,12 @@ class UrlComposerStub implements UrlComposer {
   static const url = "testUrl";
 
   @override
-  String compose(String baseUrl, {String path}) => "testUrl";
+  String compose(String baseUrl, {String? path}) => "testUrl";
 }
 
 class HttpClientSuccessfulStub implements HttpClient {
   @override
-  Future<HttpResponse> get(String url, {Map<String, String> headers}) async {
+  Future<HttpResponse> get(String url, {Map<String, String>? headers}) async {
     final httpResponse = http.Response('{"colors": []}', 200);
     return HttpResponse(status: ResponseStatus.ok, httpResponse: httpResponse);
   }
@@ -29,7 +29,7 @@ class HttpClientSuccessfulStub implements HttpClient {
 
 class HttpClientFailingStub implements HttpClient {
   @override
-  Future<HttpResponse> get(String url, {Map<String, String> headers}) async =>
+  Future<HttpResponse> get(String url, {Map<String, String>? headers}) async =>
       const HttpResponse(status: ResponseStatus.failed);
 
   @override
@@ -37,7 +37,7 @@ class HttpClientFailingStub implements HttpClient {
 }
 
 void main() {
-  PaletteNamingService service;
+  late PaletteNamingService service;
 
   group("Given a MeodaiPaletteNamingService", () {
     setUp(() {
@@ -47,48 +47,14 @@ void main() {
       );
     });
 
-    tearDown(() {
-      service = null;
-    });
-
-    group("when constructed", () {
-      test("then an assertion error is thrown on null url composer", () {
-        expect(
-          () => MeodaiPaletteNamingService(
-            urlComposer: null,
-            networkClient: HttpClientSuccessfulStub(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then an assertion error is thrown on null network client", () {
-        expect(
-          () => MeodaiPaletteNamingService(
-            urlComposer: const UrlComposerStub(),
-            networkClient: null,
-          ),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when getNaming is called", () {
-      test("then a failed response is returned if hexColors is null", () async {
-        final actual = await service.getNaming(hexColors: null);
-
-        expect(actual.status, ResponseStatus.failed);
-      });
-
       test("then a failed response is returned on empty hexColors", () async {
         final actual = await service.getNaming(hexColors: []);
-
         expect(actual.status, ResponseStatus.failed);
       });
 
-      test("then succesful response returned on non-empty hexColors", () async {
+      test("then successful response returned on hexColors", () async {
         final actual = await service.getNaming(hexColors: ["test"]);
-
         expect(actual.status, ResponseStatus.ok);
         expect(actual.results, []);
       });
@@ -101,10 +67,6 @@ void main() {
         urlComposer: const UrlComposerStub(),
         networkClient: HttpClientFailingStub(),
       );
-    });
-
-    tearDown(() {
-      service = null;
     });
 
     group("when getNaming is called", () {

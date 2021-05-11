@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class PresentationLayout extends StatelessWidget {
   const PresentationLayout({
-    @required this.children,
+    required this.children,
     this.columnAlignment = MainAxisAlignment.start,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final List<Widget> children;
@@ -13,7 +13,7 @@ class PresentationLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(

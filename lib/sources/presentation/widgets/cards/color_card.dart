@@ -6,32 +6,34 @@ import 'package:flutter/rendering.dart';
 
 class ColorCard extends StatelessWidget {
   const ColorCard({
-    @required this.title,
+    required this.title,
     this.onPressed,
     this.subtitle,
     this.child,
     this.backgroundColor,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Widget title;
-  final Widget subtitle;
-  final Widget child;
-  final Color backgroundColor;
-  final void Function() onPressed;
+  final Widget? subtitle;
+  final Widget? child;
+  final Color? backgroundColor;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final padding = PaddingData.of(context).paddingScheme;
+    final padding = PaddingData.of(context)!.paddingScheme;
     return Padding(
       padding: padding.medium,
       child: FloatingCard(
         backgroundColor: backgroundColor,
         child: Stack(
           children: [
-            child,
+            if (child != null) child!,
             Material(
-                color: Colors.transparent, child: InkWell(onTap: onPressed)),
+              color: Colors.transparent,
+              child: InkWell(onTap: onPressed),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: ColorCardTile(

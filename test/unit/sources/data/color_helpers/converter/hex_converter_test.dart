@@ -4,14 +4,10 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Converter hexConverter;
+  late Converter hexConverter;
 
   setUp(() {
     hexConverter = const HexConverter();
-  });
-
-  tearDown(() {
-    hexConverter = null;
   });
 
   group("Given a HexConverter", () {

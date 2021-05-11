@@ -24,9 +24,9 @@ mixin LocalizationProvider on LocaleCodeAware {
     }
   };
 
-  String get appTitle => _values[localeCode]['appTitle'];
-  String get trademarkBegin => _values[localeCode]['trademarkBegin'];
-  String get trademarkEnd => _values[localeCode]['trademarkEnd'];
+  String get appTitle => _values[localeCode]!['appTitle']!;
+  String get trademarkBegin => _values[localeCode]!['trademarkBegin']!;
+  String get trademarkEnd => _values[localeCode]!['trademarkEnd']!;
 
   OnBoardingL10ns get onBoarding => OnBoardingL10ns(localeCode);
 

@@ -7,19 +7,15 @@ import 'package:colored/sources/data/services/naming/naming_service.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_state.dart';
-import 'package:flutter/foundation.dart';
 
 import 'naming_state.dart';
 
 class NamingViewModel {
   NamingViewModel({
-    @required StreamController<NamingState> stateController,
-    @required NamingService namingService,
-    @required Converter converter,
-  })  : assert(stateController != null),
-        assert(namingService != null),
-        assert(converter != null),
-        _namingService = namingService,
+    required StreamController<NamingState> stateController,
+    required NamingService namingService,
+    required Converter converter,
+  })   : _namingService = namingService,
         _converter = converter,
         _stateController = stateController;
 
@@ -39,10 +35,14 @@ class NamingViewModel {
     final b = (selection.b * decimal8Bit).round();
 
     final hexColor = _converter.convert(r, g, b)[Format.hex];
-    final namingResult = await _namingService.getNaming(hexColor: hexColor);
+    if (hexColor == null) {
+      return _stateController.sink.add(const Unknown());
+    }
 
-    if (namingResult.status == ResponseStatus.ok) {
-      _stateController.sink.add(Named(namingResult.result.name));
+    final namingResponse = await _namingService.getNaming(hexColor: hexColor);
+    final namingResult = namingResponse.result;
+    if (namingResponse.status == ResponseStatus.ok && namingResult != null) {
+      _stateController.sink.add(Named(namingResult.name));
     } else {
       _stateController.sink.add(const Unknown());
     }

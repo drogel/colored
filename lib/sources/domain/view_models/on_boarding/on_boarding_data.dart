@@ -3,22 +3,18 @@ import 'package:flutter/material.dart';
 
 class OnBoardingData extends InheritedWidget {
   const OnBoardingData({
-    @required this.state,
-    @required this.onPageScroll,
-    @required this.onFinished,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        assert(onPageScroll != null),
-        assert(onFinished != null),
-        assert(state != null),
-        super(key: key, child: child);
+    required this.state,
+    required this.onPageScroll,
+    required this.onFinished,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final OnBoardingState state;
   final void Function(double, double) onPageScroll;
   final void Function() onFinished;
 
-  static OnBoardingData of(BuildContext context) =>
+  static OnBoardingData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: OnBoardingData);
 
   @override

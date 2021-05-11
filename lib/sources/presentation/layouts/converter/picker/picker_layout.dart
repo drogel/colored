@@ -11,8 +11,8 @@ const _kSaturationPickersMinConstraints = BoxConstraints(maxHeight: 100);
 
 class PickerLayout extends StatelessWidget {
   const PickerLayout({
-    @required this.availableHeight,
-    Key key,
+    required this.availableHeight,
+    Key? key,
   }) : super(key: key);
 
   final double availableHeight;
@@ -23,7 +23,7 @@ class PickerLayout extends StatelessWidget {
     return DefaultAnimatedSwitcher(child: _buildPicker(data));
   }
 
-  Widget _buildPicker(PickerData data) {
+  Widget _buildPicker(PickerData? data) {
     if (data == null) {
       return const RgbTransformer();
     }

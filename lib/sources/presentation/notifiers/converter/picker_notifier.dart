@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class PickerNotifier extends StatefulWidget {
   const PickerNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
+    required this.injector,
+    required this.child,
+    Key? key,
   }) : super(key: key);
 
   final PickerInjector injector;
@@ -19,7 +19,7 @@ class PickerNotifier extends StatefulWidget {
 }
 
 class _PickerNotifierState extends State<PickerNotifier> {
-  PickerViewModel _viewModel;
+  late final PickerViewModel _viewModel;
 
   @override
   void initState() {
@@ -32,7 +32,7 @@ class _PickerNotifierState extends State<PickerNotifier> {
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => PickerData(
-          state: snapshot.data,
+          state: snapshot.data ?? _viewModel.initialState,
           onPickerSelected: _viewModel.updatePickerStyle,
           child: widget.child,
         ),

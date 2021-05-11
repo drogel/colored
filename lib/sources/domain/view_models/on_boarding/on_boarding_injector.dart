@@ -9,7 +9,7 @@ class OnBoardingInjector {
   const OnBoardingInjector();
 
   OnBoardingViewModel injectViewModel([
-    StreamController<OnBoardingState> stateController,
+    StreamController<OnBoardingState>? stateController,
   ]) =>
       OnBoardingViewModel(
         stateController: stateController ?? StreamController<OnBoardingState>(),

@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 
 class NamingData extends InheritedWidget {
   const NamingData({
-    @required this.state,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        assert(state != null),
-        super(key: key, child: child);
+    required this.state,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final NamingState state;
 
-  static NamingData of(BuildContext context) =>
+  static NamingData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: NamingData);
 
   @override

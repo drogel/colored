@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 
 class RadiusData extends InheritedWidget {
   const RadiusData({
-    @required this.radiiScheme,
-    @required Widget child,
-    Key key,
-  })  : assert(child != null),
-        assert(radiiScheme != null),
-        super(key: key, child: child);
+    required this.radiiScheme,
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
 
   final RadiiScheme radiiScheme;
 
-  static RadiusData of(BuildContext context) =>
+  static RadiusData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: RadiusData);
 
   @override

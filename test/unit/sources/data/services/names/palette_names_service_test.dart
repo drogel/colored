@@ -14,9 +14,9 @@ class PalettesDataLoaderStub implements DataLoader<List<String>> {
 }
 
 void main() {
-  PaletteNamesService service;
-  DataLoader dataLoader;
-  MapFilter filter;
+  late PaletteNamesService service;
+  late DataLoader<List<String>> dataLoader;
+  late MapFilter<List<String>> filter;
 
   setUp(() {
     dataLoader = PalettesDataLoaderStub();
@@ -24,28 +24,7 @@ void main() {
     service = PaletteNamesService(dataLoader: dataLoader, filter: filter);
   });
 
-  tearDown(() {
-    dataLoader = null;
-    service = null;
-  });
-
   group("Given a PaletteNamesService with a mocked data source", () {
-    group("when constructed", () {
-      test("then should throw if given a null dataLoader", () {
-        expect(
-          () => PaletteNamesService(dataLoader: null, filter: filter),
-          throwsAssertionError,
-        );
-      });
-
-      test("then should throw if given a null filter", () {
-        expect(
-          () => PaletteNamesService(dataLoader: dataLoader, filter: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when fetchContainingSearch is called", () {
       test("then the palette can be found by its name", () async {
         final actual = await service.fetchContainingSearch("Test");

@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 
 class HslPicker extends StatelessWidget {
   const HslPicker({
-    @required this.color,
-    @required this.onChanged,
+    required this.color,
+    required this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
     this.saturationLightnessPickerConstraints,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Color color;
   final void Function(ColorSelection) onChanged;
-  final void Function(ColorSelection) onChangeStart;
-  final void Function(ColorSelection) onChangeEnd;
-  final BoxConstraints saturationLightnessPickerConstraints;
+  final void Function(ColorSelection)? onChangeStart;
+  final void Function(ColorSelection)? onChangeEnd;
+  final BoxConstraints? saturationLightnessPickerConstraints;
 
   @override
   Widget build(BuildContext context) => Column(

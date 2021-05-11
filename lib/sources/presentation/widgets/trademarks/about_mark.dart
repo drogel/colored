@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 const _kTextHeight = 1.3;
 
 class AboutMark extends StatelessWidget {
-  const AboutMark({Key key})
+  const AboutMark({Key? key})
       : _style = _AboutMarkStyle.expanded,
         super(key: key);
 
-  const AboutMark.compact({Key key})
+  const AboutMark.compact({Key? key})
       : _style = _AboutMarkStyle.compact,
         super(key: key);
 
@@ -17,9 +17,9 @@ class AboutMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.caption;
-    final githubLogoSize = 2 * textStyle.fontSize;
-    final localization = Localization.of(context);
+    final textStyle = Theme.of(context).textTheme.caption!;
+    final githubLogoSize = 2 * (textStyle.fontSize ?? 11.0);
+    final localization = Localization.of(context)!;
     return Row(
       children: [
         const SizedBox(width: 1),

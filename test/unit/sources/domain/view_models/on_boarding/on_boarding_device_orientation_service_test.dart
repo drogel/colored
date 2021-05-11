@@ -11,8 +11,8 @@ class MockDeviceOrientationService extends Mock
     implements DeviceOrientationService {}
 
 void main() {
-  OnBoardingViewModel viewModel;
-  DeviceOrientationService service;
+  late OnBoardingViewModel viewModel;
+  late DeviceOrientationService service;
 
   setUp(() {
     service = MockDeviceOrientationService();
@@ -25,8 +25,6 @@ void main() {
 
   tearDown(() {
     viewModel.dispose();
-    service = null;
-    viewModel = null;
   });
 
   group("Given an OnBoardingViewModel with stubbed DeviceOrientationService",

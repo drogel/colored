@@ -6,7 +6,7 @@ import 'package:colored/sources/domain/view_models/converter/transformer/transfo
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  TransformerInjector injector;
+  late TransformerInjector injector;
 
   setUp(() {
     injector = const TransformerInjector(
@@ -14,20 +14,7 @@ void main() {
     );
   });
 
-  tearDown(() {
-    injector = null;
-  });
-
   group("Given a TransformerInjector with a black initial color", () {
-    group("when constructed", () {
-      test("an assertion error is thrown if the initial color is null", () {
-        expect(
-          () => TransformerInjector(initialColor: null),
-          throwsAssertionError,
-        );
-      });
-    });
-
     group("when injectViewModel is called", () {
       test("then a StreamController is given by default if not specified", () {
         final viewModel = injector.injectViewModel();

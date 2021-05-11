@@ -5,14 +5,10 @@ import 'package:colored/sources/domain/view_models/on_boarding/on_boarding_state
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  OnBoardingInjector injector;
+  late OnBoardingInjector injector;
 
   setUp(() {
     injector = const OnBoardingInjector();
-  });
-
-  tearDown(() {
-    injector = null;
   });
 
   group("Given an OnBoardingInjector", () {

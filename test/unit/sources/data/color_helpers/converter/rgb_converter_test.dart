@@ -4,14 +4,10 @@ import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Converter rgb;
+  late Converter rgb;
 
   setUp(() {
     rgb = const RgbConverter();
-  });
-
-  tearDown(() {
-    rgb = null;
   });
 
   group("Given a RgbConverter", () {

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:colored/configuration/flavor.dart';
+import 'package:colored/configuration/flavor_values/dev_values.dart';
 import 'package:colored/configuration/flavor_values/flavor_values.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_state.dart';
@@ -16,27 +17,17 @@ class MockFlavor implements Flavor {
   bool isProduction() => false;
 
   @override
-  FlavorValues get values => null;
+  FlavorValues get values => const DevValues();
 }
 
 void main() {
-  PaletteDetailInjector injector;
+  late PaletteDetailInjector injector;
 
   setUp(() {
     injector = const PaletteDetailInjector(flavor: MockFlavor());
   });
 
-  tearDown(() {
-    injector = null;
-  });
-
   group("Given a PaletteDetailInjector", () {
-    group("when constructed", () {
-      test("then an assertion error is thrown on null flavor", () {
-        expect(() => PaletteDetailInjector(flavor: null), throwsAssertionError);
-      });
-    });
-
     group("when injectViewModel is called", () {
       test("then a StreamController is given by default if not specified", () {
         final viewModel = injector.injectViewModel();

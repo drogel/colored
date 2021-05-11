@@ -13,8 +13,9 @@ import 'package:colored/sources/domain/view_models/palettes/palettes_list/palett
 class PalettesListInjector {
   const PalettesListInjector();
 
-  PalettesListViewModel injectViewModel(
-          [StreamController<PalettesListState> stateController]) =>
+  PalettesListViewModel injectViewModel([
+    StreamController<PalettesListState>? stateController,
+  ]) =>
       PalettesListViewModel(
         stateController:
             stateController ?? StreamController<PalettesListState>(),

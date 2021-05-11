@@ -4,14 +4,10 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  FormatParser rgbParser;
+  late FormatParser rgbParser;
 
   setUp(() {
     rgbParser = RgbParser();
-  });
-
-  tearDown(() {
-    rgbParser = null;
   });
 
   group("Given a RgbParser", () {
@@ -60,13 +56,6 @@ void main() {
         expect(
           rgbParser.parse("128, 0, 128"),
           ColorSelection(r: 0.5019607843137255, g: 0, b: 0.5019607843137255),
-        );
-      });
-
-      test("then an assertion error is thrown on null input string", () {
-        expect(
-          () => rgbParser.parse(null),
-          throwsAssertionError,
         );
       });
 

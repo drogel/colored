@@ -7,22 +7,19 @@ typedef ValueChanged = void Function(double, double);
 
 class SurfaceSlider extends StatefulWidget {
   const SurfaceSlider({
-    @required this.thumbBuilder,
-    @required this.child,
-    @required this.value,
+    required this.thumbBuilder,
+    required this.child,
+    required this.value,
     this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
     this.hitTestMargin = EdgeInsets.zero,
-    Key key,
-  })  : assert(thumbBuilder != null),
-        assert(child != null),
-        assert(value != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
-  final ValueChanged onChanged;
-  final ValueChanged onChangeStart;
-  final ValueChanged onChangeEnd;
+  final ValueChanged? onChanged;
+  final ValueChanged? onChangeStart;
+  final ValueChanged? onChangeEnd;
   final EdgeInsets hitTestMargin;
   final Offset value;
   final Widget Function(bool) thumbBuilder;
@@ -39,8 +36,8 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (_, constraints) {
           final margin = widget.hitTestMargin;
-          final duration = DurationData.of(context).durationScheme;
-          final curves = CurveData.of(context).curveScheme;
+          final duration = DurationData.of(context)!.durationScheme;
+          final curves = CurveData.of(context)!.curveScheme;
           final width = constraints.maxWidth - margin.left - margin.right;
           final height = constraints.maxHeight - margin.top - margin.bottom;
           const sliderThumbShape = RoundSliderThumbShape();
@@ -91,9 +88,9 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
         ..onUpdate = ((d) => _onUpdate(d.globalPosition, context, h, w));
 
   Offset _normalize(Offset offset, BuildContext context, double h, double w) {
-    RenderBox getBox = context.findRenderObject();
+    final box = context.findRenderObject() as RenderBox;
     final margin = widget.hitTestMargin;
-    final localOffset = getBox.globalToLocal(offset);
+    final localOffset = box.globalToLocal(offset);
     final shiftedLocalX = localOffset.dx - margin.left;
     final shiftedLocalY = localOffset.dy - margin.top;
     final marginShiftedOffset = Offset(shiftedLocalX, shiftedLocalY);
@@ -119,7 +116,7 @@ class _SurfaceSliderState extends State<SurfaceSlider> {
     _shouldNotify(position.dx, position.dy, widget.onChangeEnd);
   }
 
-  void _shouldNotify(double dx, double dy, ValueChanged notifier) {
+  void _shouldNotify(double dx, double dy, ValueChanged? notifier) {
     if (notifier != null) {
       notifier(dx, dy);
     }

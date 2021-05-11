@@ -14,13 +14,12 @@ const _kChildAspectRatio = 2.618;
 
 class PalettesListGrid extends StatelessWidget {
   const PalettesListGrid({
-    @required this.palettes,
+    required this.palettes,
     this.pageStorageKey,
-    Key key,
-  })  : assert(palettes != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
-  final PageStorageKey<String> pageStorageKey;
+  final PageStorageKey<String>? pageStorageKey;
   final List<Palette> palettes;
 
   @override
@@ -45,12 +44,12 @@ class PalettesListGrid extends StatelessWidget {
       });
 
   void _onPaletteSelected({
-    @required BuildContext context,
-    @required List<String> hexCodes,
-    @required String paletteName,
+    required BuildContext context,
+    required List<String> hexCodes,
+    required String paletteName,
   }) {
     final destination = PalettesNavigationSelection.detail.index;
-    PalettesNavigationData.of(context).onNavigation(destination);
-    PaletteDetailData.of(context).onPaletteSelected(hexCodes, paletteName);
+    PalettesNavigationData.of(context)!.onNavigation(destination);
+    PaletteDetailData.of(context)!.onPaletteSelected(hexCodes, paletteName);
   }
 }

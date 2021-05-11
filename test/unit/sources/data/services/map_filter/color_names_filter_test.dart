@@ -7,14 +7,10 @@ const _kTestMap = {
 };
 
 void main() {
-  ColorNamesFilter filter;
+  late ColorNamesFilter filter;
 
   setUp(() {
     filter = const ColorNamesFilter();
-  });
-
-  tearDown(() {
-    filter = null;
   });
 
   group("Given a ColorNamesFilter", () {

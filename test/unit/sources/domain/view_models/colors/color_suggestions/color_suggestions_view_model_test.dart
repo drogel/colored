@@ -20,33 +20,9 @@ class SuggestionsServiceEmptyStub implements SuggestionsService<String> {
 }
 
 void main() {
-  ColorSuggestionsViewModel viewModel;
-  SuggestionsService<String> suggestionsService;
-  StreamController<ColorSuggestionsState> stateController;
-
-  group("Given a ColorSuggestionsViewModel", () {
-    group("when constructed", () {
-      test("then throws an assertion error if stateController is null", () {
-        expect(
-          () => ColorSuggestionsViewModel(
-            stateController: null,
-            suggestionsService: SuggestionsServiceStub(),
-          ),
-          throwsAssertionError,
-        );
-      });
-
-      test("then throws an assertion error if suggestionsSerice is null", () {
-        expect(
-          () => ColorSuggestionsViewModel(
-            stateController: StreamController<ColorSuggestionsState>(),
-            suggestionsService: null,
-          ),
-          throwsAssertionError,
-        );
-      });
-    });
-  });
+  late ColorSuggestionsViewModel viewModel;
+  late SuggestionsService<String> suggestionsService;
+  late StreamController<ColorSuggestionsState> stateController;
 
   group("Given a ColorSuggestionsViewModel with a stubbed service", () {
     setUp(() {
@@ -60,9 +36,6 @@ void main() {
 
     tearDown(() {
       stateController.close();
-      viewModel = null;
-      suggestionsService = null;
-      stateController = null;
     });
 
     group("when initialState is called", () {
@@ -121,9 +94,6 @@ void main() {
 
     tearDown(() {
       stateController.close();
-      viewModel = null;
-      suggestionsService = null;
-      stateController = null;
     });
 
     group("when init is called", () {

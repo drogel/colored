@@ -5,13 +5,12 @@ import 'package:flutter/material.dart';
 
 class PaletteDetailLoadingGrid extends StatelessWidget {
   const PaletteDetailLoadingGrid({
-    @required this.hexCodes,
+    required this.hexCodes,
     this.pageStorageKey,
-    Key key,
-  })  : assert(hexCodes != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
-  final PageStorageKey<String> pageStorageKey;
+  final PageStorageKey<String>? pageStorageKey;
   final List<String> hexCodes;
 
   @override

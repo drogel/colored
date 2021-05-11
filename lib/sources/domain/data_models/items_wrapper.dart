@@ -14,7 +14,7 @@ class ItemsWrapper<T> {
     this.items,
   });
 
-  factory ItemsWrapper.fromMap(Map<String, dynamic> map, List<T> items) =>
+  factory ItemsWrapper.fromMap(Map<String, dynamic> map, List<T>? items) =>
       ItemsWrapper(
         kind: map["kind"],
         currentItemCount: map["currentItemCount"],
@@ -28,16 +28,16 @@ class ItemsWrapper<T> {
         items: items,
       );
 
-  final String kind;
-  final int currentItemCount;
-  final int itemsPerPage;
-  final int startIndex;
-  final int totalItems;
-  final int pageIndex;
-  final int totalPages;
-  final String nextLink;
-  final String previousLink;
-  final List<T> items;
+  final String? kind;
+  final int? currentItemCount;
+  final int? itemsPerPage;
+  final int? startIndex;
+  final int? totalItems;
+  final int? pageIndex;
+  final int? totalPages;
+  final String? nextLink;
+  final String? previousLink;
+  final List<T>? items;
 
   @override
   bool operator ==(Object other) =>
@@ -56,16 +56,19 @@ class ItemsWrapper<T> {
           items == other.items;
 
   @override
-  int get hashCode => hashObjects([
-        kind,
-        currentItemCount,
-        itemsPerPage,
-        startIndex,
-        totalItems,
-        pageIndex,
-        totalPages,
-        nextLink,
-        previousLink,
-        items,
-      ]);
+  int get hashCode {
+    final nullFiltered = [
+      kind,
+      currentItemCount,
+      itemsPerPage,
+      startIndex,
+      totalItems,
+      pageIndex,
+      totalPages,
+      nextLink,
+      previousLink,
+      items,
+    ].map((e) => e ?? 0).toList();
+    return hashObjects(nullFiltered);
+  }
 }

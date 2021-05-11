@@ -5,14 +5,11 @@ import 'package:flutter/material.dart';
 
 class CrossAnimatedSwitcher extends CrossSwitcher {
   const CrossAnimatedSwitcher({
-    @required Widget firstChild,
-    @required Widget secondChild,
-    @required CrossSwitcherState state,
-    Key key,
-  })  : assert(firstChild != null),
-        assert(secondChild != null),
-        assert(state != null),
-        super(
+    required Widget firstChild,
+    required Widget secondChild,
+    required CrossSwitcherState state,
+    Key? key,
+  }) : super(
           firstChild: firstChild,
           secondChild: secondChild,
           state: state,

@@ -4,18 +4,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'router_test_helpers.dart';
 
 void main() {
-  FlowRouter routerUnderTest;
-  FlowRouter childFlowRouter;
+  late FlowRouter routerUnderTest;
+  late FlowRouter childFlowRouter;
 
   group("Given a FlowRouter with a child", () {
     setUp(() {
       childFlowRouter = FirstChildFlowRouterStub();
       routerUnderTest = FlowRouterUnderTest(children: [childFlowRouter]);
-    });
-
-    tearDown(() {
-      routerUnderTest = null;
-      childFlowRouter = null;
     });
 
     group("when onGenerateRoute is called", () {

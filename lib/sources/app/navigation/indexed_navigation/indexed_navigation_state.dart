@@ -1,6 +1,5 @@
 class IndexedNavigationState {
-  const IndexedNavigationState(this.currentIndex)
-      : assert(currentIndex != null);
+  const IndexedNavigationState(this.currentIndex);
 
   final int currentIndex;
 }

@@ -6,12 +6,10 @@ import 'package:flutter/material.dart';
 
 class IndexedNavigationNotifier extends StatefulWidget {
   const IndexedNavigationNotifier({
-    @required this.injector,
-    @required this.child,
-    Key key,
-  })  : assert(injector != null),
-        assert(child != null),
-        super(key: key);
+    required this.injector,
+    required this.child,
+    Key? key,
+  }) : super(key: key);
 
   final IndexedNavigationInjector injector;
   final Widget child;
@@ -22,7 +20,7 @@ class IndexedNavigationNotifier extends StatefulWidget {
 }
 
 class _IndexedNavigationNotifierState extends State<IndexedNavigationNotifier> {
-  IndexedNavigationController _controller;
+  late IndexedNavigationController _controller;
 
   @override
   void initState() {
@@ -35,7 +33,7 @@ class _IndexedNavigationNotifierState extends State<IndexedNavigationNotifier> {
         initialData: _controller.initialState,
         stream: _controller.stateStream,
         builder: (context, snapshot) => IndexedNavigationData(
-          state: snapshot.data,
+          state: snapshot.data ?? _controller.initialState,
           onNavigation: _controller.navigateToIndex,
           child: widget.child,
         ),
