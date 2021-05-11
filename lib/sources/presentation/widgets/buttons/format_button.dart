@@ -74,7 +74,7 @@ class _FormatButtonState extends State<FormatButton> {
     await Clipboard.setData(ClipboardData(text: widget.content));
     setState(() {
       _tooltipMessage = Localization.of(context)!.converter.tooltipMessage;
-      _tooltipColor = Theme.of(context).buttonColor;
+      _tooltipColor = Theme.of(context).colorScheme.secondaryVariant;
     });
     _showTooltip();
   }
