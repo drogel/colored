@@ -105,6 +105,12 @@ class ColoredThemeComposer implements ThemeComposer {
           scaffoldBackgroundColor: colors.primary,
           barBackgroundColor: colors.primary,
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: colors.primaryDark,
+            onPrimary: colors.secondary,
+          ),
+        ),
         visualDensity: VisualDensity.standard,
       );
 }
