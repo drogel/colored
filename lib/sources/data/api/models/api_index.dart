@@ -1,0 +1,3 @@
+class ApiIndex {
+  const ApiIndex();
+}
