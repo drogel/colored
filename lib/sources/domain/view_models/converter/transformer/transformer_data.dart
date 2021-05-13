@@ -25,6 +25,5 @@ class TransformerData extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType(aspect: TransformerData);
 
   @override
-  bool updateShouldNotify(TransformerData oldWidget) =>
-      state != oldWidget.state;
+  bool updateShouldNotify(TransformerData oldWidget) => true;
 }
