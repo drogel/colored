@@ -4,6 +4,6 @@ class ColorsSearchClosestEntry extends ApiIndexEntry {
   const ColorsSearchClosestEntry({required Uri endpoint, required String title})
       : super(endpoint: endpoint, title: title);
 
-  ColorsSearchClosestEntry.fromJson(Map<String, String> json)
+  ColorsSearchClosestEntry.fromJson(Map<String, dynamic> json)
       : super.fromJson(json);
 }
