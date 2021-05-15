@@ -1,11 +1,9 @@
 import 'package:colored/sources/data/api/models/index/entries/api_index_entry.dart';
 
-class ColorsSearchClosestEntry implements ApiIndexEntry {
-  const ColorsSearchClosestEntry({required this.endpoint, required this.title});
+class ColorsSearchClosestEntry extends ApiIndexEntry {
+  const ColorsSearchClosestEntry({required Uri endpoint, required String title})
+      : super(endpoint: endpoint, title: title);
 
-  @override
-  final Uri endpoint;
-
-  @override
-  final String title;
+  ColorsSearchClosestEntry.fromJson(Map<String, String> json)
+      : super.fromJson(json);
 }
