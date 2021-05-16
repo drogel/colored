@@ -1,8 +1,8 @@
 import 'package:colored/sources/data/api/models/index/entries/api_index_entry.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class ApiIndexEntryTester {
-  const ApiIndexEntryTester({
+class ApiIndexEntryTestRunner {
+  const ApiIndexEntryTestRunner({
     this.scheme = "https",
     this.host = "test.com",
   });
