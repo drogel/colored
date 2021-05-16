@@ -1,11 +1,9 @@
 import 'package:colored/sources/data/api/models/index/entries/api_index_entry.dart';
 
-class ColorsSearchNamesEntry implements ApiIndexEntry {
-  const ColorsSearchNamesEntry({required this.endpoint, required this.title});
+class ColorsSearchNamesEntry extends ApiIndexEntry {
+  const ColorsSearchNamesEntry({required String title, Uri? endpoint})
+      : super(title: title, endpoint: endpoint);
 
-  @override
-  final Uri endpoint;
-
-  @override
-  final String title;
+  ColorsSearchNamesEntry.fromJson(Map<String, dynamic> json)
+      : super.fromJson(json);
 }

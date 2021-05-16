@@ -1,6 +1,5 @@
 import 'package:colored/sources/data/api/models/index/entries/api_index_entry.dart';
 import 'package:colored/sources/data/api/models/index/entries/colors/colors_search_closest_entry.dart';
-import 'package:colored/sources/common/extensions/list_safe_element_at_index.dart';
 
 class ColorsSearchHexesEntry extends ApiIndexEntry {
   const ColorsSearchHexesEntry({
@@ -15,9 +14,10 @@ class ColorsSearchHexesEntry extends ApiIndexEntry {
 
   final ColorsSearchClosestEntry? closest;
 
-  static ColorsSearchClosestEntry? getClosestIfAny(Map<String, dynamic> json) {
-    final entries = ApiIndexEntry.getEntriesFromJson(json);
-    final closest = entries.safeElementAt(0);
-    return closest != null ? ColorsSearchClosestEntry.fromJson(closest) : null;
-  }
+  static ColorsSearchClosestEntry? getClosestIfAny(Map<String, dynamic> json) =>
+      ApiIndexEntry.getChildEntryAtIndexIfAny(
+        0,
+        json: json,
+        entryBuilder: (childMap) => ColorsSearchClosestEntry.fromJson(childMap),
+      );
 }

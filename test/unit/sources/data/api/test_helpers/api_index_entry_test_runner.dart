@@ -13,15 +13,22 @@ class ApiIndexEntryTestRunner {
   void assertExpectations(
     ApiIndexEntry entry, {
     required String expectedTitle,
-    required List<String> expectedPathSegments,
+    List<String>? expectedPathSegments,
     List<String>? expectedParameterKeys,
   }) {
     final endpoint = entry.endpoint;
     expect(entry.title, expectedTitle);
-    expect(endpoint.scheme, scheme);
-    expect(endpoint.host, host);
-    expect(endpoint.pathSegments, expectedPathSegments);
-    _expectIfNotNull(endpoint.queryParameters.keys, expectedParameterKeys);
+    if (expectedPathSegments == null) {
+      return;
+    }
+    if (endpoint != null) {
+      expect(endpoint.scheme, scheme);
+      expect(endpoint.host, host);
+      expect(endpoint.pathSegments, expectedPathSegments);
+      _expectIfNotNull(endpoint.queryParameters.keys, expectedParameterKeys);
+    } else {
+      fail("Endpoint should not be null");
+    }
   }
 
   void _expectIfNotNull(actual, expected) {
