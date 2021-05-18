@@ -19,7 +19,13 @@ class ColorsSuggestionsSearchClosestEntryTester
 
   @override
   void assertExpectations(ColorsSuggestionsSearchClosestEntry entry) {
-    final expectedPathSegments = ["colors", "search", "hexes", "closest"];
+    final expectedPathSegments = [
+      "suggestions",
+      "colors",
+      "search",
+      "hexes",
+      "closest",
+    ];
     testRunner.assertExpectations(
       entry,
       expectedTitle: "colors_suggestions_search_closest",
