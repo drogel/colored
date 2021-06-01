@@ -1,14 +1,11 @@
 import 'package:colored/sources/data/api/models/index/entries/api_index_entry.dart';
 
-class PalettesSuggestionsSearchNamesEntry implements ApiIndexEntry {
+class PalettesSuggestionsSearchNamesEntry extends ApiIndexEntry {
   const PalettesSuggestionsSearchNamesEntry({
-    required this.endpoint,
-    required this.title,
-  });
+    required String title,
+    Uri? endpoint,
+  }) : super(title: title, endpoint: endpoint);
 
-  @override
-  final Uri endpoint;
-
-  @override
-  final String title;
+  PalettesSuggestionsSearchNamesEntry.fromJson(Map<String, dynamic> json)
+      : super.fromJson(json);
 }
