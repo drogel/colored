@@ -1,14 +1,11 @@
 import 'package:colored/sources/data/api/models/index/entries/api_index_entry.dart';
 
-class RandomColorsSuggestionsEntry implements ApiIndexEntry {
+class RandomColorsSuggestionsEntry extends ApiIndexEntry {
   const RandomColorsSuggestionsEntry({
-    required this.endpoint,
-    required this.title,
-  });
+    required String title,
+    Uri? endpoint,
+  }) : super(title: title, endpoint: endpoint);
 
-  @override
-  final Uri endpoint;
-
-  @override
-  final String title;
+  RandomColorsSuggestionsEntry.fromJson(Map<String, dynamic> json)
+      : super.fromJson(json);
 }
