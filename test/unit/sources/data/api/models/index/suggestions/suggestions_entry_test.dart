@@ -1,11 +1,10 @@
-import 'package:colored/sources/data/api/models/index/entries/palettes/palettes_entry.dart';
 import 'package:colored/sources/data/api/models/index/entries/suggestions/suggestions_entry.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../test_helpers/api_index_entry_test_runner.dart';
 import '../../../test_helpers/entry_tester.dart';
-import '../colors/colors_entry_test.dart';
-import '../palettes/palettes_entry_test.dart';
+import 'colors/colors_suggestions_entry_test.dart';
+import 'palettes/palettes_suggestions_entry_test.dart';
 
 class SuggestionsEntryTester extends EntryTester<SuggestionsEntry> {
   const SuggestionsEntryTester(ApiIndexEntryTestRunner testRunner)
@@ -68,13 +67,13 @@ class SuggestionsEntryTester extends EntryTester<SuggestionsEntry> {
   @override
   void assertExpectations(SuggestionsEntry entry) {
     testRunner.assertExpectations(entry, expectedTitle: "suggestions");
-    final colorsTester = ColorsEntryTester(testRunner);
+    final colorsTester = ColorsSuggestionsEntryTester(testRunner);
     final colorsEntry = entry.colors;
     assertChildEntryExpectations(
       entryTester: colorsTester,
       entry: colorsEntry,
     );
-    final palettesTester = PalettesEntryTester(testRunner);
+    final palettesTester = PalettesSuggestionsEntryTester(testRunner);
     final palettesEntry = entry.palettes;
     assertChildEntryExpectations(
       entryTester: palettesTester,
@@ -88,8 +87,8 @@ void main() {
     group("when constructed from a JSON", () {
       test("then values are correctly parsed", () {
         const testRunner = ApiIndexEntryTestRunner();
-        const tester = PalettesEntryTester(testRunner);
-        final entry = PalettesEntry.fromJson(tester.testMap);
+        const tester = SuggestionsEntryTester(testRunner);
+        final entry = SuggestionsEntry.fromJson(tester.testMap);
         tester.assertExpectations(entry);
       });
     });
