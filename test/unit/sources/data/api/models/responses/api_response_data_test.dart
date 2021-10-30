@@ -2,7 +2,7 @@ import 'package:colored/sources/data/api/models/responses/api_response_data.dart
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const testIndex = {
+  const testData = {
     "kind": "test",
     "currentItemCount": 3,
     "itemsPerPage": 10,
@@ -19,7 +19,7 @@ void main() {
   group("Given an $ApiResponseData", () {
     group("when constructed from a JSON", () {
       test("then values are correctly parsed", () {
-        final apiResponseData = ApiResponseData.fromJson(testIndex);
+        final apiResponseData = ApiResponseData.fromJson(testData);
         if (apiResponseData == null) {
           fail("$ApiResponseData parsing failed, expected not null response.");
         }
