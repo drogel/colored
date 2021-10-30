@@ -104,7 +104,7 @@ void main() {
   ];
 
   group("Given an $ApiIndex", () {
-    group("when constraucted from a JSON", () {
+    group("when constructed from a JSON", () {
       test("then values are correctly parsed", () {
         const testRunner = ApiIndexEntryTestRunner();
         const colorsTester = ColorsEntryTester(testRunner);
