@@ -23,7 +23,12 @@ class ApiResponseData {
     final totalPages = json.valueFor<int>(_Key.totalPages.value);
     final selfUriString = json.stringValueFor(_Key.selfUri.value);
     final selfUri = Uri.parse(selfUriString);
-    final items = json.listValueFor<Map<String, dynamic>>(_Key.items.value);
+    final itemsValue = json[_Key.items.value];
+    if (itemsValue == null) {
+      return null;
+    }
+    final itemsList = List.from(itemsValue);
+    final items = itemsList.map((e) => Map<String, dynamic>.from(e)).toList();
     if (kind == null ||
         currentItemCount == null ||
         itemsPerPage == null ||

@@ -10,3 +10,4 @@ const samplePaletteSuggestions = "$_mockData/sample_palette_suggestions.json";
 const sampleColorSuggestions = "$_mockData/sample_color_suggestions.json";
 
 const mockRepositoryLink = "https://google.com";
+const mockApiIndexLink = "https://mock.huely.herokuapp.com/";

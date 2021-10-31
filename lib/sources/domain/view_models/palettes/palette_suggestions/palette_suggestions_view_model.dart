@@ -10,7 +10,7 @@ class PaletteSuggestionsViewModel {
   const PaletteSuggestionsViewModel({
     required StreamController<PaletteSuggestionsState> stateController,
     required SuggestionsService<List<String>> suggestionsService,
-  })   : _stateController = stateController,
+  })  : _stateController = stateController,
         _suggestionsService = suggestionsService;
 
   final StreamController<PaletteSuggestionsState> _stateController;

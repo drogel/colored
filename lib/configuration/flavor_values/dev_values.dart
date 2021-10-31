@@ -11,4 +11,7 @@ class DevValues implements FlavorValues {
 
   @override
   DataPath get dataPath => const DevPath();
+
+  @override
+  String get apiIndexLink => data_paths.mockApiIndexLink;
 }
