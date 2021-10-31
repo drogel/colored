@@ -20,7 +20,7 @@ Future<void> main() async {
 
 Future<FlowRouter> _getInitialRoute(LocalStorage localStorage) async {
   if (kIsWeb) {
-    return const MainFlowRouter();
+    return const MainRouter();
   } else {
     return _getMobileInitialRoute(localStorage);
   }
@@ -31,5 +31,5 @@ Future<FlowRouter> _getMobileInitialRoute(LocalStorage localStorage) async {
   if (didOnBoard == null) {
     return const OnBoardingFlowRouter();
   }
-  return didOnBoard ? const MainFlowRouter() : const OnBoardingFlowRouter();
+  return didOnBoard ? const MainRouter() : const OnBoardingFlowRouter();
 }

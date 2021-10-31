@@ -11,8 +11,8 @@ import 'package:colored/sources/presentation/widgets/page_routes/fade_out_route.
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class MainFlowRouter extends FlowRouter {
-  const MainFlowRouter({List<FlowRouter>? children})
+class MainRouter extends FlowRouter {
+  const MainRouter({List<FlowRouter>? children})
       : super(children: children);
 
   static const routerName = "/main";
