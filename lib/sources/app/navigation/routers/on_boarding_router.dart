@@ -14,7 +14,7 @@ import 'package:colored/sources/presentation/notifiers/converter/transformer_not
 import 'package:flutter/material.dart';
 
 class OnBoardingFlowRouter extends FlowRouter {
-  const OnBoardingFlowRouter() : super(children: const [MainFlowRouter()]);
+  const OnBoardingFlowRouter() : super(children: const [MainRouter()]);
 
   @override
   String get name => "/onboarding";

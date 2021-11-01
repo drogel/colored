@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:colored/sources/data/network_client/http_response.dart';
 
 abstract class HttpClient {

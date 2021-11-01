@@ -6,8 +6,6 @@ import 'package:colored/sources/data/services/url_launcher/url_launcher.dart';
 import 'package:colored/sources/presentation/widgets/animations/animated_image_color.dart';
 import 'package:flutter/material.dart';
 
-final repoUrl = FlavorConfig.instance.values.repositoryLink;
-
 class GithubLogoLink extends StatefulWidget {
   const GithubLogoLink({
     this.size,
@@ -15,6 +13,8 @@ class GithubLogoLink extends StatefulWidget {
     Key? key,
   })  : _urlLauncher = urlLauncher,
         super(key: key);
+
+  static final _repoUrl = FlavorConfig.instance.values.repositoryLink;
 
   final double? size;
   final UrlLauncher? _urlLauncher;
@@ -56,7 +56,8 @@ class _GithubLogoLinkState extends State<GithubLogoLink> {
   }
 
   void _launchUrl() {
-    final urlLauncher = widget._urlLauncher ?? SafeUrlLauncher(url: repoUrl);
+    final safeUrlLauncher = SafeUrlLauncher(url: GithubLogoLink._repoUrl);
+    final urlLauncher = widget._urlLauncher ?? safeUrlLauncher;
     setState(() => _currentState = AnimatedImageColorState.beginColor);
     urlLauncher.launch();
   }

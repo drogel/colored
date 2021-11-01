@@ -4,4 +4,6 @@ abstract class FlavorValues {
   DataPath get dataPath;
 
   String get repositoryLink;
+
+  String get apiIndexLink;
 }

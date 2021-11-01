@@ -8,3 +8,4 @@ const palettes = "$_data/palettes.json";
 const paletteSuggestions = "$_data/palette_suggestions.json";
 
 const githubRepositoryLink = "https://github.com/drogel/colored";
+const apiIndexLink = "https://huely.herokuapp.com/";

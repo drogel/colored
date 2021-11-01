@@ -11,4 +11,7 @@ class LocalDataValues implements FlavorValues {
 
   @override
   DataPath get dataPath => const LocalDataPath();
+
+  @override
+  String get apiIndexLink => data_paths.apiIndexLink;
 }
