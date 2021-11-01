@@ -1,0 +1,58 @@
+import 'package:colored/sources/data/api/models/responses/api_response_data.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:vector_math/hash.dart';
+
+class _TestItem {
+  const _TestItem(this.value);
+
+  factory _TestItem.fromJson(Map<String, dynamic> json) => _TestItem(json[key]);
+
+  static const key = "key";
+
+  final String value;
+
+  @override
+  bool operator ==(Object other) => other is _TestItem && other.value == value;
+
+  @override
+  int get hashCode => hashObjects([value]);
+}
+
+void main() {
+  const testData = {
+    "kind": "test",
+    "currentItemCount": 3,
+    "itemsPerPage": 10,
+    "startIndex": 1,
+    "totalItems": 3,
+    "pageIndex": 1,
+    "totalPages": 1,
+    "selfLink": "https://test.com/",
+    "items": [
+      {_TestItem.key: "value"}
+    ]
+  };
+
+  group("Given a $ListPage", () {
+    group("when constructed from an $ApiResponseData", () {
+      test("then values are correctly parsed", () {
+        final apiResponseData = ApiResponseData.fromJson(testData);
+        if (apiResponseData == null) {
+          fail("$ApiResponseData parsing failed, expected not null response.");
+        }
+        final listPage = ListPage<_TestItem>.fromApiResponseData(
+          apiResponseData,
+          jsonParser: (json) => _TestItem.fromJson(json),
+        );
+        expect(listPage.currentItemCount, 3);
+        expect(listPage.itemsPerPage, 10);
+        expect(listPage.startIndex, 1);
+        expect(listPage.totalItems, 3);
+        expect(listPage.pageIndex, 1);
+        expect(listPage.totalPages, 1);
+        expect(listPage.items, [const _TestItem("value")]);
+      });
+    });
+  });
+}
