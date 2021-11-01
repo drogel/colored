@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:colored/sources/data/api/models/index/api_index.dart';
+import 'package:colored/sources/data/api/services/base/response/api_response_parser.dart';
 import 'package:colored/sources/data/api/services/index/api_index/api_index_fetcher.dart';
 import 'package:colored/sources/data/api/services/index/api_index/api_index_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,6 +19,7 @@ void main() {
           responseBody: jsonEncode(testApiIndexResponse),
         ),
         apiIndexLink: "test",
+        parser: const ApiResponseParser(),
       );
     });
 
@@ -42,6 +44,7 @@ void main() {
           responseBody: jsonEncode(failingApiIndexResponse),
         ),
         apiIndexLink: "test",
+        parser: const ApiResponseParser(),
       );
     });
 
@@ -58,6 +61,7 @@ void main() {
       service = ApiIndexFetcher(
         client: HttpClientFailingStub(),
         apiIndexLink: "test",
+        parser: const ApiResponseParser(),
       );
     });
 
