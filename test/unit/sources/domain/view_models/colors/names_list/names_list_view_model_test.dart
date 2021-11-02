@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:colored/sources/data/pagination/list_paginator.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/data/services/names/paginated_color_names_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
@@ -27,6 +28,8 @@ class NamesServiceEmptyStub implements NamesService<String> {
           String searchString) async =>
       {};
 }
+
+const testPageInfo = PageInfo(startIndex: 1, size: 10, pageIndex: 1);
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -102,19 +105,19 @@ void main() {
       stateController.close();
     });
 
-    group("when searchColorName is called", () {
+    group("when searchColorNames is called", () {
       test("with a searchString of length < 3, then Pending is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
-        viewModel.searchColorNames("se");
+        viewModel.searchColorNames("se", pageInfo: testPageInfo);
       });
 
       test("with a searchString of length >= 3, then Found state is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Found>()),
         );
-        viewModel.searchColorNames("red");
+        viewModel.searchColorNames("red", pageInfo: testPageInfo);
       });
 
       test("with a searchString of length < 3, then search is retrieved", () {
@@ -122,7 +125,7 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
-        viewModel.searchColorNames(expected);
+        viewModel.searchColorNames(expected, pageInfo: testPageInfo);
       });
 
       test("with a searchString of length >= 3, then search is retrieved", () {
@@ -130,7 +133,7 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
-        viewModel.searchColorNames(expected);
+        viewModel.searchColorNames(expected, pageInfo: testPageInfo);
       });
 
       test("with searchString.length >= 3, then namedColors are retrieved", () {
@@ -143,7 +146,52 @@ void main() {
           final actual = found.namedColors.first;
           expect(actual, expected);
         });
-        viewModel.searchColorNames("red");
+        viewModel.searchColorNames("red", pageInfo: testPageInfo);
+      });
+    });
+
+    group("when startColorNamesSearch is called", () {
+      test("with a searchString of length < 3, then Pending is added", () {
+        stateController.stream.listen(
+          (event) => expect(event, isA<Pending>()),
+        );
+        viewModel.startColorNamesSearch("se");
+      });
+
+      test("with a searchString of length >= 3, then Found state is added", () {
+        stateController.stream.listen(
+          (event) => expect(event, isA<Found>()),
+        );
+        viewModel.startColorNamesSearch("red");
+      });
+
+      test("with a searchString of length < 3, then search is retrieved", () {
+        const expected = "se";
+        stateController.stream.listen(
+          (event) => expect(event.search, expected),
+        );
+        viewModel.startColorNamesSearch(expected);
+      });
+
+      test("with a searchString of length >= 3, then search is retrieved", () {
+        const expected = "search";
+        stateController.stream.listen(
+          (event) => expect(event.search, expected),
+        );
+        viewModel.startColorNamesSearch(expected);
+      });
+
+      test("with searchString.length >= 3, then namedColors are retrieved", () {
+        stateController.stream.listen((event) {
+          final found = event as Found;
+          final expected = NamedColor(
+            name: NamesServiceStub.namesMap.values.first,
+            hex: "#${NamesServiceStub.namesMap.keys.first.toUpperCase()}",
+          );
+          final actual = found.namedColors.first;
+          expect(actual, expected);
+        });
+        viewModel.startColorNamesSearch("red");
       });
     });
   });
@@ -171,14 +219,30 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
-        viewModel.searchColorNames("se");
+        viewModel.searchColorNames("se", pageInfo: testPageInfo);
       });
 
       test("with searchString.length >= 3, then NoneFound is retrieved", () {
         stateController.stream.listen(
           (event) => expect(event, isA<NoneFound>()),
         );
-        viewModel.searchColorNames("red");
+        viewModel.searchColorNames("red", pageInfo: testPageInfo);
+      });
+    });
+
+    group("when startColorNamesSearch is called", () {
+      test("with a searchString of length < 3, then Pending is added", () {
+        stateController.stream.listen(
+          (event) => expect(event, isA<Pending>()),
+        );
+        viewModel.startColorNamesSearch("se");
+      });
+
+      test("with searchString.length >= 3, then NoneFound is retrieved", () {
+        stateController.stream.listen(
+          (event) => expect(event, isA<NoneFound>()),
+        );
+        viewModel.startColorNamesSearch("red");
       });
     });
   });

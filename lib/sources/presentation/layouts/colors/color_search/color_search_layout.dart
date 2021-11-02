@@ -13,7 +13,7 @@ class ColorSearchLayout extends StatelessWidget implements PreferredSizeWidget {
         flexibleSpace: Align(
           alignment: Alignment.bottomCenter,
           child: ColorSuggestionsLayout(
-            onSuggestionSelected: NamesListData.of(context)!.onSearchChanged,
+            onSuggestionSelected: NamesListData.of(context)!.onSearchStarted,
           ),
         ),
       );

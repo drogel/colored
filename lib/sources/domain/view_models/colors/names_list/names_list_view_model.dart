@@ -24,14 +24,16 @@ class NamesListViewModel extends ListSearchConfigurator {
 
   NamesListState get initialState => Pending.emptySearch();
 
-  Future<void> searchColorNames(String searchString) async {
+  Future<void> searchColorNames(
+    String searchString, {
+    required PageInfo pageInfo,
+  }) async {
     final cleanSearch = _searchConfigurator.cleanSearch(searchString);
 
     if (cleanSearch.length < _searchConfigurator.minSearchLength) {
       return _stateController.sink.add(Pending(search: searchString));
     }
 
-    const pageInfo = PageInfo(startIndex: 0, size: 30, pageIndex: 0);
     final page = await _namesService.fetchContainingSearch(
       cleanSearch,
       pageInfo: pageInfo,
@@ -45,7 +47,17 @@ class NamesListViewModel extends ListSearchConfigurator {
     }
   }
 
-  void clearSearch() => _stateController.sink.add(Pending.emptySearch());
+  Future<void> startColorNamesSearch(String searchString) async {
+    const startIndex = 1;
+    const initialPageInfo = PageInfo(
+      startIndex: startIndex,
+      size: 30,
+      pageIndex: startIndex,
+    );
+    await searchColorNames(searchString, pageInfo: initialPageInfo);
+  }
+
+  void clearSearch() => startColorNamesSearch("");
 
   void dispose() => _stateController.close();
 }

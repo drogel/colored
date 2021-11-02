@@ -34,6 +34,8 @@ class _NamesListNotifierState extends State<NamesListNotifier> {
         builder: (_, snapshot) => NamesListData(
           state: snapshot.data ?? _viewModel.initialState,
           onSearchChanged: _viewModel.searchColorNames,
+          onSearchStarted: _viewModel.startColorNamesSearch,
+          onSearchCleared: _viewModel.clearSearch,
           onBackPressed: _viewModel.clearSearch,
           child: widget.child,
         ),
