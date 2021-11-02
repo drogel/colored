@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:colored/sources/data/pagination/list_paginator.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
+import 'package:colored/sources/data/services/names/paginated_color_names_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
@@ -8,9 +10,9 @@ import 'package:colored/sources/domain/view_models/colors/names_list/names_list_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockNamesService extends Mock implements NamesService {}
+class MockNamesService extends Mock implements NamesService<String> {}
 
-class NamesServiceStub implements NamesService {
+class NamesServiceStub implements NamesService<String> {
   static const Map<String, String> namesMap = {"testHex": "testName"};
 
   @override
@@ -19,7 +21,7 @@ class NamesServiceStub implements NamesService {
       namesMap;
 }
 
-class NamesServiceEmptyStub implements NamesService {
+class NamesServiceEmptyStub implements NamesService<String> {
   @override
   Future<Map<String, String>> fetchContainingSearch(
           String searchString) async =>
@@ -31,14 +33,17 @@ void main() {
 
   late NamesListViewModel viewModel;
   late StreamController<NamesListState> stateController;
-  late NamesService namesService;
+  late NamesService<String> namesService;
 
   setUp(() {
     stateController = StreamController<NamesListState>();
     namesService = MockNamesService();
     viewModel = NamesListViewModel(
       stateController: stateController,
-      namesService: namesService,
+      namesService: PaginatedColorNamesService(
+        namesService: namesService,
+        paginator: const ListPaginator(),
+      ),
       searchConfigurator: const ListSearchConfigurator(),
     );
   });
@@ -85,7 +90,10 @@ void main() {
       namesService = NamesServiceStub();
       viewModel = NamesListViewModel(
         stateController: stateController,
-        namesService: namesService,
+        namesService: PaginatedColorNamesService(
+          namesService: namesService,
+          paginator: const ListPaginator(),
+        ),
         searchConfigurator: const ListSearchConfigurator(),
       );
     });
@@ -146,7 +154,10 @@ void main() {
       namesService = NamesServiceEmptyStub();
       viewModel = NamesListViewModel(
         stateController: stateController,
-        namesService: namesService,
+        namesService: PaginatedColorNamesService(
+          namesService: namesService,
+          paginator: const ListPaginator(),
+        ),
         searchConfigurator: const ListSearchConfigurator(),
       );
     });
