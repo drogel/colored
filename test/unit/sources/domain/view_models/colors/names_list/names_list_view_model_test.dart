@@ -214,7 +214,7 @@ void main() {
       stateController.close();
     });
 
-    group("when searchColorName is called", () {
+    group("when searchColorNames is called", () {
       test("with a searchString of length < 3, then Pending is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),

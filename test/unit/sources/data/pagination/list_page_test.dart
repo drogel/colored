@@ -54,5 +54,156 @@ void main() {
         expect(listPage.items, [const _TestItem("value")]);
       });
     });
+
+    group("when checking if there is a next page", () {
+      group("with a zero start index", () {
+        test("then returns true if there are more pages", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 0,
+            totalItems: 4,
+            pageIndex: 0,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isTrue);
+        });
+
+        test("then returns false if we are on the last page", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 0,
+            totalItems: 4,
+            pageIndex: 1,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isFalse);
+        });
+
+        test("then returns false if we are past the last page", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 0,
+            totalItems: 4,
+            pageIndex: 3,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isFalse);
+        });
+      });
+
+      group("with a start index == 1", () {
+        test("then returns page index is below the start index", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 1,
+            totalItems: 4,
+            pageIndex: 0,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isTrue);
+        });
+
+        test("then returns true if there are more pages", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 1,
+            totalItems: 4,
+            pageIndex: 1,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isTrue);
+        });
+
+        test("then returns false if we are on the last page", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 1,
+            totalItems: 4,
+            pageIndex: 2,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isFalse);
+        });
+
+        test("then returns false if we are past the last page", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 1,
+            totalItems: 4,
+            pageIndex: 3,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isFalse);
+        });
+      });
+
+      group("with a start index > 1", () {
+        test("then returns page index is below the start index", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 2,
+            totalItems: 4,
+            pageIndex: 0,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isTrue);
+        });
+
+        test("then returns true if there are more pages", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 2,
+            totalItems: 4,
+            pageIndex: 2,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isTrue);
+        });
+
+        test("then returns false if we are on the last page", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 2,
+            totalItems: 4,
+            pageIndex: 3,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isFalse);
+        });
+
+        test("then returns false if we are past the last page", () {
+          const testListPage = ListPage<int>(
+            currentItemCount: 2,
+            itemsPerPage: 2,
+            startIndex: 2,
+            totalItems: 4,
+            pageIndex: 8,
+            totalPages: 2,
+            items: [0, 1, 2, 3],
+          );
+		  expect(testListPage.hasNext, isFalse);
+        });
+      });
+    });
   });
 }

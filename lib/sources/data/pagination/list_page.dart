@@ -36,4 +36,6 @@ class ListPage<T> {
   final int pageIndex;
   final int totalPages;
   final List<T> items;
+
+  bool get hasNext => pageIndex - startIndex < totalPages - 1;
 }
