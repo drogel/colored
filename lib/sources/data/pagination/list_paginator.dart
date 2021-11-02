@@ -10,7 +10,11 @@ class ListPaginator<T> implements Paginator<T> {
     final startIndex = pageInfo.startIndex;
     final pageSize = pageInfo.size;
     final pageIndex = pageInfo.pageIndex;
-    final sublistStartIndex = pageSize * (pageIndex - startIndex);
+    final sublistStartIndex = _getSublistStartIndex(
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+      startIndex: startIndex,
+    );
     final listEndIndex = items.length;
     final sublistEndIndex = _getSublistEndIndex(
       sublistStartIndex: sublistStartIndex,
@@ -28,6 +32,15 @@ class ListPaginator<T> implements Paginator<T> {
       totalPages: totalPages,
       items: sublist,
     );
+  }
+
+  int _getSublistStartIndex({
+    required int pageIndex,
+    required int pageSize,
+    required int startIndex,
+  }) {
+    final relativeIndex = (pageIndex - startIndex).clamp(0, pageIndex);
+    return pageSize * relativeIndex;
   }
 
   int _getSublistEndIndex({

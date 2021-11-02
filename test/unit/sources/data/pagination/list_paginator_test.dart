@@ -254,5 +254,43 @@ void main() {
         });
       });
     });
+
+    group("when retrieving a page with an index below the startIndex", () {
+      test("then $ListPage is the same as if pageIndex == startIndex", () {
+        _runPaginatorTest(
+          paginator,
+          testItemsSize: 10,
+          testPageSize: 4,
+          testStartIndex: 2,
+          testPageIndex: 1,
+          actualCurrentItemCount: 4,
+          actualItemsPerPage: 4,
+          actualStartIndex: 2,
+          actualTotalItems: 10,
+          actualPageIndex: 1,
+          actualTotalPages: 3,
+          actualItems: [0, 1, 2, 3],
+        );
+      });
+    });
+
+    group("when retrieving a page with an index greater than totalPages", () {
+      test("then an empty $ListPage is retrieved", () {
+        _runPaginatorTest(
+          paginator,
+          testItemsSize: 10,
+          testPageSize: 5,
+          testStartIndex: 0,
+          testPageIndex: 2,
+          actualCurrentItemCount: 0,
+          actualItemsPerPage: 5,
+          actualStartIndex: 0,
+          actualTotalItems: 10,
+          actualPageIndex: 2,
+          actualTotalPages: 2,
+          actualItems: [],
+        );
+      });
+    });
   });
 }

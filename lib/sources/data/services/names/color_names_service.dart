@@ -6,7 +6,7 @@ class ColorNamesService implements NamesService<String> {
   ColorNamesService({
     required DataLoader<String> dataLoader,
     required MapFilter<String> filter,
-  })   : _dataLoader = dataLoader,
+  })  : _dataLoader = dataLoader,
         _filter = filter;
 
   final DataLoader<String> _dataLoader;
