@@ -15,6 +15,8 @@ class ResponsiveGrid extends StatefulWidget {
     this.crossAxisMinCount = 2,
     this.crossAxisMaxCount = 9,
     this.childAspectRatio = 1,
+    this.onScrolledForwardNearBottom,
+    this.nearBottomEdgeThreshold = 0,
     Key? key,
   }) : super(key: key);
 
@@ -24,6 +26,8 @@ class ResponsiveGrid extends StatefulWidget {
   final PageStorageKey<String>? pageStorageKey;
   final double childAspectRatio;
   final int itemCount;
+  final VoidCallback? onScrolledForwardNearBottom;
+  final double nearBottomEdgeThreshold;
   final IndexedWidgetBuilder itemBuilder;
 
   @override
@@ -32,10 +36,13 @@ class ResponsiveGrid extends StatefulWidget {
 
 class _ResponsiveGridState extends State<ResponsiveGrid> {
   final _scrollController = ScrollController();
+  late double _lastExtentAfter;
 
   @override
   void initState() {
     _scrollController.addListener(_dismissKeyboard);
+    _scrollController.addListener(_onScrolledForwardNearBottom);
+    _lastExtentAfter = double.infinity;
     super.initState();
   }
 
@@ -78,6 +85,12 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
     );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
   int _computeCrossAxisCount(BoxConstraints constraints) {
     final minCount = widget.crossAxisMinCount;
     final maxCount = widget.crossAxisMaxCount;
@@ -102,6 +115,22 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
 
   void _dismissKeyboard() =>
       WidgetsBinding.instance?.focusManager.primaryFocus?.unfocus();
+
+  void _onScrolledForwardNearBottom() {
+    final onScrolledForwardNearBottom = widget.onScrolledForwardNearBottom;
+    if (onScrolledForwardNearBottom == null) {
+      return;
+    }
+    final extentAfter = _scrollController.position.extentAfter;
+	final threshold = widget.nearBottomEdgeThreshold;
+	final isPastThreshold = extentAfter <= threshold;
+	final wasBelowThreshold = _lastExtentAfter >= threshold;
+    final isScrollNearBottomEdge = wasBelowThreshold && isPastThreshold;
+    _lastExtentAfter = extentAfter;
+    if (isScrollNearBottomEdge) {
+      onScrolledForwardNearBottom();
+    }
+  }
 
   bool _isItemCountDifferent(ResponsiveGrid oldWidget) =>
       oldWidget.itemCount != widget.itemCount;
