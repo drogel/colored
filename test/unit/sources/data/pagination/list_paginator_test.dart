@@ -142,6 +142,40 @@ void main() {
             actualItems: [9],
           );
         });
+
+        test("then a $ListPage with pageIndex > lastPageIndex returns []", () {
+          _runPaginatorTest(
+            paginator,
+            testItemsSize: 10,
+            testPageSize: 2,
+            testStartIndex: 0,
+            testPageIndex: 6,
+            actualCurrentItemCount: 0,
+            actualItemsPerPage: 2,
+            actualStartIndex: 0,
+            actualTotalItems: 10,
+            actualPageIndex: 6,
+            actualTotalPages: 5,
+            actualItems: [],
+          );
+        });
+
+        test("then a $ListPage with pageIndex < start returns firstPage", () {
+          _runPaginatorTest(
+            paginator,
+            testItemsSize: 10,
+            testPageSize: 2,
+            testStartIndex: 0,
+            testPageIndex: -1,
+            actualCurrentItemCount: 2,
+            actualItemsPerPage: 2,
+            actualStartIndex: 0,
+            actualTotalItems: 10,
+            actualPageIndex: -1,
+            actualTotalPages: 5,
+            actualItems: [0, 1],
+          );
+        });
       });
 
       group("with non-zero startIndex", () {
@@ -210,6 +244,40 @@ void main() {
             actualPageIndex: 6,
             actualTotalPages: 4,
             actualItems: [9],
+          );
+        });
+
+        test("then a $ListPage with pageIndex > lastPageIndex returns []", () {
+          _runPaginatorTest(
+            paginator,
+            testItemsSize: 10,
+            testPageSize: 2,
+            testStartIndex: 1,
+            testPageIndex: 7,
+            actualCurrentItemCount: 0,
+            actualItemsPerPage: 2,
+            actualStartIndex: 1,
+            actualTotalItems: 10,
+            actualPageIndex: 7,
+            actualTotalPages: 5,
+            actualItems: [],
+          );
+        });
+
+        test("then a $ListPage with pageIndex < start returns first page", () {
+          _runPaginatorTest(
+            paginator,
+            testItemsSize: 10,
+            testPageSize: 2,
+            testStartIndex: 1,
+            testPageIndex: 0,
+            actualCurrentItemCount: 2,
+            actualItemsPerPage: 2,
+            actualStartIndex: 1,
+            actualTotalItems: 10,
+            actualPageIndex: 0,
+            actualTotalPages: 5,
+            actualItems: [0, 1],
           );
         });
       });

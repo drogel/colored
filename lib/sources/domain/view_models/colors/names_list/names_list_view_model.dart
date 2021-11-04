@@ -47,6 +47,14 @@ class NamesListViewModel extends ListSearchConfigurator {
     }
   }
 
+  Future<void> searchColorNamesNextPage(
+    String searchString, {
+    required PageInfo currentPageInfo,
+  }) async {
+    final nextPageInfo = currentPageInfo.next;
+    await searchColorNames(searchString, pageInfo: nextPageInfo);
+  }
+
   Future<void> startColorNamesSearch(String searchString) async {
     const startIndex = 1;
     const initialPageInfo = PageInfo(

@@ -22,7 +22,7 @@ class ListPaginator<T> implements Paginator<T> {
       listEndIndex: listEndIndex,
     );
     final totalPages = (items.length / pageSize).ceil();
-    final sublist = items.sublist(sublistStartIndex, sublistEndIndex);
+    final sublist = _getSublist(items, sublistStartIndex, sublistEndIndex);
     return ListPage<T>(
       currentItemCount: sublist.length,
       itemsPerPage: pageSize,
@@ -39,6 +39,9 @@ class ListPaginator<T> implements Paginator<T> {
     required int pageSize,
     required int startIndex,
   }) {
+    if (pageIndex.isNegative) {
+      return 0;
+    }
     final relativeIndex = (pageIndex - startIndex).clamp(0, pageIndex);
     return pageSize * relativeIndex;
   }
@@ -49,6 +52,19 @@ class ListPaginator<T> implements Paginator<T> {
     required int listEndIndex,
   }) {
     final maxSublistStartIndex = sublistStartIndex + pageSize;
+    if (sublistStartIndex >= listEndIndex) {
+      return listEndIndex;
+    }
     return maxSublistStartIndex.clamp(sublistStartIndex, listEndIndex);
+  }
+
+  List<T> _getSublist(List<T> list, int startIndex, int endIndex) {
+    final isStartValid = !startIndex.isNegative && startIndex <= list.length;
+    final isEndValid = !endIndex.isNegative;
+    final isRangeValid = isStartValid && isEndValid && startIndex <= endIndex;
+    if (!isRangeValid) {
+      return [];
+    }
+    return list.sublist(startIndex, endIndex);
   }
 }
