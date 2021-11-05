@@ -1,4 +1,5 @@
 import 'package:colored/sources/data/api/models/responses/api_response_data.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
 
 typedef JsonParser<T> = T Function(Map<String, dynamic> json);
 
@@ -38,4 +39,10 @@ class ListPage<T> {
   final List<T> items;
 
   bool get hasNext => pageIndex - startIndex < totalPages - 1;
+
+  PageInfo get pageInfo => PageInfo(
+        startIndex: startIndex,
+        size: currentItemCount,
+        pageIndex: pageIndex,
+      );
 }

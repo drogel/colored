@@ -1,5 +1,6 @@
 import 'package:colored/sources/data/api/models/responses/api_response_data.dart';
 import 'package:colored/sources/data/pagination/list_page.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vector_math/hash.dart';
 
@@ -67,7 +68,7 @@ void main() {
             totalPages: 2,
             items: [0, 1, 2, 3],
           );
-		  expect(testListPage.hasNext, isTrue);
+          expect(testListPage.hasNext, isTrue);
         });
 
         test("then returns false if we are on the last page", () {
@@ -80,7 +81,7 @@ void main() {
             totalPages: 2,
             items: [0, 1, 2, 3],
           );
-		  expect(testListPage.hasNext, isFalse);
+          expect(testListPage.hasNext, isFalse);
         });
 
         test("then returns false if we are past the last page", () {
@@ -93,7 +94,7 @@ void main() {
             totalPages: 2,
             items: [0, 1, 2, 3],
           );
-		  expect(testListPage.hasNext, isFalse);
+          expect(testListPage.hasNext, isFalse);
         });
       });
 
@@ -108,7 +109,7 @@ void main() {
             totalPages: 2,
             items: [0, 1, 2, 3],
           );
-		  expect(testListPage.hasNext, isTrue);
+          expect(testListPage.hasNext, isTrue);
         });
 
         test("then returns true if there are more pages", () {
@@ -121,7 +122,7 @@ void main() {
             totalPages: 2,
             items: [0, 1, 2, 3],
           );
-		  expect(testListPage.hasNext, isTrue);
+          expect(testListPage.hasNext, isTrue);
         });
 
         test("then returns false if we are on the last page", () {
@@ -134,7 +135,7 @@ void main() {
             totalPages: 2,
             items: [0, 1, 2, 3],
           );
-		  expect(testListPage.hasNext, isFalse);
+          expect(testListPage.hasNext, isFalse);
         });
 
         test("then returns false if we are past the last page", () {
@@ -147,7 +148,7 @@ void main() {
             totalPages: 2,
             items: [0, 1, 2, 3],
           );
-		  expect(testListPage.hasNext, isFalse);
+          expect(testListPage.hasNext, isFalse);
         });
       });
 
@@ -160,9 +161,9 @@ void main() {
             totalItems: 4,
             pageIndex: 0,
             totalPages: 2,
-            items: [0, 1, 2, 3],
+            items: [0, 1],
           );
-		  expect(testListPage.hasNext, isTrue);
+          expect(testListPage.hasNext, isTrue);
         });
 
         test("then returns true if there are more pages", () {
@@ -173,9 +174,9 @@ void main() {
             totalItems: 4,
             pageIndex: 2,
             totalPages: 2,
-            items: [0, 1, 2, 3],
+            items: [0, 1],
           );
-		  expect(testListPage.hasNext, isTrue);
+          expect(testListPage.hasNext, isTrue);
         });
 
         test("then returns false if we are on the last page", () {
@@ -186,9 +187,9 @@ void main() {
             totalItems: 4,
             pageIndex: 3,
             totalPages: 2,
-            items: [0, 1, 2, 3],
+            items: [0, 1],
           );
-		  expect(testListPage.hasNext, isFalse);
+          expect(testListPage.hasNext, isFalse);
         });
 
         test("then returns false if we are past the last page", () {
@@ -199,10 +200,26 @@ void main() {
             totalItems: 4,
             pageIndex: 8,
             totalPages: 2,
-            items: [0, 1, 2, 3],
+            items: [0, 1],
           );
-		  expect(testListPage.hasNext, isFalse);
+          expect(testListPage.hasNext, isFalse);
         });
+      });
+    });
+
+    group("when getting its $PageInfo field", () {
+      test("then the page info has the expected values", () {
+        const testListPage = ListPage<int>(
+          currentItemCount: 2,
+          itemsPerPage: 2,
+          startIndex: 2,
+          totalItems: 4,
+          pageIndex: 8,
+          totalPages: 2,
+          items: [0, 1],
+        );
+        const expected = PageInfo(startIndex: 2, size: 2, pageIndex: 8);
+        expect(testListPage.pageInfo, expected);
       });
     });
   });

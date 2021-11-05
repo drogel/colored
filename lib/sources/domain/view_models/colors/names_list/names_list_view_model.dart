@@ -43,7 +43,9 @@ class NamesListViewModel extends ListSearchConfigurator {
     if (namedColors.isEmpty) {
       _stateController.sink.add(NoneFound(search: searchString));
     } else {
-      _stateController.sink.add(Found(namedColors, search: searchString));
+      _stateController.sink.add(
+        Found(namedColors, search: searchString, pageInfo: page.pageInfo),
+      );
     }
   }
 
