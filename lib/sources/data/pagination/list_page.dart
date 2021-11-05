@@ -42,7 +42,7 @@ class ListPage<T> {
 
   PageInfo get pageInfo => PageInfo(
         startIndex: startIndex,
-        size: currentItemCount,
+        size: itemsPerPage,
         pageIndex: pageIndex,
       );
 }

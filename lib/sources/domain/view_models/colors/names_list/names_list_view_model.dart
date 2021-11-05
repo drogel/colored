@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/common/search_configurator/search_configurator.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/names/paginated_names_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
@@ -24,9 +25,37 @@ class NamesListViewModel extends ListSearchConfigurator {
 
   NamesListState get initialState => Pending.emptySearch();
 
-  Future<void> searchColorNames(
+  Future<void> searchColorNamesNextPage(
+    String searchString, {
+    required List<NamedColor> currentNamedColors,
+    required PageInfo currentPageInfo,
+  }) async {
+    final nextPageInfo = currentPageInfo.next;
+    await _searchColorNames(
+      searchString,
+      pageInfo: nextPageInfo,
+      currentNamedColors: currentNamedColors,
+    );
+  }
+
+  Future<void> startColorNamesSearch(String searchString) async {
+    const startIndex = 1;
+    const initialPageInfo = PageInfo(
+      startIndex: startIndex,
+      size: 30,
+      pageIndex: startIndex,
+    );
+    await _searchColorNames(searchString, pageInfo: initialPageInfo);
+  }
+
+  void clearSearch() => startColorNamesSearch("");
+
+  void dispose() => _stateController.close();
+
+  Future<void> _searchColorNames(
     String searchString, {
     required PageInfo pageInfo,
+    List<NamedColor>? currentNamedColors,
   }) async {
     final cleanSearch = _searchConfigurator.cleanSearch(searchString);
 
@@ -38,8 +67,22 @@ class NamesListViewModel extends ListSearchConfigurator {
       cleanSearch,
       pageInfo: pageInfo,
     );
-    final namedColors = page.items;
+    if (currentNamedColors == null || currentNamedColors.isEmpty) {
+      _notifySearchStarted(searchString, page: page);
+    } else {
+      _notifySearchedNextPage(
+        searchString,
+        page: page,
+        previousNamedColors: currentNamedColors,
+      );
+    }
+  }
 
+  void _notifySearchStarted(
+    String searchString, {
+    required ListPage<NamedColor> page,
+  }) {
+    final namedColors = page.items;
     if (namedColors.isEmpty) {
       _stateController.sink.add(NoneFound(search: searchString));
     } else {
@@ -49,25 +92,14 @@ class NamesListViewModel extends ListSearchConfigurator {
     }
   }
 
-  Future<void> searchColorNamesNextPage(
+  void _notifySearchedNextPage(
     String searchString, {
-    required PageInfo currentPageInfo,
-  }) async {
-    final nextPageInfo = currentPageInfo.next;
-    await searchColorNames(searchString, pageInfo: nextPageInfo);
-  }
-
-  Future<void> startColorNamesSearch(String searchString) async {
-    const startIndex = 1;
-    const initialPageInfo = PageInfo(
-      startIndex: startIndex,
-      size: 30,
-      pageIndex: startIndex,
+    required ListPage<NamedColor> page,
+    required List<NamedColor> previousNamedColors,
+  }) {
+    final allNamedColors = previousNamedColors + page.items;
+    _stateController.sink.add(
+      Found(allNamedColors, search: searchString, pageInfo: page.pageInfo),
     );
-    await searchColorNames(searchString, pageInfo: initialPageInfo);
   }
-
-  void clearSearch() => startColorNamesSearch("");
-
-  void dispose() => _stateController.close();
 }

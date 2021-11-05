@@ -210,13 +210,13 @@ void main() {
     group("when getting its $PageInfo field", () {
       test("then the page info has the expected values", () {
         const testListPage = ListPage<int>(
-          currentItemCount: 2,
+          currentItemCount: 0,
           itemsPerPage: 2,
           startIndex: 2,
           totalItems: 4,
           pageIndex: 8,
           totalPages: 2,
-          items: [0, 1],
+          items: [],
         );
         const expected = PageInfo(startIndex: 2, size: 2, pageIndex: 8);
         expect(testListPage.pageInfo, expected);

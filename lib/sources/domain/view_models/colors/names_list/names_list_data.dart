@@ -1,9 +1,11 @@
 import 'package:colored/sources/data/pagination/page_info.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
 import 'package:flutter/material.dart';
 
 typedef PaginatedNamesSearcher = Future<void> Function(
   String, {
+  required List<NamedColor> currentNamedColors,
   required PageInfo currentPageInfo,
 });
 
