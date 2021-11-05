@@ -10,18 +10,32 @@ class NamesListLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = NamesListData.of(context)!.state;
+    final data = NamesListData.of(context)!;
+    final state = data.state;
     switch (state.runtimeType) {
       case NoneFound:
         return const NoColorsMessage();
       case Found:
         final foundState = state as Found;
         return NamesGrid(
-          pageStorageKey: PageStorageKey(runtimeType.toString()),
           namedColors: foundState.namedColors,
+          pageStorageKey: PageStorageKey(runtimeType.toString()),
+          onScrolledForwardNearBottom: () => _notifyNextPageNeeded(data),
         );
       default:
         return const BackgroundContainer();
     }
+  }
+
+  void _notifyNextPageNeeded(NamesListData data) {
+    final isFoundState = data.state is Found;
+    if (!isFoundState) {
+      return;
+    }
+    final foundState = data.state as Found;
+    data.onSearchChanged(
+      foundState.search,
+      currentPageInfo: foundState.pageInfo,
+    );
   }
 }

@@ -12,16 +12,19 @@ class NamesGrid extends StatelessWidget {
   const NamesGrid({
     required this.namedColors,
     this.pageStorageKey,
+    this.onScrolledForwardNearBottom,
     Key? key,
   }) : super(key: key);
 
   final PageStorageKey<String>? pageStorageKey;
   final List<NamedColor> namedColors;
+  final VoidCallback? onScrolledForwardNearBottom;
 
   @override
   Widget build(BuildContext context) => SquareResponsiveGrid(
       pageStorageKey: pageStorageKey,
       itemCount: namedColors.length,
+      onScrolledForwardNearBottom: onScrolledForwardNearBottom,
       itemBuilder: (context, index) {
         final namedColor = namedColors[index];
         return SingleColorCard(

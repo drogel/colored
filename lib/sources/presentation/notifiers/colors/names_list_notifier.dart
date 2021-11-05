@@ -33,7 +33,7 @@ class _NamesListNotifierState extends State<NamesListNotifier> {
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => NamesListData(
           state: snapshot.data ?? _viewModel.initialState,
-          onSearchChanged: _viewModel.searchColorNames,
+          onSearchChanged: _viewModel.searchColorNamesNextPage,
           onSearchStarted: _viewModel.startColorNamesSearch,
           onSearchCleared: _viewModel.clearSearch,
           onBackPressed: _viewModel.clearSearch,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 typedef PaginatedNamesSearcher = Future<void> Function(
   String, {
-  required PageInfo pageInfo,
+  required PageInfo currentPageInfo,
 });
 
 class NamesListData extends InheritedWidget {
