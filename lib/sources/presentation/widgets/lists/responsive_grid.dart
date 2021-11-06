@@ -1,5 +1,3 @@
-import 'package:colored/sources/app/styling/curves/curve_data.dart';
-import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
 import 'package:colored/sources/presentation/widgets/lists/only_portrait_scrollbar.dart';
@@ -17,6 +15,7 @@ class ResponsiveGrid extends StatefulWidget {
     this.childAspectRatio = 1,
     this.onScrolledForwardNearBottom,
     this.nearBottomEdgeThreshold = 0,
+    this.scrollController,
     Key? key,
   }) : super(key: key);
 
@@ -28,6 +27,7 @@ class ResponsiveGrid extends StatefulWidget {
   final int itemCount;
   final VoidCallback? onScrolledForwardNearBottom;
   final double nearBottomEdgeThreshold;
+  final ScrollController? scrollController;
   final IndexedWidgetBuilder itemBuilder;
 
   @override
@@ -35,23 +35,16 @@ class ResponsiveGrid extends StatefulWidget {
 }
 
 class _ResponsiveGridState extends State<ResponsiveGrid> {
-  final _scrollController = ScrollController();
+  late final ScrollController _scrollController;
   late double _lastExtentAfter;
 
   @override
   void initState() {
+    _scrollController = widget.scrollController ?? ScrollController();
     _scrollController.addListener(_dismissKeyboard);
     _scrollController.addListener(_onScrolledForwardNearBottom);
     _lastExtentAfter = double.infinity;
     super.initState();
-  }
-
-  @override
-  void didUpdateWidget(ResponsiveGrid oldWidget) {
-    if (_isItemCountDifferent(oldWidget)) {
-      _animateToTop(context);
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -107,12 +100,6 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
     }
   }
 
-  void _animateToTop(BuildContext context) {
-    final curve = CurveData.of(context)!.curveScheme.main;
-    final duration = DurationData.of(context)!.durationScheme.mediumPresenting;
-    _scrollController.animateTo(0, duration: duration, curve: curve);
-  }
-
   void _dismissKeyboard() =>
       WidgetsBinding.instance?.focusManager.primaryFocus?.unfocus();
 
@@ -122,16 +109,13 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
       return;
     }
     final extentAfter = _scrollController.position.extentAfter;
-	final threshold = widget.nearBottomEdgeThreshold;
-	final isPastThreshold = extentAfter <= threshold;
-	final wasBelowThreshold = _lastExtentAfter >= threshold;
+    final threshold = widget.nearBottomEdgeThreshold;
+    final isPastThreshold = extentAfter <= threshold;
+    final wasBelowThreshold = _lastExtentAfter >= threshold;
     final isScrollNearBottomEdge = wasBelowThreshold && isPastThreshold;
     _lastExtentAfter = extentAfter;
     if (isScrollNearBottomEdge) {
       onScrolledForwardNearBottom();
     }
   }
-
-  bool _isItemCountDifferent(ResponsiveGrid oldWidget) =>
-      oldWidget.itemCount != widget.itemCount;
 }

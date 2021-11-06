@@ -9,6 +9,7 @@ class SquareResponsiveGrid extends StatelessWidget {
   const SquareResponsiveGrid({
     required this.itemCount,
     required this.itemBuilder,
+    this.scrollController,
     this.onScrolledForwardNearBottom,
     this.pageStorageKey,
     Key? key,
@@ -17,17 +18,19 @@ class SquareResponsiveGrid extends StatelessWidget {
   final PageStorageKey<String>? pageStorageKey;
   final int itemCount;
   final VoidCallback? onScrolledForwardNearBottom;
+  final ScrollController? scrollController;
   final IndexedWidgetBuilder itemBuilder;
 
   @override
   Widget build(BuildContext context) => ResponsiveGrid(
         pageStorageKey: pageStorageKey,
+        scrollController: scrollController,
         crossAxisMaxCount: _kCrossAxisMaxCount,
         crossAxisMinCount: _kCrossAxisMinCount,
         estimatedItemSize: _kEstimatedItemSize,
         itemCount: itemCount,
-		onScrolledForwardNearBottom: onScrolledForwardNearBottom,
-		nearBottomEdgeThreshold: 1.5 * _kEstimatedItemSize,
+        onScrolledForwardNearBottom: onScrolledForwardNearBottom,
+        nearBottomEdgeThreshold: 1.5 * _kEstimatedItemSize,
         itemBuilder: itemBuilder,
       );
 }

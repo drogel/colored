@@ -42,7 +42,7 @@ class NamesListViewModel extends ListSearchConfigurator {
     const startIndex = 1;
     const initialPageInfo = PageInfo(
       startIndex: startIndex,
-      size: 30,
+      size: 60,
       pageIndex: startIndex,
     );
     await _searchColorNames(searchString, pageInfo: initialPageInfo);
