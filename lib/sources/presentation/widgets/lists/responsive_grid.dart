@@ -41,7 +41,6 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
   @override
   void initState() {
     _scrollController = widget.scrollController ?? ScrollController();
-    _scrollController.addListener(_dismissKeyboard);
     _scrollController.addListener(_onScrolledForwardNearBottom);
     _lastExtentAfter = double.infinity;
     super.initState();
@@ -54,6 +53,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
     final viewInsets = _computeEffectiveViewInsets(mediaQuery.viewInsets);
     final totalPadding = padding.vertical + viewInsets;
     return KeyboardDismisser(
+      gestures: const [GestureType.onTap, GestureType.onVerticalDragDown],
       child: BackgroundContainer(
         child: OnlyPortraitScrollbar(
           child: SafeArea(
@@ -80,8 +80,8 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
 
   @override
   void dispose() {
-    super.dispose();
     _scrollController.dispose();
+    super.dispose();
   }
 
   int _computeCrossAxisCount(BoxConstraints constraints) {
@@ -99,9 +99,6 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
       return viewInsets;
     }
   }
-
-  void _dismissKeyboard() =>
-      WidgetsBinding.instance?.focusManager.primaryFocus?.unfocus();
 
   void _onScrolledForwardNearBottom() {
     final onScrolledForwardNearBottom = widget.onScrolledForwardNearBottom;
