@@ -1,23 +1,18 @@
 import 'package:colored/sources/domain/data_models/palette.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 
-class PalettesListState {
-  const PalettesListState(this.search);
-
-  final String search;
-}
-
-class Pending extends PalettesListState {
+class Pending extends NamesListState {
   const Pending({required String search}) : super(search);
 
   factory Pending.emptySearch() => const Pending(search: "");
 }
 
-class Found extends PalettesListState {
+class Found extends NamesListState {
   const Found(this.palettes, {required String search}) : super(search);
 
   final List<Palette> palettes;
 }
 
-class NoneFound extends PalettesListState {
+class NoneFound extends NamesListState {
   const NoneFound({required String search}) : super(search);
 }

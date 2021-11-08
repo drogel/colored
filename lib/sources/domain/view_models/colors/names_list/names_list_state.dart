@@ -1,13 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 import 'package:vector_math/hash.dart';
-
-class NamesListState {
-  const NamesListState(this.search);
-
-  final String search;
-}
 
 class Pending extends NamesListState {
   const Pending({required String search}) : super(search);

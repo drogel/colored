@@ -3,24 +3,25 @@ import 'dart:async';
 import 'package:colored/sources/common/search_configurator/search_configurator.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
 
 class PalettesListViewModel {
   const PalettesListViewModel({
-    required StreamController<PalettesListState> stateController,
+    required StreamController<NamesListState> stateController,
     required NamesService<List<String>> namesService,
     required SearchConfigurator searchConfigurator,
-  })   : _stateController = stateController,
+  })  : _stateController = stateController,
         _namesService = namesService,
         _searchConfigurator = searchConfigurator;
 
   final SearchConfigurator _searchConfigurator;
-  final StreamController<PalettesListState> _stateController;
+  final StreamController<NamesListState> _stateController;
   final NamesService<List<String>> _namesService;
 
-  Stream<PalettesListState> get stateStream => _stateController.stream;
+  Stream<NamesListState> get stateStream => _stateController.stream;
 
-  PalettesListState get initialState => Pending.emptySearch();
+  NamesListState get initialState => Pending.emptySearch();
 
   Future<void> searchPalettes(String searchString) async {
     final cleanSearch = _searchConfigurator.cleanSearch(searchString);

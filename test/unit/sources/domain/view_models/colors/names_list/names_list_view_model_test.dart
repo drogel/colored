@@ -6,6 +6,7 @@ import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/data/services/names/paginated_color_names_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -115,14 +116,14 @@ void main() {
       stateController.close();
     });
 
-    group("when searchColorNamesNextPage is called", () {
+    group("when searchNextPage is called", () {
       test("with a searchString of length < 3, then Pending is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
-        viewModel.searchColorNamesNextPage(
+        viewModel.searchNextPage(
           "se",
-          currentNamedColors: testCurrentNamedColors,
+          currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
       });
@@ -131,9 +132,9 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event, isA<Found>()),
         );
-        viewModel.searchColorNamesNextPage(
+        viewModel.searchNextPage(
           "red",
-          currentNamedColors: testCurrentNamedColors,
+          currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
       });
@@ -143,9 +144,9 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
-        viewModel.searchColorNamesNextPage(
+        viewModel.searchNextPage(
           expected,
-          currentNamedColors: testCurrentNamedColors,
+          currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
       });
@@ -155,9 +156,9 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
-        viewModel.searchColorNamesNextPage(
+        viewModel.searchNextPage(
           expected,
-          currentNamedColors: testCurrentNamedColors,
+          currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
       });
@@ -173,9 +174,9 @@ void main() {
             final actual = found.namedColors.first;
             expect(actual, expected);
           });
-          viewModel.searchColorNamesNextPage(
+          viewModel.searchNextPage(
             "red",
-            currentNamedColors: testCurrentNamedColors,
+            currentItems: testCurrentNamedColors,
             currentPageInfo: testPageInfo,
           );
         });
@@ -191,28 +192,28 @@ void main() {
             final actual = found.namedColors[testCurrentNamedColors.length];
             expect(actual, expected);
           });
-          viewModel.searchColorNamesNextPage(
+          viewModel.searchNextPage(
             "red",
-            currentNamedColors: testCurrentNamedColors,
+            currentItems: testCurrentNamedColors,
             currentPageInfo: testPageInfo,
           );
         });
       });
     });
 
-    group("when startColorNamesSearch is called", () {
+    group("when startSearch is called", () {
       test("with a searchString of length < 3, then Pending is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
-        viewModel.startColorNamesSearch("se");
+        viewModel.startSearch("se");
       });
 
       test("with a searchString of length >= 3, then Found state is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Found>()),
         );
-        viewModel.startColorNamesSearch("red");
+        viewModel.startSearch("red");
       });
 
       test("with a searchString of length < 3, then search is retrieved", () {
@@ -220,7 +221,7 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
-        viewModel.startColorNamesSearch(expected);
+        viewModel.startSearch(expected);
       });
 
       test("with a searchString of length >= 3, then search is retrieved", () {
@@ -228,7 +229,7 @@ void main() {
         stateController.stream.listen(
           (event) => expect(event.search, expected),
         );
-        viewModel.startColorNamesSearch(expected);
+        viewModel.startSearch(expected);
       });
 
       test("with searchString.length >= 3, then namedColors are retrieved", () {
@@ -241,7 +242,7 @@ void main() {
           final actual = found.namedColors.first;
           expect(actual, expected);
         });
-        viewModel.startColorNamesSearch("red");
+        viewModel.startSearch("red");
       });
     });
   });
@@ -264,30 +265,30 @@ void main() {
       stateController.close();
     });
 
-    group("when startColorNamesSearch is called", () {
+    group("when startSearch is called", () {
       test("with a searchString of length < 3, then Pending is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
-        viewModel.startColorNamesSearch("se");
+        viewModel.startSearch("se");
       });
 
       test("with searchString.length >= 3, then NoneFound is retrieved", () {
         stateController.stream.listen(
           (event) => expect(event, isA<NoneFound>()),
         );
-        viewModel.startColorNamesSearch("red");
+        viewModel.startSearch("red");
       });
     });
 
-    group("when searchColorNamesNextPage is called", () {
+    group("when searchNextPage is called", () {
       test("with a searchString of length < 3, then Pending is added", () {
         stateController.stream.listen(
           (event) => expect(event, isA<Pending>()),
         );
-        viewModel.searchColorNamesNextPage(
+        viewModel.searchNextPage(
           "se",
-          currentNamedColors: testCurrentNamedColors,
+          currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
       });
@@ -297,21 +298,21 @@ void main() {
           stateController.stream.listen(
             (event) => expect(event, isA<Found>()),
           );
-          viewModel.searchColorNamesNextPage(
+          viewModel.searchNextPage(
             "red",
-            currentNamedColors: testCurrentNamedColors,
+            currentItems: testCurrentNamedColors,
             currentPageInfo: testPageInfo,
           );
         });
 
-        test("then namedColors found are the currentNamedColors", () {
+        test("then namedColors found are the currentItems", () {
           stateController.stream.listen((event) {
             final found = event as Found;
             expect(found.namedColors, testCurrentNamedColors);
           });
-          viewModel.searchColorNamesNextPage(
+          viewModel.searchNextPage(
             "red",
-            currentNamedColors: testCurrentNamedColors,
+            currentItems: testCurrentNamedColors,
             currentPageInfo: testPageInfo,
           );
         });

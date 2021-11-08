@@ -7,18 +7,17 @@ import 'package:colored/sources/data/services/map_filter/palette_filter.dart';
 import 'package:colored/sources/data/services/memoizer/default_memoizer.dart';
 import 'package:colored/sources/data/services/names/palette_names_service.dart';
 import 'package:colored/sources/data/services/string_bundle/root_string_bundle.dart';
-import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_view_model.dart';
 
 class PalettesListInjector {
   const PalettesListInjector();
 
   PalettesListViewModel injectViewModel([
-    StreamController<PalettesListState>? stateController,
+    StreamController<NamesListState>? stateController,
   ]) =>
       PalettesListViewModel(
-        stateController:
-            stateController ?? StreamController<PalettesListState>(),
+        stateController: stateController ?? StreamController<NamesListState>(),
         namesService: PaletteNamesService(
           dataLoader: PalettesLoader(
             memoizer: DefaultMemoizer(),

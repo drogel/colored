@@ -1,6 +1,6 @@
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_data.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_injector.dart';
-import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,7 @@ class _PalettesListNotifierState extends State<PalettesListNotifier> {
   }
 
   @override
-  Widget build(BuildContext context) => StreamBuilder<PalettesListState>(
+  Widget build(BuildContext context) => StreamBuilder<NamesListState>(
         initialData: _viewModel.initialState,
         stream: _viewModel.stateStream,
         builder: (context, snapshot) => PalettesListData(

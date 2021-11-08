@@ -19,7 +19,7 @@ class NamesListLayout extends StatelessWidget {
         final foundState = state as Found;
         return NamesGrid(
           namedColors: foundState.namedColors,
-		  searchString: foundState.search,
+          searchString: foundState.search,
           pageStorageKey: PageStorageKey(runtimeType.toString()),
           onScrolledForwardNearBottom: () => _notifyNextPageNeeded(data),
         );
@@ -36,7 +36,7 @@ class NamesListLayout extends StatelessWidget {
     final foundState = data.state as Found;
     data.onSearchChanged(
       foundState.search,
-	  currentNamedColors: foundState.namedColors,
+      currentItems: foundState.namedColors,
       currentPageInfo: foundState.pageInfo,
     );
   }

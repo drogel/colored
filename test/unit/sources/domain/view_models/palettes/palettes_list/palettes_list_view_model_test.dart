@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -34,10 +35,10 @@ class PalettesServiceEmptyStub implements NamesService<List<String>> {
 void main() {
   late PalettesListViewModel viewModel;
   late NamesService<List<String>> namesService;
-  late StreamController<PalettesListState> stateController;
+  late StreamController<NamesListState> stateController;
 
   setUp(() {
-    stateController = StreamController<PalettesListState>();
+    stateController = StreamController<NamesListState>();
     namesService = MockNamesService();
     viewModel = PalettesListViewModel(
       stateController: stateController,
@@ -78,7 +79,7 @@ void main() {
 
   group("Given a PalettesViewModel with a stubbed PalettesService", () {
     setUp(() {
-      stateController = StreamController<PalettesListState>();
+      stateController = StreamController<NamesListState>();
       namesService = PalettesServiceStub();
       viewModel = PalettesListViewModel(
         stateController: stateController,
@@ -132,7 +133,7 @@ void main() {
 
   group("Given a PalettesViewModel with an empty PalettesService", () {
     setUp(() {
-      stateController = StreamController<PalettesListState>();
+      stateController = StreamController<NamesListState>();
       namesService = PalettesServiceEmptyStub();
       viewModel = PalettesListViewModel(
         stateController: stateController,

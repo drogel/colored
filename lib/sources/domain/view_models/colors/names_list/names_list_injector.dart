@@ -9,9 +9,8 @@ import 'package:colored/sources/data/services/memoizer/default_memoizer.dart';
 import 'package:colored/sources/data/services/names/color_names_service.dart';
 import 'package:colored/sources/data/services/names/paginated_color_names_service.dart';
 import 'package:colored/sources/data/services/string_bundle/root_string_bundle.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_view_model.dart';
-
-import 'names_list_state.dart';
 
 class NamesListInjector {
   const NamesListInjector();

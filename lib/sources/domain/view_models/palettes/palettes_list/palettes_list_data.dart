@@ -1,4 +1,4 @@
-import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
 import 'package:flutter/material.dart';
 
 class PalettesListData extends InheritedWidget {
@@ -9,7 +9,7 @@ class PalettesListData extends InheritedWidget {
     Key? key,
   }) : super(key: key, child: child);
 
-  final PalettesListState state;
+  final NamesListState state;
   final void Function(String) onSearchChanged;
 
   static PalettesListData? of(BuildContext context) =>
