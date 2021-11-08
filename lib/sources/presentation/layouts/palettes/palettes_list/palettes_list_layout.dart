@@ -18,6 +18,7 @@ class PalettesListLayout extends StatelessWidget {
         final foundState = state as Found;
         return PalettesListGrid(
           pageStorageKey: PageStorageKey(runtimeType.toString()),
+		  searchString: foundState.search,
           palettes: foundState.palettes,
         );
       default:
