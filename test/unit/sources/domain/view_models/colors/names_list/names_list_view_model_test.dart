@@ -6,7 +6,7 @@ import 'package:colored/sources/data/services/names/names_service.dart';
 import 'package:colored/sources/data/services/names/paginated_color_names_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
-import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -66,7 +66,7 @@ void main() {
     stateController.close();
   });
 
-  group("Given a NamesListViewModel", () {
+  group("Given a $NamesListViewModel", () {
     group("when initialState is called", () {
       test("then a Pending state is received", () {
         final initialState = viewModel.initialState;
@@ -98,7 +98,7 @@ void main() {
     });
   });
 
-  group("Given a NamesListViewModel with an stubbed NamesService", () {
+  group("Given a $NamesListViewModel with an stubbed NamesService", () {
     setUp(() {
       stateController = StreamController<NamesListState>();
       namesService = NamesServiceStub();

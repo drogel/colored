@@ -1,4 +1,4 @@
-import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_data.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_injector.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_view_model.dart';

@@ -1,13 +1,7 @@
-import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
+import 'package:colored/sources/domain/view_models/base/names/base_names_view_model.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
 import 'package:flutter/material.dart';
-
-typedef PaginatedNamesSearcher = Future<void> Function(
-  String, {
-  required List<NamedColor> currentItems,
-  required PageInfo currentPageInfo,
-});
 
 class NamesListData extends InheritedWidget {
   const NamesListData({
@@ -21,7 +15,7 @@ class NamesListData extends InheritedWidget {
   }) : super(key: key, child: child);
 
   final NamesListState state;
-  final PaginatedNamesSearcher onSearchChanged;
+  final PaginatedNamesSearcher<NamedColor> onSearchChanged;
   final Future<void> Function(String) onSearchStarted;
   final void Function() onSearchCleared;
   final void Function() onBackPressed;

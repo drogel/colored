@@ -4,7 +4,13 @@ import 'package:colored/sources/common/search_configurator/search_configurator.d
 import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/names/paginated_names_service.dart';
-import 'package:colored/sources/domain/view_models/base/names/names_list_state.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
+
+typedef PaginatedNamesSearcher<T> = Future<void> Function(
+  String, {
+  required List<T> currentItems,
+  required PageInfo currentPageInfo,
+});
 
 abstract class BaseNamesListViewModel<T> {
   const BaseNamesListViewModel({
