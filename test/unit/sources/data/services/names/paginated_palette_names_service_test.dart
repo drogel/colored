@@ -1,3 +1,4 @@
+import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/list_paginator.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/pagination/paginator.dart';
@@ -48,6 +49,9 @@ void main() {
           "Sample",
           pageInfo: testPageInfo,
         );
+		if (actual == null) {
+			fail("Did not expect $ListPage to be null.");
+		}
         expect(actual.pageIndex, 0);
         expect(actual.currentItemCount, 2);
         expect(actual.itemsPerPage, 2);
@@ -68,6 +72,9 @@ void main() {
           "Sample",
           pageInfo: testPageInfo,
         );
+		if (actual == null) {
+			fail("Did not expect $ListPage to be null.");
+		}
         expect(actual.pageIndex, 1);
         expect(actual.currentItemCount, 2);
         expect(actual.itemsPerPage, 2);
@@ -88,6 +95,9 @@ void main() {
           "Sample",
           pageInfo: testPageInfo,
         );
+		if (actual == null) {
+			fail("Did not expect $ListPage to be null.");
+		}
         expect(actual.pageIndex, 2);
         expect(actual.currentItemCount, 0);
         expect(actual.itemsPerPage, 2);

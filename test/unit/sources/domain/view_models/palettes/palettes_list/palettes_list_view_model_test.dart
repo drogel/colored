@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/list_paginator.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
+import 'package:colored/sources/data/services/names/paginated_names_service.dart';
 import 'package:colored/sources/data/services/names/paginated_palette_names_service.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
@@ -35,6 +37,17 @@ class PalettesServiceEmptyStub implements NamesService<List<String>> {
   Future<Map<String, List<String>>> fetchContainingSearch(
           String searchString) async =>
       {};
+}
+
+class PalettesServiceNullStub implements PaginatedNamesService<Palette> {
+  const PalettesServiceNullStub();
+
+  @override
+  Future<ListPage<Palette>?> fetchContainingSearch(
+    String searchString, {
+    required PageInfo pageInfo,
+  }) async =>
+      null;
 }
 
 const testPageInfo = PageInfo(startIndex: 1, size: 1, pageIndex: 1);
@@ -271,6 +284,43 @@ void main() {
           shortString,
           currentItems: testCurrentPalettes,
           currentPageInfo: testPageInfo,
+        );
+      });
+    });
+  });
+
+  group("Given a $PalettesListViewModel with an stubbed NamesService", () {
+    setUp(() {
+      stateController = StreamController<NamesListState>();
+      viewModel = PalettesListViewModel(
+        stateController: stateController,
+        namesService: const PalettesServiceNullStub(),
+        searchConfigurator: const ListSearchConfigurator(),
+      );
+    });
+
+    tearDown(() {
+      stateController.close();
+    });
+
+    group("when startSearch is called", () {
+      test("then NoneFound is retrieved", () {
+        stateController.stream.listen(
+          (event) => expect(event, isA<NoneFound>()),
+        );
+        viewModel.startSearch("red");
+      });
+    });
+
+    group("when searchNextPage is called", () {
+      test("then NoneFound is retrieved", () {
+        stateController.stream.listen(
+          (event) => expect(event, isA<NoneFound>()),
+        );
+        viewModel.searchNextPage(
+          "red",
+          currentPageInfo: testPageInfo,
+          currentItems: testCurrentPalettes,
         );
       });
     });

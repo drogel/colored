@@ -76,14 +76,17 @@ abstract class BaseNamesListViewModel<T> {
     final cleanSearch = _searchConfigurator.cleanSearch(searchString);
 
     if (cleanSearch.length < _searchConfigurator.minSearchLength) {
-      final pendingState = buildSearchPendingState(searchString);
-      return _stateController.sink.add(pendingState);
+      return _notifySearchPending(searchString);
     }
 
     final page = await _namesService.fetchContainingSearch(
       cleanSearch,
       pageInfo: pageInfo,
     );
+
+    if (page == null) {
+      return _notifySearchFailed(searchString);
+    }
     if (currentItems == null || currentItems.isEmpty) {
       _notifySearchStarted(searchString, page: page);
     } else {
@@ -101,8 +104,7 @@ abstract class BaseNamesListViewModel<T> {
   }) {
     final items = page.items;
     if (items.isEmpty) {
-      final failedState = buildSearchFailedState(searchString);
-      _stateController.sink.add(failedState);
+      _notifySearchFailed(searchString);
     } else {
       final state = buildSearchSuccessState(
         searchString,
@@ -125,5 +127,15 @@ abstract class BaseNamesListViewModel<T> {
       items: allItems,
     );
     _stateController.sink.add(state);
+  }
+
+  void _notifySearchPending(String searchString) {
+    final pendingState = buildSearchPendingState(searchString);
+    _stateController.sink.add(pendingState);
+  }
+
+  void _notifySearchFailed(String searchString) {
+    final failedState = buildSearchFailedState(searchString);
+    _stateController.sink.add(failedState);
   }
 }
