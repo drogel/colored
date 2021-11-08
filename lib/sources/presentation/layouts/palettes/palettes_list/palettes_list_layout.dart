@@ -10,7 +10,8 @@ class PalettesListLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = PalettesListData.of(context)!.state;
+    final data = PalettesListData.of(context)!;
+    final state = data.state;
     switch (state.runtimeType) {
       case NoneFound:
         return const NoPalettesMessage();
@@ -18,10 +19,25 @@ class PalettesListLayout extends StatelessWidget {
         final foundState = state as Found;
         return PalettesListGrid(
           pageStorageKey: PageStorageKey(runtimeType.toString()),
+          searchString: foundState.search,
           palettes: foundState.palettes,
+          onScrolledForwardNearBottom: () => _notifyNextPageNeeded(data),
         );
       default:
         return const BackgroundContainer();
     }
+  }
+
+  void _notifyNextPageNeeded(PalettesListData data) {
+    final isFoundState = data.state is Found;
+    if (!isFoundState) {
+      return;
+    }
+    final foundState = data.state as Found;
+    data.onSearchChanged(
+      foundState.search,
+      currentItems: foundState.palettes,
+      currentPageInfo: foundState.pageInfo,
+    );
   }
 }

@@ -14,7 +14,7 @@ class PaletteSearchLayout extends StatelessWidget
         flexibleSpace: Align(
           alignment: Alignment.bottomCenter,
           child: PaletteSuggestionsLayout(
-            onSuggestionSelected: PalettesListData.of(context)!.onSearchChanged,
+            onSuggestionSelected: PalettesListData.of(context)!.onSearchStarted,
           ),
         ),
       );

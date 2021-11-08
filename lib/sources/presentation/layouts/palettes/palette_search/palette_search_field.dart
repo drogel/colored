@@ -12,8 +12,8 @@ class PaletteSearchField extends StatelessWidget {
     final localization = Localization.of(context)!.palettes;
     return AutoFocusingSearchField(
       hintText: localization.search,
-      onClearPressed: () => data.onSearchChanged(""),
-      onChanged: data.onSearchChanged,
+      onClearPressed: () => data.onSearchCleared,
+      onChanged: data.onSearchStarted,
       searchText: data.state.search,
     );
   }

@@ -12,26 +12,52 @@ const _kCrossAxisMinCount = 1;
 const _kCrossAxisMaxCount = 4;
 const _kChildAspectRatio = 2.618;
 
-class PalettesListGrid extends StatelessWidget {
+class PalettesListGrid extends StatefulWidget {
   const PalettesListGrid({
     required this.palettes,
+    this.searchString,
     this.pageStorageKey,
+    this.onScrolledForwardNearBottom,
     Key? key,
   }) : super(key: key);
 
   final PageStorageKey<String>? pageStorageKey;
   final List<Palette> palettes;
+  final VoidCallback? onScrolledForwardNearBottom;
+  final String? searchString;
+
+  @override
+  _PalettesListGridState createState() => _PalettesListGridState();
+}
+
+class _PalettesListGridState extends State<PalettesListGrid> {
+  final _scrollController = ScrollController();
+
+  @override
+  void didUpdateWidget(covariant PalettesListGrid oldWidget) {
+    final currentSearch = widget.searchString;
+    final previousSearch = oldWidget.searchString;
+    final isSearchEmpty = currentSearch == null || currentSearch.isEmpty;
+    final wasSearchEmpty = previousSearch == null || previousSearch.isEmpty;
+    final didSearchChange = currentSearch != previousSearch;
+    if (isSearchEmpty || wasSearchEmpty || didSearchChange) {
+      _jumpToTop();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) => ResponsiveGrid(
-      pageStorageKey: pageStorageKey,
+      scrollController: _scrollController,
+      pageStorageKey: widget.pageStorageKey,
       estimatedItemSize: _kEstimatedItemSize,
       crossAxisMinCount: _kCrossAxisMinCount,
       crossAxisMaxCount: _kCrossAxisMaxCount,
       childAspectRatio: _kChildAspectRatio,
-      itemCount: palettes.length,
+	  onScrolledForwardNearBottom: widget.onScrolledForwardNearBottom,
+      itemCount: widget.palettes.length,
       itemBuilder: (context, index) {
-        final palette = palettes[index];
+        final palette = widget.palettes[index];
         return PaletteCard(
           colors: palette.hexCodes.map(HexColor.fromHex).toList(),
           title: palette.name,
@@ -52,4 +78,6 @@ class PalettesListGrid extends StatelessWidget {
     PalettesNavigationData.of(context)!.onNavigation(destination);
     PaletteDetailData.of(context)!.onPaletteSelected(hexCodes, paletteName);
   }
+
+  void _jumpToTop() => _scrollController.jumpTo(0);
 }

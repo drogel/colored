@@ -8,7 +8,7 @@ const String _kHexCode = "#000000";
 void main() {
   late NamedColor namedColor;
 
-  group("Given a valid NamedColor", () {
+  group("Given a valid $NamedColor", () {
     setUp(() => namedColor = const NamedColor(name: _kName, hex: _kHexCode));
 
     group("when constructed", () {
