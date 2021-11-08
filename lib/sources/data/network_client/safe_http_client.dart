@@ -15,10 +15,17 @@ class SafeHttpClient implements HttpClient {
   final HttpWrapper _httpWrapper;
 
   @override
-  Future<HttpResponse> get(String url, {Map<String, String>? headers}) async {
+  Future<HttpResponse> get(String url, {Map<String, String>? headers}) async =>
+      getFromUri(Uri.parse(url), headers: headers);
+
+  @override
+  Future<HttpResponse> getFromUri(
+    Uri uri, {
+    Map<String, String>? headers,
+  }) async {
     try {
       final response = await _httpWrapper
-          .get(url, headers: headers)
+          .get(uri, headers: headers)
           .timeout(const Duration(seconds: timeoutLimitSeconds));
       return HttpResponse(status: ResponseStatus.ok, httpResponse: response);
     } on SocketException catch (_) {
