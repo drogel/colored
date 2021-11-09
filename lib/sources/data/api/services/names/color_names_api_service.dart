@@ -29,8 +29,8 @@ class ColorNamesApiService extends BaseApiNamesService<NamedColor> {
     }
     final requestQueryParameters = {
       NamedColor.nameKey: searchString,
-      PageInfo.sizeKey: pageInfo.size,
-      PageInfo.pageIndexKey: pageInfo.pageIndex,
+      PageInfo.sizeKey: pageInfo.size.toString(),
+      PageInfo.pageIndexKey: pageInfo.pageIndex.toString(),
     };
     final uri = endpointUri.copy(queryParameters: requestQueryParameters);
     return uri;
