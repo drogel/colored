@@ -36,11 +36,6 @@ void main() {
         final value = testMap.listValueFor<String>("testList");
         expect(value, ["testValue"]);
       });
-
-      test("then retrieved list is empty if not found", () {
-        final value = testMap.listValueFor<String>("testString");
-        expect(value, []);
-      });
     });
   });
 }

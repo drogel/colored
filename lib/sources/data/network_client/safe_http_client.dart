@@ -11,7 +11,7 @@ class SafeHttpClient implements HttpClient {
   const SafeHttpClient({HttpWrapper httpWrapper = const DartHttpWrapper()})
       : _httpWrapper = httpWrapper;
 
-  static const timeoutLimitSeconds = 5;
+  static const timeoutLimitSeconds = 32;
   final HttpWrapper _httpWrapper;
 
   @override
