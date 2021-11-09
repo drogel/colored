@@ -8,13 +8,10 @@ import 'package:colored/sources/data/services/names/paginated_names_service.dart
 abstract class BaseApiNamesService<O> implements PaginatedNamesService<O> {
   const BaseApiNamesService({
     required HttpClient client,
-    required Uri? endpointUri,
     required ResponseParser<ApiResponse> parser,
   })  : _client = client,
-        _endpointUri = endpointUri,
         _parser = parser;
 
-  final Uri? _endpointUri;
   final HttpClient _client;
   final ResponseParser<ApiResponse> _parser;
 
@@ -23,7 +20,7 @@ abstract class BaseApiNamesService<O> implements PaginatedNamesService<O> {
     String searchString, {
     required PageInfo pageInfo,
   }) async {
-    final endpointUri = _endpointUri;
+    final endpointUri = buildSearchUri(searchString, pageInfo: pageInfo);
     if (endpointUri == null) {
       return null;
     }
@@ -40,4 +37,6 @@ abstract class BaseApiNamesService<O> implements PaginatedNamesService<O> {
   }
 
   O parseItemFromJson(Map<String, dynamic> json);
+
+  Uri? buildSearchUri(String searchString, {required PageInfo pageInfo});
 }

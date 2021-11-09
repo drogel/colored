@@ -9,6 +9,12 @@ class NamedColor {
   factory NamedColor.fromMapEntry(MapEntry<String, dynamic> entry) =>
       NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
 
+  factory NamedColor.fromJson(Map<String, dynamic> json) =>
+      NamedColor(name: json[_Key.name.value], hex: json[_Key.hex.value]);
+
+  static String nameKey = _Key.name.value;
+  static String hexKey = _Key.hex.value;
+
   final String name;
   final String hex;
 
@@ -21,4 +27,20 @@ class NamedColor {
 
   @override
   String toString() => "NamedColor(name: $name, hex: $hex)";
+}
+
+enum _Key {
+  name,
+  hex,
+}
+
+extension _KeyValues on _Key {
+  String get value {
+    switch (this) {
+      case _Key.name:
+        return "name";
+      case _Key.hex:
+        return "hex";
+    }
+  }
 }
