@@ -9,8 +9,10 @@ class NamedColor {
   factory NamedColor.fromMapEntry(MapEntry<String, dynamic> entry) =>
       NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
 
-  factory NamedColor.fromJson(Map<String, dynamic> json) =>
-      NamedColor(name: json[_Key.name.value], hex: json[_Key.hex.value]);
+  factory NamedColor.fromJson(Map<String, dynamic> json) => NamedColor(
+        name: json[_Key.name.value],
+        hex: json[_Key.hex.value].toUpperCase(),
+      );
 
   static String nameKey = _Key.name.value;
   static String hexKey = _Key.hex.value;
