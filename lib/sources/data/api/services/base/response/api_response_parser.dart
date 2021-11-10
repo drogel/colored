@@ -14,6 +14,7 @@ class ApiResponseParser implements ResponseParser<ApiResponse> {
     if (response.status == ResponseStatus.failed || httpResponse == null) {
       return null;
     }
-    return ApiResponse.fromJson(jsonDecode(httpResponse.body));
+    final responseJsonStr = utf8.decode(httpResponse.bodyBytes);
+    return ApiResponse.fromJson(json.decode(responseJsonStr));
   }
 }
