@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 const _kEstimatedItemSize = 200.0;
 const _kCrossAxisMinCount = 2;
 const _kCrossAxisMaxCount = 9;
+const _kNearBottomEdgeThreshold = 2.5 * _kEstimatedItemSize;
 
 class SquareResponsiveGrid extends StatelessWidget {
   const SquareResponsiveGrid({
@@ -30,7 +31,7 @@ class SquareResponsiveGrid extends StatelessWidget {
         estimatedItemSize: _kEstimatedItemSize,
         itemCount: itemCount,
         onScrolledForwardNearBottom: onScrolledForwardNearBottom,
-        nearBottomEdgeThreshold: 1.5 * _kEstimatedItemSize,
+        nearBottomEdgeThreshold: _kNearBottomEdgeThreshold,
         itemBuilder: itemBuilder,
       );
 }
