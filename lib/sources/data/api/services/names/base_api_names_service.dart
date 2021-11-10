@@ -1,23 +1,28 @@
 import 'package:colored/sources/data/api/models/responses/api_response.dart';
+import 'package:colored/sources/data/api/services/base/request/page_request_builder.dart';
 import 'package:colored/sources/data/api/services/base/response/response_parser.dart';
 import 'package:colored/sources/data/network_client/http_client.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/services/names/paginated_names_service.dart';
-import 'package:colored/sources/common/extensions/uri_copy.dart';
 
 abstract class BaseApiNamesService<O> implements PaginatedNamesService<O> {
   const BaseApiNamesService({
     required HttpClient client,
+    required PageRequestBuilder pageRequestBuilder,
     required ResponseParser<ApiResponse> parser,
   })  : _client = client,
+        _pageRequestBuilder = pageRequestBuilder,
         _parser = parser;
 
   final HttpClient _client;
+  final PageRequestBuilder _pageRequestBuilder;
   final ResponseParser<ApiResponse> _parser;
 
   Uri? get baseUri;
   String get searchQueryKey;
+
+  O parseItemFromJson(Map<String, dynamic> json);
 
   @override
   Future<ListPage<O>?> fetchContainingSearch(
@@ -40,19 +45,15 @@ abstract class BaseApiNamesService<O> implements PaginatedNamesService<O> {
     return listPage;
   }
 
-  O parseItemFromJson(Map<String, dynamic> json);
-
   Uri? _buildSearchUri(String searchString, {required PageInfo pageInfo}) {
-    final endpointUri = baseUri;
-    if (endpointUri == null) {
+    final uri = baseUri;
+    if (uri == null) {
       return null;
     }
-    final requestQueryParameters = {
-      searchQueryKey: searchString,
-      PageInfo.sizeKey: pageInfo.size.toString(),
-      PageInfo.pageIndexKey: pageInfo.pageIndex.toString(),
-    };
-    final uri = endpointUri.copy(queryParameters: requestQueryParameters);
-    return uri;
+    final nameRequestQueryParameter = uri.queryParameters.entries.first;
+    final searchUri = uri.replace(queryParameters: {
+      nameRequestQueryParameter.key: searchString,
+    });
+    return _pageRequestBuilder.addPageParameters(searchUri, pageInfo: pageInfo);
   }
 }

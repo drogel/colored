@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:colored/sources/data/api/models/index/api_index.dart';
+import 'package:colored/sources/data/api/services/base/request/uri_page_request_builder.dart';
 import 'package:colored/sources/data/api/services/base/response/api_response_parser.dart';
 import 'package:colored/sources/data/api/services/names/base_api_names_service.dart';
 import 'package:colored/sources/data/api/services/names/color_names_api_service.dart';
@@ -48,6 +49,7 @@ void main() {
     setUp(() {
       service = const PaletteNamesApiService(
         client: HttpClientSuccessfulStub(responseBody: ""),
+        pageRequestBuilder: UriPageRequestBuilder(),
         apiIndex: null,
         parser: ApiResponseParser(),
       );
@@ -76,6 +78,7 @@ void main() {
       final responseBody = jsonEncode(testColorNamesApiResponse);
       service = PaletteNamesApiService(
         client: HttpClientSuccessfulStub(responseBody: responseBody),
+        pageRequestBuilder: const UriPageRequestBuilder(),
         apiIndex: apiIndex,
         parser: const ApiResponseParser(),
       );
@@ -132,6 +135,7 @@ void main() {
     setUp(() {
       service = const PaletteNamesApiService(
         client: HttpClientFailingStub(),
+        pageRequestBuilder: UriPageRequestBuilder(),
         apiIndex: null,
         parser: ApiResponseParser(),
       );

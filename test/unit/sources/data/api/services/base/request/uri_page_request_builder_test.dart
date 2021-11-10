@@ -20,7 +20,7 @@ void main() {
           testUri,
           pageInfo: testPageInfo,
         );
-        expect(actual.toString(), "https://test.com?size=1&page=1#");
+        expect(actual.toString(), "https://test.com?size=1&page=1");
       });
     });
 
@@ -31,7 +31,7 @@ void main() {
           testUri,
           pageInfo: testPageInfo,
         );
-        expect(actual.toString(), "https://test.com?size=1&page=1&names=test#");
+        expect(actual.toString(), "https://test.com?size=1&page=1&names=test");
       });
     });
   });
