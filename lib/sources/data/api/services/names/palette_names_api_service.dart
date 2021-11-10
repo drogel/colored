@@ -3,9 +3,7 @@ import 'package:colored/sources/data/api/models/responses/api_response.dart';
 import 'package:colored/sources/data/api/services/base/response/response_parser.dart';
 import 'package:colored/sources/data/api/services/names/base_api_names_service.dart';
 import 'package:colored/sources/data/network_client/http_client.dart';
-import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
-import 'package:colored/sources/common/extensions/uri_copy.dart';
 
 class PaletteNamesApiService extends BaseApiNamesService<Palette> {
   const PaletteNamesApiService({
@@ -18,21 +16,12 @@ class PaletteNamesApiService extends BaseApiNamesService<Palette> {
   final ApiIndex? _apiIndex;
 
   @override
-  Palette parseItemFromJson(Map<String, dynamic> json) =>
-      Palette.fromJson(json);
+  Uri? get baseUri => _apiIndex?.palettes?.search?.names?.endpoint;
 
   @override
-  Uri? buildSearchUri(String searchString, {required PageInfo pageInfo}) {
-    final endpointUri = _apiIndex?.palettes?.search?.names?.endpoint;
-    if (endpointUri == null) {
-      return null;
-    }
-    final requestQueryParameters = {
-      Palette.nameKey: searchString,
-      PageInfo.sizeKey: pageInfo.size.toString(),
-      PageInfo.pageIndexKey: pageInfo.pageIndex.toString(),
-    };
-    final uri = endpointUri.copy(queryParameters: requestQueryParameters);
-    return uri;
-  }
+  String get searchQueryKey => Palette.nameKey;
+
+  @override
+  Palette parseItemFromJson(Map<String, dynamic> json) =>
+      Palette.fromJson(json);
 }

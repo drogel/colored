@@ -3,9 +3,7 @@ import 'package:colored/sources/data/api/models/responses/api_response.dart';
 import 'package:colored/sources/data/api/services/base/response/response_parser.dart';
 import 'package:colored/sources/data/api/services/names/base_api_names_service.dart';
 import 'package:colored/sources/data/network_client/http_client.dart';
-import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:colored/sources/common/extensions/uri_copy.dart';
 
 class ColorNamesApiService extends BaseApiNamesService<NamedColor> {
   const ColorNamesApiService({
@@ -18,21 +16,12 @@ class ColorNamesApiService extends BaseApiNamesService<NamedColor> {
   final ApiIndex? _apiIndex;
 
   @override
-  NamedColor parseItemFromJson(Map<String, dynamic> json) =>
-      NamedColor.fromJson(json);
+  Uri? get baseUri => _apiIndex?.colors?.search?.names?.endpoint;
 
   @override
-  Uri? buildSearchUri(String searchString, {required PageInfo pageInfo}) {
-    final endpointUri = _apiIndex?.colors?.search?.names?.endpoint;
-    if (endpointUri == null) {
-      return null;
-    }
-    final requestQueryParameters = {
-      NamedColor.nameKey: searchString,
-      PageInfo.sizeKey: pageInfo.size.toString(),
-      PageInfo.pageIndexKey: pageInfo.pageIndex.toString(),
-    };
-    final uri = endpointUri.copy(queryParameters: requestQueryParameters);
-    return uri;
-  }
+  String get searchQueryKey => NamedColor.nameKey;
+
+  @override
+  NamedColor parseItemFromJson(Map<String, dynamic> json) =>
+      NamedColor.fromJson(json);
 }

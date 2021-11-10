@@ -51,10 +51,9 @@ void main() {
       );
     });
 
-    group("when buildSearchUri is called", () {
+    group("when baseUri is called", () {
       test("then null is retrieved", () {
-        final uri = service.buildSearchUri("", pageInfo: testPageInfo);
-        expect(uri, isNull);
+        expect(service.baseUri, isNull);
       });
     });
 
@@ -80,13 +79,17 @@ void main() {
       );
     });
 
-    group("when buildSearchUri is called", () {
+    group("when searchQueryKey is called", () {
+      test("then name is retrieved", () {
+        expect(service.searchQueryKey, "name");
+      });
+    });
+
+    group("when baseUri is called", () {
       test("then the request uri is properly built", () {
-        const testSearch = "testSearch";
-        final uri = service.buildSearchUri(testSearch, pageInfo: testPageInfo);
         expect(
-          uri.toString(),
-          "https://test.com/colors/search/names?name=testSearch&size=1&page=1#",
+          service.baseUri.toString(),
+          contains("https://test.com/colors/search/names"),
         );
       });
     });
