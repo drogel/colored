@@ -11,6 +11,6 @@ extension MapStringSafeAccess on Map<String, dynamic> {
 
   List<T> listValueFor<T>(String key) {
     final value = this[key];
-    return value is List<T> ? value : [];
+    return List<T>.from(value);
   }
 }

@@ -19,14 +19,32 @@ void main() {
 
     group("when parsing an $ApiResponse", () {
       test("then a valid response is retrieved", () {
-        final testApiResponse = jsonEncode(testApiIndexResponse);
-        final httpResponse = http.Response(testApiResponse, 200);
+        final testEncodedResponse = json.encode(testApiIndexResponse);
+        final testApiResponse = utf8.encode(testEncodedResponse);
+        final httpResponse = http.Response.bytes(testApiResponse, 200);
         final response = HttpResponse(
           status: ResponseStatus.ok,
           httpResponse: httpResponse,
         );
         final apiResponse = parser.parse(response);
         expect(apiResponse, isNotNull);
+      });
+
+      test("then accents are correctly parsed", () {
+        final testEncodedResponse = json.encode(testApiIndexResponse);
+        final testApiResponse = utf8.encode(testEncodedResponse);
+        final httpResponse = http.Response.bytes(testApiResponse, 200);
+        final response = HttpResponse(
+          status: ResponseStatus.ok,
+          httpResponse: httpResponse,
+        );
+        final apiResponse = parser.parse(response);
+        final firstItem = apiResponse?.data.items.first;
+        if (firstItem == null) {
+          fail("Expected a non-null first $ApiResponse item");
+        }
+        final firstItemEntryName = firstItem["title"];
+        expect(firstItemEntryName, "côlòrs");
       });
     });
   });

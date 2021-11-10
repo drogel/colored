@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:colored/sources/data/network_client/http_client.dart';
 import 'package:colored/sources/data/network_client/http_response.dart';
 import 'package:colored/sources/data/network_client/response_status.dart';
@@ -11,7 +13,8 @@ class HttpClientSuccessfulStub implements HttpClient {
   final String _responseBody;
 
   HttpResponse get _stubbedResponse {
-    final httpResponse = http.Response(_responseBody, 200);
+    final responseBodyBytes = utf8.encode(_responseBody);
+    final httpResponse = http.Response.bytes(responseBodyBytes, 200);
     return HttpResponse(status: ResponseStatus.ok, httpResponse: httpResponse);
   }
 

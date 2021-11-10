@@ -110,7 +110,7 @@ const testApiIndexResponse = {
     "selfLink": "https://test.com/",
     "items": [
       {
-        "title": "colors",
+        "title": "côlòrs",
         "endpoint": "https://test.com/colors/{hex}",
         "entries": [
           {

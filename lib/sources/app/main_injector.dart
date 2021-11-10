@@ -1,6 +1,7 @@
 import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
+import 'package:colored/sources/data/api/models/index/api_index.dart';
 import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter/converter_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/displayed_formats/displayed_formats_injector.dart';
@@ -30,9 +31,14 @@ import 'package:colored/sources/presentation/notifiers/converter/transformer_not
 import 'package:flutter/material.dart';
 
 class MainInjector extends StatelessWidget {
-  const MainInjector({required this.child, Key? key}) : super(key: key);
+  const MainInjector({
+    required this.child,
+    this.apiIndex,
+    Key? key,
+  }) : super(key: key);
 
   final Widget child;
+  final ApiIndex? apiIndex;
 
   @override
   Widget build(BuildContext context) => PaletteSuggestionsNotifier(
@@ -40,7 +46,7 @@ class MainInjector extends StatelessWidget {
         child: ColorSuggestionsNotifier(
           injector: const ColorSuggestionsInjector(),
           child: NamesListNotifier(
-            injector: const NamesListInjector(),
+            injector: NamesListInjector(apiIndex: apiIndex),
             child: TransformerNotifier(
               injector:
                   const TransformerInjector(initialColor: colors.logoBlue),
