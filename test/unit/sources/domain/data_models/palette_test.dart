@@ -40,6 +40,18 @@ void main() {
         expect(namedColor.hashCode, hashObjects([name, _kColors]));
       });
     });
+
+    group("when fromJson is called", () {
+      test("a Palette with uppercased data from entry is instantiated", () {
+        final json = {
+          "name": "Test",
+          "hexes": ["#ffffff", "#000000"]
+        };
+        final actual = Palette.fromJson(json);
+        expect(actual.name, "Test");
+        expect(actual.hexCodes, ["#FFFFFF", "#000000"]);
+      });
+    });
   });
 
   group("Given two valid palettes", () {
