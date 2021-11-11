@@ -37,6 +37,12 @@ class ConverterStub implements Converter {
       {Format.hex: "mockedConversion"};
 }
 
+class RgbConverterStub implements Converter {
+  @override
+  Map<Format, String> convert(int r, int g, int b) =>
+      {Format.rgb: "mockedConversion"};
+}
+
 class ConnectivityServiceSuccessStub implements ConnectivityService {
   @override
   Stream<ConnectivityResult> get onConnectivityChanged =>
@@ -151,6 +157,31 @@ void main() {
         final selection = ColorSelection(r: 0, g: 0, b: 0);
         await viewModel.fetchNaming(selection);
       });
+    });
+  });
+
+  group("Given a NamingViewModel with a failing converter", () {
+    setUp(() {
+      stateController = StreamController<NamingState>();
+      namingService = NamingServiceSuccessStub();
+      converter = RgbConverterStub();
+      viewModel = NamingViewModel(
+        stateController: stateController,
+        namingService: namingService,
+        converter: converter,
+      );
+    });
+
+    tearDown(() {
+      stateController.close();
+    });
+
+    test("then a Unknown state is added to stream after Changing", () async {
+      stateController.stream.skip(1).listen((event) {
+        expectLater(event, isA<Unknown>());
+      });
+      final selection = ColorSelection(r: 0, g: 0, b: 0);
+      await viewModel.fetchNaming(selection);
     });
   });
 }
