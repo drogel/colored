@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:vector_math/hash.dart';
 
 class Palette {
@@ -10,9 +11,11 @@ class Palette {
   }
 
   factory Palette.fromJson(Map<String, dynamic> json) {
-    final hexCodes = List<String>.from(json[_Key.hexCodes.value]);
-    final hexes = hexCodes.map((hex) => hex.toUpperCase()).toList();
-    return Palette(name: json[_Key.name.value], hexCodes: hexes);
+    final hexEntries = json[hexCodesKey];
+    final hexes = hexEntries.map((entry) => entry[NamedColor.hexKey]).toList();
+    final hexCodes =
+        List<String>.from(hexes).map((hex) => hex.toUpperCase()).toList();
+    return Palette(name: json[_Key.name.value], hexCodes: hexCodes);
   }
 
   static String nameKey = _Key.name.value;

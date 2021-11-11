@@ -63,7 +63,9 @@ class MainInjector extends StatelessWidget {
                           flavor: FlavorConfig.instance,
                         ),
                         child: PalettesListNotifier(
-                          injector: const PalettesListInjector(),
+                          injector: PalettesListInjector(
+                            apiIndex: apiIndex,
+                          ),
                           child: PalettesNavigationNotifier(
                             injector: const PalettesNavigationInjector(),
                             child: PaletteDetailNotifier(

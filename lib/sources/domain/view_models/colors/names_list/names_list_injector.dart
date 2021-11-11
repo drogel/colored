@@ -14,26 +14,33 @@ import 'package:colored/sources/data/services/memoizer/default_memoizer.dart';
 import 'package:colored/sources/data/services/names/color_names_service.dart';
 import 'package:colored/sources/data/services/names/paginated_color_names_service.dart';
 import 'package:colored/sources/data/services/string_bundle/root_string_bundle.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
+import 'package:colored/sources/domain/view_models/base/names/base_names_injector.dart';
+import 'package:colored/sources/domain/view_models/base/names/base_names_view_model.dart';
 import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_view_model.dart';
 
-class NamesListInjector {
-  const NamesListInjector({this.apiIndex});
+class NamesListInjector extends BaseNamesInjector<NamedColor> {
+  const NamesListInjector({ApiIndex? apiIndex}) : super(apiIndex: apiIndex);
 
-  final ApiIndex? apiIndex;
-
-  NamesListViewModel injectViewModel([
+  @override
+  BaseNamesListViewModel<NamedColor> injectApiViewModel(
+    ApiIndex apiIndex, [
     StreamController<NamesListState>? stateController,
-  ]) {
-    final _apiIndex = apiIndex;
-    if (_apiIndex == null) {
-      return _injectLocalViewModel(stateController);
-    } else {
-      return _injectApiViewModel(_apiIndex, stateController);
-    }
-  }
+  ]) =>
+      NamesListViewModel(
+        stateController: stateController ?? StreamController<NamesListState>(),
+        searchConfigurator: const ListSearchConfigurator(),
+        namesService: ColorNamesApiService(
+          client: const SafeHttpClient(),
+          pageRequestBuilder: const UriPageRequestBuilder(),
+          apiIndex: apiIndex,
+          parser: const ApiResponseParser(),
+        ),
+      );
 
-  NamesListViewModel _injectLocalViewModel([
+  @override
+  BaseNamesListViewModel<NamedColor> injectLocalViewModel([
     StreamController<NamesListState>? stateController,
   ]) =>
       NamesListViewModel(
@@ -49,21 +56,6 @@ class NamesListInjector {
             filter: const ColorNamesFilter(),
           ),
           paginator: const ListPaginator(),
-        ),
-      );
-
-  NamesListViewModel _injectApiViewModel(
-    ApiIndex apiIndex, [
-    StreamController<NamesListState>? stateController,
-  ]) =>
-      NamesListViewModel(
-        stateController: stateController ?? StreamController<NamesListState>(),
-        searchConfigurator: const ListSearchConfigurator(),
-        namesService: ColorNamesApiService(
-          client: const SafeHttpClient(),
-          pageRequestBuilder: const UriPageRequestBuilder(),
-          apiIndex: apiIndex,
-          parser: const ApiResponseParser(),
         ),
       );
 }

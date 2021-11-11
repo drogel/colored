@@ -34,10 +34,24 @@ const testColorNamesApiResponse = {
     "selfLink": "https://test.com/palettes/search/names?name=Test&size=1",
     "items": [
       {
-        "name": "Test Palette",
-        "hexes": ["#ffffff", "#000000"],
-        "selfLink": "https://test.com/palettes/000000"
-      }
+        "id": "618c491e60fca7c22c4b06d8",
+        "name": "Aged Black",
+        "hexes": [
+          {
+            "hex": "#ffffff",
+            "colorLink":
+                "https://test.com/colors/search/hexes/closest?hex=ffffff"
+          },
+          {
+            "hex": "#000000",
+            "colorLink":
+                "https://test.com/colors/search/hexes/closest?hex=000000"
+          },
+        ],
+        "selfLink": "https://test.com/palettes/618c491e60fca7c22c4b06d8",
+        "colorsSearchLink":
+            "https://test.com/colors/search/hexes/closest?hex=ffffff&hex=000000"
+      },
     ]
   }
 };
@@ -103,7 +117,18 @@ void main() {
       test("then the palette is correctly parsed", () {
         final testPaletteJson = {
           "name": "Test",
-          "hexes": ["#ffffff", "#000000"]
+          "hexes": [
+            {
+              "hex": "#ffffff",
+              "colorLink":
+                  "https://test.com/colors/search/hexes/closest?hex=ffffff"
+            },
+            {
+              "hex": "#000000",
+              "colorLink":
+                  "https://test.com/colors/search/hexes/closest?hex=000000"
+            },
+          ],
         };
         final palette = service.parseItemFromJson(testPaletteJson);
         expect(
