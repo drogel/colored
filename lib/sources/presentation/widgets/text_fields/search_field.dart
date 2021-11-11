@@ -8,6 +8,7 @@ class SearchField extends StatelessWidget {
     required this.controller,
     this.focusNode,
     this.onClearPressed,
+    this.onSubmitted,
     this.onChanged,
     this.hintText,
     Key? key,
@@ -16,6 +17,7 @@ class SearchField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode? focusNode;
   final void Function()? onClearPressed;
+  final void Function(String)? onSubmitted;
   final void Function(String)? onChanged;
   final String? hintText;
 
@@ -35,6 +37,8 @@ class SearchField extends StatelessWidget {
           style: theme.textTheme.headline6,
           focusNode: focusNode,
           textCapitalization: TextCapitalization.sentences,
+          onChanged: onChanged,
+          onSubmitted: onSubmitted,
           decoration: InputDecoration(
             hintText: hintText,
             contentPadding: EdgeInsets.only(left: padding.large.left),
@@ -53,7 +57,6 @@ class SearchField extends StatelessWidget {
               borderRadius: borderRadius,
             ),
           ),
-          onChanged: onChanged,
         ),
       ),
     );
