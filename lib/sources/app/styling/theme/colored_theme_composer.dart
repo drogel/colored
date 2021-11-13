@@ -45,7 +45,7 @@ class ColoredThemeComposer implements ThemeComposer {
           error: colors.error,
           onPrimary: colors.secondary,
           onSecondary: colors.primary,
-          onSurface: colors.secondary,
+          onSurface: colors.text,
           onBackground: colors.secondary,
           onError: colors.text,
           brightness: Brightness.dark,
