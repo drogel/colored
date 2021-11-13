@@ -70,5 +70,15 @@ void main() {
         tester.assertExpectations(entry);
       });
     });
+
+    group("when constructed from the constructor", () {
+      test("then values can be correctly retrieved", () {
+        final uri = Uri.parse("https://test.com");
+        const title = "test";
+        final entry = ColorsSuggestionsEntry(title: title, endpoint: uri);
+        expect(entry.endpoint, uri);
+        expect(entry.title, title);
+      });
+    });
   });
 }

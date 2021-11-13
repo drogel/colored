@@ -8,8 +8,6 @@ import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_state.dart';
 
-import 'naming_state.dart';
-
 class NamingViewModel {
   NamingViewModel({
     required StreamController<NamingState> stateController,

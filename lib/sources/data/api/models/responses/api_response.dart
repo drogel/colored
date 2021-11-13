@@ -12,7 +12,7 @@ class ApiResponse {
   static ApiResponse? fromJson(Map<String, dynamic> json) {
     final apiVersion = json.valueFor<String>(_Key.apiVersion.value);
     final methodString = json.stringValueFor(_Key.method.value);
-    final method = HttpMethodBuilder.fromString(methodString);
+    final method = httpMethodFromString(methodString);
     final dataMap = json.valueFor<Map<String, dynamic>>(_Key.data.value);
     if (dataMap == null || apiVersion == null) {
       return null;

@@ -49,6 +49,15 @@ void main() {
         expect(actual.hex, "#FFFFFF");
       });
     });
+
+    group("when fromJson is called", () {
+      test("a NamedColor with uppercased data from entry is instantiated", () {
+        const json = {"name": "White", "hex": "#ffffff"};
+        final actual = NamedColor.fromJson(json);
+        expect(actual.name, "White");
+        expect(actual.hex, "#FFFFFF");
+      });
+    });
   });
 
   group("Given two valid palettes", () {

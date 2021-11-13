@@ -1,7 +1,8 @@
+import 'package:colored/sources/domain/data_models/palette.dart';
+import 'package:colored/sources/domain/view_models/base/names/base_names_injector.dart';
+import 'package:colored/sources/domain/view_models/base/names/base_names_view_model.dart';
 import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_data.dart';
-import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_injector.dart';
-import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_view_model.dart';
 import 'package:flutter/material.dart';
 
 class PalettesListNotifier extends StatefulWidget {
@@ -11,7 +12,7 @@ class PalettesListNotifier extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final PalettesListInjector injector;
+  final BaseNamesInjector<Palette> injector;
   final Widget child;
 
   @override
@@ -19,7 +20,7 @@ class PalettesListNotifier extends StatefulWidget {
 }
 
 class _PalettesListNotifierState extends State<PalettesListNotifier> {
-  late final PalettesListViewModel _viewModel;
+  late final BaseNamesListViewModel<Palette> _viewModel;
 
   @override
   void initState() {

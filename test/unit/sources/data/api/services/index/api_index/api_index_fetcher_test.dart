@@ -58,10 +58,10 @@ void main() {
 
   group("Given a $ApiIndexFetcher with a failing client", () {
     setUp(() {
-      service = ApiIndexFetcher(
+      service = const ApiIndexFetcher(
         client: HttpClientFailingStub(),
         apiIndexLink: "test",
-        parser: const ApiResponseParser(),
+        parser: ApiResponseParser(),
       );
     });
 

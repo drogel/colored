@@ -1,5 +1,5 @@
-import 'package:colored/sources/data/color_helpers/converter/converter.dart';
 import 'package:colored/sources/common/factors.dart';
+import 'package:colored/sources/data/color_helpers/converter/converter.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
 
 class HexConverter implements Converter {

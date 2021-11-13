@@ -1,5 +1,6 @@
+import 'package:colored/sources/app/styling/opacity/opacity_constants.dart'
+    as opacity;
 import 'package:colored/sources/app/styling/opacity/opacity_scheme.dart';
-import 'package:colored/sources/app/styling/opacity/opacity_constants.dart' as opacity;
 
 class DefaultOpacityScheme implements OpacityScheme {
   const DefaultOpacityScheme();

@@ -3,6 +3,7 @@ import 'package:colored/sources/domain/view_models/palettes/palettes_list/palett
 import 'package:colored/sources/presentation/layouts/palettes/palettes_list/no_palettes_message.dart';
 import 'package:colored/sources/presentation/layouts/palettes/palettes_list/palettes_list_grid.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
+import 'package:colored/sources/presentation/widgets/containers/loading_container.dart';
 import 'package:flutter/material.dart';
 
 class PalettesListLayout extends StatelessWidget {
@@ -13,6 +14,10 @@ class PalettesListLayout extends StatelessWidget {
     final data = PalettesListData.of(context)!;
     final state = data.state;
     switch (state.runtimeType) {
+      case Starting:
+        return const BackgroundContainer();
+      case Pending:
+        return const LoadingContainer();
       case NoneFound:
         return const NoPalettesMessage();
       case Found:

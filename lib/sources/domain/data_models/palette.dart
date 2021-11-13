@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:vector_math/hash.dart';
 
 class Palette {
@@ -8,6 +9,17 @@ class Palette {
     final hexCodes = mapEntry.value!.map((c) => "#${c.toUpperCase()}").toList();
     return Palette(name: mapEntry.key, hexCodes: hexCodes);
   }
+
+  factory Palette.fromJson(Map<String, dynamic> json) {
+    final hexEntries = json[hexCodesKey];
+    final hexes = hexEntries.map((entry) => entry[NamedColor.hexKey]).toList();
+    final hexCodes =
+        List<String>.from(hexes).map((hex) => hex.toUpperCase()).toList();
+    return Palette(name: json[_Key.name.value], hexCodes: hexCodes);
+  }
+
+  static String nameKey = _Key.name.value;
+  static String hexCodesKey = _Key.hexCodes.value;
 
   final String name;
   final List<String> hexCodes;
@@ -25,4 +37,20 @@ class Palette {
 
   @override
   String toString() => "Palette(name: $name, hexCodes: $hexCodes)";
+}
+
+enum _Key {
+  name,
+  hexCodes,
+}
+
+extension _KeyValues on _Key {
+  String get value {
+    switch (this) {
+      case _Key.name:
+        return "name";
+      case _Key.hexCodes:
+        return "hexes";
+    }
+  }
 }

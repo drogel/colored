@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class OnlyPortraitScrollbar extends StatelessWidget {
   const OnlyPortraitScrollbar({
     required this.child,
+    required this.scrollController,
     Key? key,
   }) : super(key: key);
 
   final Widget child;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,11 @@ class OnlyPortraitScrollbar extends StatelessWidget {
       return child;
     } else {
       final radius = RadiusData.of(context)!.radiiScheme;
-      return Scrollbar(radius: radius.small, child: child);
+      return Scrollbar(
+        controller: scrollController,
+        radius: radius.small,
+        child: child,
+      );
     }
   }
 

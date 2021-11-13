@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/list_paginator.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/names/names_service.dart';
+import 'package:colored/sources/data/services/names/paginated_names_service.dart';
 import 'package:colored/sources/data/services/names/paginated_palette_names_service.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
@@ -37,6 +38,17 @@ class PalettesServiceEmptyStub implements NamesService<List<String>> {
       {};
 }
 
+class PalettesServiceNullStub implements PaginatedNamesService<Palette> {
+  const PalettesServiceNullStub();
+
+  @override
+  Future<ListPage<Palette>?> fetchContainingSearch(
+    String searchString, {
+    required PageInfo pageInfo,
+  }) async =>
+      null;
+}
+
 const testPageInfo = PageInfo(startIndex: 1, size: 1, pageIndex: 1);
 
 const testCurrentPalettes = [
@@ -58,7 +70,6 @@ void main() {
         namesService: namesService,
         paginator: const ListPaginator(),
       ),
-      searchConfigurator: const ListSearchConfigurator(),
     );
   });
 
@@ -68,16 +79,16 @@ void main() {
 
   group("Given a $PalettesListViewModel", () {
     group("when initialState is called", () {
-      test("then a Pending state is received", () {
+      test("then a Starting state is received", () {
         final initialState = viewModel.initialState;
-        expect(initialState, isA<Pending>());
+        expect(initialState, isA<Starting>());
       });
     });
 
     group("When clearSearch is called", () {
-      test("then a Pending state is received", () {
+      test("then a Starting state is received", () {
         stateController.stream.listen(
-          (event) => expect(event, isA<Pending>()),
+          (event) => expect(event, isA<Starting>()),
         );
         viewModel.clearSearch();
       });
@@ -102,7 +113,6 @@ void main() {
           namesService: namesService,
           paginator: const ListPaginator(),
         ),
-        searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
@@ -111,23 +121,20 @@ void main() {
     });
 
     group("when searchNextPage is called", () {
-      test("then a Pending state is retrieved if searchString is short", () {
+      test("then a Pending state is not retrieved", () async {
         const shortSearch = "te";
-        viewModel.stateStream.listen((event) {
-          expect(event, isA<Pending>());
-          expect(event.search, shortSearch);
-        });
-
-        viewModel.searchNextPage(
+        await viewModel.searchNextPage(
           shortSearch,
           currentItems: testCurrentPalettes,
           currentPageInfo: testPageInfo,
         );
+        final event = await viewModel.stateStream.first;
+        expect(event, isNot(isA<Pending>()));
       });
 
-      test("then a Found state is retrieved for a valid searchString", () {
+      test("then a Found state is retrieved after Pending", () {
         const validSearch = "testing";
-        viewModel.stateStream.listen((event) {
+        stateController.stream.skip(1).listen((event) {
           expect(event, isA<Found>());
         });
 
@@ -138,7 +145,7 @@ void main() {
         );
       });
 
-      test("then palettes are retrieved for a valid searchString", () {
+      test("then palettes are retrieved after the Pending state", () {
         const validSearch = "testing";
         final expected = testCurrentPalettes +
             [
@@ -148,7 +155,7 @@ void main() {
               )
             ];
 
-        viewModel.stateStream.listen((event) {
+        stateController.stream.skip(1).listen((event) {
           final foundState = event as Found;
           expect(foundState.palettes, expected);
         });
@@ -162,38 +169,35 @@ void main() {
     });
 
     group("when startSearch is called", () {
-      test("with a searchString of length < 3, then Pending is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Pending>()),
-        );
-        viewModel.startSearch("se");
+      test("then Pending is added", () async {
+        await viewModel.startSearch("se");
+        expect(await viewModel.stateStream.first, isA<Pending>());
       });
 
-      test("with a searchString of length >= 3, then Found state is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Found>()),
-        );
+      test("then Found state is added after the Pending state", () {
+        stateController.stream.skip(1).listen(
+              (event) => (event) => expect(event, isA<Found>()),
+            );
         viewModel.startSearch("red");
       });
 
-      test("with a searchString of length < 3, then search is retrieved", () {
+      test("then the search is retrieved from the Pending state", () async {
         const expected = "se";
-        stateController.stream.listen(
-          (event) => expect(event.search, expected),
-        );
-        viewModel.startSearch(expected);
+        await viewModel.startSearch(expected);
+        final event = await viewModel.stateStream.first;
+        expect(event.search, expected);
       });
 
-      test("with a searchString of length >= 3, then search is retrieved", () {
+      test("then search is retrieved", () {
         const expected = "search";
-        stateController.stream.listen(
-          (event) => expect(event.search, expected),
-        );
+        stateController.stream.skip(1).listen(
+              (event) => (event) => expect(event.search, expected),
+            );
         viewModel.startSearch(expected);
       });
 
-      test("with searchString.length >= 3, then palettes are retrieved", () {
-        stateController.stream.listen((event) {
+      test("then palettes are retrieved", () {
+        stateController.stream.skip(1).listen((event) {
           final found = event as Found;
           final expected = Palette(
             name: PalettesServiceStub.palettesMap.keys.first,
@@ -217,7 +221,6 @@ void main() {
           namesService: namesService,
           paginator: const ListPaginator(),
         ),
-        searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
@@ -226,17 +229,15 @@ void main() {
     });
 
     group("when startSearch is called", () {
-      test("with a searchString of length < 3, then Pending is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Pending>()),
-        );
-        viewModel.startSearch("se");
+      test("then Pending is added", () async {
+        await viewModel.startSearch("se");
+        expect(await viewModel.stateStream.first, isA<Pending>());
       });
 
-      test("with searchString.length >= 3, then NoneFound is retrieved", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<NoneFound>()),
-        );
+      test("then NoneFound is retrieved after the Pending state", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<NoneFound>()),
+            );
         viewModel.startSearch("red");
       });
     });
@@ -245,7 +246,7 @@ void main() {
       test("with a valid searchString then current palettes are retrieved", () {
         const searchString = "test";
 
-        viewModel.stateStream.listen((event) {
+        stateController.stream.skip(1).listen((event) {
           expect(event, isA<Found>());
           final foundState = event as Found;
           expect(event.search, searchString);
@@ -259,18 +260,64 @@ void main() {
         );
       });
 
-      test("with a short searchString then a Pending state is retrieved", () {
+      test("then a Pending state is retrieved", () async {
         const shortString = "te";
-
-        viewModel.stateStream.listen((event) {
-          expect(event, isA<Pending>());
-          expect(event.search, shortString);
-        });
-
-        viewModel.searchNextPage(
+        await viewModel.searchNextPage(
           shortString,
           currentItems: testCurrentPalettes,
           currentPageInfo: testPageInfo,
+        );
+        final event = await viewModel.stateStream.first;
+        expect(event, isNot(isA<Pending>()));
+      });
+    });
+  });
+
+  group("Given a $PalettesListViewModel with an stubbed NamesService", () {
+    setUp(() {
+      stateController = StreamController<NamesListState>();
+      viewModel = PalettesListViewModel(
+        stateController: stateController,
+        namesService: const PalettesServiceNullStub(),
+      );
+    });
+
+    tearDown(() {
+      stateController.close();
+    });
+
+    group("when startSearch is called", () {
+      test("then Pending is added", () async {
+        await viewModel.startSearch("se");
+        expect(await viewModel.stateStream.first, isA<Pending>());
+      });
+
+      test("then NoneFound is retrieved after the Pending state", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<NoneFound>()),
+            );
+        viewModel.startSearch("red");
+      });
+    });
+
+    group("when searchNextPage is called", () {
+      test("then Pending is not added", () async {
+        await viewModel.searchNextPage(
+          "se",
+          currentPageInfo: testPageInfo,
+          currentItems: testCurrentPalettes,
+        );
+        expect(await viewModel.stateStream.first, isNot(isA<Pending>()));
+      });
+
+      test("then NoneFound is retrieved after the Pending state", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<NoneFound>()),
+            );
+        viewModel.searchNextPage(
+          "red",
+          currentPageInfo: testPageInfo,
+          currentItems: testCurrentPalettes,
         );
       });
     });

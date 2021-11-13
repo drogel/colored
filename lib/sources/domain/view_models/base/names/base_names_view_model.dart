@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:colored/sources/common/search_configurator/search_configurator.dart';
 import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/names/paginated_names_service.dart';
@@ -12,18 +11,22 @@ typedef PaginatedNamesSearcher<T> = Future<void> Function(
   required PageInfo currentPageInfo,
 });
 
+const _kStartIndex = 1;
+const _kInitialPageInfo = PageInfo(
+  startIndex: _kStartIndex,
+  size: 75,
+  pageIndex: _kStartIndex,
+);
+
 abstract class BaseNamesListViewModel<T> {
   const BaseNamesListViewModel({
     required StreamController<NamesListState> stateController,
     required PaginatedNamesService<T> namesService,
-    required SearchConfigurator searchConfigurator,
   })  : _stateController = stateController,
-        _searchConfigurator = searchConfigurator,
         _namesService = namesService;
 
   final StreamController<NamesListState> _stateController;
   final PaginatedNamesService<T> _namesService;
-  final SearchConfigurator _searchConfigurator;
 
   NamesListState buildInitialState();
 
@@ -47,52 +50,52 @@ abstract class BaseNamesListViewModel<T> {
     required PageInfo currentPageInfo,
   }) async {
     final nextPageInfo = currentPageInfo.next;
-    await _searchColorNames(
+    await _searchColorNamesNextPage(
       searchString,
       pageInfo: nextPageInfo,
       currentItems: currentItems,
     );
   }
 
-  Future<void> startSearch(String searchString) async {
-    const startIndex = 1;
-    const initialPageInfo = PageInfo(
-      startIndex: startIndex,
-      size: 60,
-      pageIndex: startIndex,
-    );
-    await _searchColorNames(searchString, pageInfo: initialPageInfo);
-  }
+  Future<void> startSearch(String searchString) async =>
+      _startColorNamesSearch(searchString, pageInfo: _kInitialPageInfo);
 
-  void clearSearch() => startSearch("");
+  void clearSearch() => _stateController.sink.add(buildInitialState());
 
   void dispose() => _stateController.close();
 
-  Future<void> _searchColorNames(
+  Future<void> _startColorNamesSearch(
     String searchString, {
     required PageInfo pageInfo,
-    List<T>? currentItems,
   }) async {
-    final cleanSearch = _searchConfigurator.cleanSearch(searchString);
-
-    if (cleanSearch.length < _searchConfigurator.minSearchLength) {
-      final pendingState = buildSearchPendingState(searchString);
-      return _stateController.sink.add(pendingState);
-    }
-
+    _notifySearchPending(searchString);
     final page = await _namesService.fetchContainingSearch(
-      cleanSearch,
+      searchString,
       pageInfo: pageInfo,
     );
-    if (currentItems == null || currentItems.isEmpty) {
-      _notifySearchStarted(searchString, page: page);
-    } else {
-      _notifySearchedNextPage(
-        searchString,
-        page: page,
-        previousItems: currentItems,
-      );
+    if (page == null) {
+      return _notifySearchFailed(searchString);
     }
+    _notifySearchStarted(searchString, page: page);
+  }
+
+  Future<void> _searchColorNamesNextPage(
+    String searchString, {
+    required PageInfo pageInfo,
+    required List<T> currentItems,
+  }) async {
+    final page = await _namesService.fetchContainingSearch(
+      searchString,
+      pageInfo: pageInfo,
+    );
+    if (page == null) {
+      return _notifySearchFailed(searchString);
+    }
+    _notifySearchedNextPage(
+      searchString,
+      page: page,
+      previousItems: currentItems,
+    );
   }
 
   void _notifySearchStarted(
@@ -101,8 +104,7 @@ abstract class BaseNamesListViewModel<T> {
   }) {
     final items = page.items;
     if (items.isEmpty) {
-      final failedState = buildSearchFailedState(searchString);
-      _stateController.sink.add(failedState);
+      _notifySearchFailed(searchString);
     } else {
       final state = buildSearchSuccessState(
         searchString,
@@ -125,5 +127,15 @@ abstract class BaseNamesListViewModel<T> {
       items: allItems,
     );
     _stateController.sink.add(state);
+  }
+
+  void _notifySearchPending(String searchString) {
+    final pendingState = buildSearchPendingState(searchString);
+    _stateController.sink.add(pendingState);
+  }
+
+  void _notifySearchFailed(String searchString) {
+    final failedState = buildSearchFailedState(searchString);
+    _stateController.sink.add(failedState);
   }
 }

@@ -5,6 +5,7 @@ class AutoFocusingSearchField extends StatefulWidget {
   const AutoFocusingSearchField({
     required this.searchText,
     this.onClearPressed,
+    this.onSubmitted,
     this.onChanged,
     this.hintText,
     Key? key,
@@ -13,6 +14,7 @@ class AutoFocusingSearchField extends StatefulWidget {
   final String searchText;
   final String? hintText;
   final void Function()? onClearPressed;
+  final void Function(String)? onSubmitted;
   final void Function(String)? onChanged;
 
   @override
@@ -51,6 +53,7 @@ class _AutoFocusingSearchFieldState extends State<AutoFocusingSearchField> {
         focusNode: _focusNode,
         onClearPressed: widget.onClearPressed,
         onChanged: widget.onChanged,
+        onSubmitted: widget.onSubmitted,
       );
 
   @override

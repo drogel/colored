@@ -16,7 +16,7 @@ class TimeoutHttpWrapper implements HttpWrapper {
   static const timeoutForcingSeconds = SafeHttpClient.timeoutLimitSeconds + 1;
 
   @override
-  Future<Response> get(String url, {Map<String, String>? headers}) =>
+  Future<Response> get(Uri uri, {Map<String, String>? headers}) =>
       Future.delayed(
         const Duration(seconds: timeoutForcingSeconds),
         () => Response(
@@ -30,7 +30,7 @@ class SocketExceptionHttpWrapper implements HttpWrapper {
   const SocketExceptionHttpWrapper();
 
   @override
-  Future<Response> get(String url, {Map<String, String>? headers}) =>
+  Future<Response> get(Uri uri, {Map<String, String>? headers}) =>
       throw SocketException(runtimeType.toString());
 }
 
@@ -41,7 +41,7 @@ class ResponseHttpWrapper implements HttpWrapper {
   static const responseStatus = 200;
 
   @override
-  Future<Response> get(String url, {Map<String, String>? headers}) async =>
+  Future<Response> get(Uri uri, {Map<String, String>? headers}) async =>
       Response(responseBody, responseStatus);
 }
 
