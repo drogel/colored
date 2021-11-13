@@ -11,6 +11,13 @@ typedef PaginatedNamesSearcher<T> = Future<void> Function(
   required PageInfo currentPageInfo,
 });
 
+const _kStartIndex = 1;
+const _kInitialPageInfo = PageInfo(
+  startIndex: _kStartIndex,
+  size: 75,
+  pageIndex: _kStartIndex,
+);
+
 abstract class BaseNamesListViewModel<T> {
   const BaseNamesListViewModel({
     required StreamController<NamesListState> stateController,
@@ -50,15 +57,8 @@ abstract class BaseNamesListViewModel<T> {
     );
   }
 
-  Future<void> startSearch(String searchString) async {
-    const startIndex = 1;
-    const initialPageInfo = PageInfo(
-      startIndex: startIndex,
-      size: 60,
-      pageIndex: startIndex,
-    );
-    await _startColorNamesSearch(searchString, pageInfo: initialPageInfo);
-  }
+  Future<void> startSearch(String searchString) async =>
+      _startColorNamesSearch(searchString, pageInfo: _kInitialPageInfo);
 
   void clearSearch() => _stateController.sink.add(buildInitialState());
 
