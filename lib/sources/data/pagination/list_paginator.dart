@@ -1,5 +1,5 @@
-import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/pagination/list_page.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/pagination/paginator.dart';
 
 class ListPaginator<T> implements Paginator<T> {

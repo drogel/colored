@@ -1,6 +1,6 @@
+import 'package:colored/sources/common/extensions/uri_copy.dart';
 import 'package:colored/sources/data/api/services/base/request/page_request_builder.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
-import 'package:colored/sources/common/extensions/uri_copy.dart';
 
 class UriPageRequestBuilder implements PageRequestBuilder {
   const UriPageRequestBuilder();

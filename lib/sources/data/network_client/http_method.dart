@@ -10,14 +10,12 @@ enum HttpMethod {
   unknown,
 }
 
-class HttpMethodBuilder {
-  static HttpMethod fromString(String stringValue) {
-    final httpMethod = HttpMethod.values.firstWhere(
-      (method) => method.stringValue == stringValue,
-      orElse: () => HttpMethod.unknown,
-    );
-    return httpMethod;
-  }
+HttpMethod httpMethodFromString(String stringValue) {
+  final httpMethod = HttpMethod.values.firstWhere(
+    (method) => method.stringValue == stringValue,
+    orElse: () => HttpMethod.unknown,
+  );
+  return httpMethod;
 }
 
 extension HttpMethodStrings on HttpMethod {

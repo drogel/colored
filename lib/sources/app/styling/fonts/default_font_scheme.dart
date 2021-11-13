@@ -1,5 +1,5 @@
-import 'package:colored/sources/app/styling/fonts/font_scheme.dart';
 import 'package:colored/sources/app/styling/fonts/font_constants.dart' as fonts;
+import 'package:colored/sources/app/styling/fonts/font_scheme.dart';
 
 class DefaultFontScheme implements FontScheme {
   const DefaultFontScheme();

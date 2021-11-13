@@ -24,9 +24,9 @@ class ColoredThemeComposer implements ThemeComposer {
         fontFamily: fonts.primary,
         primaryColor: colors.primary,
         primaryColorDark: colors.primaryVariant,
-        accentColor: colors.secondary,
         scaffoldBackgroundColor: colors.primary,
         indicatorColor: colors.secondary,
+        focusColor: colors.primaryDark,
         primarySwatch: colors.swatch as MaterialColor?,
         hintColor: colors.textVariant,
         hoverColor: colors.secondaryDark.withOpacity(opacity.hover),
@@ -77,7 +77,6 @@ class ColoredThemeComposer implements ThemeComposer {
         highlightColor: colors.secondaryDark.withOpacity(opacity.shadow),
         canvasColor: colors.primaryVariant,
         splashColor: colors.secondary.withOpacity(opacity.fadedColor),
-        buttonColor: colors.primaryDark,
         disabledColor: colors.primary,
         iconTheme: IconThemeData(color: colors.secondary, size: 32),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
