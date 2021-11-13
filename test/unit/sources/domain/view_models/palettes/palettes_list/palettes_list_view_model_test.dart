@@ -121,7 +121,7 @@ void main() {
     });
 
     group("when searchNextPage is called", () {
-      test("then a Pending state is retrieved", () async {
+      test("then a Pending state is not retrieved", () async {
         const shortSearch = "te";
         await viewModel.searchNextPage(
           shortSearch,
@@ -129,8 +129,7 @@ void main() {
           currentPageInfo: testPageInfo,
         );
         final event = await viewModel.stateStream.first;
-        expect(event, isA<Pending>());
-        expect(event.search, shortSearch);
+        expect(event, isNot(isA<Pending>()));
       });
 
       test("then a Found state is retrieved after Pending", () {
@@ -263,16 +262,13 @@ void main() {
 
       test("then a Pending state is retrieved", () async {
         const shortString = "te";
-
         await viewModel.searchNextPage(
           shortString,
           currentItems: testCurrentPalettes,
           currentPageInfo: testPageInfo,
         );
-
         final event = await viewModel.stateStream.first;
-        expect(event, isA<Pending>());
-        expect(event.search, shortString);
+        expect(event, isNot(isA<Pending>()));
       });
     });
   });
@@ -305,13 +301,13 @@ void main() {
     });
 
     group("when searchNextPage is called", () {
-      test("then Pending is added", () async {
+      test("then Pending is not added", () async {
         await viewModel.searchNextPage(
           "se",
           currentPageInfo: testPageInfo,
           currentItems: testCurrentPalettes,
         );
-        expect(await viewModel.stateStream.first, isA<Pending>());
+        expect(await viewModel.stateStream.first, isNot(isA<Pending>()));
       });
 
       test("then NoneFound is retrieved after the Pending state", () {

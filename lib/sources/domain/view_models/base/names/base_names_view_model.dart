@@ -43,7 +43,7 @@ abstract class BaseNamesListViewModel<T> {
     required PageInfo currentPageInfo,
   }) async {
     final nextPageInfo = currentPageInfo.next;
-    await _searchColorNames(
+    await _searchColorNamesNextPage(
       searchString,
       pageInfo: nextPageInfo,
       currentItems: currentItems,
@@ -57,37 +57,45 @@ abstract class BaseNamesListViewModel<T> {
       size: 60,
       pageIndex: startIndex,
     );
-    await _searchColorNames(searchString, pageInfo: initialPageInfo);
+    await _startColorNamesSearch(searchString, pageInfo: initialPageInfo);
   }
 
   void clearSearch() => _stateController.sink.add(buildInitialState());
 
   void dispose() => _stateController.close();
 
-  Future<void> _searchColorNames(
+  Future<void> _startColorNamesSearch(
     String searchString, {
     required PageInfo pageInfo,
-    List<T>? currentItems,
   }) async {
     _notifySearchPending(searchString);
-
     final page = await _namesService.fetchContainingSearch(
       searchString,
       pageInfo: pageInfo,
     );
-
     if (page == null) {
       return _notifySearchFailed(searchString);
     }
-    if (currentItems == null || currentItems.isEmpty) {
-      _notifySearchStarted(searchString, page: page);
-    } else {
-      _notifySearchedNextPage(
-        searchString,
-        page: page,
-        previousItems: currentItems,
-      );
+    _notifySearchStarted(searchString, page: page);
+  }
+
+  Future<void> _searchColorNamesNextPage(
+    String searchString, {
+    required PageInfo pageInfo,
+    required List<T> currentItems,
+  }) async {
+    final page = await _namesService.fetchContainingSearch(
+      searchString,
+      pageInfo: pageInfo,
+    );
+    if (page == null) {
+      return _notifySearchFailed(searchString);
     }
+    _notifySearchedNextPage(
+      searchString,
+      page: page,
+      previousItems: currentItems,
+    );
   }
 
   void _notifySearchStarted(

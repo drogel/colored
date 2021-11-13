@@ -127,13 +127,13 @@ void main() {
     });
 
     group("when searchNextPage is called", () {
-      test("then a Pending state is added", () async {
+      test("then a Pending state is not added", () async {
         await viewModel.searchNextPage(
           "se",
           currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
-        expect(await viewModel.stateStream.first, isA<Pending>());
+        expect(await viewModel.stateStream.first, isNot(isA<Pending>()));
       });
 
       test("then a Found state is added after the first Pending state", () {
@@ -285,13 +285,13 @@ void main() {
     });
 
     group("when searchNextPage is called", () {
-      test("then Pending is added", () async {
+      test("then Pending is not added", () async {
         await viewModel.searchNextPage(
           "se",
           currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
-        expect(await viewModel.stateStream.first, isA<Pending>());
+        expect(await viewModel.stateStream.first, isNot(isA<Pending>()));
       });
 
       test("then Found is retrieved after the Pending is added", () {
@@ -347,13 +347,13 @@ void main() {
     });
 
     group("when searchNextPage is called", () {
-      test("then a Pending state is added", () async {
+      test("then a Pending state is not added", () async {
         await viewModel.searchNextPage(
           "red",
           currentPageInfo: testPageInfo,
           currentItems: testCurrentNamedColors,
         );
-        expect(await viewModel.stateStream.first, isA<Pending>());
+        expect(await viewModel.stateStream.first, isNot(isA<Pending>()));
       });
 
       test("then NoneFound is retrieved after the Pending state", () {
