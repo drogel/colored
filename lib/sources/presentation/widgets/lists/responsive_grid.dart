@@ -56,6 +56,7 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
       gestures: const [GestureType.onTap, GestureType.onVerticalDragDown],
       child: BackgroundContainer(
         child: OnlyPortraitScrollbar(
+          scrollController: _scrollController,
           child: SafeArea(
             bottom: false,
             top: false,
