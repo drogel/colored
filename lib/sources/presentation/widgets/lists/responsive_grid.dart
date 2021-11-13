@@ -1,5 +1,3 @@
-import 'package:colored/sources/app/styling/curves/curve_data.dart';
-import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/presentation/widgets/containers/background_container.dart';
 import 'package:colored/sources/presentation/widgets/lists/only_portrait_scrollbar.dart';
@@ -15,6 +13,9 @@ class ResponsiveGrid extends StatefulWidget {
     this.crossAxisMinCount = 2,
     this.crossAxisMaxCount = 9,
     this.childAspectRatio = 1,
+    this.onScrolledForwardNearBottom,
+    this.nearBottomEdgeThreshold = 0,
+    this.scrollController,
     Key? key,
   }) : super(key: key);
 
@@ -24,6 +25,9 @@ class ResponsiveGrid extends StatefulWidget {
   final PageStorageKey<String>? pageStorageKey;
   final double childAspectRatio;
   final int itemCount;
+  final VoidCallback? onScrolledForwardNearBottom;
+  final double nearBottomEdgeThreshold;
+  final ScrollController? scrollController;
   final IndexedWidgetBuilder itemBuilder;
 
   @override
@@ -31,20 +35,15 @@ class ResponsiveGrid extends StatefulWidget {
 }
 
 class _ResponsiveGridState extends State<ResponsiveGrid> {
-  final _scrollController = ScrollController();
+  late final ScrollController _scrollController;
+  late double _lastExtentAfter;
 
   @override
   void initState() {
-    _scrollController.addListener(_dismissKeyboard);
+    _scrollController = widget.scrollController ?? ScrollController();
+    _scrollController.addListener(_onScrolledForwardNearBottom);
+    _lastExtentAfter = double.infinity;
     super.initState();
-  }
-
-  @override
-  void didUpdateWidget(ResponsiveGrid oldWidget) {
-    if (_isItemCountDifferent(oldWidget)) {
-      _animateToTop(context);
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -54,8 +53,10 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
     final viewInsets = _computeEffectiveViewInsets(mediaQuery.viewInsets);
     final totalPadding = padding.vertical + viewInsets;
     return KeyboardDismisser(
+      gestures: const [GestureType.onTap, GestureType.onVerticalDragDown],
       child: BackgroundContainer(
         child: OnlyPortraitScrollbar(
+          scrollController: _scrollController,
           child: SafeArea(
             bottom: false,
             top: false,
@@ -78,6 +79,12 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
     );
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   int _computeCrossAxisCount(BoxConstraints constraints) {
     final minCount = widget.crossAxisMinCount;
     final maxCount = widget.crossAxisMaxCount;
@@ -94,15 +101,19 @@ class _ResponsiveGridState extends State<ResponsiveGrid> {
     }
   }
 
-  void _animateToTop(BuildContext context) {
-    final curve = CurveData.of(context)!.curveScheme.main;
-    final duration = DurationData.of(context)!.durationScheme.mediumPresenting;
-    _scrollController.animateTo(0, duration: duration, curve: curve);
+  void _onScrolledForwardNearBottom() {
+    final onScrolledForwardNearBottom = widget.onScrolledForwardNearBottom;
+    if (onScrolledForwardNearBottom == null) {
+      return;
+    }
+    final extentAfter = _scrollController.position.extentAfter;
+    final threshold = widget.nearBottomEdgeThreshold;
+    final isPastThreshold = extentAfter <= threshold;
+    final wasBelowThreshold = _lastExtentAfter >= threshold;
+    final isScrollNearBottomEdge = wasBelowThreshold && isPastThreshold;
+    _lastExtentAfter = extentAfter;
+    if (isScrollNearBottomEdge) {
+      onScrolledForwardNearBottom();
+    }
   }
-
-  void _dismissKeyboard() =>
-      WidgetsBinding.instance?.focusManager.primaryFocus?.unfocus();
-
-  bool _isItemCountDifferent(ResponsiveGrid oldWidget) =>
-      oldWidget.itemCount != widget.itemCount;
 }

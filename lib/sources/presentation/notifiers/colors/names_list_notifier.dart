@@ -1,7 +1,8 @@
+import 'package:colored/sources/domain/data_models/named_color.dart';
+import 'package:colored/sources/domain/view_models/base/names/base_names_injector.dart';
+import 'package:colored/sources/domain/view_models/base/names/base_names_view_model.dart';
+import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_data.dart';
-import 'package:colored/sources/domain/view_models/colors/names_list/names_list_injector.dart';
-import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
-import 'package:colored/sources/domain/view_models/colors/names_list/names_list_view_model.dart';
 import 'package:flutter/material.dart';
 
 class NamesListNotifier extends StatefulWidget {
@@ -12,14 +13,14 @@ class NamesListNotifier extends StatefulWidget {
   }) : super(key: key);
 
   final Widget child;
-  final NamesListInjector injector;
+  final BaseNamesInjector<NamedColor> injector;
 
   @override
   _NamesListNotifierState createState() => _NamesListNotifierState();
 }
 
 class _NamesListNotifierState extends State<NamesListNotifier> {
-  late final NamesListViewModel _viewModel;
+  late final BaseNamesListViewModel<NamedColor> _viewModel;
 
   @override
   void initState() {
@@ -33,7 +34,9 @@ class _NamesListNotifierState extends State<NamesListNotifier> {
         stream: _viewModel.stateStream,
         builder: (_, snapshot) => NamesListData(
           state: snapshot.data ?? _viewModel.initialState,
-          onSearchChanged: _viewModel.searchColorNames,
+          onSearchChanged: _viewModel.searchNextPage,
+          onSearchStarted: _viewModel.startSearch,
+          onSearchCleared: _viewModel.clearSearch,
           onBackPressed: _viewModel.clearSearch,
           child: widget.child,
         ),

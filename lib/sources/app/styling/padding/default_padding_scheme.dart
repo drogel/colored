@@ -1,6 +1,6 @@
-import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:colored/sources/app/styling/padding/padding_constants.dart'
     as padding;
+import 'package:colored/sources/app/styling/padding/padding_scheme.dart';
 import 'package:flutter/material.dart';
 
 class DefaultPaddingScheme implements PaddingScheme {

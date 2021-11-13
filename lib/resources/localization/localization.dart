@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:colored/resources/localization/localization_provider.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
+import 'package:flutter/material.dart';
 
 class Localization extends LocaleCodeAware with LocalizationProvider {
   Localization(this.locale) : super(locale.toString());

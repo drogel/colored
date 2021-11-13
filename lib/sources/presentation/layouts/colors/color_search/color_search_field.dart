@@ -12,8 +12,8 @@ class ColorSearchField extends StatelessWidget {
     final localization = Localization.of(context)!.namesList;
     return AutoFocusingSearchField(
       hintText: localization.search,
-      onClearPressed: () => data.onSearchChanged(""),
-      onChanged: data.onSearchChanged,
+      onClearPressed: data.onSearchCleared,
+      onSubmitted: data.onSearchStarted,
       searchText: data.state.search,
     );
   }

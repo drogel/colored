@@ -1,11 +1,11 @@
+import 'package:colored/sources/app/styling/curves/curve_data.dart';
+import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
 import 'package:colored/sources/app/styling/opacity/opacity_data.dart';
+import 'package:colored/sources/app/styling/padding/padding_data.dart';
+import 'package:colored/sources/app/styling/radii/radius_data.dart';
 import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_data.dart';
 import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_state.dart';
-import 'package:colored/sources/app/styling/curves/curve_data.dart';
-import 'package:colored/sources/app/styling/radii/radius_data.dart';
-import 'package:colored/sources/app/styling/padding/padding_data.dart';
-import 'package:colored/sources/app/styling/duration/duration_data.dart';
 import 'package:flutter/material.dart';
 
 class ConnectivityBar extends StatelessWidget {

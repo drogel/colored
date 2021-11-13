@@ -34,8 +34,8 @@ class AnimatedImageColor extends StatelessWidget {
     final defaultCurve = curveScheme.main;
     final defaultDuration = durationScheme.shortPresenting;
     final currentColor = _setCurrentColor();
-    return TweenAnimationBuilder<Color>(
-      tween: Tween<Color>(begin: begin, end: currentColor),
+    return TweenAnimationBuilder<Color?>(
+      tween: ColorTween(begin: begin, end: currentColor),
       duration: duration ?? defaultDuration,
       curve: curve ?? defaultCurve,
       builder: (context, color, child) => Image.asset(

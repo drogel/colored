@@ -26,7 +26,7 @@ class DropdownFormatButton extends StatelessWidget {
     final theme = Theme.of(context);
     final padding = PaddingData.of(context)!.paddingScheme;
     return Theme(
-      data: theme.copyWith(canvasColor: theme.buttonColor),
+      data: theme.copyWith(canvasColor: theme.focusColor),
       child: Padding(
         padding: padding.small.add(EdgeInsets.only(top: padding.small.top)),
         child: Column(

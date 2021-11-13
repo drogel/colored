@@ -8,7 +8,7 @@ const String _kHexCode = "#000000";
 void main() {
   late NamedColor namedColor;
 
-  group("Given a valid NamedColor", () {
+  group("Given a valid $NamedColor", () {
     setUp(() => namedColor = const NamedColor(name: _kName, hex: _kHexCode));
 
     group("when constructed", () {
@@ -45,6 +45,15 @@ void main() {
       test("then a NamedColor with the data from entry is instantiated", () {
         const mapEntry = MapEntry<String, dynamic>("ffffff", "White");
         final actual = NamedColor.fromMapEntry(mapEntry);
+        expect(actual.name, "White");
+        expect(actual.hex, "#FFFFFF");
+      });
+    });
+
+    group("when fromJson is called", () {
+      test("a NamedColor with uppercased data from entry is instantiated", () {
+        const json = {"name": "White", "hex": "#ffffff"};
+        final actual = NamedColor.fromJson(json);
         expect(actual.name, "White");
         expect(actual.hex, "#FFFFFF");
       });

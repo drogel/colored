@@ -1,3 +1,9 @@
+## [0.10.3] - November 13th, 2021
+
+- Updates to Flutter 2.5.3.
+- Integrates the Huely API for colors and palettes names lists.
+- Fixes minor UI/UX bugs.
+
 ## [0.10.2] - October 11th, 2020
 
 - Adds a palette detail page that let users see the color codes and names in a palette.

@@ -22,7 +22,7 @@ class DraggableIndicator extends StatelessWidget {
           margin: const EdgeInsets.all(1),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(radii.small),
-            color: theme.buttonColor,
+            color: theme.focusColor,
           ),
         ),
         GestureDetector(

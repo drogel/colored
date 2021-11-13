@@ -25,7 +25,7 @@ class _ColorThumbState extends State<ColorThumb> {
     final elevation = ElevationData.of(context)!.elevationScheme;
     final duration = DurationData.of(context)!.durationScheme;
     final theme = Theme.of(context);
-    final buttonColor = theme.buttonColor;
+    final buttonColor = theme.focusColor;
     final defaultTextColor = theme.colorScheme.onPrimary;
     final actionsTheme = theme.appBarTheme.actionsIconTheme;
     final textColor = actionsTheme?.color ?? defaultTextColor;
