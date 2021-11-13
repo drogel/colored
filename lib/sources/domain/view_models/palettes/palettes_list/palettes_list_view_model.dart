@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:colored/sources/common/search_configurator/search_configurator.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/names/paginated_names_service.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
@@ -12,15 +11,13 @@ class PalettesListViewModel extends BaseNamesListViewModel<Palette> {
   const PalettesListViewModel({
     required StreamController<NamesListState> stateController,
     required PaginatedNamesService<Palette> namesService,
-    required SearchConfigurator searchConfigurator,
   }) : super(
           stateController: stateController,
           namesService: namesService,
-          searchConfigurator: searchConfigurator,
         );
 
   @override
-  NamesListState buildInitialState() => Pending.emptySearch();
+  NamesListState buildInitialState() => const Starting();
 
   @override
   NamesListState buildSearchFailedState(String searchString) =>

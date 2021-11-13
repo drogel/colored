@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:colored/sources/common/search_configurator/search_configurator.dart';
 import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/names/paginated_names_service.dart';
@@ -16,14 +15,11 @@ abstract class BaseNamesListViewModel<T> {
   const BaseNamesListViewModel({
     required StreamController<NamesListState> stateController,
     required PaginatedNamesService<T> namesService,
-    required SearchConfigurator searchConfigurator,
   })  : _stateController = stateController,
-        _searchConfigurator = searchConfigurator,
         _namesService = namesService;
 
   final StreamController<NamesListState> _stateController;
   final PaginatedNamesService<T> _namesService;
-  final SearchConfigurator _searchConfigurator;
 
   NamesListState buildInitialState();
 
@@ -64,7 +60,7 @@ abstract class BaseNamesListViewModel<T> {
     await _searchColorNames(searchString, pageInfo: initialPageInfo);
   }
 
-  void clearSearch() => startSearch("");
+  void clearSearch() => _stateController.sink.add(buildInitialState());
 
   void dispose() => _stateController.close();
 
@@ -73,14 +69,10 @@ abstract class BaseNamesListViewModel<T> {
     required PageInfo pageInfo,
     List<T>? currentItems,
   }) async {
-    final cleanSearch = _searchConfigurator.cleanSearch(searchString);
-
-    if (cleanSearch.length < _searchConfigurator.minSearchLength) {
-      return _notifySearchPending(searchString);
-    }
+    _notifySearchPending(searchString);
 
     final page = await _namesService.fetchContainingSearch(
-      cleanSearch,
+      searchString,
       pageInfo: pageInfo,
     );
 

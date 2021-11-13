@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:colored/configuration/flavor_config.dart';
-import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/data/api/models/index/api_index.dart';
 import 'package:colored/sources/data/api/services/base/request/uri_page_request_builder.dart';
 import 'package:colored/sources/data/api/services/base/response/api_response_parser.dart';
@@ -30,7 +29,6 @@ class NamesListInjector extends BaseNamesInjector<NamedColor> {
   ]) =>
       NamesListViewModel(
         stateController: stateController ?? StreamController<NamesListState>(),
-        searchConfigurator: const ListSearchConfigurator(),
         namesService: ColorNamesApiService(
           client: const SafeHttpClient(),
           pageRequestBuilder: const UriPageRequestBuilder(),
@@ -45,7 +43,6 @@ class NamesListInjector extends BaseNamesInjector<NamedColor> {
   ]) =>
       NamesListViewModel(
         stateController: stateController ?? StreamController<NamesListState>(),
-        searchConfigurator: const ListSearchConfigurator(),
         namesService: PaginatedColorNamesService(
           namesService: ColorNamesService(
             dataLoader: ColorNamesLoader(

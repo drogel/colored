@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/list_paginator.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
@@ -71,7 +70,6 @@ void main() {
         namesService: namesService,
         paginator: const ListPaginator(),
       ),
-      searchConfigurator: const ListSearchConfigurator(),
     );
   });
 
@@ -81,16 +79,16 @@ void main() {
 
   group("Given a $NamesListViewModel", () {
     group("when initialState is called", () {
-      test("then a Pending state is received", () {
+      test("then a Starting state is received", () {
         final initialState = viewModel.initialState;
-        expect(initialState, isA<Pending>());
+        expect(initialState, isA<Starting>());
       });
     });
 
     group("when clearSearch is called", () {
-      test("then a Pending state is received", () {
+      test("then a Starting state is received", () {
         stateController.stream.listen(
-          (event) => expect(event, isA<Pending>()),
+          (event) => expect(event, isA<Starting>()),
         );
         viewModel.clearSearch();
       });
@@ -121,7 +119,6 @@ void main() {
           namesService: namesService,
           paginator: const ListPaginator(),
         ),
-        searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
@@ -130,21 +127,19 @@ void main() {
     });
 
     group("when searchNextPage is called", () {
-      test("with a searchString of length < 3, then Pending is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Pending>()),
-        );
-        viewModel.searchNextPage(
+      test("then a Pending state is added", () async {
+        await viewModel.searchNextPage(
           "se",
           currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
+        expect(await viewModel.stateStream.first, isA<Pending>());
       });
 
-      test("with a searchString of length >= 3, then Found state is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Found>()),
-        );
+      test("then a Found state is added after the first Pending state", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<Found>()),
+            );
         viewModel.searchNextPage(
           "red",
           currentItems: testCurrentNamedColors,
@@ -152,7 +147,7 @@ void main() {
         );
       });
 
-      test("with a searchString of length < 3, then search is retrieved", () {
+      test("then the search from the Pending state is retrieved", () {
         const expected = "se";
         stateController.stream.listen(
           (event) => expect(event.search, expected),
@@ -164,11 +159,11 @@ void main() {
         );
       });
 
-      test("with a searchString of length >= 3, then search is retrieved", () {
+      test("then the search from the Found state is retrieved", () {
         const expected = "search";
-        stateController.stream.listen(
-          (event) => expect(event.search, expected),
-        );
+        stateController.stream.skip(1).listen(
+              (event) => expect(event.search, expected),
+            );
         viewModel.searchNextPage(
           expected,
           currentItems: testCurrentNamedColors,
@@ -176,9 +171,9 @@ void main() {
         );
       });
 
-      group("with searchString.length >= 3, namedColors are retrieved", () {
+      group("namedColors are retrieved", () {
         test("containing the first namedColor from the current colors", () {
-          stateController.stream.listen((event) {
+          stateController.stream.skip(1).listen((event) {
             final found = event as Found;
             final expected = NamedColor(
               name: testCurrentNamedColors.first.name,
@@ -195,7 +190,7 @@ void main() {
         });
 
         test("containing the first namedColor from the retrieved colors", () {
-          stateController.stream.listen((event) {
+          stateController.stream.skip(1).listen((event) {
             final found = event as Found;
             const namesMap = NamesServiceStub.namesMap;
             final expected = NamedColor(
@@ -215,21 +210,19 @@ void main() {
     });
 
     group("when startSearch is called", () {
-      test("with a searchString of length < 3, then Pending is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Pending>()),
-        );
-        viewModel.startSearch("se");
+      test("then a Pending state is added", () async {
+        await viewModel.startSearch("se");
+        expect(await stateController.stream.first, isA<Pending>());
       });
 
-      test("with a searchString of length >= 3, then Found state is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Found>()),
-        );
+      test("then Found state is added after the Starting state", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<Found>()),
+            );
         viewModel.startSearch("red");
       });
 
-      test("with a searchString of length < 3, then search is retrieved", () {
+      test("then the search from the Starting state is retrieved", () {
         const expected = "se";
         stateController.stream.listen(
           (event) => expect(event.search, expected),
@@ -237,16 +230,16 @@ void main() {
         viewModel.startSearch(expected);
       });
 
-      test("with a searchString of length >= 3, then search is retrieved", () {
+      test("then the search from the Found state is retrieved", () {
         const expected = "search";
-        stateController.stream.listen(
-          (event) => expect(event.search, expected),
-        );
+        stateController.stream.skip(1).listen(
+              (event) => expect(event.search, expected),
+            );
         viewModel.startSearch(expected);
       });
 
-      test("with searchString.length >= 3, then namedColors are retrieved", () {
-        stateController.stream.listen((event) {
+      test("then namedColors are retrieved", () {
+        stateController.stream.skip(1).listen((event) {
           final found = event as Found;
           final expected = NamedColor(
             name: NamesServiceStub.namesMap.values.first,
@@ -270,7 +263,6 @@ void main() {
           namesService: namesService,
           paginator: const ListPaginator(),
         ),
-        searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
@@ -279,56 +271,50 @@ void main() {
     });
 
     group("when startSearch is called", () {
-      test("with a searchString of length < 3, then Pending is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Pending>()),
-        );
-        viewModel.startSearch("se");
+      test("then a Pending state is added", () async {
+        await viewModel.startSearch("se");
+        expect(await viewModel.stateStream.first, isA<Pending>());
       });
 
-      test("with searchString.length >= 3, then NoneFound is retrieved", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<NoneFound>()),
-        );
+      test("then NoneFound is retrieved after the Pending state", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<NoneFound>()),
+            );
         viewModel.startSearch("red");
       });
     });
 
     group("when searchNextPage is called", () {
-      test("with a searchString of length < 3, then Pending is added", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<Pending>()),
-        );
-        viewModel.searchNextPage(
+      test("then Pending is added", () async {
+        await viewModel.searchNextPage(
           "se",
+          currentItems: testCurrentNamedColors,
+          currentPageInfo: testPageInfo,
+        );
+        expect(await viewModel.stateStream.first, isA<Pending>());
+      });
+
+      test("then Found is retrieved after the Pending is added", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<Found>()),
+            );
+        viewModel.searchNextPage(
+          "red",
           currentItems: testCurrentNamedColors,
           currentPageInfo: testPageInfo,
         );
       });
 
-      group("with searchString.length >= 3", () {
-        test("then Found is retrieved", () {
-          stateController.stream.listen(
-            (event) => expect(event, isA<Found>()),
-          );
-          viewModel.searchNextPage(
-            "red",
-            currentItems: testCurrentNamedColors,
-            currentPageInfo: testPageInfo,
-          );
+      test("then namedColors found are the currentItems", () {
+        stateController.stream.skip(1).listen((event) {
+          final found = event as Found;
+          expect(found.namedColors, testCurrentNamedColors);
         });
-
-        test("then namedColors found are the currentItems", () {
-          stateController.stream.listen((event) {
-            final found = event as Found;
-            expect(found.namedColors, testCurrentNamedColors);
-          });
-          viewModel.searchNextPage(
-            "red",
-            currentItems: testCurrentNamedColors,
-            currentPageInfo: testPageInfo,
-          );
-        });
+        viewModel.searchNextPage(
+          "red",
+          currentItems: testCurrentNamedColors,
+          currentPageInfo: testPageInfo,
+        );
       });
     });
   });
@@ -339,7 +325,6 @@ void main() {
       viewModel = NamesListViewModel(
         stateController: stateController,
         namesService: const NamesServiceNullStub(),
-        searchConfigurator: const ListSearchConfigurator(),
       );
     });
 
@@ -348,19 +333,33 @@ void main() {
     });
 
     group("when startSearch is called", () {
-      test("then NoneFound is retrieved", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<NoneFound>()),
-        );
+      test("then a Pending state is added", () async {
+        await viewModel.startSearch("se");
+        expect(await viewModel.stateStream.first, isA<Pending>());
+      });
+
+      test("then NoneFound is retrieved after the Pending state", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<NoneFound>()),
+            );
         viewModel.startSearch("red");
       });
     });
 
     group("when searchNextPage is called", () {
-      test("then NoneFound is retrieved", () {
-        stateController.stream.listen(
-          (event) => expect(event, isA<NoneFound>()),
+      test("then a Pending state is added", () async {
+        await viewModel.searchNextPage(
+          "red",
+          currentPageInfo: testPageInfo,
+          currentItems: testCurrentNamedColors,
         );
+        expect(await viewModel.stateStream.first, isA<Pending>());
+      });
+
+      test("then NoneFound is retrieved after the Pending state", () {
+        stateController.stream.skip(1).listen(
+              (event) => expect(event, isA<NoneFound>()),
+            );
         viewModel.searchNextPage(
           "red",
           currentPageInfo: testPageInfo,

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:colored/sources/common/search_configurator/list_search_configurator.dart';
 import 'package:colored/sources/data/api/models/index/api_index.dart';
 import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
@@ -26,7 +25,6 @@ class _LocalViewModelMock extends BaseNamesListViewModel<String> {
       : super(
           namesService: const _TestPaginatedNamesService(),
           stateController: StreamController<NamesListState>(),
-          searchConfigurator: const ListSearchConfigurator(),
         );
 
   @override
@@ -51,7 +49,6 @@ class _ApiViewModelMock extends BaseNamesListViewModel<String> {
       : super(
           namesService: const _TestPaginatedNamesService(),
           stateController: StreamController<NamesListState>(),
-          searchConfigurator: const ListSearchConfigurator(),
         );
 
   @override
