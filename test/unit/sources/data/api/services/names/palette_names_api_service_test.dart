@@ -98,12 +98,6 @@ void main() {
       );
     });
 
-    group("when searchQueryKey is called", () {
-      test("then name is retrieved", () {
-        expect(service.searchQueryKey, "name");
-      });
-    });
-
     group("when buildSearchUri is called", () {
       test("then the request uri is properly built", () {
         expect(

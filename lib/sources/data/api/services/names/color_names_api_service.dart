@@ -25,9 +25,6 @@ class ColorNamesApiService extends BaseApiNamesService<NamedColor> {
   Uri? get baseUri => _apiIndex?.colors?.search?.names?.endpoint;
 
   @override
-  String get searchQueryKey => NamedColor.nameKey;
-
-  @override
   NamedColor parseItemFromJson(Map<String, dynamic> json) =>
       NamedColor.fromJson(json);
 }
