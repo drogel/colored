@@ -1,5 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:colored/sources/data/api/models/responses/api_response_data.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
+import 'package:vector_math/hash.dart';
 
 typedef JsonParser<T> = T Function(Map<String, dynamic> json);
 
@@ -45,4 +47,26 @@ class ListPage<T> {
         size: itemsPerPage,
         pageIndex: pageIndex,
       );
+
+  @override
+  bool operator ==(Object other) =>
+      other is ListPage<T> &&
+      const ListEquality().equals(items, other.items) &&
+      other.currentItemCount == currentItemCount &&
+      other.itemsPerPage == itemsPerPage &&
+      other.startIndex == startIndex &&
+      other.totalItems == totalItems &&
+      other.totalPages == totalPages &&
+      other.pageIndex == pageIndex;
+
+  @override
+  int get hashCode => hashObjects([
+        items,
+        currentItemCount,
+        itemsPerPage,
+        startIndex,
+        totalItems,
+        totalPages,
+        pageIndex,
+      ]);
 }

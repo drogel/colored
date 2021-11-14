@@ -20,7 +20,6 @@ abstract class BaseApiNamesService<O> implements PaginatedNamesService<O> {
   final ResponseParser<ApiResponse> _parser;
 
   Uri? get baseUri;
-  String get searchQueryKey;
 
   O parseItemFromJson(Map<String, dynamic> json);
 
