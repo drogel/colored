@@ -47,7 +47,7 @@ class NamingViewModel {
     }
 
     final page = await _namingService.fetchContainingSearch(
-      hexColor,
+      hexColor.replaceAll("#", ""),
       pageInfo: _kPageInfo,
     );
     if (page != null) {

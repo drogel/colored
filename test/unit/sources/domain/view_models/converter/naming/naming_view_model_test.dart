@@ -15,24 +15,29 @@ import 'package:connectivity_platform_interface/src/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class NamingServiceSuccessStub implements PaginatedNamesService<NamedColor> {
-  const NamingServiceSuccessStub();
+  NamingServiceSuccessStub();
 
   static const String name = "testColor";
+  int searchStringWithoutPoundSingCount = 0;
 
   @override
   Future<ListPage<NamedColor>?> fetchContainingSearch(
     String searchString, {
     required PageInfo pageInfo,
-  }) async =>
-      const ListPage<NamedColor>(
-        currentItemCount: 1,
-        itemsPerPage: 1,
-        startIndex: 1,
-        totalItems: 1,
-        pageIndex: 1,
-        totalPages: 1,
-        items: [NamedColor(name: name, hex: "testHex")],
-      );
+  }) async {
+    if (!searchString.contains("#")) {
+      searchStringWithoutPoundSingCount++;
+    }
+    return const ListPage<NamedColor>(
+      currentItemCount: 1,
+      itemsPerPage: 1,
+      startIndex: 1,
+      totalItems: 1,
+      pageIndex: 1,
+      totalPages: 1,
+      items: [NamedColor(name: name, hex: "testHex")],
+    );
+  }
 }
 
 class NamingServiceFailureStub implements PaginatedNamesService<NamedColor> {
@@ -73,7 +78,7 @@ void main() {
   group("Given a NamingViewModel with successful NamingService requests", () {
     setUp(() {
       stateController = StreamController<NamingState>();
-      namingService = const NamingServiceSuccessStub();
+      namingService = NamingServiceSuccessStub();
       converter = ConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,
@@ -134,6 +139,30 @@ void main() {
     });
   });
 
+  group("Given a NamingViewModel with a service that counts fetch calls", () {
+    late NamingServiceSuccessStub namingCountingService;
+
+    setUp(() {
+      stateController = StreamController<NamingState>();
+      namingCountingService = NamingServiceSuccessStub();
+      converter = ConverterStub();
+      viewModel = NamingViewModel(
+        stateController: stateController,
+        namingService: namingCountingService,
+        converter: converter,
+      );
+    });
+
+    group("when fetchNaming is called", () {
+      test("then pound sings are removed from the searchString", () async {
+        final selection = ColorSelection(r: 0, g: 0, b: 0);
+        expect(namingCountingService.searchStringWithoutPoundSingCount, 0);
+        await viewModel.fetchNaming(selection);
+        expect(namingCountingService.searchStringWithoutPoundSingCount, 1);
+      });
+    });
+  });
+
   group("Given a NamingViewModel with failing NamingService requests", () {
     setUp(() {
       stateController = StreamController<NamingState>();
@@ -178,7 +207,7 @@ void main() {
   group("Given a NamingViewModel with a failing converter", () {
     setUp(() {
       stateController = StreamController<NamingState>();
-      namingService = const NamingServiceSuccessStub();
+      namingService = NamingServiceSuccessStub();
       converter = RgbConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,

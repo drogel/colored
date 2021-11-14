@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:colored/configuration/flavor.dart';
+import 'package:colored/sources/data/api/models/index/api_index.dart';
 import 'package:colored/sources/data/api/services/base/request/uri_page_request_builder.dart';
 import 'package:colored/sources/data/api/services/base/response/api_response_parser.dart';
 import 'package:colored/sources/data/api/services/naming/color_naming_api_service.dart';
@@ -11,15 +12,19 @@ import 'package:colored/sources/domain/view_models/converter/naming/naming_state
 import 'package:colored/sources/domain/view_models/converter/naming/naming_view_model.dart';
 
 class NamingInjector {
-  const NamingInjector({required Flavor flavor}) : _flavor = flavor;
+  const NamingInjector({
+    required Flavor flavor,
+    this.apiIndex,
+  }) : _flavor = flavor;
 
   final Flavor _flavor;
+  final ApiIndex? apiIndex;
 
   NamingViewModel injectViewModel([
     StreamController<NamingState>? stateController,
   ]) =>
       _flavor.isProduction()
-          ? _injectViewModel(stateController)
+          ? _injectApiViewModel(apiIndex, stateController)
           : _injectMockViewModel(stateController);
 
   NamingViewModel _injectMockViewModel([
@@ -31,17 +36,17 @@ class NamingInjector {
         converter: const HexConverter(),
       );
 
-  NamingViewModel _injectViewModel([
+  NamingViewModel _injectApiViewModel(
+    ApiIndex? apiIndex, [
     StreamController<NamingState>? stateController,
   ]) =>
       NamingViewModel(
         stateController: stateController ?? StreamController<NamingState>(),
-        namingService: const ColorNamingApiService(
-          client: SafeHttpClient(),
-          // TODO: - Inject ApiIndex.
-          apiIndex: null,
-          pageRequestBuilder: UriPageRequestBuilder(),
-          parser: ApiResponseParser(),
+        namingService: ColorNamingApiService(
+          client: const SafeHttpClient(),
+          apiIndex: apiIndex,
+          pageRequestBuilder: const UriPageRequestBuilder(),
+          parser: const ApiResponseParser(),
         ),
         converter: const HexConverter(),
       );

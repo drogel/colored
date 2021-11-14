@@ -61,6 +61,7 @@ class MainInjector extends StatelessWidget {
                       child: NamingNotifier(
                         injector: NamingInjector(
                           flavor: FlavorConfig.instance,
+                          apiIndex: apiIndex,
                         ),
                         child: PalettesListNotifier(
                           injector: PalettesListInjector(
