@@ -223,4 +223,56 @@ void main() {
       });
     });
   });
+
+  group("Given two $ListPage", () {
+    group("when checking for equality", () {
+      test("two $ListPage are equal if their content is equal", () {
+        const firstListPage = ListPage<int>(
+          currentItemCount: 0,
+          itemsPerPage: 2,
+          startIndex: 2,
+          totalItems: 4,
+          pageIndex: 8,
+          totalPages: 2,
+          items: [1],
+        );
+        const secondListPage = ListPage<int>(
+          currentItemCount: 0,
+          itemsPerPage: 2,
+          startIndex: 2,
+          totalItems: 4,
+          pageIndex: 8,
+          totalPages: 2,
+          items: [1],
+        );
+        expect(firstListPage, secondListPage);
+      });
+    });
+
+    group("when hashCode is called", () {
+      test("then all properties are taken into account", () {
+        const listPage = ListPage<int>(
+          currentItemCount: 1,
+          itemsPerPage: 1,
+          startIndex: 1,
+          totalItems: 1,
+          pageIndex: 1,
+          totalPages: 1,
+          items: [1],
+        );
+        expect(
+          listPage.hashCode,
+          hashObjects([
+            listPage.items,
+            listPage.currentItemCount,
+            listPage.itemsPerPage,
+            listPage.startIndex,
+            listPage.totalItems,
+            listPage.totalPages,
+            listPage.pageIndex,
+          ]),
+        );
+      });
+    });
+  });
 }

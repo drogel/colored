@@ -1,34 +1,49 @@
 import 'dart:async';
 
 import 'package:colored/sources/data/color_helpers/converter/converter.dart';
-import 'package:colored/sources/data/network_client/response_status.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/data/services/connectivity/connectivity_service.dart';
-import 'package:colored/sources/data/services/naming/naming_response.dart';
-import 'package:colored/sources/data/services/naming/naming_service.dart';
+import 'package:colored/sources/data/services/names/paginated_names_service.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
 import 'package:colored/sources/domain/data_models/format.dart';
-import 'package:colored/sources/domain/data_models/naming_result.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_state.dart';
 import 'package:colored/sources/domain/view_models/converter/naming/naming_view_model.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:connectivity_platform_interface/src/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class NamingServiceSuccessStub implements NamingService {
+class NamingServiceSuccessStub implements PaginatedNamesService<NamedColor> {
+  const NamingServiceSuccessStub();
+
   static const String name = "testColor";
 
   @override
-  Future<NamingResponse> getNaming({String? hexColor}) async =>
-      const NamingResponse(
-        ResponseStatus.ok,
-        result: NamingResult(name: name, hex: "testHex"),
+  Future<ListPage<NamedColor>?> fetchContainingSearch(
+    String searchString, {
+    required PageInfo pageInfo,
+  }) async =>
+      const ListPage<NamedColor>(
+        currentItemCount: 1,
+        itemsPerPage: 1,
+        startIndex: 1,
+        totalItems: 1,
+        pageIndex: 1,
+        totalPages: 1,
+        items: [NamedColor(name: name, hex: "testHex")],
       );
 }
 
-class NamingServiceFailureStub implements NamingService {
+class NamingServiceFailureStub implements PaginatedNamesService<NamedColor> {
+  const NamingServiceFailureStub();
+
   @override
-  Future<NamingResponse> getNaming({String? hexColor}) async =>
-      const NamingResponse(ResponseStatus.failed);
+  Future<ListPage<NamedColor>?> fetchContainingSearch(
+    String searchString, {
+    required PageInfo pageInfo,
+  }) async =>
+      null;
 }
 
 class ConverterStub implements Converter {
@@ -52,13 +67,13 @@ class ConnectivityServiceSuccessStub implements ConnectivityService {
 void main() {
   late NamingViewModel viewModel;
   late StreamController<NamingState> stateController;
-  late NamingService namingService;
+  late PaginatedNamesService<NamedColor> namingService;
   late Converter converter;
 
   group("Given a NamingViewModel with successful NamingService requests", () {
     setUp(() {
       stateController = StreamController<NamingState>();
-      namingService = NamingServiceSuccessStub();
+      namingService = const NamingServiceSuccessStub();
       converter = ConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,
@@ -122,7 +137,7 @@ void main() {
   group("Given a NamingViewModel with failing NamingService requests", () {
     setUp(() {
       stateController = StreamController<NamingState>();
-      namingService = NamingServiceFailureStub();
+      namingService = const NamingServiceFailureStub();
       converter = ConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,
@@ -163,7 +178,7 @@ void main() {
   group("Given a NamingViewModel with a failing converter", () {
     setUp(() {
       stateController = StreamController<NamingState>();
-      namingService = NamingServiceSuccessStub();
+      namingService = const NamingServiceSuccessStub();
       converter = RgbConverterStub();
       viewModel = NamingViewModel(
         stateController: stateController,
