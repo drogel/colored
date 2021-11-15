@@ -52,10 +52,17 @@ abstract class BaseApiService<T> implements ApiRequestBuilder<T> {
     if (uri == null) {
       return null;
     }
-    final nameRequestQueryParameter = uri.queryParameters.entries.first;
-    final searchUri = uri.replace(queryParameters: {
-      nameRequestQueryParameter.key: queryParameters,
-    });
+    final searchUri = _buildUriParameters(uri, queryParameters);
     return _pageRequestBuilder.addPageParameters(searchUri, pageInfo: pageInfo);
+  }
+
+  Uri _buildUriParameters(Uri uri, Iterable<String> queryParameters) {
+    if (uri.queryParameters.isEmpty) {
+      return uri;
+    }
+    final requestQueryParameter = uri.queryParameters.entries.first;
+    return uri.replace(queryParameters: {
+      requestQueryParameter.key: queryParameters,
+    });
   }
 }
