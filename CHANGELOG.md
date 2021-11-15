@@ -1,3 +1,7 @@
+## [0.10.4] - November 14th, 2021
+
+- Integrates the Huely API for color and palette naming.
+
 ## [0.10.3] - November 13th, 2021
 
 - Updates to Flutter 2.5.3.
