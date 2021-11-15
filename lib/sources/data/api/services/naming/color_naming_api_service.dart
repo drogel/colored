@@ -4,10 +4,10 @@ import 'package:colored/sources/data/api/services/base/request/page_request_buil
 import 'package:colored/sources/data/api/services/base/response/response_parser.dart';
 import 'package:colored/sources/data/api/services/names/base_api_names_service.dart';
 import 'package:colored/sources/data/network_client/http_client.dart';
-import 'package:colored/sources/domain/data_models/palette.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 
-class PaletteNamesApiService extends BaseApiNamesService<Palette> {
-  const PaletteNamesApiService({
+class ColorNamingApiService extends BaseApiNamesService<NamedColor> {
+  const ColorNamingApiService({
     required HttpClient client,
     required ApiIndex? apiIndex,
     required PageRequestBuilder pageRequestBuilder,
@@ -22,9 +22,9 @@ class PaletteNamesApiService extends BaseApiNamesService<Palette> {
   final ApiIndex? _apiIndex;
 
   @override
-  Uri? get baseUri => _apiIndex?.palettes?.search?.names?.endpoint;
+  Uri? get baseUri => _apiIndex?.colors?.search?.hexes?.closest?.endpoint;
 
   @override
-  Palette parseItemFromJson(Map<String, dynamic> json) =>
-      Palette.fromJson(json);
+  NamedColor parseItemFromJson(Map<String, dynamic> json) =>
+      NamedColor.fromJson(json);
 }

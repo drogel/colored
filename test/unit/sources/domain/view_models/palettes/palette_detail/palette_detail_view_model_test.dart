@@ -1,41 +1,53 @@
 @Timeout(Duration(milliseconds: 500))
 import 'dart:async';
 
-import 'package:colored/sources/data/network_client/response_status.dart';
-import 'package:colored/sources/data/services/palette_naming/palette_naming_response.dart';
-import 'package:colored/sources/data/services/palette_naming/palette_naming_service.dart';
-import 'package:colored/sources/domain/data_models/naming_result.dart';
+import 'package:colored/sources/data/api/services/base/request/api_request_builder.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockPaletteNamingService extends Mock implements PaletteNamingService {}
+class MockPaletteNamingService extends Mock
+    implements ApiRequestBuilder<NamedColor> {}
 
-class PaletteNamingServiceSuccessStub implements PaletteNamingService {
-  static const black =
-      NamingResult(name: "Black", hex: "#000000", r: 0, b: 0, g: 0);
+class PaletteNamingServiceSuccessStub implements ApiRequestBuilder<NamedColor> {
+  static const black = NamedColor(name: "Black", hex: "#000000");
 
-  static const white =
-      NamingResult(name: "White", hex: "#FFFFFF", r: 255, b: 255, g: 255);
+  static const white = NamedColor(name: "White", hex: "#FFFFFF");
 
   @override
-  Future<PaletteNamingResponse> getNaming({List<String>? hexColors}) async =>
-      const PaletteNamingResponse(
-        ResponseStatus.ok,
-        results: [black, white],
-      );
+  Future<ListPage<NamedColor>?> request(
+    Iterable<String> queryParameters, {
+    required PageInfo pageInfo,
+  }) async {
+    final namedColors = [black, white];
+    return ListPage<NamedColor>(
+      currentItemCount: namedColors.length,
+      itemsPerPage: namedColors.length,
+      startIndex: 1,
+      totalItems: namedColors.length,
+      pageIndex: 1,
+      totalPages: 1,
+      items: namedColors,
+    );
+  }
 }
 
-class PaletteNamingServiceFailedStub implements PaletteNamingService {
+class PaletteNamingServiceFailedStub implements ApiRequestBuilder<NamedColor> {
   @override
-  Future<PaletteNamingResponse> getNaming({List<String>? hexColors}) async =>
-      const PaletteNamingResponse(ResponseStatus.failed);
+  Future<ListPage<NamedColor>?> request(
+    Iterable<String> queryParameters, {
+    required PageInfo pageInfo,
+  }) async =>
+      null;
 }
 
 void main() {
   late PaletteDetailViewModel viewModel;
-  late PaletteNamingService namingService;
+  late ApiRequestBuilder<NamedColor> namingService;
   late StreamController<PaletteDetailState> stateController;
 
   group("Given a PaletteDetailViewModel", () {
