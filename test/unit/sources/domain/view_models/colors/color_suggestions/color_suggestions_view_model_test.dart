@@ -1,27 +1,47 @@
 import 'dart:async';
 
-import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
+import 'package:colored/sources/data/services/suggestions/paginated_suggestions_service.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/colors/color_suggestions/color_suggestions_state.dart';
 import 'package:colored/sources/domain/view_models/colors/color_suggestions/color_suggestions_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class SuggestionsServiceStub implements SuggestionsService<String> {
-  static const mockSuggestions = {"1": "First", "2": "Second"};
+class SuggestionsServiceStub
+    implements PaginatedSuggestionsService<NamedColor> {
+  static const mockSuggestions = [
+    NamedColor(name: "First", hex: "#1"),
+    NamedColor(name: "Second", hex: "#2"),
+  ];
 
   @override
-  Future<Map<String, String>> fetchSuggestions(int estimatedCount) async =>
-      mockSuggestions;
+  Future<ListPage<NamedColor>?> fetchRandom({
+    required PageInfo pageInfo,
+  }) async =>
+      ListPage(
+        currentItemCount: mockSuggestions.length,
+        itemsPerPage: mockSuggestions.length,
+        startIndex: 1,
+        totalItems: mockSuggestions.length,
+        pageIndex: 1,
+        totalPages: 1,
+        items: mockSuggestions,
+      );
 }
 
-class SuggestionsServiceEmptyStub implements SuggestionsService<String> {
+class SuggestionsServiceEmptyStub
+    implements PaginatedSuggestionsService<NamedColor> {
   @override
-  Future<Map<String, String>> fetchSuggestions(int estimatedCount) async => {};
+  Future<ListPage<NamedColor>?> fetchRandom({
+    required PageInfo pageInfo,
+  }) async =>
+      null;
 }
 
 void main() {
   late ColorSuggestionsViewModel viewModel;
-  late SuggestionsService<String> suggestionsService;
+  late PaginatedSuggestionsService<NamedColor> suggestionsService;
   late StreamController<ColorSuggestionsState> stateController;
 
   group("Given a ColorSuggestionsViewModel with a stubbed service", () {

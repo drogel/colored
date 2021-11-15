@@ -44,7 +44,7 @@ class MainInjector extends StatelessWidget {
   Widget build(BuildContext context) => PaletteSuggestionsNotifier(
         injector: const PaletteSuggestionsInjector(),
         child: ColorSuggestionsNotifier(
-          injector: const ColorSuggestionsInjector(),
+          injector: ColorSuggestionsInjector(apiIndex: apiIndex),
           child: NamesListNotifier(
             injector: NamesListInjector(apiIndex: apiIndex),
             child: TransformerNotifier(
