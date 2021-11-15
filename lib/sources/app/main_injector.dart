@@ -72,6 +72,7 @@ class MainInjector extends StatelessWidget {
                             child: PaletteDetailNotifier(
                               injector: PaletteDetailInjector(
                                 flavor: FlavorConfig.instance,
+                                apiIndex: apiIndex,
                               ),
                               child: MainTabsNotifier(
                                 injector: const MainTabsInjector(),

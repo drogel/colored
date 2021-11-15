@@ -34,5 +34,21 @@ void main() {
         expect(actual.toString(), "https://test.com?size=1&page=1&names=test");
       });
     });
+
+    group("when given a $Uri with $PageInfo with a list of parameters", () {
+      test("then the $PageInfo is appended to the request parameters", () {
+        final testUri = Uri.parse(
+          "https://test.com?names=test&names=test2&names=test3",
+        );
+        final actual = requestBuilder.addPageParameters(
+          testUri,
+          pageInfo: testPageInfo,
+        );
+        expect(
+          actual.toString(),
+          "https://test.com?size=1&page=1&names=test&names=test2&names=test3",
+        );
+      });
+    });
   });
 }
