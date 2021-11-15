@@ -7,11 +7,11 @@ class UriPageRequestBuilder implements PageRequestBuilder {
 
   @override
   Uri addPageParameters(Uri uri, {required PageInfo pageInfo}) {
-    final uriRequestQueryParameters = uri.queryParameters;
-    final requestQueryParameters = {
+    final uriRequestQueryParameters = uri.queryParametersAll;
+    final requestQueryParameters = Map<String, dynamic>.from({
       PageInfo.sizeKey: pageInfo.size.toString(),
       PageInfo.pageIndexKey: pageInfo.pageIndex.toString(),
-    };
+    });
     requestQueryParameters.addAll(uriRequestQueryParameters);
     return uri.copy(queryParameters: requestQueryParameters);
   }

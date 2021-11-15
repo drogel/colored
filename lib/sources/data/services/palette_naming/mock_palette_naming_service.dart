@@ -1,24 +1,34 @@
 import 'dart:convert';
 
 import 'package:colored/resources/mock_data_paths.dart' as mock_paths;
-import 'package:colored/sources/data/network_client/response_status.dart';
-import 'package:colored/sources/data/services/palette_naming/palette_naming_response.dart';
-import 'package:colored/sources/data/services/palette_naming/palette_naming_service.dart';
+import 'package:colored/sources/data/api/services/base/request/api_request_builder.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
+import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/data_models/naming_result.dart';
 import 'package:flutter/services.dart';
 
-class MockPaletteNamingService implements PaletteNamingService {
+class MockPaletteNamingService implements ApiRequestBuilder<NamedColor> {
   const MockPaletteNamingService();
 
   @override
-  Future<PaletteNamingResponse> getNaming({
-    required List<String> hexColors,
+  Future<ListPage<NamedColor>?> request(
+    Iterable<String> queryParameters, {
+    required PageInfo pageInfo,
   }) async {
     final samplePalette = await rootBundle.loadString(mock_paths.samplePalette);
     final jsonResponse = jsonDecode(samplePalette);
     final mapList = jsonResponse[NamingResult.mappingKey];
     final paletteMap = List<Map<String, dynamic>>.from(mapList);
-    final results = paletteMap.map((map) => NamingResult.fromMap(map)).toList();
-    return PaletteNamingResponse(ResponseStatus.ok, results: results);
+    final namedColors = paletteMap.map((m) => NamedColor.fromJson(m)).toList();
+    return ListPage<NamedColor>(
+      currentItemCount: namedColors.length,
+      itemsPerPage: namedColors.length,
+      startIndex: 1,
+      totalItems: namedColors.length,
+      pageIndex: 1,
+      totalPages: 1,
+      items: namedColors,
+    );
   }
 }
