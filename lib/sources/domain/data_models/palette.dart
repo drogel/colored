@@ -20,6 +20,7 @@ class Palette {
 
   static String nameKey = _Key.name.value;
   static String hexCodesKey = _Key.hexCodes.value;
+  static String suggestionMappingKey = "palette";
 
   final String name;
   final List<String> hexCodes;

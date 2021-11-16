@@ -77,7 +77,7 @@ void main() {
       });
     });
 
-    group("when fetchContainingSearch is called", () {
+    group("when fetchRandom is called", () {
       test("then null is retrieved", () async {
         final uri = await service.fetchRandom(pageInfo: testPageInfo);
         expect(uri, isNull);
@@ -144,7 +144,7 @@ void main() {
       );
     });
 
-    group("when fetchContainingSearch is called", () {
+    group("when fetchRandom is called", () {
       test("then null is retrieved", () async {
         final uri = await service.fetchRandom(pageInfo: testPageInfo);
         expect(uri, isNull);
