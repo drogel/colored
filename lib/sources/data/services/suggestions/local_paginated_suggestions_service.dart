@@ -16,16 +16,7 @@ abstract class LocalPaginatedSuggestionsService<I, O>
   @override
   Future<ListPage<O>?> fetchRandom({required PageInfo pageInfo}) async {
     final suggestionsMap = await _service.fetchSuggestions(pageInfo.size);
-    final namedColors = suggestionsMap.entries.map(convertEntry).toList();
-    final itemCount = namedColors.length;
-    return ListPage(
-      currentItemCount: itemCount,
-      itemsPerPage: itemCount,
-      startIndex: 1,
-      totalItems: itemCount,
-      pageIndex: 1,
-      totalPages: 1,
-      items: namedColors,
-    );
+    final items = suggestionsMap.entries.map(convertEntry).toList();
+    return ListPage.singlePageFromItems(items);
   }
 }

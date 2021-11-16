@@ -24,15 +24,7 @@ class PaletteNamingServiceSuccessStub implements ApiRequestBuilder<NamedColor> {
     required PageInfo pageInfo,
   }) async {
     final namedColors = [black, white];
-    return ListPage<NamedColor>(
-      currentItemCount: namedColors.length,
-      itemsPerPage: namedColors.length,
-      startIndex: 1,
-      totalItems: namedColors.length,
-      pageIndex: 1,
-      totalPages: 1,
-      items: namedColors,
-    );
+    return ListPage.singlePageFromItems(namedColors);
   }
 }
 

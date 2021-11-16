@@ -19,14 +19,6 @@ class MockNamingService implements PaginatedNamesService<NamedColor> {
     final map = jsonDecode(sampleColorStr);
     final namingMap = map[NamedColor.mocksMappingKey].first;
     final namedColor = NamedColor.fromJson(namingMap);
-    return ListPage<NamedColor>(
-      currentItemCount: 1,
-      itemsPerPage: 1,
-      startIndex: 1,
-      totalItems: 1,
-      pageIndex: 1,
-      totalPages: 1,
-      items: [namedColor],
-    );
+    return ListPage.singlePageFromItems([namedColor]);
   }
 }

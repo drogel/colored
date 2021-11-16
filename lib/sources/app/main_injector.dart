@@ -42,7 +42,7 @@ class MainInjector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => PaletteSuggestionsNotifier(
-        injector: const PaletteSuggestionsInjector(),
+        injector: PaletteSuggestionsInjector(apiIndex: apiIndex),
         child: ColorSuggestionsNotifier(
           injector: ColorSuggestionsInjector(apiIndex: apiIndex),
           child: NamesListNotifier(

@@ -20,14 +20,6 @@ class MockPaletteNamingService implements ApiRequestBuilder<NamedColor> {
     final mapList = jsonResponse[NamedColor.mocksMappingKey];
     final paletteMap = List<Map<String, dynamic>>.from(mapList);
     final namedColors = paletteMap.map((m) => NamedColor.fromJson(m)).toList();
-    return ListPage<NamedColor>(
-      currentItemCount: namedColors.length,
-      itemsPerPage: namedColors.length,
-      startIndex: 1,
-      totalItems: namedColors.length,
-      pageIndex: 1,
-      totalPages: 1,
-      items: namedColors,
-    );
+    return ListPage.singlePageFromItems(namedColors);
   }
 }

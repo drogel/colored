@@ -19,15 +19,7 @@ class SuggestionsServiceStub
   Future<ListPage<NamedColor>?> fetchRandom({
     required PageInfo pageInfo,
   }) async =>
-      ListPage(
-        currentItemCount: mockSuggestions.length,
-        itemsPerPage: mockSuggestions.length,
-        startIndex: 1,
-        totalItems: mockSuggestions.length,
-        pageIndex: 1,
-        totalPages: 1,
-        items: mockSuggestions,
-      );
+      ListPage.singlePageFromItems(mockSuggestions);
 }
 
 class SuggestionsServiceEmptyStub

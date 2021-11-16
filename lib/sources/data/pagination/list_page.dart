@@ -32,6 +32,16 @@ class ListPage<T> {
     );
   }
 
+  factory ListPage.singlePageFromItems(List<T> items) => ListPage(
+        currentItemCount: items.length,
+        itemsPerPage: items.length,
+        startIndex: 1,
+        totalItems: items.length,
+        pageIndex: 1,
+        totalPages: 1,
+        items: items,
+      );
+
   final int currentItemCount;
   final int itemsPerPage;
   final int startIndex;
