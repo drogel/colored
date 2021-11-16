@@ -16,6 +16,8 @@ class NamedColor {
 
   static String nameKey = _Key.name.value;
   static String hexKey = _Key.hex.value;
+  static String mocksMappingKey = "colors";
+  static String suggestionMappingKey = "color";
 
   final String name;
   final String hex;

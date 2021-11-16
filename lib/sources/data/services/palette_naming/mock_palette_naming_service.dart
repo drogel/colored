@@ -5,7 +5,6 @@ import 'package:colored/sources/data/api/services/base/request/api_request_build
 import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:colored/sources/domain/data_models/naming_result.dart';
 import 'package:flutter/services.dart';
 
 class MockPaletteNamingService implements ApiRequestBuilder<NamedColor> {
@@ -18,17 +17,9 @@ class MockPaletteNamingService implements ApiRequestBuilder<NamedColor> {
   }) async {
     final samplePalette = await rootBundle.loadString(mock_paths.samplePalette);
     final jsonResponse = jsonDecode(samplePalette);
-    final mapList = jsonResponse[NamingResult.mappingKey];
+    final mapList = jsonResponse[NamedColor.mocksMappingKey];
     final paletteMap = List<Map<String, dynamic>>.from(mapList);
     final namedColors = paletteMap.map((m) => NamedColor.fromJson(m)).toList();
-    return ListPage<NamedColor>(
-      currentItemCount: namedColors.length,
-      itemsPerPage: namedColors.length,
-      startIndex: 1,
-      totalItems: namedColors.length,
-      pageIndex: 1,
-      totalPages: 1,
-      items: namedColors,
-    );
+    return ListPage.singlePageFromItems(namedColors);
   }
 }

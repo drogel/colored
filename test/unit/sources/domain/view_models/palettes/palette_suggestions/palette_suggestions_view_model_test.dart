@@ -1,33 +1,38 @@
 import 'dart:async';
 
-import 'package:colored/sources/data/services/suggestions/suggestions_service.dart';
+import 'package:colored/sources/data/pagination/list_page.dart';
+import 'package:colored/sources/data/pagination/page_info.dart';
+import 'package:colored/sources/data/services/suggestions/paginated_suggestions_service.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class SuggestionsServiceStub implements SuggestionsService<List<String>> {
-  static const mockSuggestions = <String, List<String>>{
-    "First": ["000000", "ffffff"],
-    "Second": [],
-  };
+class SuggestionsServiceStub implements PaginatedSuggestionsService<Palette> {
+  static const mockSuggestions = [
+    Palette(name: "First", hexCodes: ["#000000", "#FFFFFF"]),
+    Palette(name: "Second", hexCodes: []),
+  ];
 
   @override
-  Future<Map<String, List<String>>> fetchSuggestions(
-          int estimatedCount) async =>
-      mockSuggestions;
+  Future<ListPage<Palette>?> fetchRandom({
+    required PageInfo pageInfo,
+  }) async =>
+      ListPage.singlePageFromItems(mockSuggestions);
 }
 
-class SuggestionsServiceEmptyStub implements SuggestionsService<List<String>> {
+class SuggestionsServiceEmptyStub
+    implements PaginatedSuggestionsService<Palette> {
   @override
-  Future<Map<String, List<String>>> fetchSuggestions(
-          int estimatedCount) async =>
-      {};
+  Future<ListPage<Palette>?> fetchRandom({
+    required PageInfo pageInfo,
+  }) async =>
+      null;
 }
 
 void main() {
   late PaletteSuggestionsViewModel viewModel;
-  late SuggestionsService<List<String>> suggestionsService;
+  late PaginatedSuggestionsService<Palette> suggestionsService;
   late StreamController<PaletteSuggestionsState> stateController;
 
   group("Given a PaletteSuggestionsViewModel", () {
