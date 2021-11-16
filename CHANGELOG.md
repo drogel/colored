@@ -1,3 +1,7 @@
+## [0.11.0] - November 16th, 2021
+
+- Integrates the Huely API for color and palette suggestions.
+
 ## [0.10.4] - November 14th, 2021
 
 - Integrates the Huely API for color and palette naming.
