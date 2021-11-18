@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:colored/sources/common/extensions/string_clean_hex_string.dart';
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/parser/format_parser/format_parser.dart';
 import 'package:colored/sources/domain/data_models/color_selection.dart';
@@ -22,7 +23,7 @@ class HexParser extends FormatParser {
     if (string.length == 6 || string.length == 7) {
       buffer.write('ff');
     }
-    buffer.write(string.replaceFirst('#', ''));
+    buffer.write(string.cleanHex);
     final color = Color(int.parse(buffer.toString(), radix: 16));
     final selection = ColorSelection(
       r: color.red / decimal8Bit,

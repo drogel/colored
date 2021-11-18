@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:colored/sources/common/extensions/string_clean_hex_string.dart';
+
 extension HexColor on Color {
   /// String in format "aabbcc" or "ffaabbcc" with an optional leading "#".
   static Color fromHex(String hexString) {
@@ -7,7 +9,7 @@ extension HexColor on Color {
     if (hexString.length == 6 || hexString.length == 7) {
       buffer.write('ff');
     }
-    buffer.write(hexString.replaceFirst('#', ''));
+    buffer.write(hexString.cleanHex);
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 
