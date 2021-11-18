@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/sources/common/extensions/string_clean_hex_string.dart';
 import 'package:colored/sources/common/factors.dart';
 import 'package:colored/sources/data/color_helpers/converter/converter.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
@@ -47,7 +48,7 @@ class NamingViewModel {
     }
 
     final page = await _namingService.fetchContainingSearch(
-      hexColor.replaceAll("#", ""),
+      hexColor.cleanHex,
       pageInfo: _kPageInfo,
     );
     if (page != null) {

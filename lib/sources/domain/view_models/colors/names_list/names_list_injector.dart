@@ -4,7 +4,9 @@ import 'package:colored/configuration/flavor_config.dart';
 import 'package:colored/sources/data/api/models/index/api_index.dart';
 import 'package:colored/sources/data/api/services/base/request/uri_page_request_builder.dart';
 import 'package:colored/sources/data/api/services/base/response/api_response_parser.dart';
+import 'package:colored/sources/data/api/services/names/color_hexes_api_service.dart';
 import 'package:colored/sources/data/api/services/names/color_names_api_service.dart';
+import 'package:colored/sources/data/api/services/names/names_list_api_service.dart';
 import 'package:colored/sources/data/network_client/safe_http_client.dart';
 import 'package:colored/sources/data/pagination/list_paginator.dart';
 import 'package:colored/sources/data/services/data_loader/color_names_loader.dart';
@@ -29,11 +31,19 @@ class NamesListInjector extends BaseNamesInjector<NamedColor> {
   ]) =>
       NamesListViewModel(
         stateController: stateController ?? StreamController<NamesListState>(),
-        namesService: ColorNamesApiService(
-          client: const SafeHttpClient(),
-          pageRequestBuilder: const UriPageRequestBuilder(),
-          apiIndex: apiIndex,
-          parser: const ApiResponseParser(),
+        namesService: NamesListApiService(
+          colorNamesApiService: ColorNamesApiService(
+            client: const SafeHttpClient(),
+            pageRequestBuilder: const UriPageRequestBuilder(),
+            apiIndex: apiIndex,
+            parser: const ApiResponseParser(),
+          ),
+          colorHexesApiService: ColorHexesApiService(
+            client: const SafeHttpClient(),
+            pageRequestBuilder: const UriPageRequestBuilder(),
+            apiIndex: apiIndex,
+            parser: const ApiResponseParser(),
+          ),
         ),
       );
 
