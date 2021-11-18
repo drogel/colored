@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colored/sources/common/extensions/string_clean_hex_string.dart';
 import 'package:colored/sources/data/api/services/base/request/api_request_builder.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
@@ -28,7 +29,7 @@ class PaletteDetailViewModel {
     }
 
     _stateController.sink.add(Pending(name, hexCodes));
-	final cleanHexes = hexCodes.map((c) => c.replaceAll("#", "")).toList();
+    final cleanHexes = hexCodes.map((c) => c.cleanHex).toList();
     final pageSize = cleanHexes.length;
     final pageInfo = PageInfo(startIndex: 1, size: pageSize, pageIndex: 1);
     final page = await _namingService.request(cleanHexes, pageInfo: pageInfo);
