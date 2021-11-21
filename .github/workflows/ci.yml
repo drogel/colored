@@ -1,0 +1,41 @@
+name: CI
+
+on: pull_request
+    
+jobs:
+  testing:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Set up Flutter environment
+      uses: subosito/flutter-action@v1
+      with:
+         channel: 'stable'
+    
+    - name: Get Flutter packages
+      run: flutter pub get
+      working-directory: code
+
+    - name: Check spelling
+      uses: zwaldowski/cspell-action@v1
+      with:
+        paths: '**/*.{md,dart}'
+        config: .github/workflows/cspell.json
+        exclude: 'LICENSE.md'
+    
+    - name: Check formatting
+      run: flutter format --set-exit-if-changed .
+    
+    - name: Analyze project
+      run: flutter analyze .
+    
+    - name: Run tests with coverage
+      run: flutter test --coverage
+
+    - name: Check code coverage
+      uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
+      with:
+        path: './coverage/lcov.info'
+        min_coverage: 95
+    
