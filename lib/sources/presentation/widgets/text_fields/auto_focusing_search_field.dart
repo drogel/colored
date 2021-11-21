@@ -8,6 +8,8 @@ class AutoFocusingSearchField extends StatefulWidget {
     this.onSubmitted,
     this.onChanged,
     this.hintText,
+    this.focusNode,
+    this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -16,6 +18,8 @@ class AutoFocusingSearchField extends StatefulWidget {
   final void Function()? onClearPressed;
   final void Function(String)? onSubmitted;
   final void Function(String)? onChanged;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
 
   @override
   _AutoFocusingSearchFieldState createState() =>
@@ -28,8 +32,8 @@ class _AutoFocusingSearchFieldState extends State<AutoFocusingSearchField> {
 
   @override
   void initState() {
-    _controller = TextEditingController();
-    _focusNode = FocusNode();
+    _controller = widget.controller ?? TextEditingController();
+    _focusNode = widget.focusNode ?? FocusNode();
     _setSearchStateValue(widget.searchText);
     super.initState();
   }
@@ -55,13 +59,6 @@ class _AutoFocusingSearchFieldState extends State<AutoFocusingSearchField> {
         onChanged: widget.onChanged,
         onSubmitted: widget.onSubmitted,
       );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    _focusNode.dispose();
-    super.dispose();
-  }
 
   void _setSearchStateValue(String search) =>
       _controller.value = TextEditingValue(
