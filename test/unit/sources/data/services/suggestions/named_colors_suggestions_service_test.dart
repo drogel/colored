@@ -34,10 +34,10 @@ void main() {
           NamedColor(name: "Second", hex: "#222222"),
           NamedColor(name: "Fourth", hex: "#444444"),
         ];
-		final actualPage = actual;
-		if (actualPage == null) {
-			fail("Expected a non-null $ListPage");
-		}
+        final actualPage = actual;
+        if (actualPage == null) {
+          fail("Expected a non-null $ListPage");
+        }
         expect(actualPage.items, expected);
         expect(actualPage.currentItemCount, 2);
         expect(actualPage.itemsPerPage, 2);

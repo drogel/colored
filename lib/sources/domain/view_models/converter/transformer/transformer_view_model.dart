@@ -12,7 +12,7 @@ class TransformerViewModel {
     required StreamController<TransformerState> stateController,
     required ColorTransformer transformer,
     required Color initialColor,
-  })   : _initialColor = initialColor,
+  })  : _initialColor = initialColor,
         _stateController = stateController,
         _transformer = transformer;
 

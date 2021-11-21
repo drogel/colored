@@ -28,4 +28,3 @@ class ColorHexesApiService extends BaseApiNamesService<NamedColor> {
   NamedColor parseItemFromJson(Map<String, dynamic> json) =>
       NamedColor.fromJson(json);
 }
-

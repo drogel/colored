@@ -6,7 +6,7 @@ class CherryPickedSuggestionsService<T> implements SuggestionsService<T> {
   CherryPickedSuggestionsService({
     required DataLoader<T> dataLoader,
     required ListPicker<String> listPicker,
-  })   : _dataLoader = dataLoader,
+  })  : _dataLoader = dataLoader,
         _listPicker = listPicker;
 
   final DataLoader _dataLoader;

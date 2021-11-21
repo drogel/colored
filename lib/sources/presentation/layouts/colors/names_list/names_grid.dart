@@ -32,7 +32,7 @@ class _NamesGridState extends State<NamesGrid> {
   @override
   void didUpdateWidget(covariant NamesGrid oldWidget) {
     final currentSearch = widget.searchString;
-	final previousSearch = oldWidget.searchString;
+    final previousSearch = oldWidget.searchString;
     final isSearchEmpty = currentSearch == null || currentSearch.isEmpty;
     final wasSearchEmpty = previousSearch == null || previousSearch.isEmpty;
     final didSearchChange = currentSearch != previousSearch;

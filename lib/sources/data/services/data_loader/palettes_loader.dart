@@ -9,7 +9,7 @@ class PalettesLoader implements DataLoader<List<String>> {
     required Memoizer<Map<String, List<String>>> memoizer,
     required StringBundle stringBundle,
     required String palettesDataPath,
-  })   : _palettesDataPath = palettesDataPath,
+  })  : _palettesDataPath = palettesDataPath,
         _stringBundle = stringBundle,
         _memoizer = memoizer;
 

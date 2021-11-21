@@ -5,7 +5,7 @@ class ConverterL10ns extends LocaleCodeAware {
 
   static final Map<String, Map<String, String>> _values = {
     'en': {
-      'pageTitle' : 'Converter',
+      'pageTitle': 'Converter',
       'tooltipMessage': 'Copied!',
       'tooltipError': 'Wrong format',
       'hex': 'Hex',
@@ -13,7 +13,7 @@ class ConverterL10ns extends LocaleCodeAware {
       'colorConverter': 'Color converter',
     },
     "es": {
-      'pageTitle' : 'Conversor',
+      'pageTitle': 'Conversor',
       'tooltipMessage': '¡Copiado!',
       'tooltipError': 'Formato no válido',
       'hex': 'Hex',

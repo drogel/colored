@@ -1,4 +1,5 @@
-import 'package:colored/sources/app/styling/duration/duration_constants.dart' as duration;
+import 'package:colored/sources/app/styling/duration/duration_constants.dart'
+    as duration;
 import 'package:colored/sources/app/styling/duration/duration_scheme.dart';
 
 class DefaultDurationScheme implements DurationScheme {
