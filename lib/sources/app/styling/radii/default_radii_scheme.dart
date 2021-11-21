@@ -1,5 +1,6 @@
 import 'package:colored/sources/app/styling/radii/radii_scheme.dart';
-import 'package:colored/sources/app/styling/radii/radius_constants.dart' as radii;
+import 'package:colored/sources/app/styling/radii/radius_constants.dart'
+    as radii;
 import 'package:flutter/material.dart';
 
 class DefaultRadiiScheme implements RadiiScheme {

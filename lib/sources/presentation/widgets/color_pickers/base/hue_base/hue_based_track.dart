@@ -5,8 +5,7 @@ class HueBasedTrack extends StatelessWidget {
   const HueBasedTrack({
     required this.painter,
     Key? key,
-  })  :
-        super(key: key);
+  }) : super(key: key);
 
   final CustomPainter painter;
 

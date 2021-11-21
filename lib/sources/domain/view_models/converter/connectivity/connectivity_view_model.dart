@@ -8,7 +8,7 @@ class ConnectivityViewModel {
   ConnectivityViewModel({
     required StreamController<ConnectivityState> stateController,
     required ConnectivityService connectivityService,
-  })   : _connectivityService = connectivityService,
+  })  : _connectivityService = connectivityService,
         _stateController = stateController;
 
   final StreamController<ConnectivityState> _stateController;

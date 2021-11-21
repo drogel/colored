@@ -7,7 +7,7 @@ class PaletteSuggestionsLoader implements DataLoader<List<String>> {
   const PaletteSuggestionsLoader({
     required StringBundle stringBundle,
     required String paletteSuggestionsDataPath,
-  })   : _paletteSuggestionsDataPath = paletteSuggestionsDataPath,
+  })  : _paletteSuggestionsDataPath = paletteSuggestionsDataPath,
         _stringBundle = stringBundle;
 
   final StringBundle _stringBundle;

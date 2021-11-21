@@ -1,4 +1,1 @@
-enum FlavorType {
-  dev,
-  localData
-}
+enum FlavorType { dev, localData }
