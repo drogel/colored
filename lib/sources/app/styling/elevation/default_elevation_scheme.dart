@@ -1,4 +1,5 @@
-import 'package:colored/sources/app/styling/elevation/elevation_constants.dart' as elevation;
+import 'package:colored/sources/app/styling/elevation/elevation_constants.dart'
+    as elevation;
 import 'package:colored/sources/app/styling/elevation/elevation_scheme.dart';
 
 class DefaultElevationScheme implements ElevationScheme {

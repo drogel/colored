@@ -16,7 +16,7 @@ class ConverterViewModel {
     required Parser colorParser,
     required Converter colorConverter,
     required DeviceOrientationService deviceOrientationService,
-  })   : _deviceOrientationService = deviceOrientationService,
+  })  : _deviceOrientationService = deviceOrientationService,
         _stateController = stateController,
         _converter = colorConverter,
         _parser = colorParser;

@@ -49,9 +49,9 @@ void main() {
           "Sample",
           pageInfo: testPageInfo,
         );
-		if (actual == null) {
-			fail("Did not expect $ListPage to be null.");
-		}
+        if (actual == null) {
+          fail("Did not expect $ListPage to be null.");
+        }
         expect(actual.pageIndex, 0);
         expect(actual.currentItemCount, 2);
         expect(actual.itemsPerPage, 2);
@@ -72,9 +72,9 @@ void main() {
           "Sample",
           pageInfo: testPageInfo,
         );
-		if (actual == null) {
-			fail("Did not expect $ListPage to be null.");
-		}
+        if (actual == null) {
+          fail("Did not expect $ListPage to be null.");
+        }
         expect(actual.pageIndex, 1);
         expect(actual.currentItemCount, 2);
         expect(actual.itemsPerPage, 2);
@@ -95,9 +95,9 @@ void main() {
           "Sample",
           pageInfo: testPageInfo,
         );
-		if (actual == null) {
-			fail("Did not expect $ListPage to be null.");
-		}
+        if (actual == null) {
+          fail("Did not expect $ListPage to be null.");
+        }
         expect(actual.pageIndex, 2);
         expect(actual.currentItemCount, 0);
         expect(actual.itemsPerPage, 2);

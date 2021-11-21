@@ -9,7 +9,7 @@ class ColorNamesLoader implements DataLoader<String> {
     required Memoizer<Map<String, String>> memoizer,
     required StringBundle stringBundle,
     required String colorsDataPath,
-  })   : _colorsDataPath = colorsDataPath,
+  })  : _colorsDataPath = colorsDataPath,
         _stringBundle = stringBundle,
         _memoizer = memoizer;
 

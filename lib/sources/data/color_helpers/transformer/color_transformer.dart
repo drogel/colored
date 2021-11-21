@@ -10,15 +10,12 @@ class ColorTransformer implements Transformer {
 
   @override
   ColorSelection changeLightness(ColorSelection selection, double change) {
-    final num red = (selection.r * decimal8Bit + change)
-        .round()
-        .clamp(0, decimal8Bit);
-    final num green = (selection.g * decimal8Bit + change)
-        .round()
-        .clamp(0, decimal8Bit);
-    final num blue = (selection.b * decimal8Bit + change)
-        .round()
-        .clamp(0, decimal8Bit);
+    final num red =
+        (selection.r * decimal8Bit + change).round().clamp(0, decimal8Bit);
+    final num green =
+        (selection.g * decimal8Bit + change).round().clamp(0, decimal8Bit);
+    final num blue =
+        (selection.b * decimal8Bit + change).round().clamp(0, decimal8Bit);
     final changedSelection = ColorSelection(
       r: red / decimal8Bit,
       g: green / decimal8Bit,

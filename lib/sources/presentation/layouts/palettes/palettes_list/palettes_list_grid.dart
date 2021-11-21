@@ -54,7 +54,7 @@ class _PalettesListGridState extends State<PalettesListGrid> {
       crossAxisMinCount: _kCrossAxisMinCount,
       crossAxisMaxCount: _kCrossAxisMaxCount,
       childAspectRatio: _kChildAspectRatio,
-	  onScrolledForwardNearBottom: widget.onScrolledForwardNearBottom,
+      onScrolledForwardNearBottom: widget.onScrolledForwardNearBottom,
       itemCount: widget.palettes.length,
       itemBuilder: (context, index) {
         final palette = widget.palettes[index];

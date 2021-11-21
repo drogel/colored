@@ -1,4 +1,5 @@
-import 'package:colored/sources/app/styling/curves/curve_constants.dart' as curves;
+import 'package:colored/sources/app/styling/curves/curve_constants.dart'
+    as curves;
 import 'package:colored/sources/app/styling/curves/curve_scheme.dart';
 import 'package:flutter/material.dart';
 

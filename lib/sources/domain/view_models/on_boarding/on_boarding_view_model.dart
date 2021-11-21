@@ -14,7 +14,7 @@ class OnBoardingViewModel {
     required StreamController<OnBoardingState> stateController,
     required DeviceOrientationService deviceOrientationService,
     required LocalStorage localStorage,
-  })   : _localStorage = localStorage,
+  })  : _localStorage = localStorage,
         _deviceOrientationService = deviceOrientationService,
         _stateController = stateController;
 

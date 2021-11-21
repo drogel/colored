@@ -7,7 +7,7 @@ class ColorSuggestionsLoader implements DataLoader<String> {
   const ColorSuggestionsLoader({
     required StringBundle stringBundle,
     required String colorSuggestionsDataPath,
-  })   : _colorSuggestionsDataPath = colorSuggestionsDataPath,
+  })  : _colorSuggestionsDataPath = colorSuggestionsDataPath,
         _stringBundle = stringBundle;
 
   final StringBundle _stringBundle;
