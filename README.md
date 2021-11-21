@@ -13,12 +13,6 @@
   <a href="https://github.com/drogel/colored/stargazers">
     <img src="https://img.shields.io/github/stars/drogel/colored.svg?style=flat">
   </a>
-  <a href="https://app.bitrise.io/app/7152db5cbc657220">
-    <img src="https://app.bitrise.io/app/7152db5cbc657220/status.svg?token=fWEpLMVVdMVGFjFBDcryZQ&branch=master">
-  </a>
-  <a href="https://codecov.io/gh/drogel/colored">
-     <img src="https://codecov.io/gh/drogel/colored/branch/master/graph/badge.svg?token=9S0QBZIOMN" />
-  </a>
 </p>
 
 ## About
