@@ -1,8 +1,11 @@
 import 'package:colored/sources/app/styling/elevation/elevation_data.dart';
 import 'package:colored/sources/app/styling/padding/padding_data.dart';
 import 'package:colored/sources/app/styling/radii/radius_data.dart';
-import 'package:colored/sources/domain/data_models/nameable.dart';
+import 'package:colored/sources/domain/data_models/palette.dart';
+import 'package:colored/sources/presentation/widgets/containers/gradient_circle.dart';
 import 'package:flutter/material.dart';
+
+const _kOptionLeadingSize = 24.0;
 
 class AutocompleteOptionsList extends StatelessWidget {
   const AutocompleteOptionsList({
@@ -13,8 +16,8 @@ class AutocompleteOptionsList extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final void Function(Nameable) onSelected;
-  final Iterable<Nameable> options;
+  final void Function(Palette) onSelected;
+  final Iterable<Palette> options;
   final double availableWidth;
   final int maxOptionsLenght;
 
@@ -42,6 +45,12 @@ class AutocompleteOptionsList extends StatelessWidget {
               itemBuilder: (context, index) {
                 final option = options.elementAt(index);
                 return ListTile(
+                  leading: SizedBox(
+                    height: _kOptionLeadingSize,
+                    width: _kOptionLeadingSize,
+                    child: GradientCircle(hexCodes: option.hexCodes),
+                  ),
+                  horizontalTitleGap: 0,
                   title: Text(option.name, style: textTheme.bodyText1),
                   onTap: () => onSelected(option),
                   shape: RoundedRectangleBorder(

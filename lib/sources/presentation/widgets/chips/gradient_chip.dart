@@ -1,6 +1,5 @@
-import 'package:colored/sources/app/styling/radii/radius_data.dart';
-import 'package:colored/sources/common/extensions/hex_color.dart';
 import 'package:colored/sources/presentation/widgets/chips/suggestion_chip.dart';
+import 'package:colored/sources/presentation/widgets/containers/gradient_circle.dart';
 import 'package:flutter/material.dart';
 
 class GradientChip extends StatelessWidget {
@@ -16,22 +15,9 @@ class GradientChip extends StatelessWidget {
   final List<String> hexCodes;
 
   @override
-  Widget build(BuildContext context) {
-    final gradientColors = hexCodes.map(HexColor.fromHex).toList();
-    final borderRadius = RadiusData.of(context)!.radiiScheme.medium;
-    return SuggestionChip(
-      text: text,
-      avatar: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: gradientColors,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.all(borderRadius),
-        ),
-      ),
-      onPressed: onPressed,
-    );
-  }
+  Widget build(BuildContext context) => SuggestionChip(
+        text: text,
+        avatar: GradientCircle(hexCodes: hexCodes),
+        onPressed: onPressed,
+      );
 }

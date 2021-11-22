@@ -1,4 +1,5 @@
 import 'package:colored/sources/domain/data_models/nameable.dart';
+import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/presentation/widgets/lists/autocomplete_options_list.dart';
 import 'package:colored/sources/presentation/widgets/text_fields/auto_focusing_search_field.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class AutocompleteSearchField extends StatelessWidget {
   }) : super(key: key);
 
   final String searchText;
-  final Iterable<Nameable> autocompleteOptions;
+  final Iterable<Palette> autocompleteOptions;
   final String? hintText;
   final void Function()? onClearPressed;
   final void Function(String)? onSubmitted;
@@ -23,7 +24,7 @@ class AutocompleteSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-        builder: (_, constraints) => Autocomplete<Nameable>(
+        builder: (_, constraints) => Autocomplete<Palette>(
           optionsBuilder: _buildOptions,
           onSelected: _onOptionSelected,
           displayStringForOption: (nameable) => nameable.name,
@@ -51,7 +52,7 @@ class AutocompleteSearchField extends StatelessWidget {
         ),
       );
 
-  Iterable<Nameable> _buildOptions(TextEditingValue textEditingValue) {
+  Iterable<Palette> _buildOptions(TextEditingValue textEditingValue) {
     if (textEditingValue.text.isEmpty) {
       return [];
     }
