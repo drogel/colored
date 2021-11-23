@@ -59,7 +59,7 @@ class AutocompleteSearchField extends StatelessWidget {
     final filteredOptions = autocompleteOptions.where((option) {
       final name = option.name.toLowerCase();
       final textFieldValue = textEditingValue.text.toLowerCase();
-      return name.contains(textFieldValue) && name != textFieldValue;
+      return name.contains(textFieldValue);
     });
     return filteredOptions;
   }

@@ -34,13 +34,11 @@ class _AutoFocusingSearchFieldState extends State<AutoFocusingSearchField> {
   void initState() {
     _controller = widget.controller ?? TextEditingController();
     _focusNode = widget.focusNode ?? FocusNode();
-    _setSearchStateValue(widget.searchText);
     super.initState();
   }
 
   @override
   void didUpdateWidget(covariant AutoFocusingSearchField oldWidget) {
-    _setSearchStateValue(widget.searchText);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -58,15 +56,6 @@ class _AutoFocusingSearchFieldState extends State<AutoFocusingSearchField> {
         onClearPressed: widget.onClearPressed,
         onChanged: widget.onChanged,
         onSubmitted: widget.onSubmitted,
-      );
-
-  void _setSearchStateValue(String search) =>
-      _controller.value = TextEditingValue(
-        text: search,
-        selection: TextSelection(
-          baseOffset: search.length,
-          extentOffset: search.length,
-        ),
       );
 
   void _shouldRequestFocus(String search) {
