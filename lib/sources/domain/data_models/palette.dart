@@ -22,6 +22,9 @@ class Palette extends Nameable {
     return Palette(name: json[_Key.name.value], hexCodes: hexCodes);
   }
 
+  factory Palette.fromNamedColor(NamedColor namedColor) =>
+      Palette(name: namedColor.name, hexCodes: [namedColor.hex]);
+
   static String nameKey = _Key.name.value;
   static String hexCodesKey = _Key.hexCodes.value;
   static String suggestionMappingKey = "palette";
