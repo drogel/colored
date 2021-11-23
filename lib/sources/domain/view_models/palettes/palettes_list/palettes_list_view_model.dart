@@ -28,7 +28,10 @@ class PalettesListViewModel extends BaseNamesListViewModel<Palette> {
       Pending(search: searchString);
 
   @override
-  NamesListState buildSearchSuccessState(String searchString,
-          {required PageInfo pageInfo, required List<Palette> items}) =>
+  NamesListState buildSearchSuccessState(
+    String searchString, {
+    required PageInfo pageInfo,
+    required List<Palette> items,
+  }) =>
       Found(items, search: searchString, pageInfo: pageInfo);
 }
