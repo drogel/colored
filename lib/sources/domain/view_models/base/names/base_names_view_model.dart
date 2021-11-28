@@ -30,7 +30,7 @@ abstract class BaseNamesListViewModel<T> {
 
   NamesListState buildInitialState();
 
-  NamesListState buildSearchPendingState(String searchString);
+  NamesListState? buildSearchPendingState(String searchString);
 
   NamesListState buildSearchFailedState(String searchString);
 
@@ -131,6 +131,9 @@ abstract class BaseNamesListViewModel<T> {
 
   void _notifySearchPending(String searchString) {
     final pendingState = buildSearchPendingState(searchString);
+    if (pendingState == null) {
+      return;
+    }
     _stateController.sink.add(pendingState);
   }
 

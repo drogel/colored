@@ -17,6 +17,7 @@ import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/base/names/base_names_injector.dart';
 import 'package:colored/sources/domain/view_models/base/names/base_names_view_model.dart';
 import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
+import 'package:colored/sources/domain/view_models/colors/color_suggestions/search/color_suggestions_search_view_model.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_view_model.dart';
 
 class ColorSuggestionsSearchInjector extends BaseNamesInjector<NamedColor> {
@@ -45,7 +46,7 @@ class ColorSuggestionsSearchInjector extends BaseNamesInjector<NamedColor> {
   BaseNamesListViewModel<NamedColor> injectLocalViewModel([
     StreamController<NamesListState>? stateController,
   ]) =>
-      NamesListViewModel(
+      ColorSuggestionsSearchViewModel(
         stateController: stateController ?? StreamController<NamesListState>(),
         namesService: PaginatedColorNamesService(
           namesService: ColorNamesService(

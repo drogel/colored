@@ -6,28 +6,8 @@ import 'package:colored/sources/domain/view_models/colors/names_list/names_list_
 import 'package:colored/sources/presentation/widgets/text_fields/autocomplete_search_field.dart';
 import 'package:flutter/material.dart';
 
-class ColorSearchField extends StatefulWidget {
+class ColorSearchField extends StatelessWidget {
   const ColorSearchField({Key? key}) : super(key: key);
-
-  @override
-  State<ColorSearchField> createState() => _ColorSearchFieldState();
-}
-
-class _ColorSearchFieldState extends State<ColorSearchField> {
-  late Iterable<Palette> _palettes;
-
-  @override
-  void initState() {
-    _palettes = [];
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    final suggestionsData = ColorSuggestionsSearchData.of(context)!;
-    _palettes = _buildSuggestionsOptions(suggestionsData);
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +15,7 @@ class _ColorSearchFieldState extends State<ColorSearchField> {
     final suggestionsData = ColorSuggestionsSearchData.of(context)!;
     final localization = Localization.of(context)!.namesList;
     return AutocompleteSearchField(
-      autocompleteOptions: _palettes,
+      autocompleteOptions: _buildSuggestionsOptions(suggestionsData),
       hintText: localization.search,
       onClearPressed: data.onSearchCleared,
       onSubmitted: data.onSearchStarted,
@@ -47,13 +27,11 @@ class _ColorSearchFieldState extends State<ColorSearchField> {
   Iterable<Palette> _buildSuggestionsOptions(ColorSuggestionsSearchData data) {
     final suggestionsState = data.state;
     switch (suggestionsState.runtimeType) {
-      case NoneFound:
-        return [];
       case Found:
         final foundState = suggestionsState as Found;
         return foundState.namedColors.map((c) => Palette.fromNamedColor(c));
       default:
-        return _palettes;
+        return [];
     }
   }
 }
