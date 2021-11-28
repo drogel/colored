@@ -1,3 +1,7 @@
+## [0.12.0] - November 28th, 2021
+
+- Integrates the Huely API for suggestion searches.
+
 ## [0.11.1] - November 18th, 2021
 
 - Integrates the Huely API for color search by hex.
