@@ -1,9 +1,13 @@
 import 'package:collection/collection.dart';
+import 'package:colored/sources/domain/data_models/nameable.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:vector_math/hash.dart';
 
-class Palette {
-  const Palette({required this.name, required this.hexCodes});
+class Palette extends Nameable {
+  const Palette({
+    required String name,
+    required this.hexCodes,
+  }) : super(name);
 
   factory Palette.fromMapEntry(MapEntry<String, List<String>?> mapEntry) {
     final hexCodes = mapEntry.value!.map((c) => "#${c.toUpperCase()}").toList();
@@ -18,11 +22,13 @@ class Palette {
     return Palette(name: json[_Key.name.value], hexCodes: hexCodes);
   }
 
+  factory Palette.fromNamedColor(NamedColor namedColor) =>
+      Palette(name: namedColor.name, hexCodes: [namedColor.hex]);
+
   static String nameKey = _Key.name.value;
   static String hexCodesKey = _Key.hexCodes.value;
   static String suggestionMappingKey = "palette";
 
-  final String name;
   final List<String> hexCodes;
 
   @override

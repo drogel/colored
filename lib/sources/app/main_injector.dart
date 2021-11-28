@@ -3,6 +3,7 @@ import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
 import 'package:colored/sources/data/api/models/index/api_index.dart';
 import 'package:colored/sources/domain/view_models/colors/color_suggestions/color_suggestions_injector.dart';
+import 'package:colored/sources/domain/view_models/colors/color_suggestions/search/color_suggestions_search_injector.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/connectivity/connectivity_injector.dart';
 import 'package:colored/sources/domain/view_models/converter/converter/converter_injector.dart';
@@ -16,6 +17,7 @@ import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_navigation/palettes_navigation_injector.dart';
 import 'package:colored/sources/presentation/notifiers/colors/color_suggestions_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/colors/color_suggestions_search_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/colors/names_list_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/converter/connectivity_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/converter/converter_notifier.dart';
@@ -74,9 +76,14 @@ class MainInjector extends StatelessWidget {
                                 flavor: FlavorConfig.instance,
                                 apiIndex: apiIndex,
                               ),
-                              child: MainTabsNotifier(
-                                injector: const MainTabsInjector(),
-                                child: child,
+                              child: ColorSuggestionsSearchNotifier(
+                                injector: ColorSuggestionsSearchInjector(
+                                  apiIndex: apiIndex,
+                                ),
+                                child: MainTabsNotifier(
+                                  injector: const MainTabsInjector(),
+                                  child: child,
+                                ),
                               ),
                             ),
                           ),
