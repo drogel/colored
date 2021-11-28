@@ -14,6 +14,7 @@ import 'package:colored/sources/domain/view_models/converter/transformer/transfo
 import 'package:colored/sources/domain/view_models/main_tabs/main_tabs_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_detail/palette_detail_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/palette_suggestions_injector.dart';
+import 'package:colored/sources/domain/view_models/palettes/palette_suggestions/search/palette_suggestions_search_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_injector.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_navigation/palettes_navigation_injector.dart';
 import 'package:colored/sources/presentation/notifiers/colors/color_suggestions_notifier.dart';
@@ -28,6 +29,7 @@ import 'package:colored/sources/presentation/notifiers/converter/transformer_not
 import 'package:colored/sources/presentation/notifiers/main_tabs/main_tabs_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palettes/palette_detail_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palettes/palette_suggestions_notifier.dart';
+import 'package:colored/sources/presentation/notifiers/palettes/palette_suggestions_search_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palettes/palettes_list_notifier.dart';
 import 'package:colored/sources/presentation/notifiers/palettes/palettes_navigation_notifier.dart';
 import 'package:flutter/material.dart';
@@ -76,13 +78,17 @@ class MainInjector extends StatelessWidget {
                                 flavor: FlavorConfig.instance,
                                 apiIndex: apiIndex,
                               ),
-                              child: ColorSuggestionsSearchNotifier(
-                                injector: ColorSuggestionsSearchInjector(
-                                  apiIndex: apiIndex,
-                                ),
-                                child: MainTabsNotifier(
-                                  injector: const MainTabsInjector(),
-                                  child: child,
+                              child: PaletteSuggestionsSearchNotifier(
+                                injector:
+                                    const PaletteSuggestionsSearchInjector(),
+                                child: ColorSuggestionsSearchNotifier(
+                                  injector: ColorSuggestionsSearchInjector(
+                                    apiIndex: apiIndex,
+                                  ),
+                                  child: MainTabsNotifier(
+                                    injector: const MainTabsInjector(),
+                                    child: child,
+                                  ),
                                 ),
                               ),
                             ),
