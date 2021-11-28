@@ -55,6 +55,15 @@ void main() {
         expect(actual.hexCodes, ["#FFFFFF", "#000000"]);
       });
     });
+
+    group("when fromNamedColor is called", () {
+      test("a Palette from the color is instantiated", () {
+        const testNamedColor = NamedColor(name: "Test", hex: "#000000");
+        final actual = Palette.fromNamedColor(testNamedColor);
+        expect(actual.name, "Test");
+        expect(actual.hexCodes, ["#000000"]);
+      });
+    });
   });
 
   group("Given two valid palettes", () {

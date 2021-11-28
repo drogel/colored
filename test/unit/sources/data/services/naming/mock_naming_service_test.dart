@@ -6,9 +6,9 @@ import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   late PaginatedNamesService<NamedColor> namingService;
+
+  setUpAll(TestWidgetsFlutterBinding.ensureInitialized);
 
   setUp(() {
     namingService = const MockNamingService();

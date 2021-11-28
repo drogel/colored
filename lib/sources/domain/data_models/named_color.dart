@@ -1,10 +1,11 @@
+import 'package:colored/sources/domain/data_models/nameable.dart';
 import 'package:vector_math/hash.dart';
 
-class NamedColor {
+class NamedColor extends Nameable {
   const NamedColor({
-    required this.name,
+    required String name,
     required this.hex,
-  });
+  }) : super(name);
 
   factory NamedColor.fromMapEntry(MapEntry<String, dynamic> entry) =>
       NamedColor(name: entry.value, hex: "#${entry.key.toUpperCase()}");
@@ -19,7 +20,6 @@ class NamedColor {
   static String mocksMappingKey = "colors";
   static String suggestionMappingKey = "color";
 
-  final String name;
   final String hex;
 
   @override

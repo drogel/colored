@@ -39,7 +39,7 @@ class PalettesListLayout extends StatelessWidget {
       return;
     }
     final foundState = data.state as Found;
-    data.onSearchChanged(
+    data.onPageFinished(
       foundState.search,
       currentItems: foundState.palettes,
       currentPageInfo: foundState.pageInfo,

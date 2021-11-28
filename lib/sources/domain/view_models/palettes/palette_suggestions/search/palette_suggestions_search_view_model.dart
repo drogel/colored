@@ -7,8 +7,9 @@ import 'package:colored/sources/domain/view_models/base/names/base_names_view_mo
 import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
 
-class PalettesListViewModel extends BaseNamesListViewModel<Palette> {
-  const PalettesListViewModel({
+class PaletteSuggestionsSearchViewModel
+    extends BaseNamesListViewModel<Palette> {
+  const PaletteSuggestionsSearchViewModel({
     required StreamController<NamesListState> stateController,
     required PaginatedNamesService<Palette> namesService,
   }) : super(
@@ -24,8 +25,7 @@ class PalettesListViewModel extends BaseNamesListViewModel<Palette> {
       NoneFound(search: searchString);
 
   @override
-  NamesListState? buildSearchPendingState(String searchString) =>
-      Pending(search: searchString);
+  NamesListState? buildSearchPendingState(String searchString) => null;
 
   @override
   NamesListState buildSearchSuccessState(

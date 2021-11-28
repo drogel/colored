@@ -39,7 +39,7 @@ class NamesListLayout extends StatelessWidget {
       return;
     }
     final foundState = data.state as Found;
-    data.onSearchChanged(
+    data.onPageFinished(
       foundState.search,
       currentItems: foundState.namedColors,
       currentPageInfo: foundState.pageInfo,

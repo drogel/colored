@@ -24,7 +24,7 @@ class NamesListViewModel extends BaseNamesListViewModel<NamedColor> {
       NoneFound(search: searchString);
 
   @override
-  NamesListState buildSearchPendingState(String searchString) =>
+  NamesListState? buildSearchPendingState(String searchString) =>
       Pending(search: searchString);
 
   @override
