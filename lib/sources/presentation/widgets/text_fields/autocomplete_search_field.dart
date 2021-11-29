@@ -3,6 +3,7 @@ import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/presentation/widgets/lists/autocomplete_options_list.dart';
 import 'package:colored/sources/presentation/widgets/text_fields/auto_focusing_search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AutocompleteSearchField extends StatelessWidget {
   const AutocompleteSearchField({
@@ -34,14 +35,17 @@ class AutocompleteSearchField extends StatelessWidget {
             focusNode,
             onFieldSubmitted,
           ) =>
-              AutoFocusingSearchField(
-            controller: controller,
+              RawKeyboardListener(
             focusNode: focusNode,
-            searchText: searchText,
-            onClearPressed: onClearPressed,
-            onChanged: onChanged,
-            hintText: hintText,
-            onSubmitted: onSubmitted,
+            onKey: _handleKey,
+            child: AutoFocusingSearchField(
+              controller: controller,
+              searchText: searchText,
+              onClearPressed: onClearPressed,
+              onChanged: onChanged,
+              hintText: hintText,
+              onSubmitted: onSubmitted,
+            ),
           ),
           optionsViewBuilder: (_, onSelected, options) =>
               AutocompleteOptionsList(
@@ -70,5 +74,16 @@ class AutocompleteSearchField extends StatelessWidget {
       return;
     }
     _onSubmitted(nameable.name);
+  }
+
+  void _handleKey(RawKeyEvent event) {
+    if (event is RawKeyUpEvent) {
+      return;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+      // TODO: Handle arrow up key
+    } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+      // TODO: Handle arrow down key
+    }
   }
 }
