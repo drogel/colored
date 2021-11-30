@@ -5,6 +5,8 @@ import 'package:colored/sources/presentation/widgets/text_fields/auto_focusing_s
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+const _kMaxVisibleOptions = 5;
+
 class AutocompleteSearchField extends StatefulWidget {
   const AutocompleteSearchField({
     required this.searchText,
@@ -29,13 +31,7 @@ class AutocompleteSearchField extends StatefulWidget {
 }
 
 class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
-  late int _keyboardSelectedIndex;
-
-  @override
-  void initState() {
-    _keyboardSelectedIndex = 0;
-    super.initState();
-  }
+  int? _keyboardSelectedIndex;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -61,13 +57,16 @@ class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
               onSubmitted: widget.onSubmitted,
             ),
           ),
-          optionsViewBuilder: (_, onSelected, options) =>
-              AutocompleteOptionsList(
-            options: options,
-            selectedOptionIndex: _keyboardSelectedIndex,
-            onSelected: onSelected,
-            availableWidth: constraints.maxWidth,
-          ),
+          optionsViewBuilder: (_, onSelected, options) {
+            _clampSelectedIndex(options);
+            return AutocompleteOptionsList(
+              options: options,
+              selectedOptionIndex: _keyboardSelectedIndex,
+              onSelected: onSelected,
+              availableWidth: constraints.maxWidth,
+              maxVisibleOptions: _kMaxVisibleOptions,
+            );
+          },
         ),
       );
 
@@ -96,9 +95,27 @@ class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
       return;
     }
     if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
-      setState(() => _keyboardSelectedIndex--);
+      _decrementSelectedIndex();
     } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-      setState(() => _keyboardSelectedIndex++);
+      _incrementSelectedIndex();
     }
+  }
+
+  void _incrementSelectedIndex() {
+    _keyboardSelectedIndex ??= -1;
+    setState(() => _keyboardSelectedIndex = _keyboardSelectedIndex! + 1);
+  }
+
+  void _decrementSelectedIndex() {
+    final keyboardSelectedIndex = _keyboardSelectedIndex;
+    if (keyboardSelectedIndex == null) {
+      return;
+    }
+    setState(() => _keyboardSelectedIndex = keyboardSelectedIndex - 1);
+  }
+
+  void _clampSelectedIndex(Iterable<Palette> options) {
+    final optionsLenght = options.length.clamp(0, options.length - 1);
+    _keyboardSelectedIndex = _keyboardSelectedIndex?.clamp(0, optionsLenght);
   }
 }

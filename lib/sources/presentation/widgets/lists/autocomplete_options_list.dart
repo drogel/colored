@@ -12,15 +12,15 @@ class AutocompleteOptionsList extends StatelessWidget {
     required this.options,
     required this.onSelected,
     required this.availableWidth,
-    required this.selectedOptionIndex,
-    this.maxVisibleOptions = 4,
+    required this.maxVisibleOptions,
+    this.selectedOptionIndex,
     Key? key,
   }) : super(key: key);
 
   final void Function(Palette) onSelected;
   final Iterable<Palette> options;
   final double availableWidth;
-  final int selectedOptionIndex;
+  final int? selectedOptionIndex;
   final int maxVisibleOptions;
 
   @override
