@@ -5,7 +5,7 @@ import 'package:colored/sources/presentation/widgets/text_fields/auto_focusing_s
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class AutocompleteSearchField extends StatelessWidget {
+class AutocompleteSearchField extends StatefulWidget {
   const AutocompleteSearchField({
     required this.searchText,
     required this.autocompleteOptions,
@@ -24,6 +24,20 @@ class AutocompleteSearchField extends StatelessWidget {
   final void Function(String)? onChanged;
 
   @override
+  State<AutocompleteSearchField> createState() =>
+      _AutocompleteSearchFieldState();
+}
+
+class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
+  late int _keyboardSelectedIndex;
+
+  @override
+  void initState() {
+    _keyboardSelectedIndex = 0;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (_, constraints) => Autocomplete<Palette>(
           optionsBuilder: _buildOptions,
@@ -40,16 +54,17 @@ class AutocompleteSearchField extends StatelessWidget {
             onKey: _handleKey,
             child: AutoFocusingSearchField(
               controller: controller,
-              searchText: searchText,
-              onClearPressed: onClearPressed,
-              onChanged: onChanged,
-              hintText: hintText,
-              onSubmitted: onSubmitted,
+              searchText: widget.searchText,
+              onClearPressed: widget.onClearPressed,
+              onChanged: widget.onChanged,
+              hintText: widget.hintText,
+              onSubmitted: widget.onSubmitted,
             ),
           ),
           optionsViewBuilder: (_, onSelected, options) =>
               AutocompleteOptionsList(
             options: options,
+            selectedOptionIndex: _keyboardSelectedIndex,
             onSelected: onSelected,
             availableWidth: constraints.maxWidth,
           ),
@@ -60,7 +75,7 @@ class AutocompleteSearchField extends StatelessWidget {
     if (textEditingValue.text.isEmpty) {
       return [];
     }
-    final filteredOptions = autocompleteOptions.where((option) {
+    final filteredOptions = widget.autocompleteOptions.where((option) {
       final name = option.name.toLowerCase();
       final textFieldValue = textEditingValue.text.toLowerCase();
       return name.contains(textFieldValue);
@@ -69,7 +84,7 @@ class AutocompleteSearchField extends StatelessWidget {
   }
 
   void _onOptionSelected(Nameable nameable) {
-    final _onSubmitted = onSubmitted;
+    final _onSubmitted = widget.onSubmitted;
     if (_onSubmitted == null) {
       return;
     }
@@ -81,9 +96,9 @@ class AutocompleteSearchField extends StatelessWidget {
       return;
     }
     if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
-      // TODO: Handle arrow up key
+      setState(() => _keyboardSelectedIndex--);
     } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-      // TODO: Handle arrow down key
+      setState(() => _keyboardSelectedIndex++);
     }
   }
 }
