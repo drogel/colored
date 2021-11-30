@@ -38,7 +38,9 @@ class AutocompleteOptionsList extends StatelessWidget {
           elevation: elevation,
           borderRadius: BorderRadius.all(radii.medium),
           child: SizedBox(
-            height: (56.0 + _kOptionSpacing) * optionsLenght + padding.vertical,
+            height: (56.0 + _kOptionSpacing) * optionsLenght +
+                padding.vertical +
+                _kOptionSpacing,
             width: availableWidth,
             child: ListView.separated(
               padding: padding,

@@ -32,6 +32,7 @@ class AutocompleteSearchField extends StatefulWidget {
 
 class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
   int? _keyboardSelectedIndex;
+  Iterable<Palette>? _options;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -51,14 +52,15 @@ class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
             child: AutoFocusingSearchField(
               controller: controller,
               searchText: widget.searchText,
-              onClearPressed: widget.onClearPressed,
-              onChanged: widget.onChanged,
+              onClearPressed: _onClear,
+              onChanged: _onChanged,
               hintText: widget.hintText,
-              onSubmitted: widget.onSubmitted,
+              onSubmitted: (str) => _onSubmitted(str, controller: controller),
             ),
           ),
           optionsViewBuilder: (_, onSelected, options) {
             _clampSelectedIndex(options);
+            _options = options;
             return AutocompleteOptionsList(
               options: options,
               selectedOptionIndex: _keyboardSelectedIndex,
@@ -82,6 +84,17 @@ class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
     return filteredOptions;
   }
 
+  void _onChanged(String value) {
+    final onChanged = widget.onChanged;
+    if (value.isEmpty) {
+      _resetSelectedIndex();
+    }
+    if (onChanged == null) {
+      return;
+    }
+    onChanged(value);
+  }
+
   void _onOptionSelected(Nameable nameable) {
     final _onSubmitted = widget.onSubmitted;
     if (_onSubmitted == null) {
@@ -98,7 +111,33 @@ class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
       _decrementSelectedIndex();
     } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
       _incrementSelectedIndex();
+    } else {
+      _resetSelectedIndex();
     }
+  }
+
+  void _onSubmitted(String value, {required TextEditingController controller}) {
+    final onSubmitted = widget.onSubmitted;
+    if (onSubmitted == null) {
+      return;
+    }
+    final options = _options;
+    final selectedIndex = _keyboardSelectedIndex;
+    if (options == null || selectedIndex == null) {
+      return onSubmitted(value);
+    }
+    final selectedOption = options.elementAt(selectedIndex).name;
+    onSubmitted(selectedOption);
+    controller.text = selectedOption;
+  }
+
+  void _onClear() {
+    final onClear = widget.onClearPressed;
+    if (onClear == null) {
+      return;
+    }
+    _resetSelectedIndex();
+    onClear();
   }
 
   void _incrementSelectedIndex() {
@@ -118,4 +157,6 @@ class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
     final optionsLenght = options.length.clamp(0, options.length - 1);
     _keyboardSelectedIndex = _keyboardSelectedIndex?.clamp(0, optionsLenght);
   }
+
+  void _resetSelectedIndex() => _keyboardSelectedIndex = null;
 }
