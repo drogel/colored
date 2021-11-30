@@ -43,6 +43,7 @@ class AutocompleteOptionsList extends StatelessWidget {
                 _kOptionSpacing,
             width: availableWidth,
             child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
               padding: padding,
               itemCount: options.length,
               separatorBuilder: (_, __) => const _OptionSeparator(),

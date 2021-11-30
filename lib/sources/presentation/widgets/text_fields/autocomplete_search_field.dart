@@ -81,7 +81,7 @@ class _AutocompleteSearchFieldState extends State<AutocompleteSearchField> {
       final textFieldValue = textEditingValue.text.toLowerCase();
       return name.contains(textFieldValue);
     });
-    return filteredOptions;
+    return filteredOptions.take(_kMaxVisibleOptions);
   }
 
   void _onChanged(String value) {
