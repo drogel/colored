@@ -15,7 +15,6 @@ class NamedColor extends Nameable {
         hex: json[_Key.hex.value].toUpperCase(),
       );
 
-  static String nameKey = _Key.name.value;
   static String hexKey = _Key.hex.value;
   static String mocksMappingKey = "colors";
   static String suggestionMappingKey = "color";

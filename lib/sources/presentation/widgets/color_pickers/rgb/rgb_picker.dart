@@ -63,6 +63,8 @@ class _RgbPickerState extends State<RgbPicker> {
   @override
   Widget build(BuildContext context) {
     final opacity = OpacityData.of(context)!.opacityScheme;
+    final contextScrollBehavior = ScrollConfiguration.of(context);
+    final scrollBehavior = contextScrollBehavior.copyWith(scrollbars: false);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -77,6 +79,7 @@ class _RgbPickerState extends State<RgbPicker> {
             _firstValue = value;
             widget.onChanged(_getSelection());
           },
+          scrollBehavior: scrollBehavior,
           controller: _controller,
         ),
         ExpandableSlider(
@@ -89,6 +92,7 @@ class _RgbPickerState extends State<RgbPicker> {
             _secondValue = value;
             widget.onChanged(_getSelection());
           },
+          scrollBehavior: scrollBehavior,
           controller: _controller,
         ),
         ExpandableSlider(
@@ -101,6 +105,7 @@ class _RgbPickerState extends State<RgbPicker> {
             _thirdValue = value;
             widget.onChanged(_getSelection());
           },
+          scrollBehavior: scrollBehavior,
           controller: _controller,
         ),
       ],

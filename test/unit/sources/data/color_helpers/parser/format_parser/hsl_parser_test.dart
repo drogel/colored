@@ -90,6 +90,13 @@ void main() {
           throwsAssertionError,
         );
       });
+
+      test("then an argument error is thrown on nonparsable input string", () {
+        expect(
+          () => hslParser.parse("ABC ABC"),
+          throwsArgumentError,
+        );
+      });
     });
   });
 }

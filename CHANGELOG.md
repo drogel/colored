@@ -1,3 +1,7 @@
+## [0.12.1] - December 4th, 2021
+
+- Adds keyboard shortcuts to autocomplete suggestions.
+
 ## [0.12.0] - November 28th, 2021
 
 - Integrates the Huely API for suggestion searches.

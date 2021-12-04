@@ -17,11 +17,7 @@ class HslParser extends FormatParser {
   @override
   ColorSelection parse(String string) {
     assert(string.isNotEmpty, 'String color format to parse cannot be empty');
-    final hslMatches = _hslRegExp.firstMatch(string);
-    if (hslMatches == null) {
-      throw ArgumentError("String can't be parsed to HSL");
-    }
-    final hslMatched = hslMatches.group(0);
+    final hslMatched = _hslRegExp.firstMatch(string)?.group(0);
     if (hslMatched == null) {
       throw ArgumentError("String can't be parsed to HSL");
     }
