@@ -18,15 +18,10 @@ class RgbParser extends FormatParser {
   @override
   ColorSelection parse(String string) {
     assert(string.isNotEmpty, "String color format to parse cannot be empty");
-    final rgbMatches = _rgbRegExp.firstMatch(string);
-    if (rgbMatches == null) {
-      throw ArgumentError("String can't be parsed to RGB");
-    }
-    final rgbMatched = rgbMatches.group(0);
+    final rgbMatched = _rgbRegExp.firstMatch(string)?.group(0);
     if (rgbMatched == null) {
       throw ArgumentError("String can't be parsed to RGB");
     }
-
     final rgbComponents = getDoubleComponents(rgbMatched);
     final selection = ColorSelection(
       r: rgbComponents[0] / decimal8Bit,

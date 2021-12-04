@@ -17,11 +17,7 @@ class HsvParser extends FormatParser {
   @override
   ColorSelection parse(String string) {
     assert(string.isNotEmpty, "String color format to parse cannot be empty");
-    final hsvMatches = _hsvRegExp.firstMatch(string);
-    if (hsvMatches == null) {
-      throw ArgumentError("String can't be parsed to HSV");
-    }
-    final hsvMatched = hsvMatches.group(0);
+    final hsvMatched = _hsvRegExp.firstMatch(string)?.group(0);
     if (hsvMatched == null) {
       throw ArgumentError("String can't be parsed to HSV");
     }

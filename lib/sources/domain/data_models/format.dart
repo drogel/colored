@@ -7,20 +7,30 @@ enum Format {
   hsv,
 }
 
+const _hexString = "Hex";
+const _rgbString = "RGB";
+const _hslString = "HSL";
+const _hsvString = "HSV";
+
 Map<Format, String> _values = {
-  Format.hex: "Hex",
-  Format.rgb: "RGB",
-  Format.hsl: "HSL",
-  Format.hsv: "HSV",
+  Format.hex: _hexString,
+  Format.rgb: _rgbString,
+  Format.hsl: _hslString,
+  Format.hsv: _hsvString,
 };
 
 extension FormatValue on Format {
   String get rawValue {
-    final value = _values[this];
-    if (value == null) {
-      throw ArgumentError("No rawValue defined for $this");
+    switch (this) {
+      case Format.hex:
+        return _hexString;
+      case Format.rgb:
+        return _rgbString;
+      case Format.hsl:
+        return _hslString;
+      case Format.hsv:
+        return _hsvString;
     }
-    return value;
   }
 
   static Format format(String rawValue) {

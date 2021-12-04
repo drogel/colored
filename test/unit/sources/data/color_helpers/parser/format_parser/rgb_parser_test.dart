@@ -65,6 +65,13 @@ void main() {
           throwsAssertionError,
         );
       });
+
+      test("then an argument error is thrown on nonparsable input string", () {
+        expect(
+          () => rgbParser.parse("ABC ABC"),
+          throwsArgumentError,
+        );
+      });
     });
   });
 }
