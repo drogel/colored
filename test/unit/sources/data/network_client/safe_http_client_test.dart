@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:colored/sources/data/network_client/http_client.dart';

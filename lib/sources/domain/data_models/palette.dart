@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:colored/sources/domain/data_models/nameable.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
-import 'package:vector_math/hash.dart';
 
 class Palette extends Nameable {
   const Palette({
@@ -39,7 +38,7 @@ class Palette extends Nameable {
       );
 
   @override
-  int get hashCode => hashObjects([name, hexCodes]);
+  int get hashCode => Object.hashAll([name, hexCodes]);
 
   @override
   String toString() => "Palette(name: $name, hexCodes: $hexCodes)";

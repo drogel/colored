@@ -1,5 +1,3 @@
-import 'package:vector_math/hash.dart';
-
 class PageInfo {
   const PageInfo({
     required this.startIndex,
@@ -29,7 +27,7 @@ class PageInfo {
       other.pageIndex == pageIndex;
 
   @override
-  int get hashCode => hashObjects([startIndex, size, pageIndex]);
+  int get hashCode => Object.hashAll([startIndex, size, pageIndex]);
 }
 
 enum _Key {

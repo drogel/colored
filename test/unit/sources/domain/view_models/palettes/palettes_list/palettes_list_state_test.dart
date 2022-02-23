@@ -2,7 +2,6 @@ import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/domain/view_models/palettes/palettes_list/palettes_list_state.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vector_math/hash.dart';
 
 void main() {
   const testPalette = Palette(name: "Test", hexCodes: ["#000000", "#FFFFFF"]);
@@ -22,7 +21,7 @@ void main() {
         );
         expect(
           foundState.hashCode,
-          hashObjects([palettes, testSearch, testPageInfo]),
+          Object.hashAll([palettes, testSearch, testPageInfo]),
         );
       });
     });

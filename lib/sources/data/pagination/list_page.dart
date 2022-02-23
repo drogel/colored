@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:colored/sources/data/api/models/responses/api_response_data.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
-import 'package:vector_math/hash.dart';
 
 typedef JsonParser<T> = T Function(Map<String, dynamic> json);
 
@@ -70,7 +69,7 @@ class ListPage<T> {
       other.pageIndex == pageIndex;
 
   @override
-  int get hashCode => hashObjects([
+  int get hashCode => Object.hashAll([
         items,
         currentItemCount,
         itemsPerPage,
