@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:colored/sources/app/styling/colors/color_constants.dart'
     as colors;
 import 'package:colored/sources/app/styling/colors/colored_color_scheme.dart';

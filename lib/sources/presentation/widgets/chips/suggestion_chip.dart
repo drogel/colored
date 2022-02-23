@@ -28,7 +28,7 @@ class SuggestionChip extends StatelessWidget {
       padding: EdgeInsets.only(left: horizontalPadding),
       child: InputChip(
         onPressed: onPressed != null ? () => onPressed(text) : null,
-        backgroundColor: colors.primaryVariant,
+        backgroundColor: colors.primaryContainer,
         shape: RoundedRectangleBorder(borderRadius: borderRadius),
         avatar: avatar,
         label: Text(text),

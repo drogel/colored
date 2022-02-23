@@ -1,7 +1,6 @@
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vector_math/hash.dart';
 
 const NamedColor _kBlack = NamedColor(name: "Black", hex: "#000000");
 const NamedColor _kWhite = NamedColor(name: "White", hex: "#FFFFFF");
@@ -37,7 +36,7 @@ void main() {
       test("then the hashCode is built based on name and hex codes", () {
         const name = "test";
         final namedColor = Palette(name: name, hexCodes: _kColors);
-        expect(namedColor.hashCode, hashObjects([name, _kColors]));
+        expect(namedColor.hashCode, Object.hashAll([name, _kColors]));
       });
     });
 

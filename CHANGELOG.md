@@ -1,3 +1,7 @@
+## [0.12.2] - February 23rd, 2022
+
+- Updates to Flutter 2.10.
+
 ## [0.12.1] - December 4th, 2021
 
 - Adds keyboard shortcuts to autocomplete suggestions.

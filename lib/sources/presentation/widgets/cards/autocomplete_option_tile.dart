@@ -53,6 +53,6 @@ class AutocompleteOptionTile extends StatelessWidget {
     required OpacityScheme opacityScheme,
   }) =>
       isHighlighted
-          ? colorScheme.secondaryVariant.withOpacity(opacityScheme.shadow)
-          : colorScheme.primaryVariant;
+          ? colorScheme.secondaryContainer.withOpacity(opacityScheme.shadow)
+          : colorScheme.primaryContainer;
 }

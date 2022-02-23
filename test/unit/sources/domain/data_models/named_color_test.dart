@@ -1,6 +1,5 @@
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vector_math/hash.dart';
 
 const String _kName = "Black";
 const String _kHexCode = "#000000";
@@ -37,7 +36,7 @@ void main() {
 
         const namedColor = NamedColor(name: name, hex: hex);
 
-        expect(namedColor.hashCode, hashObjects([name, hex]));
+        expect(namedColor.hashCode, Object.hashAll([name, hex]));
       });
     });
 

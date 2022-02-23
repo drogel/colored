@@ -30,7 +30,7 @@ class _FormatButtonState extends State<FormatButton> {
 
   @override
   void didChangeDependencies() {
-    _tooltipColor = Theme.of(context).colorScheme.primaryVariant;
+    _tooltipColor = Theme.of(context).colorScheme.primaryContainer;
     super.didChangeDependencies();
   }
 
@@ -74,7 +74,7 @@ class _FormatButtonState extends State<FormatButton> {
     await Clipboard.setData(ClipboardData(text: widget.content));
     setState(() {
       _tooltipMessage = Localization.of(context)!.converter.tooltipMessage;
-      _tooltipColor = Theme.of(context).colorScheme.secondaryVariant;
+      _tooltipColor = Theme.of(context).colorScheme.secondaryContainer;
     });
     _showTooltip();
   }
