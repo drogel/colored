@@ -28,7 +28,7 @@ class SearchField extends StatelessWidget {
     final borderRadius = BorderRadius.all(radii.medium);
     final padding = PaddingData.of(context)!.paddingScheme;
     return Theme(
-      data: theme.copyWith(canvasColor: theme.colorScheme.primaryVariant),
+      data: theme.copyWith(canvasColor: theme.colorScheme.primaryContainer),
       child: Material(
         borderRadius: borderRadius,
         elevation: theme.appBarTheme.elevation!,
@@ -43,7 +43,7 @@ class SearchField extends StatelessWidget {
             hintText: hintText,
             contentPadding: EdgeInsets.only(left: padding.large.left),
             filled: true,
-            fillColor: theme.colorScheme.primaryVariant,
+            fillColor: theme.colorScheme.primaryContainer,
             prefixIcon: Icon(Icons.search, color: theme.hintColor),
             suffixIcon: PlainIconButton(
               icon: const Icon(Icons.clear),

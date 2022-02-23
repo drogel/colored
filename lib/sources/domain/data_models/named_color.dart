@@ -1,5 +1,4 @@
 import 'package:colored/sources/domain/data_models/nameable.dart';
-import 'package:vector_math/hash.dart';
 
 class NamedColor extends Nameable {
   const NamedColor({
@@ -26,7 +25,7 @@ class NamedColor extends Nameable {
       other is NamedColor && other.name == name && other.hex == hex;
 
   @override
-  int get hashCode => hashObjects([name, hex]);
+  int get hashCode => Object.hashAll([name, hex]);
 
   @override
   String toString() => "NamedColor(name: $name, hex: $hex)";

@@ -2,7 +2,6 @@ import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/named_color.dart';
 import 'package:colored/sources/domain/view_models/colors/names_list/names_list_state.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vector_math/hash.dart';
 
 void main() {
   const testNamedColor = NamedColor(name: "Test", hex: "#000000");
@@ -22,7 +21,7 @@ void main() {
         );
         expect(
           foundState.hashCode,
-          hashObjects([namedColors, testSearch, testPageInfo]),
+          Object.hashAll([namedColors, testSearch, testPageInfo]),
         );
       });
     });

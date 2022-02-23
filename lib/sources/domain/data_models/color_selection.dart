@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:colored/sources/common/factors.dart';
 import 'package:flutter/material.dart';
-import 'package:vector_math/hash.dart';
 
 class ColorSelection {
   factory ColorSelection({
@@ -75,5 +72,5 @@ class ColorSelection {
       other is ColorSelection && other.r == r && other.g == g && other.b == b;
 
   @override
-  int get hashCode => hashObjects([r, g, b]);
+  int get hashCode => Object.hashAll([r, g, b]);
 }

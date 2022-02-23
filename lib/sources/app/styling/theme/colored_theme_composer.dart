@@ -37,9 +37,9 @@ class ColoredThemeComposer implements ThemeComposer {
         ),
         colorScheme: ColorScheme(
           primary: colors.primary,
-          primaryVariant: colors.primaryVariant,
+          primaryContainer: colors.primaryVariant,
           secondary: colors.secondary,
-          secondaryVariant: colors.secondaryDark,
+          secondaryContainer: colors.secondaryDark,
           surface: colors.primary,
           background: colors.primary,
           error: colors.error,

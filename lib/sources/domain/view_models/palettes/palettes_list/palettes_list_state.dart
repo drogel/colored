@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:colored/sources/domain/data_models/palette.dart';
 import 'package:colored/sources/domain/view_models/base/names/names_state.dart';
-import 'package:vector_math/hash.dart';
 
 class Starting extends NamesListState {
   const Starting() : super("");
@@ -30,7 +29,7 @@ class Found extends NamesListState {
       other.pageInfo == pageInfo;
 
   @override
-  int get hashCode => hashObjects([palettes, search, pageInfo]);
+  int get hashCode => Object.hashAll([palettes, search, pageInfo]);
 }
 
 class NoneFound extends NamesListState {

@@ -1,6 +1,5 @@
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vector_math/hash.dart';
 
 const int _kStartIndex = 1;
 const int _kSize = 10;
@@ -34,7 +33,7 @@ void main() {
       test("then the hashCode is built based on all fields", () {
         expect(
           pageInfo.hashCode,
-          hashObjects([_kStartIndex, _kSize, _kPageIndex]),
+          Object.hashAll([_kStartIndex, _kSize, _kPageIndex]),
         );
       });
     });

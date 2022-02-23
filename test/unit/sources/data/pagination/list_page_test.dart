@@ -2,7 +2,6 @@ import 'package:colored/sources/data/api/models/responses/api_response_data.dart
 import 'package:colored/sources/data/pagination/list_page.dart';
 import 'package:colored/sources/data/pagination/page_info.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vector_math/hash.dart';
 
 class _TestItem {
   const _TestItem(this.value);
@@ -17,7 +16,7 @@ class _TestItem {
   bool operator ==(Object other) => other is _TestItem && other.value == value;
 
   @override
-  int get hashCode => hashObjects([value]);
+  int get hashCode => Object.hashAll([value]);
 }
 
 void main() {
@@ -262,7 +261,7 @@ void main() {
         );
         expect(
           listPage.hashCode,
-          hashObjects([
+          Object.hashAll([
             listPage.items,
             listPage.currentItemCount,
             listPage.itemsPerPage,

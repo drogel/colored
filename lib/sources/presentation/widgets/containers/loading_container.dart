@@ -13,7 +13,7 @@ class LoadingContainer extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         BackgroundContainer(child: child),
-        LinearProgressIndicator(color: colorScheme.secondaryVariant),
+        LinearProgressIndicator(color: colorScheme.secondaryContainer),
       ],
     );
   }
